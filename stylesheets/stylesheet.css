@@ -243,3 +243,62 @@ a {
 @media screen and (max-width: 42em) {
   .site-footer {
     font-size: 0.9rem; } }
+    
+#slider {
+	margin: 0px auto;
+	width: 845px;
+	top: 60px;
+	height: 200px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0px 0px 40px rgba(0,0,0,0.4);
+	background: #434343;
+}
+
+#slider [id^='image']:target img {
+	top: 0;  
+	left: 0;
+}
+
+#slider [id^='image']:target a {
+	background: #fff;
+	border: 3px solid #333;
+	width: 10px;
+	height: 10px;
+}
+
+#slider [id^="image"] img {
+	position: absolute;
+	top: -200px;
+	border: 0;
+	-moz-transition: top 0.5s ease-in;
+	-ms-transition: top 0.5s ease-in;
+	-webkit-transition: top 0.5s ease-in;
+	-o-transition: top 0.5s ease-in;
+}
+
+.slider-nav {
+	background: #333;
+	width: 16px;
+	z-index: 9999;
+	height: 16px;
+	box-shadow: inset 0px 2px 10px rgba(0,0,0,0.3), 0px 0px 20px rgba(255,255,255,0.4);
+	border-radius: 32px;
+	position: absolute;
+	bottom: 15px;
+}
+
+#image-1 .slider-nav {
+	right: 80px;
+}
+#image-2 .slider-nav {
+	right: 60px;
+}
+
+#image-3 .slider-nav {
+	right: 40px;
+}
+
+#image-4 .slider-nav {
+	right: 20px;
+}

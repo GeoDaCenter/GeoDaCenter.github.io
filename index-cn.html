@@ -40,18 +40,19 @@
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
   <span class="octicon octicon-link"></span></a>GeoDa 1.8 Beta 介绍</h3>
 
-<p>GeoDa是一个免费并且源代码开放的用与空间数据分析的软件. 通过探索和建模空间模式，GeoDa向用户提供了全新的空间数据分析视角。</p>
+<p>GeoDa是一个免费、开源的空间数据分析软件。 通过探索和建模空间模式，GeoDa向用户提供了全新的空间数据分析视角。</p>
 
 <p>GeoDa是由 <a href="https://en.wikipedia.org/wiki/Luc_Anselin">Luc Anselin</a> 博士和其团队开发的. 该程序提供了友好的用户界面以及丰富的用于探索性空间数据分析(ESDA)的方法，比如空间自相关统计(spatial autocorrelation statistics)和基本的空间回归分析(spatial regression analysis)。 </p>
 
-<p>从2003年2月GeoDa发布第一个版本以来，<a href="https://geodacenter.asu.edu/projects/opengeoda">GeoDa的用户数量</a> 成倍的增长。截止2016年4月，GeoDa的用户数量已经超过了15万。 This includes lab users at universities such as Harvard, MIT, and Cornell. The user community and press embraced the program enthusiastically, calling it a "hugely important analytic tool," a "very fine piece of software," and an "exciting development."</p>
+<p>从2003年2月GeoDa发布第一个版本以来，<a href="https://geodacenter.asu.edu/projects/opengeoda">GeoDa的用户数量</a> 成倍的增长。截止2016年4月，GeoDa的用户数量已经超过了15万。 包括哈佛，麻省理工、康奈尔等著名大学都在实验室中安装并使用GeoDa软件。GeoDa软件得到了用户和媒体广泛的好评，被称之为“一个非常重要的分析工具”，“一款制作精良的软件”，有着“激动人心的进展”。</p>
 
-<p>The latest beta version 1.8 contains several new features such as support for more spatial file formats, full space-time data support in all views, basemap layers for all maps, averages charts, scatter plot matrices, nonparametric spatial autocorrelation (correlogram), and flexible data categorization.</p>
+<p>GeoDa最新发布的版本是1.8 beta。其包含了很多新的功能，比如：支持更多的空间数据格式，支持时空（space-time)数据，支持包括Nokia和CartoDB提供的底图(Basemap)显示，均值比较图表(averages charts)，散点图矩阵(scatter plot matrices)，非参数的空间自相关图(nonparametric spatial autocorrelation--correlogram)，以及灵活的数据分类方法(flexible data categorization)。</p>
 
 <br/>
 <h3>
-<a id="intro-toolbar" class="anchor" href="#intro-toolbar" aria-hidden="true"><span class="octicon octicon-link"></span></a>A New Look</h3>
-<p>After years of using the same old icons, GeoDa now has a new look:</p>
+<a id="intro-toolbar" class="anchor" href="#intro-toolbar" aria-hidden="true">
+	<span class="octicon octicon-link"></span></a>全新的外观</h3>
+<p>经过了十多年的沉淀，GeoDa现在有了一个全新的设计:</p>
 <p>
 <div class="bss-slides num2" tabindex="2">
    <figure>
@@ -76,11 +77,12 @@ makeBSS('.num2', opts);
 
 </p>
 
-<p>GeoDa runs on Windows, MacOSX and Linux (Ubuntu)</p>
+<p>跨平台：GeoDa可以运行在Windows， MacOSX 和 Linux (Ubuntu) 系统上。</p>
 
 <br/>
 <h3>
-<a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>GeoDa Now Supports More Spatial Data Formats</h3>
+<a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+GeoDa支持更多的空间数据格式</h3>
 <p>GeoDa now supports a larger variety of vector data in different formats: You can work with shapefiles, geodatabases, GeoJSON, MapInfo, GML, KML, and other vector data formats supported by the GDAL library. The program also converts coordinates in table format (.csv, .dbf, .xls, .ods) to one of these spatial data formats and converts data between different file formats (such as .csv to .dbf or shapefile to GeoJSON). Selecting a subset and exporting it as a new file is now also possible.</p>
 <p><img src="images/dataformats.png" class="shadowfilter"></p>
 
@@ -97,7 +99,8 @@ makeBSS('.num2', opts);
 <p><img src="images/time.png" class="shadowfilter"></p>
 
 <h3>
-<a id="intro-ui" class="anchor" href="#intro-ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ground-Truth Map Results with Basemaps</h3>
+<a id="intro-ui" class="anchor" href="#intro-ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+添加包括Nokia和CartoDB提供的底图(Basemap)</h3>
 
 <p>If your spatial data are projected (.prj file), you can now add a basemap to any map view, including cluster maps, for better orientation and for ground-truthing results.</p>
 
@@ -107,13 +110,15 @@ makeBSS('.num2', opts);
 
 <br/>
 <h3>
-<a id="intro-avg" class="anchor" href="#intro-avg" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compare Averages Across Time and Space</h3>
+<a id="intro-avg" class="anchor" href="#intro-avg" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+时空数据的均值比较</h3>
 <p>A new Averages Chart compares values that are averaged over time and/or space and tests if the differences in these means are significant. For instance, first select if you want to compare means of selected vs. unselected observations in the same time period or compare all observations for different time periods. A basic pre-post/impact-control test then indicates if your results changed over time and space (using an F-test and difference-in-difference test).</p>
 <p><img src="images/avgchart.png" class="shadowfilter"></p>
 
 <br/>
 <h3>
-<a id="intro-sp-matrix" class="anchor" href="#intro-sp-matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Detect Relationships in Multivariate Space</h3>
+<a id="intro-sp-matrix" class="anchor" href="#intro-sp-matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+Detect Relationships in Multivariate Space</h3>
 <p>A scatter plot matrix allows you to explore multiple bivariate correlations at once. In this example, the regression slopes for selected, unselected and all police precincts in San Francisco are shown to explore relationships between four types of crime.</p>
 <p><img src="images/scatter_matrix.png" class="shadowfilter"></p>
 

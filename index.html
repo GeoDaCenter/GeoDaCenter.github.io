@@ -29,7 +29,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">GeoDa on Github</h1>
-      <h2 class="project-tagline">GeoDa (TM): Software providing an introduction to spatial data analysis.</h2>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis.</h2>
       <a href="https://github.com/lixun910/geoda" class="btn">View on GitHub</a>
       <a href="https://github.com/lixun910/geoda/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/lixun910/geoda/tarball/master" class="btn">Download .tar.gz</a>
@@ -37,12 +37,26 @@
 
     <section class="main-content">
       <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GeoDa GitHub Pages.</h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introducing GeoDa 1.8 Beta</h3>
 
-<p>GeoDa is the flagship program of the GeoDa Center, following a long line of software tools developed by Dr. Luc Anselin. It is designed to implement techniques for exploratory spatial data analysis (ESDA) on lattice data (points and polygons). The free program provides a user friendly and graphical interface to methods of descriptive spatial data analysis, such as spatial autocorrelation statistics, as well as basic spatial regression functionality. The latest version contains several new features such as full space-time data support in all views, a new cartogram, a refined map movie, parallel coordinate plot, 3D visualization, conditional plots (and maps) and spatial regression.</p>
+<p>GeoDa is a free and open source software tool that serves as an introduction to spatial data analysis. It is designed to facilitate new insights from data analysis by exploring and modeling spatial patterns.</p>
+
+<p>GeoDa was developed by <a href="https://en.wikipedia.org/wiki/Luc_Anselin">Dr. Luc Anselin</a> and his team. The program provides a user-friendly and graphical interface to methods of exploratory spatial data analysis (ESDA), such as spatial autocorrelation statistics, and basic spatial regression analysis for lattice data (points and polygons). </p>
+
+<p>Since its initial release in February 2003, <a href="https://geodacenter.asu.edu/projects/opengeoda">GeoDa's user numbers</a> have increased exponentially to over 150,000 (April 2015). This includes lab users at universities such as Harvard, MIT, and Cornell. The user community and press embraced the program enthusiastically, calling it a "hugely important analytic tool," a "very fine piece of software," and an "exciting development."</p>
+
+<p>The latest beta version 1.8 contains several new features such as support for more spatial file formats, full space-time data support in all views, basemap layers for all maps, averages charts, scatter plot matrices, nonparametric spatial autocorrelation (correlogram), and flexible data categorization.</p>
+
+<br/>
+<h3>
+<a id="intro-toolbar" class="anchor" href="#intro-toolbar" aria-hidden="true"><span class="octicon octicon-link"></span></a>A New Look</h3>
+<p>After years of using the same old icons, GeoDa now has a new look:</p>
+<p><img src="images/toolbar.png" class="shadowfilter"></p>
 
 <h3>
-<a id="intro-geoda-1.8" class="anchor" href="#intro-geoda-1.8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introducing GeoDa 1.8</h3>
+<a id="intro-geoda-1.8" class="anchor" href="#intro-geoda-1.8" aria-hidden="true"><span class="octicon octicon-link"></span></a>GeoDa Remains Cross-Platform</h3>
+
+<p>GeoDa runs on Windows, MacOSX and Linux (Ubuntu):</p>
 
 <p>
 <div class="bss-slides num2" tabindex="2">
@@ -70,12 +84,26 @@ makeBSS('.num2', opts);
 
 <br/>
 <h3>
-<a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spatial Data</h3>
-<p>GeoDa supports various vector data in different formats and projections. Supported formats include all vector data supported by GDAL library.</p>
+<a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>GeoDa Now Supports More Spatial Data Formats</h3>
+<p>GeoDa now supports a larger variety of vector data in different formats: You can work with shapefiles, geodatabases, GeoJSON, MapInfo, GML, KML, and other vector data formats supported by the GDAL library. The program also converts coordinates in table format (.csv, .dbf, .xls, .ods) to one of these spatial data formats and converts data between different file formats (such as .csv to .dbf or shapefile to GeoJSON). Selecting a subset and exporting it as a new file is now also possible.</p>
 <p><img src="images/dataformats.png" class="shadowfilter"></p>
 
+<br/>
 <h3>
-<a id="intro-ui" class="anchor" href="#intro-ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>New GeoDa UI</h3>
+<a id="intro-esda" class="anchor" href="#intro-esda" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explore Statistical Results through Linked Maps and Charts</h3>
+<p>In contrast to programs that visualize raw data in maps, GeoDa focuses on exploring the results of statistical tests and models through linked maps and charts.</p>
+<p><img src="images/esda.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-time" class="anchor" href="#intro-time" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analyze Spatial and Temporal Patterns Across Linked Views</h3>
+<p>You can now group the same variable across time periods in the new Time Editor to explore statistical patterns across space and time. Then explore results as views change over time with the Time Player.</p>
+<p><img src="images/time.png" class="shadowfilter"></p>
+
+<h3>
+<a id="intro-ui" class="anchor" href="#intro-ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ground-Truth Map Results with Basemaps</h3>
+
+<p>If your spatial data are projected (.prj file), you can now add a basemap to any map view, including cluster maps, for better orientation and for ground-truthing results.</p>
 
 <p>
 <style>
@@ -126,33 +154,43 @@ makeBSS('.num2', opts);
 <div style="clear:both;"></div>
 </p>
 
+<br/>
 <h3>
-<a id="intro-esda" class="anchor" href="#intro-esda" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exploratory Spatial Data Analysis</h3>
-<p>
-</p>
+<a id="intro-avg" class="anchor" href="#intro-avg" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compare Averages Across Time and Space</h3>
+<p>A new Averages Chart compares values that are averaged over time and/or space and tests if the differences in these means are significant. For instance, first select if you want to compare means of selected vs. unselected observations in the same time period or compare all observations for different time periods. A basic pre-post/impact-control test then indicates if your results changed over time and space (using an F-test and difference-in-difference test).</p>
+<p><img src="images/avgchart.png" class="shadowfilter"></p>
 
+<br/>
 <h3>
-<a id="intro-space-time" class="anchor" href="#intro-space-time" aria-hidden="true"><span class="octicon octicon-link"></span></a>Space-Time Enabled</h3>
-<p>
-</p>
+<a id="intro-sp-matrix" class="anchor" href="#intro-sp-matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Detect Relationships in Multivariate Space</h3>
+<p>A scatter plot matrix allows you to explore multiple bivariate correlations at once. In this example, the regression slopes for selected, unselected and all police precincts in San Francisco are shown to explore relationships between four types of crime.</p>
+<p><img src="images/scatter_matrix.png" class="shadowfilter"></p>
 
+<br/>
 <h3>
-<a id="intro-regression" class="anchor" href="#intro_regression" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spatial Regression</h3>
-<p>
-</p>
+<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Determine if Changes Over Time Are Spatially Clustered</h3>
+<p>Use a global or local Differential Moran?s I test to find out if a variable?s change over time in a given location is statistically related to that of its neighbors. For instance, this local (LISA) cluster map shows hotspots in New York with larger changes in the share of kids between 2002 and 2008 (and coldspots with smaller changes).</p>
+<p><img src="images/DiffMI.png" class="shadowfilter"></p>
 
+<br/>
 <h3>
-<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Communities</h3>
+<a id="intro-corr" class="anchor" href="#intro-corr" aria-hidden="true"><span class="octicon octicon-link"></span></a>Find the Threshold Where Spatial Correlation Ends</h3>
+<p>A nonparametric spatial autocorrelation test (correlogram) is now available to determine distance thresholds when the values of neighboring pairs are no longer correlated.</p>
+<p><img src="images/corr.png" class="shadowfilter"></p>
 
-<p>Since its initial release in February 2003, GeoDa's user numbers have increased exponentially, as the chart and map of global users above shows. This includes lab users at universities such as Harvard, MIT, and Cornell. The user community and press embraced the program enthusiastically, calling it a "hugely important analytic tool," a "very fine piece of software," an "exciting development" and more.</p>
+<br/>
+<h3>
+<a id="intro-cat" class="anchor" href="#intro-cat" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explore the Impact of Flexible Data Categorization</h3>
+<p>With the new category editor, you can explore how sensitive your results are to changes in the thresholds that categorize your data. In this example the thresholds in the conditional map (right) are based on the categories that can be adjusted in the category editor (left).</p>
+<p><img src="images/cat_editor.png" class="shadowfilter"></p>
 
-<p>
-        <iframe width="100%" height="420" frameborder="0" src="https://geodacenter.asu.edu/data/charts/GeoDa Software_map.html"></iframe>
-</p>
+
+
+
 <h3>
 <a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies</h3>
 
-<p>GeoDa TM is built upon several open source libraries and source-code files. Below is a list of some of these that we'd like to acknowledge.</p>
+<p>GeoDa is released under a GPL license. It builds on several open source libraries and source-code files. Below is the list of the key projects that we would like to acknowledge.</p>
 
 <p>
 	GDAL Libraries, version 1.10
@@ -210,8 +248,24 @@ Author: Maciej Sobczak
 License: See logger.h in included source files
 Links: <a href="http://www.msobczak.com/">http://www.msobczak.com/</a></p>
 
+
+
+<br/>
 <h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a id="intro-ackn" class="anchor" href="#intro-ackn" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgments</h3>
+<p>The development of GeoDa has most recently been supported by the National Science Foundation, the National Institutes of Health, the National Institute of Justice, and the Agency for Healthcare Research and Quality.</p>
+
+<br/>
+<h3>
+<a id="intro-support" class="anchor" href="#intro-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support</h3>
+<p>We are currently updating the documentation to reflect the new features in GeoDa 1.8. The <a href="https://geodacenter.asu.edu/support/community">Openspace listserv</a> supports technical questions about GeoDa.</p>
+
+<br/>
+<h3>
+<a id="intro-contact" class="anchor" href="#intro-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h3>
+<p>Questions? Contact <a href="mailto:geodacenter.asu.edu">us</a>.</p>
+
+
 
 <p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
 

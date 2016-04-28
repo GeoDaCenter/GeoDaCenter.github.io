@@ -1,0 +1,5 @@
+1.8.4
+GeoDa
+http://geodacenter.github.io/updates/1.8.4/osx/GeoDa
+../Resources/plugins/ogr_OCI.so
+http://geodacenter.github.io/updates/1.8.4/osx/ogr_OCI

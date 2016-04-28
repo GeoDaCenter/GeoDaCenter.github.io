@@ -1,0 +1,5 @@
+1.8.4
+GeoDa.exe
+http://geodacenter.github.io/updates/1.8.4/win64/GeoDa
+ogr_OCI.dll
+http://geodacenter.github.io/updates/1.8.4/win64/ogr_OCI

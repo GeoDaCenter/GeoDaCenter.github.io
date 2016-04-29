@@ -1,0 +1,8 @@
+1.8.4
+https://github.com/GeoDaCenter/geoda/releases/tag/1.8.4
+GeoDa
+http://geodacenter.github.io/updates/1.8.4/win32/GeoDa
+41212412
+ogr_OCI
+http://geodacenter.github.io/updates/1.8.4/win32/ogr_OCI
+12412

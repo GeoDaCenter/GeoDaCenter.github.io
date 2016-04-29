@@ -1,8 +1,0 @@
-1.8.4
-https://github.com/GeoDaCenter/geoda/releases/tag/1.8.2
-GeoDa
-http://geodacenter.github.io/updates/1.8.4/osx/GeoDa
-28074576
-../Resources/plugins/ogr_OCI.so
-http://geodacenter.github.io/updates/1.8.4/osx/ogr_OCI
-157392

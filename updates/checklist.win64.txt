@@ -1,5 +1,5 @@
 1.8.4
 http://google.com/
 GeoDa.exe
-http://google.com/
-123124
+http://geodacenter.github.io/updates/win64/GeoDa
+7854592

@@ -1,5 +1,5 @@
 1.8.4
 http://google.com
-GeoDa.exe
-http://google.com/
-1231241
+GeoDa
+http://geodacenter.github.io/updates/1.8.4/osx/GeoDa
+28074576

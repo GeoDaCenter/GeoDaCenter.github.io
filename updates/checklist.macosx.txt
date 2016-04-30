@@ -1,5 +1,0 @@
-1.8.4
-http://google.com
-GeoDa
-http://geodacenter.github.io/updates/1.8.4/osx/GeoDa
-28074576

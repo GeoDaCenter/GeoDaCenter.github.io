@@ -1,5 +1,0 @@
-1.8.4
-http://google.com
-GeoDa.exe
-http://google.com/
-1231241

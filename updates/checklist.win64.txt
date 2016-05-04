@@ -1,5 +1,5 @@
-1.8.4
-https://github.com/GeoDaCenter/geoda/releases/tag/1.8.4
+1.8.5
+https://github.com/GeoDaCenter/geoda/releases/tag/1.8.5
 GeoDa.exe
-http://geodacenter.github.io/updates/1.8.4/win64/GeoDa
-7887360
+http://geodacenter.github.io/updates/1.8.5/win64/GeoDa
+7890944

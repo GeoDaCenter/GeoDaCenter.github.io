@@ -1,4 +1,4 @@
-1.8.5
+1.8.5.1
 https://github.com/GeoDaCenter/geoda/releases/tag/1.8.5
 GeoDa
 http://geodacenter.github.io/updates/1.8.5/osx/GeoDa

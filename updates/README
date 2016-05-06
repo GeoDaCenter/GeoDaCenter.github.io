@@ -2,5 +2,7 @@
 https://github.com/GeoDaCenter/geoda/releases/tag/1.8.4 #URL description
 GeoDa.exe # FILE1 name
 http://geodacenter.github.io/updates/1.8.4/win32/GeoDa # Download URL
+123455 # FILE SIZE
 ogr_OCI.dll # FILE2 name
 http://geodacenter.github.io/updates/1.8.4/win32/ogr_OCI #Download URL
+1231241 # FILE SIZE

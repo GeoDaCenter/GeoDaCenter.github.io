@@ -1,8 +1,8 @@
-1.8.6
-https://github.com/GeoDaCenter/geoda/releases/tag/1.8.6
+1.8.7
+https://github.com/GeoDaCenter/geoda/releases/tag/1.8.7
 GeoDa
-http://geodacenter.github.io/updates/1.8.6/osx/GeoDa
-28128960
+http://geodacenter.github.io/updates/1.8.7/osx/GeoDa
+28133648
 cache.sqlite
-http://geodacenter.github.io/updates/1.8.6/osx/cache.sqlite
+http://geodacenter.github.io/updates/1.8.7/osx/cache.sqlite
 5120

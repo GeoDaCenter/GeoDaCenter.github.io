@@ -1,8 +1,8 @@
-1.8.7.3
+1.8.7.5
 https://github.com/GeoDaCenter/geoda/releases
 GeoDa.exe
-http://geodacenter.github.io/updates/1.8.7.3/win32/GeoDa
+http://geodacenter.github.io/updates/1.8.7.5/win32/GeoDa
 6744576
 cache.sqlite
-http://geodacenter.github.io/updates/1.8.7.3/win32/cache.sqlite
+http://geodacenter.github.io/updates/1.8.7.5/win32/cache.sqlite
 5120

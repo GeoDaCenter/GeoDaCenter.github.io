@@ -29,6 +29,14 @@
   </head>
   <body>
 
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -42,7 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <section class="page-header">
       <h1 class="project-name">GeoDa on Github</h1>
       <h2 class="project-tagline">Data Formats</h2>
-      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+       <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
       <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
        <a href="http://geodacenter.github.io/formats.html" class="btn">Data Formats</a>
       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
@@ -55,152 +63,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <span class="octicon octicon-link"></span></a>Spatial Data Format Supported by GeoDa 1.8</h3>
 
 <p>
+<h2 style="font-size: 18.5705px;">&nbsp;</h2>
+<h2 style="font-size: 18.5705px;">GeoDa 1.8+ Beta Release</h2>
+<p>This 1.8 beta release is the most current version of GeoDa with <a href="http://geodacenter.github.io/">new features</a>. It is a beta release since we have only tested the program internally. We did find it to be stable but if you encounter a bug, <a href="mailto:geodacenter@asu.edu">please let us know</a>. You can also report bugs and issues on <a href="https://github.com/GeoDaCenter/geoda/issues">our Github site</a>. This version is continuously updated when bugs are fixed.</p>
+<p>Latest 1.8 beta release: 6/11/2016 subversion 1.8.8 (<a href="http://github.com/GeoDaCenter/geoda/releases">release notes</a>)</p>
+<ul>
+	<li style="line-height: 19.5px;"><a href="download_windows.html">GeoDa for Windows (XP, Vista, 7, 8,&nbsp;8.1 and 10) beta version 1.8.8&nbsp;(32-bit&nbsp;and 64-bit)</a></li>
+	<li style="line-height: 19.5px;"><a href="download_mac.html">GeoDa for OS X (10.6.8 or later) beta version 1.8.8</a></li>
+	<li style="line-height: 19.5px;"><a href="download_linux.html">GeoDa for Linux (Ubuntu 14.04 or later) beta version 1.8.6</a></li>
+</ul>
+<p>The source code for GeoDa is available <a href="http://geodacenter.github.io/index.html">here</a> and is released under the <a href="http://www.gnu.org/licenses/gpl-3.0.html">GPL v3.0 license</a>.</p>
+<h2>Legacy GeoDa</h2>
+<p><b>If for some reason you know that you need to use the older GeoDa binary for Windows XP, select the &quot;Geoda 0.9.5-i Windows XP Installer&quot; link below. &nbsp;The download will begin immediately after you login.</b></p>
+<ul>
+	<li>The setup.exe file will then download to your machine (double-click or &quot;run&quot; to install)</li>
+	<li>Note that GeoDa 0.9.5-i runs on Windows XP only.</li>
+	<li><a href="/GeoD-0.9.5-features.html">List of features</a></li>
+	<li><a href="https://geodacenter.org/downloads/unprotected/setup_0.exe">GeoDa 0.9.5-i Windows XP Installer</a></li>
+</ul>
+<h2>Other</h2>
+<ul>
+	<li>Problems? Email geodacenter@asu.edu</li>
+	<li><a href="/geodainfo.html" target="_blank">Additional resources</a></li>
+</ul>
+<p>&nbsp;</p>
 
-<h4>File Formats&nbsp; (compiled into GeoDa)</h4>
-<table>
-	<tbody>
-		<tr>
-			<td>File Format Name</td>
-			<td>File Name Extensions</td>
-			<td>Writable</td>
-		</tr>
-		<tr>
-			<td>Comma Separated Value (CSV)</td>
-			<td>.csv</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>ESRI Shapefile</td>
-			<td>.shp; .dbf</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>GeoJSON</td>
-			<td>.json; .geojson</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>GML</td>
-			<td>.kml; .xml</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>GPX</td>
-			<td>.gpx</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>KML</td>
-			<td>.kml; .xml</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>Mapinfo File</td>
-			<td>.MIF; .MID</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>MS Excel Format</td>
-			<td>.xls</td>
-			<td>No</td>
-		</tr>
-		<tr>
-			<td>Open Document Spreadsheet</td>
-			<td>.ods</td>
-			<td>No</td>
-		</tr>
-	</tbody>
-</table>
-<p>&nbsp;</p>
-<h4>Cloud Datasource&nbsp; </h4>
-<table>
-	<tbody>
-		<tr>
-			<td>CartoDB</td>
-			<td>You need your CartoDB user account and API key</td>
-			<td>No</td>
-		</tr>
-	</tbody>
-</table>
-<p>&nbsp;</p>
-  <h4>Databases</h4>
-<table>
-	<tbody>
-		<tr>
-			<td>Database Name</td>
-			<td>Support Versions</td>
-			<td>Writable</td>
-			<td>Needs additional setup?</td>
-		</tr>
-		<tr>
-			<td>ESRI ArcSDE (64-bit)</td>
-			<td>10.x (suggested)</td>
-			<td>No</td>
-			<td>Yes, see <a href="setup-arcsde.html">setup instruction</a></td>
-		</tr>
-		<tr>
-			<td>ESRI ArcSDE (32-bit)</td>
-			<td>9.x (suggested)</td>
-			<td>No</td>
-			<td>Yes, see <a href="setup-arcsde.html">setup instruction</a></td>
-		</tr>
-		<tr>
-			<td>Oracle Spatial</td>
-			<td>11g (suggested)</td>
-			<td>Yes</td>
-			<td>Yes, see <a href="setup-oracle.html">setup instruction</a></td>
-		</tr>
-		<tr>
-			<td>PostgreSQL with PostGIS</td>
-			<td>9.3.1 (suggested)</td>
-			<td>Yes</td>
-			<td>No</td>
-		</tr>
-		<tr>
-			<td>MySQL with Spatial Extension</td>
-			<td>5.6.14 (suggested)</td>
-			<td>Yes</td>
-			<td>No</td>
-		</tr>
-	</tbody>
-</table>
-<p>&nbsp;</p>
-<h4>File Databases</h4>
-<table>
-	<tbody>
-		<tr>
-			<td>File Database Name</td>
-			<td>Support Versions</td>
-			<td>Writable</td>
-			<td>Needs additional setup?</td>
-		</tr>
-		<tr>
-			<td>SQLite</td>
-			<td>3.0 (suggested)</td>
-			<td>Yes</td>
-			<td>No</td>
-		</tr>
-		<tr>
-			<td>Spatialite</td>
-			<td>3.0 (suggested)</td>
-			<td>Yes</td>
-			<td>No</td>
-		</tr>
-		<tr>
-			<td>ESRI File Geodatabase</td>
-			<td>&nbsp;</td>
-			<td>Yes</td>
-			<td>Yes, see <a href="setup-esri-fgdb.html">setup instruction</a></td>
-		</tr>
-		<tr>
-			<td>ESRI Personal Geodatabase</td>
-			<td>&nbsp;</td>
-			<td>No</td>
-			<td>Yes, see <a href="setup-pgeo.html">setup instruction</a></td>
-		</tr>
-	</tbody>
-</table>
-<p>&nbsp;</p>
 </p>
 
 <br/>

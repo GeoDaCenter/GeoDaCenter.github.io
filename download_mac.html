@@ -29,6 +29,14 @@
   </head>
   <body>
 
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -42,7 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <section class="page-header">
       <h1 class="project-name">GeoDa on Github</h1>
       <h2 class="project-tagline">Data Formats</h2>
-      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+       <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
       <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
        <a href="http://geodacenter.github.io/formats.html" class="btn">Data Formats</a>
       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
@@ -55,152 +63,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <span class="octicon octicon-link"></span></a>Spatial Data Format Supported by GeoDa 1.8</h3>
 
 <p>
+<!--content start-->
+<p>The download will begin immediately after clicking the link.</p>
+<ul>
+	<li><a href="http://geodacenter.org/downloads/unprotected/GeoDa1.8.8-Installer.dmg">GeoDa 1.8.8&nbsp;for Mac OS X (10.6.8 or later required)</a></li>
+	<li><a href="https://geodacenter.org/downloads/unprotected/GeoDa-1.6.7-Mac.dmg">GeoDa 1.6.7 for Mac OS X (10.6.8 or later required)</a></li>
+</ul>
+<p><b>Mountain Lion (10.8), Mavericks (10.9) and Yosemite (10.10)</b> users. Please note that you will get a warning message about this program coming from an unknown developer the first time you try to open it.</p>
+<p>Use control-click and select open to open the program (instead of double click) and accept at the prompt. You will not be asked this again. However, in order for this to work, you need to set your Security &amp; Privacy preferences to Mac App Store and identified developers; the default is Mac App store only, which will NOT WORK for GeoDa.</p>
 
-<h4>File Formats&nbsp; (compiled into GeoDa)</h4>
-<table>
-	<tbody>
-		<tr>
-			<td>File Format Name</td>
-			<td>File Name Extensions</td>
-			<td>Writable</td>
-		</tr>
-		<tr>
-			<td>Comma Separated Value (CSV)</td>
-			<td>.csv</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>ESRI Shapefile</td>
-			<td>.shp; .dbf</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>GeoJSON</td>
-			<td>.json; .geojson</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>GML</td>
-			<td>.kml; .xml</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>GPX</td>
-			<td>.gpx</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>KML</td>
-			<td>.kml; .xml</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>Mapinfo File</td>
-			<td>.MIF; .MID</td>
-			<td>Yes</td>
-		</tr>
-		<tr>
-			<td>MS Excel Format</td>
-			<td>.xls</td>
-			<td>No</td>
-		</tr>
-		<tr>
-			<td>Open Document Spreadsheet</td>
-			<td>.ods</td>
-			<td>No</td>
-		</tr>
-	</tbody>
-</table>
-<p>&nbsp;</p>
-<h4>Cloud Datasource&nbsp; </h4>
-<table>
-	<tbody>
-		<tr>
-			<td>CartoDB</td>
-			<td>You need your CartoDB user account and API key</td>
-			<td>No</td>
-		</tr>
-	</tbody>
-</table>
-<p>&nbsp;</p>
-  <h4>Databases</h4>
-<table>
-	<tbody>
-		<tr>
-			<td>Database Name</td>
-			<td>Support Versions</td>
-			<td>Writable</td>
-			<td>Needs additional setup?</td>
-		</tr>
-		<tr>
-			<td>ESRI ArcSDE (64-bit)</td>
-			<td>10.x (suggested)</td>
-			<td>No</td>
-			<td>Yes, see <a href="setup-arcsde.html">setup instruction</a></td>
-		</tr>
-		<tr>
-			<td>ESRI ArcSDE (32-bit)</td>
-			<td>9.x (suggested)</td>
-			<td>No</td>
-			<td>Yes, see <a href="setup-arcsde.html">setup instruction</a></td>
-		</tr>
-		<tr>
-			<td>Oracle Spatial</td>
-			<td>11g (suggested)</td>
-			<td>Yes</td>
-			<td>Yes, see <a href="setup-oracle.html">setup instruction</a></td>
-		</tr>
-		<tr>
-			<td>PostgreSQL with PostGIS</td>
-			<td>9.3.1 (suggested)</td>
-			<td>Yes</td>
-			<td>No</td>
-		</tr>
-		<tr>
-			<td>MySQL with Spatial Extension</td>
-			<td>5.6.14 (suggested)</td>
-			<td>Yes</td>
-			<td>No</td>
-		</tr>
-	</tbody>
-</table>
-<p>&nbsp;</p>
-<h4>File Databases</h4>
-<table>
-	<tbody>
-		<tr>
-			<td>File Database Name</td>
-			<td>Support Versions</td>
-			<td>Writable</td>
-			<td>Needs additional setup?</td>
-		</tr>
-		<tr>
-			<td>SQLite</td>
-			<td>3.0 (suggested)</td>
-			<td>Yes</td>
-			<td>No</td>
-		</tr>
-		<tr>
-			<td>Spatialite</td>
-			<td>3.0 (suggested)</td>
-			<td>Yes</td>
-			<td>No</td>
-		</tr>
-		<tr>
-			<td>ESRI File Geodatabase</td>
-			<td>&nbsp;</td>
-			<td>Yes</td>
-			<td>Yes, see <a href="setup-esri-fgdb.html">setup instruction</a></td>
-		</tr>
-		<tr>
-			<td>ESRI Personal Geodatabase</td>
-			<td>&nbsp;</td>
-			<td>No</td>
-			<td>Yes, see <a href="setup-pgeo.html">setup instruction</a></td>
-		</tr>
-	</tbody>
-</table>
-<p>&nbsp;</p>
+<!--content end-->
+
 </p>
 
 <br/>

@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Technical Questions | GeoDa on Github</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/simple-slideshow-styles.css">
+    <style>
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+  </head>
+  <body>
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">Answers to Technical GeoDa Questions</h2>
+      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+       <a href="documentation.html" class="btn">Documentation</a>
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>       
+       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+    <section class="main-content">
+ 
+  <ul>
+ 	<li><a href="#data">What characteristics should my data have?</a></li>
+         <li><a href="#datasize">What are data size limits in GeoDa?</a></li>
+	<li><a href="#specs">What platforms does GeoDa run on?</a></li>
+	<li><a href="#layer">Can I load more than one layer in GeoDa?</a></li>
+	<li><a href="#miss">What to do with missing values?</a></li>
+	<li><a href="#choice">Which weights matrix should I choose?</a></li>
+	<li><a href="#dist">What happens when I set the threshold distance lower than the default?</a></li>
+	<li><a href="#invdist">Does GeoDa include inverse distance weighting?</a></li>
+	<li><a href="#unit">How do I get the distance units I want?</a></li>
+	<li><a href="#isle">What to do with islands?</a></li>
+	<li><a href="#projection">How do I assign projections and coordinate systems to my spatial file?</a></li>
+         <li><a href="#lisactr">LISA maps only show cluster center</a></li>
+	<li><a href="#lisasig">How to assess the sensitivity of LISA results?</a></li>
+	<li><a href="#lisabox">My box map does not reflect my LISA map - why?</a></li>
+	<li><a href="#robust">How robust is the pseudo p-value?</a></li>
+	<li><a href="#smooth">How to assess the ensitivity of different smoothers?</a></li>
+	<li><a href="#regout">Run a regression without opening a project</a></li>
+	<li><a href="#output">Where can I get help interpreting the regression output?</a></li>
+</ul>
+
+<h2><a name="data">What characteristics should my data have?</a></h2>
+<p>GeoDa is designed for data with the following characteristics:</p>
+<ul>
+	<li>Continuously distributed (not categorically)</li>
+	<li>Refers to discrete areal units (as opposed to sample points)</li>
+	<li>Has no missing values.</li>
+</ul>
+
+<h2><a name="datasize">What are data size limits in GeoDa?</a></h2>
+
+<p>For the ESDA analysis in GeoDa, it can be hard to detect patterns across multiple views for data larger than 5,000-10,000 observations although some applications have used it for over 170,000 areas. However, performance tends to slow down in these cases. GeoDa-Web is being designed for larger datasets. For the spatial regression analysis, the threshold for performance reductions will depend on the choice of spatial weights but often lies between 50,000-100,000 observations. GeoDaSpace (especially the GMM estimators) are more suited for larger datasets,</p>
+
+
+<h2><a name="specs">What platforms does GeoDa run on?</a></h2>
+<p>GeoDa runs on Windows, Mac OSX and Linux. It does not access restricted system folders in Windows.</p>
+
+<h2><a name="layer">Can I load more than one layer in GeoDa?</a></h2>
+<p>No. You can add a basemap layer to an existing area or point map but no other additional layer (such as points and areas). This option is available in <a href="CAST">CAST</a> and will be available in GeoDa-Web, which will be released in the near future.</p>
+
+
+<h2><a name="miss">What to do with missing values?</a></h2>
+<p>GeoDa does not handle missing values - it will fill blank fields with zeros or treat values such as 99, -1, etc. as observed. There is no easy solution to this problem. Some options include excluding missing observations, resaving your shape file for only those areas without missing values or interpolating missing values (care needs to be taken that this interpolation is not based on the values of immediate neighbors, otherwise <a href="glossary.html#sa">spatial autocorrelation</a> is introduced by design). </p>
+
+<h2><a name="choice">Which weights matrix should I choose?</a></h2>
+<p>The choice of <a href="glossary.html#wghts">weights</a> should ultimately be driven by a rationale for including those areas as neighbors that have a spatial effect on a given location. This rationale can be derived from theory or be the result of using <a href="glossary.html#esda">ESDA</a> to experiment with different weights and connectivity orders. Since weights matrices are used to create spatial lags that average neighboring values, the choice of a weights matrix will determine which neighboring values will be averaged. For instance, since rook weights will usually have fewer neighbors than queen weights, on average, each neighboring observation has more influence.</p>
+
+<p>The question of which weights to choose is more pertinent in the context of modeling than ESDA since modeling is based on substantive notions of spatial effects while ESDA prioritizes the rejection of spatial randomness. Therefore, if there are no substantive reasons to guide the choice of weights in ESDA, using a weights file with as few neighbors as possible (such as rook) makes sense. Especially with irregular areal units (as opposed to grids), the difference between <a href="/node/390#rook">rook</a> and <a href="/node/390#queen">queen</a> weights is often minimal. However, it is advisable to test how sensitive your results are to your weights specifications by comparing multiple weights matrices.</p>
+
+<h2><a name="dist">What happens when I set the threshold distance lower than the default?</a></h2>
+<p>The default distance threshold ensures that every observation has at least one neighbor. If you set the threshold distance as smaller than the default minimum, GeoDa will create a <a href="glossary.html#wghts">weights matrix</a> based on your threshold, not the default, i.e., it will contain &quot;island&quot; observations without neighbors. You can easily check this by looking at the weights characteristics in GeoDa and by opening the weights matrix in a text editor.</p>
+<p>If you are curious about the difference between the matrix with the default minimum threshold and yours, create both matrices and compare them by looking at their <a href="glossary.html#hist">weights characteristics</a> (which is a histogram of the number of neighbors for all observations). You will see that the minimum threshold matrix has no observations with zero neighbors while yours will have observations with zero neighbors.</p>
+
+<h2><a name="invdist">Does GeoDa include inverse distance weighting?</a></h2>
+
+<p>You can create two types of distance-based weights (with .gwt file extensions) in GeoDa:</p>
+
+<p>GeoDa currently does not yet implement inverse distance weighting (i.e., the third column with distances in the .gwt file is only used to determine whether a point is within a distance band or not). The extent of the distance band is specified by your threshold distance (the default value ensures that you have no islands). GeoDa row-standardizes weights, i.e., the rows sum to 1. If you need inverse distance weights, consider <a href="GeoDaSpace">GeoDaSpace's weights tool</a>.</p>
+
+<p>If the size of your areas varies considerably, you might be interested in using K-nearest neighbors, which ensures that every point has the same number of neighbors. Note, however, that these weights cannot be used to estimate spatial regression models with Maximum Likelihood since these weights are asymmetric.</p>
+
+<h2><a name="unit">How do I get the distance units I want?</a></h2>
+<p>If you need the metric displayed in the distance weights threshold box to reflect a particular unit (e.g., feet or miles), project your <a href="glossary.html#shape">shape file</a> or other spatial file first and set the desired units in another program such as a <a href="glossary.html#gis">GIS</a>. Then create the weights based on this file.</p>
+
+<h2><a name="isle">What to do with islands?</a></h2>
+<p>Islands should not be used for LISA maps and can be problematic for GeoDa&#39;s regression models. One option to ensure no islands is to use distance weights (distance bands or k-nearest neighbors). You can also remove islands in GeoDa by exporting a new spatial file without islands or by assigning them to other areas that are similar by editing the weights matrix in a text editor (for details on the weights formats, see the <a href="
+http://la1.rcc.uchicago.edu/media/geoda_files/docs/geoda093.pdf" target="_self">GeoDa 0.9.3 User&#39;s Guide</a>, pp. 80-81). You will need to assign a mainland area ID to the island ID, and vice versa, assign the island ID to the mainland ID.</p>
+
+<h2><a name="projection">How do I assign projections and coordinate systems to my spatial file?</a></h2>
+<p>GeoDa does not contain any tools to set or change map projections or geographic coordinate systems. Geographic coordinate systems are relevant for adding a basemap to your map (you need WGS84). They can be relevant when using GeoDa&#39;s distance weights, which are based on the distances between points. You can set the distance units displayed in the weights distance dialog (e.g., feet, meters, or miles) by first projecting the spatial file in a <a href="glossary.html#gis">GIS</a> outside of GeoDa. 
+
+<h2><a name="lisactr">LISA maps only show cluster center</a></h2>
+<p>Note that the LISA cluster map only shows the <i>center</i> of the cluster in color (e.g., red for a high-high cluster). The actual extend of the cluster includes the center and the surrounding neighbors as defined by the <a href="glossary.html#wghts">weights matrix</a>. If you are not sure which units are neighbors, use the connectivity map in the Weights Editor.</p>
+
+<h2><a name="lisasig">How to assess the sensitivity of LISA results?</a></h2>
+<p>To assess the sensitivity of your results, compare several <a href="glossary.html#perm">permutations</a> and apply several significance filters. This way you can explore which clusters and spatial outliers remain stable throughout.</p>
+
+<h2><a name="lisabox">My box map does not reflect my LISA map - why?</a></h2>
+<p>The box map&#39;s quantile categories, like the box plot&#39;s, are based on the median. With highly skewed distributions (e.g., when the mean is much lower than the median), the box map&#39;s categories might not reflect the same pattern as the LISA map. When the distribution is symmetric, the box map and LISA map results are very similar.</p>
+
+<h2><a name="robust">How robust is the pseudo p-value?</a></h2>
+<p>Explore how robust your observed Moran&#39;s I value is compared to the <a href="glossary.html#random">randomized</a> reference distribution. In the <a href="glossary.html#gmoran">Moran scatter plot</a>, increase the number of permutations from 99 up and test if the relationship between the observed and randomized Moran&#39;s I changes. In the <a href="glossary.html#lisa2">LISA</a> maps, increase the number of randomizations from 99 permutations up to see if the clusters change.</p>
+
+<h2><a name="smooth">How to assess the sensitivity of different smoothers?</a></h2>
+<p>To assess how sensitive the identification of outliers is to a specific <a href="glossary.html#smooth">smoothing</a> technique, you can visually compare the different smoothers in GeoDa. Create four maps (raw rate, EB-smoothed, spatial rate, and EBS-smoothed) and choose the <a href="glossary.html#boxmap">box map</a> option under map themes when you choose your <a href="glossary.html#event">base and event variables</a>.</p>
+<p>One of the considerations in choosing between smoothers is that the area where strength is borrowed from to correct for local variance instability should be representative of the underlying risk in a local area.</p>
+<p>You can also open one or more <a href="glossary.html#boxplot">box plot(s)</a> of the raw rate and/or the smoothed rates to explore the differences in <a href="glossary.html#outliers">outliers</a> through linking and brushing.</p>
+
+<h2><a name="regout">Run regression without opening project</a></h2>
+<p>You can access GeoDa&#39;s regression functionality without opening a spatial file by going directly to Regress after opening GeoDa. This option is particularly useful if you are working with large datasets (e.g., several hundred thousand observations), to avoid loading times of the map file.</p>
+
+<h2><a name="output">Where can I get help interpreting the regression output?</a></h2>
+<p>The <a href="http://la1.rcc.uchicago.edu/media/geoda_files/docs/geodaworkbook.pdf" target="_self">GeoDa workbook</a> contains several regression chapters with more detail on interpretation of output. For further background reading, see the <a href="https://spatial.uchicago.edu/spatial-analysis-references>regression references</a> and, in particular, Anselin (1988)</a>.</p>
+
+
+<h3>
+<a id="intro-contact" class="anchor" href="#intro-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h3>
+<p>Questions? Contact <a href="mailto:spatial@uchicago.edu">us</a>.</p>
+
+
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="https://github.com/lixun910">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>

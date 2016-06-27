@@ -126,7 +126,7 @@
 <p>This smoother is called Empirical <i>Bayes</i> because it borrows strength from a <i>prior</i> distribution to correct for the variance instability associated with rates that have a small base. It is <i>empirical</i> because the prior distribution is based on global characteristics of the existing observations.</p>
 <h3>
 	<a name="ebstand">Empirical Bayes Standardization</a></h3>
-<p>While the Empirical Bayes (EB) smoother adjusts for variance instability through a weighted averaging of rates based on a reference rate, EB standardization directly standardizes raw rates to obtain a constant variance. While <a href="#smooth">smoothing</a> is based on weighting rates, standardization rescales rates. The original raw rate is replaced with a standardized rate with mean zero and standard deviation of one. GeoDa implements the EB standardization procedure suggested by <a href="/node/396#ebstandf">Assuncao and Reis</a> in its <a href="#gmoran">global Moran scatter plot</a> and <a href="#lisa2">LISA</a> maps.</p>
+<p>While the Empirical Bayes (EB) smoother adjusts for variance instability through a weighted averaging of rates based on a reference rate, EB standardization directly standardizes raw rates to obtain a constant variance. While <a href="#smooth">smoothing</a> is based on weighting rates, standardization rescales rates. The original raw rate is replaced with a standardized rate with mean zero and standard deviation of one. GeoDa implements the EB standardization procedure suggested by <a href="refs.html">Assuncao and Reis</a> in its <a href="#gmoran">global Moran scatter plot</a> and <a href="#lisa2">LISA</a> maps.</p>
 <h3>
 	<a name="esda">ESDA</a></h3>
 <p>ESDA stands for <i>Exploratory Spatial Data Analysis</i>. It refers to a set of techniques to interactively visualize and explore data where space matters, in order to detect potentially interesting and explicable patterns. It can also be used to generate hypotheses and to visually assess model results and diagnostics (e.g., by visualizing patterns of residuals that were saved in the regression process). In addition, it is a useful tool for data quality control (e.g., using the weights histogram).</p>
@@ -185,14 +185,14 @@
 <p>K Nearest Neighbors (KNN) is a distance-based definition of neighbors where &quot;k&quot; refers to the number of neighbors of a location. It is computed as the distance between a point and the number (k) of nearest neighbor points (i.e. the distance between the <a href="#centralpt">central points</a> of polygons). It is often applied when areas (such as counties) have different sizes to ensure that every location has the same number of neighbors, independently how large the neighboring areas are.</p>
 
 <p><a name="crash"></a></p>
-<p>K Nearest Neighbors weights matrices can be created in GeoDa. They are asymmetric (e.g., point A is B&#39;s nearest neighbor but point B does not have to be point A&#39;s nearest neighbor). Because of this asymmetry, it is not possible to correctly estimate spatial lag or error models with KNN weights and Maximum Likelihood Estimators in GeoDa However, you can do this with other spatial estimators and KNN weights in <ahref=?GeoDaSpace?>GeoDaSpace</a>.</p>
+<p>K Nearest Neighbors weights matrices can be created in GeoDa. They are asymmetric (e.g., point A is B&#39;s nearest neighbor but point B does not have to be point A&#39;s nearest neighbor). Because of this asymmetry, it is not possible to correctly estimate spatial lag or error models with KNN weights and Maximum Likelihood Estimators in GeoDa However, you can do this with other spatial estimators and KNN weights in <ahref="GeoDaSpace">GeoDaSpace</a>.</p>
 
 <p>&nbsp;</p>
 <h3>
 	<a name="l"><b>L</b></a></h3>
 <h3>
 	<a name="lattice">Lattice Data</a></h3>
-<p>Lattice data refers to point or polygon data that represent discrete areal units (such as counties), i.e. areas where there is no uncertainty as to their location, as opposed to events or sample points whose location is not certain. For more details, see <a href="/node/396#baily">Bailey &amp; Gatrell</a> (introductory) or <a href="/node/396#cressie">Cressie (1991)</a> (advanced).</p>
+<p>Lattice data refers to point or polygon data that represent discrete areal units (such as counties), i.e. areas where there is no uncertainty as to their location, as opposed to events or sample points whose location is not certain. For more details, see <a href="https://spatial.uchicago.edu/spatial-analysis-references">Bailey &amp; Gatrell (introductory) or Cressie (1991)</a> (advanced).</p>
 <h3>
 	<a name="layer">Layer</a></h3>
 <p>When more than one <a href="#shape">shape file</a> is loaded in GeoDa or in a <a href="#gis">GIS</a>, the shape file is referred to as a layer. Layers share the same (or part of the same) geographic extent and display different characteristics of this geography, such as census tracts (polygons), businesses (points), and streets (lines) in the same city.</p>

@@ -1,7 +1,11 @@
-1.8.6
-https://github.com/GeoDaCenter/geoda/releases/tag/1.8.6
+1.8.8
+https://github.com/GeoDaCenter/geoda/releases
 GeoDa.exe
-http://geodacenter.github.io/updates/1.8.6/win64/GeoDa
-7895040
-http://geodacenter.github.io/updates/1.8.6/win64/cache.sqlite
+http://geodacenter.github.io/updates/1.8.8/win64/GeoDa
+7902720
+cache.sqlite
+http://geodacenter.github.io/updates/1.8.8/win64/cache.sqlite
 5120
+gdal_geoda20.dll
+http://geodacenter.github.io/updates/1.8.8/win64/gdal_geoda20
+15457792

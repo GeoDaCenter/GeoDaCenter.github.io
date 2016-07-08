@@ -1,11 +1,11 @@
-1.8.8
+1.8.9.1
 https://github.com/GeoDaCenter/geoda/releases
 GeoDa
-http://geodacenter.github.io/updates/1.8.8/osx/GeoDa
-28133424
+http://geodacenter.github.io/updates/1.8.9.1/osx/GeoDa
+28132576
 cache.sqlite
-http://geodacenter.github.io/updates/1.8.8/osx/cache.sqlite
+http://geodacenter.github.io/updates/1.8.9.1/osx/cache.sqlite
 5120
 ../Resources/plugins/libgdal.20.dylib
-http://geodacenter.github.io/updates/1.8.8/osx/libgdal.20.dylib
+http://geodacenter.github.io/updates/1.8.9.1/osx/libgdal.20.dylib
 17889848

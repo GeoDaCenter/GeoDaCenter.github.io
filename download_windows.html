@@ -54,7 +54,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
       <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
        <a href="documentation.html" class="btn">Documentation</a>
-       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>       
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>
        <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
     </section>
 
@@ -67,17 +67,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>
 <!-- content start-->
 <p>The download will begin immediately after clicking on this link:</p>
-<h4>GeoDa 1.8.8 Beta</h4>
-<ul>
+<h4>GeoDa 1.8.8</h4>
+<ul  style="margin-left: 20px">
 	<li><a href="http://la1.rcc.uchicago.edu/media/geoda_files/software/geoda/GeoDa-1.8.8-Windows-64bit.exe" onclick="ga('send', 'event', 'GeoDaWin64Downloads188', 'GeoDaDownload', 'GeoDa Software Downloads Count for Win64');">for 64-bit Windows Visa, 7, 8 and 10</a>.</li>
 	<li><a href="http://la1.rcc.uchicago.edu/media/geoda_files/software/geoda/GeoDa-1.8.8-Windows-32bit.exe" onclick="ga('send', 'event', 'GeoDaWin32Downloads188', 'GeoDaDownload', 'GeoDa Software Downloads Count for Win64');">for 32-bit Windows XP, Vista, 7, 8 and 10</a>.</li>
 </ul>
-<h4>GeoDa 1.6.7 Stable</h4>
-<ul>
+
+<br/>
+<p>
+  Note: for windows users, upgrade from 1.8.6 to 1.8.8 may encounter a UAC issue or a failure of drag-n-drop file to GeoDa feature. To solve this problem, one needs to uninstall GeoDa first (also please manually delete the directory "c:\program files\GeoDa Software") and then download and install GeoDa 1.8.8 .
+</p>
+
+<h3>Previous versions</h3>
+<h4>GeoDa 1.6.7</h4>
+<ul  style="margin-left: 20px">
 	<li><a href="http://la1.rcc.uchicago.edu/media/geoda_files/software/geoda/GeoDa-1.6.7-Windows-64bit.exe" onclick="ga('send', 'event', 'GeoDaWin64Downloads167', 'GeoDaDownload', 'GeoDa Software Downloads Count for Win64 version 1.6.7');">for 64-bit Windows Visa, 7, 8 and 10</a>.</li>
 	<li><a href="http://la1.rcc.uchicago.edu/media/geoda_files/software/geoda/GeoDa-1.6.7-Windows-32bit.exe" onclick="ga('send', 'event', 'GeoDaWin32Downloads167', 'GeoDaDownload', 'GeoDa Software Downloads Count for Win64 version 1.6.7');">for 32-bit Windows XP, Vista, 7, 8 and 10</a>.</li>
 </ul>
 
+<h4>Legacy GeoDa</h4>
+<p>If you want to use the 2004 GeoDa 0.95i binary for Windows XP, select the &quot;Geoda 0.9.5-i Windows XP Installer&quot; link below. &nbsp;The download will begin immediately after you login.</p>
+<ul  style="margin-left: 20px">
+	<li>Note that GeoDa 0.9.5-i runs on Windows XP only.</li>
+	<li><a href="http://la1.rcc.uchicago.edu/media/geoda_files/software/geoda/setup_0.exe"  onclick="ga('send', 'event', 'GeoDaLegecy095', 'GeoDaDownload', 'GeoDa Software Downloads Count for Legacy 0.9.5i');">GeoDa 0.9.5-i Windows XP Installer</a></li>
+</ul>
+</p>
 
 
 <br/>
@@ -92,6 +106,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="#install">Installation</a> </li>
 <li><a href="#after_install">Run GeoDa</a> </li>
 <li><a href="#uninstall">Uninstall instructions</a> </li>
+<li><a href="#usbinstall">Create a USB running GeoDa</a> </li>
 </ul>
 
 <a name="install"></a>
@@ -126,6 +141,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="" src="images/win_uninstall_3.png" style="width: 396px; height: 161px;" /></p>
 <p>Alternatively, to uninstall GeoDa, go to Control Panel &gt; Programs &gt; Programs and Features and select the GeoDa program from the list and select Uninstall as shown below:</p>
 <p><img alt="" src="images/windows_geoda_uninstall.png" /></p>
+
+
+<a name="usbinstall"></a>
+<h4>Create a USB running GeoDa</h4>
+<p>To run GeoDa on Windows machines without administrator permission (e.g. this is normal in a lab environment), there is a trick to create a USB running GeoDa without installation:</p>
+<p>Step 1:</p>
+<p>Find a windows machine with administrator permission, install GeoDa. (Note: make sure the visual c++ 2010 redistributable has been installed)</p>
+<p>Step 2:</p>
+<p>Copy two files to GeoDa installation directory "C:\Program Files\GeoDa Software": <br/> C:\Windows\System32\MSVCP100.dll<br/>C:\Windows\System32\MSVCR100.dll</p>
+<p>Step 3:</p>
+<p>Zip the GeoDa installation directory "C:\Program Files\GeoDa Software", and distribute the zip file as GeoDa program to students/users.</p>
+
 <!-- content end-->
 
 </p>

@@ -7,20 +7,23 @@ ogr_OCI.dll # FILE2 name
 http://geodacenter.github.io/updates/1.8.4/win32/ogr_OCI #Download URL
 1231241 # FILE SIZE
 
-7/7/2016
-1.8.9
+7/13/2016
+1.8.9.3
 GeoDa executable file update
-GDAL dll
+
+7/7/2016
+1.8.9.1
+GeoDa executable file update
 
 7/6/2016
 1.8.8
 GeoDa executable file update
 GDAL dll
+cache.sqlite
 
 NOTE:
 1.8.8 will be a auto-upgrade for Mac OS X users, but for windows, users need to install from binaries to get fully upgrade.
-GeoDa executable file update
-GDAL dll
+
 
 5/27/2016:
 1.8.7.9

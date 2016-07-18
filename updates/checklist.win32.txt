@@ -1,4 +1,4 @@
-1.8.8
+1.8.6
 https://github.com/GeoDaCenter/geoda/releases
 GeoDa.exe
 http://geodacenter.github.io/updates/1.8.8/win32/GeoDa

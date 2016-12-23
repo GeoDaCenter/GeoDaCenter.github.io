@@ -26,7 +26,7 @@
       	  right: auto!important;
       	}
         .water {
-        fill: #00248F;
+        fill: #deebf7;
       }
 
       .land {
@@ -36,8 +36,8 @@
       }
 
       .land:hover {
-        fill:#33CC33;
-        stroke-width: 1px;
+        stroke: #FFF;
+        stroke-width: 2.5px;
       }
 
       .focused {
@@ -65,12 +65,25 @@
         font-size: 14px;
         font-family: sans-serif;
       }
+
+      .q0-11 { fill:rgb(255,255,255); }
+      .q1-11 { fill:rgb(240,240,240); }
+      .q2-11 { fill:rgb(255,247,236); }
+      .q3-11 { fill:rgb(254,232,200); }
+      .q4-11 { fill:rgb(253,212,158); }
+      .q5-11 { fill:rgb(253,187,132); }
+      .q6-11 { fill:rgb(252,141,89); }
+      .q7-11 { fill:rgb(239,101,72); }
+      .q8-11 { fill:rgb(215,48,31); }
+      .q9-11 { fill:rgb(179,0,0); }
+      .q10-11 { fill:rgb(127,0,0); }
     </style>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <script src="http://d3js.org/queue.v1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="javascripts/simple_statistics.js"></script>
   </head>
   <body>
 
@@ -134,11 +147,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p></p>
 
 <h3>Live Update of GeoDa Users Across the Globe</h3>
-
-
-
 <p>
-	<div id="visualization" style="width: 60%; height: 250px;"> </div>
+	<!--<iframe width="100%" height="520" frameborder="0" src="https://lixun910.cartodb.com/viz/d1b90530-3fbd-11e6-93d2-0e3a376473ab/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>-->
+  <div id="geoda_map" style="width: 50%; height: 500px;border: 0px solid red; "> </div>
+</p>
+<p>
+	<div id="visualization" style="width: 75%; height: 400px;"> </div>
+
 </p>
 <script type="text/javascript">
       google.load('visualization', '1', {packages: ['areachart']});
@@ -153,7 +168,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         new google.visualization.AreaChart(document.getElementById('visualization')).
             draw(data,
                   {//width: 100%,
-                   height: 250,
+                   height: 300,
                       title: 'More than '+data.getValue(data.getNumberOfRows()-1,1)+' GeoDa Software users ('+
                               data.getValue(data.getNumberOfRows()-1,0)+')',
                       colors:['#AAAAFC'],
@@ -163,18 +178,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
       google.setOnLoadCallback(drawVisualization);
 </script>
-<p>
-	<iframe width="100%" height="520" frameborder="0" src="https://lixun910.cartodb.com/viz/d1b90530-3fbd-11e6-93d2-0e3a376473ab/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-</p>
-<p>
-	<div id="geoda_map" style="width: 100%; height: 250px;border: 0px solid red"> </div>
-</p>
+
 <script>
 
   var width = 600,
       height = 500,
       sens = 0.25,
       focused;
+
+var interrupt = false;
+  var scales = {};
 
   //Setting projection
 
@@ -198,7 +211,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   svg.append("path")
   .datum({type: "Sphere"})
   .attr("class", "water")
-  .attr("d", path);
+  .attr("d", path)
+  //Drag event
+.call(d3.behavior.drag()
+  .origin(function() {
+    interrupt = true;
+    var r = projection.rotate();
+    return {x: r[0] / sens, y: -r[1] / sens};
+  })
+  .on("drag", function() {
+
+    var rotate = projection.rotate();
+    projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+    svg.selectAll("path.land").attr("d", path);
+    svg.selectAll(".focused").classed("focused", focused = false);
+  })
+);
+
 
   var countryTooltip = d3.select("body").append("div").attr("class", "countryTooltip");
 
@@ -206,47 +235,93 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   queue()
   .defer(d3.json, "./data/world-110m.json")
   .defer(d3.tsv, "./data/world-110m-country-names.tsv")
+  .defer(d3.csv, "./data/down_by_country.csv")
   .await(ready);
 
   //Main function
 
-  function ready(error, world, countryData) {
+  function ready(error, world, countryData, countryDownloads) {
+
+    var origin = [71, -42],
+    velocity = [.010, -.002],
+    t0 = Date.now();
 
     var countryById = {},
-    countries = topojson.feature(world, world.objects.countries).features;
-
-    //Adding countries to select
+        downloadById = {},
+        countries = topojson.feature(world, world.objects.countries).features;
 
     countryData.forEach(function(d) {
       countryById[d.id] = d.name;
-      option = countryList.append("option");
-      option.text(d.name);
-      option.property("value", d.id);
+      downloadById[d.id] = 0;
     });
 
+    var sum_down = 0;
+    countryDownloads.forEach(function(d) {
+      if (d.id >= 0) {
+        downloadById[d.id] = parseInt(d.count);
+        sum_down += parseInt(d.count);
+      }
+    });
+
+    var down_data = [];
+    for (var id in downloadById) {
+        if (downloadById[id] > 0)
+          down_data.push(downloadById[id]);
+    }
+    var down_cat = ss.jenks(down_data, 9);
+
+    scales.jenks9 = d3.scale.threshold()
+       .domain(down_cat)
+       .range(d3.range(11).map(function(i) { return "q" + i + "-11"; }));
+
+    scales.quantize = d3.scale.quantize()
+       .domain([0, sum_down])
+       .range(d3.range(11).map(function(i) { return "q" + i + "-11"; }));
+
+
+
     //Drawing countries on the globe
-
     var world = svg.selectAll("path.land")
-    .data(countries)
-    .enter().append("path")
-    .attr("class", "land")
-    .attr("d", path)
-
+                   .data(countries)
+                   .enter().append("path")
+                   .attr("class", function(d) {
+                     var down = 0;
+                     if (d.id in downloadById) {
+                       down = downloadById[d.id];
+                     }
+                     var clr = scales["jenks9"](down);
+                     if (clr == undefined) {
+                       console.log(d.id);
+                     }
+                     return "land " + clr;
+                   })
+                   .attr("d", path)
     //Drag event
-
     .call(d3.behavior.drag()
-      .origin(function() { var r = projection.rotate(); return {x: r[0] / sens, y: -r[1] / sens}; })
+      .origin(function() {
+        interrupt = true;
+        var r = projection.rotate();
+        return {x: r[0] / sens, y: -r[1] / sens};
+      })
       .on("drag", function() {
         var rotate = projection.rotate();
         projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
         svg.selectAll("path.land").attr("d", path);
         svg.selectAll(".focused").classed("focused", focused = false);
-      }))
-
+      })
+      .on("dragend", function () {
+        //interrupt = false;
+      })
+    )
     //Mouse events
-
     .on("mouseover", function(d) {
-      countryTooltip.text(countryById[d.id])
+      countryTooltip.text(function() {
+        var cnt = 0;
+        if (d.id in downloadById) {
+            cnt = downloadById[d.id];
+        }
+        return countryById[d.id] + ": " + cnt;
+      })
       .style("left", (d3.event.pageX + 7) + "px")
       .style("top", (d3.event.pageY - 15) + "px")
       .style("display", "block")
@@ -261,37 +336,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .style("top", (d3.event.pageY - 15) + "px");
     });
 
-    //Country focus on option select
 
-    /*
-    d3.select("select").on("change", function() {
-      var rotate = projection.rotate(),
-      focusedCountry = country(countries, this),
-      p = d3.geo.centroid(focusedCountry);
 
-      svg.selectAll(".focused").classed("focused", focused = false);
-
-    //Globe rotating
-
-    (function transition() {
-      d3.transition()
-      .duration(2500)
-      .tween("rotate", function() {
-        var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
-        return function(t) {
-          projection.rotate(r(t));
-          svg.selectAll("path").attr("d", path)
-          .classed("focused", function(d, i) { return d.id == focusedCountry.id ? focused = d : false; });
-        };
-      })
-      })();
-    });
-    */
-    function country(cnt, sel) {
-      for(var i = 0, l = cnt.length; i < l; i++) {
-        if(cnt[i].id == sel.value) {return cnt[i];}
+    d3.timer(function() {
+      if (interrupt == false) {
+    var dt = Date.now() - t0;
+    projection.rotate([velocity[0] * dt + origin[0], velocity[1] * dt + origin[1]]);
+    svg.selectAll("path.land").attr("d", path);
+        svg.selectAll(".focused").classed("focused", focused = false);
       }
-    };
+
+    });
 
   };
   </script>

@@ -2,3 +2,7 @@
 *.swp
 
 .DS_Store
+
+*.py
+
+data/GeoDa-Github-Website-2bd8df3fe4f2.p12

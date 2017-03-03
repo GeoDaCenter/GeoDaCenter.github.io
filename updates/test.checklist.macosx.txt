@@ -1,14 +1,65 @@
-1.8.15
+1.8.17
 https://github.com/GeoDaCenter/geoda/releases
-web_plugins
-http://geodacenter.github.io/updates/1.8.14/osx/web_plugins
-0
 GeoDa
-http://geodacenter.github.io/updates/1.8.14/osx/GeoDa
-28155808
+http://geodacenter.github.io/updates/1.8.16/osx/GeoDa
+29806760
 cache.sqlite
-http://geodacenter.github.io/updates/1.8.14/osx/cache.sqlite
+http://geodacenter.github.io/updates/1.8.16/osx/cache.sqlite
 5120
 ../Resources/plugins/libgdal.20.dylib
-http://geodacenter.github.io/updates/1.8.14/osx/libgdal.20.dylib
-17889848
+http://geodacenter.github.io/updates/1.8.16/osx/libgdal.20.dylib
+14675296
+../Resources/plugins/ogr_FileGDB.so
+http://geodacenter.github.io/updates/1.8.16/osx/ogr_FileGDB.so
+257792
+../Resources/plugins/ogr_OCI.so
+http://geodacenter.github.io/updates/1.8.16/osx/ogr_OCI.so
+157392
+../Resources/samples.sqlite
+http://geodacenter.github.io/updates/1.8.16/osx/samples.sqlite
+9966592
+../Resources/Baltimore Home Sales.png
+http://geodacenter.github.io/updates/1.8.16/osx/Baltimore Home Sales.png
+17620
+../Resources/Boston Home Sales.png
+http://geodacenter.github.io/updates/1.8.16/osx/Boston Home Sales.png
+21455
+../Resources/Buenos Aires Elections.png
+http://geodacenter.github.io/updates/1.8.16/osx/Buenos Aires Elections.png
+25964
+../Resources/Colombia Malaria.png
+http://geodacenter.github.io/updates/1.8.16/osx/Colombia Malaria.png
+35209
+../Resources/Columbus Crime.png
+http://geodacenter.github.io/updates/1.8.16/osx/Columbus Crime.png
+25852
+../Resources/Milwaukee 2000 Census.png
+http://geodacenter.github.io/updates/1.8.16/osx/Milwaukee 2000 Census.png
+20748
+../Resources/NAT.png
+http://geodacenter.github.io/updates/1.8.16/osx/NAT.png
+77697
+../Resources/Nepal Aid.png
+http://geodacenter.github.io/updates/1.8.16/osx/Nepal Aid.png
+41646
+../Resources/no_map.png
+http://geodacenter.github.io/updates/1.8.16/osx/no_map.png
+14442
+../Resources/NYC Data.png
+http://geodacenter.github.io/updates/1.8.16/osx/NYC Data.png
+58641
+../Resources/Phoenix ACS.png
+http://geodacenter.github.io/updates/1.8.16/osx/Phoenix ACS.png
+31257
+../Resources/watermark-20.png
+http://geodacenter.github.io/updates/1.8.16/osx/watermark-20.png
+21395
+../Resources/SanFran Crime.png
+http://geodacenter.github.io/updates/1.8.16/osx/SanFran Crime.png
+39783
+../Resources/SIDS NC.png
+http://geodacenter.github.io/updates/1.8.16/osx/SIDS NC.png
+43332
+../Resources/US Homicides.png
+http://geodacenter.github.io/updates/1.8.16/osx/US Homicides.png
+45130

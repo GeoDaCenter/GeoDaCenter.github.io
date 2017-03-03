@@ -1,4 +1,4 @@
-1.8.14.1
+1.8.15
 https://github.com/GeoDaCenter/geoda/releases
 web_plugins
 http://geodacenter.github.io/updates/1.8.14/osx/web_plugins

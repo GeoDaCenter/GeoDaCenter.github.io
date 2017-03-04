@@ -1,8 +1,8 @@
-1.8.17
+1.8.16
 https://github.com/GeoDaCenter/geoda/releases
 GeoDa
 https://s3.amazonaws.com/geodaupdate/1.8.16/osx/GeoDa
-29060564
+29823384
 cache.sqlite
 https://s3.amazonaws.com/geodaupdate/1.8.16/osx/cache.sqlite
 5120

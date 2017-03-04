@@ -1,3 +1,41 @@
+
+For 1.8.16, the upate system has been updated and moved to Amazon S3:
+
+For Mac Users, all upgrade to 1.8.16 will be made through
+checklist.macosx.txt
+
+After upgrade to 1.8.16, MacOSX10.6 users will check 
+https://s3.amazonaws.com/geodaupdate/checklist.macosx106.txt
+for upgrade.
+
+After upgrade to 1.8.16, MacOSX10.7+ users will check
+https://s3.amazonaws.com/geodaupdate/checklist.macosx107.txt
+for upgrade.
+
+1.8.16.2 with retina support will be available for MacOSX10.7+ users for upgrade.
+
+
+
+For Windows Users, all upgrade to 1.8.16 will be made through
+checklist.win32.txt and checklist.win64.txt.
+
+After upgrade to 1.8.16, all Windows users will check
+https://s3.amazonaws.com/geodaupdate/checklist.win32.txt
+https://s3.amazonaws.com/geodaupdate/checklist.win64.txt
+for upgrade.
+
+The new checklist file will add one line (3rd line) as download message, which will be shown on the auto-upgrade dialog
+
+1.8.4 #VERSION
+https://github.com/GeoDaCenter/geoda/releases/tag/1.8.4 #URL 
+This is a message will be shown in GeoDa auto-upgrade dialog #message
+GeoDa.exe # FILE1 name
+http://geodacenter.github.io/updates/1.8.4/win32/GeoDa # FILE1 Download URL
+123455 # FILE1 SIZE
+
+
+
+###############################################################################
 1.8.4 #VERSION
 https://github.com/GeoDaCenter/geoda/releases/tag/1.8.4 #URL description
 GeoDa.exe # FILE1 name
@@ -6,6 +44,12 @@ http://geodacenter.github.io/updates/1.8.4/win32/GeoDa # Download URL
 ogr_OCI.dll # FILE2 name
 http://geodacenter.github.io/updates/1.8.4/win32/ogr_OCI #Download URL
 1231241 # FILE SIZE
+
+3/3/2017
+1.8.16.2 (Mac OS X 10.7+ only)
+
+3/2/2017
+1.8.16
 
 11/8/2016
 1.8.14

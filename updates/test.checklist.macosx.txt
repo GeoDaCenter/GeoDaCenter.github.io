@@ -1,65 +1,65 @@
 1.8.17
 https://github.com/GeoDaCenter/geoda/releases
 GeoDa
-http://geodacenter.github.io/updates/1.8.16/osx/GeoDa
-29806760
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/GeoDa
+29060564
 cache.sqlite
-http://geodacenter.github.io/updates/1.8.16/osx/cache.sqlite
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/cache.sqlite
 5120
 ../Resources/plugins/libgdal.20.dylib
-http://geodacenter.github.io/updates/1.8.16/osx/libgdal.20.dylib
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/libgdal.20.dylib
 14675296
 ../Resources/plugins/ogr_FileGDB.so
-http://geodacenter.github.io/updates/1.8.16/osx/ogr_FileGDB.so
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/ogr_FileGDB.so
 257792
 ../Resources/plugins/ogr_OCI.so
-http://geodacenter.github.io/updates/1.8.16/osx/ogr_OCI.so
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/ogr_OCI.so
 157392
 ../Resources/samples.sqlite
-http://geodacenter.github.io/updates/1.8.16/osx/samples.sqlite
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/samples.sqlite
 9966592
-../Resources/Baltimore Home Sales.png
-http://geodacenter.github.io/updates/1.8.16/osx/Baltimore Home Sales.png
+../Resources/BaltimoreHomeSales.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/BaltimoreHomeSales.png
 17620
-../Resources/Boston Home Sales.png
-http://geodacenter.github.io/updates/1.8.16/osx/Boston Home Sales.png
+../Resources/BostonHomeSales.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/BostonHomeSales.png
 21455
-../Resources/Buenos Aires Elections.png
-http://geodacenter.github.io/updates/1.8.16/osx/Buenos Aires Elections.png
+../Resources/BuenosAiresElections.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/BuenosAiresElections.png
 25964
-../Resources/Colombia Malaria.png
-http://geodacenter.github.io/updates/1.8.16/osx/Colombia Malaria.png
+../Resources/ColombiaMalaria.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/ColombiaMalaria.png
 35209
-../Resources/Columbus Crime.png
-http://geodacenter.github.io/updates/1.8.16/osx/Columbus Crime.png
+../Resources/ColumbusCrime.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/ColumbusCrime.png
 25852
-../Resources/Milwaukee 2000 Census.png
-http://geodacenter.github.io/updates/1.8.16/osx/Milwaukee 2000 Census.png
+../Resources/Milwaukee2000Census.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/Milwaukee2000Census.png
 20748
 ../Resources/NAT.png
-http://geodacenter.github.io/updates/1.8.16/osx/NAT.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/NAT.png
 77697
-../Resources/Nepal Aid.png
-http://geodacenter.github.io/updates/1.8.16/osx/Nepal Aid.png
+../Resources/NepalAid.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/NepalAid.png
 41646
 ../Resources/no_map.png
-http://geodacenter.github.io/updates/1.8.16/osx/no_map.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/no_map.png
 14442
-../Resources/NYC Data.png
-http://geodacenter.github.io/updates/1.8.16/osx/NYC Data.png
+../Resources/NYCData.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/NYCData.png
 58641
-../Resources/Phoenix ACS.png
-http://geodacenter.github.io/updates/1.8.16/osx/Phoenix ACS.png
+../Resources/PhoenixACS.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/PhoenixACS.png
 31257
 ../Resources/watermark-20.png
-http://geodacenter.github.io/updates/1.8.16/osx/watermark-20.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/watermark-20.png
 21395
-../Resources/SanFran Crime.png
-http://geodacenter.github.io/updates/1.8.16/osx/SanFran Crime.png
+../Resources/SanFranCrime.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/SanFranCrime.png
 39783
-../Resources/SIDS NC.png
-http://geodacenter.github.io/updates/1.8.16/osx/SIDS NC.png
+../Resources/SIDSNC.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/SIDSNC.png
 43332
-../Resources/US Homicides.png
-http://geodacenter.github.io/updates/1.8.16/osx/US Homicides.png
+../Resources/USHomicides.png
+https://s3.amazonaws.com/geodaupdate/1.8.16/osx/USHomicides.png
 45130

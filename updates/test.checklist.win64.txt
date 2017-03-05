@@ -18,11 +18,11 @@ http://geodacenter.github.io/updates/1.8.16/win64/run_geoda.bat
 libcurl.dll
 http://geodacenter.github.io/updates/1.8.16/win64/libcurl
 335872
-wxmsw31u_gl_vc_custom.dll
-http://geodacenter.github.io/updates/1.8.16/win64/wxmsw31u_gl_vc_custom
+wxmsw310u_gl_vc_custom.dll
+http://geodacenter.github.io/updates/1.8.16/win64/wxmsw310u_gl_vc_custom
 86016
-wxmsw31u_vc_custom.dll
-http://geodacenter.github.io/updates/1.8.16/win64/wxmsw31u_vc_custom
+wxmsw310u_vc_custom.dll
+http://geodacenter.github.io/updates/1.8.16/win64/wxmsw310u_vc_custom
 16327680
 ogr_FileGDB.dll
 http://geodacenter.github.io/updates/1.8.16/win64/ogr_FileGDB

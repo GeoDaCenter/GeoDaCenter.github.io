@@ -15,11 +15,11 @@ http://geodacenter.github.io/updates/1.8.16/win32/GeoDa.ico
 run_geoda.bat
 http://geodacenter.github.io/updates/1.8.16/win32/run_geoda.bat
 199
-wxmsw31u_gl_vc_custom.dll
-http://geodacenter.github.io/updates/1.8.16/win32/wxmsw31u_gl_vc_custom
+wxmsw310u_gl_vc_custom.dll
+http://geodacenter.github.io/updates/1.8.16/win32/wxmsw310u_gl_vc_custom
 73216
-wxmsw31u_vc_custom.dll
-http://geodacenter.github.io/updates/1.8.16/win32/wxmsw31u_vc_custom
+wxmsw310u_vc_custom.dll
+http://geodacenter.github.io/updates/1.8.16/win32/wxmsw310u_vc_custom
 13581312
 ogr_FileGDB.dll
 http://geodacenter.github.io/updates/1.8.16/win32/ogr_FileGDB

@@ -3,7 +3,7 @@ https://github.com/GeoDaCenter/geoda/releases
 NOTE: GeoDa 1.8.16.2 supports Retina Display and runs faster on Mac OSX 10.7+.
 GeoDa
 https://s3.amazonaws.com/geodaupdate/1.8.16.2/osx107/GeoDa
-29060436
+29060428
 cache.sqlite
 https://s3.amazonaws.com/geodaupdate/1.8.16.2/osx107/cache.sqlite
 5120

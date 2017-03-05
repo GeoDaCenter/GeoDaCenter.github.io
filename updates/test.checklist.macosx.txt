@@ -2,7 +2,7 @@
 https://github.com/GeoDaCenter/geoda/releases
 GeoDa
 http://geodacenter.github.io/updates/1.8.16/osx/GeoDa
-29823384
+29823280
 cache.sqlite
 http://geodacenter.github.io/updates/1.8.16/osx/cache.sqlite
 5120

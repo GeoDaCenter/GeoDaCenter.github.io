@@ -59,6 +59,18 @@ a {
     border-color: rgba(20, 20, 20, 0.2);
     text-align: center;
 }
+.lab-btn {
+    background-color: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,1);
+    border-color: rgba(20, 20, 20, 0.2);
+    text-align: center;
+}
+.lab-btn:hover {
+    background-color: rgba(200,200,200,0.9);
+    color: rgba(0,0,0,1);
+    border-color: rgba(20, 20, 20, 0.2);
+    text-align: center;
+}
 
 .download-btn:hover {
     background-color: rgba(76,175,80,0.5);

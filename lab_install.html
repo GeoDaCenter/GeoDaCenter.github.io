@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Download | GeoDa on Github</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/simple-slideshow-styles.css">
+    <style>
+      	figcaption {
+      	  top: .70em;
+         	  left: .35em;
+       	  bottom: auto!important;
+      	  right: auto!important;
+      	}
+        .water {
+        fill: #deebf7;
+      }
+
+      .land {
+        fill: #A98B6F;
+        stroke: #FFF;
+        stroke-width: 0.7px;
+      }
+
+      .land:hover {
+        stroke: #FFF;
+        stroke-width: 2.5px;
+      }
+
+      .focused {
+        fill: #33CC33;
+      }
+
+      select {
+        position: absolute;
+        top: 20px;
+        left: 580px;
+        border: solid #ccc 1px;
+        padding: 3px;
+        box-shadow: inset 1px 1px 2px #ddd8dc;
+      }
+
+      .countryTooltip {
+        position: absolute;
+        display: none;
+        pointer-events: none;
+        background: #fff;
+        padding: 5px;
+        text-align: left;
+        border: solid #ccc 1px;
+        color: #666;
+        font-size: 14px;
+        font-family: sans-serif;
+      }
+
+      .q0-11 { fill:rgb(255,255,255); }
+      .q1-11 { fill:rgb(240,240,240); }
+      .q2-11 { fill:rgb(255,247,236); }
+      .q3-11 { fill:rgb(254,232,200); }
+      .q4-11 { fill:rgb(253,212,158); }
+      .q5-11 { fill:rgb(253,187,132); }
+      .q6-11 { fill:rgb(252,141,89); }
+      .q7-11 { fill:rgb(239,101,72); }
+      .q8-11 { fill:rgb(215,48,31); }
+      .q9-11 { fill:rgb(179,0,0); }
+      .q10-11 { fill:rgb(127,0,0); }
+    </style>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="javascripts/simple_statistics.js"></script>
+  </head>
+  <body>
+
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">GeoDa Software Lab Installation</h2>
+      <a href="http://geodacenter.github.io/" class="btn">Homepage</a>
+      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+       <a href="documentation.html" class="btn">Documentation</a>
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+
+    <section class="main-content">
+      <h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+  <span class="octicon octicon-link"></span></a></h3>
+
+<p>
+<h3>Lab Installation</h3>
+
+
+<h4>
+<a id="intro-contact" class="anchor" href="#intro-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes:</h4>
+<p>GeoDa requires write permission on serveral directories/files. When install GeoDa in a Lab environment, please make sure the following directories and files have write permission:</p>
+<ul  style="margin-left: 20px">
+<li>/basemap_cache/ (directory for downloading basemap tiles)</li>
+<li>cache.sqlite (file for GeoDa configurations)</li>
+</ul>
+
+<h4>Windows</h4>
+<p>With latest GeoDa installer on windows (1.8.16), you can try to install it in silent mode using the command:</p>
+<p>
+<div style="padding: 5px; background-color: black; color: rgb(0, 204, 0);">&nbsp; &nbsp;GeoDa-1.8.16-Windows-64bit.exe /VERYSILENT /SUPPRESSMSGBOXES </div>
+
+</p>
+<p>(other switchers are here: <a href="http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline">http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline</a>)</p>
+
+<p>However, GeoDa will check if visual c++ 2010 redistributable has been installed, so you have to install the visual c++ 2010 redistributable package in command line in silent mode first. 
+e.g. </p>
+
+<p>
+<div style="padding: 5px; background-color: black; color: rgb(0, 204, 0);">&nbsp; &nbsp;vc++2010.res.exe /quiet </div>
+
+</p>
+<p>Also, GeoDa will check if older version GeoDa has been installed, so this silent mode command will only work with clean installation.</p>
+
+
+<h4>CentOS</h4>
+<p>To install GeoDa on CentOS in a Lab Environment, you can use the GeoDa package without root permission. You can download <a href="https://s3.amazonaws.com/geoda/software/GeoDa-1.8.16.el7.centos-noroot.tar.gz"> here </a></p>
+
+
+
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="https://github.com/lixun910">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  </body>
+</html>

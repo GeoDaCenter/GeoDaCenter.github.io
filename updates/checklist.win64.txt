@@ -2,7 +2,7 @@
 https://github.com/GeoDaCenter/geoda/releases
 GeoDa.exe
 http://geodacenter.github.io/updates/1.8.16/win64/GeoDa
-8018944
+8016896
 cache.sqlite
 http://geodacenter.github.io/updates/1.8.16/win64/cache.sqlite
 5120

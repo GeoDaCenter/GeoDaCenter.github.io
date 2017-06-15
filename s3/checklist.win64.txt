@@ -1,9 +1,9 @@
 1.8.16.10
 https://github.com/GeoDaCenter/geoda/releases
-Click Update button to get GeoDa v1.10 (1.8.16.10)
+Click Update button to upgrade to GeoDa v1.10 (1.8.16.10) release date: 06/15/2017
 GeoDa.exe
 https://s3.amazonaws.com/geodaupdate/1.10.0/win64/GeoDa
-8672768
+8676352
 cache.sqlite
 https://s3.amazonaws.com/geodaupdate/1.10.0/win64/cache.sqlite
 5120
@@ -33,7 +33,7 @@ https://s3.amazonaws.com/geodaupdate/1.10.0/win64/ogr_OCI
 183296
 web_plugins/samples.sqlite
 https://s3.amazonaws.com/geodaupdate/1.10.0/win64/samples.sqlite
-9966592
+10725376
 web_plugins/BaltimoreHomeSales.png
 https://s3.amazonaws.com/geodaupdate/1.10.0/win64/BaltimoreHomeSales.png
 17620
@@ -79,3 +79,6 @@ https://s3.amazonaws.com/geodaupdate/1.10.0/win64/SIDSNC.png
 web_plugins/USHomicides.png
 https://s3.amazonaws.com/geodaupdate/1.10.0/win64/USHomicides.png
 45130
+web_plugins/Guerry.png
+https://s3.amazonaws.com/geodaupdate/1.10.0/win64/Guerry.png
+53903

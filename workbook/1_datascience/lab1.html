@@ -613,11 +613,18 @@ Save Toolbar Icon
 <p>So far, we have only dealt with a regular table, without taking advantage of any spatial features. However, the table contains fields with coordinates and GeoDa can turn these into an explicit spatial points layer that can be saved in a range of GIS formats. In the process of illustrating this, we will also tackle some typical data munging issues that result from data entry or other data quality problems. For example, in the current data set, there are two observations that have an entry of <strong>0</strong> for the community area. Since we will be aggregating the points by community area, it is critical that we have that information, or else we need to remove those observations. Luckily, in our case, there is a fairly straightforward solution, taking advantage of GeoDa’s spatial selection feature.</p>
 <div id="creating-a-point-layer-from-coordinates-in-a-table" class="section level3 unnumbered">
 <h3>Creating a point layer from coordinates in a table</h3>
-<p>In GeoDa, it is straightforward to create a GIS point layer from tabular data that contain coordinate information. It is a two step process. After you invoke the function from the main menu, as <strong>Tools &gt; Shape &gt; Points from Table</strong>, a dialog appears to let you specify the X and Y coordinates.</p>
+<p>In GeoDa, it is straightforward to create a GIS point layer from tabular data that contain coordinate information. It is a two step process. After you invoke the function, a dialog appears to let you specify the X and Y coordinates. The <strong>Points from Table</strong> is one of the options in the Table menu.</p>
 <div class="figure" style="text-align: center">
-<img src="pics/7_62_tools_points.png" alt="Points from Table" width="30%" />
+<img src="pics/7_points_from_table.png" alt="Points from Table (Table menu)" width="20%" />
 <p class="caption">
-Points from Table
+Points from Table (Table menu)
+</p>
+</div>
+<p>In addition, it can also be started from the main menu, as <strong>Tools &gt; Shape &gt; Points from Table</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics/7_62_tools_points.png" alt="Points from Table (Tools menu)" width="30%" />
+<p class="caption">
+Points from Table (Tools menu)
 </p>
 </div>
 <p>In our example, the table contains two sets of coordinates, <strong>X</strong> and <strong>Y</strong>, as well as <strong>Longitude</strong> (the horizontal, or x-coordinate) and <strong>Latitude</strong> (the vertical, or y-coordinate). The <strong>X</strong>, <strong>Y</strong> variables are projected, and we will use those to illustrate a potential problem when no metadata on the projection is available.</p>

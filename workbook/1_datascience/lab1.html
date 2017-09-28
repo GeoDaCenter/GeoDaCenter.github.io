@@ -23,6 +23,60 @@
 <script src="lab1_files/navigation-1.1/tabsets.js"></script>
 <link href="lab1_files/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="lab1_files/highlightjs-1.1/highlight.js"></script>
+    <title>GeoDa on Github</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="http://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;} 
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+    
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    </style>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -111,6 +165,19 @@ $(document).ready(function () {
 
 
 
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="documentation.html" class="btn">Documentation</a>
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+    <section class="main-content">
 
 <div class="fluid-row" id="header">
 
@@ -118,7 +185,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Spatial Data Handling in GeoDa</h1>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>9/17/2017</em></h4>
+<h4 class="date"><em>9/28/2017</em></h4>
 
 </div>
 
@@ -234,7 +301,10 @@ $(document).ready(function () {
 <ul>
 <li>Table aggregation dialog</li>
 </ul></li>
-<li>Tools &gt; Shape &gt; Points from Table</li>
+<li>Tools &gt; Shape &gt; Points from Table
+<ul>
+<li>Table &gt; Points from Table</li>
+</ul></li>
 <li>Map window toolbar
 <ul>
 <li>Base Map icon and dialog</li>
@@ -337,7 +407,7 @@ Export from Abandoned Vehicles Map
 <p>This will involve various functionalities of the GeoDa <strong>Table</strong>, such as the variable properties editor, the <strong>Preferences</strong> setting, the <strong>Calculator</strong>, the <strong>Selection Tool</strong>, and the option to delete variables. The end result will be a table saved in the <strong>dbf</strong> format (parenthetically illustrating the use of GeoDa as a format converter).</p>
 <div id="loading-the-data" class="section level3 unnumbered">
 <h3>Loading the data</h3>
-<p>The first step is to load the data from the csv file into GeoDa. After starting GeoDa, select the <strong>Open</strong> icon from the toolbar (the left-most icon).</p>
+<p>The first step is to load the data from the csv file into GeoDa. After launchig GeoDa, the <strong>Connect to Data Source</strong> dialog should open. If you do not start GeoDa from scratch, make sure to select the <strong>Open</strong> icon from the toolbar (the left-most icon).</p>
 <div class="figure" style="text-align: center">
 <img src="pics/open_icon.png" alt="Open Toolbar Icon" width="20%" />
 <p class="caption">
@@ -359,7 +429,7 @@ CSV Data Import
 CSV File Configuration
 </p>
 </div>
-<p>The program tries to guess the type for the variables, but mostly treats them as <strong>string</strong>. We will deal with this later. For now, make sure the <strong>First record has field names</strong> item is set to <strong>YES</strong> and leave all other options to the default setting. After clicking the <strong>OK</strong> button, the data table will show the contents of the file, with the number of observations (172326) in the status bar at the bottom.</p>
+<p>The program tries to guess the type for the variables, but mostly treats them as <strong>String</strong>. We will deal with this later. For now, make sure the <strong>First record has field names</strong> item is set to <strong>YES</strong> (the default setting), and leave all other options as they are. After clicking the <strong>OK</strong> button, the data table will show the contents of the file, with the number of observations (172326) in the status bar at the bottom.</p>
 <div class="figure" style="text-align: center">
 <img src="pics/2_big_table_1.png" alt="Table Contents" width="100%" />
 <p class="caption">
@@ -390,7 +460,7 @@ Editing the Variable Type
 Date Type Error Message
 </p>
 </div>
-<p>The current functionality to manipulate dates and times in GeoDa is limited to a small set of commonly used default formats. However, the format used in the Abandoned Vehicles data set does not conform to any one of these (hence the error message). So, we need to enter it explicitly into the <strong>Preferences</strong> pane. From the main menu, select GeoDa &gt; Preferences to bring up the Preferences pane.</p>
+<p>The current functionality to manipulate dates and times in GeoDa is limited to a small set of commonly used default formats. However, the format used in the Abandoned Vehicles data set does not conform to any one of these (hence the error message). So, we need to enter it explicitly into the <strong>Preferences</strong> pane. Close the variable properties dialog and then, from the main menu, select <strong>GeoDa &gt; Preferences</strong> to bring up the Preferences pane.</p>
 <div class="figure" style="text-align: center">
 <img src="pics/2_geoda_preferences.png" alt="GeoDa Preferences Settings" width="20%" />
 <p class="caption">
@@ -447,7 +517,7 @@ Calculator Dialog
 <li><p>add a new variable (place holder for the result) to the table</p></li>
 <li><p>assign the result of a calculation to the new variable</p></li>
 </ul>
-<p>You can also assign the results of a calculation to an existing variable (instead of creating a new one), but this can be very dangerous. It is much better practice to create a new variable and then delete the one you want to have replaced (you can optionally change the name of the newly created variable to the name of the one you deleted).</p>
+<p>You can also assign the results of a calculation to an existing variable (instead of creating a new one), but this can be very dangerous. It is much better practice to create a new variable and then delete the one you want to have replaced (after these steps, you can optionally change the name of the newly created variable to the name of the one you deleted).</p>
 <p>The types of calculations are given in the tabs at the top of the dialog. At this point, GeoDa supports:</p>
 <ul>
 <li><p><strong>Special</strong> operations, such as random variable computation and the creation of a simple sequence number (<strong>enumerate</strong>)</p></li>
@@ -613,14 +683,14 @@ Save Toolbar Icon
 <p>So far, we have only dealt with a regular table, without taking advantage of any spatial features. However, the table contains fields with coordinates and GeoDa can turn these into an explicit spatial points layer that can be saved in a range of GIS formats. In the process of illustrating this, we will also tackle some typical data munging issues that result from data entry or other data quality problems. For example, in the current data set, there are two observations that have an entry of <strong>0</strong> for the community area. Since we will be aggregating the points by community area, it is critical that we have that information, or else we need to remove those observations. Luckily, in our case, there is a fairly straightforward solution, taking advantage of GeoDa’s spatial selection feature.</p>
 <div id="creating-a-point-layer-from-coordinates-in-a-table" class="section level3 unnumbered">
 <h3>Creating a point layer from coordinates in a table</h3>
-<p>In GeoDa, it is straightforward to create a GIS point layer from tabular data that contain coordinate information. It is a two step process. After you invoke the function, a dialog appears to let you specify the X and Y coordinates. The <strong>Points from Table</strong> is one of the options in the Table menu.</p>
+<p>In GeoDa, it is straightforward to create a GIS point layer from tabular data that contain coordinate information. It is a two step process. After you invoke the function, a dialog appears to let you specify the X and Y coordinates. The <strong>Table &gt; Points from Table</strong> item is one of the options in the Table menu.</p>
 <div class="figure" style="text-align: center">
 <img src="pics/7_points_from_table.png" alt="Points from Table (Table menu)" width="20%" />
 <p class="caption">
 Points from Table (Table menu)
 </p>
 </div>
-<p>In addition, it can also be started from the main menu, as <strong>Tools &gt; Shape &gt; Points from Table</strong>.</p>
+<p>Alternatively, it can also be started from the main menu, as <strong>Tools &gt; Shape &gt; Points from Table</strong>.</p>
 <div class="figure" style="text-align: center">
 <img src="pics/7_62_tools_points.png" alt="Points from Table (Tools menu)" width="30%" />
 <p class="caption">
@@ -634,14 +704,14 @@ Points from Table (Tools menu)
 Specifying Coordinates
 </p>
 </div>
-<p>After clicking on <strong>OK</strong>, a warning message appears.</p>
+<p>After clicking on <strong>OK</strong>, a warning message appears together with point map, showing the locations of the abandoned vehicles.</p>
 <div class="figure" style="text-align: center">
 <img src="pics/7_115_missing_coordmessage.png" alt="Missing Coordinates Warning" width="40%" />
 <p class="caption">
 Missing Coordinates Warning
 </p>
 </div>
-<p>It turns out that one observation (in row 1174) does not have values for the X, Y coordinates. We will ignore this for now (we return to it below) and proceed to bring up the point map.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> When there are many observations with misbehaving coordinates, it may make sense to save the row numbers as a text file. This happens when clicking on the <strong>Save Details</strong> button. Instead, we will click <strong>OK</strong> and move on. As a result, a point map appears, showing the locations of the abandoned vehicles.</p>
+<p>It turns out that one observation (in row 1174) does not have values for the X, Y coordinates. We will ignore this for now (we return to it below) and proceed to bring up the point map.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> When there are many observations with misbehaving coordinates, it may make sense to save the row numbers as a text file. This happens when clicking on the <strong>Save Details</strong> button. Instead, we will click <strong>OK</strong> and move on.</p>
 <p>Note that the map legend and status bar mention 2636 observations, even though our table has 2637. This is another indication that one of the observations does not have a proper set of coordinates (which keeps them from being mapped).</p>
 <div class="figure" style="text-align: center">
 <img src="pics/7_67_xymap.png" alt="Point Map" width="80%" />
@@ -716,14 +786,14 @@ Missing Coordinates in Table
 Sort Table by Community Area
 </p>
 </div>
-<p>How do we fix this? With a standard GIS, this is a <em>point in polygon</em> problem. We would combine the point locations with a layer of community areas and find the area in which the points are located. GeoDa does not have this functionality (yet). Instead, we can use an ad hoc approach that turns out to work well in this particular case. However, this is by no means necessarily always the case. Resorting to a point in polygon analysis is definitely best practice.</p>
+<p>How do we fix this? With a standard GIS, this is a <em>point in polygon</em> problem. We would combine the point locations with a layer of community areas and find the area in which the points are located. GeoDa does not have this functionality (yet). Instead, we can use an ad hoc approach that turns out to work well in this particular example. However, this is by no means necessarily always the case. Resorting to a point in polygon analysis is definitely best practice.</p>
 <div class="figure" style="text-align: center">
 <img src="pics/8_81_selectedpoints.png" alt="Selected Points in Map" width="30%" />
 <p class="caption">
 Selected Points in Map
 </p>
 </div>
-<p>We will now see if the values for neighboring points shed any light on which community area the two points in question are in. As long as the points are interior points to a community area (community areas are fairly large in Chicago), that is a reasonable approach.</p>
+<p>We will now see if the values for neighboring points shed any light on which community area the two points in question may be located in. As long as the points are interior points to a community area (community areas are fairly large in Chicago), that is a reasonable approach.</p>
 <p>We will invoke the <strong>Select</strong> icon of the map toolbar, the arrow sign that is the right-most icon.</p>
 <div class="figure" style="text-align: center">
 <img src="pics/8_73_mapselecticon.png" alt="Map Selection Icon" width="35%" />
@@ -942,7 +1012,7 @@ Vehicle Counts Merged
 </div>
 <div id="computing-abandoned-vehicles-per-capita" class="section level3 unnumbered">
 <h3>Computing abandoned vehicles per capita</h3>
-<p>The number of vehicles per capital is computed by means of the by now familiar <strong>Calculator</strong> tool. We first <strong>Add</strong> a new variable, e.g., <strong>VEHPCAP</strong> and then use the <strong>Bivariate</strong> tab to calculate the division (<strong>DIVIDE</strong>) of <strong>AGG_COUNT</strong> by <strong>POP2010</strong>, as shown below.</p>
+<p>The number of vehicles per capital is computed by means of the by now familiar <strong>Calculator</strong> tool. We first <strong>Add</strong> a new variable, e.g., <strong>VEHPCAP</strong> (place the field after the last variable) and then use the <strong>Bivariate</strong> tab to calculate the division (<strong>DIVIDE</strong>) of <strong>AGG_COUNT</strong> by <strong>POP2010</strong>, as shown below.</p>
 <div class="figure" style="text-align: center">
 <img src="pics/10_108_percapita.png" alt="Compute Per Capita Abandoned Vehicles" width="50%" />
 <p class="caption">
@@ -1017,6 +1087,23 @@ Abandoned Vehicles with Base Map
 </ol>
 </div>
 
+<footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-72724100-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
 
 
 

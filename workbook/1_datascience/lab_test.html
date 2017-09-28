@@ -118,13 +118,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-<p></p>
-
+<br />
+<br />
 
 <div id="introduction" class="section level2 unnumbered">
 <h2>Introduction</h2>
 <p>In this lab, we will go through some examples of the types of manipulations (data munging or data wrangling) typically required to get your data set ready for analysis. It is commonly argued that this typically takes around 80% of the effort in a data science project <span class="citation">(for example, as mentioned in Dasu and Johnson 2003)</span>. We will use the City of Chicago open data portal to download data on abandoned vehicles. Our end goal is to create some choropleth maps with abandoned vehicles per capita for Chicago community areas. In order to accomplish this, we will employ functionality in the GeoDa <strong>Table</strong> and <strong>Map</strong> commands. Before we can create the maps, we will need to select observations, aggregate data, join different files and carry out variable transformations in order to obtain a so-called “spatially intensive” variable for mapping.</p>
 <div id="objectives" class="section level3 unnumbered">
+
+<br />
+<br />
+
 <h3>Objectives</h3>
 <p>After completing the lab, you should know how to carry out the following tasks:</p>
 <ul>
@@ -141,8 +145,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><p>Variable calculations in a GeoDa <strong>Table</strong></p></li>
 <li><p>Basic choropleth mapping</p></li>
 </ul>
+
+<br />
+<br />
+
 <div id="geoda-functions-covered" class="section level4 unnumbered">
-<h4>GeoDa functions covered</h4>
+<h3>GeoDa functions covered</h3>
 <ul>
 <li>GeoDa &gt; Preferences</li>
 <li>File &gt; Open
@@ -198,11 +206,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <div id="obtaining-data-from-the-chicago-open-data-portal" class="section level2 unnumbered">
 
-<p></p>
+<br />
+<br />
 
 <h2>Obtaining data from the Chicago Open Data Portal</h2>
 <p>Our first task is to find the data on abandoned vehicles on the data portal and downloading them to a file so that we can manipulate it in GeoDa. The format of choice is a comma delimited file, or <strong>csv</strong> file. This is basically a spreadsheet-like table with the variables as columns and the observations as rows.</p>
 <div id="downloading-the-data" class="section level3 unnumbered">
+
+<br />
+<br />
+
 <h3>Downloading the data</h3>
 <ul>
 <li>Go to the <a href="https://data.cityofchicago.org">City of Chicago open data portal</a></li>
@@ -252,6 +265,10 @@ Abandoned Vehicles CSV File Contents
 </div>
 <p>Inspecting the cells, you see that there are many empty ones and the coding is not entirely consistent. We will deal with this by selecting only those variables/columns that we are interested in and only taking a subset of observations for a given time period, in order to keep things manageable.</p>
 </div>
+
+<br />
+<br />
+
 <div id="online-map-of-the-abandoned-vehicles" class="section level3 unnumbered">
 <h3>Online map of the abandoned vehicles</h3>
 <ul>
@@ -279,6 +296,10 @@ Export from Abandoned Vehicles Map
 </div>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="selecting-observations-for-a-given-time-period" class="section level2 unnumbered">
 <h2>Selecting Observations for a Given Time Period</h2>
 <p>For the sake of this exercise, we don’t want to deal with all observations. Instead, say we are interested in analyzing the abandoned vehicle locations for a given time period, such as the month of September 2016. To get to this point, we will need to move through the following steps:</p>
@@ -290,6 +311,10 @@ Export from Abandoned Vehicles Map
 <li><p>keep only those variables/columns of interest to us</p></li>
 </ul>
 <p>This will involve various functionalities of the GeoDa <strong>Table</strong>, such as the variable properties editor, the <strong>Preferences</strong> setting, the <strong>Calculator</strong>, the <strong>Selection Tool</strong>, and the option to delete variables. The end result will be a table saved in the <strong>dbf</strong> format (parenthetically illustrating the use of GeoDa as a format converter).</p>
+
+<br />
+<br />
+
 <div id="loading-the-data" class="section level3 unnumbered">
 <h3>Loading the data</h3>
 <p>The first step is to load the data from the csv file into GeoDa. After starting GeoDa, select the <strong>Open</strong> icon from the toolbar (the left-most icon).</p>
@@ -322,6 +347,9 @@ Table Contents
 </p>
 </div>
 </div>
+
+<br />
+<br />
 <div id="converting-a-string-to-date-format" class="section level3 unnumbered">
 <h3>Converting a string to date format</h3>
 <p>We want to select the observations for the month of September in 2016. Before we can create the query, we need to transform the <strong>Creation Date</strong> to something manageable that we can search on. As it stands, the entries are in <strong>string</strong> format (sometimes also referred to as character format). We can check this by means of the <strong>Edit Variable Properties</strong> option in the <strong>Table</strong> menu. You access this from the menu (<strong>Table &gt; Edit Variable Properties</strong>) or by right-clicking in the Table itself, which brings up the menu options.</p>
@@ -381,6 +409,10 @@ Creation Date in Table
 </p>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="extracting-month-and-year-from-the-date-format" class="section level3 unnumbered">
 <h3>Extracting month and year from the date format</h3>
 <p>Currently, search functionality on date formats is not implemented in GeoDa. But we can extract the year and month as integer and then use those in the Table <strong>Selection Tool</strong>. In order to get the year and month, we need to use the <strong>Calculator</strong> item in the Table menu. Select <strong>Table &gt; Calculator</strong> or choose this item in the Table option menu (right click in the table).</p>
@@ -434,6 +466,10 @@ Month and Year in Data Table
 </p>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="extracting-observations-for-the-desired-time-period" class="section level3 unnumbered">
 <h3>Extracting observations for the desired time period</h3>
 <p>We now have all the elements in place to design some queries to select the observations for the month of September 2016 (or any other time period). We invoke the Table <strong>Selection Tool</strong> from the main menu, as <strong>Table &gt; Selection Tool</strong>, or from the options menu by right-clicking on the table.</p>
@@ -458,6 +494,10 @@ Select Month From Selection
 </p>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="saving-the-data-in-a-different-format" class="section level3 unnumbered">
 <h3>Saving the data in a different format</h3>
 <p>So far, all operations have been carried out in memory, and if we close GeoDa, all the changes will be lost. In order to make them permanent, we need to save the file. We use this as an opportunity to illustrate the powerful format conversion functionality in GeoDa. While we initially read the data from a CSV file, we will save the selected observations as a new table in the DBF format.</p>
@@ -505,6 +545,10 @@ Close Toolbar Icon
 New Data Table
 </p>
 </div>
+
+<br />
+<br />
+
 <div id="more-on-selections" class="section level4">
 <h4>More on selections</h4>
 <p>The feature of saving selected observations is used a lot in practice. It can be applied directly, as we have done here, but also indirectly. For example, sometimes we are interested in saving the table with the observations that do <strong>not</strong> meet a particular criterion. This is often the case when we have observations with missing values, or, in general, any observations we want to <strong>remove</strong> from the data set. First, we select those observations, but then we <strong>invert</strong> the selection, i.e., we take the complement. This can be done from within the <strong>Selection Tool</strong>, but also directly from the Table options menu, as <strong>Table &gt; Invert Selection</strong>.</p>
@@ -531,6 +575,10 @@ Selection Variable Dialog
 </div>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="selecting-the-variables-for-the-final-table" class="section level3 unnumbered">
 <h3>Selecting the variables for the final table</h3>
 <p>The new table contains several variables that we are really not interested in. For example, both <strong>MONTH</strong> and <strong>YEAR</strong> have the same value for all entries, which is not very meaningful. Also, a number of the other variables are descriptive strings, that do not lend themselves to a quantitative analysis. As a final step, we will use the <strong>Table &gt; Delete Variable(s)</strong> function (invoke from the menu or use right click in the table).</p>
@@ -563,9 +611,17 @@ Save Toolbar Icon
 </div>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="creating-a-point-layer" class="section level2 unnumbered">
 <h2>Creating a Point Layer</h2>
 <p>So far, we have only dealt with a regular table, without taking advantage of any spatial features. However, the table contains fields with coordinates and GeoDa can turn these into an explicit spatial points layer that can be saved in a range of GIS formats. In the process of illustrating this, we will also tackle some typical data munging issues that result from data entry or other data quality problems. For example, in the current data set, there are two observations that have an entry of <strong>0</strong> for the community area. Since we will be aggregating the points by community area, it is critical that we have that information, or else we need to remove those observations. Luckily, in our case, there is a fairly straightforward solution, taking advantage of GeoDa’s spatial selection feature.</p>
+
+<br />
+<br />
+
 <div id="creating-a-point-layer-from-coordinates-in-a-table" class="section level3 unnumbered">
 <h3>Creating a point layer from coordinates in a table</h3>
 <p>In GeoDa, it is straightforward to create a GIS point layer from tabular data that contain coordinate information. It is a two step process. After you invoke the function, a dialog appears to let you specify the X and Y coordinates. The <strong>Points from Table</strong> is one of the options in the Table menu.</p>
@@ -613,6 +669,10 @@ ESRI Shape File Format
 </div>
 <p>Clicking on <strong>OK</strong> will create three files on the drive, with file extensions <strong>shp</strong>, <strong>shx</strong>, and <strong>dbf</strong>. The <strong>dbf</strong> file is the same as before, and contains the tabular data. The two other files contain information on the geometries. We can continue to work in the current project.</p>
 </div>
+
+<br />
+<br />
+
 <div id="data-problems" class="section level3 unnumbered">
 <h3>Data Problems</h3>
 <div id="gotcha-1-missing-projection-information" class="section level4 unnumbered">
@@ -642,6 +702,10 @@ Projection Error Message
 <p>We will ignore this for now, since in what follows we will focus on the data in the table, without its explicity geometric features. We can proceed this way since our objective is to aggregate the points by community area, and we already have a community area code. In practice, this may not be the case, and you may need to carry out a <em>spatial join</em> in a GIS (which will require the projection information).</p>
 <p>At this point, we can close the project – make sure to respond <strong>No</strong> to the query about saving the geometries, since we have already done that (in the <strong>vehiclept</strong> shape file).</p>
 </div>
+
+<br />
+<br />
+
 <div id="gotcha-2-missing-coordinates" class="section level4 unnumbered">
 <h4>Gotcha #2 – missing coordinates</h4>
 <p>With a clean project, we now load the just created shape file by dropping <strong>vehiclept.shp</strong> into the <strong>Drop files here</strong> box of the data connection dialog. Note that you only need to select the file with the <strong>shp</strong> extension, <strong>not</strong> all three files!</p>
@@ -661,6 +725,10 @@ Missing Coordinates in Table
 </div>
 <p>We see that indeed, observation 1174 does not have an entry for <strong>X</strong> or <strong>Y</strong> (interestingly, it does have an entry for <strong>Latitude</strong> and <strong>Longitude</strong>). However, there is an entry for the community area identifier, which is our main interest at this stage. Furthermore, since we won’t be using the actual point features, but only the information in the table, we can move on and ignore this issue.</p>
 </div>
+
+<br />
+<br />
+
 <div id="gotcha-3-missing-community-area-codes" class="section level4 unnumbered">
 <h4>Gotcha #3 – missing community area codes</h4>
 <p>There remains another problem, however. Moving back to the data table (click on the <strong>Table</strong> icon if necessary), we will now sort on the community area entries by double clicking on the <strong>Comm</strong> field header. As it turns out, the two smallest values are <strong>0</strong>, which is an invalid code. Since we will be aggregating the points by community area, this if of concern.</p>
@@ -734,6 +802,10 @@ Table Cell Edited – 2
 </div>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="abandoned-vehicles-by-community-area" class="section level2 unnumbered">
 <h2>Abandoned Vehicles by Community Area</h2>
 <p>Our ultimate goal is to map the abandoned vehicles by community area. But, so far, what we have are the individual locations of the vehicles. What we need is a count of the number of such vehicles by community area. In GIS-speak, this is referred to as <em>spatial aggregation</em>. The simplest case is the one we will illustrate here, where all we need is a count of the number of observations that fall within a given community area. Since we have the identifier for the enclosing community area for each of the individual vehicle locations, this is a simple table aggregation operation. In a GIS, the coordinates of the individual points would be subjected to a <em>point in polygon</em> operation, to determine the polygon (i.e., the community area) that encloses the point. In many situations in practice, the areal identifier will not be available, so that the only way to tackle this would be through an actual GIS operation.</p>
@@ -763,6 +835,10 @@ Vehicle Count by Community Area
 </div>
 <p>We now have everything we need in terms of abandoned vehicle counts by community area, but we still need to specify the spatial data layer for the areas themselves.</p>
 </div>
+
+<br />
+<br />
+
 <div id="community-area-data" class="section level2 unnumbered">
 <h2>Community Area Data</h2>
 <p>Since our ultimate objective is to create a choropleth map with the abandoned vehicles per capita for the Chicago community areas, we need two more pieces of information. We need a boundary file for the community areas so that we can create a base map, and we need the population data.</p>
@@ -791,6 +867,10 @@ Download Boundaries as Shape File
 </div>
 <p>This will download a zipped file to your drive that contains the four basic files associated with a shape file, with file extensions <strong>shp</strong>, <strong>shx</strong>, <strong>dbf</strong> and <strong>prj</strong>. The file name is the rather uninformative <em>geo_export_fe02e535-53d6-4d62-a22b-7d06167b5a7c</em>. For ease of interpretation, we change the four file names to <em>chicagocomm</em>.</p>
 </div>
+
+<br />
+<br />
+
 <div id="base-map" class="section level3 unnumbered">
 <h3>Base map</h3>
 <p>To generate a base map for the community areas, we start a new project in GeoDa and drop the file <strong>chicagocomm.shp</strong> into the <strong>Drop files here</strong> area of the data source dialog. This will open a green base map, as shown below. Note how the status bar lists the number of observations (77).</p>
@@ -823,16 +903,28 @@ Community ID as Integer
 </p>
 </div>
 <p>To make this change permanent, we again <strong>Save</strong> the data by clicking on the save icon in the toolbar (no need to Save As since we don’t really want to keep the ID variable as a string).</p>
+
+<br />
+<br />
+
 <div id="a-note-on-projections" class="section level4 unnumbered">
 <h4>A note on projections</h4>
 <p>A detailed treatment of projections is beyond the scope of our discussion, but it is nevertheless a critical concept. The bottom line is that whenever two geographical layers are to be combined, they need to be expressed in the same projection. This is a (very) common source of problems when integrating different spatial data sets. A projection consists of two important pieces of information. One is the <em>model</em> for the earth spheroid (the earth is not a ball, but a sort of ellipsoid), and the second is the <em>transformation</em> used to convert latitude and longitude degrees to cartesian coordinates (Y for latitude and X for longitude). For ESRI shape files, this information is contained in the file with the <strong>.prj</strong> extension. More generally, this is a file with the coordinate reference system (or CRS) information in it. There are a number of formats. A good resource is the <a href="http://spatialreference.org">spatialreference.org</a> site, which contains thousands of references in a variety of commonly used formats.</p>
 <p>For our purposes, we will just need to make sure that whenever we join or merge two spatial data sets, they both have the same <strong>.prj</strong> file. More complex manipulations will require a full-fledged GIS system, or the use of the <strong>proj4</strong> library in <strong>R</strong>. See also the <a href="https://data.cdrc.ac.uk/tutorial/an-introduction-to-spatial-data-analysis-and-visualisation-in-r">tutorial on spatial data analysis and visualization in R by Guy Lansley and James Cheshire</a> for an excellent overview of the main issues with examples using <strong>R</strong>.</p>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="community-area-population-data" class="section level3 unnumbered">
 <h3>Community Area population data</h3>
 <p>In order to compute the number of abandoned vehicles per capita, we need some population values for the community areas. As it turns out, it is not that simple to find this in a readily available digital format. The <a href="http://www.cityofchicago.org/city/en/depts/dcd/supp_info/community_area_2000and2010censuspopulationcomparisons.html">City of Chicago web site</a> contains a pdf file with the neighborhood ID, the neighborhood name, the populations for 2010 and 2000, the difference between the two years and the percentage difference. While pdf files are fine for reporting results, they are not ideal to input into any data analysis software. Since there are only 77 community areas, we could sit down and just type the values, but that is asking for trouble. Instead we should use a data scraping tool, such as the functionality contained in the R package <strong>pdftools</strong>. To save some trouble, the results of this operation with population data for 2010 are included in the file <strong>Community_Pop.csv</strong>.</p>
 </div>
+
+<br />
+<br />
+
 <div id="merging-the-population-data" class="section level3 unnumbered">
 <h3>Merging the population data</h3>
 <p>We start with having the Chicago Community area base map active, with the table open. Right click on the table, or use the menu to select <strong>Table &gt; Merge</strong>, as shown:</p>
@@ -874,6 +966,10 @@ Cleaned up Table
 <p>We make the changes permanent by clicking on the <strong>Save</strong> icon in the toolbar. The updated shape file <em>chicagocomm</em> now only includes the four variables we selected. At this point, we could use the <strong>Map</strong> functionality to create a choropleth map of total population. However, this is not advisable, since total population is a so-called <strong>spatially extensive</strong> variable, in the sense that it will tend to be larger for larger areas, everything else being the same. In other words, the larger population size may be only related to an area being larger and not to any other underlying process. In general, it is good to avoid mapping spatially extensive variables and replace them by <strong>spatially intensive</strong> counterparts, such as a population <em>density</em>. We take this approach and do not map the total counts for the abandoned vehicles, but turn it into a per capita ratio instead.</p>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="mapping-community-area-abandoned-vehicles-per-capita" class="section level2 unnumbered">
 <h2>Mapping Community Area Abandoned Vehicles Per Capita</h2>
 <p>At this point, we have all the pieces to proceed with our final map. There are three tasks remaining: merge the vehicle counts table with the community area layer; compute the per capita rate; and create a choropleth map.</p>
@@ -895,6 +991,10 @@ Vehicle Counts Merged
 </div>
 <p>We make the change permantent by pressing the <strong>Save</strong> button, or, alternatively, <strong>Save As</strong> under a different file name, although at this point, this is not necessary, since we are proceeding immediately to the rate computation.</p>
 </div>
+
+<br />
+<br />
+
 <div id="computing-abandoned-vehicles-per-capita" class="section level3 unnumbered">
 <h3>Computing abandoned vehicles per capita</h3>
 <p>The number of vehicles per capital is computed by means of the by now familiar <strong>Calculator</strong> tool. We first <strong>Add</strong> a new variable, e.g., <strong>VEHPCAP</strong> and then use the <strong>Bivariate</strong> tab to calculate the division (<strong>DIVIDE</strong>) of <strong>AGG_COUNT</strong> by <strong>POP2010</strong>, as shown below.</p>
@@ -913,6 +1013,10 @@ Final Set of Variables
 </div>
 <p>At this point, we may want to make the changes permanent, with either the <strong>Save</strong> or <strong>Save As</strong> operations.</p>
 </div>
+
+<br />
+<br />
+
 <div id="choropleth-map" class="section level3 unnumbered">
 <h3>Choropleth map</h3>
 <p>We now move beyond the Table functionality in GeoDa and proceed to create a map. This is initiated either from the menu or by clicking on the <strong>Map</strong> toolbar icon (the sixth icon from the left on the toolbar).</p>
@@ -954,6 +1058,10 @@ Abandoned Vehicles with Base Map
 <p>This ends our journey from the open data portal all the way to a visual representation of the spatial distribution of abandoned vehicles. The maps do suggest some patterning and some potential association with proximity to the major interstates, but we will leave a more formal analysis of patterns (and clusters) to a later exercise.</p>
 </div>
 </div>
+
+<br />
+<br />
+
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references">

@@ -12,7 +12,7 @@
 
 <meta name="author" content="Luc Anselin" />
 
-<meta name="date" content="2017-10-03" />
+<meta name="date" content="2017-10-09" />
 
 <title>Exploratory Data Analysis (EDA)</title>
 
@@ -111,7 +111,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <h1 class="title toc-ignore">Exploratory Data Analysis (EDA)</h1>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>10/03/2017</em></h4>
+<h4 class="date"><em>10/09/2017</em></h4>
 
 
 <div id="TOC">
@@ -163,7 +163,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><p>Assessing spatial heterogeneity through the Chow test</p></li>
 <li><p>Interpreting a scatter plot matrix</p></li>
 <li><p>Interpreting bubble charts and 3D scatter plots</p></li>
-<li><p>Interpreting parallel coodinate plots</p></li>
+<li><p>Interpreting parallel coordinate plots</p></li>
 <li><p>Interpreting conditional plots</p></li>
 </ul>
 <div id="geoda-functions-covered" class="section level4 unnumbered">
@@ -310,7 +310,7 @@ Histogram with 5 intervals
 Display statistics option
 </p>
 </div>
-<p>The <strong>Display Statistics</strong> option adds a number of descriptors below the graph. The summary statistics are given at the bottom. We see that the 55 observations have a minimum value of 0, a maximum of 48.1, median of 33.5, mean of 32.1 and a standard deviation of 10.4. We take the minimum value as is, even though a percentage of zero may seem suspicious. In addition, for the histogram, descriptive statistics are provided for each interval, showing the range for the interval, the number of observations as a count and as a percentage of the total number of observations, and the number of standard deviations away from the mean for the center of the bin. This allows us to identify potential outliers, e.g., as defined by those observations more than two standard deviations from the mean. In our example, the right-most category would satisfy this criterion.</p>
+<p>The <strong>Display Statistics</strong> option adds a number of descriptors below the graph. The summary statistics are given at the bottom. We see that the 55 observations have a minimum value of 0, a maximum of 48.1, median of 33.5, mean of 32.1 and a standard deviation of 10.4. We take the minimum value as is, even though a percentage of zero may seem suspicious. In addition, for the histogram, descriptive statistics are provided for each interval, showing the range for the interval, the number of observations as a count and as a percentage of the total number of observations, and the number of standard deviations away from the mean for the center of the bin. This allows us to identify potential outliers, e.g., as defined by those observations more than two standard deviations from the mean. In our example, the lowest category would satisfy this criterion.</p>
 <p>In addition to the summary characteristics for each bin listed at the bottom, the summary of each bin appears in the status bar when the cursor is moved over that bin. This works whether the descriptive statistics option is on or not. In our example, the cursor is over the central bin.</p>
 <div class="figure" style="text-align: center">
 <img src="pics2/1_histwstats.png" alt="Histogram with descriptive statistics" width="70%" />
@@ -559,7 +559,7 @@ Brushing the map – 2
 Linked scatter plot selection – 2
 </p>
 </div>
-<p>As we identify subregions in the data with a different slope (structure) from the rest, we can assess this more formally through regression analysis (e.g., analysis of variance). This is facilitated by <strong>Saving</strong> the selection in the form of an indicator variable (with1 for the selected observations) that can then be incorporated in a regression specification.</p>
+<p>As we identify subregions in the data with a different slope (structure) from the rest, we can assess this more formally through regression analysis (e.g., analysis of variance). This is facilitated by <strong>Saving</strong> the selection in the form of an indicator variable (with 1 for the selected observations) that can then be incorporated in a regression specification.</p>
 </div>
 <div id="scatter-plot-matrix" class="section level3 unnumbered">
 <h3>Scatter Plot Matrix</h3>
@@ -744,7 +744,7 @@ PCP variable selection
 Default PCP
 </p>
 </div>
-<p>The options for the PCP include all the standard ones we have seen before, with the addition of <strong>Classification Themes</strong>. This allows for all of the themes used for choropleth maps to be applied to the top variable listed in the PCP. This makes it a little easier to compare the pattern of the observations for one variable to the relative order of those observations for other variables. We will keep the default (themeless) for now and revisit the classifications in the discussion of the <strong>Map</strong> functionality.</p>
+<p>The options for the PCP include all the standard ones we have seen before. As in the bubble chart, we also have the choice of <strong>Classification Themes</strong>. This allows for all of the themes used for choropleth maps to be applied to the top variable listed in the PCP. This makes it a little easier to compare the pattern of the observations for one variable to the relative order of those observations for other variables. We will keep the default (themeless) for now and revisit the classifications in the discussion of the <strong>Map</strong> functionality.</p>
 <div class="figure" style="text-align: center">
 <img src="pics2/10_216_pcp_options.png" alt="PCP options" width="40%" />
 <p class="caption">
@@ -804,7 +804,7 @@ Conditional Scatter Plot toolbar icon
 Conditional Scatter Plot variable selection
 </p>
 </div>
-<p>The default plot again consists of a 3 x 3 arrangement. In our example, the subsetting is too fine grained for 55 observations, since several cells have only minimal observations (e.g., 2, 3 and 4).</p>
+<p>The default plot consists of a 3 x 3 arrangement. In our example, the subsetting is too fine grained for 55 observations, since several cells have only minimal observations (e.g., 2, 3 and 4).</p>
 <div class="figure" style="text-align: center">
 <img src="pics2/11_226_condscat3x3.png" alt="3x3 Conditional Scatter Plot" width="80%" />
 <p class="caption">

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Luc Anselin" />
+
+<meta name="date" content="2017-10-12" />
+
+<title>Rate Mapping</title>
+
+<link href="lab3b_files/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="lab3b_files/highlightjs-1.1/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="http://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;} 
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+    
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="http://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Rate Mapping</h1>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>10/12/2017</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#getting-started">Getting Started</a></li>
+</ul></li>
+<li><a href="#raw-rate-map">Raw Rate Map</a><ul>
+<li><a href="#saving-the-rates-to-the-table">Saving the rates to the table</a></li>
+<li><a href="#computing-rates-in-the-table">Computing rates in the table</a><ul>
+<li><a href="#digression-setting-the-display-precision-on-axes">Digression – setting the display precision on axes</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#excess-risk-map">Excess Risk Map</a></li>
+<li><a href="#empirical-bayes-eb-smoothed-rate-map">Empirical Bayes (EB) Smoothed Rate Map</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered">
+<h2>Introduction</h2>
+<p>In this lab, we will explore some basic concepts that arise when mapping rates or proportions. Such data are characterized by an intrinsic variance instability, in that the precision of the rate as an estimate for underlying risk is inversely proportional with the population at risk. More precisely, this implies that rates estimated from small populations (e.g., small rural counties) may have a large standard error. Furthermore, they potentially may erroneously suggest the presence of outliers.</p>
+<p>In what follows, we will cover two basic methods to map rates as well as the most commonly used <em>rate smoothing</em> technique, based on the <em>Empirical Bayes</em> approach. Spatially explicit smoothing techniques will be covered as part of the treatment of distance-based spatial weights.</p>
+<div id="objectives" class="section level3 unnumbered">
+<h3>Objectives</h3>
+<p>After completing this lab, you should be familiar with the following operations and analyses:</p>
+<ul>
+<li><p>Create thematic maps for rates</p></li>
+<li><p>Assess extreme rate values by means of an excess risk map</p></li>
+<li><p>Apply the Empirical Bayes smoothing principle to rate maps</p></li>
+<li><p>Compute crude rates and smoothed rates in the table</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Map &gt; Rates-Calculated Map
+<ul>
+<li>Raw Rate</li>
+<li>Excess Risk</li>
+<li>Empirical Bayes</li>
+<li>saving calculated rates to the table</li>
+</ul></li>
+<li>Table &gt; Calculator &gt; Rates</li>
+<li>View &gt; Set Display Precision on Axes</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started" class="section level3 unnumbered">
+<h3>Getting Started</h3>
+<p>In this lab, we will use a sample data set with lung cancer data for the 88 counties of the state of Ohio. This is a commonly used example in many texts that cover disease mapping and spatial statistics.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> The data set is also included as one of the Center for Spatial Data Science example data sets and can be downloaded from the <a href="https://geodacenter.github.io/data-and-lab/ohiolung/">Ohio Lung Cancer Mortality page</a></p>
+<p>After the zipped file is downloaded, we select the three files associated with the ESRI shape file format: <strong>ohlung.shp</strong>, <strong>ohlung.shx</strong>, and <strong>ohlung.dbf</strong>. Note that there is no projection file associated with this (no <strong>ohlung.prj</strong> file). However, the metadata file <strong>ohiolung_metadata.html</strong> refers to the county boundary file as being in the UTM Zone 17 projection.</p>
+<p>To fix this problem, we resort to a resource mentioned in the Spatial Data Handling lab, namely the <a href="http://spatialreference.org">spatialreference.org</a> site that contains thousands of references in a variety of commonly used formats. Specifically, when we search for UTM Zone 17, we reach the following <a href="http://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/">page</a>.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/0_008_projection.png" alt="UTM Zone 17 projection" width="100%" />
+<p class="caption">
+UTM Zone 17 projection
+</p>
+</div>
+<p>We can now select the <strong>.PRJ File</strong> link to download the file with the correct projection information. To match it up with our other files, we rename the file as <strong>ohlung.prj</strong>. We now have all the pieces to get started.</p>
+<p>We fire up GeoDa, click on the <strong>Open</strong> icon and drop the <strong>ohlung.shp</strong> file in the <strong>Drop files here</strong> box of the <strong>Connect to Data Source</strong> dialog. The green themeless map with the outlines of the 88 Ohio counties appears in a map window.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/0_305_ohiomap.png" alt="Ohio counties themeless map" width="80%" />
+<p class="caption">
+Ohio counties themeless map
+</p>
+</div>
+<p>Since we have projection information, we can add a base layer to provide some context (click on the <strong>Base Map</strong> icon and select <strong>Nokia Day</strong>).</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/0_306_ohiowithbase.png" alt="Ohio counties with base layer" width="80%" />
+<p class="caption">
+Ohio counties with base layer
+</p>
+</div>
+</div>
+</div>
+<div id="raw-rate-map" class="section level2 unnumbered">
+<h2>Raw Rate Map</h2>
+<p>We start our discussion of rate maps by illustrating something we should <em>not</em> be doing. Earlier, the difference between a <em>spatially extensive</em> and a <em>spatially intensive</em> variable was pointed out. In our example, we could be concerned with the number (count) of lung cancer cases by county among white females in Ohio (say, in 1968). The corresponding variable in our data set is <strong>LFW68</strong>. We can create a box map (hinge 1.5) in the by now familar way (e.g., from the menu as <strong>Map &gt; Box Map &gt; Hinge = 1.5</strong>). This yields the following map.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_317_countmap.png" alt="Spatially extensive lung cancer counts" width="80%" />
+<p class="caption">
+Spatially extensive lung cancer counts
+</p>
+</div>
+<p>Anyone familiar with the geography of Ohio will recognize the <em>outliers</em> as the counties with the largest populations, i.e., the metropolitan areas of Cincinnati, Columbus, Cleveland, etc. This highlights a major problem with spatially extensive variables like total counts, in that they tend to vary with the size (population) of the areal units. So, everything else being the same, we would expect to have more lung cancer cases in counties with larger populations.</p>
+<p>Instead, we opt for a <em>spatially intensive</em> variable, such as the rate of the cases per population. In GeoDa, this is accomplished from the main map menu as <strong>Map &gt; Rates-Calculated Map</strong>, which provides five different options to calculate the rates. For now, we focus on the <strong>Raw Rate</strong> (or, crude rate).</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_307_ratesmenu.png" alt="Rate map from main Map menu" width="40%" />
+<p class="caption">
+Rate map from main Map menu
+</p>
+</div>
+<p>The same five options are also provided from any open map in the map options menu (right click on the map) as <strong>Rates</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_319_frommapmenu.png" alt="Rate map from Map options menu" width="40%" />
+<p class="caption">
+Rate map from Map options menu
+</p>
+</div>
+<p>First, we consider the <strong>Raw Rate</strong> or crude rate, the simple ratio of the events (number of lung cancer cases) over the population at risk (the county population).<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> In the variable dialog, we select <strong>LFW68</strong> as the <strong>Event Variable</strong> (i.e., the numerator) and <strong>POPFW68</strong> as the <strong>Base Variable</strong> (i.e., the denominator). In the <strong>Map Themes</strong> drop down list, we choose <strong>Box Map (Hinge=1.5)</strong> (if we don’t specify the type of map explicitly, the default will be a quantile map with 4 categories).</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_310_rawratevars.png" alt="Lung cancer rate variables" width="50%" />
+<p class="caption">
+Lung cancer rate variables
+</p>
+</div>
+<p>The associated box map follows as:</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_311_rawratemap.png" alt="Lung cancer rate box map" width="80%" />
+<p class="caption">
+Lung cancer rate box map
+</p>
+</div>
+<p>We immediately notice that the counties identified as upper outliers are very different from what the map for the counts suggested. We can address this even more explicitly by selecting the outliers in the count map (click on the square in the legend next to <strong>Upper outlier</strong>), and identifying the corresponding counties in the rate map through linking (they are shown in the actual shade, whereas the non-selected counties are shown in a lower transparency). None of the original outliers are extreme values in the rate map. In fact, some counties are in the lower quartiles (blue color) for the rates. This highlights the problem with using spatially extensive variables to assess the spatial pattern of events. The only meaningful analysis is when the population at risk (the denominator) is also taken into account through a rate measure.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_318_countoutliers.png" alt="Count outliers in rate map" width="100%" />
+<p class="caption">
+Count outliers in rate map
+</p>
+</div>
+<div id="saving-the-rates-to-the-table" class="section level3 unnumbered">
+<h3>Saving the rates to the table</h3>
+<p>Even though we have a map for the lung cancer mortality rates, the rates themselves are not available for any other analyses. However, this can be easily remedied. A right click in the map will bring up the familiar options menu, from which <strong>Save Rates</strong> can be selected to create the rate variable. This brings up a dialog to specify a name for the rate variable other than the default. For example, we can use <strong>RLFW68</strong>, as shown below.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_320_saveratevar.png" alt="Rate variable name selection" width="25%" />
+<p class="caption">
+Rate variable name selection
+</p>
+</div>
+<p>After clicking on <strong>OK</strong>, the new variable is added to the table. We can verify this by bringing the table to the foreground (click on the <strong>Table</strong> icon in the toolbar). The new variable has been added as the last field in the table. In order to make this permanent, we need to <strong>Save</strong> the current data set, or <strong>Save As</strong> a new data set.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_321_ratevarintable.png" alt="Rate field added to table" width="20%" />
+<p class="caption">
+Rate field added to table
+</p>
+</div>
+</div>
+<div id="computing-rates-in-the-table" class="section level3 unnumbered">
+<h3>Computing rates in the table</h3>
+<p>Rates can also be computed as part of the <strong>Calculator</strong> functionality for the table. In the calculator dialog, we select the <strong>Rates</strong> tab, which has the same five rate calculation options as before available under the <strong>Method</strong> drop down list.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_328_ratesintable.png" alt="Rate computation in table calculator" width="60%" />
+<p class="caption">
+Rate computation in table calculator
+</p>
+</div>
+<p>We operate in the usual fashion, by first adding a variable (say, <strong>LRATE</strong>) and then performing the computation. After selecting <strong>Raw Rate</strong> as the <strong>Method</strong>, we pick <strong>LFW68</strong> as the <strong>Event Variable</strong> and <strong>POPFW68</strong> as the <strong>Base Variable</strong> in the dialog.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_329_computerrawrate.png" alt="Rate variables in table calculator" width="60%" />
+<p class="caption">
+Rate variables in table calculator
+</p>
+</div>
+<p>After clicking <strong>Apply</strong>, the new variable is added to the table. As before, in order to make this permanent, we neede to <strong>Save</strong> or <strong>Save As</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_330_tablerate.png" alt="Rate field added to table" width="30%" />
+<p class="caption">
+Rate field added to table
+</p>
+</div>
+<div id="digression-setting-the-display-precision-on-axes" class="section level4 unnumbered">
+<h4>Digression – setting the display precision on axes</h4>
+<p>We digress briefly to illustrate an aspect of the graph display that may need attention. For example, when we create a box plot with the just saved or computed rates (<strong>Explore &gt; Box Plot</strong>, with <strong>Display Statistics</strong> turned off), we obtain the following graph.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_324_boxplot00.png" alt="Box plot for rate variable" width="40%" />
+<p class="caption">
+Box plot for rate variable
+</p>
+</div>
+<p>Note how the axes are not very informative, giving a label of <strong>0.00</strong> for all tick marks. This is due to the default precision setting for values displayed on the axes, set to <strong>2</strong>, which is reasonable in many cases. However, in this example, since the rates are all very small values, two decimal values is insufficient. We change the precision in the <strong>View</strong> option, selecting <strong>Set Display Precision on Axes</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_323_displayprecision.png" alt="Set display precision option" width="40%" />
+<p class="caption">
+Set display precision option
+</p>
+</div>
+<p>In the dialog that follows, we change the precision to <strong>4</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_325_newdisplayprecision.png" alt="Display precision dialog" width="25%" />
+<p class="caption">
+Display precision dialog
+</p>
+</div>
+<p>This gives slightly more meaningful results.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_326_boxnewprec.png" alt="Box plot for rate variable with adjusted precision" width="40%" />
+<p class="caption">
+Box plot for rate variable with adjusted precision
+</p>
+</div>
+<p>Finally, to illustrate the equivalence between the rates contained in the table and the rates used in the rate mapping, we select the upper outliers in the box plot. Through linking, this shows the corresponding counties in the rate map.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/1_322_boxplotoutliers.png" alt="Crude rate outliers" width="100%" />
+<p class="caption">
+Crude rate outliers
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="excess-risk-map" class="section level2 unnumbered">
+<h2>Excess Risk Map</h2>
+<p>A commonly used notion in public health analysis is the concept of a standardized mortality rate (SMR), or, the ratio of the observed mortality rate to a national (or regional) standard. GeoDa implements this in the form of an <strong>Excess Risk</strong> calculation. The excess risk is the ratio of the observed rate to the average rate computed for all the data. Note that this average is not the average of the county rates. Instead, it is calculated as the ratio of the total sum of all events over the total sum of all populations at risk (e.g., in our example, all the white female deaths in the state over the state white female population).</p>
+<p>We can map the standardized rates directly by means of <strong>Rates-Calculated Map &gt; Excess Risk</strong> in the map menu. In the dialog that follows, we specify the same variables as before for <strong>Event Variable</strong> (<strong>LFW68</strong>) and for the <strong>Base Variable</strong> (<strong>POPFW68</strong>).</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/2_331_excessriskvariables.png" alt="Excess Risk map variables" width="40%" />
+<p class="caption">
+Excess Risk map variables
+</p>
+</div>
+<p>Clicking <strong>OK</strong> brings up the map. The legend categories in the map are hard coded, with the blue tones representing counties where the risk is less than the state average (excess risk ratio &lt; 1) and the brown tones those counties where the risk is higher than the state average (excess risk ratio &gt; 1). In our map, we can see that six counties have an SMR greater than 2 (the brown colored counties), suggesting elevated rates relative to the state average.</p>
+<p>As before, all the usual options for a map are available. For example, we can save the categories as a new variable in the table.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/2_332_excessriskmap.png" alt="Excess Risk map" width="80%" />
+<p class="caption">
+Excess Risk map
+</p>
+</div>
+<p>We can also save the rates, in the same manner as for the raw rate map (<strong>Save Rates</strong> option). Since the excess risk map has a particular format, this is the only way to create other maps with the SMR. We first save the rates, which then allows any graph or map to be constructed for the new variables. For example, using <strong>R_EXCESS</strong> (the default) as the variable name, a box map reveals three outliers (the same outliers as in the box map for the crude rate).</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/2_333_smrboxmap.png" alt="Box Map for SMR" width="80%" />
+<p class="caption">
+Box Map for SMR
+</p>
+</div>
+<p>Finally, to compare the extreme values suggested by the excess risk map and the box map, we select the category with SMR &gt; 2 in the excess risk map (click on the corresponding brown box in the legend). It turns out that the box map applies a more stringent criterion to designate locations as having an elevated rate, based on the actual distribution of the SMR values, not only whether they are &gt; 2.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/2_334_smroutliers.png" alt="SMR outliers" width="100%" />
+<p class="caption">
+SMR outliers
+</p>
+</div>
+<p>As was the case for the crude rate, the excess risk can also be calculated by means of the table <strong>Calculator</strong> (see the description for the crude rate).</p>
+</div>
+<div id="empirical-bayes-eb-smoothed-rate-map" class="section level2 unnumbered">
+<h2>Empirical Bayes (EB) Smoothed Rate Map</h2>
+<p>As mentioned in the introduction, rates have an intrinsic variance instability, which may lead to the identification of <em>spurious</em> outliers. In order to correct for this, we can use smoothing approaches or shrinkage estimators, which improve on the precision of the crude rate by <em>borrowing strength</em> from the other observations. GeoDa includes three methods to smooth the rates, and Empirical Bayes approach, a spatial averaging approach, and a combination between the two. We will consider the spatial approaches when we discuss distance-based spatial weights. Here, we focus on the <strong>Empirical Bayes</strong> (EB) method.</p>
+<p>In the EB approach, the raw rates are “shrunk” towards the overall statewide average. In essense, the EB technique consists of computing a weighted average between the raw rate for each county and the state average, with weights proportional to the underlying population at risk. Simply put, small counties (i.e., with a small population at risk) will tend to have their rates adjusted considerably, whereas for larger counties the rates will barely change.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a></p>
+<p>An EB smoothed rate map is created from the map menu <strong>Rates-Calculated Map &gt; Empirical Bayes</strong>. In the variable selection dialog, we again take <strong>LFW68</strong> as the event variable and <strong>POPFW68</strong> as the base variable. In the drop down list of map types, we choose a <strong>Box Map (Hinge=1.5)</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/3_335_EBvariables.png" alt="EB map variables" width="40%" />
+<p class="caption">
+EB map variables
+</p>
+</div>
+<p>Clicking <strong>OK</strong> brings up the map.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/3_336_EBmap.png" alt="EB rate map" width="80%" />
+<p class="caption">
+EB rate map
+</p>
+</div>
+<p>In comparison to the box map for the crude rates and the excess rate map, none of the original outliers remain identified as such in the smoothed map. Instead, a new outlier is shown in the very southwestern corner of the state (Hamilton county).</p>
+<p>Since many of the original outlier counties have small populations at risk (check in the data table), their EB smoothed rates are quite different (lower) from the original. In contrast, Hamilton county is one of the most populous counties (it contains the city of Cincinnati), so that its raw rate is barely adjusted. Because of that, it percolates to the top of the distribution and becomes an outlier. We can systematically select observations in the box plot for the raw rates and compare their position in the cumulative distribution to the one for the smoothed rates to see which observations are affected most. For example, in the two box plots below (<strong>Save Rates</strong> first to add the EB smoothed rate to the table), we select the outliers for the crude rate in the left graph. This shows their position in the upper quartile for the EB smoothed rate, but well within the fence.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/3_338_shrinkage1.png" alt="Outliers for crude rate vs EB rate" width="100%" />
+<p class="caption">
+Outliers for crude rate vs EB rate
+</p>
+</div>
+<p>Next, we select the outlier in the box plot for the EB smoothed rate and notice its position around the 75 percentile for the crude rate. Also note how the range of the rates has shrunk. Many of the higher crude rates are well below 0.00012 for the EB rate, whereas the value for the EB outlier has barely changed.</p>
+<div class="figure" style="text-align: center">
+<img src="pics3b/3_339_shrinkage2.png" alt="Outliers for EB rate vs crude rate" width="100%" />
+<p class="caption">
+Outliers for EB rate vs crude rate
+</p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Anselinetal06">
+<p>Anselin, Luc, Nancy Lozano, and Julia Koschinsky. 2006. “Rate Transformations and Smoothing.” <em>Technical Report</em>. Spatial Analysis Laboratory, University of Illinois, Urbana-Champaign.</p>
+</div>
+<div id="ref-Lawsonetal03">
+<p>Lawson, A.B, W.J. Browne, and C.L.V. Rodeiro. 2003. <em>Disease Mapping with WinBUGS and MLwiN</em>. Wiley.</p>
+</div>
+<div id="ref-XiaCarlin98">
+<p>Xia, H., and B.P. Carlin. 1998. “Spatio-Temporal Models with Errors in Covariates. Mapping Ohio Lung Cancer Mortality.” <em>Statistics in Medicine</em> 17: 2025–43.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>For example, see <span class="citation">Xia and Carlin (1998)</span> and <span class="citation">Lawson, Browne, and Rodeiro (2003)</span>.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>In actuality, this is a little trickier than advertized. The best way is to first search for <strong>utm zone 17</strong>, then select <strong>SR-ORG:13 WGS 1984 UTM Zone 17N</strong>. At that point, <strong>google it</strong> and then click on the link for <strong>EPSG:32617</strong>.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Note that the current version of GeoDa does not support age-adjusted rates, which are common practice in epidemiology.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>For an extensive technical discussion, see <span class="citation">Anselin, Lozano, and Koschinsky (2006)</span>.<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+      </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-72724100-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

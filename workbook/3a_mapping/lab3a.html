@@ -12,7 +12,7 @@
 
 <meta name="author" content="Luc Anselin" />
 
-<meta name="date" content="2017-10-12" />
+<meta name="date" content="2017-10-16" />
 
 <title>Basic Mapping</title>
 
@@ -111,7 +111,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <h1 class="title toc-ignore">Basic Mapping</h1>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>10/12/2017</em></h4>
+<h4 class="date"><em>10/16/2017</em></h4>
 
 
 <div id="TOC">
@@ -255,9 +255,9 @@ Map Toolbar icon
 </div>
 <p>The selection brings up the list of map types that can be created in GeoDa.</p>
 <div class="figure" style="text-align: center">
-<img src="pics3a/0_231_map_options.png" alt="Map options" width="30%" />
+<img src="pics3a/0_231_map_options.png" alt="Map type options" width="30%" />
 <p class="caption">
-Map options
+Map type options
 </p>
 </div>
 <p>We ignore the <strong>Rates-Calculated Maps</strong> item for now, which will be considered separately. Among the other options, there are three where an additional choice is required (the right pointing arrow) consisting of the number of intervals to be specified (choose the number from a drop down list). All the other options have pre-specified settings.</p>
@@ -340,12 +340,12 @@ Histogram-Equal Intervals map equivalence
 <h3>Map options</h3>
 <p>Once a map is created, there are two types of options available. One set pertains directly to the manipulation of the map and is implemented by means of the icons on the map toolbar. We have already seen some of its features in an earlier exercise, but revisit it in more detail here. The second set of options is triggered by right clicking on the map window, which invokes the options dialog.</p>
 <div class="figure" style="text-align: center">
-<img src="pics3a/1_241_mapoptions.png" alt="Map options" width="30%" />
+<img src="pics3a/1_241_mapoptions_u.png" alt="Map options" width="30%" />
 <p class="caption">
 Map options
 </p>
 </div>
-<p>The top item (<strong>Change Current Map Type</strong>) brings up the same list with map types as invoked by clicking on the <strong>Map</strong> icon on the main toolbar, with one additional entry for a custom classification (<strong>Create New Custom</strong>). Selecting a different map type from a current map in this fashion precludes the need to choose a variable, but it also overwrites the current map. We consider the various features in further detail below, except for the <strong>Rates</strong> and <strong>Save Rates</strong>, which are covered in a separate chapter.</p>
+<p>The top item (<strong>Change Current Map Type</strong>) brings up the same list with map types as invoked by clicking on the <strong>Map</strong> icon on the main toolbar, with one additional entry for a custom classification (<strong>Create New Custom</strong>). Selecting a different map type from a current map in this fashion precludes the need to choose a variable, but it also overwrites the current map. We consider the various features in further detail below, except for the <strong>Rates</strong> and <strong>Save Rates</strong>, and <strong>Selection and Neighbors</strong>, which are covered in a separate chapter.</p>
 <div id="the-map-toolbar" class="section level4 unnumbered">
 <h4>The map toolbar</h4>
 <p>The map toolbar contains eight icons that facilitate selection and viewing of the map.</p>
@@ -577,7 +577,7 @@ Co-location map
 <p>In addition to the range of pre-defined classifications available for choropleth maps in GeoDa, it is also possible to create a custom classification. This is often useful when substantive concerns dictate the cut points, rather than data driven criteria. For example, this may be appropriate when specific income categories are specified for certain government programs. It is also useful when comparing the spatial distribution of a variable over time. All pre-defined classifications are relative and would be re-computed for each time period. For example, when mapping crime rates over time, in an era of declining rates, the observations in the upper quartile in a later period may have crime rates that correspond to a much lower category in an earlier period. This would not be apparent using the pre-defined approaches, but could be visualized by setting the same break points for each time period.</p>
 <p>The <strong>Category Editor</strong> in GeoDa is a complex tool that allows for the creation of a fully customized classification scheme. It is invoked from the map options menu, as <strong>Change Current Map Type &gt; Create New Custom</strong>.</p>
 <div class="figure" style="text-align: center">
-<img src="pics3a/4_272_new_custom.png" alt="Custom category" width="40%" />
+<img src="pics3a/4_272_new_custom_u.png" alt="Custom category" width="40%" />
 <p class="caption">
 Custom category
 </p>
@@ -681,7 +681,7 @@ Custom category labels
 <h3>Applications of custom categories</h3>
 <p>Once created, the custom classification becomes available to any application where classification is involved. Most directly, this is the mapping functionality, where now the custom category is listed as an option when selecting <strong>Change Current Map Type</strong>.</p>
 <div class="figure" style="text-align: center">
-<img src="pics3a/4_288_custommaptype.png" alt="Custom map classification" width="50%" />
+<img src="pics3a/4_288_custommaptype_u.png" alt="Custom map classification" width="50%" />
 <p class="caption">
 Custom map classification
 </p>

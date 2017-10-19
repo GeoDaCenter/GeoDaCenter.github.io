@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Luc Anselin" />
+
+<meta name="date" content="2017-10-19" />
+
+<title>Contiguity-Based Spatial Weights</title>
+
+<link href="lab4a_files/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="lab4a_files/highlightjs-1.1/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="http://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;} 
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+    
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="http://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Contiguity-Based Spatial Weights</h1>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>10/19/2017</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#getting-started">Getting Started</a></li>
+</ul></li>
+<li><a href="#contiguity-weights">Contiguity Weights</a><ul>
+<li><a href="#rook-contiguity">Rook contiguity</a><ul>
+<li><a href="#gal-weights-file">GAL weights file</a></li>
+</ul></li>
+<li><a href="#queen-contiguity">Queen contiguity</a></li>
+<li><a href="#loading-weights-from-a-file">Loading weights from a file</a></li>
+</ul></li>
+<li><a href="#weights-characteristics">Weights Characteristics</a><ul>
+<li><a href="#connectivity-histogram">Connectivity histogram</a><ul>
+<li><a href="#neighbors-of-a-selection">Neighbors of a selection</a></li>
+<li><a href="#saving-the-neighbor-cardinality-to-the-table">Saving the neighbor cardinality to the table</a></li>
+</ul></li>
+<li><a href="#connectivity-map">Connectivity map</a></li>
+</ul></li>
+<li><a href="#higher-order-contiguity">Higher order contiguity</a></li>
+<li><a href="#the-project-file-again">The Project File (again)</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered">
+<h2>Introduction</h2>
+<p>In this lab, we will explore the spatial weights functionality in GeoDa that is based on the notion of contiguity between polygons. We will use the <strong>U.S. Homicides</strong> sample data set that comes pre-installed with GeoDa. It contains values for homicides and several socio-economic determinants for the 3085 counties in the continental United States.</p>
+<p>We will create contiguity-based weights (rook and queen), as well as higher order contiguity. We will examine their characteristics using the connectivity histogram and explore the connectivity map. We will close by taking another look at the Project File, which is a way to remember project settings (such as spatial weights) between sessions.</p>
+<p>Technical details on spatial weights are contained Chapters 3 and 4 of <span class="citation">Anselin and Rey (2014)</span>, although the software illustrations in that book are based on a GeoDa interface for an earlier version.</p>
+<div id="objectives" class="section level3 unnumbered">
+<h3>Objectives</h3>
+<ul>
+<li><p>Construct contiguity-based spatial weights</p></li>
+<li><p>Compute higher order contiguity weights</p></li>
+<li><p>Identify the neighbors of selected observations</p></li>
+<li><p>Store the weights information in a GeoDa Project File</p></li>
+<li><p>Assess the characteristics of spatial weights</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Weights Manager (Tools &gt; Weights Manager)
+<ul>
+<li>weights file creation interface</li>
+<li>ID variable</li>
+<li>rook and queen contiguity</li>
+<li>precision threshold option</li>
+<li>spatial weights file name</li>
+<li>weights properties in the weights manager</li>
+<li>loading weights from a file</li>
+</ul></li>
+<li>Structure of a GAL file</li>
+<li>Connectivity histogram</li>
+<li>Connectivity map</li>
+<li>Select neighbors of selected
+<ul>
+<li>Table &gt; Add Neighbors To Selection</li>
+<li>Map &gt; Selection and Neighbors</li>
+</ul></li>
+<li>File &gt; Save Project</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started" class="section level3 unnumbered">
+<h3>Getting Started</h3>
+<p>With GeoDa launched and all previous projects closed, we start a new project and load the U.S. Homicides sample data set from the <strong>Sample Data</strong> tab of the <strong>Connect to Data Source</strong> dialog (second data set from the top). This yields the familiar themeless base map of the U.S. counties.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/0_341_uscountiesmap.png" alt="U.S. counties themeless map" width="80%" />
+<p class="caption">
+U.S. counties themeless map
+</p>
+</div>
+<p>In order to make sure that the weights files we are about to construct end up in the same directory as the data, we need to create a copy of the sample data and <strong>Save As</strong> a new file in a working directory. Select <strong>Save As</strong> and choose <strong>ESRI Shapefile</strong> as the file type to create a copy.</p>
+<p>Close the project and load the new file in the usual fashion. In the example that follows, the file name is <strong>natregimes</strong> (with four matching files with extensions .shp, .shx, .dbf, and .prj). We are now ready to proceed.</p>
+</div>
+</div>
+<div id="contiguity-weights" class="section level2 unnumbered">
+<h2>Contiguity Weights</h2>
+<p>We invoke the weights creation through the <strong>Weights Manager</strong> icon in the toolbar, or by selecting <strong>Tools &gt; Weights Manager</strong> in the menu.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_weights_manager.png" alt="Weights Manager toolbar icon" width="15%" />
+<p class="caption">
+Weights Manager toolbar icon
+</p>
+</div>
+<p>Clicking on the <strong>W</strong> icon brings up the <strong>Weights Manager</strong> dialog. At this point, it should be totally empty. By selecting the <strong>Create</strong> button, we can start constructing the weights.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_weights_manager_dialog.png" alt="Weights Manager dialog" width="40%" />
+<p class="caption">
+Weights Manager dialog
+</p>
+</div>
+<p>The actual construction of the weights is implemented through the <strong>Weights File Creation</strong> interface. This organizes all the different options in one place.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_weights_creation_dialog.png" alt="Weights File Creation interface" width="60%" />
+<p class="caption">
+Weights File Creation interface
+</p>
+</div>
+<p>The first item to specify is the <strong>ID Variable</strong>. This variable is a critical element to make sure that the weights are connected to the correct observations in the data table. In other words, the ID variable is a so-called key that links the data to the weights. In GeoDa, it is best to have the ID Variable be integer. In practice, this is often not the case. One way to deal with this is to use the <strong>Edit Variable Properties</strong> functionality in the table to turn a string into an integer, as we have seen earlier. However, sometimes there is no easy way to identify an ID variable. In that case, the <strong>Add ID Variable</strong> button provides the solution: the added ID variable is simply an integer sequence number that is added to the data table (as always, you must <strong>Save</strong> the data to make the addition permanent).</p>
+<p>For the natregimes data set, we use <strong>fipsno</strong> as the ID variable. This is the county FIPS code turned into an integer value. Once the ID variable is entered, the various options for the weights become available. We can now proceed to the <strong>Contiguity Weight</strong> panel in the interface (the top panel) to create spatial weights.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_344_idvariable.png" alt="Weights File Creation activated" width="60%" />
+<p class="caption">
+Weights File Creation activated
+</p>
+</div>
+<div id="rook-contiguity" class="section level3 unnumbered">
+<h3>Rook contiguity</h3>
+<p>We first consider <strong>Rook contiguity</strong>, i.e., when only common sides of the polygons are considered to define the neighbor relation (common vertices are ignored). With the <strong>Rook contiguity</strong> radio button checked, a click on <strong>Create</strong> will start the weights construction process. First, a file dialog appears in which a file name for the weights must be specified (the file extension <strong>GAL</strong> is added automatically). For example, we could use <strong>natregimes_r.gal</strong>. Since there are no real metadata in a spatial weights file, it is a good practice to make the file name something meaningful, so that you can remember what type of weight you just created. In our example, we added _<strong>r</strong> to the name of the data set to suggest rook weights. However, as we will see below, if a <strong>Project File</strong> is saved, some of the characteristics of the weights are remembered.</p>
+<p>After entering a file name and clicking on <strong>OK</strong>, the weights are computed and written to the file. At the end of this operation, a success message will appear (or an <strong>Error</strong> message if something went wrong).</p>
+<p>A useful option in the weights file creation dialog is the specification of a <strong>Precision threshold</strong> (highlighted in the figure). In most cases, this is not needed, but in some instances the precision of the underlying shape file in insufficient to allow for an exact match of coordinates (to determine which polygons are neighbors). When this happens, GeoDa suggests a default error band to allow for a fuzzy comparison. For example, this would be needed to create contiguity weights in the NYC sample data set.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_342_widvariable.png" alt="Rook contiguity with precision threshold option" width="60%" />
+<p class="caption">
+Rook contiguity with precision threshold option
+</p>
+</div>
+<p>After the weights are created, the corresponding file name is listed in the weights manager under the <strong>Weights Name</strong>. In addition, several summary properties are given, including the type (<strong>rook</strong>), whether the weights are inherently symmetric or not (<strong>symmetric</strong>), the full file name (<strong>natregimes_r.gal</strong>), the id variable (<strong>fipsno</strong>) and the order of contiguity (<strong>1</strong>).</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_343_wmanagerwrook.png" alt="Rook contiguity listed in Weights Manager" width="40%" />
+<p class="caption">
+Rook contiguity listed in Weights Manager
+</p>
+</div>
+<div id="gal-weights-file" class="section level4 unnumbered">
+<h4>GAL weights file</h4>
+<p>The GAL weights file is a simple text file that contains, for each observation, the number of neighbors and their identifiers. The format was suggested in the 1980s by the Geometric Algorithms Lab at Nottingham University and achieved widespread use after its inclusion in SpaceStat <span class="citation">(Anselin 1992)</span>, and subsequent adoption by the R spdep package.</p>
+<p>The one innovation SpaceStat added was the inclusion of a header line, with some metadata for the weights, such as the number of observations, the name of the shape file from which the weights were derived, and the name of the ID variable. For each observation, the number of neighbors is listed after its ID (e.g., for county 27077, there are 3 neighbors), followed by the IDs of the neighbors (27135 27071 27007).</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_003_galfile.png" alt="Contents of GAL weights file" width="50%" />
+<p class="caption">
+Contents of GAL weights file
+</p>
+</div>
+<p>Since the GAL file is a simple text file, it can easily be edited (e.g., to add or remove neighbors), although this is not recommended: it is easy to break the inherent symmetry of the contiguity weights.</p>
+</div>
+</div>
+<div id="queen-contiguity" class="section level3 unnumbered">
+<h3>Queen contiguity</h3>
+<p>We proceed in the same fashion to construct queen contiguity weights. The difference between the rook and queen criterion to determine neighbors is that the latter also includes common vertices. This makes the greatest difference for regular grids (square polygons), where the rook criterion will result in four neighbors (except for edge cases) and the queen criterion will yield eight. For irregular polygons (like most areal units encountered in practice), the differences will be slight. In order to deal with potential inaccuracies in the polygon file (such as rounding errors), using the queen criterion is recommended in practice.</p>
+<p>After checking the <strong>Queen contiguity</strong> radio button, clicking on <strong>Create</strong> and entering a file name (e.g., <strong>natregimes_q.gal</strong>), the new weights will be saved to the weights file. At this point, the file name for the queen weights is included among the weights names listed in the weights manager.</p>
+<p>In the dialog, the highlighted weights are the active ones. This will determine what weights are used in any analysis, but also drives the properties that are listed in the dialog and what is generated by the <strong>Connectivity Histogram</strong> and the <strong>Connectivity Map</strong> (discussed below). In the example, the summary properties for the queen weights are shown, since that is the highlighted weights name.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_345_queenweights.png" alt="Queen contiguity added to weights manager" width="40%" />
+<p class="caption">
+Queen contiguity added to weights manager
+</p>
+</div>
+</div>
+<div id="loading-weights-from-a-file" class="section level3 unnumbered">
+<h3>Loading weights from a file</h3>
+<p>The <strong>Weights Manager</strong> can also be used to <strong>Load</strong> weights files that are already available on disk. To start with a clean slate, we first <strong>Remove</strong> the two weights currently in the list (highlight the file name and click on <strong>Remove</strong>). Next, we select the <strong>Load</strong> button (center top) and specify the name of the weights file. However, unlike the weights created on the fly in the current session, only limited items will be contained in the properties list, since there are no metadata for the weights files.</p>
+<p>In our example, GeoDa has no way of knowing whether the loaded file represents queen or rook contiguity (given as <strong>custom</strong> in the properties list), whether it is symmetric (<strong>unknown</strong>), or the order of contiguity (not listed). Therefore, it is highly recommended to use a Project File to store the weights characteristics.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/1_346_loadweights.png" alt="Loaded weights in weights manager" width="40%" />
+<p class="caption">
+Loaded weights in weights manager
+</p>
+</div>
+</div>
+</div>
+<div id="weights-characteristics" class="section level2 unnumbered">
+<h2>Weights Characteristics</h2>
+<p>Some useful characteristics of the currently selected weights are provided in the <strong>Weights Manager</strong> by means of the <strong>Connectivity Histogram</strong> and the <strong>Connectivity Map</strong>. In order to use the Project File later on, we first quickly re-create the rook and queen contiguity from scratch (remove any currenly listed weights that were loaded, and either use new file names, or overwrite the current files when creating the weights).</p>
+<div id="connectivity-histogram" class="section level3 unnumbered">
+<h3>Connectivity histogram</h3>
+<p>The <strong>Histogram</strong> button produces a connectivity histogram that shows the number of observations for each value of the cardinality of neighbors (i.e., how many observations have the given number of neighbors). The graph is a standard GeoDa histogram, with a number of options available, some of which are generic, and some specific to the connectivity histogram.</p>
+<p>The histogram for the queen contiguity associated with the U.S. counties is given below.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_connectivity_queen.png" alt="Connectivity histogram - queen weights" width="60%" />
+<p class="caption">
+Connectivity histogram - queen weights
+</p>
+</div>
+<p>The overall pattern is quite symmetric, with a mode of 6 (i.e., most counties have 6 neighbors). In addition to the visual inspection, the usual statistics of the distribution can be added to the bottom of the table by means of the <strong>View &gt; Display Statistics</strong> option.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_347_conhist_displaystats.png" alt="Display connectivity statistics" width="40%" />
+<p class="caption">
+Display connectivity statistics
+</p>
+</div>
+<p>From the descriptive statistics listed at the bottom of the graph, we can see that the median number of neighbors is 6, the average is 5.89, and the maximum is 14. In addition, the number of observations in each interval is listed as well.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_hist_w_statistics.png" alt="Connectivity histogram with statistics" width="60%" />
+<p class="caption">
+Connectivity histogram with statistics
+</p>
+</div>
+<p>In standard GeoDa fashion, the connectivity histogram is connected to all the other views through linking and brushing. For example, by selecting the modal bar, all 1037 counties with six neighbors are highlighted in the U.S. county map.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_349_modalneighbors.png" alt="Counties with six neighbors" width="100%" />
+<p class="caption">
+Counties with six neighbors
+</p>
+</div>
+<p>It is good practice to check the connectivity histogram for any “strange” patterns, such as observations with only one neighbor and neighborless observations (isolates). The latter will be covered in the discussion of distance-based weights.</p>
+<p>Ideally, we like the distribution of the cardinalities to be nice and symmetric, and are on the lookout for bimodal distributions (some observations have few neighbors and some many) and other deviations from symmetry.</p>
+<div id="neighbors-of-a-selection" class="section level4 unnumbered">
+<h4>Neighbors of a selection</h4>
+<p>An interesting feature of GeoDa that becomes available as soon as a weights file has been created or loaded is the selection of the <em>neighbors</em> of a selection. We illustrate this with a special characteristic of several counties in the state of Virginia.</p>
+<p>When selecting the first (left-most) bar in the histogram, i.e., the observations with only one neighbor, we find that several of the 24 selected counties are in the state of Virginia. This become clear after we add a base layer (select the <strong>Base Map</strong> icon in the map toolbar and choose <strong>Nokia Day</strong>) and zoom in on the state of Virginia. We find 10 of the counties in question in this state.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_354_vacitycounties.png" alt="Virginia city counties" width="60%" />
+<p class="caption">
+Virginia city counties
+</p>
+</div>
+<p>Upon closer examination (or, using prior knowledge), we can see that these counties are actually cities within a surrounding county, which results in them having only a single neighbor (the surrounding county).</p>
+<p>We can illustrate this further by utilizing a feature of the table <strong>Selection Tool</strong>. This tool is activated in the usual way by right clicking anywhere in the table. The <strong>Add Neighbors to Selection</strong> button is central in the middle panel. Note that the <strong>Weights</strong> must be specified. By default, the drop-down list will show the currently active weights, i.e., <strong>natregimes_q</strong> in our example.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_351_addneighbors.png" alt="Adding neighbors to selection" width="60%" />
+<p class="caption">
+Adding neighbors to selection
+</p>
+</div>
+<p>Alternatively, this option can also be selected from any map (with an active current selection), using <strong>Selection and Neighbors</strong> from the option menu (right click on the map).<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> Here again, the option will only work if there is a currently active spatial weights file. If not, a warning will be generated.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_418_addneighbormap.png" alt="Adding neighbors to selection" width="25%" />
+<p class="caption">
+Adding neighbors to selection
+</p>
+</div>
+<p>Either option will take the currently selected observations, i.e., in the example, this would be the selected city-counties in Virginia, and add their neighbors (i.e., the surrounding counties) to the selection. As shown below, the larger counties have a small polygon within them corresponding to the city-counties.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_353_vawnbrs.png" alt="Virginia city counties with neighbors" width="60%" />
+<p class="caption">
+Virginia city counties with neighbors
+</p>
+</div>
+</div>
+<div id="saving-the-neighbor-cardinality-to-the-table" class="section level4 unnumbered">
+<h4>Saving the neighbor cardinality to the table</h4>
+<p>A second useful option of the connectivity histogram is to save the neighbor cardinality to the data table as an additional column/variable to be used in further analysis. The <strong>Save Connectivity to Table</strong> option is invoked in the usual way by right clicking on the view.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_348_conntotable.png" alt="Save connectivity to table" width="30%" />
+<p class="caption">
+Save connectivity to table
+</p>
+</div>
+<p>This brings up a small dialog in which the name for the new variable can be specified (the default is a generic <strong>NUM_NBRS</strong>, which may not be the most insightful when different spatial weights are being compared).</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_save_connectivity.png" alt="Variable for neighbor cardinality" width="40%" />
+<p class="caption">
+Variable for neighbor cardinality
+</p>
+</div>
+<p>Upon clicking <strong>OK</strong>, an additional column is added to the data table with the number of neighbors for that observation (and that particular spatial weights specification). The number of neighbors is an important input into the calculation of the significance of the local join count statistic, covered in a later chapter.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_number_neighbors_in_table.png" alt="Cardinality added to table" width="40%" />
+<p class="caption">
+Cardinality added to table
+</p>
+</div>
+</div>
+</div>
+<div id="connectivity-map" class="section level3 unnumbered">
+<h3>Connectivity map</h3>
+<p>The button on the right at the bottom of the <strong>Weights Manager</strong> interface brings up a <strong>Connectivity Map</strong>. This is a standard GeoDa map view (with all the usual map features invoked through toolbar icons, including zooming and panning), but with a special functionality that highlights the neighbors of any <em>selected</em> observation. In our example, this starts with a map of all the U.S. counties.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_357_contiguitymap.png" alt="Connectivity map -- US counties" width="60%" />
+<p class="caption">
+Connectivity map – US counties
+</p>
+</div>
+<p>As soon as the pointer is moved over one of the observations, its neighbors are highlighted. For example, we can zoom in on Virginia again and point at one of the counties. This shows its neighbors on the map (including the city county enclosed by it as the tiny point within the polygon), and lists their ID values in the status bar. In this instance, the county with FIPS code 51003 (Albemarle, VA) has 9 neighbors using the queen contiguity criterion.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/2_connectivity_map_zoom.png" alt="Neighbors for Albermarle, VA" width="60%" />
+<p class="caption">
+Neighbors for Albermarle, VA
+</p>
+</div>
+</div>
+</div>
+<div id="higher-order-contiguity" class="section level2 unnumbered">
+<h2>Higher order contiguity</h2>
+<p>Higher order contiguity weights are constructed in the same manner as the first order weights we just covered, but by specifying a value larger than 1 (which is the default) in the <strong>Order of contiguity</strong> drop down list.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/3_358_higherorder.png" alt="Higher order contiguity" width="60%" />
+<p class="caption">
+Higher order contiguity
+</p>
+</div>
+<p>As before, the weights are saved to a file after selecting the <strong>Create</strong> button and specifying a file name.</p>
+<p>One important aspect of higher order contiguity weights is whether or not the lower order neighbors are included in the weights file. This is determined by a check box (highlighted in the figure above). Conceptually, there is quite a difference between the two concepts. The <em>pure</em> higher order contiguity does not include any lower order neighbors (for example, an encompassing notion of second order neighbors would include the first order neighbors as well, since there are two steps – back and forth – connecting each observation to its first order neighbor). This is the notion appropriate for use in a statistical analysis of spatial autocorrelation for different <em>spatial lag</em> orders. However, in practice, it is often useful to use increasing orders of contiguity as similar to increasing distance bands, i.e., consisting of both first and second order neighbors.</p>
+<p>We proceed and create two forms of second order queen contiguity weights, one without the box checked (pure second order contiguity), and one with the box checked (inclusive second order contiguity). Both weights should now be listed in the weights manager.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/3_359_higherorderinmanager.png" alt="Higher order contiguity weights in manager" width="40%" />
+<p class="caption">
+Higher order contiguity weights in manager
+</p>
+</div>
+<p>The difference between the two concepts is easily illustrated by means of the connectivity map. For example, focusing on Solano county, CA (in the Bay Area, FIPS code 6095), we first consider the pure second order contiguity (weights file <strong>natregimes_q2</strong> in the weights manager should be selected). Using this definition, the county has 9 second order neighbors. In particular, notice the band of unselected first order neighbors right next to the county with the pointer above it.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/3_solano_pure.png" alt="Solano, Ca -- second order contiguity" width="45%" />
+<p class="caption">
+Solano, Ca – second order contiguity
+</p>
+</div>
+<p>Compare this to the inclusive second order contiguity (weights file <strong>natregimes_q2inc</strong>), where there are now 13 neighbors. Also, there are no gaps in the neighbor structure.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/3_solano_inc.png" alt="Solano, CA -- first order included" width="45%" />
+<p class="caption">
+Solano, CA – first order included
+</p>
+</div>
+</div>
+<div id="the-project-file-again" class="section level2 unnumbered">
+<h2>The Project File (again)</h2>
+<p>Upon closing the current project, the information on the characteristics of the spatial weights is lost. When you later reload the same polygon layer (e.g., natregimes), you have to reload each weights file using the <strong>Load</strong> button in the weights manager. As we have seen, the summary properties listed for those loaded weights are not very informative.</p>
+<p>A much superior alternative is to create and save a project file. As we saw in the discussion of the custom category editor, this file contains information about the project, such as the variables contained in it (especially important when space-time variables are created), as well as the spatial weights.</p>
+<p>The project information is kept in memory. As we saw earlier, it is saved by means of the <strong>Save Project</strong> item in the <strong>File</strong> menu. This will prompt for a file name and save the project file with a file extension <strong>gda</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/4_360_saveproject.png" alt="Save Project option" width="25%" />
+<p class="caption">
+Save Project option
+</p>
+</div>
+<p>The project file itself is an editable XML text file. It contains all the information on the source file, variable names, any transformations carried out and any space-time (grouped) variables created. It also keeps all the characteristics of the spatial weights. As we see below, the four weights created so far are included, with the properties as they were listed in the weights manager.</p>
+<div class="figure" style="text-align: center">
+<img src="pics4a/4_gda_file.png" alt="Weights information in project file" width="60%" />
+<p class="caption">
+Weights information in project file
+</p>
+</div>
+<p>Once the project <strong>gda</strong> file has been saved, a new project should be started by loading the project file instead of opening a shape file (or other geographical layer). This will automatically load all the spatial weights contained in the project file and list their properties in the weights manager. Also, all transformations and space-time variables that were constructed earlier will be recreated. In addition, different project files can be created for the same data set, each with their own set of weights, space-time variables, etc.</p>
+<p><br></p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Anselin92">
+<p>Anselin, Luc. 1992. <em>SpaceStat</em>. National Center for Geographic Information and Analysis, University of California, Santa Barbara, CA.</p>
+</div>
+<div id="ref-AnselinRey14">
+<p>Anselin, Luc, and Sergio Rey. 2014. <em>Modern Spatial Econometrics in Practice</em>. GeoDa Press, LLC, Chicago, IL.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>This option will not work if there isn’t a currently active selection.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+      </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-72724100-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

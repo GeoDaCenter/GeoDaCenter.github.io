@@ -12,7 +12,6 @@
 
 <meta name="author" content="Luc Anselin" />
 
-<meta name="date" content="2017-10-19" />
 
 <title>Distance-Based Spatial Weights</title>
 
@@ -111,7 +110,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <h1 class="title toc-ignore">Distance-Based Spatial Weights</h1>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>10/19/2017</em></h4>
+<h4 class="date"><em>10/23/2017 (updated)</em></h4>
 
 
 <div id="TOC">
@@ -374,14 +373,14 @@ KNN-6 connectivity histogram
 </p>
 </div>
 <p>One drawback of the k-nearest neighbor approach is that it ignores the distances involved. The first k neighbors are selected, irrespective of how near or how far they may be. This suggests a notion of distance decay that is not absolute, but relative, in the sense of intervening opportunities (e.g., you consider the two closest grocery stores, irrespective of how far they may be).</p>
-<p>This can be illustrated in the Cleveland example by selecting an observation in the eastern part of the map, where the house sales are densely distributed in space. With the pointer on one of the brown circles in the connectivity map, we distinguish six black circles close by.</p>
+<p>This can be illustrated in the Cleveland example by selecting an observation in the western part of the map, where the house sales are densely distributed in space. With the pointer on one of the brown circles in the connectivity map, we distinguish six black circles close by.</p>
 <div class="figure" style="text-align: center">
 <img src="pics4b/2_388_k6close.png" alt="KNN-6 close neighbors" width="60%" />
 <p class="caption">
 KNN-6 close neighbors
 </p>
 </div>
-<p>By contrast, if we move to the western part of the data set and similarly select an observation (brown circle) with the pointer, the six neighbors are much farther apart.</p>
+<p>By contrast, if we move to the eastern part of the data set and similarly select an observation (brown circle) with the pointer, the six neighbors are much farther apart.</p>
 <div class="figure" style="text-align: center">
 <img src="pics4b/2_387_k6far.png" alt="KNN-6 far neighbors" width="60%" />
 <p class="caption">
@@ -491,7 +490,8 @@ Cheshire county connectivity map
 <div id="spatially-lagged-variable" class="section level3 unnumbered">
 <h3>Spatially lagged variable</h3>
 <p>After clearing the current project, and loading the project file <strong>clev_sls_154_core.gda</strong>, the weights manager should list the various distance weights and the queen contiguity weight for the Cleveland point data set.</p>
-<p>Spatially lagged variables are a weighted average of the values for neighboring observations, where the neighbors are defined through the spatial weights. The computation is a simple average based on the neighbor structure only and (currently) does not take into account the distances themselves. The computation is carried out through the <strong>Calculator</strong> dialog activated from the table menu (<strong>Table &gt; Calculator</strong>), using the <strong>Spatial Lag</strong> tab. Note the <strong>Weight</strong> drop down list, which contains all the spatial weights available to the project, with the current one listed, e.g., <strong>clev_sls_154_core_q</strong> in the example below.</p>
+<p>Spatially lagged variables are a weighted average of the values for neighboring observations, where the neighbors are defined through the spatial weights. The computation is a simple average based on the neighbor structure only and (currently) does not take into account the distances themselves. More formally, for a variable <span class="math inline">\(z_i\)</span> observed at location <span class="math inline">\(i\)</span>, and with weights matrix elements <span class="math inline">\(w_{ij}\)</span>, the spatial lag would be <span class="math inline">\(\sum_j w_{ij} z_j\)</span>.</p>
+<p>In GeoDa, this computation is carried out through the <strong>Calculator</strong> dialog activated from the table menu (<strong>Table &gt; Calculator</strong>), using the <strong>Spatial Lag</strong> tab. Note the <strong>Weight</strong> drop down list, which contains all the spatial weights available to the project, with the current one listed, e.g., <strong>clev_sls_154_core_q</strong> in the example below.</p>
 <div class="figure" style="text-align: center">
 <img src="pics4b/5_397_spatial_lag_tab.png" alt="Spatial Lag tab in calculator" width="60%" />
 <p class="caption">
@@ -512,8 +512,8 @@ Spatial Lag for sales price
 Spatial Lag for sales price in table
 </p>
 </div>
-<p>We can quickly assess the effect of the spatial averaging by comparing the descriptive statistics between the original price variable and its spatial lag (select the descriptive statistics option in a histogram or box plot graph). The main effect of the spatial lag is a compression of the range and variance of the variable. The range from $1,049 to $527,409 for the original variable changes to $5530-$213,735 for the spatial lag. Similarly, the standard deviation is considerably reduced from 60,654 to 38,165.</p>
-<p>A more dramatic view of the influence of high-valued or low-valued neighbors on the spatial lag is given by the PCP. In several instances, the line goes from a high price to a much lower spatial lag, and vice versa. In other words, if there is high spatial heterogeneity in the data, the choice of the neighborhood (the spatial weights) becomes very important, and the spatial lag may not be a good proxy for the value observed at a given location (recall that the value at a given loctaion is <em>not</em> included in the spatial lag calculation).</p>
+<p>We can quickly assess the effect of the spatial averaging by comparing the descriptive statistics between the original price variable and its spatial lag (for example, by viewing the descriptive statistics associated with a histogram or box plot graph). The main effect of the spatial lag is a compression of the range and variance of the variable. The range from $1,049 to $527,409 for the original variable changes to $5530-$213,735 for the spatial lag. Similarly, the standard deviation is considerably reduced from 60,654 to 38,165.</p>
+<p>A more dramatic view of the influence of high-valued or low-valued neighbors on the spatial lag is given by the PCP. In several instances, the line goes from a high price to a much lower spatial lag, and vice versa. In other words, if there is high spatial heterogeneity in the data, the choice of the neighborhood (the spatial weights) becomes very important, and the spatial lag may not be a good proxy for the value observed at a given location (recall that the value at a given loctaion is <em>not</em> included in the spatial lag calculation). This relates directly to the notion of <em>local spatial autocorrelation</em> that we will examine in a later chapter.</p>
 <div class="figure" style="text-align: center">
 <img src="pics4b/5_404_pcp.png" alt="PCP for sales price and its spatial lag" width="80%" />
 <p class="caption">
@@ -531,7 +531,8 @@ PCP for sales price and its spatial lag
 Standard deviational map for crude rates
 </p>
 </div>
-<p>First, we illustrate how <em>not</em> to proceed, but use this as a way to show how to include the observation itself in the computation of the spatial lag. In other words, the lag variable now becomes a <em>window average</em>, including both the observation as well as its neighboring values in the calculation of the average. To that effect, we activate the <strong>Spatial Lag</strong> tab, add a new variable, e.g., <strong>W_RATE1</strong>, and check the box next to <strong>Self neighbors included</strong>. The active weights matrix is <strong>ohlung_q2inc</strong>. At this point, we can calculate the spatial window average of the rates as a spatial lag.</p>
+<p>First, we illustrate how <em>not</em> to proceed, but use this as a way to show how to include the observation itself in the computation of the spatial lag. In other words, the lag variable now becomes a <em>window average</em>, including both the observation as well as its neighboring values in the calculation of the average. More precisely, with the crude rate at observation <span class="math inline">\(i\)</span> as <span class="math inline">\(o_i/p_i\)</span> (observed events over population), the window average would be <span class="math inline">\(\sum_j w_{ij} o_j/p_j\)</span>, where now <span class="math inline">\(w_{ii} \neq 0\)</span>.</p>
+<p>To compute this expression, we activate the <strong>Spatial Lag</strong> tab, add a new variable, e.g., <strong>W_RATE1</strong>, and check the box next to <strong>Self neighbors included</strong>. The active weights matrix is <strong>ohlung_q2inc</strong>. At this point, we can calculate the spatial window average of the rates as a spatial lag.</p>
 <div class="figure" style="text-align: center">
 <img src="pics4b/6_405_windowavg_rate.png" alt="Spatial window average of crude rates" width="60%" />
 <p class="caption">
@@ -546,8 +547,8 @@ Crude rate spatial window average
 </p>
 </div>
 <p>Characteristic of the spatial averaging, several larger groupings of similarly classified observations appear. Also, the upper outliers have disappeared (there is one new lower outlier).</p>
-<p>As mentioned, this is <em>not</em> the proper way to operate, since this approach ignores the differences between the populations of the different counties and the associated variance instability of the rates. The <strong>Spatial Rate</strong> smoothing option is the correct alternative.</p>
-<p>We invoke this from the <strong>Map &gt; Rates-Calculated Map</strong> options as <strong>Spatial Rate</strong>. The resulting dialog requires the selection of the <strong>Event Variable</strong> (<strong>LFW68</strong>), the <strong>Base Variable</strong> (<strong>POPFW68</strong>), the <strong>Map Theme</strong> (<strong>Standard Deviation Map</strong>), and a specification for the spatial weights (<strong>ohlung_q2inc</strong>).<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
+<p>As mentioned, this is <em>not</em> the proper way to operate, since this approach ignores the differences between the populations of the different counties and the associated variance instability of the rates. The <strong>Spatial Rate</strong> smoothing option is the correct alternative. Rather than taking the spatial lag of the rates, the spatial smoothing takes the sum window values for both numerator (the events) and denominator (population) and computes the ratio of these. More precisely, in the same notation as above, the spatially smoothed rate would be <span class="math inline">\(\sum_j w_{ij} o_j / \sum_j w_{ij} p_j\)</span>. In this expression, the weights <span class="math inline">\(w_{ij}\)</span> are binary (0 or 1) with <span class="math inline">\(w_{ii} = 1\)</span>, so that numerator and denominator consist of a simple sum of the respective values.</p>
+<p>We invoke this calculation from the <strong>Map &gt; Rates-Calculated Map</strong> options as <strong>Spatial Rate</strong>. The resulting dialog requires the selection of the <strong>Event Variable</strong> (<strong>LFW68</strong>), the <strong>Base Variable</strong> (<strong>POPFW68</strong>), the <strong>Map Theme</strong> (<strong>Standard Deviation Map</strong>), and a specification for the spatial weights (<strong>ohlung_q2inc</strong>).<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
 <div class="figure" style="text-align: center">
 <img src="pics4b/6_409_spatialrate.png" alt="Spatial rate dialog" width="50%" />
 <p class="caption">

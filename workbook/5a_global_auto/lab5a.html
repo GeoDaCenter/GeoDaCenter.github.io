@@ -28,11 +28,11 @@
 	}
 	.intro1 { margin-left: -45px;}
     </style>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="../../stylesheets/simple-slideshow-styles.css">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="http://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
     <style>
     ul {padding-left:30px;} 
 	figcaption {
@@ -150,7 +150,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p><br></p>
 <div id="introduction" class="section level2 unnumbered">
 <h2>Introduction</h2>
-<p>In this lab, we will explore the analysis of global spatial autocorrelation measures, focusing on the basics. We will use the Moran scatter plot and the non-parametric spatial correlogram to visualize the magnitude and the range of spatial autocorrelation. We will continue with the Cleveland house sales data set that we used in the analysis of distance-based spatial weights.</p>
+<p>In this lab, we will explore the analysis of global spatial autocorrelation measures, focusing on the basics. We will use the Moran scatter plot and the non-parametric spatial correlogram to visualize the magnitude and the range of spatial autocorrelation. We will continue with the <a href="https://geodacenter.github.io/data-and-lab//clev_sls_154_core/">Cleveland house sales data set</a> that we used in the analysis of distance-based spatial weights.</p>
 <div id="objectives" class="section level3 unnumbered">
 <h3>Objectives</h3>
 <ul>
@@ -221,7 +221,7 @@ Moran scatter plot toolbar icon
 Univariate Moran’s I
 </p>
 </div>
-<p>Alternatively, one can choose <strong>Space &gt; Univariate Moran’s I</strong> from the menu.</p>
+<p>Alternatively, one can choose <strong>Space &gt; Univariate Moran$B!G(Bs I</strong> from the menu.</p>
 <div class="figure" style="text-align: center">
 <img src="pics5a/0_425_moranfrommenu.png" alt="Moran scatter plot from menu" width="40%" />
 <p class="caption">
@@ -252,8 +252,8 @@ Moran scatter plot
 <div id="interpretation" class="section level4 unnumbered">
 <h4>Interpretation</h4>
 <p>In our example, the points in the graph are a bit lopsided because it is rendered as a square (the preferred approach when both axes are measured in the same units, to avoid distorting the data). The house prices are on the horizontal axis, and their spatially lagged counterparts on the vertical axis. Note that the house price values have been standardized, and are given in standard deviational units (the mean is zero and the standard deviation is one). Similarly, the spatial lag is computed for those standardized values.</p>
-<p>We can see that the shape of the point cloud is determined by the presence of several outliers on the high end (e.g., larger than three standard deviational units from the mean). One observation, with a sales price of $527,409 (compared to the median sales prices of $20,000), is as large as 8 standard deviational units above the mean. On the lower end of the spectrum (to the left of the dashed line in the middle that represents the mean), there is much less spread in the house prices, and those points end up bunched together. By eliminating some of the outliers, one may be able to see more detail for the remaining observations, but we won’t pursue that here.</p>
-<p>In its default setting, the plot shows a linear fit through the point cloud. The slope of this line corresponds to Moran’s I, and its value (0.282336) is listed at the top of the graph.</p>
+<p>We can see that the shape of the point cloud is determined by the presence of several outliers on the high end (e.g., larger than three standard deviational units from the mean). One observation, with a sales price of $527,409 (compared to the median sales prices of <span class="math inline">\(20,000), is as large as 8 standard deviational units above the mean. On the lower end of the spectrum (to the left of the dashed line in the middle that represents the mean), there is much less spread in the house prices, and those points end up bunched together. By eliminating some of the outliers, one may be able to see more detail for the remaining observations, but we won\)</span>B!G(Bt pursue that here.</p>
+<p>In its default setting, the plot shows a linear fit through the point cloud. The slope of this line corresponds to Moran$B!G(Bs I, and its value (0.282336) is listed at the top of the graph.</p>
 <p>In the usual way, a right click in the plot brings up the available options.</p>
 <div class="figure" style="text-align: center">
 <img src="pics5a/1_426_scatplotoptions.png" alt="Moran scatter plot options" width="25%" />
@@ -342,7 +342,7 @@ Reference distribution for Moran’s I
 </p>
 </div>
 <p>The graph contains several summary statistics. In the top left are shown the number of permutations used to construct the reference distribution (999) and the associated pseudo p-value. The latter is the ratio of the number of values for the statistic that are equal to or greater than the observed value (in our example, just 1 for the observed statistic itself) to the number of generated samples (999) + 1 (for the actual sample). Hence, the result is 1/(999+1) = 0.001. As mentioned above, this is also the smallest (most extreme) p-value that can be obtained. It is important to keep this in mind when comparing results where a different number of permutations are used. For example, a pseudo p-value of 0.001 for 999 permutations is not necessarily <em>more significant</em> than a pseudo p-value of 0.01 for 99. In both cases, not a single statistic computed from the randomly generated samples exceeded the actual statistic. This contrasts with the usual interpretation of an analytically derived p-value.</p>
-<p>In the status bar at the bottom of the graph appear several descriptive measures of the Moran’s I statistic. First is the actually observed value, I = 0.2823. Next follows the theoretical expected value, E[I], which equals -1/(n-1). The value of -0.0049 is indeed -1 / 204 (there are 205 observations in the data set). The mean is the average of the reference distribution. In our example, this result is -0.0071, slightly off from the theoretically expected value. The standard deviation of the reference distribution is 0.0372, compared to a theoretical value of 0.00158 under an analytical randomization approach (not computed in GeoDa). This illustrates a common feature in empirical work, namely that the theoretical indication of precision may be overly optimistic (the standard deviation is smaller in the analytical derivation). The z-value that corresponds to the computed Moran’s I, its empirical mean and standard deviation is 7.7721 (the last item to the right on the status bar). Even though a normal approximation would not be accurate, the z-value does suggest strong rejection of the null hypothesis.</p>
+<p>In the status bar at the bottom of the graph appear several descriptive measures of the Moran<span class="math inline">\(B!G(Bs I statistic. First is the actually observed value, I = 0.2823. Next follows the theoretical expected value, E[I], which equals -1/(n-1). The value of -0.0049 is indeed -1 / 204 (there are 205 observations in the data set). The mean is the average of the reference distribution. In our example, this result is -0.0071, slightly off from the theoretically expected value. The standard deviation of the reference distribution is 0.0372, compared to a theoretical value of 0.00158 under an analytical randomization approach (not computed in GeoDa). This illustrates a common feature in empirical work, namely that the theoretical indication of precision may be overly optimistic (the standard deviation is smaller in the analytical derivation). The z-value that corresponds to the computed Moran\)</span>B!G(Bs I, its empirical mean and standard deviation is 7.7721 (the last item to the right on the status bar). Even though a normal approximation would not be accurate, the z-value does suggest strong rejection of the null hypothesis.</p>
 <p>Clicking on the <strong>Run</strong> button will generate a new empirical distribution. This allows for a sensitivity analysis of the results. Especially when only 99 permutations are used, the summary statistics may vary somewhat, but for 999 (and definitely for 99999, the largest possible value), they should be pretty stable.</p>
 </div>
 </div>
@@ -426,7 +426,7 @@ Initial correlogram dialog
 </p>
 </div>
 <p>The items at the top of the dialog are the <strong>Variable</strong> (available from a drop down list), the <strong>Distance</strong> metric (default is Euclidean, but Arc distance is also available), and the <strong>Number of Bins</strong>. The non-parametric correlogram is computed by means of a local regression on the pairwise correlations that fall within a distance bin. The number of bins determines the distance range of each bin. This range is the maximum distance divided by the number of bins. The more bins are chosen, the more fine-grained the correlogram will be. However, this also potentially can lead to too few pairs in some bins (the rule of thumb is to have at least 30).</p>
-<p>The number of elements in each bin is a result of the interplay between the number of bins and the maximum distance. As the default, all pairs are used (in our example, with 205 observations, this yields: <span class="math inline">\([205^2 - 205]/2 = 20910\)</span> pairs) and thus all the pairwise distances are taken into account. However, in many instances in practice, this may not be a good choice. For example, when there are many observations, the number of pairs quickly becomes unwieldy and GeoDa will run out of memory. Also, the correlations computed for pairs that are far apart are not that meaningful (they should be zero due to Tobler’s law). The bottom half of the dialog provides options for fine-tuning these choices.</p>
+<p>The number of elements in each bin is a result of the interplay between the number of bins and the maximum distance. As the default, all pairs are used (in our example, with 205 observations, this yields: <span class="math inline">\([205^2 - 205]/2 = 20910\)</span> pairs) and thus all the pairwise distances are taken into account. However, in many instances in practice, this may not be a good choice. For example, when there are many observations, the number of pairs quickly becomes unwieldy and GeoDa will run out of memory. Also, the correlations computed for pairs that are far apart are not that meaningful (they should be zero due to Tobler$B!G(Bs law). The bottom half of the dialog provides options for fine-tuning these choices.</p>
 <p>First, we consider the default, which uses all pairs and does not impose any constraints in terms of maximum distance. The number of bins is set to <strong>10</strong>. As before, the <strong>Variable</strong> we analyze is <strong>sale_price</strong>.</p>
 <div class="figure" style="text-align: center">
 <img src="pics5a/5_464_saleprice.png" alt="Variable setting for correlogram" width="30%" />

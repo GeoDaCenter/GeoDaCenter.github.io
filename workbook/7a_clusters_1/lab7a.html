@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Luc Anselin" />
+
+
+<title>Cluster Analysis (1)</title>
+
+<link href="lab7a_files/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="lab7a_files/highlightjs-1.1/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="http://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;} 
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+    
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h3.subtitle{
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="http://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Cluster Analysis (1)</h1>
+<h3 class="subtitle"><em>Dimension Reduction Methods</em></h3>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>11/21/2017 [in progress]</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#getting-started">Getting started</a></li>
+</ul></li>
+<li><a href="#principal-component-analysis-pca">Principal Component Analysis (PCA)</a><ul>
+<li><a href="#principles">Principles</a></li>
+<li><a href="#implementation">Implementation</a><ul>
+<li><a href="#variable-settings-panel">Variable Settings Panel</a></li>
+<li><a href="#saving-the-results">Saving the Results</a></li>
+</ul></li>
+<li><a href="#interpretation">Interpretation</a></li>
+<li><a href="#spatializing-the-principal-components">Spatializing the Principal Components</a></li>
+</ul></li>
+<li><a href="#multidimensional-scaling-mds">Multidimensional Scaling (MDS)</a><ul>
+<li><a href="#principle">Principle</a></li>
+<li><a href="#implementation-1">Implementation</a><ul>
+<li><a href="#distance-measures">Distance measures</a></li>
+<li><a href="#power-approximation">Power approximation</a></li>
+</ul></li>
+<li><a href="#spatializing-mds">Spatializing MDS</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered">
+<h2>Introduction</h2>
+<p>In this first of three labs that deal with multivariate clustering methods, we will cover two traditional methods to avoid the so-called <em>curse of dimensionality</em>. Both <strong>principal components</strong> and <strong>multidimensional scaling</strong> are techniques to reduce the dimensionality of the analysis. This is particularly relevant in situations where many variables are available that are highly intercorrelated.</p>
+<p>To illustrate these techniques, we will use the Guerry data set on moral statistics in 1830 France, which comes pre-installed with GeoDa.</p>
+<p><strong>Note</strong>: the cluster methods in GeoDa are under active development and are <strong>not yet production grade</strong>. Some of them are quite slow and others do not scale well to data sets with more than 1,000 observations. Also, new methods and options are still being added, so this is a work in progress. Always make sure to have the latest version of the notes.</p>
+<div id="objectives" class="section level3 unnumbered">
+<h3>Objectives</h3>
+<ul>
+<li><p>Compute principal components for a set of variables</p></li>
+<li><p>Interpret the characteristics of a principal component analysis</p></li>
+<li><p>Spatializing the principal components</p></li>
+<li><p>Carry out multidimensional scaling for a set of variables</p></li>
+<li><p>Compare closeness in attribute space to closeness in geographic space</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Clusters &gt; PCA
+<ul>
+<li>select variables</li>
+<li>PCA parameters</li>
+<li>PCA summary statistics</li>
+<li>saving PCA results</li>
+</ul></li>
+<li>Clusters &gt; MDS
+<ul>
+<li>select variables</li>
+<li>MDS parameters</li>
+<li>saving MDS results</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started" class="section level3 unnumbered">
+<h3>Getting started</h3>
+<p>With GeoDa launched and all previous projects closed, we again load the Guerry sample data set from the <strong>Connect to Data Source</strong> interface. We either load it from the sample data collection and then save the file in a working directory, or we use a previously saved version. The process should yield the familiar themeless base map, showing the 85 French departments.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/0_547_themelessbasemap.png" alt="French departments themeless map" width="80%" />
+<p class="caption">
+French departments themeless map
+</p>
+</div>
+</div>
+</div>
+<div id="principal-component-analysis-pca" class="section level2 unnumbered">
+<h2>Principal Component Analysis (PCA)</h2>
+<div id="principles" class="section level3 unnumbered">
+<h3>Principles</h3>
+<p>Principal components are new variables constructed as a linear combination of a set of original variables, such that they capture the most variance. In a broader sense, the principal components can be interpreted as the best linear approximation to the multivariate point cloud of the data. The goal is to find a small number of principal components (much smaller than the number of original variables) that explains the bulk of the variance in the original variables.</p>
+<p>More precisely, a value for the principal component <span class="math inline">\(u\)</span> at observation <span class="math inline">\(i\)</span>, <span class="math inline">\(z_{ui}\)</span>, with <span class="math inline">\(u = 1, \dots, p\)</span> and <span class="math inline">\(p &lt;&lt; k\)</span>, is defined as: <span class="math display">\[z_{ui} = \sum_{h=1}^k a_{hu} x_{hi},\]</span> i.e., a sum of the observations for the original variables, each multiplied by a coefficient <span class="math inline">\(a_{hu}\)</span>. The coefficients <span class="math inline">\(a_{hu}\)</span> are obtained by maximizing the explained variance and ensuring that the resulting principal components are orthogonal to each other.</p>
+<p>Principal components are closely related to the eigenvalues and eigenvectors of the cross-product matrix <span class="math inline">\(X&#39;X\)</span>, where <span class="math inline">\(X\)</span> is the <span class="math inline">\(n \times k\)</span> matrix of <span class="math inline">\(n\)</span> observations on <span class="math inline">\(k\)</span> variables. The coefficients by which the original variables need to be multiplied to obtain each principal component can be shown to correspond to the elements of the eigenvectors of <span class="math inline">\(X&#39;X\)</span>, with the associated eigenvalue giving the explained variance <span class="citation">(for details, see, e.g., James et al. 2013, Chapter 10)</span>.</p>
+<p>Operationally, the principal component coefficients are obtained by means of a matrix decomposition. One option is to compute the <em>eigenvalue decomposition</em> of the <span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(X&#39;X\)</span>, as <span class="math display">\[X&#39;X = VGV&#39;,\]</span> where <span class="math inline">\(V\)</span> is a <span class="math inline">\(k \times k\)</span> matrix with the eigenvectors as columns (the coefficients needed to construct the principal components), and <span class="math inline">\(G\)</span> a <span class="math inline">\(k \times k\)</span> diagonal matrix of the associated eigenvalues (the explained variance).</p>
+<p>A second, and computationally preferred way to approach this is as a <em>singular value decomposition</em> of the <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span>, as <span class="math display">\[X = UDV&#39;,\]</span> where again <span class="math inline">\(V\)</span> is the matrix with the eigenvectors as columns, and <span class="math inline">\(D\)</span> is a <span class="math inline">\(k \times k\)</span> diagonal matrix such that <span class="math inline">\(D^2\)</span> is the matrix of eigenvalues.</p>
+<p>In a principal component analysis, we are typically interested in three main results. First, the relative contributions of each of the original variables to each principal component can be measured. Second, the principal component scores themselves are of interest, typically for a small number of components that explain a substantial share of the variance. Finally, the variance proportion explained by each component in and of itself is of interest.</p>
+</div>
+<div id="implementation" class="section level3 unnumbered">
+<h3>Implementation</h3>
+<p>We invoke the principal components functionality from the <strong>Clusters</strong> toolbar icon.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_683_cluster_toolbaricon.png" alt="Clusters toolbar icon" width="15%" />
+<p class="caption">
+Clusters toolbar icon
+</p>
+</div>
+<p><strong>PCA</strong> is the first item on the list of options. Alternatively, from the main menu, we can select <strong>Clusters &gt; PCA</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_684_pca_option.png" alt="PCA Option" width="25%" />
+<p class="caption">
+PCA Option
+</p>
+</div>
+<p>This brings up the <strong>PCA Settings</strong> dialog, the main interface through which variables are chosen, options selected, and summary results are provided.</p>
+<div id="variable-settings-panel" class="section level4 unnumbered">
+<h4>Variable Settings Panel</h4>
+<p>We select the variables and set the parameters for the principal components analysis through the options in the left hand panel of the interface. We choose the six same variables from the multivariate analysis presented in <span class="citation">Dray and Jombart (2011)</span>: <strong>Crm_prs</strong>, <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Donatns</strong>, <strong>Infants</strong>, and <strong>Suicids</strong> <span class="citation">(see also Anselin 2017, for an extensive discussion of the variables)</span>. These variables appear highlighted in the <strong>Select Variables</strong> panel.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_685_variableselection.png" alt="PCA Settings panel" width="80%" />
+<p class="caption">
+PCA Settings panel
+</p>
+</div>
+<p>The default settings for the <strong>Parameters</strong> are likely fine in most practical situations. The <strong>Method</strong> is set to <strong>SVD</strong>, i.e., singular value decomposition. The alternative is <strong>Eigen</strong> for an explicit eigenvalue decomposition. In our example, the results are identical. For larger data sets, the singular value decomposition approach is preferred.</p>
+<p>The <strong>Transformation</strong> option is set to <strong>Standardize</strong> by default, which converts all variables such that their mean is zero and variance one. Alternatives are to use the variables in their original scale (<strong>Raw</strong>), or as deviations from the mean (<strong>Demean</strong>).</p>
+<p>After clicking on the <strong>Run</strong> button, the summary statistics appear in the right hand panel. We return for a detailed interpretation below.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_686_pca_results.png" alt="PCA results" width="100%" />
+<p class="caption">
+PCA results
+</p>
+</div>
+</div>
+<div id="saving-the-results" class="section level4 unnumbered">
+<h4>Saving the Results</h4>
+<p>Once the results have been computed, a value appears next to the <strong>Output</strong> <strong>Components</strong> item in the left panel. This value corresponds to the number of components that explain 95% of the variance, as indicated in the results panel. This determines the number of components that will be added to the data table upon selecting <strong>Save</strong>. The value can be changed in the drop-down list.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_687_save_output.png" alt="Save output dialog" width="35%" />
+<p class="caption">
+Save output dialog
+</p>
+</div>
+<p>In our example, we keep the number of components as <strong>5</strong>, even though that is not a very good result (given that we started with only six variables). The <strong>Save</strong> button brings a dialog to select variable names for the principal components. The default is generic and not suitable for a situation where a large number of analyses will be carried out.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_688_saveresults_dialog.png" alt="Principal Component variable names" width="35%" />
+<p class="caption">
+Principal Component variable names
+</p>
+</div>
+<p>Clicking on <strong>OK</strong> will add the principal components to the data table, where they become available for all types of analysis and visualization. The addition is only made permanent after saving the table.</p>
+</div>
+</div>
+<div id="interpretation" class="section level3 unnumbered">
+<h3>Interpretation</h3>
+<p>The result summary panel provides several statistics pertaining to the eigenvalues, the variable loadings and the contribution of each of the original variables to the respective components.</p>
+<p>The <strong>Standard deviation</strong> explained by each of the components corresponds to the square root of the eigenvalues (each eigenvalue equals the variance explained by the corresponding principal component). Each component thus explains a fraction of the total variance, which is listed both as a separate <strong>Proportion</strong> and as a <strong>Cumulative proportion</strong>. The latter is typically used to choose a cut-off for the number of components. A common convention is to take a threshold of 95%, which would suggest 5 components in our example. An alternative criterion is the classic <strong>Kaiser</strong> criterion, which suggests to select the components for which the eigenvalue exceeds <strong>1</strong>. In our example, this would yield 3 components.</p>
+<p>The bottom part of the results panel is occupied by two matrices that have the original variables as rows and the components as columns.</p>
+<p>The first table shows the <strong>Eigenvectors/Variable Loadings</strong>. For each component (column), this lists the elements of the corresponding eigenvector. These are also the coefficients by which the original variables need to be multiplied to construct the component. Note that the signs of the eigenvectors are arbitrary (some software may give the opposite signs, but the coefficient values are unchanging). Also, the eigenvectors are standardized such that the sum of the squared coefficients equals one.</p>
+<p>When the original variables are all standardized, each coefficient gives a measure of the relative contribution of a variable to the component in question. The loadings are also the vectors employed in a principal component <em>biplot</em>, a common graph produced in a principal component analysis (but not currently available in GeoDa).</p>
+<p>The second table consists of the <strong>Squared correlations</strong> between each of the original variables and the principal components. Each row of the table shows how much of the variance in the original variable is explained by each of the components. As a result, the values in each row sum to one. More insightful is the analysis of each column, which indicates which variables are important in the computation of the matching component. In our example, we see that <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Infants</strong> and <strong>Suicids</strong> are the most important for the first component, whereas for the second component this is <strong>Crm_prs</strong> and <strong>Donatns</strong>. As we can see from the cumulative proportion listing, these two components explain about 56% of the variance in the original variables.</p>
+</div>
+<div id="spatializing-the-principal-components" class="section level3 unnumbered">
+<h3>Spatializing the Principal Components</h3>
+<p>Since the principal components have now been added to the data table, they are available for use in any graph or map. For example, a standard graph is the scatter plot of the first two principal components, as shown below. By construction, the two variables are uncorrelated, which yields the characteristic circular cloud plot. A regression line fit to this scatter plot would yield a horizontal line (with slope zero). Through linking and brushing, we can identify the locations on the map for any point in the scatter plot.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_693_pc12_scatter.png" alt="First two principal components scatter plot" width="80%" />
+<p class="caption">
+First two principal components scatter plot
+</p>
+</div>
+<p>In order to get a better insight into how the principal components are constructed, we can combine a box plot with a parallel coordinate plot. For example, in the box plot below, we can select the observations in the first quartile of PC1, i.e., with the <em>lowest</em> value for the component. We next construct a parallel coordinate plot for the four variables that contribute most to this component. From the analysis above, we know that these are <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Infants</strong> and <strong>Suicids</strong>. The corresponding linked selection in the PCP shows <em>low</em> values for all but <strong>Litercy</strong>, but the latter had a negative loading on the first component, so this is in line with our expectations. This nicely illustrates how the first component captures a <em>clustering</em> in multivariate attribute space among these four variables.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_692_pc1_box_pcp.png" alt="PC1 composition using PCP" width="100%" />
+<p class="caption">
+PC1 composition using PCP
+</p>
+</div>
+<p>We can further <em>spatialize</em> the visualization of principal components by explicitly considering their spatial distribution. For example, a natural breaks choropleth map of the first component shows a distinct pattern, with higher values below a diagonal line going above the middle of the country from the north west to the middle of the south east border.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_689_pc1map.png" alt="PC1 natural breaks map" width="80%" />
+<p class="caption">
+PC1 natural breaks map
+</p>
+</div>
+<p>This is confirmed by a Local Moran cluster map (using p=0.01 and 99999 permutations), which identifies a strong Low-Low cluster in the northern part of the country, ranging from east to west. In addition, there is pronounced High-High cluster in the center of the country.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_690_pc1localmoran.png" alt="PC1 Local Moran cluster map" width="80%" />
+<p class="caption">
+PC1 Local Moran cluster map
+</p>
+</div>
+<p>We can now further explore the spatial cluster of the principal component and its reflection in the multivariate clustering of the four contributing variables. We select the Low-Low departments in the cluster map (click on the dark blue rectangle in the legend), which highlights the corresponding observations in the PCP and box plot. Again, we see the expected pattern of low values for three of the variables and high values for <strong>Litercy</strong>. The selection matches 7 out of the 21 observations in the lower quartile, but also three observations from the second quartile. This illustrates the tension between attribute and locational similarity characteristic of multivariate spatial clustering.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/1_691_pc1_pcp.png" alt="Low-Low PC1 clusters in PCP" width="100%" />
+<p class="caption">
+Low-Low PC1 clusters in PCP
+</p>
+</div>
+</div>
+</div>
+<div id="multidimensional-scaling-mds" class="section level2 unnumbered">
+<h2>Multidimensional Scaling (MDS)</h2>
+<div id="principle" class="section level3 unnumbered">
+<h3>Principle</h3>
+<p>Multidimensional Scaling or MDS is an alternative approach to portraying a multivariate data cloud in lower dimensions. MDS is based on the notion of distance between observation points in multiattribute space. For <span class="math inline">\(p\)</span> variables, the Euclidean distance between observations <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span> in p-dimensional space is <span class="math display">\[d_{ij} = || x_i - x_j || = \sum_{k=1}^p (x_{ik} - x_{jk})^2,\]</span> the sum of the Euclidean distances over each dimension. The objective of MDS is to find points <span class="math inline">\(z_1, z_2, \dots, z_n\)</span> in <em>two-dimensional space</em> that mimic the distance in multiattribute space as closely as possible. This is implemented by minimizing a <em>stress function</em>, <span class="math inline">\(S(z)\)</span>: <span class="math display">\[S(z) = \sum_i \sum_j (d_{ij} - ||z_i - z_j||)^2.\]</span> In other words, a set of coordinates in two dimensions are found such that the distances between the resulting pairs of points are as close as possible to their pair-wise distances in multi-attribute space.</p>
+<p>Further technical details can be found in <span class="citation">Hastie, Tibshirani, and Friedman (2009)</span>, among others.</p>
+</div>
+<div id="implementation-1" class="section level3 unnumbered">
+<h3>Implementation</h3>
+<p>The MDS functionality in GeoDa is invoked from the <strong>Clusters</strong> toolbar icon, or from the main menu, as <strong>Clusters &gt; MDS</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_695_MDS_menu.png" alt="MDS menu option" width="25%" />
+<p class="caption">
+MDS menu option
+</p>
+</div>
+<p>This brings up the <strong>MDS Settings</strong> panel through which the variables are selected and various computational parameters are set. We continue with the same six variables as used previously, i.e., <strong>Crm_prs</strong>, <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Donatns</strong>, <strong>Infants</strong>, and <strong>Suicids</strong>. For now, we leave all options to their default settings.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_696_MDS_variables.png" alt="MDS input variable selection" width="50%" />
+<p class="caption">
+MDS input variable selection
+</p>
+</div>
+<p>After clicking the <strong>Run</strong> button, a small dialog is brought up to select the variable names for the new MDS coordinates.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_697_MDS_saveresults.png" alt="MDS result variable selection" width="30%" />
+<p class="caption">
+MDS result variable selection
+</p>
+</div>
+<p>After this selection, <strong>OK</strong> generates a two-dimensional scatter plot with the observations. In this scatter plot, points that are close together in two dimensions should also be close together in the six-dimensional attribute space. In addition, two new variables with the coordinate values will be added to the data table (as usual, to make this addition permanent, we need to save the table).</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_698_MDS_plot.png" alt="MDS plot" width="80%" />
+<p class="caption">
+MDS plot
+</p>
+</div>
+<div id="distance-measures" class="section level4 unnumbered">
+<h4>Distance measures</h4>
+<p>The <strong>Parameters</strong> panel in the MDS Settings dialog allows for a number of options to be set. The <strong>Transformation</strong> option is the same as for PCA, with the default set to <strong>Standardize</strong>, but <strong>Raw</strong> and <strong>Demean</strong> are available as well. Best practice is to use the variables in standardized form.</p>
+<p>Another important option is the <strong>Distance Function</strong> setting. The default is to use <strong>Euclidean</strong> distance, but an alternative is <strong>Manhattan</strong> block distance, or, the use of absolute differences instead of squared differences. The effect is to lessen the impact of outliers, or large distances.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_699_MDS_distancefunction.png" alt="MDS Manhattan distance function" width="50%" />
+<p class="caption">
+MDS Manhattan distance function
+</p>
+</div>
+<p>The result that follows from a Manhattan distance metric can seem slightly different from the default Euclidean MDS plot. First of all, the scale of the coordinates is different, but the identification of <em>close</em> observations can also differ somewhat between the two plots. On the other hand, the identification of <em>outliers</em> is fairly consistent between the two.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_700_MDS_manhattan_plot.png" alt="MDS plot (Manhattan distance)" width="80%" />
+<p class="caption">
+MDS plot (Manhattan distance)
+</p>
+</div>
+<p>For example, using the linking and brushing functionality, we can select two close points in the Manhattan graph and locate the matching points in the Euclidean graph. As it turns out, in our example, the matching locations in the Euclidean graph appear to be further apart, but still in proximity of each other (to some extent, the seeming larger distances may be due to the different scales in the graphs).</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_702_plotdiff2.png" alt="Distance metric comparison (2)" width="100%" />
+<p class="caption">
+Distance metric comparison (2)
+</p>
+</div>
+<p>On the other hand, when we select an outlier in the Manhattan graph (a point far from the remainder of the point cloud), the matching observation in the Euclidean graph is an outlier as well.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_701_plot_diff1.png" alt="Distance metric comparison (1)" width="100%" />
+<p class="caption">
+Distance metric comparison (1)
+</p>
+</div>
+</div>
+<div id="power-approximation" class="section level4 unnumbered">
+<h4>Power approximation</h4>
+<p>An option that is particularly useful in larger data sets is to use a <strong>Power iteration</strong> to approximate the first few largest eigenvalues needed for the MDS algorithm. In large data sets, the standard algorithm will break down.</p>
+<p>This option is selected by checking the box in the <strong>Parameters</strong> panel. The default number of iterations is set to 100, which should be fine in most situations. However, if needed, it can be adjusted by entering a different value in the corresponding box.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/3_709_poweroption.png" alt="MDS power iteration option" width="50%" />
+<p class="caption">
+MDS power iteration option
+</p>
+</div>
+<p>At first sight, the result may seem different from the standard output, but this is due to the indeterminacy of the signs of the eigenvectors.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_703_power.png" alt="MDS plot (power approximation)" width="80%" />
+<p class="caption">
+MDS plot (power approximation)
+</p>
+</div>
+<p>Closer inspection of the two graphs suggests that the axes are flipped. We can clearly see this by selecting two points in one graph and locating them in the other. The relative position of the points is the same in the two graphs, but they are on opposite sides of the origin on the y-axis.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/2_704_powercomparison.png" alt="Computation algorithm comparison" width="100%" />
+<p class="caption">
+Computation algorithm comparison
+</p>
+</div>
+</div>
+</div>
+<div id="spatializing-mds" class="section level3 unnumbered">
+<h3>Spatializing MDS</h3>
+<p>We can now integrate the MDS scatter plot with other views of the data. Before we move to an explicit spatial perspective, we consider the connection between points close in the MDS plot and the corresponding <em>lines</em> in the parallel coordinate plot for the six variables in our analysis. It turns out that the lines are close in some of the dimensions, such as <strong>Crm_prs</strong>, <strong>Donatns</strong> and <strong>Suicids</strong>, but less so in others. This complements the insight gained from the PCA analysis, where <strong>Crm_prs</strong> and <strong>Donatns</strong> were major contributing variables to the second principal component, but not to the first. We can delve deeper into this by brushing the MDS scatter plot, or, alternatively, by brushing the PCP and examining the relative locations of the matching points in the MDS scatter plot.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/3_708_MDS_PCP.png" alt="MDS and PCP" width="100%" />
+<p class="caption">
+MDS and PCP
+</p>
+</div>
+<p>A <em>spatial</em> perspective is introduced by linking the MDS scatter plot with various map views of the data. To illustrate the principle, we only use the themeless map in the examples below, but clearly, this becomes more informative when applied to choropleth maps for several of the variables involved (including co-location maps that pertain to multiple variables at once).</p>
+<p>First, we select some points in the MDS scatter plot and assess their location in geographical space. By brushing the scatter plot, we can assess the extent to which <em>neighbors in attribute space</em> correspond to <em>neighbors in geographic space</em>. In our illustration, this seems the case for some of the observations in the MDS, but one is fairly isolated from the rest on the map.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/3_705_neighborsMDS.png" alt="Neighbors in MDS space" width="100%" />
+<p class="caption">
+Neighbors in MDS space
+</p>
+</div>
+<p>Alternatively, we can <em>brush</em> the map and identify the matching observations in the MDS scatter plot. This reverses the logic and assesses the extent to which neighbors in geographic space are also neighbors in attribute space. In this instance in our example, the result is mixed, with little evidence of a match between the two concepts.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/3_706_neighbors_space.png" alt="Brushing the map and MDS" width="100%" />
+<p class="caption">
+Brushing the map and MDS
+</p>
+</div>
+<p>Finally, we can select the neighbors explicitly in the map (provided there is an active spatial weights matrix) using the <strong>Selection and Neighbors</strong> option (right click in the map to activate the options menu). This allows an investigation of the tension between locational similarity (neighbors on the map) and attribute similarity (neigbhors in the MDS plot) for any selection and its neighbors. In our example, we selected one department (the location of the cursor on the map) with its neighbors (using first order queen contiguity) and identify the corresponding points in the MDS plot. For the selected observation, there is little evidence of a match between the two concepts.</p>
+<div class="figure" style="text-align: center">
+<img src="pics7a/3_707_selection_and_neighbors.png" alt="Selection and neighbors and MDS" width="100%" />
+<p class="caption">
+Selection and neighbors and MDS
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Anselin17">
+<p>Anselin, Luc. 2017. “A Local Indicator of Multivariate Spatial Association, Extending Geary’s c.” <em>Technical Report</em>. Center for Spatial Data Science, University of Chicago.</p>
+</div>
+<div id="ref-DrayJombart11">
+<p>Dray, S., and T. Jombart. 2011. “Revisiting Guerry’s Data, Introducing Spatial Constraints in Multivariate Analysis.” <em>The Annals of Applied Statistics</em> 5: 2278–99.</p>
+</div>
+<div id="ref-Hastieetal09">
+<p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The Elements of Statistical Learning (2nd Edition)</em>. Springer.</p>
+</div>
+<div id="ref-Jamesetal13">
+<p>James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning, with Applications in R</em>. Springer.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+      </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-72724100-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

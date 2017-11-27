@@ -27,11 +27,11 @@
 	}
 	.intro1 { margin-left: -45px;}
     </style>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="../../stylesheets/simple-slideshow-styles.css">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="http://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
     <style>
     ul {padding-left:30px;} 
 	figcaption {
@@ -110,7 +110,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <h1 class="title toc-ignore">Distance-Based Spatial Weights</h1>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>10/23/2017 (updated)</em></h4>
+<h4 class="date"><em>11/27/2017 (updated)</em></h4>
 
 
 <div id="TOC">
@@ -467,11 +467,11 @@ Arc distance weights properties
 </p>
 </div>
 <p>The resulting weights clearly illustrate the pitfalls of using a distance-band when polygons (i.e., counties) are of widely varying sizes. This is similar to the issues encountered for points with different densities.</p>
-<p>For example, in the connectivity map for the just created weights, we find that there is only one neighbor for San Bernardino county, CA (FIPS code 6071), the largest county (in area) in the country. In other words, the distance between the centroid of San Bernardino county and its nearest neighbor (Riverside county) drives the designation of neighbors for all the other counties in the U.S.</p>
+<p>For example, in the connectivity map for the just created weights, we find that there is only one neighbor for Elko county, NV (FIPS code 32007). As it turns out, the distance between the centroid of this county and its nearest neighbor (Twin Falls, ID, FIPS code 16083) drives the critical distance to designate neighbors for all the other counties in the U.S.</p>
 <div class="figure" style="text-align: center">
-<img src="pics4b/3_nat_oneneighbor.png" alt="San Bernadino county connectivity map" width="60%" />
+<img src="pics4b/00_726_elko.png" alt="Elko county connectivity map" width="40%" />
 <p class="caption">
-San Bernadino county connectivity map
+Elko county connectivity map
 </p>
 </div>
 <p>Clearly, this has major consequences for the smaller counties east of the Mississippi. As an illustration, consider Cheshire county (NH) with FIPS code 33005, which ends up with 33 neighbors using the 91 mile distance cut-off.</p>

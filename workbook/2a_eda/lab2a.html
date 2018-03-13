@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Luc Anselin" />
+
+
+<title>Exploratory Data Analysis (1)</title>
+
+<link href="lab2a_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab2a_files/highlightjs-9.12.0/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="http://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;} 
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+    
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h3.subtitle {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="http://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Exploratory Data Analysis (1)</h1>
+<h3 class="subtitle"><em><h3>
+Univariate and Bivariate Analysis
+</h3></em></h3>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>03/13/2018 (revised and updated)</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#getting-started">Getting started</a></li>
+</ul></li>
+<li><a href="#analyzing-the-distribution-of-a-single-variable">Analyzing the Distribution of a Single Variable</a><ul>
+<li><a href="#histogram">Histogram</a><ul>
+<li><a href="#selecting-the-number-of-histogram-bins">Selecting the number of histogram bins</a></li>
+<li><a href="#display-histogram-statistics">Display histogram statistics</a></li>
+<li><a href="#linking-a-histogram-and-a-map">Linking a histogram and a map</a></li>
+<li><a href="#saving-a-graph-as-an-image">Saving a graph as an image</a></li>
+</ul></li>
+<li><a href="#box-plot">Box plot</a></li>
+</ul></li>
+<li><a href="#bivariate-analysis-the-scatter-plot">Bivariate Analysis: The Scatter Plot</a><ul>
+<li><a href="#creating-a-scatter-plot">Creating a Scatter Plot</a><ul>
+<li><a href="#scatter-plot-options">Scatter Plot options</a></li>
+<li><a href="#lowess-smoother">LOWESS smoother</a></li>
+</ul></li>
+<li><a href="#brushing-the-scatter-plot-spatial-heterogeneity">Brushing the Scatter Plot – Spatial Heterogeneity</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered">
+<h2>Introduction</h2>
+<p>In this Chapter, we will begin to explore the EDA functionality in GeoDa, in particular the methods
+that deal with one or two variables. We leave the treatment of multiple variables for the
+next Chapter. We also illustrate the powerful linking and brushing capability that is central to the architecture of the program. We start with the description and visualization of a single variable,
+and then move on to the bivariate scatter plot.</p>
+<p>We will use a data set with demographic and socio-economic information for 55 New York City sub-boroughs. The data are from the <a href="http://coredata.nyc">Furman Institute at NYU</a>. This data set is part of the GeoDa <strong>Sample Data</strong> and can be loaded directly into the program.</p>
+<div id="objectives" class="section level3 unnumbered">
+<h3>Objectives</h3>
+<ul>
+<li><p>Computing descriptive statistics and creating visualizations of the distribution of a single variable (histogram, box plot)</p></li>
+<li><p>Interpreting a scatter plot and scatter plot smoothing (LOWESS)</p></li>
+<li><p>Carrying out scatter plot brushing and linking</p></li>
+<li><p>Assessing spatial heterogeneity through the Chow test</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Linking and brushing graphs and maps</li>
+<li>Variable settings dialog</li>
+<li>Explore &gt; Histogram
+<ul>
+<li>Choose Intervals option</li>
+<li>View &gt; Display Statistics option</li>
+<li>Save Image as option</li>
+</ul></li>
+<li>Explore &gt; Box Plot
+<ul>
+<li>Hinge option</li>
+</ul></li>
+<li>Explore &gt; Scatter Plot
+<ul>
+<li>View &gt; Display Precision option</li>
+<li>Data option</li>
+<li>Smoother option</li>
+<li>LOWESS parameters setting</li>
+<li>Regimes Regression option and Chow test</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started" class="section level3 unnumbered">
+<h3>Getting started</h3>
+<p>We open GeoDa and select (double click on the thumbnail map icon) the data set <strong>NYC Data</strong> from the list contained under the <strong>Sample Data</strong> tab, as shown in Figure <a href="#fig:sampledata">1</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:sampledata"></span>
+<img src="pics2a/0_nyc_sampledata.png" alt="NYC Data sample data set" width="80%" />
+<p class="caption">
+Figure 1: NYC Data sample data set
+</p>
+</div>
+<p>This opens up a green themeless map of the 55 New York City sub-boroughs (Figure <a href="#fig:suboro">2</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:suboro"></span>
+<img src="pics2a/0_nyc_basemap.png" alt="NYC sub-boroughs" width="60%" />
+<p class="caption">
+Figure 2: NYC sub-boroughs
+</p>
+</div>
+<p>We will focus our attention on the functionality of the <strong>Explore</strong> menu, listed
+in Figure <a href="#fig:exploremenu">3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:exploremenu"></span>
+<img src="pics2a/0_explore_menu.png" alt="Explore menu items" width="30%" />
+<p class="caption">
+Figure 3: Explore menu items
+</p>
+</div>
+<p>The counterpart to the menu items are the collection of eight icons on the main toolbar,
+shown in Figure <a href="#fig:exploretool">4</a>. The icon for the <strong>Averages Chart</strong> is separate.
+We postpone the treatment of this tool until a later chapter.</p>
+<div class="figure" style="text-align: center"><span id="fig:exploretool"></span>
+<img src="pics2a/0_explore_icons.png" alt="Explore toolbar icons" width="50%" />
+<p class="caption">
+Figure 4: Explore toolbar icons
+</p>
+</div>
+<p>The first two icons on the left pertain to univariate analyses, respectively the <strong>Histogram</strong>
+and <strong>Box Plot</strong>. The <strong>Scatter Plot</strong> extends this to bivariate association. The other
+icons pertain to the analysis of multiple variables, which we leave to the next Chapter to
+consider.</p>
+</div>
+</div>
+<div id="analyzing-the-distribution-of-a-single-variable" class="section level2 unnumbered">
+<h2>Analyzing the Distribution of a Single Variable</h2>
+<div id="histogram" class="section level3 unnumbered">
+<h3>Histogram</h3>
+<p>We begin our analysis with the simple description of the distribution of a single variable. Arguably the most familiar statistical graphic is the histogram, which is a discrete representation of the density function of a variable. In essence, the range of the variable (the difference between maximum and minimum) is divided into a number of equal intervals (or bins), and the number of observations that fall within each bin is depicted in a bar graph.</p>
+<p>The histogram functionality is started by selecting <strong>Explore &gt; Histogram</strong> from the menu, or by clicking on the <strong>Histogram</strong> toolbar icon, the left-most icon in the set in Figure <a href="#fig:histicon">5</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:histicon"></span>
+<img src="pics2a/1_histogram_icon.png" alt="Histogram toolbar icon" width="50%" />
+<p class="caption">
+Figure 5: Histogram toolbar icon
+</p>
+</div>
+<p>This brings up the <strong>Variable Settings</strong> dialog, which lists all the numeric variables in the data set (string variables cannot be analyzed). Scroll down the list as in Figure <a href="#fig:histvarlist">6</a> until you can select <strong>kids2009</strong>, the percentage of households with kids under age 18 in 2009.</p>
+<div class="figure" style="text-align: center"><span id="fig:histvarlist"></span>
+<img src="pics2a/1_hist_variable.png" alt="Histogram variable selection" width="20%" />
+<p class="caption">
+Figure 6: Histogram variable selection
+</p>
+</div>
+<p>After clicking <strong>OK</strong>, the default histogram appears, showing the distribution of the 55 observations over seven bins, as in Figure <a href="#fig:defaulthist">7</a>. The distribution tends to be skewed to the left, with a tail on the low end and most taller bins on the high end, suggesting more areas with a higher percentage of kids under 18.</p>
+<div class="figure" style="text-align: center"><span id="fig:defaulthist"></span>
+<img src="pics2a/1_default_histogram.png" alt="Default histogram" width="50%" />
+<p class="caption">
+Figure 7: Default histogram
+</p>
+</div>
+<p>There are two important options for the histogram. One is to set the number of bins for the default equal interval setting, the other is to customize the values of the cut-off points completely. We will postpone a consideration of the latter until the discussion of choropleth maps (in essence, a map version of a histogram).</p>
+<p>The histogram options shown in Figure <a href="#fig:histoptions">8</a> are brought up in the usual fashion, by right clicking on the graph.</p>
+<div class="figure" style="text-align: center"><span id="fig:histoptions"></span>
+<img src="pics2a/1_hist_chooseint.png" alt="Choose intervals histogram option" width="30%" />
+<p class="caption">
+Figure 8: Choose intervals histogram option
+</p>
+</div>
+<div id="selecting-the-number-of-histogram-bins" class="section level4 unnumbered">
+<h4>Selecting the number of histogram bins</h4>
+<p>After selecting the <strong>Choose Intervals</strong> option, a dialog appears that lets you set the number of bins explicitly. The default is 7, but in our example, we change this to 5, as in Figure <a href="#fig:hist5option">9</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:hist5option"></span>
+<img src="pics2a/1_interval5.png" alt="Histogram intervals set to 5" width="30%" />
+<p class="caption">
+Figure 9: Histogram intervals set to 5
+</p>
+</div>
+<p>The resulting histogram now has five bars, as in Figure <a href="#fig:hist5bars">10</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:hist5bars"></span>
+<img src="pics2a/1_hist_5cats.png" alt="Histogram with 5 intervals" width="50%" />
+<p class="caption">
+Figure 10: Histogram with 5 intervals
+</p>
+</div>
+<p>Note how the wider bins for the histogram somewhat smooth the shape of the distribution.</p>
+</div>
+<div id="display-histogram-statistics" class="section level4 unnumbered">
+<h4>Display histogram statistics</h4>
+<p>A second important option for the histogram (and any other statistical graph) is to display descriptive statistics in the graph. This is accomplished by selecting
+<strong>View &gt; Display Statistics</strong> in the option menu shown in Figure <a href="#fig:histstats">11</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:histstats"></span>
+<img src="pics2a/1_display_stats.png" alt="Display statistics option" width="50%" />
+<p class="caption">
+Figure 11: Display statistics option
+</p>
+</div>
+<p>The <strong>Display Statistics</strong> option adds a number of descriptors below the graph. The summary statistics are given at the bottom, illustrated in Figure <a href="#fig:histsummary">12</a>. We see that the 55 observations have a minimum value of 0, a maximum of 48.1, median of 33.5, mean of 32.1 and a standard deviation of 10.4. We take the minimum value as is, even though a percentage of zero may seem suspicious. In addition, for the histogram, descriptive statistics are provided for each interval, showing the range for the interval, the number of observations as a count and as a percentage of the total number of observations, and the number of standard deviations away from the mean for the center of the bin. This allows us to identify potential outliers, e.g., as defined by those observations more than two standard deviations from the mean. In our example, the lowest category would satisfy this criterion.</p>
+<p>The summary characteristics for a given bin also appear in the status bar when the cursor is moved over the corresponding bar. This works whether the descriptive statistics option is on or not. In our example in Figure <a href="#fig:histsummary">12</a>, the cursor is over the central bar.</p>
+<div class="figure" style="text-align: center"><span id="fig:histsummary"></span>
+<img src="pics2a/1_histwstats.png" alt="Histogram with descriptive statistics" width="70%" />
+<p class="caption">
+Figure 12: Histogram with descriptive statistics
+</p>
+</div>
+<p>Other options available in the Histogram are adjustments to various color settings (<strong>Color</strong>),
+saving the selection (see below), <strong>Copy the Image to Clipboard</strong> and saving the graph as an
+image file (see below).</p>
+</div>
+<div id="linking-a-histogram-and-a-map" class="section level4 unnumbered">
+<h4>Linking a histogram and a map</h4>
+<p>To illustrate the concept of <em>linked</em> graphs and maps, we first set the number of intervals for the histogram back to 7 (<strong>Choose Intervals &gt; 7</strong>). Then we select the three left-most bars in the histogram (click and shift-click to expand the selection). The highlighted bars keep their color, whereas the non-selected ones become transparent, as in the right-hand graph in Figure <a href="#fig:histmaplink">13</a>. This is the standard approach to visualize a selection in a graph in GeoDa.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>Immediately upon selection of the bars in the graph, the corresponding observations in the map are also highlighted, as in the left-hand graph in Figure <a href="#fig:histmaplink">13</a>. In our current example, the map is a simple themeless map (all areal units are green), but in more realistic applications, the map can be any type of choropleth map, for the same variable or for a different variable. The latter can be very useful in the exploration of categorical overlap between variables.</p>
+<p>In our example, the histogram bars at the low end of the distributions (i.e., with a low percentage of households with kids) correspond to sub-boroughs primarily located in
+Manhattan, which should not come as a surprise.</p>
+<div class="figure" style="text-align: center"><span id="fig:histmaplink"></span>
+<img src="pics2a/1_150_linkhistmap.png" alt="Linking a histogram and a map" width="100%" />
+<p class="caption">
+Figure 13: Linking a histogram and a map
+</p>
+</div>
+<p>The reverse linking works as well. For example, using a rectangular selection tool on the themeless map, we can select sub-boroughs in Manhattan and adjoining Brooklyn, as in the map in Figure
+<a href="#fig:maphistlink">14</a>. The linked
+histogram (right-hand graph in Figure <a href="#fig:maphistlink">14</a>) will show the attribute distribution for the selected spatial units as highlighted fractions of the bars (the transparent bars correspond to the unselected areal units).</p>
+<p>In practice, we will be interested in assessing the extent to which the
+distribution of the selected observations (e.g., a sub-region) matches the overall distribution.
+When it does not, this may reveal the presence of <em>spatial heterogeneity</em>, to which we return in the discussion of
+scatter plot brushing.</p>
+<div class="figure" style="text-align: center"><span id="fig:maphistlink"></span>
+<img src="pics2a/1_151_linkmaphist.png" alt="Linking a map and a histogram" width="100%" />
+<p class="caption">
+Figure 14: Linking a map and a histogram
+</p>
+</div>
+<p>As we have seen before, it is also possible to save the selection in the form of a 0-1 indicator variable with the <strong>Save Selection</strong> option.</p>
+<p>The technique of linking, and its dynamic counterpart of <em>brushing</em> (more later) is central to the data exploration philosophy that is behind GeoDa <span class="citation">(for a more elaborate exposition of the philosophy
+behind GeoDa, see Anselin, Syabri, and Kho <a href="#ref-Anselinetal:06a">2006</a>)</span>.</p>
+</div>
+<div id="saving-a-graph-as-an-image" class="section level4 unnumbered">
+<h4>Saving a graph as an image</h4>
+<p>A useful option associated with any graph in GeoDa is the possibility to save the graph as an image, in either <strong>png</strong> (the default) or <strong>bmp</strong> format. This process is started by selecting
+<strong>Save Image As</strong> from the options menu (right click on the graph and select the
+item as shown in Figure <a href="#fig:histsaveimg">15</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:histsaveimg"></span>
+<img src="pics2a/1_saveimageas.png" alt="Save image as option" width="25%" />
+<p class="caption">
+Figure 15: Save image as option
+</p>
+</div>
+<p>The resulting dialog provides a way to specify a file name and a location where to save the file. The default file name in our example is <strong>NYC DataHistogramFrame.png</strong>. For the histogram without descriptive statistics, with 7 categories and selections
+highlighted, the
+corresponding image is as shown in Figure <a href="#fig:histimg">16</a>. This makes it easy to incorporate the graphs into a document.</p>
+<div class="figure" style="text-align: center"><span id="fig:histimg"></span>
+<img src="pics2a/NYC%20DataHistogramFrame.png" alt="Histogram as png image" width="60%" />
+<p class="caption">
+Figure 16: Histogram as png image
+</p>
+</div>
+</div>
+</div>
+<div id="box-plot" class="section level3 unnumbered">
+<h3>Box plot</h3>
+<p>A box plot is an alternative visualization of the distribution of a single variable. It is invoked as <strong>Explore &gt; Box Plot</strong>, or by selecting the <strong>Box Plot</strong> icon in the toolbar, shown in
+Figure <a href="#fig:boxicon">17</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:boxicon"></span>
+<img src="pics2a/2_154_boxploticon.png" alt="Box plot toolbar icon" width="50%" />
+<p class="caption">
+Figure 17: Box plot toolbar icon
+</p>
+</div>
+<p>Identical to the approach followed for the histogram, next appears a <strong>Variable Settings</strong> dialog to select the variable. In GeoDa, the default is that the variable from any previous analysis is already selected. In our example, we continue with <strong>kids2009</strong> (see Figure <a href="#fig:histvarlist">6</a>). This brings up the box plot graph shown in Figure <a href="#fig:boxplot">18</a> (make sure to turn <em>off</em> any previous selection of observations).</p>
+<div class="figure" style="text-align: center"><span id="fig:boxplot"></span>
+<img src="pics2a/2_155_boxplot.png" alt="Default box plot" width="40%" />
+<p class="caption">
+Figure 18: Default box plot
+</p>
+</div>
+<p>The box plot focuses on the quantiles of the distribution. The data points are sorted from small to large. The median (50 percent point) is represented by the horizontal orange bar in the middle of the distribution. The brown rectangle goes from the first quartile (25th percentile) to the third quartile (75th percentile). The difference between the values that
+correspond to the third (39.6773) and the first quartile (26.6943) is referred to as the <em>inter-quartile range</em> (IQR). The inter-quartile range is a measure of the spread of the distribution, a non-parametric counterpart to the standard deviation. In our example, the IQR is roughly 13 (39.6773 - 26.6943 = 12.9831).</p>
+<p>The horizontal lines drawn at the top and bottom of the
+graph are the so-called <em>fences</em> or <em>hinges</em>. They correspond to the values of the first quartile less 1.5 IQR (i.e., roughly 26.7 - 1.5x13 = 7.2), and the third quartile plus 1.5 IQR
+(i.e., roughly 39.7 + 1.5x13 = 59.2). Observations that fall outside the fences are considered to
+be <em>outliers</em>.</p>
+<p>In our example in Figure <a href="#fig:boxplot">18</a>, we have a single lower outlier, but no upper outliers.
+Note that the one lower outlier is the observation that corresponds with a value of 0
+(the minimum), which we earlier had flagged as potentially suspicious. The outlier detection would seem to confirm this. Checking for <em>strange</em> values that may possibly be coding
+errors or suggest other measurement problems is one of the very useful applications of
+a box plot.</p>
+<p>The default in GeoDa is to list the summary statistics at the bottom of the box plot. As
+was the case for the histogram, the statistics
+include the minumum, maximum, mean, median and standard deviation. In addition, the values for the first and third quartile and the resulting IQR are given as well. The listing
+of descriptive statistics can be turned off by unchecking <strong>View &gt; Display Statistics</strong> (i.e., the
+default is the reverse of what held for the histogram, where the statistics had to be
+invoked explicitly).</p>
+<p>The typical multiplier for the IQR to determine outliers is 1.5 (roughly equivalent to the practice of using two standard deviations in a parametric setting). However, a value of 3.0 is fairly common as well, which considers only truly extreme observations as outliers. The multiplier to determine the fence can be changed with the <strong>Hinge &gt; 3.0</strong> option (right click in the plot to select the options menu, and
+then choose the hinge value, as in Figure <a href="#fig:boxhinge3option">19</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:boxhinge3option"></span>
+<img src="pics2a/2_156_changehinge.png" alt="Change the box plot hinge" width="30%" />
+<p class="caption">
+Figure 19: Change the box plot hinge
+</p>
+</div>
+<p>The resulting box plot (with the statistics display turned off in Figure <a href="#fig:box3">20</a>) no longer characterizes the lowest value as an outlier.</p>
+<div class="figure" style="text-align: center"><span id="fig:box3"></span>
+<img src="pics2a/2_157_boxplot3.png" alt="Box plot with hinge = 3.0" width="40%" />
+<p class="caption">
+Figure 20: Box plot with hinge = 3.0
+</p>
+</div>
+<p>Several other options for the box plot are the same as for the histogram, such as saving the selection, copying the image to the clipboard, and saving the graph as an image file.</p>
+<p>Also, as is the case for any graph in GeoDa, linking is implemented. For example, selecting the lower outlier in the box plot will highlight the corresponding obbservation in the themeless map of sub-boroughs,
+as shown in Figure <a href="#fig:linkboxmap">21</a>. The reverse process, consisting of first selecting in the map, works as well.</p>
+<div class="figure" style="text-align: center"><span id="fig:linkboxmap"></span>
+<img src="pics2a/2_158_linkboxmap.png" alt="Showing the outlier on a linked map" width="100%" />
+<p class="caption">
+Figure 21: Showing the outlier on a linked map
+</p>
+</div>
+<p>The main purpose of the box plot in an exploratory strategy is to identify outlier observations. Later, we will see how to assess whether such outliers also coincide in space.</p>
+</div>
+</div>
+<div id="bivariate-analysis-the-scatter-plot" class="section level2 unnumbered">
+<h2>Bivariate Analysis: The Scatter Plot</h2>
+<div id="creating-a-scatter-plot" class="section level3 unnumbered">
+<h3>Creating a Scatter Plot</h3>
+<p>The standard tool to assess a <em>linear</em> relationship between two variables is the
+scatter plot, a diagram with two axes, each corresponding to one of the variables. The
+observation (x, y) pairs are plotted as points in the diagram.</p>
+<p>We create a scatter plot by clicking on its toolbar icon, or by selecting <strong>Explore &gt; Scatter Plot</strong> from the menu. The <strong>Scatter Plot</strong> icon is the third in the EDA group on the toolbar, shown
+in Figure <a href="#fig:scattericon">22</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:scattericon"></span>
+<img src="pics2a/3_scatterplot_icon.png" alt="Scatter Plot toolbar icon" width="50%" />
+<p class="caption">
+Figure 22: Scatter Plot toolbar icon
+</p>
+</div>
+<p>This brings up the <strong>Scatter Plot Variables</strong> dialog where the variables for the X and Y axes
+need to be selected. In our example, illustrated in Figure <a href="#fig:scatvars">23</a>, we will choose the percentage of households with kids under age 18 in 2000 (<strong>kids2000</strong>) as the X-variable, and the percentage of households receiving public assistance (<strong>pubast00</strong>) as the Y-variable.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatvars"></span>
+<img src="pics2a/3_scatterplot_variables.png" alt="Scatter Plot variable selection" width="50%" />
+<p class="caption">
+Figure 23: Scatter Plot variable selection
+</p>
+</div>
+<p>Clicking <strong>OK</strong> brings up the scatter plot.</p>
+<p>The default view of the scatter plot is to use the variables in their original scales (i.e., not standardized), show the axes through zero (as dashed lines), and fit a linear smoother (i.e., a least squares regression fit). In our example in Figure <a href="#fig:scatdefault">24</a>, there is only a horizontal
+axis, since all the x values are larger than zero.</p>
+<p>In addition, at the bottom of the graph, several summary statistics are listed for the regression line.
+This includes the R<sup>2</sup> of the fit, and the estimate, standard error, t-statistic and p-value for both the intercept and the slope coefficient. This default view is illustrated in Figure <a href="#fig:scatdefault">24</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatdefault"></span>
+<img src="pics2a/3_default_scatter_plot.png" alt="Default Scatter Plot" width="80%" />
+<p class="caption">
+Figure 24: Default Scatter Plot
+</p>
+</div>
+<p>In the current setup, no observations are selected, so that the second line in the statistical summary
+in Figure <a href="#fig:scatdefault">24</a> (all red zeros) has no values. This line pertains to the selected observations. The blue line at the bottom relates to the unselected observation. The sum of the number of observations in each of the two subsets always equals the total number of observations, listed on the top line. The three lines are listed because of the default <strong>View</strong> setting of <strong>Regimes Regression</strong>,
+even though there is currently no active selection (see also below).</p>
+<div id="scatter-plot-options" class="section level4 unnumbered">
+<h4>Scatter Plot options</h4>
+<p>The scatter plot has several interesting options, listed in Figure <a href="#fig:scatoptions">25</a>. As usual, these are brought up by right clicking in the view or by selecting <strong>Options</strong> in the menu.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatoptions"></span>
+<img src="pics2a/5_175_scatplotoptions.png" alt="Scatter Plot options" width="50%" />
+<p class="caption">
+Figure 25: Scatter Plot options
+</p>
+</div>
+<p>Several of the options should by now be familiar, such as the <strong>Selection Shape</strong>, <strong>Color</strong>, <strong>Save Selection</strong> and the two ways to save the image. The <strong>Data</strong> item provides a choice between the variables on their original scale (the default) and the use of standardized variables. Note that when you use the standardized form, the slope of the linear smoother is also the correlation coefficient between the two variables.</p>
+<p>The <strong>View</strong> option shows the default settings with the <strong>Statistics</strong> displayed below the graph, the <strong>Axes Through Origin</strong> shown as dashed lines, and the <strong>Status Bar</strong> active. Two
+other default settings are to have a <strong>Fixed Aspect Ratio</strong> and <strong>Regimes Regression</strong>
+active. When some observations are selected, the regimes regression setting will result in
+the computation of three different linear smoothers. We revisit this when we consider brushing the scatter plot.</p>
+<p>The first of the view options is not set by default. It controls the precision by which the values are
+displayed on the axes. In our scatter plot in Figure <a href="#fig:scatdefault">24</a>, this is currently two digits.
+When checking <strong>Set Display Precision on Axes</strong>, a dialog pops up. For example, we can
+turn the precision to 1 digit, as in Figure <a href="#fig:displayprecision1">26</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:displayprecision1"></span>
+<img src="pics2a/5_177_axesdisplay.png" alt="Display precision for scatter plot axes" width="30%" />
+<p class="caption">
+Figure 26: Display precision for scatter plot axes
+</p>
+</div>
+<p>The values displayed on the axes are adjusted in accordance with the new precision setting,
+shown in Figure <a href="#fig:scatwith1precision">27</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatwith1precision"></span>
+<img src="pics2a/5_178_axesw1.png" alt="Scatter Plot with different precision" width="60%" />
+<p class="caption">
+Figure 27: Scatter Plot with different precision
+</p>
+</div>
+</div>
+<div id="lowess-smoother" class="section level4 unnumbered">
+<h4>LOWESS smoother</h4>
+<p>We turn the precision back to 2 digits and explore a non-linear smoother of the scatter plot.
+A LOWESS nonlinear local regression fit reveals potential nonlinearities in the bivariate relationship and may suggest the presence of structural breaks <span class="citation">(for a good overview of the methodological
+issues, see, e.g., Cleveland <a href="#ref-Cleveland:79">1979</a>; and Loader <a href="#ref-Loader:99">1999</a>, <a href="#ref-Loader:04">2004</a>)</span>. LOWESS stands for locally weighted scatter
+plot smoother and is slightly different from LOESS, a local polynomial regression
+(the two are often confused, but implement different fitting algorithms). In GeoDa, LOWESS is
+implemented and selected in the <strong>Smoother</strong> option,
+as shown in Figure <a href="#fig:smoothoption">28</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:smoothoption"></span>
+<img src="pics2a/4_scatter_smoother_options.png" alt="Scatter Plot smoothing options" width="40%" />
+<p class="caption">
+Figure 28: Scatter Plot smoothing options
+</p>
+</div>
+<p>Selecting the <strong>Show LOWESS Smoother</strong> option adds the nonlinear fit to the scatter plot. Note that by default the <strong>Show Linear Smoother</strong> option remains checked, so that this needs to be unchecked to see only the nonlinear fit. The respective graphs that result from each option are illustrated in Figures <a href="#fig:smoothwlinear">29</a>
+and <a href="#fig:smoothwolinear">30</a>. In practice, having both options
+selected facilitates an easy comparison of the two curve fits.</p>
+<div class="figure" style="text-align: center"><span id="fig:smoothwlinear"></span>
+<img src="pics2a/4_164_defaultlowess.png" alt="Default LOWESS smoother" width="60%" />
+<p class="caption">
+Figure 29: Default LOWESS smoother
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:smoothwolinear"></span>
+<img src="pics2a/4_167_loweswolinear.png" alt="LOWESS smoother without linear fit" width="60%" />
+<p class="caption">
+Figure 30: LOWESS smoother without linear fit
+</p>
+</div>
+<p>In our example, there is considerable evidence of a nonlinear relationship between the two variables. An alternative interpretation is to see this as an indication of a structural break, where in one subset of the data the slope is very steep, whereas in another it is fairly flat.</p>
+<p>The nonlinear fit is driven by a number of parameters, the most important of which is the bandwidth. The parameters can be changed in the options by selecting <strong>Edit LOWESS Parameters</strong> in the <strong>Smoother</strong> option. As shown in Figure <a href="#fig:bandwidth">31</a>, a small dialog is brought up in which the <strong>Bandwidth</strong> (default setting 0.20), <strong>Iterations</strong> and <strong>Delta Factor</strong> can be adjusted. The bandwidth determines the smoothness of the curve and is given as a fraction of the total range in X values. In other words, the default bandwidth of 0.20 implies that for each local fit (centered on a value for X), about one fifth of the scatter points are taken into account. The other options are technical and are best left
+to their default values.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>To obtain Figure <a href="#fig:smooth40">32</a>, we changed the bandwidth to 0.40, which results in a much smoother curve that brings out a possible structural break in the data in a more striking fashion.</p>
+<div class="figure" style="text-align: center"><span id="fig:bandwidth"></span>
+<img src="pics2a/4_lowess040.png" alt="LOWESS bandwidth settings" width="30%" />
+<p class="caption">
+Figure 31: LOWESS bandwidth settings
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:smooth40"></span>
+<img src="pics2a/4_165_lowess040.png" alt="LOWESS smoother bandwidth 0.40" width="60%" />
+<p class="caption">
+Figure 32: LOWESS smoother bandwidth 0.40
+</p>
+</div>
+<p>The plot seems to suggest that the linear fit is really a compromise between two slopes. There is a steep slope for observations with a value for households with children above 40 percent, suggesting a major increase in public assistance with every increase in the percentage children. With values for <strong>kids2000</strong> below 40, the slope is much gentler and even flat in small subsets of the data.</p>
+<p>The opposite effect is obtained when the bandwidth is made smaller. For example, with a value of 0.10, the resulting curve in Figure <a href="#fig:smooth10">33</a> is much more jagged and less informative.</p>
+<div class="figure" style="text-align: center"><span id="fig:smooth10"></span>
+<img src="pics2a/4_166_lowess010.png" alt="LOWESS smoother bandwidth 0.10" width="60%" />
+<p class="caption">
+Figure 33: LOWESS smoother bandwidth 0.10
+</p>
+</div>
+<p>The literature contains many discussions of the notion of an optimal bandwidth, but in practice a trial and error approach is often more effective. In any case, a value for the bandwidth that follows one of these rules of thumb can be entered in the dialog. Currently, GeoDa does not compute these for you.</p>
+<p>Finally, while one might expect the LOWESS fit and a linear fit to coincide with a bandwidth of 1.0,
+this is not the case. The LOWESS fit will be near-linear, but slightly different from a standard
+least squares result due to the locally weighted nature of the algorithm.</p>
+</div>
+</div>
+<div id="brushing-the-scatter-plot-spatial-heterogeneity" class="section level3 unnumbered">
+<h3>Brushing the Scatter Plot – Spatial Heterogeneity</h3>
+<p><em>Linking</em> and <em>brushing</em> are powerful techniques to assess structural breaks in the data, such as evidence of spatial heterogeneity. We have already seen how a selection in any of the views results in the same observation to immediately be selected in all other views through linking. Brushing is a dynamic extension of this process. This is the most insightful when applied to the combination of a map and a scatter plot, but it equally applies to all the other views <span class="citation">(for some early exposition and discussion of these
+ideas pertaining to so-called dynamic graphics, see, e.g., the classic references of Stuetzle <a href="#ref-Stuetzle:87">1987</a>; Becker and Cleveland <a href="#ref-BeckerCleveland:87">1987</a>; Becker, Cleveland, and Wilks <a href="#ref-Beckeretal:87">1987</a>; Monmonier <a href="#ref-Monmonier:89">1989</a>; as
+well as in the outline of legacy GeoDa functionality in Anselin, Syabri, and Kho <a href="#ref-Anselinetal:06a">2006</a>)</span>.</p>
+<p>The brushing process is initiated by setting up a selection shape in one of the views. The default is a rectangular shape, but we have seen earlier how that can be changed to a circle or a line. In our example, we keep the default. Click anywhere in the scatter plot and draw the pointer into a rectangular shape, as shown below. Note how the pointer is attached to a corner of the rectangle. At this point, the shape can be moved around in the view, dynamically changing the selection.</p>
+<p>In our example
+in Figure <a href="#fig:brushscat1">34</a>, we have selected 22 observations. The purple line represents the original linear fit, the red line is the fit for the 22 selected observations, and the blue line is the fit for the other 33 observations. Below the three lines with the slope coefficients and fit statistics, the results
+are listed of a Chow test on structural stability are listed <span class="citation">(Chow <a href="#ref-Chow:60">1960</a>)</span>. Clearly, in contrast to the overall purple and the blue line, there is no relationship at all for the selected observations in question, as evidenced by the horizontal red line. The Chow test confirms this by strongly rejecting (p &lt; 0.0005) the null hypothesis of equal coefficients (between the slopes of the blue and the red lines).</p>
+<div class="figure" style="text-align: center"><span id="fig:brushscat1"></span>
+<img src="pics2a/6_179_brush_scat1.png" alt="Brushing the scatter plot -- 1" width="60%" />
+<p class="caption">
+Figure 34: Brushing the scatter plot – 1
+</p>
+</div>
+<p>Because of the linking, the 22 selected observations are also highlighted in all the other views, such as the green themeless map shown in Figure <a href="#fig:brushmap1">35</a>. In an actual application, this map can be for a third variable, allowing us to investigate potential interaction effects.</p>
+<div class="figure" style="text-align: center"><span id="fig:brushmap1"></span>
+<img src="pics2a/6_180_map1.png" alt="Linked map selection -- 1" width="60%" />
+<p class="caption">
+Figure 35: Linked map selection – 1
+</p>
+</div>
+<p>With the <strong>Regimes Regression</strong> option turned on, the three linear fits change instantaneously as different observations are selected. Of course, the fits themselves are only meaningful when sufficient observations are part of the selection. For example, we can move the selection rectangle up and to the right,
+as in Figure <a href="#fig:brushscat2">36</a>, which yields a new selection of 10 observations, with associated regression lines. This time, there is insufficient evidence to reject the null hypothesis (Chow test with p = 0.975).</p>
+<div class="figure" style="text-align: center"><span id="fig:brushscat2"></span>
+<img src="pics2a/6_181_brush_scat2.png" alt="Brushing the scatter plot -- 2" width="60%" />
+<p class="caption">
+Figure 36: Brushing the scatter plot – 2
+</p>
+</div>
+<p>Again, the matching locations are shown in the map in Figure <a href="#fig:brushmap2">37</a>. As the selection rectangle moves in the scatter plot, the highlighted sub-boroughs in the map change as well.</p>
+<div class="figure" style="text-align: center"><span id="fig:brushmap2"></span>
+<img src="pics2a/6_182_map2.png" alt="Linked map selection -- 2" width="60%" />
+<p class="caption">
+Figure 37: Linked map selection – 2
+</p>
+</div>
+<p>The process can also be reversed and started in a view other than the scatter plot. For example, we can brush the map (in our example in Figure <a href="#fig:brushmap3">38</a>, 10 observations are selected), and assess how the linear fits are affected in the scatter plot.</p>
+<div class="figure" style="text-align: center"><span id="fig:brushmap3"></span>
+<img src="pics2a/6_183._brushmap1.png" alt="Brushing the map -- 1" width="60%" />
+<p class="caption">
+Figure 38: Brushing the map – 1
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:mapscat3"></span>
+<img src="pics2a/6_184_scat1.png" alt="Linked scatter plot selection -- 1" width="60%" />
+<p class="caption">
+Figure 39: Linked scatter plot selection – 1
+</p>
+</div>
+<p>In Figure <a href="#fig:mapscat3">39</a>, the map selection results in a rejection of the null hypothesis of constant slopes
+with p &lt; 0.0031. In other words, the slope in the region we selected in the map is significantly
+different from the slope in the rest of the map, suggesting spatial heterogeneity.</p>
+<p>As we brush across the map, we can assess the degree to which the linear relationship is stable. Any systematically changing slopes between clearly defined sub-regions of the observations would suggest the presence of spatial heterogeneity. For example, moving
+the selection rectangle north, as in Figure <a href="#fig:brushmap4">40</a>, makes the evidence for stuctural change somewhat weaker
+(as evidenced by the Chow test with p &lt; 0.01 shown in Figure <a href="#fig:mapscat4">41</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:brushmap4"></span>
+<img src="pics2a/6_185_brushmap2.png" alt="Brushing the map -- 2" width="60%" />
+<p class="caption">
+Figure 40: Brushing the map – 2
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:mapscat4"></span>
+<img src="pics2a/6_186_scat2.png" alt="Linked scatter plot selection -- 2" width="60%" />
+<p class="caption">
+Figure 41: Linked scatter plot selection – 2
+</p>
+</div>
+<p>As we identify subregions in the data with a different slope (structure) from the rest,
+we can assess this more formally through regression analysis (e.g., analysis of variance). This
+is facilitated by <strong>Saving</strong> the selection in the form of an indicator variable (with 1 for the selected observations). This new variable can then be incorporated in a regression specification.</p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Anselinetal:06a">
+<p>Anselin, Luc, Ibnu Syabri, and Youngihn Kho. 2006. “GeoDa, an Introduction to Spatial Data Analysis.” <em>Geographical Analysis</em> 38:5–22.</p>
+</div>
+<div id="ref-BeckerCleveland:87">
+<p>Becker, Richard A., and W.S. Cleveland. 1987. “Brushing Scatterplots.” <em>Technometrics</em> 29:127–42.</p>
+</div>
+<div id="ref-Beckeretal:87">
+<p>Becker, Richard A., W.S. Cleveland, and A.R. Wilks. 1987. “Dynamic Graphics for Data Analysis.” <em>Statistical Science</em> 2:355–95.</p>
+</div>
+<div id="ref-Chow:60">
+<p>Chow, G. 1960. “Tests of Equality Between Sets of Coefficients in Two Linear Regressions.” <em>Econometrica</em> 28:591–605.</p>
+</div>
+<div id="ref-Cleveland:79">
+<p>Cleveland, William S. 1979. “Robust Locally Weighted Regression and Smoothing Scatterplots.” <em>Journal of the American Statistical Association</em> 74:829–36.</p>
+</div>
+<div id="ref-Loader:99">
+<p>Loader, Catherine. 1999. <em>Local Regression and Likelihood</em>. Heidelberg: Springer-Verlag.</p>
+</div>
+<div id="ref-Loader:04">
+<p>———. 2004. “Smoothing: Local Regression Techniques.” In <em>Handbook of Computational Statistics: Concepts and Methods</em>, edited by James E. Gentle, Wolfgang Härdle, and Yuichi Mori, 539–63. Berlin: Springer-Verlag.</p>
+</div>
+<div id="ref-Monmonier:89">
+<p>Monmonier, Mark. 1989. “Geographic Brushing: Enhancing Exploratory Analysis of the Scatterplot Matrix.” <em>Geographical Analysis</em> 21:81–84.</p>
+</div>
+<div id="ref-Stuetzle:87">
+<p>Stuetzle, W. 1987. “Plot Windows.” <em>Journal of the American Statistical Association</em> 82:466–75.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>In the <strong>GeoDa Preference Setup</strong>, under <strong>System</strong>, the transparency of the unhighlighted objects in a selection operation can be adjusted. The default is 0.80, which means only about 20% of the regular color is shown.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>The LOWESS algorithm is complex and uses a weighted local polynomial fit.
+The <strong>Iterations</strong> setting determines how many times the fit is adjusted by refining the weights. A
+smaller value for this option will speed up computation, but result in a less robust fit. The
+<strong>Delta Factor</strong> drops points from the calculation of the local fit if they are too close (within
+Delta) to speed up the computations. Technical details are covered in <span class="citation">Cleveland (<a href="#ref-Cleveland:79">1979</a>)</span>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-72724100-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

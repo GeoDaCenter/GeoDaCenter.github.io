@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Luc Anselin" />
+
+
+<title>Exploratory Data Analysis (2)</title>
+
+<link href="lab2b_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab2b_files/highlightjs-9.12.0/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="http://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;} 
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+    
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h3.subtitle {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="http://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="http://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="http://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="http://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Exploratory Data Analysis (2)</h1>
+<h3 class="subtitle"><em><h3>
+Multivariate Exploration
+</h3></em></h3>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>03/13/2018 (revised and updated)</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#getting-started">Getting started</a></li>
+</ul></li>
+<li><a href="#scatter-plot-matrix">Scatter Plot Matrix</a><ul>
+<li><a href="#principle">Principle</a></li>
+<li><a href="#creating-a-scatter-plot-matrix">Creating a Scatter Plot Matrix</a><ul>
+<li><a href="#scatter-plot-matrix-options">Scatter Plot Matrix options</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#three-variables-bubble-chart-and-3d-scatter-plot">Three Variables: Bubble Chart and 3D Scatter Plot</a><ul>
+<li><a href="#bubble-chart">Bubble chart</a><ul>
+<li><a href="#bubble-chart-options">Bubble chart options</a></li>
+</ul></li>
+<li><a href="#d-scatter-plot">3D Scatter Plot</a><ul>
+<li><a href="#interacting-with-the-3d-scatter-plot">Interacting with the 3D scatter plot</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#true-multivariate-eda-parallel-coordinate-plot-and-conditional-plots">True Multivariate EDA: Parallel Coordinate Plot and Conditional Plots</a><ul>
+<li><a href="#parallel-coordinate-plot-pcp">Parallel Coordinate Plot (PCP)</a><ul>
+<li><a href="#principle-1">Principle</a></li>
+<li><a href="#creating-a-pcp">Creating a PCP</a></li>
+<li><a href="#pcp-options">PCP options</a></li>
+</ul></li>
+<li><a href="#conditional-plots">Conditional Plots</a><ul>
+<li><a href="#principle-2">Principle</a></li>
+<li><a href="#creating-conditional-scatter-plots">Creating conditional scatter plots</a></li>
+<li><a href="#changing-the-conditioning">Changing the conditioning</a></li>
+<li><a href="#creating-conditional-histograms">Creating conditional histograms</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered">
+<h2>Introduction</h2>
+<p>In this Chapter, we continue to explore the EDA functionality in GeoDa, in particular the methods to deal with multiple variables, such as the scatter plot matrix, bubble chart, 3D scatter plot, parallel coordinate plot and conditional plots.</p>
+<p>We will again use the data set with demographic and socio-economic information for 55 New York City sub-boroughs.</p>
+<div id="objectives" class="section level3 unnumbered">
+<h3>Objectives</h3>
+<ul>
+<li><p>Interpreting a scatter plot matrix</p></li>
+<li><p>Interpreting bubble charts and 3D scatter plots</p></li>
+<li><p>Interpreting parallel coordinate plots</p></li>
+<li><p>Interpreting conditional plots</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Explore &gt; Scatter Plot Matrix
+<ul>
+<li>changing the variable order in a scatter plot matrix</li>
+<li>smoothing and brushing the scatter plot matrix</li>
+</ul></li>
+<li>Explore &gt; Bubble Chart
+<ul>
+<li>bubble chart classification schemes</li>
+<li>bubble size</li>
+</ul></li>
+<li>Explore &gt; 3D Scatter Plot
+<ul>
+<li>rotating and zooming the 3D scatter plot</li>
+<li>projecting onto one axis</li>
+<li>selection in the 3D scatter plot</li>
+</ul></li>
+<li>Explore &gt; Parallel Coordinate Plot
+<ul>
+<li>changing the classification theme for the PCP</li>
+<li>changing the order of the axes</li>
+<li>brushing the PCP</li>
+</ul></li>
+<li>Explore &gt; Conditional Plot
+<ul>
+<li>conditional scatter plot</li>
+<li>conditional histogram</li>
+<li>conditional scatter plot option</li>
+<li>changing the condition breakpoints</li>
+<li>LOWESS smoother in conditional plots</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started" class="section level3 unnumbered">
+<h3>Getting started</h3>
+<p>We start by making sure the data set <strong>NYC Data</strong> is loaded into the project. If not, it is listed under the <strong>Sample Data</strong> tab and can be loaded by double-clicking on its icon.</p>
+<p>This yields the by now familiar green themeless map of the 55 New York City sub-boroughs (Figure <a href="#fig:suboro">1</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:suboro"></span>
+<img src="pics2b/0_nyc_basemap.png" alt="NYC sub-boroughs" width="60%" />
+<p class="caption">
+Figure 1: NYC sub-boroughs
+</p>
+</div>
+</div>
+</div>
+<div id="scatter-plot-matrix" class="section level2 unnumbered">
+<h2>Scatter Plot Matrix</h2>
+<div id="principle" class="section level3 unnumbered">
+<h3>Principle</h3>
+<p>A scatter plot matrix visualizes the bivariate relationships among several pairs of variables. The individual scatter plots are stacked such that each variable is in turn on the x-axis and on
+the y-axis. In a general sense, it is the visual counterpart of a correlation matrix, although unlike
+the latter, it is not symmetric. The main interest is in the magnitude and sign of the slope in each
+of the scatter plots, and the extent to which this points to a signficant bivariate relationship.</p>
+<p>Even though this method is included here, it is not really a <em>multivariate</em> exploration, but rather
+a collection of <em>bivariate</em> explorations for multiple variables.</p>
+<p>In GeoDa, the diagonal elements also contain a histogram for the variable in the corresponding row/column.</p>
+</div>
+<div id="creating-a-scatter-plot-matrix" class="section level3 unnumbered">
+<h3>Creating a Scatter Plot Matrix</h3>
+<p>We start the scatter plot matrix by selecting the corresponding icon on the toolbar (part of the EDA icons), as in Figure <a href="#fig:scatmaticon">2</a>, or by choosing <strong>Explore &gt; Scatter Plot Matrix</strong> from the menu.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatmaticon"></span>
+<img src="pics2b/7_scatmatrix_icon.png" alt="Scatter Plot Matrix toolbar icon" width="50%" />
+<p class="caption">
+Figure 2: Scatter Plot Matrix toolbar icon
+</p>
+</div>
+<p>This brings up a dialog through which variables can be added or removed, shown
+in Figure <a href="#fig:scatmatvars">3</a>. The design of the interface is such that one selects a variable from the list on the left and clicks on the right arrow <strong>&gt;</strong> to include it in the list on the right (alternatively,
+one can double click on the variable name to move it to the right-hand column). The left arrow <strong>&lt;</strong> is there to remove a variable from the <strong>Include</strong> list.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatmatvars"></span>
+<img src="pics2b/7_187_scatplotmatvars.png" alt="Scatter Plot Matrix variables selection" width="50%" />
+<p class="caption">
+Figure 3: Scatter Plot Matrix variables selection
+</p>
+</div>
+<p>As soon as two variables are selected, the scatter plot matrix is rendered in the background. As new
+variables are added to the list on the right, the matrix in the background is updated with the additional scatter plots.</p>
+<p>In our example in Figure <a href="#fig:scatmatvars2">4</a>, we selected average people per household in 2000 (<strong>hhsiz00</strong>), the percentage households with children under 18 in 2000 (<strong>kids2000</strong>), the average number of years lived in the current residence in 2002 (<strong>yrhom02</strong>) and the percentage households receiving public assistance in 2000 (<strong>pubast00</strong>). The order of the variables can be changed by means of the <strong>Up</strong> and <strong>Down</strong> buttons in the dialog.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatmatvars2"></span>
+<img src="pics2b/7_188_scatplotmat_vars.png" alt="Scatter Plot Matrix variables" width="50%" />
+<p class="caption">
+Figure 4: Scatter Plot Matrix variables
+</p>
+</div>
+<p>Once we move the dialog aside, the full 4 x 4 scatter plot matrix is revealed, as shown
+in Figure <a href="#fig:scatmat">5</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatmat"></span>
+<img src="pics2b/7_189_scatplotmat.png" alt="Scatter Plot Matrix" width="80%" />
+<p class="caption">
+Figure 5: Scatter Plot Matrix
+</p>
+</div>
+<p>The graph shows both positive and negative associations, as well as non-significant ones. Above
+each scatter plot, the slope of the linear fit is listed, with significance indicated by one * (p &lt; 0.05) or two ** (p &lt; 0.01). The histograms in the diagonal provide a sense of the shape of the distribution for each variable. Among others, the graph reveals a strongly significant and positive relationship between the percentage households with kids and public assistance (as we saw before in the scatter plot), and a strong negative and significant relationship between number of years in the residence and public assistance. The relationship between years in residence and percent households with kids is not significant.</p>
+<div id="scatter-plot-matrix-options" class="section level4 unnumbered">
+<h4>Scatter Plot Matrix options</h4>
+<p>As is customary, a right click (or control click) brings up the options for the scatter plot
+matrix. The defaults are a linear fit
+(<strong>Smoother &gt; Show Linear Smoother</strong>), with linking and brushing disabled (<strong>View &gt; Regimes Regression</strong>
+unchecked), and the slope values displayed. Selecting <strong>Add/Remove Variables</strong> bring back the variable selection dialog.</p>
+<p>In addition to the linear fit, the scatter plot matrix also supports a LOWESS fit, with the same parameter editing capability as in the standard scatter plot. This is invoked by
+selecting <strong>Smoother &gt; Show LOWESS Smoother</strong>, as shown in Figure <a href="#fig:scatmatlowes1">6</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatmatlowes1"></span>
+<img src="pics2b/7_190_smoother.png" alt="Scatter Plot Matrix smoothing options" width="50%" />
+<p class="caption">
+Figure 6: Scatter Plot Matrix smoothing options
+</p>
+</div>
+<p>A LOWESS smoother (with bandwidth 0.40) reveals considerable non-linearity in some of the bivariate relationships, as illustrated in Figure <a href="#fig:scatmatlowes2">7</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatmatlowes2"></span>
+<img src="pics2b/7_191_scatplotmat_smooth.png" alt="Scatter Plot Matrix with smoothing" width="80%" />
+<p class="caption">
+Figure 7: Scatter Plot Matrix with smoothing
+</p>
+</div>
+<p>Finally, with the brushing and linking functionality enabled (<strong>View &gt; Regimes Regression</strong>
+checked), potential structural breaks can be further investigated dynamically. As in the standard scatter plot, the red linear fit corresponds to the selected observations, the blue line is for the unselected ones and the purple line is for the complete sample. As evidenced in Figure <a href="#fig:scatmatregimes">8</a>, the selected observations are also highlighted in the histograms on the diagonal, as well as in any other open windows/graphs.</p>
+<div class="figure" style="text-align: center"><span id="fig:scatmatregimes"></span>
+<img src="pics2b/7_192_scatmat_brush.png" alt="Scatter Plot Matrix with brushing" width="80%" />
+<p class="caption">
+Figure 8: Scatter Plot Matrix with brushing
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="three-variables-bubble-chart-and-3d-scatter-plot" class="section level2 unnumbered">
+<h2>Three Variables: Bubble Chart and 3D Scatter Plot</h2>
+<p>Once we move beyond two variables, it becomes difficult to explicitly visualize the relationships among the variables in higher-dimensional space. Techniques to deal with such higher dimensions all boil down to reducing the dimensionality of the problem, i.e., attempting to show the relationships in a two-dimensional plane. In this section, we consider two of these techniques that work for situations in three dimensions (or, at most, four), the bubble chart and the 3-dimensional scatter plot.</p>
+<div id="bubble-chart" class="section level3 unnumbered">
+<h3>Bubble chart</h3>
+<p>The bubble chart is an extension of the scatter plot to include a third and possibly a fourth variable into the two-dimensional chart. While the points in the two-dimensional scatter plot remain as showing the association between two variables, the size of the points (the <em>bubble</em>) is used to introduce a third variable. In addition, the color shading of the points can be used to consider a fourth variable as well, although this may stretch our perceptual abilities.</p>
+<p>The bubble chart is invoked from the menu as <strong>Explore &gt; Bubble Chart</strong> and from the toolbar by selecting the fifth icon, shown in Figure <a href="#fig:bubbleicon">9</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bubbleicon"></span>
+<img src="pics2b/8_193_bubbleicon.png" alt="Bubble Chart toolbar icon" width="50%" />
+<p class="caption">
+Figure 9: Bubble Chart toolbar icon
+</p>
+</div>
+<p>This brings up a dialog to select the variables for up to four dimensions: x-axis, y-axis, bubble size and bubble color. In Figure <a href="#fig:bubblevars">10</a>, we take <strong>kids2000</strong> (percentage households with children under 18), <strong>pubast00</strong> (percentage households receiving public assistance), and
+<strong>rent2002</strong> (median rent) as the three variables. We take the color for the <em>bubble</em> to be the same as the bubble size (<strong>rent2002</strong>).</p>
+<div class="figure" style="text-align: center"><span id="fig:bubblevars"></span>
+<img src="pics2b/8_194_bubblevars.png" alt="Bubble Chart variable selection" width="80%" />
+<p class="caption">
+Figure 10: Bubble Chart variable selection
+</p>
+</div>
+<p>The resulting graph, illustrated in Figure <a href="#fig:bubblechart">11</a> (after resizing the window
+somewhat), shows the same scatter plot as before, but now with the size and color of the circle reflecting the magnitude of the rent (red is high, blue is low). We see that the higher rents (larger bubbles) are situated in the lower left corner of the scatter plot. This suggests an interaction between the three variables, e.g., the higher median rent tends to be in sub-boroughs with a small percentage of households with children or receiving public assistance. This interaction between the three variables is not something we might have expected a priori (or, maybe it is, but the graph brings it out more explicitly). The null case would be that there is no structural relationship between the two original variables and the third, resulting in a graph with the size/color of the bubbles randomly distributed throughout.</p>
+<div class="figure" style="text-align: center"><span id="fig:bubblechart"></span>
+<img src="pics2b/8_196_bubbchart.png" alt="Bubble Chart" width="80%" />
+<p class="caption">
+Figure 11: Bubble Chart
+</p>
+</div>
+<div id="bubble-chart-options" class="section level4 unnumbered">
+<h4>Bubble chart options</h4>
+<p>In addition to the usual options we have seen before, the bubble chart has a few unique features. The first item, shown in Figure <a href="#fig:bubbleoptions">12</a>, allows one to choose from among
+several <strong>Classification Themes</strong> (as well as to create/select a custom classification). The default is the <strong>Standard Deviation</strong> theme, where the colors correspond to standard deviational units away from the mean (red colors above the mean, blue colors below the mean). We will revisit the different classification schemes when we discuss the <strong>Map</strong> functionality in GeoDa.</p>
+<div class="figure" style="text-align: center"><span id="fig:bubbleoptions"></span>
+<img src="pics2b/8_197_classthemes.png" alt="Bubble Chart theme selection" width="40%" />
+<p class="caption">
+Figure 12: Bubble Chart theme selection
+</p>
+</div>
+<p>Another option specific to the bubble chart is to set the size of the bubble, with
+<strong>Adjust Bubble Size</strong> (the bottom item in the menu in Figure <a href="#fig:bubbleoptions">12</a>). This brings up a dialog with a slider to change the size of the circles, as in Figure <a href="#fig:bubblesize">13</a>. This is particularly useful when the default size overwhelms the graph. Note that the slider dialog must
+be closed before moving on.</p>
+<div class="figure" style="text-align: center"><span id="fig:bubblesize"></span>
+<img src="pics2b/8_198_bubbsize.png" alt="Bubble Chart size adjustment" width="80%" />
+<p class="caption">
+Figure 13: Bubble Chart size adjustment
+</p>
+</div>
+<p>Given the screen real estate taken up by the circles in the bubble chart, this is a technique that lends itself particularly well for small to medium sized data sets. For large size data sets, this particular graph is less appropriate.</p>
+</div>
+</div>
+<div id="d-scatter-plot" class="section level3 unnumbered">
+<h3>3D Scatter Plot</h3>
+<p>An explicit visualization of the relationship between three variables is possible in a
+three-dimensional scatter plot, a direct extension of the principles used in two dimensions to a three-dimensional data cube. Each of the dimensions of the cube corresponds to a variable, and the observations are shown as a point cloud in three dimensions (of course, projected onto the two-dimensional plane of our screen).</p>
+<p>This device is invoked as <strong>Explore &gt; 3D Scatter Plot</strong> from the menu, or by selecting the corresponding icon on the toolbar, as shown in Figure <a href="#fig:3dscattericon">14</a> (the third from the right in the EDA group).</p>
+<div class="figure" style="text-align: center"><span id="fig:3dscattericon"></span>
+<img src="pics2b/9_203_3dscaticon.png" alt="3D Scatter Plot toolbar icon" width="50%" />
+<p class="caption">
+Figure 14: 3D Scatter Plot toolbar icon
+</p>
+</div>
+<p>The choice of this icon brings up a variable selection dialog for the variables corresponding to the <strong>X</strong>, <strong>Y</strong> and <strong>Z</strong> dimensions. We stay with the same variables as before: <strong>kids2000</strong>, <strong>pubast00</strong>, and <strong>rent2002</strong>, as in Figure <a href="#fig:3dscattervars">15</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:3dscattervars"></span>
+<img src="pics2b/9_204_3dscat_vars.png" alt="3D Scatter Plot variable selection" width="60%" />
+<p class="caption">
+Figure 15: 3D Scatter Plot variable selection
+</p>
+</div>
+<p>The default 3D scatter plot in Figure <a href="#fig:3dscatter1">16</a> shows the data cube with the y-axis as vertical, and the z and x-axes as horizontal.</p>
+<div class="figure" style="text-align: center"><span id="fig:3dscatter1"></span>
+<img src="pics2b/9_205_3dscatplot1.png" alt="3D Scatter Plot" width="80%" />
+<p class="caption">
+Figure 16: 3D Scatter Plot
+</p>
+</div>
+<div id="interacting-with-the-3d-scatter-plot" class="section level4 unnumbered">
+<h4>Interacting with the 3D scatter plot</h4>
+<p>The data cube can be re-sized by keeping the control key pressed and moving the pointer up (zoom out) or down
+(zoom in). It can also be rotated by means of the pointer. In addition, the controls on the left-hand side of the view allow for the projection of the point cloud onto a given two-dimensional pane, and the construction of a selection box by checking the relevant boxes and/or moving the slider bar.</p>
+<p>For example, in Figure <a href="#fig:3dscatter2">17</a>, the cube has been zoomed in and the axes rotated such that Z is now vertical. With
+the <strong>Project to X-Y</strong> box checked on the left, a 2-dimensional scatter plot is projected onto the X-Y plane.</p>
+<div class="figure" style="text-align: center"><span id="fig:3dscatter2"></span>
+<img src="pics2b/9_206_zoomandprojext.png" alt="3D Scatter Plot zoom and project" width="80%" />
+<p class="caption">
+Figure 17: 3D Scatter Plot zoom and project
+</p>
+</div>
+<p>Selection in the three dimensional plot (or, rather, its two-dimensional projection) is a little tricky and takes some practice. The selection can be done either manually, by pressing down the command key while moving the pointer, or by using the guides under the selection check box.</p>
+<p>Checking the box next to <strong>Select</strong> creates a small red selection cube in the graph. This can be moved around with the command key pressed, or can be moved and resized by using the controls to the left.</p>
+<p>The first set of controls (to the left) move the box along the matching dimension, e.g., up or down the X values for larger or smaller values of the percentage households with kids, and the same for the other two variables. The control to the right changes the size of the box in the corresponding dimension (e.g., larger along the x dimension). The combination of these controls moves the box around to select observation points, with the selected points colored yellow.</p>
+<p>For example, in the graph shown in Figure <a href="#fig:3dscatbrush">18</a>, the selection box has been
+moved to the upper end of the Z dimension (high rent), and the low end of both X and Y (low percent children and low assistance). The selected observations are highlighted in yellow in the data cube.</p>
+<div class="figure" style="text-align: center"><span id="fig:3dscatbrush"></span>
+<img src="pics2b/9_207_select3d.png" alt="3D Scatter Plot selection cube" width="80%" />
+<p class="caption">
+Figure 18: 3D Scatter Plot selection cube
+</p>
+</div>
+<p>The linking feature of GeoDa selectes these same five observations in the map, as
+in Figure <a href="#fig:3dscatmap">19</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:3dscatmap"></span>
+<img src="pics2b/9_208_linkedtomap.png" alt="3D Scatter Plot selection linked to map" width="80%" />
+<p class="caption">
+Figure 19: 3D Scatter Plot selection linked to map
+</p>
+</div>
+<p>In addition, illustrated in Figure <a href="#fig:3dscatbubble">20</a>, GeoDa also shows these same observations in the bubble chart (from the previous section), confirming the association between low percentage kids, low assistance and high rent that we found earlier.</p>
+<div class="figure" style="text-align: center"><span id="fig:3dscatbubble"></span>
+<img src="pics2b/9_210_selectbubble.png" alt="3D Scatter Plot selection linked to bubble chart" width="80%" />
+<p class="caption">
+Figure 20: 3D Scatter Plot selection linked to bubble chart
+</p>
+</div>
+<p>Similar to what we observed for the bubble chart, the 3D scatter plot is most useful for small to medium sized data sets. For larger numbers of observations, the point cloud quickly becomes overwhelming and is no longer effective for visualization.</p>
+</div>
+</div>
+</div>
+<div id="true-multivariate-eda-parallel-coordinate-plot-and-conditional-plots" class="section level2 unnumbered">
+<h2>True Multivariate EDA: Parallel Coordinate Plot and Conditional Plots</h2>
+<p>Once we move beyond three variables, it becomes difficult to visualize the actual
+multi-dimensional cloud plot that corresponds to the observations. Instead, we need to resort to creative ways to reduce the dimensionality to something we can show in a standard two-dimensional view. Two methods that take a different approach to this problem are the parallel coordinate plot (PCP) and conditional plots.</p>
+<div id="parallel-coordinate-plot-pcp" class="section level3 unnumbered">
+<h3>Parallel Coordinate Plot (PCP)</h3>
+<div id="principle-1" class="section level4 unnumbered">
+<h4>Principle</h4>
+<p>The parallel coordinate plot or PCP is designed to visually identify clusters and patterns in a multi-dimensional variable space. Originally suggested by <span class="citation">Inselberg (<a href="#ref-Inselberg:85">1985</a>; see also Inselberg and Dimsdale <a href="#ref-InselbergDimsdale:90">1990</a>)</span>,
+it has become a main feature in many visual data mining frameworks
+<span class="citation">(e.g., Wegman <a href="#ref-Wegman:90">1990</a>; Wegman and Dorfman <a href="#ref-WegmanDorfman:03">2003</a>)</span>.</p>
+<p>In a PCP, each variable is represented as a (parallel) axis, and each observation consists of a line that connects points on the axes. Clusters are identified as groups of lines (i.e., observations) that follow a similar path. This is equivalent to points that are close together in multidimensional variable space. Unlike the latter, which can only be visualized for up to three dimensions (e.g., in the 3D scatter plot), the PCP can be applied to a large number of variables. The only limitation is human perception and screen real estate.</p>
+<p>Outliers in a PCP are lines that show a very different pattern from the rest, similar to outlying points in a multi-dimensional cloud.</p>
+</div>
+<div id="creating-a-pcp" class="section level4 unnumbered">
+<h4>Creating a PCP</h4>
+<p>The PCP functionality is invoked from the menu as <strong>Explore &gt; Parallel Coordinate Plot</strong>,
+or by means of the PCP toolbar icon, shown in Figure <a href="#fig:pcpicon">21</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:pcpicon"></span>
+<img src="pics2b/10_212_pcpicon.png" alt="PCP toolbar icon" width="50%" />
+<p class="caption">
+Figure 21: PCP toolbar icon
+</p>
+</div>
+<p>In the familiar way, clicking on this icon brings up a variable selection dialog. In the same
+manner as for the scatter plot matrix, we move variables from the left column to the right <strong>Include</strong> column using the arrows (or by double clicking on the variable name).
+In our example, shown in Figure <a href="#fig:pcpvars">22</a>, we will use the same three variables as before, <strong>kids2000</strong>, <strong>rent2002</strong>,
+and <strong>pubast00</strong>, as well as a fourth, <strong>yrhom02</strong>, the average number of years lived in the current residence in 2002.</p>
+<div class="figure" style="text-align: center"><span id="fig:pcpvars"></span>
+<img src="pics2b/10_213_pcpvariables.png" alt="PCP variable selection" width="60%" />
+<p class="caption">
+Figure 22: PCP variable selection
+</p>
+</div>
+<p>Each line in the plot corresponds to one observation. The connected points are the values taken for that observation for each of the variables on the axes. The default PCP in GeoDa has the basic green colors, similar to the <strong>Themeless</strong> base map, as in Figure <a href="#fig:pcpdefault">23</a>. Also, some descriptive statistics (mean, standard deviation) are
+listed next to each of the axes (this is the default, but it can be changed with the <strong>Display</strong> option).</p>
+<div class="figure" style="text-align: center"><span id="fig:pcpdefault"></span>
+<img src="pics2b/10_215_defaultpcp.png" alt="Default PCP" width="80%" />
+<p class="caption">
+Figure 23: Default PCP
+</p>
+</div>
+</div>
+<div id="pcp-options" class="section level4 unnumbered">
+<h4>PCP options</h4>
+<p>The options for the PCP include all the standard features we have seen before. In the same
+manner as for the
+bubble chart, we also have the choice of <strong>Classification Themes</strong>. This allows for all of the themes available for choropleth maps to be applied to the variable listed at the top in the PCP.</p>
+<p>Changing the
+color theme may make it a little easier to compare the pattern of the observations for one variable to the relative order of those observations for other variables, although colors are notoriously poor in distinguishing subtle variation in values.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+Therefore, as shown in Figure <a href="#fig:pcpthemes">24</a>, the default of <strong>Themeless</strong> is preferred. We will revisit the classifications in the discussion of the <strong>Map</strong> functionality.</p>
+<div class="figure" style="text-align: center"><span id="fig:pcpthemes"></span>
+<img src="pics2b/10_216_pcp_options.png" alt="PCP options" width="40%" />
+<p class="caption">
+Figure 24: PCP options
+</p>
+</div>
+<p>It often makes sense to change the order of the axes (variables) to bring out patterns of clustering (or outliers) more clearly. This is accomplished by dragging the circle associated with each axis to a different location. For example, in Figure <a href="#fig:pcpmove1">25</a>, we drag the circle associated with <strong>pubast00</strong> up to move it to the second spot, above <strong>rent2002</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:pcpmove1"></span>
+<img src="pics2b/10_217_pcp_moveaxis.png" alt="Moving the axes for PCP" width="80%" />
+<p class="caption">
+Figure 25: Moving the axes for PCP
+</p>
+</div>
+<p>The resulting PCP in Figure <a href="#fig:pcpmove2">26</a> shows more clearly how the low and high values for <strong>kids2000</strong> and <strong>pubast00</strong> align.</p>
+<div class="figure" style="text-align: center"><span id="fig:pcpmove2"></span>
+<img src="pics2b/10_220_pcpnewaxes.png" alt="PCP with axes moved" width="80%" />
+<p class="caption">
+Figure 26: PCP with axes moved
+</p>
+</div>
+<p>Just like the scatter plot, the PCP can be <strong>brushed</strong>. In Figure <a href="#fig:pcpbrush1">27</a>, using a rectangular selection shape, the five lowest values for <strong>kids2000</strong> are selected. The pattern that results (only the selected observations, or lines, are highlighted in the graph), shows how these observations track very closely for the four variables considered here. This is a typical pattern for a <strong>visual cluster</strong> detected in the PCP. The rectangle can be moved along the axis for <strong>kids2000</strong> to see how other clusters may reveal
+themselves. Alternatively, the <em>brush</em> can be created on any of the other axes to proceed in a similar way.</p>
+<div class="figure" style="text-align: center"><span id="fig:pcpbrush1"></span>
+<img src="pics2b/10_218_pcpbrush.png" alt="Brushing the PCP" width="80%" />
+<p class="caption">
+Figure 27: Brushing the PCP
+</p>
+</div>
+<p>The selection in the PCP is immediately linked to the other open views. For example,
+as illustrated in Figure <a href="#fig:pcpmap">28</a>, the five selected observations are sub-boroughs
+located in Manhattan, as we have already seen before.</p>
+<div class="figure" style="text-align: center"><span id="fig:pcpmap"></span>
+<img src="pics2b/10_219_pcponmap.png" alt="Linking PCP and map" width="80%" />
+<p class="caption">
+Figure 28: Linking PCP and map
+</p>
+</div>
+<p>Similar to what holds for the other graphs, the brushing process can be initiated in any of the other open views, such as the map, histogram, box plot, scatter plot, bubble chart or 3D scatter plot.</p>
+</div>
+</div>
+<div id="conditional-plots" class="section level3 unnumbered">
+<h3>Conditional Plots</h3>
+<div id="principle-2" class="section level4 unnumbered">
+<h4>Principle</h4>
+<p>Conditional plots, also known as facet graphs or Trellis graphs <span class="citation">(Becker, Cleveland, and Shyu <a href="#ref-Beckeretal:96">1996</a>)</span>, provide a means to assess interactions between more than two variables. Multiple graphs or maps are constructed for different subsets of the observations, obtained as a result of <em>conditioning</em> on the value of two variables.</p>
+<p>GeoDa supports conditional maps, histograms and scatter plots. We focus here on conditional scatter
+plots and histograms, and leave the discussion of conditional maps for a later Chapter.</p>
+<p>We first consider the conditional scatter plots and close the Chapter with a brief illustration
+of conditional histograms.</p>
+</div>
+<div id="creating-conditional-scatter-plots" class="section level4 unnumbered">
+<h4>Creating conditional scatter plots</h4>
+<p>Each of the three conditional plots is started from the <strong>Conditional Plot</strong> icon on the toolbar,
+shown in Figure <a href="#fig:condploticon">29</a>. This brings up a list that provides three types of plot options. Alternatively, the same can be accomplished from the menu, by means of <strong>Explore &gt; Conditional Plot</strong>, followed by the choice of <strong>Map</strong>, <strong>Histogram</strong> or <strong>Scatter Plot</strong> (note that the conditional map functionality can also be started from the map menu, as <strong>Map &gt; Conditional Map</strong>).</p>
+<p>The conditional scatter plot is the third option in the list, as in Figure <a href="#fig:condplotoption">30</a>. This plot allows
+the interaction among four variables to be considered simultaneously.</p>
+<div class="figure" style="text-align: center"><span id="fig:condploticon"></span>
+<img src="pics2b/11_223_condploticon.png" alt="Conditional Plot toolbar icon" width="50%" />
+<p class="caption">
+Figure 29: Conditional Plot toolbar icon
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:condplotoption"></span>
+<img src="pics2b/11_224_condscatploticon.png" alt="Conditional Scatter Plot toolbar icon" width="15%" />
+<p class="caption">
+Figure 30: Conditional Scatter Plot toolbar icon
+</p>
+</div>
+<p>The four variables required are selected in the variables selection dialog
+shown in Figure <a href="#fig:condplotvars">31</a>. Not only are there the conditioning variables for the x and y axes that need to be chosen, but also the two variables for the scatter plot itself. In our example, we have taken <strong>hhsiz00</strong> (median household size in 2000), <strong>yrhom02</strong> (average number of years lived in current residence, for 2002) as the two conditioning variables. The scatter plot is constructed with <strong>kids2000</strong> (% households with kids under 18 in 2000) on the x-axis and <strong>pubast00</strong> (% households receiving public assistance in 2000) on the y-axis.</p>
+<div class="figure" style="text-align: center"><span id="fig:condplotvars"></span>
+<img src="pics2b/11_225_condscatplotvars.png" alt="Conditional Scatter Plot variable selection" width="60%" />
+<p class="caption">
+Figure 31: Conditional Scatter Plot variable selection
+</p>
+</div>
+<p>The default plot consists of a 3 x 3 arrangement. In our example in Figure <a href="#fig:condplot3x3">32</a>, the subsetting is too fine grained for 55 observations, since several cells have only minimal observations (e.g., 2, 3 and 4).</p>
+<div class="figure" style="text-align: center"><span id="fig:condplot3x3"></span>
+<img src="pics2b/11_226_condscat3x3.png" alt="3x3 Conditional Scatter Plot" width="80%" />
+<p class="caption">
+Figure 32: 3x3 Conditional Scatter Plot
+</p>
+</div>
+</div>
+<div id="changing-the-conditioning" class="section level4 unnumbered">
+<h4>Changing the conditioning</h4>
+<p>The options menu provides a way to change the number of categories as well as the break points. The <strong>Vertical Bins Breaks</strong> and <strong>Horizontal Bins Breaks</strong> contain all the standard interval conventions (more about this when we discuss mapping), as well as the possibility to create custom cut-off points.</p>
+<p>In our example, illustrated in Figure <a href="#fig:binbreaks">33</a>, we switch from a 3x3 setup to a 2x2 arrangement by selecting the median (<strong>Quantile &gt; 2</strong>) as the break point for each of the conditioning variables.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>More precisely, a breakpoint is chosen that splits the number
+of observations into two equal parts (as close as possible). However, since the median can itself correspond to an observation (for an uneven number of observations, as is the case in our example),
+the cut-off value shown in the graph can be slightly different from the actual median.</p>
+<p>For example,
+the median for <strong>hhsiz00</strong> (e.g., as obtained from the descriptive statistics listed with a
+box plot) is 2.7176, whereas the cut-off value shown for the horizontal axis of the graph is 2.703.
+In addition, when there are many tied observations, the break points are chosen such that the
+resulting categories are as close as possible to the specified requirements. In any event, the
+breaks can also be set explicitly by means of the <strong>Custom Breaks</strong> option (see the discussion
+of the map functionality).</p>
+<div class="figure" style="text-align: center"><span id="fig:binbreaks"></span>
+<img src="pics2b/11_227_binbreaks.png" alt="Adjusting bin breaks" width="40%" />
+<p class="caption">
+Figure 33: Adjusting bin breaks
+</p>
+</div>
+<p>By default, a linear fit is shown through the scatter plots (<strong>Show Linear Smoother</strong>), and for
+each plot, axes tick points (<strong>View &gt; Display Axes Scale Values</strong>) and the slope value
+(<strong>View &gt; Display Slope Values</strong>) are displayed by default. These settings
+are illustrated in Figure <a href="#fig:condfit">34</a>. As in the scatter plot matrix, the regression slopes are highlighted as significant by means of one (p &lt; 0.05) or two asterisks (p &lt; 0.01).</p>
+<div class="figure" style="text-align: center"><span id="fig:condfit"></span>
+<img src="pics2b/11_228_condscat2x2.png" alt="2x2 Conditional Scatter Plot" width="80%" />
+<p class="caption">
+Figure 34: 2x2 Conditional Scatter Plot
+</p>
+</div>
+<p>The result in Figure <a href="#fig:condfit">34</a> suggest a positive and significant slope between the number of kids and the degree of public assistance for those neighborhoods with more residential transition (smaller number of years lived in residence), as shown in the two graphs at the bottom. The slope is almost four times steeper in neighborhoods with larger household size (lower-right graph). However, the relationship is not significant for the more residentially stable neighborhoods (number of years lived in residence above the median), irrespective of the household size (top two graphs).</p>
+<p>Finally, the options also allow for a LOWESS smoother to be applied to the scatter plot points
+(by checking <strong>Show LOWESS Smoother</strong> in the options). For example, with the bandwidth set to 0.40 (after adjusting
+the bandwith with <strong>Edit LOWESS Parameters</strong>), this results in the graph
+shown in Figure <a href="#fig:condlowess">35</a>. We again see a more or less linear relationship in the bottom two scatter plots, but much more erratic behavior in the top ones. This confirms the lack of significance we found for the linear fit.</p>
+<div class="figure" style="text-align: center"><span id="fig:condlowess"></span>
+<img src="pics2b/11_229_condscatlowess.png" alt="LOWESS smooth of the Conditional Scatter Plot" width="80%" />
+<p class="caption">
+Figure 35: LOWESS smooth of the Conditional Scatter Plot
+</p>
+</div>
+</div>
+<div id="creating-conditional-histograms" class="section level4 unnumbered">
+<h4>Creating conditional histograms</h4>
+<p>A conditional histogram
+shows the distribution of a target variable for subsets of the data as determined by intervals
+for the conditional variables. It is selected as the second item in the list of conditional plots,
+as shown in Figure <a href="#fig:condhistoption">36</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:condhistoption"></span>
+<img src="pics2b/12_897_condhistoption.png" alt="Conditional Histogram toolbar icon" width="15%" />
+<p class="caption">
+Figure 36: Conditional Histogram toolbar icon
+</p>
+</div>
+<p>We proceed in the same way as for the conditional scatter plot and select <strong>hhsiz00</strong> and
+<strong>yrhom02</strong> as the conditioning variables for the target variable <strong>pubast00</strong>, as
+illustrated in the variable selection dialog in Figure <a href="#fig:condhistvars">37</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:condhistvars"></span>
+<img src="pics2b/12_899_condhistvars.png" alt="Conditional Histogram variable selection" width="60%" />
+<p class="caption">
+Figure 37: Conditional Histogram variable selection
+</p>
+</div>
+<p>In order to obtain a somewhat meaningful result, we again adjust the horizontal and vertical bin
+sizes to end up with the 2 by 2 plot shown in Figure <a href="#fig:condhist">38</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:condhist"></span>
+<img src="pics2b/12_900_condhistogram.png" alt="2x2 Conditional Histogram" width="80%" />
+<p class="caption">
+Figure 38: 2x2 Conditional Histogram
+</p>
+</div>
+<p>We cannot distinguish a meaningful difference between the plots in the top part of the graph, i.e.,
+for those sub-boroughs with a higher percentage of long-term residents, the distributon of the
+percentage public assistance does not seem to depend on the median household size. However, in the bottom
+part of the graph, there is a suggestion that in sub-boroughs characterized by a higher turnover
+in residents and with larger median household size, there is a higher percentage public assistance.</p>
+<p>As always in an exploratory exercise, this is just a suggestion, and it would need to be
+further quantified in the form of a precise hypothesis test.</p>
+</div>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Beckeretal:96">
+<p>Becker, Richard A., W.S. Cleveland, and M-J. Shyu. 1996. “The Visual Design and Control of Trellis Displays.” <em>Journal of Computational and Graphical Statistics</em> 5:123–55.</p>
+</div>
+<div id="ref-Inselberg:85">
+<p>Inselberg, A. 1985. “The Plane with Parallel Coordinates.” <em>Visual Computer</em> 1:69–91.</p>
+</div>
+<div id="ref-InselbergDimsdale:90">
+<p>Inselberg, Alfred, and B. Dimsdale. 1990. “Parallel Coordinates: A Tool for Visualizing Multi-Dimensional Geometry.” <em>Proceedings of the IEEE Visualization 90</em>, 361–78.</p>
+</div>
+<div id="ref-Wegman:90">
+<p>Wegman, Edward J. 1990. “Hyperdimensional Data Analysis Using Parallel Coordinates.” <em>Journal of the American Statistical Association</em> 85:664–75.</p>
+</div>
+<div id="ref-WegmanDorfman:03">
+<p>Wegman, Edward J., and Alan Dorfman. 2003. “Visualizing Cereal World.” <em>Computational Statistics and Data Analysis</em> 43 (4):633–49.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>In addition, the color scheme remains attached to the variable that
+was originally listed at the top, even if the axis corresponding to that variables is later moved to
+a different position.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Note that the break point convention can be different for the horizontal and vertical axes, such as, 3 categories vertically and 2 horizontally.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-72724100-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

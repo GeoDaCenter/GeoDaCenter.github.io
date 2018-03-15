@@ -1,3 +1,0 @@
-1.10
-https://github.com/GeoDaCenter/geoda/releases
-

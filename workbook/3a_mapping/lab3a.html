@@ -15,25 +15,25 @@
 
 <title>Basic Mapping</title>
 
-<link href="lab3a_files/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="lab3a_files/highlightjs-1.1/highlight.js"></script>
+<link href="lab3a_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab3a_files/highlightjs-9.12.0/highlight.js"></script>
     <title>GeoDa on Github</title>
 
     <style>
     	*{margin:0;padding:0;}
-	.shadowfilter {
-	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-	filter: url(shadow.svg#drop-shadow);
-	}
-	.intro1 { margin-left: -45px;}
+	    .shadowfilter {
+	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	        filter: url(shadow.svg#drop-shadow);
+	     }
+	     .intro1 { margin-left: -45px;}
     </style>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="../../stylesheets/simple-slideshow-styles.css">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
     <style>
-    ul {padding-left:30px;} 
+    ul {padding-left:30px;}
 	figcaption {
 	  top: .70em;
    	  left: .35em;
@@ -41,9 +41,12 @@
 	  right: auto!important;
 	}
     </style>
-    
+
         <style>
     h1 {
+        text-align: center;
+    }
+    h3.subtitle {
         text-align: center;
     }
     h4.author {
@@ -56,7 +59,7 @@
         font-size : 12px;
     }
     </style>
-    
+
 <!-- Google Analytics -->
 <script>
 window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -66,21 +69,23 @@ ga('send', 'pageview');
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 <!-- End Google Analytics -->
 <!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-53RVF8');</script>
 <!-- End Google Tag Manager -->
 
 <style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -96,21 +101,21 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
     <section class="page-header">
       <h1 class="project-name">GeoDa</h1>
       <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
-      <a href="//geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
       <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
       <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
-       <a href="//geodacenter.github.io/documentation.html" class="btn">Documentation</a>
-       <a href="//geodacenter.github.io/support.html" class="btn">Support</a>
-       <a href="//geodacenter.github.io/index-cn.html" class="btn">中文</a>
+       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
     </section>
-
 
     <section class="main-content">
 
 
 <h1 class="title toc-ignore">Basic Mapping</h1>
-<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>10/18/2017 (updated)</em></h4>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>03/14/2018 (revised and updated)</em></h4>
 
 
 <div id="TOC">
@@ -128,6 +133,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </ul></li>
 <li><a href="#map-options">Map options</a><ul>
 <li><a href="#the-map-toolbar">The map toolbar</a></li>
+<li><a href="#map-base-layer-base-map">Map base layer (base map)</a></li>
 <li><a href="#saving-the-classification-as-a-categorical-variable">Saving the classification as a categorical variable</a></li>
 <li><a href="#saving-the-map-as-an-image">Saving the map as an image</a></li>
 <li><a href="#shape-centers">Shape centers</a></li>
@@ -144,12 +150,19 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><a href="#co-location-map">Co-location map</a></li>
 </ul></li>
 <li><a href="#custom-classifications">Custom Classifications</a><ul>
-<li><a href="#category-editor">Category editor</a></li>
+<li><a href="#category-editor">Category editor</a><ul>
+<li><a href="#default-setup">Default setup</a></li>
+<li><a href="#editing-break-points">Editing break points</a></li>
+<li><a href="#custom-category-labels">Custom category labels</a></li>
+</ul></li>
 <li><a href="#applications-of-custom-categories">Applications of custom categories</a></li>
-<li><a href="#saving-the-custom-categories-the-project-file">Saving the custom categories – the Project file</a></li>
+<li><a href="#saving-the-custom-categories-the-project-file">Saving the custom categories – the Project File</a></li>
 </ul></li>
 <li><a href="#conditional-map">Conditional Map</a></li>
-<li><a href="#cartogram">Cartogram</a></li>
+<li><a href="#cartogram">Cartogram</a><ul>
+<li><a href="#principle">Principle</a></li>
+<li><a href="#creating-a-cartogram">Creating a cartogram</a></li>
+</ul></li>
 <li><a href="#map-animation">Map Animation</a></li>
 <li><a href="#references">References</a></li>
 </ul>
@@ -158,15 +171,20 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p><br></p>
 <div id="introduction" class="section level2 unnumbered">
 <h2>Introduction</h2>
-<p>In this lab, we will explore a range of mapping and geovisualization options. We start with a review of common thematic map classifications and the way these are implemented in GeoDa. We next focus on different statistical maps, in particular maps that are designed to highight extreme values or outliers. We also illustrate maps for categorical variables (unique value maps), and their extension to multiple categories in the form of co-location maps. We close with a review of some special approaches to geovisualization, i.e., conditional maps, the cartogram and map animation.</p>
-<p>Even though there is substantial mapping functionality in GeoDa, it is worth noting that it is <em>not</em> a cartographic software. The main objective is to use the maps as part of a framework of <em>dynamic graphics</em>, to interact with the data as part of the exploration process. As a result, maps in GeoDa do not have some standard cartographic features, such as a directional arrow, or a scale bar. However, any map can be saved as an image file for further manipulation in specialized graphics software.</p>
-<p>For this exercise, we will again be using the data set with demographic and socio-economic information for 55 New York City sub-boroughs that comes built-in with GeoDa.</p>
+<p>In this Chapter, we will explore a range of mapping and geovisualization options. We start with a review of common thematic map classifications and the way these are implemented in GeoDa. We next focus on different statistical maps, in particular maps that are designed to
+highight extreme values or outliers. We also illustrate maps for categorical variables
+(unique value maps), and their extension to multiple categories in the form
+of co-location maps. We close with a review of some special approaches to geovisualization, i.e., conditional maps, the cartogram and map animation.</p>
+<p>Even though there is substantial mapping functionality in GeoDa, it is worth noting that it is
+<em>not</em> a cartographic software. The main objective is to use the maps as part of a framework
+of <em>dynamic graphics</em>, to interact with the data as part of the exploration process. As a result, maps in GeoDa do not have some standard cartographic features, such as a directional arrow, or a scale bar. However, any map can be saved as an image file for further manipulation in specialized graphics software.</p>
+<p>We will continue to use the data set with demographic and socio-economic information for 55 New York City sub-boroughs that comes built-in with GeoDa.</p>
 <div id="objectives" class="section level3 unnumbered">
 <h3>Objectives</h3>
-<p>After completing this lab, you should be familiar with the following operations and analyses:</p>
 <ul>
 <li><p>Create commonly used thematic and statistical maps</p></li>
 <li><p>Manipulate the map by zooming, panning, and selection</p></li>
+<li><p>Add a background layer (base map) to a thematic map</p></li>
 <li><p>Save the map as an image</p></li>
 <li><p>Save map classifications as a categorical variable</p></li>
 <li><p>Display and/or save the mean centers and centroids of polygons</p></li>
@@ -205,8 +223,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>Save Categories</li>
 <li>Save the map as an image</li>
 <li>Extract mean centers and/or centroids</li>
-<li>Changing the look of a map</li>
-<li>Making map outlines invisible</li>
+<li>Change the look of a map</li>
+<li>Make map outlines invisible</li>
 </ul></li>
 <li>Map &gt; Percentile Map</li>
 <li>Map &gt; Box Map
@@ -245,202 +263,342 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 <div id="thematic-maps-overview" class="section level2 unnumbered">
 <h2>Thematic Maps – Overview</h2>
-<p>We start GeoDa, or, if continuing from a previous exercise, close the project and load the NYC sub-borough data set from the <strong>Sample Data</strong> tab in the <strong>Connect to Data Source</strong> dialog. Once click on the NYC Data icon brings up the by now familiar green themeless map. To see the different mapping options, we select <strong>Map</strong> from the menu, or click on the <strong>Maps and Rates</strong> icon in the toolbar.</p>
-<div class="figure" style="text-align: center">
+<p>We start by closing the current project and load the NYC sub-borough data set from the <strong>Sample Data</strong> tab in the <strong>Connect to Data Source</strong> dialog. One click on the NYC Data icon brings up the by now familiar green themeless map. To see the different mapping options, we select <strong>Map</strong> from the menu, or click on the <strong>Maps and Rates</strong> icon in the toolbar, shown
+in Figure <a href="#fig:mapicon">1</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:mapicon"></span>
 <img src="pics3a/0_230_mapicon.png" alt="Map Toolbar icon" width="20%" />
 <p class="caption">
-Map Toolbar icon
+Figure 1: Map Toolbar icon
 </p>
 </div>
-<p>The selection brings up the list of map types that can be created in GeoDa.</p>
-<div class="figure" style="text-align: center">
+<p>The selection brings up the list of map types that can be created in GeoDa, as given
+in Figure <a href="#fig:maptypeoptions">2</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:maptypeoptions"></span>
 <img src="pics3a/0_231_map_options_u.png" alt="Map type options" width="30%" />
 <p class="caption">
-Map type options
+Figure 2: Map type options
 </p>
 </div>
-<p>We ignore the <strong>Rates-Calculated Maps</strong> item for now, which will be considered separately. Among the other options, there are three where an additional choice is required (the right pointing arrow) consisting of the number of intervals to be specified (choose the number from a drop down list). All the other options have pre-specified settings.</p>
-<p>Common map classifications include the <strong>Quantile Map</strong>, <strong>Natural Breaks Map</strong>, and <strong>Equal Intervals Map</strong>. Specialized classifications that are designed to bring out extreme values include the <strong>Percentile Map</strong>, <strong>Box Map</strong> (with two options for the hinge), and the <strong>Standard Deviation Map</strong>. The <strong>Unique Values Map</strong> does not involve a classification algorithm, since it uses the integer values of a categorical variable itself as the map categories. The <strong>Co-location Map</strong> is an extension of this principle to multiple categorical variables. Finally, <strong>Custom Breaks</strong> allows for the use of customized classifications by means of the <strong>Category Editor</strong>.</p>
+<p>We ignore the <strong>Rates-Calculated Maps</strong> item for now, which will be considered in the next Chapter. Among the other map types, there are three where an additional choice is required (the right pointing arrow) consisting of the number of intervals to be specified (choose the number
+from a drop down list). All the other options have pre-specified settings.</p>
+<p>Common map classifications include the <strong>Quantile Map</strong>, <strong>Natural Breaks Map</strong>, and
+<strong>Equal Intervals Map</strong>. Specialized classifications that are designed to bring out
+extreme values include the <strong>Percentile Map</strong>, <strong>Box Map</strong> (with two options for the hinge), and the <strong>Standard Deviation Map</strong>. The <strong>Unique Values Map</strong> does not involve a classification algorithm, since it uses the integer values of a categorical variable itself as the map categories. The
+<strong>Co-location Map</strong> is an extension of this principle to multiple categorical variables.
+Finally, <strong>Custom Breaks</strong> allows for the use of customized classifications by means
+of the <strong>Category Editor</strong>.</p>
 <p>We consider each in turn.</p>
 <div id="common-map-classifications" class="section level3 unnumbered">
 <h3>Common map classifications</h3>
 <div id="quantile-map" class="section level4 unnumbered">
 <h4>Quantile map</h4>
-<p>We already saw an example of a quintile map (5 categories) in the exercise where we mapped the number of abandoned vehicles by community area in Chicago. As a quick review, select <strong>Quantile Map &gt; 4</strong> to create a <em>quartile</em> map (four categories).</p>
-<div class="figure" style="text-align: center">
+<p>A quantile map is based on sorted values for a variable that are then grouped into
+bins that each have the same number of observations, the so-called quantiles. The number of bins
+corresponds to the particular quantile, e.g., five bins for a <em>quintile</em> map, or four bins
+for a <em>quartile</em> map, two of the most commonly used categories.</p>
+<p>To illustrate this functionality, we select
+<strong>Quantile Map &gt; 4</strong> from the list of options shown
+in Figure <a href="#fig:quantileoption">3</a> to create a <em>quartile</em> map (four categories).</p>
+<div class="figure" style="text-align: center"><span id="fig:quantileoption"></span>
 <img src="pics3a/1_232_quartileoption_u.png" alt="Quartile map" width="35%" />
 <p class="caption">
-Quartile map
+Figure 3: Quartile map
 </p>
 </div>
-<p>In the variable selection dialog that follows, we select <strong>rent2008</strong> for the median rent in 2008.</p>
-<div class="figure" style="text-align: center">
+<p>In the variable selection dialog that follows, illustrated
+in Figure <a href="#fig:mapvars">4</a> , we select <strong>rent2008</strong>, for the median rent in 2008.</p>
+<div class="figure" style="text-align: center"><span id="fig:mapvars"></span>
 <img src="pics3a/1_233_rentvar.png" alt="Variable selection dialog" width="25%" />
 <p class="caption">
-Variable selection dialog
+Figure 4: Variable selection dialog
 </p>
 </div>
-<p>This brings up the quartile map, with four categories in the legend, each matching a quartile in the data. The values in parentheses give the number of observations in each category.</p>
-<div class="figure" style="text-align: center">
+<p>This brings up the quartile map, shown in Figure <a href="#fig:quartmap">5</a>, with four categories in the legend, each matching a quartile in the data. The values in parentheses give the number of observations in each category.</p>
+<div class="figure" style="text-align: center"><span id="fig:quartmap"></span>
 <img src="pics3a/1_234_quartilemap.png" alt="Quartile map for median rent in 2008" width="80%" />
 <p class="caption">
-Quartile map for median rent in 2008
+Figure 5: Quartile map for median rent in 2008
 </p>
 </div>
-<p>Upon closer examination, something doesn’t seem to be quite right. With 55 total observations, we should expect roughly 14 (55/4 = 13.75) observations in each group. But the first group only has 7, and the third group has 19! This illustrates a common problem with quantile maps whenever ties are present. If we open up the <strong>Table</strong> (click on the icon if it is not open) and sort on the variable <strong>rent2008</strong> (click on the field name), we see where the problem lies.</p>
-<div class="figure" style="text-align: center">
+<p>Upon closer examination, something doesn’t seem to be quite right. With 55 total observations, we should expect roughly 14 (55/4 = 13.75) observations in each group. But the first group only has 7, and the third group has 19!</p>
+<p>This illustrates a common problem with quantile maps
+whenever ties are present. If we open up the <strong>Table</strong> (click on the table icon if it is not open) and sort on the variable <strong>rent2008</strong> (click on the field name), we see in Figure <a href="#fig:tiestable">6</a> where the problem lies.</p>
+<div class="figure" style="text-align: center"><span id="fig:tiestable"></span>
 <img src="pics3a/1_235_rent_sorted.png" alt="Sorted median rent in 2008" width="90%" />
 <p class="caption">
-Sorted median rent in 2008
+Figure 6: Sorted median rent in 2008
 </p>
 </div>
-<p>Ignoring the zero entries for now (those are a potential problem in their own right), we see that observations starting in row 8 up to row 21 all have a value of 1000. The cut-off for the first quartile is at 14, highlighted in yellow in the graph. In a non-spatial analysis, this is not an issue, the first quartile value is given as 1000. But in a map, the observations are locations that need to be assigned to a group (with a separate color). Other than an arbitrary assignment, there is no way to classify observations with a rent of 1000 in either category 1 or category 2. To deal with these <em>ties</em>, GeoDa moves all the observations with a value of 1000 to the second category. As a result, even though the value of the first quartile is given as 1000 in the map legend, only those observations with rents <em>less than</em> 1000 are included in the first quartile category. As we see from the table, there are 7 such observations.</p>
+<p>Ignoring the zero entries for now (those are a potential problem in their own right),
+we see that observations starting in row 8 up to row 21 all have a value of 1000. The cut-off
+for the first quartile is at 14, highlighted in yellow in the graph. In a non-spatial analysis, this is not an issue, the first quartile value is given as 1000. But in a map, the observations are locations that need to be assigned to a group (with a separate color). Other than an arbitrary assignment, there is no way to classify observations with a rent of 1000 in either category 1 or category 2. To deal with these <em>ties</em>, GeoDa moves all the observations with a value of 1000 to the second category. As a result, even though the value of the first quartile is given as 1000 in the map legend, only those observations with rents <em>less than</em> 1000 are included in the first quartile category. As we see from the table, there are seven such observations.</p>
 <p>Any time there are ties in the ranking of observations that align with the values for the breakpoints, the classification in a quantile map will be problematic and result in categories with an unequal number of observations.</p>
 </div>
 <div id="natural-breaks-map" class="section level4 unnumbered">
 <h4>Natural breaks map</h4>
-<p>A natural breaks map uses a nonlinear algorithm to group observations such that the within-group homogeneity is maximized, following the pathbreaking work of <span class="citation">Fisher (1958)</span> and <span class="citation">Jenks (1977)</span>. In essence, this is a clustering algorithm in one dimension to determine the break points that yield groups with the largest internal similarity.</p>
-<p>To create such a map with four categories, we select <strong>Natural Breaks Map &gt; 4</strong> from the list of options and again choose <strong>rent2008</strong> as the variable, in the same way as for the quantile map. This yields a natural breaks map.</p>
-<div class="figure" style="text-align: center">
+<p>A natural breaks map uses a nonlinear algorithm to group observations such that
+the within-group homogeneity is maximized, following the pathbreaking work of
+<span class="citation">Fisher (<a href="#ref-Fisher:58">1958</a>)</span> and <span class="citation">Jenks (<a href="#ref-Jenks:77">1977</a>)</span>. In essence, this is a clustering algorithm in one dimension to determine the break points that yield groups with the largest internal similarity.</p>
+<p>To create such a map with four categories, we select <strong>Natural Breaks Map &gt; 4</strong> from the list of options and again choose <strong>rent2008</strong> as the variable, in the same way as for the quantile map. This yields a natural breaks map, shown in Figure <a href="#fig:natbreaks">7</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:natbreaks"></span>
 <img src="pics3a/1_236_naturalbreaks.png" alt="Natural breaks map for median rent in 2008" width="80%" />
 <p class="caption">
-Natural breaks map for median rent in 2008
+Figure 7: Natural breaks map for median rent in 2008
 </p>
 </div>
 <p>In comparison to the quartile map, the natural breaks criterion is better at grouping the extreme observations. The three observations with zero values make up the first category, whereas the five high rent areas in Manhattan make up the top category. Note also that in contrast to the quantile maps, the number of observations in each category can be highly unequal.</p>
 </div>
 <div id="equal-intervals-map" class="section level4 unnumbered">
 <h4>Equal intervals map</h4>
-<p>An equal intervals map uses the same principle as a histogram to organize the observations into categories that divide the range of the variable into equal bins. Using <strong>Equal Intervals Map &gt; 4</strong> and <strong>rent2008</strong> for the variable provides the following result.</p>
-<div class="figure" style="text-align: center">
+<p>An equal intervals map uses the same principle as a histogram to organize the observations
+into categories that divide the range of the variable into equal interval bins. This
+contrasts with the quantile map, where the number of observations in each bin is equal, but the
+range for each bin is not. For
+the equal interval classification, the value range between the lower and upper bound
+in each bin is constant across bins, but the number of observations in each
+bin is typically not equal.</p>
+<p>Using
+<strong>Equal Intervals Map &gt; 4</strong> and <strong>rent2008</strong> for the variable provides the result
+illustrated in Figure <a href="#fig:eqinterval">8</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:eqinterval"></span>
 <img src="pics3a/1_237_equalintervals.png" alt="Equal intervals map for median rent in 2008" width="80%" />
 <p class="caption">
-Equal intervals map for median rent in 2008
+Figure 8: Equal intervals map for median rent in 2008
 </p>
 </div>
 <p>As in the case of natural breaks, the equal interval approach can yield categories with highly unequal numbers of observations. In our example, the three zero observations again get grouped in the first category, but the second range (from 725 to 1450) contains the bulk of the spatial units (42).</p>
-<p>To illustrate the similarity with the histogram, we select <strong>Explore &gt; Histogram</strong> for <strong>rent2008</strong> and set the <strong>Choose Intervals</strong> option to <strong>4</strong>. Also, set <strong>View &gt; Display Statistics</strong>. The resulting histogram has the exact same ranges for each interval as the equal intervals map. The number of observations in each category is the same as well (see the values in the descriptive statistics below the graph).</p>
-<div class="figure" style="text-align: center">
+<p>To illustrate the similarity with the histogram, we select <strong>Explore &gt; Histogram</strong> for <strong>rent2008</strong> and set the <strong>Choose Intervals</strong> option to <strong>4</strong>. Also, set <strong>View &gt; Display Statistics</strong>. The resulting histogram in Figure <a href="#fig:eqinthist">9</a> has the exact same ranges for each interval as the equal intervals map. The number of observations in each category is the same as well. The values for the
+number of observations in the descriptive statistics below the graph match the values given
+in parentheses in the map legend.</p>
+<div class="figure" style="text-align: center"><span id="fig:eqinthist"></span>
 <img src="pics3a/1_238_histogram4.png" alt="Histogram (4) for median rent in 2008" width="60%" />
 <p class="caption">
-Histogram (4) for median rent in 2008
+Figure 9: Histogram (4) for median rent in 2008
 </p>
 </div>
-<p>Finally, we illustrate the equivalence between the two graphs by selecting a category in the map legend. We click on the dark brown rectangle in the map legend associated with the highest category, which selects the corresponding observations in both the map and the histogram. As expected, the selected bins match completely.</p>
-<div class="figure" style="text-align: center">
+<p>Finally, we illustrate the equivalence between the two graphs by selecting a category in the map legend.
+To accomplish this, we click on the rectangle in the map legend associated with the chosen category.
+In the right-hand panel of Figure <a href="#fig:linkmapeqint">10</a>, this is shown for the highest category
+(the dark brown rectangle in the legend). This selects the corresponding observations in the map, and,
+through linking, in the histogram as well (left-hand panel in Figure <a href="#fig:linkmapeqint">10</a>). As expected, the selected bins match completely.</p>
+<div class="figure" style="text-align: center"><span id="fig:linkmapeqint"></span>
 <img src="pics3a/1_239_histmap_select.png" alt="Histogram-Equal Intervals map equivalence" width="100%" />
 <p class="caption">
-Histogram-Equal Intervals map equivalence
+Figure 10: Histogram-Equal Intervals map equivalence
 </p>
 </div>
 </div>
 </div>
 <div id="map-options" class="section level3 unnumbered">
 <h3>Map options</h3>
-<p>Once a map is created, there are two types of options available. One set pertains directly to the manipulation of the map and is implemented by means of the icons on the map toolbar. We have already seen some of its features in an earlier exercise, but revisit it in more detail here. The second set of options is triggered by right clicking on the map window, which invokes the options dialog.</p>
-<div class="figure" style="text-align: center">
-<img src="pics3a/1_241_mapoptions_u.png" alt="Map options" width="30%" />
+<p>Once a map is created, there are two types of options available. One set pertains directly
+to the manipulation of the map and is implemented by means of the icons on the map toolbar. The second set of options is triggered by right clicking on the map window, which
+invokes the options dialog shown in Figure <a href="#fig:mapoptions">11</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:mapoptions"></span>
+<img src="pics3a/1_241_mapoptions.png" alt="Map options" width="30%" />
 <p class="caption">
-Map options
+Figure 11: Map options
 </p>
 </div>
-<p>The top item (<strong>Change Current Map Type</strong>) brings up the same list with map types as invoked by clicking on the <strong>Map</strong> icon on the main toolbar, with one additional entry for a custom classification (<strong>Create New Custom</strong>). Selecting a different map type from a current map in this fashion precludes the need to choose a variable, but it also overwrites the current map. We consider the various features in further detail below, except for the <strong>Rates</strong> and <strong>Save Rates</strong>, and <strong>Selection and Neighbors</strong>, which are covered in a separate chapter.</p>
+<p>The top item (<strong>Change Current Map Type</strong>) brings up the same list with map types as invoked by clicking on the <strong>Map</strong>
+icon on the main toolbar. Selecting a different map type from a current map in this fashion
+precludes the need to choose a variable, but it also overwrites the current map.</p>
+<p>We consider the various features in further detail below, except for the rates functions (<strong>Rates</strong> and <strong>Save Rates</strong>), and operations related to the spatial weights (<strong>Connectivity</strong>), which
+are covered in later chapters.</p>
 <div id="the-map-toolbar" class="section level4 unnumbered">
 <h4>The map toolbar</h4>
-<p>The map toolbar contains eight icons that facilitate selection and viewing of the map.</p>
-<div class="figure" style="text-align: center">
+<p>The map toolbar contains eight icons that facilitate selection and viewing of the map, as shown
+in Figure <a href="#fig:maptoolbar">12</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:maptoolbar"></span>
 <img src="pics3a/1_240_maptoolbar.png" alt="Map toolbar" width="40%" />
 <p class="caption">
-Map toolbar
+Figure 12: Map toolbar
 </p>
 </div>
-<p>We have already covered the <strong>Select</strong> (left most) icon in a previous exercise, as well as the <strong>Base Map</strong> icon (second from right). The right most icon is simply to <strong>Refresh</strong> the image, in case something went wrong.</p>
-<p>The other icons, from left to right, allow the following actions:</p>
+<p>From left to right, the icons allow the following actions:</p>
 <ul>
-<li><p><strong>Invert Select</strong>, switches to the complement of the current selection (same functionality as <strong>Table &gt; Invert Selection</strong>)</p></li>
+<li><p><strong>Select</strong>, to select one or more (using shift click) observations, or an observation region
+when using a selection shape (the default is a rectangle); this is the default operation
+and works in the same fashion as selection on any graph in GeoDa</p></li>
+<li><p><strong>Invert Select</strong>, switches to the complement of the current selection (same functionality
+as <strong>Table &gt; Invert Selection</strong>)</p></li>
 <li><p><strong>Zoom In</strong>, zooms in on the map by drawing a rectangle for the new map extent</p></li>
 <li><p><strong>Zoom Out</strong>, zooms out of the map by repeatedly clicking on the map</p></li>
 <li><p><strong>Pan</strong>, implements panning by dragging the map in any given direction with the pointer</p></li>
 <li><p><strong>Full Extent</strong>, returns the map to its default full extent</p></li>
+<li><p><strong>Base Map</strong>, allows the map to be superimposed onto a base layer that contains roads and
+other realistic geographic features</p></li>
+<li><p><strong>Refresh</strong> the image (in case something went wrong)</p></li>
 </ul>
+<p>These functions are mostly standard and self-explanatory, except for the base map,
+to which we turn next.</p>
+</div>
+<div id="map-base-layer-base-map" class="section level4 unnumbered">
+<h4>Map base layer (base map)</h4>
+<p>The choropleth maps created by GeoDa are abstractions and lack context. To provide some
+context, a base layer can be added behind the map. The base layer is similar to a Google map, and
+contains roads, rivers and lakes, and other recognizable geographic features. Currently, GeoDa
+supports base layers provided by Carto and by Nokia. The various options are listed in a dialog
+that is activated after clicking on the <strong>Base Map</strong> icon in the map toolbar, as shown
+in Figure <a href="#fig:maplayeroptions">13</a>. The default setting is <strong>No Basemap</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:maplayeroptions"></span>
+<img src="pics3a/11_753_baselayeroptions.png" alt="Map base layer options" width="30%" />
+<p class="caption">
+Figure 13: Map base layer options
+</p>
+</div>
+<p>For each provider, four different types of base layers are available. For Carto, this is <strong>Carto Light</strong>
+and <strong>Carto Dark</strong>, as well as these types without labels. For Nokia, the supported layers are
+<strong>Nokia Day</strong>, <strong>Nokia Night</strong>, <strong>Nokia Hybrid</strong>, and <strong>Nokia Satellite</strong>.</p>
+<p>For example, the default map created by selecting <strong>Carto Light</strong> (as in Figure <a href="#fig:maplayeroptions">13</a>)
+is illustrated in Figure <a href="#fig:cartolight1">14</a> for the natural breaks map of the rent data. Note that, in practice, it may be necessary to
+adjust the zoom level to get a satisfactory framing of the map and the base layer.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:cartolight1"></span>
+<img src="pics3a/11_758_cartodefault.png" alt="Carto Light base map -- default options" width="80%" />
+<p class="caption">
+Figure 14: Carto Light base map – default options
+</p>
+</div>
+<p>The relative transparency of the base layer versus the choropleth map can be adjusted by means
+of the <strong>Change Map Transparency</strong> option. This provides a slider bar to change the transparency of the base layer (a smaller value gives more importance to the choropleth map relative to the base layer).
+In the example shown in Figure <a href="#fig:transparency">15</a>, we have moved the slider from its starting
+value of 0.69 over to 0.10, in order to make the map itself more pronounced.</p>
+<div class="figure" style="text-align: center"><span id="fig:transparency"></span>
+<img src="pics3a/11_754_changetransparency.png" alt="Change base layer transparency" width="30%" />
+<p class="caption">
+Figure 15: Change base layer transparency
+</p>
+</div>
+<p>The outcome is illustrated in Figure <a href="#fig:cartolight2">16</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:cartolight2"></span>
+<img src="pics3a/11_759_cartoat10.png" alt="Carto Light base map -- transparency 0.10" width="80%" />
+<p class="caption">
+Figure 16: Carto Light base map – transparency 0.10
+</p>
+</div>
+<p>The second set of base layers is provided by Nokia and takes on a very different look
+(more similar to Google maps). For example, in Figure <a href="#fig:nokiaday">17</a>, the <strong>Nokia Day</strong>
+option is illustrated for the same natural breaks map.</p>
+<div class="figure" style="text-align: center"><span id="fig:nokiaday"></span>
+<img src="pics3a/11_757_nokiaday.png" alt="Nokia Day base map" width="80%" />
+<p class="caption">
+Figure 17: Nokia Day base map
+</p>
+</div>
+<p>The Nokia base map support is provided under a generic account for all GeoDa users. This
+account has general usage restrictions, so users may want to set up their own accounts with
+Nokia. This can be accomplished by means of the <strong>Basemap Configuration</strong>
+option.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>Finally, in a pinch, it may be necessary to use the <strong>Clean Basemap Cache</strong> option
+when things go wrong.</p>
 </div>
 <div id="saving-the-classification-as-a-categorical-variable" class="section level4 unnumbered">
 <h4>Saving the classification as a categorical variable</h4>
-<p>The classification associated with a given map can be added to the data table as a new categorical variable by means of the <strong>Save Categories</strong> option. This brings up a variable selection dialog in which we can specify the name for the new variable (the default is <strong>CATEGORIES</strong>). In our example, we use <strong>natbreak</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>The classification associated with a given map can be added to the data table as
+a new categorical variable by means of the <strong>Save Categories</strong> option. This brings up
+a variable selection dialog in which we can specify the name for the new variable
+(the default is <strong>CATEGORIES</strong>). In our example, we use <strong>natbreak</strong>, as in
+Figure <a href="#fig:natbreak">18</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:natbreak"></span>
 <img src="pics3a/1_242_natbreakcategories.png" alt="Map categories variable" width="40%" />
 <p class="caption">
-Map categories variable
+Figure 18: Map categories variable
 </p>
 </div>
-<p>Upon selecting OK, a new field is added to the data table. The categories are labeled from low to high, starting with the value 1. The resulting categorical variable can be used as input into a <strong>Unique Values Map</strong> or a <strong>Co-location Map</strong> (see below). However, any information is lost on the ranges from which the categories were derived, or the type of legend (e.g., sequential, diverging).</p>
-<div class="figure" style="text-align: center">
+<p>Upon selecting OK, a new field is added to the data table, as shown
+in Figure <a href="#fig:classintable">19</a>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> The categories are labeled from low to high, starting with the value 1. The resulting categorical variable can be used as input into a <strong>Unique Values Map</strong> or a <strong>Co-location Map</strong> (see below).</p>
+<div class="figure" style="text-align: center"><span id="fig:classintable"></span>
 <img src="pics3a/1_243_catintable.png" alt="Map categories variable in table" width="50%" />
 <p class="caption">
-Map categories variable in table
+Figure 19: Map categories variable in table
 </p>
 </div>
+<p>Note that there is no metadata associated with this new variable. As
+a result, all
+information is lost
+on the variable in question, the ranges from which the categories were derived, the type of legend (e.g., sequential, diverging),
+or, for that matter, the type of classification itself (unless those characteristics
+are somehow reflected in the variable name).</p>
 </div>
 <div id="saving-the-map-as-an-image" class="section level4 unnumbered">
 <h4>Saving the map as an image</h4>
-<p>The three options at the bottom of the list, <strong>Save Selection</strong>, <strong>Copy Image to Clipboard</strong>, and <strong>Save Image As</strong> operate in the same way as for the statistical graphs we reviewed earlier. However, there is one important change compared to earlier versions of GeoDa.</p>
-<p>The map image can be saved as four different formats: <strong>png</strong> (the default), <strong>bmp</strong>, <strong>SVG</strong> and <strong>Postscript</strong>. More importantly, GeoDa now saves the legend with the image (in earlier versions only the map image was saved, without the legend). For example, using <strong>Save Image As</strong> for the natural breaks map in our example yields the following png image.</p>
-<div class="figure" style="text-align: center">
+<p>The three options at the bottom of the list, <strong>Save Selection</strong>, <strong>Copy Image to Clipboard</strong>,
+and <strong>Save Image As</strong> operate in the same way as for the statistical graphs we reviewed earlier. However, there is one important change compared to earlier versions of GeoDa.</p>
+<p>The map image can be
+saved as four different formats: <strong>png</strong> (the default), <strong>bmp</strong>, <strong>SVG</strong> and <strong>Postscript</strong>.
+More importantly, GeoDa now saves the legend with the image (in earlier versions only the map image was saved, without the legend). For example, using <strong>Save Image As</strong> for the natural breaks map in our example yields the png image shown in Figure <a href="#fig:mappng">20</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:mappng"></span>
 <img src="pics3a/NYC%20DataMapFrame.png" alt="Saved map image" width="60%" />
 <p class="caption">
-Saved map image
+Figure 20: Saved map image
 </p>
 </div>
 </div>
 <div id="shape-centers" class="section level4 unnumbered">
 <h4>Shape centers</h4>
-<p>The options <strong>Shape Centers</strong> and <strong>Thiessen Polygons</strong> apply respectively to polygon and point layers. We will use Thiessen polygons in the lab that deals with distance-based spatial weights. The <strong>Shape Centers</strong> item allows the mean center or centroid to be added to either the display itself, or to the table, or to be saved as a separate point layer file. In our current example, since we are dealing with polygons, the options for <strong>Thiessen Polygons</strong> are not available (greyed out in the interface).</p>
-<p>The sub-menu offers the different options for <strong>Shape Centers</strong>. All options pertain to either the <strong>Mean Center</strong> or to the <strong>Centroid</strong>. The former is obtained as the simple average of the the X and Y coordinates that define the vertices of the polygon. The latter is more complex, and is the actual center of mass of the polygon (image a cardboard cutout of the polygon, the centroid is the central point where a pin would hold up the cutout in a stable equilibrium). Both suffer when the polygons are highly irregular, and in those instances they can end up being located outside the polygon. Nevertheless, the shape centers are a handy way to convert a polygon layer to a corresponding point layer with the same underlying geography.</p>
+<p>The options <strong>Shape Centers</strong> and <strong>Thiessen Polygons</strong> apply respectively to polygon and point layers. The <strong>Shape Centers</strong> item allows the mean center or centroid to be added to either the display itself, or to the table, or to be saved as a separate point layer file. The <strong>Thiessen Polygons</strong> option pertains
+to point layers only, so it is not available in our current example, based on sub-boroughs,
+i.e., polygons (the option is greyed out
+in the interface). We will cover Thiessen polygons in the chapter that deals with
+distance-based spatial weights.</p>
+<p>The sub-menu shown in Figure <a href="#fig:shapecentermenu">21</a> offers the different options for <strong>Shape Centers</strong>. All options pertain to either
+the <strong>Mean Center</strong> or to the <strong>Centroid</strong>. The former is obtained as the simple average of the the X and Y coordinates that define the vertices of the polygon. The latter is more complex, and is the actual center of mass of the polygon (image a cardboard cutout of the polygon, the centroid is the central point where a pin would hold up the cutout in a stable equilibrium). Both methods can yield strange
+results when the polygons are highly irregular or in a so-called multi-polygon situation (different
+polygons associated with the same ID, such as a mainland area and an island belonging to the
+same county). In those instances the centers can end up being located outside the polygon. Nevertheless, the shape centers are a handy way to convert a polygon layer to a corresponding point layer with the same underlying geography. For example, they are used under the hood to calculate distance-based spatial
+weights for polygons.</p>
 <p>At present, GeoDa can only deal with one geography at a time, but this geography can be represented in a number of different ways. For example, the NYC sub-boroughs can be shown as polygons (as we do here), or as their shape centers in a point layer (same geography), or even as the Thiessen polygons constructed from that point layer. The key factor is that all three representations are connected to the same cross-sectional data set.</p>
-<p>There are three options for the shape centers: add their coordinates as fields to the current data table; display them on the map; and save them to an external point layer file.</p>
-<div class="figure" style="text-align: center">
+<p>As detailed in Figure <a href="#fig:shapecentermenu">21</a>, there are three options for the shape centers: add their coordinates as fields to the current
+data table; display them on the map; and save them to an external point layer file.</p>
+<div class="figure" style="text-align: center"><span id="fig:shapecentermenu"></span>
 <img src="pics3a/1_244_shapecenteroptions.png" alt="Shape Center options" width="50%" />
 <p class="caption">
-Shape Center options
+Figure 21: Shape Center options
 </p>
 </div>
-<p>To illustrate these features we select <strong>Add Mean Centers to Table</strong>. This brings up a dialog to specify the variable names for the X and Y coordinates. For now, we stick with the default of <strong>COORD_X</strong> and <strong>COORD_Y</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>To illustrate these features we select <strong>Add Mean Centers to Table</strong> (as in Figure <a href="#fig:shapecentermenu">21</a>). This brings up a dialog to specify the variable names for the X and Y coordinates. For now, we stick with the default of <strong>COORD_X</strong> and <strong>COORD_Y</strong>, in
+Figure <a href="#fig:shapecoords">22</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:shapecoords"></span>
 <img src="pics3a/1_245_meancentervars.png" alt="Mean center variable selection" width="30%" />
 <p class="caption">
-Mean center variable selection
+Figure 22: Mean center variable selection
 </p>
 </div>
-<p>Pressing <strong>OK</strong> will add the two fields to the data table.</p>
-<div class="figure" style="text-align: center">
+<p>Pressing <strong>OK</strong> will add the two fields to the data table, as shown in Figure <a href="#fig:coordsintable">23</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:coordsintable"></span>
 <img src="pics3a/1_246_meancenterintable.png" alt="Mean center coordinates in table" width="50%" />
 <p class="caption">
-Mean center coordinates in table
+Figure 23: Mean center coordinates in table
 </p>
 </div>
-<p>To show the points on the current map, we choose <strong>Display Mean Centers</strong>. They are added as small circles within the polygons with which they correspond.</p>
-<div class="figure" style="text-align: center">
+<p>To show the points on the current map, we select <strong>Display Mean Centers</strong>. The points are added as small circles within the polygons with which they correspond, as in Figure <a href="#fig:pointsonmap">24</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:pointsonmap"></span>
 <img src="pics3a/1_247_meancentersdisplay.png" alt="Mean centers displayed on map" width="80%" />
 <p class="caption">
-Mean centers displayed on map
+Figure 24: Mean centers displayed on map
 </p>
 </div>
 <p>The third option, <strong>Save Mean Centers</strong>, will bring up the familiar file name selection dialog that will create a new file (or database table) with the point layer.</p>
 </div>
 <div id="other-map-options" class="section level4 unnumbered">
 <h4>Other map options</h4>
-<p>The remainig three options pertain to the look of the map view. <strong>Show Status Bar</strong> is on by default, which means that the number of observations, the number of selected observations, etc., will be displayed on the status bar. The <strong>Selection Shape</strong> is set by default to <strong>Rectangle</strong>, with the other two options as <strong>Circle</strong> and <strong>Line</strong>. This allows for the selection of observations on the map that lie within the specified shape, as drawn by the pointer. As we have seen earlier, any selection is instantaneously identified in all other views as well through the process of linking.</p>
-<div class="figure" style="text-align: center">
+<p>The remainig three options pertain to the look of the map view. <strong>Show Status Bar</strong> is on by default, which means that the number of observations, the number of selected observations, etc., will be displayed on the status bar. The <strong>Selection Shape</strong> is set by default to <strong>Rectangle</strong>, with the other two options as <strong>Circle</strong> and <strong>Line</strong>. This allows for the selection of observations on the map that lie within the specified shape, as drawn
+by the pointer. As we have seen earlier, through the process of linking, any selection is instantaneously identified in all other views as well.</p>
+<p>Finally, the <strong>Color</strong> options determine how the map is displayed. By default, the polygon outlines (i.e., in our example, the boundaries of the sub-borough neighborhoods) are shown, with <strong>Outlines Visible</strong> checked, as in Figure <a href="#fig:outlines">25</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:outlines"></span>
 <img src="pics3a/1_248_outlines.png" alt="Map appearance options" width="40%" />
 <p class="caption">
-Map appearance options
+Figure 25: Map appearance options
 </p>
 </div>
-<p>Finally, the <strong>Color</strong> options determine how the map is displayed. By default, the polygon outlines (i.e., in our example, the boundaries of the sub-borough neighborhoods) are shown, with <strong>Outlines Visible</strong> checked. By unchecking this option, the lines disappear. This is particularly helpful when the map contains many small areas that will tend to be dominated by their boundary lines. In our example (with the mean center points left in), this results in an impression of much larger areas, because many adjoining sub-boroughs ended up in the same category.</p>
-<div class="figure" style="text-align: center">
+<p>By unchecking this option, the outlines disappear. This is particularly helpful when the map contains many small areas that will tend to be dominated by their boundary lines. In our example in
+Figure <a href="#fig:mapnooutlines">26</a> (with the mean center points left in), this results in an
+impression of larger regions, because many adjoining sub-boroughs ended up in the same
+category of the natural breaks classification.</p>
+<div class="figure" style="text-align: center"><span id="fig:mapnooutlines"></span>
 <img src="pics3a/1_249_mapno_outlines.png" alt="Map without outlines visible" width="80%" />
 <p class="caption">
-Map without outlines visible
+Figure 26: Map without outlines visible
 </p>
 </div>
 <p>The <strong>Background Color</strong> determines the background against which the map is drawn. In most instances, the default of white is the best choice.</p>
@@ -449,394 +607,592 @@ Map without outlines visible
 </div>
 <div id="extreme-value-maps" class="section level2 unnumbered">
 <h2>Extreme Value Maps</h2>
-<p>Extreme value maps are variations of common choropleth maps where the classification is designed to highlight extreme values at the lower and upper end of the scale, with the goal of identifying <em>outliers</em>. These maps were developed in the spirit of <em>spatializing EDA</em>, i.e., adding spatial features to commonly used approaches in non-spatial EDA <span class="citation">(Anselin 1994)</span>.</p>
-<p>GeoDa currently supports three such map types in the <strong>Map</strong> menu: a percentile map, a box map, and a standard deviation map. These are briefly described below. Only their distinctive features are highlighted, since they share all the same options with the other choropleth map types.</p>
+<p>Extreme value maps are variations of common choropleth maps where the classification
+is designed to highlight extreme values at the lower and upper end of the scale, with
+the goal of identifying <em>outliers</em>. These maps were developed in the spirit of
+<em>spatializing EDA</em>, i.e., adding spatial features to commonly used approaches in
+non-spatial EDA <span class="citation">(Anselin <a href="#ref-Anselin:94">1994</a>)</span>.</p>
+<p>GeoDa currently supports three such map types in the <strong>Map</strong> menu: a percentile map, a box map, and a
+standard deviation map. These are briefly described below. Only their distinctive features are highlighted, since they share all the same options with the other choropleth map types.</p>
 <div id="percentile-map" class="section level3 unnumbered">
 <h3>Percentile map</h3>
-<p>The percentile map is a variant of a quantile map that would start off with 100 categories. However, rather than having these 100 categories, the map classification is reduced to six ranges, the lowest 1%, 1-10%, 10-50%, 50-90%, 90-99% and the top 1%. This is shown below for the <strong>rent2008</strong> variable. We select <strong>Map &gt; Percentile Map</strong> from the map menu or the map toolbar icon and choose the variable to create the map.</p>
-<div class="figure" style="text-align: center">
+<p>The percentile map is a variant of a quantile map that would start off with 100 categories. However, rather than having these 100 categories, the map classification is reduced to six ranges, the lowest 1%, 1-10%, 10-50%, 50-90%, 90-99% and the top 1%. This is shown in Figure <a href="#fig:percentmap">27</a> for the <strong>rent2008</strong> variable. We select <strong>Map &gt; Percentile Map</strong> from the map menu or the map toolbar icon and choose the variable to create the map.</p>
+<div class="figure" style="text-align: center"><span id="fig:percentmap"></span>
 <img src="pics3a/2_250_percentilemap.png" alt="Percentile map" width="80%" />
 <p class="caption">
-Percentile map
+Figure 27: Percentile map
 </p>
 </div>
-<p>Note how the extreme values are much better highlighted, especially at the upper end of the distribution. The classification also illustrates some common problems with this type of map. First of all, since there are fewer than 100 observations, in a strict sense there is no 1% of the distribution. This is handled (arbitrarily) by rounding, so that the highest category has one observation, but the lowest does not have any. Also, since the values are sorted from low to high to determine the cut points, there can be an issue with ties. As we have seen, this is a generic problem for all quantile maps. As pointed out, GeoDa handles ties by moving observations to the next highest category. For example, when there are a lot of observations with zero values (e.g., in the crime rate map for the U.S. counties), the lowest percentile can easily end up without observations, since all the zeros will be moved to the next category.</p>
+<p>Note how the extreme values are much better highlighted, especially at the upper end of the distribution. The classification also illustrates some common problems with this type of map. First of all, since there are fewer than 100 observations, in a strict sense there is no 1% of the distribution. This is handled (arbitrarily) by rounding, so that the highest category has one observation, but the lowest does not have any.</p>
+<p>In addition, since the values are sorted from low to high to determine the cut points, there can be an issue with ties. As we have seen, this is a generic problem for all quantile maps. As pointed out, GeoDa handles ties by moving observations to the next highest category. For example, when there are a lot of observations with zero values (e.g., in the crime rate map for the U.S. counties), the lowest percentile can easily end up without observations, since all the zeros will be moved to the next category.</p>
 </div>
 <div id="box-map" class="section level3 unnumbered">
 <h3>Box map</h3>
-<p>A box map is the mapping counterpart of the idea behind a box plot. The point of departure is again a quantile map, more specifically, a quartile map. But the four categories are extended to six bins, to separately identify the lower and upper outliers. The map menu has two items for the box map, one for each option for the hinges (1.5 and 3.0), identical to what we had for the box plot. For example, we invoke this map using <strong>Map &gt; Box Map (Hinge=1.5)</strong> from the menu or the map icon on the toolbar. After selecting <strong>rent2008</strong> as the variable, the map is created.</p>
-<div class="figure" style="text-align: center">
+<p>A box map <span class="citation">(Anselin <a href="#ref-Anselin:94">1994</a>)</span> is the mapping counterpart of the idea behind a box plot. The point of departure
+is again a quantile map, more specifically, a quartile map. But the four categories are extended to six bins, to separately identify the lower and upper outliers.</p>
+<p>The map menu has two entries
+for the box map, one for each option for the hinges (1.5 and 3.0), identical to what we
+had for the box plot. For example, we invoke this map using <strong>Map &gt; Box Map (Hinge=1.5)</strong> from the menu or the map icon on the toolbar. After selecting <strong>rent2008</strong> as the variable, the map
+shown in Figure <a href="#fig:boxmap">28</a> is created.</p>
+<div class="figure" style="text-align: center"><span id="fig:boxmap"></span>
 <img src="pics3a/2_251_boxmap.png" alt="Box map, hinge=1.5" width="80%" />
 <p class="caption">
-Box map, hinge=1.5
+Figure 28: Box map, hinge=1.5
 </p>
 </div>
-<p>Compared to the quartile map above, the box map separates the three lower outliers (the observations with zero values) from the other four observations in the first quartile. They are depicted in dark blue. Similarly, it separates the 6 outliers in Manhattan from the 8 other observations in the upper quartile. The upper outliers are colored dark red. To illustrate the correspondence between the box plot and the box map, we put the two side by side (<strong>Explore &gt; Box Plot</strong>) and select the upper outliers in the box plot. Only the matching 6 outliers in the box map are highlighted. Note that the outliers in the box plot do not provide any information on the fact that these locations are also adjoining in space. This the <em>spatial</em> perspective that the box map adds to the data exploration.</p>
-<div class="figure" style="text-align: center">
+<p>Compared to the quartile map in Figure <a href="#fig:quartmap">5</a>, the box map in Figure <a href="#fig:boxmap">28</a> separates the three lower outliers (the observations with zero values) from
+the other four observations in the first quartile. They are depicted in dark blue. Similarly,
+it separates the six outliers in Manhattan from the eight other observations in the upper quartile. The upper outliers are colored dark red.</p>
+<p>To illustrate the correspondence between the box plot and the box map, we put the two side by side (<strong>Explore &gt; Box Plot</strong>) in Figure <a href="#fig:boxmapoutliers">29</a>. In the right-hand panel, we select the upper outliers in the box plot. Only the matching six outlier locations in the box map are highlighted. Note that the outliers in the box plot do not provide any information on the fact that these locations are also adjoining in space. This the <em>spatial</em> perspective that the box map adds
+to the data exploration.</p>
+<div class="figure" style="text-align: center"><span id="fig:boxmapoutliers"></span>
 <img src="pics3a/2_252_outliers.png" alt="Outliers in box plot and box map" width="100%" />
 <p class="caption">
-Outliers in box plot and box map
+Figure 29: Outliers in box plot and box map
 </p>
 </div>
-<p>From the current map, we can switch the box map between the hinge criterion of 1.5 and 3.0 by opening the options menu (right click on the map) and selecting <strong>Change Current Map Type &gt; Box Map (Hinge = 3.0)</strong>. Alternatively, we can also open a new map window from the main menu or map toolbar icon and select <strong>Box Map (Hinge=3.0)</strong> as the option. The resulting box map no longer has lower outliers and has only 5 upper outliers.</p>
-<div class="figure" style="text-align: center">
+<p>From the current map, we can switch the box map between the hinge criterion of 1.5 and 3.0 by opening
+the options menu (right click on the map) and selecting
+<strong>Change Current Map Type &gt; Box Map (Hinge = 3.0)</strong>. Alternatively, we can also open a new map window from the main menu or map toolbar icon and select <strong>Box Map (Hinge=3.0)</strong> as the option.
+The resulting box map, shown in Figure <a href="#fig:boxmap3">30</a>, no longer has lower outliers and has only five upper outliers.</p>
+<div class="figure" style="text-align: center"><span id="fig:boxmap3"></span>
 <img src="pics3a/2_253_boxmap3.png" alt="Box map, hinge=3.0" width="80%" />
 <p class="caption">
-Box map, hinge=3.0
+Figure 30: Box map, hinge=3.0
 </p>
 </div>
-<p>The box map is the <em>preferred method</em> to quickly and efficiently identify outliers and broad spatial patterns in a data set.</p>
+<p>The box map is the <em>preferred method</em> to quickly and efficiently identify outliers and broad spatial patterns
+in a data set.</p>
 </div>
 <div id="standard-deviation-map" class="section level3 unnumbered">
 <h3>Standard deviation map</h3>
-<p>The third type of extreme values map is a standard deviation map. In some way, this is a parametric counterpart to the box map, in that the standard deviation is used as the criterion to identify outliers, instead of the inter-quartile range.</p>
+<p>The third type of extreme values map is a standard deviation map. In some way, this
+is a parametric counterpart to the box map, in that the standard deviation is used as
+the criterion to identify outliers, instead of the inter-quartile range.</p>
 <p>In a standard deviation map, the variable under consideration is transformed to standard deviational units (with mean 0 and standard deviation 1). The number of categories in the classification depends on the range of values, i.e., how many standard deviational units cover the range from lowest to highest. It is also quite common that some categories do not contain any observations.</p>
-<p>We continue with the variable <strong>rent2008</strong> and bring up a standard deviation map by means of <strong>Map &gt; Standard Deviation Map</strong> from the main menu or from the map toolbar icon.</p>
-<div class="figure" style="text-align: center">
+<p>We continue with the variable <strong>rent2008</strong> and bring up a standard deviation map by means
+of <strong>Map &gt; Standard Deviation Map</strong> from the main menu or from the map toolbar icon.</p>
+<div class="figure" style="text-align: center"><span id="fig:standardmap"></span>
 <img src="pics3a/2_254_standardevmap.png" alt="Standard deviation map" width="80%" />
 <p class="caption">
-Standard deviation map
+Figure 31: Standard deviation map
 </p>
 </div>
-<p>In the map, there are 5 neighborhoods with median rent more than two standard deviations above the mean, and 3 with a median rent less than two standard deviations below the mean. Both sets would be labeled outliers in standard statistical practice. Also, note how the second lowest category does not contain any observations (so the corresponding color is not present in the map).</p>
+<p>In the map in Figure <a href="#fig:standardmap">31</a>, there are five neighborhoods with median rent more than two standard deviations above the mean, and three with a median rent less than two standard deviations below the mean. Both sets would be labeled outliers in standard statistical practice. Also, note how the second lowest
+category does not contain any observations (so the corresponding color is not present in
+the map).</p>
 </div>
 </div>
 <div id="mapping-categorical-variables" class="section level2 unnumbered">
 <h2>Mapping Categorical Variables</h2>
-<p>So far, our maps have pertained to continuous variables, with a clear order from low to high. GeoDa also contains some functionality to map categorical variables, for which the numerical values are distinct, but not necessarily meaningful in and of themselves. Most importantly, the numerical values typically do not imply any ordering of the categories. The two functions in GeoDa are the unique value map, for a single variable, and the co-location map, where the categories for multiple variables are compared.</p>
+<p>So far, our maps have pertained to continuous variables, with a clear order from low to high.
+GeoDa also contains some functionality to map categorical variables, for which the numerical values are distinct, but not necessarily meaningful in and of themselves. Most importantly, the numerical values typically do not imply any ordering of the categories. The two relevant functions in GeoDa are the <em>unique value map</em>, for a single variable, and the <em>co-location map</em>, where the categories for multiple variables are compared.</p>
 <div id="unique-value-map" class="section level3 unnumbered">
 <h3>Unique Value map</h3>
-<p>To illustrate the categorical map, we create a box map (with hinge 1.5) for each of the variables <strong>kids2000</strong> (the percentage households with kids under 18) and <strong>pubast00</strong> (the percentage households receiving public assistance). In each of these maps, we save the categories (<strong>Save Categories</strong> in the options menu), respectively as <strong>kidscat</strong> and <strong>asstcat</strong>. The category labels go from 1 to 6, but not all categories necessarily have observations. For example, the map for public assistance does not have either lower (label 1) or higher (label 6), outliers, only observations for 2–5. For the kids map, we have categories 1–5.</p>
-<p>Now, we ignore the meaning of the categories and create a categorical map for the classifications in the box map for the <strong>kidscat</strong> variable by means of <strong>Map &gt; Unique Value Map</strong> from the main menu or from the map toolbar icon.</p>
-<div class="figure" style="text-align: center">
+<p>To illustrate the categorical map, we first create a box map (with hinge 1.5) for each of the
+variables <strong>kids2000</strong> (the percentage households with kids under 18) and <strong>pubast00</strong> (the percentage households receiving public assistance). In each of these maps, we save the
+categories (<strong>Save Categories</strong> in the options menu), respectively as <strong>kidscat</strong>
+and <strong>asstcat</strong>. The category labels go from 1 to 6, but not all categories necessarily
+have observations. For example, the map for public assistance does not have either lower
+(label 1) or higher (label 6), outliers, only observations for 2–5. For the kids map,
+we have categories 1–5.</p>
+<p>At this point, we ignore the meaning of the categories and create a categorical map for the
+classifications in the box map for the <strong>kidscat</strong> variable by means of <strong>Map &gt; Unique Value Map</strong>
+from the main menu or from the map toolbar icon. This yields the map shown in Figure <a href="#fig:uniquemap">32</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:uniquemap"></span>
 <img src="pics3a/3_257_kidscatunque.png" alt="Unique value map" width="80%" />
 <p class="caption">
-Unique value map
+Figure 32: Unique value map
 </p>
 </div>
-<p>The categorical map has values in the legend from 1 to 5, but unlike for the box map from which they originated, they do not imply any ordering. This is also reflected in the colors, which are generated from the ColorBrewer categorical map palette. In addition, it is possible to move colors between categories. This is carried out by moving an item in the legend by dragging the label up or down. In the example, we drag the label 5 (associated with the rosy color) up to the next level, where the color is green and the label is 4.</p>
-<div class="figure" style="text-align: center">
+<p>The categorical map has values in the legend from 1 to 5, but unlike for the box map from which they originated, they do not imply any ordering. This is also reflected in the colors, which are generated from the <a href="http://colorbrewer2.org/#type=qualitative&amp;scheme=Accent&amp;n=3">ColorBrewer categorical map palette</a>.</p>
+<p>It is also possible to change the colors for the categories. This is carried out by dragging the
+legend label up or down (the category value to the right, not the rectangle on the left). In the example in Figure <a href="#fig:draglabel1">33</a>, we drag the label 5 (associated with the rosy color) up to the next level, where the color is green and the label is 4.</p>
+<div class="figure" style="text-align: center"><span id="fig:draglabel1"></span>
 <img src="pics3a/3_258_swithcats.png" alt="Switching categories" width="20%" />
 <p class="caption">
-Switching categories
+Figure 33: Switching categories
 </p>
 </div>
-<p>As soon as we release the label, it becomes 4 again (to emphasize that the label in and of itself is meaningless in terms of value).</p>
-<div class="figure" style="text-align: center">
+<p>As soon as we release the label, shown in Figure <a href="#fig:draglabel2">34</a>, it becomes 4 again. This emphasizes that the label in and
+of itself is meaningless in terms of value.</p>
+<div class="figure" style="text-align: center"><span id="fig:draglabel2"></span>
 <img src="pics3a/3_259_catswitched.png" alt="Categories switched" width="20%" />
 <p class="caption">
-Categories switched
+Figure 34: Categories switched
 </p>
 </div>
-<p>However, all observations that used to be colored rosy are now colored dark green, and vice versa.</p>
-<div class="figure" style="text-align: center">
+<p>As a result of the switch in labels, all observations that used to be colored rosy
+in Figure <a href="#fig:uniquemap">32</a> are now colored dark green, and
+vice versa, as illustrated in Figure <a href="#fig:uniquemap2">35</a></p>
+<div class="figure" style="text-align: center"><span id="fig:uniquemap2"></span>
 <img src="pics3a/3_260_newcats.png" alt="Unique value map with relabeled categories" width="80%" />
 <p class="caption">
-Unique value map with relabeled categories
+Figure 35: Unique value map with relabeled categories
 </p>
 </div>
-<p>It is important to keep in mind that the values in the legend are just labels, represented as integers for convenience, but they could just as well have been A, B, C, etc., or other descriptors. This is a fundamental difference between the categorical maps and the other choropleth map types.</p>
+<p>It is important to keep in mind that the values in the legend are just labels,
+represented as integers for convenience, but they could just as well have been A, B, C, etc.,
+or other descriptors. This is a fundamental difference between the categorical maps and the
+other choropleth map types.</p>
 </div>
 <div id="co-location-map" class="section level3 unnumbered">
 <h3>Co-location map</h3>
-<p>The idea of a co-location map is the extension of the unique value map concept to a multivariate context. In essence, it is the implementation of the idea of <em>map overlay</em> or <em>map algebra</em>.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> The labels for different categorical variables are compared and the matches identified on the map. It is up to the user to ensure that the categories across variables are meaningful, since the <em>co-location</em> is based on the variables having the same code. For example, this is useful when comparing the extent to which the quartiles across different variables occur at the same locations. Or, as we will see later, whether significant patterns of local spatial autocorrelation match across several variables. But it is also very easy to generate nonsensical results, for example, when the labels are not comparable.</p>
-<p>The co-location map is invoked as <strong>Map &gt; Co-location Map</strong> from the main menu or from the map toolbar icon. The next dialog allows for the selection of the different categorical variables in the top panel. If there are matches between the codes for the variables, these are displayed at the bottom, with the labels and a proposed color scheme. We select <strong>kidscat</strong> and <strong>asstcat</strong> as the two categories we want to compare. Four <em>labels</em> match between the two variables, and their values and a proposed color theme are listed in the bottom panel.</p>
-<div class="figure" style="text-align: center">
+<p>The idea behind a co-location map is the extension of the unique value map concept to a multivariate
+context. In essence, it is the implementation of ideas related to the principles of <em>map overlay</em> or
+<em>map algebra</em> applied to categorical maps.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p>In a co-location map, the labels for different categorical
+variables are compared and the matches identified on the map.
+It is up to the user to ensure that the categories across variables are meaningful, since the <em>co-location</em> is based on the variables having the same code. For example, this is useful when comparing the extent to which
+the quartiles across different variables occur at the same locations. Or, as we will see
+later, whether significant patterns of local spatial autocorrelation match across several
+variables. But it is also very easy to generate nonsensical results, for example, when the labels are
+not comparable.</p>
+<p>The co-location map is invoked as <strong>Map &gt; Co-location Map</strong> from the main menu or from the
+map toolbar icon. This brings up a dialog, shown in Figure <a href="#fig:colocationvars">36</a>, that allows for the selection of the different categorical variables in the top panel. If there are matches between the codes for the variables, these are displayed at the bottom, with the labels and a proposed color scheme.</p>
+<p>In our example, we select <strong>kidscat</strong> and <strong>asstcat</strong> as the two categories we want to compare. Four <em>labels</em> match between the two variables, and their values and a proposed color theme are listed in the bottom panel of Figure <a href="#fig:colocationvars">36</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:colocationvars"></span>
 <img src="pics3a/3_261_colocation_dialog.png" alt="Co-location map variable selection" width="50%" />
 <p class="caption">
-Co-location map variable selection
+Figure 36: Co-location map variable selection
 </p>
 </div>
-<p>The proposed color scheme is <strong>Unique Values</strong> by default. But in this example, that is not the appropriate shading, since we are comparing the classifications between two box maps (or, equivalently, box plots). The <strong>Select color scheme</strong> drop down list provides a set of pre-coded color schemes for a range of likely comparisons between categories. For our example, we select <strong>Box Map</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>The proposed color scheme is <strong>Unique Values</strong> by default. But in this example, that is not the appropriate shading, since we are comparing the classifications between two box maps (or, equivalently, box plots). The <strong>Select color scheme</strong> drop down list provides a set of pre-coded color schemes for a range of likely comparisons between categories. For our example, we select
+<strong>Box Map</strong>, as shown in Figure <a href="#fig:colorscheme">37</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:colorscheme"></span>
 <img src="pics3a/3_264_colorschemeoptions.png" alt="Co-location map color schemes" width="30%" />
 <p class="caption">
-Co-location map color schemes
+Figure 37: Co-location map color schemes
 </p>
 </div>
-<p>This changes the proposed color scheme in the bottom panel to match the palette for a box map (but only 4 of the 6 colors are being used).</p>
-<div class="figure" style="text-align: center">
+<p>This changes the proposed color scheme in the bottom panel of Figure <a href="#fig:colocationvars">36</a> to match the palette for a box map, as in Figure <a href="#fig:boxscheme">38</a>. Note that since only four categories had
+any matches, only four of the six available colors are being used.</p>
+<div class="figure" style="text-align: center"><span id="fig:boxscheme"></span>
 <img src="pics3a/3_269_boxmapcolors.png" alt="Co-location map box map color schemes" width="30%" />
 <p class="caption">
-Co-location map box map color schemes
+Figure 38: Co-location map box map color schemes
 </p>
 </div>
-<p>Clicking on the <strong>OK</strong> button brings up the co-location map.</p>
-<div class="figure" style="text-align: center">
+<p>Clicking on the <strong>OK</strong> button brings up the co-location map, shown in Figure <a href="#fig:colocationmap">39</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:colocationmap"></span>
 <img src="pics3a/3_270_colocationmap.png" alt="Co-location map" width="80%" />
 <p class="caption">
-Co-location map
+Figure 39: Co-location map
 </p>
 </div>
-<p>In our example, 25 of the 55 sub-boroughs have observations in matching categories for the two variables. The 30 that do not are shaded light grey. The matching observations are shaded in the color of the box map category to which they belong. We find that 10 (out of the 14) neighborhoods belong to the upper quartile (&gt; 75%, but not outliers) for both variables, suggesting an association. This association is also something we already observed in the LOWESS smoother of the scatter plot between these two variables. The main difference with a scatter plot is that the co-location map can be applied to categorical variables. It can also easily be extended to more than two variables.</p>
+<p>In our example in Figure <a href="#fig:colocationmap">39</a>, 25 of the 55 sub-boroughs have observations in matching categories for the two variables. The 30 that do not are shaded light grey. The matching observations are shaded in the color of the box map category to which they belong. We find that 10 (out of the 14) neighborhoods belong to the upper quartile (&gt; 75%, but not outliers) for both variables, suggesting an association. This association is also something we already observed in the LOWESS smoother of the scatter plot between these two variables. The main difference with a scatter plot is that the co-location map can be applied to categorical variables. It can also easily be extended to more than two variables.</p>
 </div>
 </div>
 <div id="custom-classifications" class="section level2 unnumbered">
 <h2>Custom Classifications</h2>
-<p>In addition to the range of pre-defined classifications available for choropleth maps in GeoDa, it is also possible to create a custom classification. This is often useful when substantive concerns dictate the cut points, rather than data driven criteria. For example, this may be appropriate when specific income categories are specified for certain government programs. It is also useful when comparing the spatial distribution of a variable over time. All pre-defined classifications are relative and would be re-computed for each time period. For example, when mapping crime rates over time, in an era of declining rates, the observations in the upper quartile in a later period may have crime rates that correspond to a much lower category in an earlier period. This would not be apparent using the pre-defined approaches, but could be visualized by setting the same break points for each time period.</p>
-<p>The <strong>Category Editor</strong> in GeoDa is a complex tool that allows for the creation of a fully customized classification scheme. It is invoked from the map options menu, as <strong>Change Current Map Type &gt; Create New Custom</strong>.</p>
-<div class="figure" style="text-align: center">
-<img src="pics3a/4_272_new_custom_uu.png" alt="Custom category" width="40%" />
+<p>In addition to the range of pre-defined classifications available for choropleth maps
+in GeoDa, it is also possible to create a custom classification. This is often useful
+when substantive concerns dictate the cut points, rather than data driven criteria.
+For example, this may be appropriate when specific income categories are specified for
+certain government programs.</p>
+<p>A custom classification may also be useful when comparing the spatial distribution of a
+variable over time. All included pre-defined classifications are relative and would be re-computed
+for each time period. For example, when mapping crime rates over time, in an era of
+declining rates, the observations in the upper quartile in a later period may have crime
+rates that correspond to a much lower category in an earlier period. This would not be
+apparent using the pre-defined approaches, but could be visualized by setting the same
+break points for each time period.</p>
+<p>The <strong>Category Editor</strong> in GeoDa is a complex tool that allows for the creation of a fully customized classification scheme. It is invoked from the map options menu, as
+<strong>Change Current Map Type &gt; Custom Breaks &gt; Create New Custom</strong>, as shown in Figure <a href="#fig:optioncreatecustom">40</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:optioncreatecustom"></span>
+<img src="pics3a/4_272_new_custom.png" alt="Custom category" width="55%" />
 <p class="caption">
-Custom category
+Figure 40: Custom category
 </p>
 </div>
-<p>Alternatively, the category editor can also be invoked directly by selecting the corresponding icon from the toolbar, immediately to the left of the histogram icon.</p>
-<div class="figure" style="text-align: center">
+<p>Alternatively, the category editor can also be invoked directly by selecting
+the corresponding icon from the toolbar, immediately to the left of the histogram icon,
+shown in Figure <a href="#fig:customicon">41</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:customicon"></span>
 <img src="pics3a/4_301_cateditor_icon.png" alt="Category Editor toolbar icon" width="15%" />
 <p class="caption">
-Category Editor toolbar icon
+Figure 41: Category Editor toolbar icon
 </p>
 </div>
 <div id="category-editor" class="section level3 unnumbered">
 <h3>Category editor</h3>
-<p>The opening dialog asks for a new title for the category, with the default set to <strong>Custom Breaks</strong>.</p>
-<div class="figure" style="text-align: center">
+<div id="default-setup" class="section level4 unnumbered">
+<h4>Default setup</h4>
+<p>There are slight differences between the category editor dialog, depending on whether
+it is invoked from the toolbar, or as an option from an existing map. The main difference
+is that in the latter case, the associated map will be updated as a new classification is
+being developed. When invoked from the toolbar, this is not the case. We illustrate the
+map option in what follows.</p>
+<p>For example, in Figure <a href="#fig:customdialog1">42</a>, the <strong>Create New Custom</strong> option is invoked
+from a box map for the <strong>kids2000</strong> variable. The dialog requests a name for the new category
+and shows a four classification histogram with diverging colors. The default name suggested
+is <strong>Custom Breaks (kids2000)</strong>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:customdialog1"></span>
 <img src="pics3a/4_274_maindialog1.png" alt="Category editor initialization" width="70%" />
 <p class="caption">
-Category editor initialization
+Figure 42: Category editor initialization
 </p>
 </div>
-<p>We specify the name for the new classification as <strong>custom1</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>We continue by specifying the name for the new classification as <strong>custom1</strong>, as in Figure <a href="#fig:custom1var">43</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:custom1var"></span>
 <img src="pics3a/4_275_custom_name.png" alt="Specifying a custom category name" width="30%" />
 <p class="caption">
-Specifying a custom category name
+Figure 43: Specifying a custom category name
 </p>
 </div>
-<p>After clicking <strong>OK</strong>, the category editor dialog is updated with the name for the new classification, which appears in the drop down list below <strong>Create Custom Breaks</strong>. The variable on which the classification will be based is listed, here <strong>kids2000</strong> (but all other variables are available from the drop down list), as well as a default definition of <strong>Breaks</strong> (here, <strong>Quantile</strong>), <strong>Color Scheme</strong> (here, <strong>diverging</strong>), and <strong>Categories</strong> (here, <strong>6</strong>). The panel on the right shows a histogram with the current classification applied to the associated variable. Moving the pointer over a bar in the histogram displays some summary statistics in the status bar, such as the range and its associated number of observations.</p>
-<div class="figure" style="text-align: center">
+<p>After clicking <strong>OK</strong>, the category editor dialog is updated with the name for the new
+classification, which now appears in the drop down list below <strong>Create Custom Breaks</strong>,
+as shown in Figure <a href="#fig:customdialog2">44</a>. Also, since we invoked this from an existing
+map, the variable on which the classification will be based is listed, here <strong>kids2000</strong>, next
+to <strong>Assoc. Var.</strong></p>
+<p>In contrast, when the category editor is invoked from the toolbar, the variable
+listed will be the first variable
+in the data table, which usually is not meaningful. At that point, another variable should
+be selected from the drop down list. Also, even though the custom classification is started
+from a map for <strong>kids2000</strong>, another variable can be chosen to define the break points.
+However, the map for <strong>kids2000</strong> will then be updated with the breakpoints for the other
+variable, which may not be meaningful. Typically, it is best practice to stick with the
+range of values for a given variable, unless there is a good reason not to (e.g., to define
+generic percentage break points).</p>
+<div class="figure" style="text-align: center"><span id="fig:customdialog2"></span>
 <img src="pics3a/4_276_editorinterface.png" alt="Category editor interface" width="70%" />
 <p class="caption">
-Category editor interface
+Figure 44: Category editor interface
 </p>
 </div>
-<p>As soon as the custom editing process is initiated, the map from which it was started is synchronized with the current state of the category editor. In our example, this turns the original classification into six groups with a diverging color scheme, matching the number of observations in each category that is also shown in the category editor histogram (for example, 9 observations in the first bin).</p>
-<div class="figure" style="text-align: center">
+<p>The other settings in the dialog take their default values.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> In Figure <a href="#fig:customdialog2">44</a>,
+this is <strong>Quantile</strong> for the <strong>Breaks</strong>, <strong>diverging</strong> for the <strong>Color Scheme</strong>, and <strong>6</strong> for
+the number of <strong>Categories</strong>. The panel on the right shows a histogram with the current
+classification applied to the associated variable. Moving the pointer over a bar in the
+histogram displays some summary statistics in the status bar, such as the range and its
+associated number of observations.</p>
+<p>As soon as the custom editing process is initiated, the map from which it was
+started is synchronized with the current state of the category editor. In our
+example, shown in Figure <a href="#fig:custommap1">45</a>, this turns the original classification into six groups with a diverging
+color scheme, matching the number of observations in each category that is also
+shown in the category editor histogram (for example, nine observations in the first bin).
+In addition, the header to the map window now shows <strong>custom1: kids2000</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:custommap1"></span>
 <img src="pics3a/4_277_mapsynched.png" alt="Map synchronization" width="80%" />
 <p class="caption">
-Map synchronization
+Figure 45: Map synchronization
 </p>
 </div>
-<p>Besides the number of categories, the two main criteria to define a new classification are the break points and the associated colors. Each item has a number of options in a drop down list. For the <strong>Breaks</strong>, the five options consist of four traditional criteria, and one <strong>User Defined</strong> item. We select the latter.</p>
-<div class="figure" style="text-align: center">
+<p>Besides the number of categories, the two main criteria to define a new classification
+are the break points and the associated colors. Each item has a number of options in a
+drop down list. For the <strong>Breaks</strong>, the five options consist of four traditional
+criteria, and one <strong>User Defined</strong> item. We select the latter, shown in Figure <a href="#fig:custombreaks">46</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:custombreaks"></span>
 <img src="pics3a/4_279_breaksdialog.png" alt="Breaks dialog" width="30%" />
 <p class="caption">
-Breaks dialog
+Figure 46: Breaks dialog
 </p>
 </div>
-<p>The associated colors are selected from the <strong>Color Scheme</strong> drop down list, and include <strong>sequential</strong>, <strong>diverging</strong>, <strong>thematic</strong> (or, categorical), and <strong>custom</strong>. The custom colors are defined by clicking on the colored boxes next to each category under the heading <strong>Edit Custom Breaks</strong>. In our example, we will use a <strong>sequential</strong> coloring scheme.</p>
-<div class="figure" style="text-align: center">
+<p>The associated colors are selected from the <strong>Color Scheme</strong> drop down list, and include
+<strong>sequential</strong>, <strong>diverging</strong>, <strong>thematic</strong> (or, categorical), and <strong>custom</strong>. The custom
+colors are defined by clicking on the colored boxes next to each category under the
+heading <strong>Edit Custom Breaks</strong>. In our example, we will use a <strong>sequential</strong> coloring scheme,
+as in Figure <a href="#fig:customcolors">47</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:customcolors"></span>
 <img src="pics3a/4_280_colorschemedialog.png" alt="Color scheme dialog" width="30%" />
 <p class="caption">
-Color scheme dialog
+Figure 47: Color scheme dialog
 </p>
 </div>
-<p>As we adjusted the classification criteria, the histogram in the right-hand panel is immediately updated to reflect the latest selection (and so is the synchronized map).</p>
-<div class="figure" style="text-align: center">
+<p>As we adjusted the classification criteria, the histogram in the right-hand panel is
+immediately updated to reflect the latest selection, illustrated in Figure <a href="#fig:custhistupdate">48</a>
+(and so is the synchronized map).</p>
+<div class="figure" style="text-align: center"><span id="fig:custhistupdate"></span>
 <img src="pics3a/4_281_dialogatstart.png" alt="Updated category editor dialog" width="70%" />
 <p class="caption">
-Updated category editor dialog
+Figure 48: Updated category editor dialog
 </p>
 </div>
-<p>We are now ready to edit the break points. There are two approaches to carry this out. One is to use the handle in the vertical slider next to the list of button breaks. One break is dealt with at a time, selected by means of the matching radio button to the left. In our example, this is <strong>Button break 1</strong>. When we move the slider down, the value in the box changes (increases). For example, in the figure below it is set at <strong>19.987</strong>. As the slider moves up or down, the histogram (and the map) is instantaneously updated to reflect the new break points. With <strong>Automatic Labels</strong> checked (the default), the category labels are updated as well.</p>
-<div class="figure" style="text-align: center">
+</div>
+<div id="editing-break-points" class="section level4 unnumbered">
+<h4>Editing break points</h4>
+<p>We are now ready to edit the break points. There are two approaches to carry this out.
+One is to use the handle in the vertical slider next to the list of button breaks.
+One break is dealt with at a time, selected by means of the matching radio button
+to the left. In our example, this is <strong>Button break 1</strong>.</p>
+<p>When we move the slider down,
+the value in the box changes (increases). For example, in Figure <a href="#fig:breakslider">49</a>, it is set
+at <strong>19.987</strong>. As the slider moves up or down, the histogram (and the map) is
+instantaneously updated to reflect the new break points. With <strong>Automatic Labels</strong> checked
+(the default), the category labels are updated as well.</p>
+<div class="figure" style="text-align: center"><span id="fig:breakslider"></span>
 <img src="pics3a/4_282_custombreaks.png" alt="Edit custom breaks -- pointer" width="70%" />
 <p class="caption">
-Edit custom breaks – pointer
+Figure 49: Edit custom breaks – pointer
 </p>
 </div>
-<p>A second approach to edit the break points is to type them in directly, as shown below. Again, as new values are entered, the histogram, map and labels are updated.</p>
-<div class="figure" style="text-align: center">
+<p>A second approach to edit the break points is to type them in directly, as shown
+in Figure <a href="#fig:breaktype">50</a>. Again,
+as new values are entered, the histogram, map and labels are updated.</p>
+<div class="figure" style="text-align: center"><span id="fig:breaktype"></span>
 <img src="pics3a/4_283_editbreaks2.png" alt="Edit custom breaks -- manual entry" width="40%" />
 <p class="caption">
-Edit custom breaks – manual entry
+Figure 50: Edit custom breaks – manual entry
 </p>
 </div>
-<p>We complete the process by entering 20, 30, 40, 45 and 50 as the new break points, as shown below.</p>
-<div class="figure" style="text-align: center">
+<p>We complete the process by entering 20, 30, 40, 45 and 50 as the new break points, to
+end up with the break points as given in Figure <a href="#fig:newbreaks">51</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:newbreaks"></span>
 <img src="pics3a/4_284_finaldialog.png" alt="New categories defined" width="70%" />
 <p class="caption">
-New categories defined
+Figure 51: New categories defined
 </p>
 </div>
-<p>The corresponding map classification has the updated labels and categories. Note how the legend heading indicates the use of <strong>custom1</strong> as the classification for the variable <strong>kids2000</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>The corresponding map classification, shown in Figure <a href="#fig:newbreaksmap">52</a>, has the updated labels and categories. Note how the
+legend heading indicates the use of <strong>custom1</strong> as the classification for the variable
+<strong>kids2000</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:newbreaksmap"></span>
 <img src="pics3a/4_285_custom_map.png" alt="Updated map classification" width="80%" />
 <p class="caption">
-Updated map classification
+Figure 52: Updated map classification
 </p>
 </div>
-<p>Finally, even though in the current application it is not actually needed, we uncheck the <strong>Automatic Labels</strong> box to illustrate the custom labels feature. In the boxes, we enter <strong>cat1</strong>, <strong>cat2</strong>, etc. as the labels. The labels in the map are updated accordingly.</p>
-<div class="figure" style="text-align: center">
+</div>
+<div id="custom-category-labels" class="section level4 unnumbered">
+<h4>Custom category labels</h4>
+<p>Finally, even though in the current application it is not actually needed, we uncheck the
+<strong>Automatic Labels</strong> box to illustrate the custom labels feature. In the boxes, we enter
+<strong>cat1</strong>, <strong>cat2</strong>, etc. as the labels. The labels in the map in Figure <a href="#fig:customlabels">53</a>
+are updated accordingly.</p>
+<div class="figure" style="text-align: center"><span id="fig:customlabels"></span>
 <img src="pics3a/4_315_customcategories.png" alt="Custom category labels" width="80%" />
 <p class="caption">
-Custom category labels
+Figure 53: Custom category labels
 </p>
 </div>
-<p>To proceed further, we check the <strong>Automatic Labels</strong> again to return to the more informative labels that show the range for each bin.</p>
+<p>To proceed further, we check the <strong>Automatic Labels</strong> again to return to the more
+informative labels that show the range for each bin.</p>
 </div>
-<div id="applications-of-custom-categories" class="section level3">
+</div>
+<div id="applications-of-custom-categories" class="section level3 unnumbered">
 <h3>Applications of custom categories</h3>
-<p>Once created, the custom classification becomes available to any application where classification is involved. Most directly, this is the mapping functionality, where now the custom category is listed as an option when selecting <strong>Change Current Map Type</strong>.</p>
-<div class="figure" style="text-align: center">
-<img src="pics3a/4_288_custommaptype_uu.png" alt="Custom map classification" width="50%" />
+<p>Once created, the custom classification becomes available to any application where
+classification is involved. Most directly, this is the mapping functionality, where
+now the custom category is listed as an option under the <strong>Custom Breaks</strong> when selecting
+<strong>Change Current Map Type</strong>. In Figure <a href="#fig:custommapclassification">54</a>, we see
+the just created <strong>custom1</strong> classification listed as an option.</p>
+<div class="figure" style="text-align: center"><span id="fig:custommapclassification"></span>
+<img src="pics3a/4_288_custommaptype.png" alt="Custom map classification" width="50%" />
 <p class="caption">
-Custom map classification
+Figure 54: Custom map classification
 </p>
 </div>
-<p>The <strong>custom1</strong> classification could be used to track the spatial distribution of the kids variable over time. For example, we can create a box map (with hinge 1.5) for the <strong>kids2005</strong> variable, and proceed with <strong>Change Current Map Type</strong> to select <strong>custom1</strong>. The resulting map reflects the new custom categories. We observe an overall shift towards the lower categories, i.e., more sub-boroughs have a smaller share of households with children in 2005 compared to 2000.</p>
-<div class="figure" style="text-align: center">
+<p>This <strong>custom1</strong> classification could be used to track the spatial distribution
+of the kids variable over time. For example, we can create a box map (with hinge 1.5) for
+the <strong>kids2005</strong> variable, and proceed with <strong>Change Current Map Type</strong> to select <strong>custom1</strong>.
+The resulting map, shown in Figure <a href="#fig:customkids2005">55</a>, reflects the new custom categories. We observe an overall shift towards the
+lower categories, i.e., more sub-boroughs have a smaller share of households with children in 2005 compared to 2000.</p>
+<div class="figure" style="text-align: center"><span id="fig:customkids2005"></span>
 <img src="pics3a/4_316_kids05wcustom.png" alt="kids2005 with custom classification" width="80%" />
 <p class="caption">
-kids2005 with custom classification
+Figure 55: kids2005 with custom classification
 </p>
 </div>
-<p>In addition, the custom classification is also available to the histogram. Selecting <strong>Histogram Classification</strong> in the options shows <strong>custom1</strong> as a classification. Note that the category editor can also be initiated from the histogram options.</p>
-<div class="figure" style="text-align: center">
+<p>In addition, the custom classification is also
+available to the histogram. For example, in a histogram for <strong>kids2000</strong> (with seven bins), we can
+select <strong>Histogram Classification</strong> in the options, with
+<strong>custom1</strong> as an available classification, as in Figure <a href="#fig:histcustom1option">56</a>. Note that the category editor can also be initiated from the
+histogram options by selecting <strong>Create New Custom</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:histcustom1option"></span>
 <img src="pics3a/4_286_customhistdialog.png" alt="Custom classification for histogram" width="50%" />
 <p class="caption">
-Custom classification for histogram
+Figure 56: Custom classification for histogram
 </p>
 </div>
-<p>The corresponding histogram is the same as the one shown at the end of the breaks editing process in the category editor.</p>
-<div class="figure" style="text-align: center">
+<p>The histogram with the new classification, in Figure <a href="#fig:histcustom1">57</a>, is the same as the one shown at the end of the breaks editing
+process in the category editor.</p>
+<div class="figure" style="text-align: center"><span id="fig:histcustom1"></span>
 <img src="pics3a/4_287_custom_histogram.png" alt="Customized breaks in histogram" width="60%" />
 <p class="caption">
-Customized breaks in histogram
+Figure 57: Customized breaks in histogram
 </p>
 </div>
-<p>The custom categories can also be used as break points in conditional plots. This is the approach to fully customize the break points for the conditioning variables.</p>
+<p>The custom categories can also be used as break points in conditional plots. This is the
+preferred approach to fully customize the break points for the conditioning variables.</p>
 </div>
 <div id="saving-the-custom-categories-the-project-file" class="section level3 unnumbered">
-<h3>Saving the custom categories – the Project file</h3>
-<p>GeoDa has the ability to save a so-called project file that contains information on various variable transformations and other operations. We will revisit the project file in more detail when we discuss spatial weights. One useful feature of the project file is that it also contains the definition of any custom categories that were created. If this definition is not saved in a project file, then it will be lost, and will need to be recreated from scratch the next time the data set is analyzed.</p>
-<p>The project file is created from the menu as <strong>File &gt; Save Project</strong>.</p>
-<div class="figure" style="text-align: center">
+<h3>Saving the custom categories – the Project File</h3>
+<p>GeoDa has the ability to save a so-called <strong>Project File</strong> that contains information on various variable transformations and other operations. We will revisit the project file in more detail when we discuss spatial weights. One useful feature of the project file is that it also contains the definition of any custom categories that were created. If this definition is not saved in a project file, then it will be lost, and will need to be recreated from scratch the next time the data set is analyzed.</p>
+<p>The project file is created from the menu as <strong>File &gt; Save Project</strong>, as in Figure <a href="#fig:projectfilemenu">58</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:projectfilemenu"></span>
 <img src="pics3a/4_294_saveproject.png" alt="Save Project" width="25%" />
 <p class="caption">
-Save Project
+Figure 58: Save Project
 </p>
 </div>
-<p>This is followed by the usual file name dialog. The file is saved with a file extension of <strong>gda</strong>. It is a text file that includes XML encoding. For example, when we examine the just created project file with a text editor, we can locate the section pertaining to <strong>custom_classifications</strong>, as shown below.</p>
-<div class="figure" style="text-align: center">
+<p>This is followed by the usual file name dialog. The file is saved with a
+file extension of <strong>gda</strong>. It is a text file that includes XML encoding.
+For example, when we examine the just created project file with a text editor,
+we can locate the section pertaining to <strong>custom_classifications</strong>, as shown in
+Figure <a href="#fig:projectfilecontents">59</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:projectfilecontents"></span>
 <img src="pics3a/4_002_custominfo.png" alt="Custom category definition in project file" width="80%" />
 <p class="caption">
-Custom category definition in project file
+Figure 59: Custom category definition in project file
 </p>
 </div>
-<p>The custom classification section contains all the aspects needed for the definition of the custom category.</p>
-<p>Once a project file has been saved, GeoDa should be started by loading the <strong>gda</strong> file, rather than the shape file or any other data set. This ensures that all the meta-information is taken into account, all variable transformations updated and custom categories stored. The options menu for any map will now contain <strong>custom1</strong> as one of the available categories.</p>
+<p>The custom classification section contains all the aspects needed for the
+definition of the custom category.</p>
+<p>Once a project file has been saved, GeoDa should be started by loading the <strong>gda</strong> file, rather than the shape file or any other data set. This ensures that all the meta-information is taken into account, all variable transformations updated and custom categories stored. The options menu for any map,
+histogram or conditional plot will now contain <strong>custom1</strong> as one of the available categories.</p>
 <p>Once we move to more complex analyses, with multiple variable transformations, spatial weights, and other items created during various operations, the most efficient way to operate is to always save and use a project file.</p>
 </div>
 </div>
 <div id="conditional-map" class="section level2 unnumbered">
 <h2>Conditional Map</h2>
-<p>In the discussion of conditional plots in EDA, one of the options was a conditional map, also known as a conditioned choropleth map, or a micromap matrix <span class="citation">(for an extensive discussion, see Carr and Pickle 2010)</span>. This functionality can be invoked from the menu as <strong>Map &gt; Conditional Map</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>In the discussion of conditional plots in EDA, one of the options was a conditional map,
+also known as a conditioned choropleth map, or a micromap matrix <span class="citation">(for an extensive
+discussion, see Carr and Pickle <a href="#ref-CarrPickle:10">2010</a>)</span>. This functionality can be invoked from the
+menu as <strong>Map &gt; Conditional Map</strong>, as in Figure <a href="#fig:condmapmenu">60</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:condmapmenu"></span>
 <img src="pics3a/5_289_condmapmenu_u.png" alt="Conditional Map from Map menu" width="25%" />
 <p class="caption">
-Conditional Map from Map menu
+Figure 60: Conditional Map from Map menu
 </p>
 </div>
-<p>Alternatively, it is also one of the options associated with the conditional plot toolbar icon.</p>
-<div class="figure" style="text-align: center">
+<p>Alternatively, it is also the first of the options associated with the conditional plot toolbar icon,
+illustrated in Figure <a href="#fig:condmapicon">61</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:condmapicon"></span>
 <img src="pics3a/5_290_condplotmapicon.png" alt="Conditional Map from Conditional Plot icon" width="15%" />
 <p class="caption">
-Conditional Map from Conditional Plot icon
+Figure 61: Conditional Map from Conditional Plot icon
 </p>
 </div>
-<p>Selecting this option brings up a variable selection dialog containing three columns (compare this to the four columns for the conditional scatter plot). The first column pertains to the conditioning variable for the horizontal axis, the second to the conditioning variable for the vertical axis. The third column, <strong>Map Theme</strong>, selects the variable that will be mapped. In our example, we use <strong>forhis08</strong> (% of Hispanic population not born in the U.S.) and <strong>hhsiz08</strong> (average number of people per household) as the two conditioning variables, and <strong>rent2008</strong> (median rent) as the focus variable. All values are for 2008.</p>
-<div class="figure" style="text-align: center">
+<p>Selecting this option brings up a variable selection dialog containing three columns, as
+was the case for the conditional histogram plots.
+The first column pertains to the conditioning variable for the horizontal axis, the second defines the conditioning variable for the vertical axis. The third column, <strong>Map Theme</strong>, selects the variable that will be mapped.</p>
+<p>In our example, in Figure <a href="#fig:condmapvars">62</a>, we use <strong>forhis08</strong> (% of Hispanic population not born in the U.S.) and <strong>hhsiz08</strong> (average number of people per household) as the two conditioning variables, and <strong>rent2008</strong> (median rent) as the focus variable. All values are for 2008.</p>
+<div class="figure" style="text-align: center"><span id="fig:condmapvars"></span>
 <img src="pics3a/5_291_condmapvariables.png" alt="Conditional Map variable selection" width="60%" />
 <p class="caption">
-Conditional Map variable selection
+Figure 62: Conditional Map variable selection
 </p>
 </div>
-<p>Clicking <strong>OK</strong> brings up the default conditional map, with three categories (quantiles) for each of the conditioning variables, and thus 9 micro maps in total. On the horizontal axis, <strong>forhis08</strong> is listed with two break points. The vertical axis variable is given as <strong>hhsiz08</strong>, also with two break points. The maps themselves are box maps for the median rent variable. Each of the micro maps contains only those observations that match the categories on the horizontal and vertical axes.</p>
-<div class="figure" style="text-align: center">
+<p>Clicking <strong>OK</strong> brings up the default conditional map, shown in
+Figure <a href="#fig:condmap3x3">63</a>. The matrix of micromaps contains three categories (quantiles) for each of the conditioning variables, and thus nine micromaps in total. On the horizontal axis, <strong>forhis08</strong> is listed with two break points. The vertical axis variable is given as <strong>hhsiz08</strong>, also with two break points. The maps themselves are box maps for the median rent variable. Each of the micro maps contains only those observations that match the categories on the horizontal and vertical axes.</p>
+<p>Note that, as in the other conditional plots, the break points listed may be slightly different
+from the quantiles given in a quantile map. This is to ensure that the categories are completely
+separated. For example, a quantile map with three categories for the horizontal conditional
+variable <strong>forhis08</strong> would give the first category ending at 31.829 and the second starting at
+31.972. The first breakpoint listed in the micromap matrix is 31.900, which is exactly the
+midpoint between the two values, ensuring complete separation.</p>
+<div class="figure" style="text-align: center"><span id="fig:condmap3x3"></span>
 <img src="pics3a/5_292_condmap3x3.png" alt="3x3 Conditional Map" width="80%" />
 <p class="caption">
-3x3 Conditional Map
+Figure 63: 3x3 Conditional Map
 </p>
 </div>
-<p>Since there are only 55 observations in our example, the sample size for each of the subsets tends to be very small. Instead, we use the <strong>Options</strong> menu (right click) to change the classification. The structure of this menu is the same as for the other conditional plots, including changing the conditioning bins through <strong>Vertical Bins Breaks</strong> and <strong>Horizontal Bins Breaks</strong>. There are seven preset classifications, as well as the option to create custom breaks by means of the category editor. Note that if you continued with the previous example, the custom category <strong>custom1</strong> will be included as one of the options.</p>
-<p>In the illustration below, the vertical and horizontal break points were changed from the default 3 quantiles, to 2. The result is a 2 x 2 matrix of micro maps</p>
-<div class="figure" style="text-align: center">
+<p>Since there are only 55 observations in our example, the sample size for each of the subsets tends to be very small. Therefore, we use the <strong>Options</strong> menu (right click) to change the classification. The structure of this menu is the same as for the other conditional plots. This includes
+the option to change the conditioning bins through <strong>Vertical Bins Breaks</strong> and <strong>Horizontal Bins Breaks</strong>. There are seven preset classifications, as well as the option to create custom breaks by means of the category editor. Note that if you continued with the previous example,
+the custom category <strong>custom1</strong> will be included as one of the <strong>Custom Breaks</strong> options.</p>
+<p>In the illustration in Figure <a href="#fig:condmap2x2">64</a>, the vertical and horizontal break points were changed from the default 3 quantiles, to 2. The result is a 2 x 2 matrix of micro maps</p>
+<div class="figure" style="text-align: center"><span id="fig:condmap2x2"></span>
 <img src="pics3a/5_293_condmap2x2.png" alt="2x2 Conditional Map" width="80%" />
 <p class="caption">
-2x2 Conditional Map
+Figure 64: 2x2 Conditional Map
 </p>
 </div>
 <p>The classification suggests that sub-boroughs with larger household size tend to have lower rents (the two maps at the top), whereas there does not seem to be an effect of the % Hispanic that is foreign-born (the maps on the left and right do not seem to be drastically different in the range of values they contain). By manipulating the break points, further insight can be gained into the presence of interaction effects (or lack thereof). This can be further investigated more formally by means of an analysis of variance.</p>
 </div>
 <div id="cartogram" class="section level2 unnumbered">
 <h2>Cartogram</h2>
-<p>GeoDa includes a circular cartogram, in which the areal units are represented as circles, whose size (and color) is proportional to the variable observed at that location.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> The changed shapes remove the misleading effect that the area of the unit might have on perception of magnitude. For example, in the case of median rent in NYC sub-boroughs, some of the smaller areas in Manhattan have the highest rent, and consequently they can barely be noticed in a standard choropleth map.</p>
-<p>The cartogram is invoked by its toolbar button, situated in the center of the three mapping icons, or by selecting <strong>Map &gt; Cartogram</strong> in the <strong>Map</strong> menu.</p>
-<div class="figure" style="text-align: center">
+<div id="principle" class="section level3 unnumbered">
+<h3>Principle</h3>
+<p>A cartogram is a map type where the original layout of the areal unit is replaced by a geometric
+form (usually a circle, rectangle, or hexagon) that is proportional to the value of the variable
+for the location. This is in contrast to a standard choropleth map, where the size of the polygon
+corresponds to the area of the location in question. The cartogram has a long history and many
+variants have been suggested, some quite creative. In essence, the construction of a cartogram
+is an example of a nonlinear optimization problem, where the geometric forms have to be located such that
+they reflect the topology (spatial arrangement) of the locations as closely as possible <span class="citation">(see Tobler <a href="#ref-Tobler:04">2004</a>, for an extensive discussion of various aspects
+of the cartogram)</span>.</p>
+<p>GeoDa implements a circular cartogram, in which the areal units are represented as circles,
+whose size (and color) is proportional to the value observed at that location.
+The changed shapes remove the misleading effect that the area of the unit might have on perception of magnitude.</p>
+<p>For example, in the case of median rent in NYC sub-boroughs, some of the smaller areas in Manhattan have the highest rent, and consequently
+they can barely be noticed in a standard choropleth map.</p>
+</div>
+<div id="creating-a-cartogram" class="section level3 unnumbered">
+<h3>Creating a cartogram</h3>
+<p>The cartogram is invoked by its toolbar button, situated in the center of the three mapping icons
+(Figure <a href="#fig:cartogramicon">65</a>), or by selecting <strong>Map &gt; Cartogram</strong> in the <strong>Map</strong> menu.</p>
+<div class="figure" style="text-align: center"><span id="fig:cartogramicon"></span>
 <img src="pics3a/6_295_cartogramicon.png" alt="Cartogram icon" width="15%" />
 <p class="caption">
-Cartogram icon
+Figure 65: Cartogram icon
 </p>
 </div>
-<p>Next follows the <strong>Cartogram Variables</strong> dialog that contains two columns, one for the <strong>Circle Size</strong> and one for the <strong>Circle Color</strong>. It is highly recommended to select the same variable for both. In our example, this is again <strong>rent2008</strong>. The circle color variable can be different from the circle size variable, but then it may be difficult (and sometimes confusing) to keep the two separate.</p>
-<div class="figure" style="text-align: center">
+<p>Next follows the <strong>Cartogram Variables</strong> dialog that contains two columns, one for the <strong>Circle Size</strong> and one for the <strong>Circle Color</strong>. It is highly recommended to select the same variable for both. In our example, shown in Figure <a href="#fig:cartogramvars">66</a>, we again select <strong>rent2008</strong>.
+Note that the circle color variable can be different from the circle size variable, but then it may be difficult (and sometimes confusing) to keep the two separate.</p>
+<div class="figure" style="text-align: center"><span id="fig:cartogramvars"></span>
 <img src="pics3a/6_296_cartogramvariables.png" alt="Cartogram variable selection" width="40%" />
 <p class="caption">
-Cartogram variable selection
+Figure 66: Cartogram variable selection
 </p>
 </div>
-<p>Clicking <strong>OK</strong> brings up the cartogram view. The default is to use the <strong>Box Map</strong> classification for the circle colors (with hinge at 1.5 IQR).</p>
-<div class="figure" style="text-align: center">
+<p>Clicking <strong>OK</strong> brings up the cartogram view. The default, shown in
+Figure <a href="#fig:defaultcartogram">67</a>, is to use the <strong>Box Map</strong> classification for the circle colors (with hinge at 1.5 IQR).</p>
+<div class="figure" style="text-align: center"><span id="fig:defaultcartogram"></span>
 <img src="pics3a/6_297_cartogram.png" alt="Cartogram" width="80%" />
 <p class="caption">
-Cartogram
+Figure 67: Cartogram
 </p>
 </div>
-<p>The cartogram is most insightful when used in conjunction with a regular choropleth map. Selecting an observation in the cartogram then immediately links it with the corresponding area in the choropleth map, here illustrated for one of the Manhattan neighborhoods.</p>
-<div class="figure" style="text-align: center">
+<p>The cartogram is most insightful when used in conjunction with a regular choropleth map. Selecting an observation in the cartogram then immediately links it with the corresponding area in the choropleth map, illustrated in Figure <a href="#fig:linkedcartogram">68</a> for one of the Manhattan neighborhoods.</p>
+<div class="figure" style="text-align: center"><span id="fig:linkedcartogram"></span>
 <img src="pics3a/6_298_linkedcartogram.png" alt="Linked Cartogram and map" width="100%" />
 <p class="caption">
-Linked Cartogram and map
+Figure 68: Linked Cartogram and map
 </p>
 </div>
-<p>The cartogram has all the same options as a regular choropleth map, with one addition. The positioning of the circles in the cartogram is the result of a non-linear optimization algorithm that tries to locate the center of the circle as close as possible to the centroid of the areal unit with which it corresponds, while respecting the contiguity structure as much as possible. There is no unique solution to this problem, and it is often good practice to experiment with further iterations that will slightly reposition the circles. This is implemented in the <strong>Improve Cartogram</strong> option. A number of different iteration options are listed, together with the estimated time. The latter is particularly useful for larger data sets (but not in our example).</p>
-<div class="figure" style="text-align: center">
+<p>The cartogram has all the same options as a regular choropleth map, with one addition.
+The positioning of the circles in the cartogram is the result of a non-linear optimization algorithm that tries to locate the center of the circle as close as possible to the centroid of the areal unit with which it corresponds, while respecting the contiguity structure as much as possible. There is no unique solution to this problem, and it is often good practice to experiment with further iterations that will slightly reposition the circles. This is implemented in the <strong>Improve Cartogram</strong> option,
+shown in Figure <a href="#fig:improvecartogram">69</a>. A number of different iteration options are listed, together with the estimated time. The latter is particularly useful for larger data sets (but not in our example).</p>
+<div class="figure" style="text-align: center"><span id="fig:improvecartogram"></span>
 <img src="pics3a/6_299_improve_cartogram.png" alt="Improve Cartogram" width="50%" />
 <p class="caption">
-Improve Cartogram
+Figure 69: Improve Cartogram
 </p>
+</div>
 </div>
 </div>
 <div id="map-animation" class="section level2 unnumbered">
 <h2>Map Animation</h2>
-<p>In GeoDa, map animation, or, more generally, any kind of animation is carried out through the animation tool. This is invoked by the <strong>Map Movie</strong> toolbar icon, or from the <strong>Menu</strong>, as <strong>Map &gt; Map Movie</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>In GeoDa, map animation, or, more generally, any kind of animation is carried out through the animation tool. This is invoked by the <strong>Map Movie</strong> toolbar icon, shown in Figure <a href="#fig:mapmovieicon">70</a>, or from the <strong>Menu</strong>, as
+<strong>Map &gt; Map Movie</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:mapmovieicon"></span>
 <img src="pics3a/7_300_mapmovie_icon.png" alt="Map Movie icon" width="15%" />
 <p class="caption">
-Map Movie icon
+Figure 70: Map Movie icon
 </p>
 </div>
-<p>This brings up the <strong>Animation</strong> dialog, the control center through which the various aspects of the animation are controlled. The first item to specify is the <strong>Variable</strong> from the drop down list. We continue with <strong>rent2008</strong>. At the bottom of the dialog are the main controls: the start <strong>&gt;</strong> button, step-by-step forward <strong>&gt;&gt;</strong> or backward <strong>&lt;&lt;</strong>, whether the animation loops or stops at the end, an option to <strong>Reverse</strong> the progress, the speed of the animation, and whether the order followed is ascending or descending. The defaults are usually good, with <strong>Cumulative</strong> checked (i.e., the selection grows as the animation progresses) and <strong>Ascending order</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>This brings up the <strong>Animation</strong> dialog, the control center through which the various aspects of the animation are controlled. The first item to specify is the <strong>Variable</strong> from the drop down list. We continue with <strong>rent2008</strong>, shown in Figure <a href="#fig:animationcontrol">71</a>.</p>
+<p>At the bottom of the dialog are the main controls: the start <strong>&gt;</strong> button, step-by-step forward <strong>&gt;&gt;</strong> or backward <strong>&lt;&lt;</strong>, whether the animation loops or stops at the end, an option to <strong>Reverse</strong> the progress, the speed of the animation, and whether the order followed is ascending or descending. The defaults are usually good, with <strong>Cumulative</strong> checked (i.e., the selection grows as the animation progresses) and <strong>Ascending order</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:animationcontrol"></span>
 <img src="pics3a/8_302_mapmovie_vars.png" alt="Map Movie variable selection" width="50%" />
 <p class="caption">
-Map Movie variable selection
+Figure 71: Map Movie variable selection
 </p>
 </div>
-<p>Once the forward button is activated, each observation is selected in turn, starting with the lowest value. This selection is not only for the map (the term map movie is a left-over from earlier versions), but for all currently active windows. The slider in the <strong>Animation</strong> dialog moves from left to right, and under the variable name the currently selected observation and its value are listed. In our example, the dialog looks as follows after 17 steps.</p>
-<div class="figure" style="text-align: center">
+<p>Once the forward button is activated, each observation is selected in turn, starting with the lowest value. This selection is not only for the map (the term map movie is a left-over from earlier versions), but for all currently active windows. The slider in the <strong>Animation</strong> dialog moves from left to right. Under the variable name, the currently selected observation and its value are listed. In our example,
+after 17 steps, the dialog looks as in Figure <a href="#fig:controlinprogress">72</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:controlinprogress"></span>
 <img src="pics3a/8_303_movie_step.png" alt="Animation tool" width="50%" />
 <p class="caption">
-Animation tool
+Figure 72: Animation tool
 </p>
 </div>
-<p>The current selected observation is 51, with a value of 1000. All 17 lowest valued observations are highlighted in all currently open views, such as in the box map below (note how the status bar confirms that 17 observations were selected).</p>
-<div class="figure" style="text-align: center">
+<p>The current selected observation is listed as 51, with a value of 1000. The 17 lowest valued observations are highlighted in all currently open views, such as in the box map
+in Figure <a href="#fig:movieboxmap">73</a> (note how the status bar confirms that 17 observations were selected).</p>
+<div class="figure" style="text-align: center"><span id="fig:movieboxmap"></span>
 <img src="pics3a/8_304_movie_selectedinmap.png" alt="Map animation" width="80%" />
 <p class="caption">
-Map animation
+Figure 73: Map animation
 </p>
 </div>
 <p>The animation tool can be paused at any point, reversed, changed from continuous change to step-by-step, etc., using the controls provided. The main point of the animation is to visually check for any patterns, such as all the lowest or highest values occurring in one location, or an increase in value that follows a given spatial trend (e.g., core-periphery, or East-West). Of course, this visual impression is only that, and will need to be confirmed with the more formal pattern detection methods that we will cover later.</p>
@@ -845,50 +1201,55 @@ Map animation
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references">
-<div id="ref-Anselin94">
-<p>Anselin, Luc. 1994. “Exploratory Spatial Data Analysis and Geographic Information Systems.” In <em>New Tools for Spatial Analysis</em>, by Marco Painho (Ed.), 45–54. Eurostat, Luxembourg.</p>
+<div id="ref-Anselin:94">
+<p>Anselin, Luc. 1994. “Exploratory Spatial Data Analysis and Geographic Information Systems.” In <em>New Tools for Spatial Analysis</em>, edited by Marco Painho, 45–54. Luxembourg: Eurostat.</p>
 </div>
-<div id="ref-CarrPickle10">
-<p>Carr, Daniel B., and Linda Williams Pickle. 2010. <em>Visualizing Data Patterns with Micromaps</em>. Chapman &amp; Hall/CRC.</p>
+<div id="ref-CarrPickle:10">
+<p>Carr, Daniel B., and Linda Williams Pickle. 2010. <em>Visualizing Data Patterns with Micromaps</em>. Boca Raton, FL: Chapman &amp; Hall/CRC.</p>
 </div>
-<div id="ref-Fisher58">
-<p>Fisher, W.D. 1958. “On Grouping for Maximum Homogeneity.” <em>Journal of the American Statistical Association</em> 53: 789–98.</p>
+<div id="ref-Fisher:58">
+<p>Fisher, W. D. 1958. “On Grouping for Maximum Homogeneity.” <em>Journal of the American Statistical Association</em> 53:789–98.</p>
 </div>
-<div id="ref-Jenks77">
-<p>Jenks, G.F. 1977. “Optimal Data Classification for Choropleth Maps.” <em>Occasional Paper No. 2</em>. Department of Geography, University of Kansas.</p>
+<div id="ref-Jenks:77">
+<p>Jenks, G.F. 1977. “Optimal Data Classification for Choropleth Maps.” Occasional. Paper no. 2. Lawrence, KS: Department of Geography, University of Kansas.</p>
 </div>
-<div id="ref-Tobler04">
-<p>Tobler, Waldo. 2004. “Thirty Five Years of Computer Cartograms.” <em>Annals, Association of American Geographers</em> 94: 58–73.</p>
+<div id="ref-Tobler:04">
+<p>Tobler, Waldo. 2004. “Thirty Five Years of Computer Cartograms.” <em>Annals of He Association of American Geographers</em> 94:58–73.</p>
+</div>
+<div id="ref-Tomlin:90">
+<p>Tomlin, C. Dana. 1990. <em>Geographic Information Systems and Cartographic Modeling</em>. Englewood Cliffs, NJ: Prentice-Hall.</p>
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>While map algebra tends to be geared to applications for raster data, since the polygons for the different variables are identical, the same principles can be applied to the categorical map context.<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>See <span class="citation">Tobler (2004)</span> for an extensive discussion of various aspects of the cartogram.<a href="#fnref3">↩</a></p></li>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>The base layer
+is based on a <em>tile</em> technology, which determines the map extent shown.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>A free Nokia/HERE account can be obtained
+from <a href="https://developer.here.com" class="uri">https://developer.here.com</a>. The basemap can then
+be configured with the App ID and App Key.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Note that you may need to restore the table to the
+original order to get the exact same results as shown in Figure <a href="#fig:classintable">19</a>. The current
+state of your table may still be sorted on the <strong>rent2008</strong> variable.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Map algebra tends to be geared to applications for raster data, i.e., regular grids. However,
+since the polygons for the different variables are identical, the same principles
+can be applied in the context of the categorical maps. The classic reference on the principles
+of map algebra is <span class="citation">Tomlin (<a href="#ref-Tomlin:90">1990</a>)</span>.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>When invoked frome the toolbar, the default name is simply
+<strong>Custom Breaks</strong>.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>If another classification was
+created earlier, the settings will inherit from that classification.<a href="#fnref7" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 
 <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</footer>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-      </section>
-
-            <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-72724100-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+</section>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

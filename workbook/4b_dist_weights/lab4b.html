@@ -13,27 +13,27 @@
 <meta name="author" content="Luc Anselin" />
 
 
-<title>Distance-Based Spatial Weights</title>
+<title>Distance-Band Spatial Weights</title>
 
-<link href="lab4b_files/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="lab4b_files/highlightjs-1.1/highlight.js"></script>
+<link href="lab4b_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab4b_files/highlightjs-9.12.0/highlight.js"></script>
     <title>GeoDa on Github</title>
 
     <style>
     	*{margin:0;padding:0;}
-	.shadowfilter {
-	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-	filter: url(shadow.svg#drop-shadow);
-	}
-	.intro1 { margin-left: -45px;}
+	    .shadowfilter {
+	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	        filter: url(shadow.svg#drop-shadow);
+	     }
+	     .intro1 { margin-left: -45px;}
     </style>
-    <link rel="stylesheet" type="text/css" href="//geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="//geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="//geodacenter.github.io/stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="//geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
     <style>
-    ul {padding-left:30px;} 
+    ul {padding-left:30px;}
 	figcaption {
 	  top: .70em;
    	  left: .35em;
@@ -41,9 +41,12 @@
 	  right: auto!important;
 	}
     </style>
-    
+
         <style>
     h1 {
+        text-align: center;
+    }
+    h3.subtitle {
         text-align: center;
     }
     h4.author {
@@ -56,7 +59,7 @@
         font-size : 12px;
     }
     </style>
-    
+
 <!-- Google Analytics -->
 <script>
 window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -66,21 +69,23 @@ ga('send', 'pageview');
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 <!-- End Google Analytics -->
 <!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-53RVF8');</script>
 <!-- End Google Tag Manager -->
 
 <style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -96,21 +101,21 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
     <section class="page-header">
       <h1 class="project-name">GeoDa</h1>
       <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
-      <a href="//geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
       <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
       <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
-       <a href="//geodacenter.github.io/documentation.html" class="btn">Documentation</a>
-       <a href="//geodacenter.github.io/support.html" class="btn">Support</a>
-       <a href="//geodacenter.github.io/index-cn.html" class="btn">中文</a>
+       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
     </section>
-
 
     <section class="main-content">
 
 
-<h1 class="title toc-ignore">Distance-Based Spatial Weights</h1>
-<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>11/27/2017 (updated)</em></h4>
+<h1 class="title toc-ignore">Distance-Band Spatial Weights</h1>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>03/16/2018 (revised and updated)</em></h4>
 
 
 <div id="TOC">
@@ -119,24 +124,44 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><a href="#objectives">Objectives</a><ul>
 <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
 </ul></li>
-<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#getting-started">Getting started</a><ul>
+<li><a href="#customizing-a-point-map">Customizing a point map</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#distance-band-weights">Distance-Band Weights</a><ul>
-<li><a href="#gwt-file">GWT file</a></li>
-<li><a href="#weights-characteristics">Weights characteristics</a></li>
-<li><a href="#isolates">Isolates</a></li>
+<li><a href="#concepts">Concepts</a><ul>
+<li><a href="#distance-metric">Distance metric</a></li>
+<li><a href="#great-circle-distance">Great circle distance</a></li>
+<li><a href="#distance-band-weights-1">Distance-band weights</a></li>
 </ul></li>
-<li><a href="#k-nearest-neighbor-weights">K-Nearest Neighbor Weights</a></li>
+<li><a href="#creating-distance-band-weights">Creating distance-band weights</a></li>
+<li><a href="#gwt-file">GWT file</a></li>
+<li><a href="#weights-characteristics">Weights characteristics</a><ul>
+<li><a href="#connectivity-histogram">Connectivity histogram</a></li>
+<li><a href="#finding-the-locations-separated-by-the-max-min-distance">Finding the locations separated by the max-min distance</a></li>
+<li><a href="#finding-the-most-connected-observations">Finding the most connected observations</a></li>
+<li><a href="#connectivity-graph">Connectivity graph</a></li>
+</ul></li>
+<li><a href="#isolates">Isolates</a><ul>
+<li><a href="#isolates-in-the-connectivity-histogram">Isolates in the connectivity histogram</a></li>
+<li><a href="#isolates-in-the-connectivity-graph">Isolates in the connectivity graph</a></li>
+<li><a href="#how-to-deal-with-isolates">How to deal with isolates</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#k-nearest-neighbor-weights">K-Nearest Neighbor Weights</a><ul>
+<li><a href="#concept">Concept</a></li>
+<li><a href="#creating-knn-weights">Creating KNN weights</a><ul>
+<li><a href="#properties-of-knn-weights">Properties of KNN weights</a></li>
+<li><a href="#knn-and-distance">KNN and distance</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#generalizing-the-concept-of-contiguity">Generalizing the Concept of Contiguity</a><ul>
 <li><a href="#contiguity-based-weights-for-points">Contiguity-based weights for points</a><ul>
 <li><a href="#thiessen-polygons">Thiessen polygons</a></li>
-<li><a href="#contiguity-weights">Contiguity weights</a></li>
+<li><a href="#creating-thiessen-polygons-from-a-point-layer">Creating Thiessen polygons from a point layer</a></li>
+<li><a href="#contiguity-weights-for-thiessen-polygons">Contiguity weights for Thiessen polygons</a></li>
 </ul></li>
 <li><a href="#distance-based-weights-for-polygons">Distance-based weights for polygons</a></li>
-</ul></li>
-<li><a href="#applications-of-spatial-weights">Applications of Spatial Weights</a><ul>
-<li><a href="#spatially-lagged-variable">Spatially lagged variable</a></li>
-<li><a href="#spatial-rate-smoothing">Spatial rate smoothing</a></li>
 </ul></li>
 <li><a href="#references">References</a></li>
 </ul>
@@ -145,10 +170,15 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p><br></p>
 <div id="introduction" class="section level2 unnumbered">
 <h2>Introduction</h2>
-<p>In this lab, we will continue dealing with the spatial weights functionality in GeoDa, but now we will focus on weights that use the notion of distance. Intrinsically, this is most appropriate for point layers, but we will see that it can readily be generalized to polygons as well.</p>
-<p>We will initially use a data set with point locations of house sales for Cleveland, OH, but later return to our U.S. county Homicides and Ohio county lung cancer data as well.</p>
-<p>We will compute the distance between points to create distance-band weights, as well as k-nearest neighbor weights. We will examine the weights characteristics and pay particular attention to the issue of neighborless locations, or <em>isolates</em>. We also consider generalizing the concept of contiguity to points (using Thiessen polygons), and the notion of distance-based weights for polygons (using their centroids to compute the distances). We close with a discussion of two applications of spatial weights (other than their use in spatial autocorrelation statistics): the creation of spatially lagged variables and spatial rate smoothing.</p>
-<p>As for the previous lab, technical details on spatial weights are contained Chapters 3 and 4 of <span class="citation">Anselin and Rey (2014)</span> (with software illustrations for an earlier GeoDa interface design).</p>
+<p>In this Chapter, we will continue to deal with the spatial weights functionality in GeoDa,
+but now we will focus on weights that use the notion of distance. Intrinsically, this
+is most appropriate for point layers, but we will see that it can readily be
+generalized to polygons as well.</p>
+<p>We will initially use a data set with point locations of house sales for Cleveland, OH,
+but later return to our U.S. county Homicides data to illustrate the polygon case.</p>
+<p>We will compute the distance between points to create distance-band weights, as well as k-nearest neighbor weights. We will examine the weights characteristics and pay particular attention to the issue of neighborless locations, or <em>isolates</em>. We also
+consider generalizing the
+concept of contiguity to points (using Thiessen polygons), and the notion of distance-based weights for polygons (using their centroids to compute the distances).</p>
 <div id="objectives" class="section level3 unnumbered">
 <h3>Objectives</h3>
 <ul>
@@ -158,11 +188,9 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><p>Assess the effect of the max-min distance cut-off</p></li>
 <li><p>Identify isolates</p></li>
 <li><p>Construct k-nearest neighbor spatial weights</p></li>
-<li><p>Create a Thiessen polygon from a point layer</p></li>
+<li><p>Create Thiessen polygons from a point layer</p></li>
 <li><p>Construct contiguity weights for points and distance weights for polygons</p></li>
 <li><p>Understand the use of great circle distance</p></li>
-<li><p>Create a spatially lagged variable as an average and as a sum of the neighbors</p></li>
-<li><p>Compute and map spatially smoothed rates</p></li>
 </ul>
 <div id="geoda-functions-covered" class="section level4 unnumbered">
 <h4>GeoDa functions covered</h4>
@@ -173,20 +201,15 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <ul>
 <li>distance-band weights</li>
 <li>k-nearest neighbor weights</li>
+<li>great circle distance option</li>
+</ul></li>
+<li>Weights Manager
+<ul>
+<li>Connectivity Histogram, Map and Graph</li>
 </ul></li>
 <li>Map
 <ul>
 <li>Thiessen Polygons option</li>
-</ul></li>
-<li>Table &gt; Calculator
-<ul>
-<li>Spatial Lag</li>
-<li>row-standardized weights or not</li>
-<li>include self-neighbors or not</li>
-</ul></li>
-<li>Map &gt; Rates-Calculated Map
-<ul>
-<li>Spatial Rate</li>
 </ul></li>
 </ul>
 <p><br></p>
@@ -194,438 +217,692 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 <div id="getting-started" class="section level3 unnumbered">
 <h3>Getting started</h3>
-<p>We will use a data set that contains the location and sales price of 205 homes in a core area of Cleveland, OH for the fourth quarter of 2015. The data set is included as one of the Center for Spatial Data Science example data sets and can be downloaded from <a href="https://geodacenter.github.io/data-and-lab//clev_sls_154_core/">Cleveland Home Sales (2015)</a>. This yields a folder with four shape files with file name <strong>clev_sls_154_core</strong> and the usual four file extensions (shp, shx, dbf and prj).</p>
-<p>We get started by clearing the previous project and dropping the file <strong>clev_sls_154_core.shp</strong> into the <strong>Drop files here</strong> rectangle of the connect to data source dialog. A themeless base map is shown.</p>
-<div class="figure" style="text-align: center">
+<p>To begin, we will use a data set that contains the location and sales price of 205 homes in a core area of Cleveland, OH for the fourth quarter of 2015.
+The data set is included as one of the Center for Spatial Data Science example
+data sets and can be downloaded from
+<a href="https://geodacenter.github.io/data-and-lab//clev_sls_154_core/">Cleveland Home Sales (2015)</a>.
+This yields a folder with four shape files with file name <strong>clev_sls_154_core</strong> and
+the usual four file extensions (shp, shx, dbf and prj).</p>
+<p>We get started by clearing the previous project and dropping the file <strong>clev_sls_154_core.shp</strong> into the <strong>Drop files here</strong> rectangle of the connect to data source dialog. A themeless base map is shown
+in Figure <a href="#fig:home1">1</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:home1"></span>
 <img src="pics4b/0_361_pointsthemeless.png" alt="Cleveland home sales themeless map" width="80%" />
 <p class="caption">
-Cleveland home sales themeless map
+Figure 1: Cleveland home sales themeless map
 </p>
 </div>
-<p>To make this look a little better, we do three things. First, we add a base map using the toolbar icon and pick <strong>Nokia Day</strong>, as before. The transparency may need some adjustment to make the points easier to see (use <strong>Change Map Transparency</strong> from the base map icon options menu). Next, we change the color of the points (actually, circles) themselves. This is one of the options in the legend panel of the map. Right click on the green box to the left of <strong>(205)</strong> and choose <strong>Color for Category</strong>.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
-<div class="figure" style="text-align: center">
+<div id="customizing-a-point-map" class="section level4 unnumbered">
+<h4>Customizing a point map</h4>
+<p>To make this look a little nicer, we make three minor modifications. First, we add a base map using the
+corresponding toolbar icon and pick <strong>Nokia Day</strong>. The transparency may need some adjustment to
+make the points easier to see (use <strong>Change Map Transparency</strong> from the base map icon options menu).</p>
+<p>Next, we change the color of the points themselves (actually, drawn as tiny circles). This is one of the options in the legend panel of the map. Right click on the green box to the left
+of <strong>(205)</strong> and choose <strong>Color for Category</strong>, as in Figure <a href="#fig:cat1">2</a>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:cat1"></span>
 <img src="pics4b/0_362_colorforcategory.png" alt="Set color for category" width="25%" />
 <p class="caption">
-Set color for category
+Figure 2: Set color for category
 </p>
 </div>
-<p>In our example, we turned the circles to black, which results in the following base map.</p>
-<div class="figure" style="text-align: center">
+<p>In our example, we turned the circles to black, which results in the base map
+shown in Figure <a href="#fig:base1">3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:base1"></span>
 <img src="pics4b/0_363_pointswbasemap.png" alt="Cleveland home sales point map" width="80%" />
 <p class="caption">
-Cleveland home sales point map
+Figure 3: Cleveland home sales point map
 </p>
 </div>
-<p>A third minor adjustment is to change the way selected and unselected points are displayed. The default is to use transparency to distinguish them, but for points this often does not provide a clear distinction, in the sense that the unselected points may be hard to see. Instead, we go back to the <em>old</em> way of highlighting selected observations in GeoDa, which is to use a different color. We set this options in the <strong>System</strong> tab of the <strong>GeoDa Preferences Setup</strong>. The first item under <strong>Maps</strong> pertains to the way in which map selections are highlighted. The default is to have the check box <strong>off</strong>, but we change that so that the box is checked.</p>
-<div class="figure" style="text-align: center">
+<p>A third minor adjustment is to change the way selected and unselected points are
+displayed. The default is to use transparency to distinguish them, but for points this
+often does not provide a clear distinction, in the sense that the unselected points
+may be hard to see. Instead, we go back to the <em>old</em> way of highlighting selected observations
+in GeoDa, which is to use a different color.</p>
+<p>We set this option in the <strong>System</strong> tab of the <strong>GeoDa Preferences Setup</strong>. As shown in Figure <a href="#fig:color1">4</a>, the first item under <strong>Maps</strong> pertains to the way in which map selections are highlighted. The default is to have the check box <strong>off</strong>, but we change that so that the box is checked.</p>
+<div class="figure" style="text-align: center"><span id="fig:color1"></span>
 <img src="pics4b/0_374_highlightoption.png" alt="GeoDa selection preferences" width="80%" />
 <p class="caption">
-GeoDa selection preferences
+Figure 4: GeoDa selection preferences
 </p>
 </div>
-<p>A selection of points (locations) in the map is now shown as <em>red</em>, whereas the unselected points remain in black, as shown below.</p>
-<div class="figure" style="text-align: center">
+<p>A selection of points (locations) in the map is now shown as <em>red</em>, whereas the
+unselected points remain in black, as shown in Figure <a href="#fig:redselect">5</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:redselect"></span>
 <img src="pics4b/0_375_selectioncolor.png" alt="Cleveland points with selection highlighted" width="80%" />
 <p class="caption">
-Cleveland points with selection highlighted
+Figure 5: Cleveland points with selection highlighted
 </p>
 </div>
-<p>The points considered in our example are contained within an arbitrary rectangular selection taken from the full set of home sales for that period. We are now ready to proceed with spatial weights derived from a point layer.</p>
+<p>The points considered in our example are contained within an arbitrary rectangular selection taken from the full set
+of home sales for that period. We are now ready to proceed with spatial weights derived
+from a point layer.</p>
+</div>
 </div>
 </div>
 <div id="distance-band-weights" class="section level2 unnumbered">
 <h2>Distance-Band Weights</h2>
-<p>As we did for contiguity weights, we invoke the <strong>Weights Manager</strong> and click on the <strong>Create</strong> button to get the process started. In the <strong>Weights File Creation</strong> interface, after specifying the ID variable (<strong>unique_id</strong>), we focus on the lower panel (<strong>Distance Weight</strong>) and select the <strong>Threshold distance</strong> radio button. The default max-min distance (largest nearest neighbor distance) is given in units appropriate for the projection used. Note the importance of the <strong>Distance metric</strong> (highlighted in the screen shot). Since our data is projected, it is appropriate to use <strong>Euclidean</strong> (straight line) distance. However, many data sets come in simple latitude-longitude, for which a great circle distance (or arc distance) must be used instead. We will revisit this shortly.</p>
-<div class="figure" style="text-align: center">
+<div id="concepts" class="section level3 unnumbered">
+<h3>Concepts</h3>
+<div id="distance-metric" class="section level4 unnumbered">
+<h4>Distance metric</h4>
+<p>The core input into the determination of a neighbor relation for distance-based
+spatial weights is a formal measure of distance, or a distance <em>metric</em>.
+The most familiar special case is the <em>Euclidean</em> or straight line
+distance, <span class="math inline">\(d_{ij}\)</span>, as the crow flies:
+<span class="math display">\[\begin{equation*}
+d_{ij} = \sqrt{(x_{i} - x_{j})^{2} + (y_{i} - y_{j})^{2}}, 
+\end{equation*}\]</span>
+for two points <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, with respective coordinates <span class="math inline">\((x_{i},y_{i})\)</span> and
+<span class="math inline">\((x_{j},y_{j})\)</span>.</p>
+</div>
+<div id="great-circle-distance" class="section level4 unnumbered">
+<h4>Great circle distance</h4>
+<p>Euclidean inter-point distances
+are only meaningful when the coordinates are recorded on
+a plane, i.e., for projected points.</p>
+<p>In practice,
+one often works with unprojected points, expressed as
+degrees of latitude and longitude, in which case using a straight
+line distance measure is inappropriate, since it ignores the curvature
+of the earth. This is especially the case for longer distances, such
+as from the East Coast to the West Coast in the U.S.</p>
+<p>The proper distance measure in this case is the so-called
+<em>arc distance</em> or <em>great circle distance</em>. This
+takes the latitude and longitude in decimal degrees as input
+into a conversion formula.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Decimal degrees are obtained
+from the degree-minute-second value as degrees +
+minutes/60 + seconds/3600.</p>
+<p>The latitude and longitude in
+decimal degrees are converted into radians as:
+<span class="math display">\[\begin{eqnarray*}
+\mbox{Lat}_r &amp;=&amp; (\mbox{Lat}_d - 90) * \pi/180\\
+\mbox{Lon}_r &amp;=&amp; \mbox{Lon}_d * \pi/180,
+\end{eqnarray*}\]</span>
+where the subscripts <span class="math inline">\(d\)</span> and <span class="math inline">\(r\)</span> refer respectively to decimal
+degrees and radians, and <span class="math inline">\(\pi = 3.14159 \dots\)</span>.
+With <span class="math inline">\(\Delta \mbox{Lon} = \mbox{Lon}_{r(j)} - \mbox{Lon}_{r(i)}\)</span>, the
+expression for the arc distance is:
+<span class="math display">\[\begin{eqnarray*}
+d_{ij} &amp;=&amp; \mbox{R} * \arccos [ \cos ( \Delta \mbox{Lon} )
+     * \sin \mbox{Lat}_{r(i)} *
+ \sin \mbox{Lat}_{r(j)} )\\
+  &amp;&amp;+ \cos \mbox{Lat}_{r(i)} * \cos \mbox{Lat}_{r(j)} ],
+\end{eqnarray*}\]</span>
+or, equivalently:
+<span class="math display">\[\begin{eqnarray*}
+d_{ij} &amp;=&amp; \mbox{R} * \arccos [ \cos ( \Delta \mbox{Lon} )
+     * \cos \mbox{Lat}_{r(i)} *
+ \cos \mbox{Lat}_{r(j)} )\\
+   &amp;&amp;+ \sin \mbox{Lat}_{r(i)} * \sin \mbox{Lat}_{r(j)} ],
+\end{eqnarray*}\]</span>
+where R is the radius of the earth. In GeoDa, the arc distance is obtained in
+miles with R = 3959, and in kilometers with R = 6371.</p>
+<p>These
+calculated distance values are only approximate, since the radius
+of the earth is taken at the equator. A more precise measure would
+take into account the actual latitude at which the distance
+is measured. In addition, the earth’s shape is much
+more complex than a sphere, but the approximation serves our purposes.</p>
+</div>
+<div id="distance-band-weights-1" class="section level4 unnumbered">
+<h4>Distance-band weights</h4>
+<p>The most straightforward spatial weights matrix constructed from a
+distance measure is obtained when <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are considered neighbors whenever <span class="math inline">\(j\)</span>
+falls within a critical <em>distance band</em> from <span class="math inline">\(i\)</span>. More precisely, <span class="math inline">\(w_{ij} = 1\)</span>
+when <span class="math inline">\(d_{ij} \le \delta\)</span>, and <span class="math inline">\(w_{ij} = 0\)</span> otherwise, where <span class="math inline">\(\delta\)</span> is
+a preset critical distance cutoff.</p>
+<p>In order to avoid isolates (islands) that would result from too
+stringent a critical distance, the distance must be chosen such
+that each
+location has at least one neighbor. Such a distance conforms
+to a <em>max-min</em> criterion, i.e., it is the largest of the
+nearest neighbor distances.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>In practice, the max-min criterion often leads to too many neighbors
+for locations that are somewhat clustered, since the critical
+distance is determined by the points that are furthest apart.
+This problem
+frequently occurs
+when the density of the points is uneven across
+the data set, such as when some of the points are clustered
+and others more spread out. We revisit this problem in the illustrations
+below.</p>
+<p>Further technical details on distance-based spatial weights are contained Chapters 3 and 4 of <span class="citation">Anselin and Rey (<a href="#ref-AnselinRey:14">2014</a>)</span>, although the software illustrations are for an earlier GeoDa interface design.</p>
+</div>
+</div>
+<div id="creating-distance-band-weights" class="section level3 unnumbered">
+<h3>Creating distance-band weights</h3>
+<p>As we did for contiguity weights, we invoke the <strong>Weights Manager</strong> and click on the <strong>Create</strong> button to get the process started. In the <strong>Weights File Creation</strong> interface, after specifying the ID variable (<strong>unique_id</strong>), we focus on the right-most button, <strong>Distance Weight</strong>. This generates the dialog for
+the three distance weight options: <strong>Distance band</strong>, <strong>K-Nearest neighbors</strong>, and <strong>Adaptive kernel</strong>.
+In this Chapter, we focus on the first two options.</p>
+<p>Distance band weights are initiated by selecting the <strong>Distance band</strong> button in the interface, as
+shown in Figure <a href="#fig:distanceband">6</a>. This is also the default option. The max-min distance (largest nearest neighbor distance) is given in the box next to
+<strong>Specify bandwidth</strong>, in units appropriate for the projection used. In our example, these are feet.</p>
+<div class="figure" style="text-align: center"><span id="fig:distanceband"></span>
 <img src="pics4b/1_clev_distanceband.png" alt="Distance band default setting" width="60%" />
 <p class="caption">
-Distance band default setting
+Figure 6: Distance band default setting
 </p>
 </div>
-<p>The critical distance for our point data is about 3598 feet, or roughly 0.7 miles. This is the distance that ensures that each point (house sale) has at least one neighbor. After clicking on the <strong>Create</strong> button and specifying a file name, such as <strong>clev_sls_154_cored_d</strong> (the GWT file extension is added automatically), the new weights are listed in the <strong>Weights Manager</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>Note the importance of the <strong>Distance metric</strong>, highlighted in Figure <a href="#fig:distanceband">6</a>. Since our data is projected, it is appropriate to use <strong>Euclidean</strong> (straight line) distance. However, many data sets come in simple latitude-longitude, for which a great circle distance (or arc distance) must be used instead. We will revisit this shortly.</p>
+<p>The critical distance for our point data is about 3598 feet, or roughly 0.7 miles. This is the distance that ensures that each point (house sale) has at least one neighbor. After clicking on the <strong>Create</strong> button and specifying a file name, such as <strong>clev_sls_154_cored_d</strong>
+(the GWT file extension is added automatically), the new weights and their
+summary properties are listed in the <strong>Weights Manager</strong>, as in Figure <a href="#fig:dweights1">7</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:dweights1"></span>
 <img src="pics4b/1_clev_d_weightmanager.png" alt="Distance weights in weight manager" width="40%" />
 <p class="caption">
-Distance weights in weight manager
+Figure 7: Distance weights in weight manager
 </p>
 </div>
-<p>An important aspect of the metadata in the weights manager is the <strong>threshold value</strong>. This information will be included in the <strong>Project File</strong>. This is the only reliable way to remember which distance cut-off was used for the distance bands in the weights.</p>
+<p>An important aspect of the metadata in the weights manager is the <strong>threshold value</strong>. This
+information will also be included in any <strong>Project File</strong> that is saved. This is the only reliable way to remember which distance cut-off was used for the distance bands in the weights.</p>
+</div>
 <div id="gwt-file" class="section level3 unnumbered">
 <h3>GWT file</h3>
-<p>Distance-based weights are saved in files with a <strong>GWT</strong> file extension. This format is slightly different from the GAL format used for contiguity weights. It was first introduced in SpaceStat in 1995, and later adopted by R spdep and other software packages. The header line is the same as for GAL files, but each pair of neighbors is listed, with the ID of the observation, the ID of its neighbor and the distance that separates them. This distance is currently only included for informational purposes, since GeoDa does not use the distance measure itself in any operations (spatial weights are also row-standardized by default).</p>
-<div class="figure" style="text-align: center">
+<p>Distance-based weights are saved in files with a <strong>GWT</strong> file extension. This format,
+illustrated in Figure <a href="#fig:gwtformat">8</a>, is slightly different from the GAL format used for contiguity weights. It was first introduced in SpaceStat in 1995, and later adopted by R spdep and other software packages. The header line is the same as for GAL files, but each pair of neighbors is listed, with the ID of the observation, the ID of its neighbor and the distance that separates them. This distance is currently only included for informational purposes, since GeoDa does not use the actual distance value in any statistical operations (spatial weights are also row-standardized by default).</p>
+<div class="figure" style="text-align: center"><span id="fig:gwtformat"></span>
 <img src="pics4b/1_gwtfile.png" alt="GWT file contents" width="30%" />
 <p class="caption">
-GWT file contents
+Figure 8: GWT file contents
 </p>
 </div>
 </div>
 <div id="weights-characteristics" class="section level3 unnumbered">
 <h3>Weights characteristics</h3>
-<p>In the same way as for contiguity weights, we can assess the characteristics of distance-based weights by means of the <strong>Connectivity Histogram</strong> and the <strong>Connectivity Map</strong>, available through the buttons at the bottom of the weights manager.</p>
-<p>The shape of the connectivity histogram for distance-band weights is typically very different from that of contiguity-based weights (we can bring up descriptive statistics through the <strong>View &gt; Display Statistics</strong> option). We see a much larger range in the number of neighbors, as well as extremes, with some observations having only one neighbor, and others 32. This is directly related to the spatial distribution of the points. Locations that are somewhat isolated will drive the determination of the largest nearest neighbor cut-off point (their nearest neighbor distance will be large), whereas dense clusters of locations will encompass many neighbors using this large cut-off distance.</p>
-<div class="figure" style="text-align: center">
+<p>In the same way as for contiguity weights, we can assess the characteristics of
+distance-based weights by means of the <strong>Connectivity Histogram</strong>, the <strong>Connectivity
+Map</strong>, and the <strong>Connectivity Graph</strong>, available through the buttons at the bottom of the weights manager.</p>
+<div id="connectivity-histogram" class="section level4 unnumbered">
+<h4>Connectivity histogram</h4>
+<p>The shape of the connectivity histogram for distance-band weights is typically very different from that of contiguity-based weights (as in any histogram, we can bring up descriptive statistics through the
+<strong>View &gt; Display Statistics</strong> option). As illustrated in Figure <a href="#fig:disthistogram">9</a>, we see a much larger range in the number of neighbors, as well as extremes, with some observations having only one neighbor, and others having 32.</p>
+<div class="figure" style="text-align: center"><span id="fig:disthistogram"></span>
 <img src="pics4b/1_clev_d_histogram.png" alt="Connectivity histogram -- default distance band" width="60%" />
 <p class="caption">
-Connectivity histogram – default distance band
+Figure 9: Connectivity histogram – default distance band
 </p>
 </div>
-<p>In the Cleveland example, we can examine the GWT file to find the observation pair separated by the critical distance cut-off (3598). This turns out to be the observation pair #11359 and #10014.</p>
-<div class="figure" style="text-align: center">
+<p>We also observe these descriptive statistics in the property list shown in Figure <a href="#fig:dweights1">7</a>.
+Compared to contiguity weights, the mean (12.64) and median (13.00) number of neighbors are much
+higher, and the matrix is also much denser (% non-zero = 6.17%).</p>
+<p>The range in the number of neighbors is directly related to the spatial distribution of the points. Locations that are somewhat isolated will drive the determination of the largest nearest neighbor cut-off point (their nearest neighbor distance will be large), whereas dense clusters of locations will encompass many neighbors using this large cut-off distance.</p>
+</div>
+<div id="finding-the-locations-separated-by-the-max-min-distance" class="section level4 unnumbered">
+<h4>Finding the locations separated by the max-min distance</h4>
+<p>In the Cleveland example, we can examine the GWT file to find the observation pair separated by the critical distance cut-off (3598). As shown in Figure <a href="#fig:maxdist">10</a>, this turns out to be the observation pair with unique_id 11359 and 10014.</p>
+<div class="figure" style="text-align: center"><span id="fig:maxdist"></span>
 <img src="pics4b/1_cutoff_distance.png" alt="Cut off distance in GWT file" width="25%" />
 <p class="caption">
-Cut off distance in GWT file
+Figure 10: Cut off distance in GWT file
 </p>
 </div>
-<p>In the Table, a selection of observation #11359 will result in the corresponding location to be highlighted in red in the point map.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> It is a little tricky to identify, but using the base map as a guide facilitates finding the location of the point (shown with the pointer in the map below).</p>
-<div class="figure" style="text-align: center">
+<p>In the Table, a selection of observation with unique_id 11359 will result in the corresponding
+location to be highlighted in red in the
+point map, as indicated with the pointer in
+Figure <a href="#fig:maxminlocation">11</a>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:maxminlocation"></span>
 <img src="pics4b/1_376_locationselected.png" alt="Selected max-min location" width="60%" />
 <p class="caption">
-Selected max-min location
+Figure 11: Selected max-min location
 </p>
 </div>
-<p>We now open the <strong>Connectivity Map</strong> and locate the point with <strong>unique_id</strong> #11359. Again, we add a base map and use the street network as a guide to find the point.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> The status bar of the connectivity map shows the selected observation (#11359) and its one neighbor (#10114, in black).</p>
-<div class="figure" style="text-align: center">
+<p>We now open the <strong>Connectivity Map</strong>, shown in Figure <a href="#fig:distconnmap">12</a>. Since this map is a regular themeless map, we can customize
+it in the same way as the original point map by adding a base layer (Nokia day) and changing the
+color category to black. As the current selection,
+the point with <strong>unique_id</strong> 11359 will be highlighted in red. With the pointer
+hovering over the selected point, the status bar of the connectivity map
+will show the selected observation (11359) and its one neighbor (10114, in black), as highlighted in
+Figure <a href="#fig:distconnmap">12</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:distconnmap"></span>
 <img src="pics4b/1_377_maxdistr.png" alt="Selected max-min location in Connectivity Map" width="60%" />
 <p class="caption">
-Selected max-min location in Connectivity Map
+Figure 12: Selected max-min location in Connectivity Map
 </p>
 </div>
-<p>We can examine the effect of the large distance cut-off on more densely distributed point locations. For example, selecting the right-most bar in the <strong>Connectivity Histogram</strong> will highlight the two most connected observations in the map. The connectivity histogram shows that these have 32 neighbors. The two points are highlighted in red in the map below.</p>
-<div class="figure" style="text-align: center">
+</div>
+<div id="finding-the-most-connected-observations" class="section level4 unnumbered">
+<h4>Finding the most connected observations</h4>
+<p>We can examine the effect of the large distance cut-off on more densely distributed point locations. For example, selecting the right-most bar in the <strong>Connectivity Histogram</strong> will highlight the two most connected observations in the map. The connectivity histogram shows
+that these have 32 neighbors. The two points are highlighted in red in the map in Figure <a href="#fig:mostconnected">13</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:mostconnected"></span>
 <img src="pics4b/1_373_clarkfulton.png" alt="Most connected observations" width="60%" />
 <p class="caption">
-Most connected observations
+Figure 13: Most connected observations
 </p>
 </div>
-<p>As expected, the two points in question are in the center of a dense cluster of sales transactions. When we again inspect the <strong>Connectivity Map</strong> (use the base map street network to locate the points) we see that each of these points has 32 neighbors. For example, with the point #19785 selected (with the pointer on its brown circle), some of the 32 neighbors are shown as black circles in the map below.</p>
-<div class="figure" style="text-align: center">
+<p>As expected, the two points in question are in the center of a dense cluster of sales transactions.
+Through linking, they are also selected in the <strong>Connectivity Map</strong>. We can find their unique_id
+values from the table (<strong>Move Selected to Top</strong>). For example, for the observation with unique_id=19785, we see in the connectivity map that this point has 32 neighbors, highlighted as
+black circles in Figure <a href="#fig:mostconnectedneighbors">14</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:mostconnectedneighbors"></span>
 <img src="pics4b/1_379_32neighbors.png" alt="Most connected observations in connectivity map" width="60%" />
 <p class="caption">
-Most connected observations in connectivity map
+Figure 14: Most connected observations in connectivity map
 </p>
 </div>
 <p>The unequal distribution of the neighbor cardinality in distance-band weights is often an undesirable feature. Therefore, when the spatial distribution of the points is highly uneven, distance-band weights should be avoided, since they could provide misleading impressions of (local) spatial autocorrelation. We examine some alternatives below.</p>
 </div>
+<div id="connectivity-graph" class="section level4 unnumbered">
+<h4>Connectivity graph</h4>
+<p>The properties of the distance band weights can be further investigated by means of the
+<strong>Connectivity Graph</strong>. As before, this is invoked through the right-most button at
+the bottom of the weights manager.</p>
+<p>The pattern shown in Figure <a href="#fig:dconngraph">15</a> highlights how the connectivity divides the points into
+two interconnected subgraphs and two pairs of points. The different sub-networks have no connection between them. In Figure <a href="#fig:dconngraph">15</a>, the pointer is centered on
+location 19195, which has 32 neighbors and is located in the center of a tightly connected network. We can also identify a few locations that are only connected with their nearest neighbor, but not with any other locations.</p>
+<div class="figure" style="text-align: center"><span id="fig:dconngraph"></span>
+<img src="pics4b/1_824_conngraph_d.png" alt="Connectivity graph for distance band weights" width="80%" />
+<p class="caption">
+Figure 15: Connectivity graph for distance band weights
+</p>
+</div>
+</div>
+</div>
 <div id="isolates" class="section level3 unnumbered">
 <h3>Isolates</h3>
-<p>So far, we have used the default cut-off value for the distance band. However, the dialog is flexible enough that we can type in any value for the cut-off, or use the moveable button to drag to any value larger than the minimum. Sometimes, theoretical or policy considerations suggest a specific value for the cut-off that may be smaller than the max-min distance. For example, say we want to use 1500 ft. as the distance band. After typing in that value in the dialog, we proceed in the usual way to create the weights.</p>
-<div class="figure" style="text-align: center">
+<p>So far, we have used the default cut-off value for the distance band. However, the dialog is flexible enough that we can type in any value for the cut-off, or use the moveable button to drag to any value larger than the minimum. Sometimes, theoretical or policy considerations suggest a specific value for the cut-off that may be smaller than the max-min distance.</p>
+<p>For example, say we want to use 1500 ft. as the distance band. After typing in that value in the dialog,
+shown in Figure <a href="#fig:d1500">16</a>, we proceed in the usual way to create the weights.</p>
+<div class="figure" style="text-align: center"><span id="fig:d1500"></span>
 <img src="pics4b/1_clev_d1500.png" alt="Distance band set to 1500" width="60%" />
 <p class="caption">
-Distance band set to 1500
+Figure 16: Distance band set to 1500
 </p>
 </div>
-<p>However, a warning appears, pointing out that the specified cut-off value is smaller than the max-min distance needed to ensure that each observation has at least one neighbor.</p>
-<div class="figure" style="text-align: center">
+<p>However, a warning appears, as in Figure <a href="#fig:distwarning">17</a>, pointing out that the specified cut-off value is smaller than the
+max-min distance needed to ensure that each observation has at least one neighbor.</p>
+<div class="figure" style="text-align: center"><span id="fig:distwarning"></span>
 <img src="pics4b/1_365_distancewarning.png" alt="Isolates warning message" width="35%" />
 <p class="caption">
-Isolates warning message
+Figure 17: Isolates warning message
 </p>
 </div>
-<p>If we proceed and click <strong>Yes</strong> in the dialog, the properties of the new weights are listed in the weight manager, including the <strong>threshold value</strong> of 1500.</p>
-<div class="figure" style="text-align: center">
+<p>If we proceed and click <strong>Yes</strong> in the dialog, the properties of the new weights are listed in
+the weight manager, as in Figure <a href="#fig:propertiesd1500">18</a>. This includes the <strong>threshold value</strong> of 1500,
+but also shows a much sparser distribution, with <strong>%non-zero</strong> as 1.48% (compared to 6.17% for the
+default). In addition, the minimum number of neighbors is indicated to be <strong>0</strong>. In other words,
+one of more observations do not have neighbors when a distance band of 1500 feet is used.</p>
+<div class="figure" style="text-align: center"><span id="fig:propertiesd1500"></span>
 <img src="pics4b/1_381_threshold1500.png" alt="Distance threshold 1500 properties" width="40%" />
 <p class="caption">
-Distance threshold 1500 properties
+Figure 18: Distance threshold 1500 properties
 </p>
 </div>
-<p>The connectivity histogram shows a much more compact distribution of neighbor cardinality (compared to the max-min criterion), but it also reveals the existence of 24 isolates, i.e., observations without neighbors. This given as a warning at the top of the histogram (highlighted in red in the figure), but can also be seen by hovering the pointer over the first bin. The status bar reveals that the range 0-1 has 24 observations.</p>
-<div class="figure" style="text-align: center">
+<div id="isolates-in-the-connectivity-histogram" class="section level4 unnumbered">
+<h4>Isolates in the connectivity histogram</h4>
+<p>The connectivity histogram shown in Figure <a href="#fig:isolatesconnhist">19</a> reveals a much more compact distribution of
+neighbor cardinality (compared to the max-min criterion). However, it also suggests the existence of 24 isolates, i.e., observations without neighbors. This is given as a warning at the top of the histogram
+(highlighted in red in the figure), but can also be seen by hovering the pointer over the
+first bin. The status bar reveals that the range 0-1 has 24 observations.</p>
+<div class="figure" style="text-align: center"><span id="fig:isolatesconnhist"></span>
 <img src="pics4b/1_clev_isolates2.png" alt="Isolates in connectivity histogram" width="60%" />
 <p class="caption">
-Isolates in connectivity histogram
+Figure 19: Isolates in connectivity histogram
 </p>
 </div>
-<p>When selecting the left-most bar in the histogram, we can locate the points in the map (the red points for selected observations). The selected points are indeed locations that are far away from the other points (more than 1500 feet).</p>
-<div class="figure" style="text-align: center">
+<p>When selecting the left-most bar in the histogram, we can locate the isolated points in the map,
+as in Figure <a href="#fig:isolatesinmap">20</a> (the red points are the selected observations). The selected points are indeed locations that are far away from the other points (more than 1500 feet).</p>
+<div class="figure" style="text-align: center"><span id="fig:isolatesinmap"></span>
 <img src="pics4b/1_383_isolates_in_pointmap.png" alt="Isolates in point map" width="80%" />
 <p class="caption">
-Isolates in point map
+Figure 20: Isolates in point map
 </p>
 </div>
-<p>Since the isolated observations are not included in the spatial weights (in effect, the corresponding row in the spatial weights matrix consists of zeros), they are not accounted for in any spatial analysis, such as tests for spatial autocorrelation, or spatial regression. For all practical purposes, they should be removed from such analysis. However, they are fine to be included in a traditional <em>non-spatial</em> data analysis.</p>
-<p>Ignoring isolates may cause problems in the calculation of spatially lagged variables (see below), or measures of local spatial autocorrelation. By construction, the spatially lagged variable will be zero, which may suggest spurious correlations.</p>
+</div>
+<div id="isolates-in-the-connectivity-graph" class="section level4 unnumbered">
+<h4>Isolates in the connectivity graph</h4>
+<p>The most dramatic visualizion of the isolates is given by the <strong>Connectivity Graph</strong>, shown in
+Figure <a href="#fig:d1500conngraph">21</a>. The 24 points without an edge in the graph to another point are easily
+identified. In our example, the pointer is over location with unique_id 62122. The status bar indicates
+that this point has 0 neighbors.</p>
+<div class="figure" style="text-align: center"><span id="fig:d1500conngraph"></span>
+<img src="pics4b/1_825_conngraph_d1500.png" alt="Connectivity graph for distance band set to 1500" width="80%" />
+<p class="caption">
+Figure 21: Connectivity graph for distance band set to 1500
+</p>
+</div>
+</div>
+<div id="how-to-deal-with-isolates" class="section level4 unnumbered">
+<h4>How to deal with isolates</h4>
+<p>Since the isolated observations are not included in the spatial weights (in effect, the corresponding row in the spatial weights matrix consists of zeros), they are not accounted for in any spatial analysis, such as tests for spatial autocorrelation, or spatial regression. For all practical purposes, they should be removed from such analysis. However, they are fine
+to be included in a traditional <em>non-spatial</em> data analysis.</p>
+<p>Ignoring isolates may cause problems in the calculation of spatially lagged variables, or measures of local spatial autocorrelation. By construction, the spatially
+lagged variable will be zero, which may suggest spurious correlations.</p>
+<p>Alternatives where isolates are avoided by design are the K-nearest neighbor weights and
+contiguity weights constructed from the Thiessen polygons for the points. They are discussed next.</p>
+</div>
 </div>
 </div>
 <div id="k-nearest-neighbor-weights" class="section level2 unnumbered">
 <h2>K-Nearest Neighbor Weights</h2>
-<p>When the density of the locations is very uneven, a partial solution to the problems associated with distance-band weights is provided by k-nearest neighbor weights. In GeoDa, these are computed by selecting the corresponding radio button in <strong>Distance Weight</strong> panel of the <strong>Weights File Creation</strong> interface. The value for the number of neighbors (k) is specified through the highlighted drop down list shown below. The default is 4, but in this example, we have selected <strong>6</strong>.</p>
-<div class="figure" style="text-align: center">
+<div id="concept" class="section level3 unnumbered">
+<h3>Concept</h3>
+<p>As mentioned, an alternative type of distance-based spatial weights that avoids the problem
+of isolates are <span class="math inline">\(k\)</span>-nearest neighbor weights. In contrast
+to the distance band, this is not a symmetric relation. The fact that B is the nearest
+neighbor to A does not imply that A is the nearest neighbor to B. There may be another point
+C that is actually closer to B than A. This asymmetry can cause problems in analyses that
+depend on the instrinsic symmetry of the weights (e.g., some algorithms to estimate spatial
+regression models). One solution is to replace the original weights matrix <span class="math inline">\(\mathbf{W}\)</span> by
+<span class="math inline">\((\mathbf{W + W&#39;})/2\)</span>, which is symmetric by construction.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> GeoDa currently does not implement
+this approach.</p>
+<p>A potential issue with <span class="math inline">\(k\)</span>-nearest neighbor weights is the
+occurrence of ties, i.e., when more than one location <span class="math inline">\(j\)</span> has the
+same distance from <span class="math inline">\(i\)</span>. A number of solutions exist to break
+the tie, from randomly selecting one of the <span class="math inline">\(k\)</span>-th order
+neighbors, to including all of them. In GeoDa,
+random selection is implemented.</p>
+</div>
+<div id="creating-knn-weights" class="section level3 unnumbered">
+<h3>Creating KNN weights</h3>
+<p>KNN weights are computed by selecting the corresponding button in
+<strong>Distance Weight</strong> panel of the <strong>Weights File Creation</strong> interface. The value for the <strong>Number of neighbors</strong> (k) is specified in the box shown in Figure <a href="#fig:knn6">22</a>. The default is 4, but in our example, we have selected <strong>6</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:knn6"></span>
 <img src="pics4b/2_384_k6.png" alt="K nearest neighbor weights" width="60%" />
 <p class="caption">
-K nearest neighbor weights
+Figure 22: K nearest neighbor weights
 </p>
 </div>
-<p>The weights (saved as the file <strong>clev_sls_154_core_k6</strong>) are added to the collection contained in the weights manager and its properties listed. Note that these now include the number of neighbors (and not the distance threshold value, as before).</p>
-<div class="figure" style="text-align: center">
+<p>The weights (saved as the file <strong>clev_sls_154_core_k6</strong>) are added to the collection contained in the weights manager. In addition, all its properties are listed, as illustrated in Figure <a href="#fig:knnproperties">23</a>. Note
+that the properties now include the number of neighbors (instead of the distance threshold value,
+as is the case of distance-band weights). Also, <strong>symmetry</strong> is set to asymmetric, which is a
+fundamental difference with distance-band weights.</p>
+<div class="figure" style="text-align: center"><span id="fig:knnproperties"></span>
 <img src="pics4b/2_385_k6properties.png" alt="KNN-6 weights properties" width="40%" />
 <p class="caption">
-KNN-6 weights properties
+Figure 23: KNN-6 weights properties
 </p>
 </div>
-<p>Again, we can use the connectivity histogram and the connectivity map to inspect the neighbor characteristics of the observations. However, in this case, the histogram doesn’t make much sense, since all observations have the same number of neighbors (by construction).</p>
-<p>In some instances, it may be difficult to pick the actual neighbors when there are ties in the distances. GeoDa deals with this by randomly picking neighbors from the ties, such that the list is exactly <em>k</em> (e.g., if there was a tie between neighbor 4 and 5 in a k=4 nearest neighbor case, one of the two would be picked at random).</p>
-<div class="figure" style="text-align: center">
+<div id="properties-of-knn-weights" class="section level4 unnumbered">
+<h4>Properties of KNN weights</h4>
+<p>The properties listed in the weights manager also include the mean and median number of
+neighbors, which of course equal k (in our example, they equal 6). The resulting weights matrix
+is much sparser than the distance-band weights (2.93% compared to 6.17%).</p>
+<p>Again, we can also use the connectivity histogram and the connectivity map to inspect the neighbor characteristics of the observations. However, in this case, the histogram doesn’t make much sense, since all observations have the same number of neighbors (by construction), as shown
+in Figure <a href="#fig:knnhist">24</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:knnhist"></span>
 <img src="pics4b/2_386_k6connectivity.png" alt="KNN-6 connectivity histogram" width="30%" />
 <p class="caption">
-KNN-6 connectivity histogram
+Figure 24: KNN-6 connectivity histogram
 </p>
 </div>
+<p>In contrast, the connectivity graph, shown in Figure <a href="#fig:knngraph">25</a>, clearly demonstrates
+how each point is connected to six other points. In our example, this yields a fully connected
+graph instead of the collection of sub-graphs for the distance band.</p>
+<div class="figure" style="text-align: center"><span id="fig:knngraph"></span>
+<img src="pics4b/2_831_conngraphk6.png" alt="KNN-6 connectivity graph" width="80%" />
+<p class="caption">
+Figure 25: KNN-6 connectivity graph
+</p>
+</div>
+<p>In Figure <a href="#fig:knngraph">25</a>, we have the pointer over observation with unique_id 9372. The status bar lists the
+ID values for its six nearest neighbors.</p>
+</div>
+<div id="knn-and-distance" class="section level4 unnumbered">
+<h4>KNN and distance</h4>
 <p>One drawback of the k-nearest neighbor approach is that it ignores the distances involved. The first k neighbors are selected, irrespective of how near or how far they may be. This suggests a notion of distance decay that is not absolute, but relative, in the sense of intervening opportunities (e.g., you consider the two closest grocery stores, irrespective of how far they may be).</p>
-<p>This can be illustrated in the Cleveland example by selecting an observation in the western part of the map, where the house sales are densely distributed in space. With the pointer on one of the brown circles in the connectivity map, we distinguish six black circles close by.</p>
-<div class="figure" style="text-align: center">
+<p>This can be illustrated in the Cleveland example by selecting an observation in the western
+part of the map, where the house sales are densely distributed in space. With the pointer on
+one of the circles in the connectivity map, we distinguish six black circles close by, as
+shown in Figure <a href="#fig:k6close">26</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:k6close"></span>
 <img src="pics4b/2_388_k6close.png" alt="KNN-6 close neighbors" width="60%" />
 <p class="caption">
-KNN-6 close neighbors
+Figure 26: KNN-6 close neighbors
 </p>
 </div>
-<p>By contrast, if we move to the eastern part of the data set and similarly select an observation (brown circle) with the pointer, the six neighbors are much farther apart.</p>
-<div class="figure" style="text-align: center">
+<p>By contrast, if we move to the eastern part of the data set and similarly select an
+observation with the pointer, the six neighbors are much farther apart, as in Figure
+<a href="#fig:k6far">27</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:k6far"></span>
 <img src="pics4b/2_387_k6far.png" alt="KNN-6 far neighbors" width="60%" />
 <p class="caption">
-KNN-6 far neighbors
+Figure 27: KNN-6 far neighbors
 </p>
 </div>
-<p>This relative distance effect should be kept in mind before mechanically applying a k-nearest neighbor criterion.</p>
+<p>This relative distance effect should be kept in mind before mechanically applying
+a k-nearest neighbor criterion.</p>
+</div>
+</div>
 </div>
 <div id="generalizing-the-concept-of-contiguity" class="section level2 unnumbered">
 <h2>Generalizing the Concept of Contiguity</h2>
-<p>In GeoDa, the concept of contiguity can be generalized to point layers by converting the latter to a tessellation, specifically Thiessen polygons. Queen or rook contiguity weights can then be created for the polygons, in the usual way.</p>
-<p>Similarly, the concepts of distance-band weights and k-nearest neighbor weights can be generalized to polygon layers. The layers are represented by their central points and the standard distance computations are applied.</p>
-<p>These operations can be carried out explicitly, by actually creating a separate Thiessen polygon layer or centroid point layer, and then loading it into GeoDa. Alternatively, the computations happen <em>under the hood</em>, in the sense that it is not necessary to create a separate layer. In this way, it is possible to use the weights manager to create contiguity weights for points or distance weights for polygons directly in the <strong>Weights File Creation</strong> dialog.</p>
+<p>In GeoDa, the concept of contiguity can be generalized to point layers by converting
+the latter to a tessellation, specifically Thiessen polygons. Queen or rook contiguity
+weights can then be created for the polygons, in the usual way.</p>
+<p>Similarly, the concepts of distance-band weights and k-nearest neighbor weights can be
+generalized to polygon layers. The layers are represented by their central points and
+the standard distance computations are applied.</p>
+<p>These operations can be carried out explicitly, by actually creating a separate Thiessen polygon
+layer or centroid point layer, and subsequently loading it into GeoDa as a new project.
+Alternatively, the computations happen <em>under the hood</em>, in the sense that it is not
+necessary to create a separate layer. In this way, it is possible to use the weights
+manager to create contiguity weights for points or distance weights for polygons directly
+in the <strong>Weights File Creation</strong> dialog.</p>
 <p>We briefly consider these options.</p>
 <div id="contiguity-based-weights-for-points" class="section level3 unnumbered">
 <h3>Contiguity-based weights for points</h3>
 <div id="thiessen-polygons" class="section level4 unnumbered">
 <h4>Thiessen polygons</h4>
-<p>An alternative solution to deal with the problem of the uneven distribution of neighbor cardinality for distance-band weights is to compute a measure of contiguity. This is accomplished by turning the points into Thiessen polygons. A Thiessen polygon is a tessellation (a way to divide an area into regular subareas) that encloses all locations that are closer to the central point than to any other point. In economic geography, this is a (simplistic) notion of a market area, in the sense that all consumers in the polygon would patronize the seller located at the central point. The polygons are constructed by combining lines perpendicular at the midpoint of a line connecting a point to its nearest neighbors and creating the most compact polygon that results from this operation.</p>
-<p>In any point map, the tessellation is invoked as an option, by right-clicking on the map. Similar to the setup for <strong>Shape Centers</strong>, <strong>Thiessen Polygons</strong> gives a choice between simply displaying the polygons over the point layer, or saving them as a separater layer. There is a third option (greyed out in the example below) that applies to situations where multiple points share the same locations (e.g., appartments in the same high rise). GeoDa has an option to save the information for the duplicate points to a table.</p>
-<div class="figure" style="text-align: center">
+<p>An alternative solution to deal with the problem of the uneven distribution of neighbor cardinality for distance-band weights is to compute a measure of contiguity. This is accomplished by turning the points into Thiessen polygons. These are also referred to as Voronoi diagrams or Delaunay triangulations.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
+<p>In general terms, a Thiessen polygon is a
+tessellation (a way to divide an area into regular subareas) that encloses all locations
+that are closer to the central point than to any other point. In economic geography, this
+is a (simplistic) notion of a market area, in the sense that all consumers in the polygon
+would patronize the seller located at the central point. The polygons are constructed
+by combining lines perpendicular at the midpoint of a line that connects a point to its nearest neighbors.
+From this, the most compact polygon is created.</p>
+</div>
+<div id="creating-thiessen-polygons-from-a-point-layer" class="section level4 unnumbered">
+<h4>Creating Thiessen polygons from a point layer</h4>
+<p>In any point map, the tessellation is invoked as an option, by right-clicking on the map. Similar
+to the setup for <strong>Shape Centers</strong>, <strong>Thiessen Polygons</strong> gives a choice between simply
+displaying the polygons over the point layer, or saving them as a separater
+layer, as shown in Figure <a href="#fig:thiessenoption">28</a>.</p>
+<p>There
+is a third option (greyed out in the example below) that applies to situations where
+multiple points share the same location (e.g., appartments in the same high rise).
+GeoDa has an option to save the information for the duplicate points to a
+table.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:thiessenoption"></span>
 <img src="pics4b/3_389_thiessenoption.png" alt="Thiessen polygon option" width="50%" />
 <p class="caption">
-Thiessen polygon option
+Figure 28: Thiessen polygon option
 </p>
 </div>
-<p>The map overlay is illustrated here for the Cleveland house sale points. Each polygon encloses exactly one point. Besides the characteristic distortions as the edge of the polygon, we notice a great discrepancy between the polygon sizes in the areas with a dense distribution of points and the areas where they are further apart.</p>
-<div class="figure" style="text-align: center">
+<p>The map overlay is illustrated in Figure <a href="#fig:clevelandthiessen">29</a> for the Cleveland house sale points. Each polygon
+encloses exactly one point. Besides the
+characteristic distortions as the edge of the polygon, we notice a great discrepancy
+between the polygon sizes in the areas with a dense distribution of points and the
+areas where they are further apart.</p>
+<div class="figure" style="text-align: center"><span id="fig:clevelandthiessen"></span>
 <img src="pics4b/3_390_thiessenpoly.png" alt="Thiessen polygons overlaid on point map" width="80%" />
 <p class="caption">
-Thiessen polygons overlaid on point map
+Figure 29: Thiessen polygons overlaid on point map
 </p>
 </div>
 </div>
-<div id="contiguity-weights" class="section level4 unnumbered">
-<h4>Contiguity weights</h4>
-<p>When selecting rook or queen contiguity in the <strong>Contiguity Weight</strong> panel of the weights file creation dialog, the Thiessen polygons are constructed in the background and the contiguity criteria applied to them. In our Cleveland example, we can create a queen contiguity weights file (as <strong>clev_sls_154_core_q</strong>), shown below in the weights manager list.</p>
-<div class="figure" style="text-align: center">
+<div id="contiguity-weights-for-thiessen-polygons" class="section level4 unnumbered">
+<h4>Contiguity weights for Thiessen polygons</h4>
+<p>When selecting rook or queen contiguity in the <strong>Contiguity Weight</strong> panel of the
+weights file creation dialog, the Thiessen polygons are constructed in the background
+and the contiguity criteria applied to them. For example, for our Cleveland point data, we can create
+a queen contiguity weights file in the standard way (e.g., as <strong>clev_sls_154_core_q</strong>). The
+file name subsequently shows up in the weights manager list, as
+illustrated in Figure <a href="#fig:queenptslist">30</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:queenptslist"></span>
 <img src="pics4b/3_391_queencontigpts.png" alt="Queen contiguity for points" width="40%" />
 <p class="caption">
-Queen contiguity for points
+Figure 30: Queen contiguity for points
 </p>
 </div>
-<p>The associated connectivity histogram illustrates why this approach may be a useful alternative to distance-band or k-nearest neighbor weights (connectivity histogram shown with the statistics displayed). The histogram represents a much more symmetric and compact distribution of the neighbor cardinalities, very similar to the shape of the histogram for contiguity between polygons. The median number of neighbors is 6 and the average 5.6, with a limited spread around these values. In many instances where the point distribution is highly uneven, this approach provides a useful compromise between the distance-band and the k-nearest neighbors.</p>
-<div class="figure" style="text-align: center">
+<p>The descriptive statistics in the properties list as well as the associated connectivity histogram illustrate why this approach may be a useful alternative to distance-band or k-nearest neighbor weights.
+In Figure <a href="#fig:queenptshist">31</a>, theconnectivity histogram is shown with the statistics displayed.</p>
+<div class="figure" style="text-align: center"><span id="fig:queenptshist"></span>
 <img src="pics4b/3_392_point_q_histogram.png" alt="Points-based queen connectivity histogram " width="60%" />
 <p class="caption">
-Points-based queen connectivity histogram
+Figure 31: Points-based queen connectivity histogram
 </p>
 </div>
-<p>Before moving on to the next option, we save the weights information in a <strong>Project File</strong> (e.g., <strong>clev_sls_154_core.gda</strong>), using <strong>File &gt; Save Project</strong>.</p>
+<p>The histogram represents a much more symmetric and compact distribution of the neighbor cardinalities, very similar to the typical shape of the histogram for first order contiguity between polygons. The median number of neighbors is 6 and the average 5.6, with a limited spread around these values. In many instances where the point distribution is highly uneven, this approach provides a useful compromise between the distance-band and the k-nearest neighbors.</p>
+<p>This is further illustrated by the connectivity graph for the queen contiguity, shown in
+Figure <a href="#fig:queenptsgraph">32</a>. The pointer over point with unique_id 40295 shows this location having
+six neighbors, compared to only one in Figure <a href="#fig:dconngraph">15</a> for the default distance band
+contiguity. The more balanced structure is also reflected by the fully connected graph.</p>
+<div class="figure" style="text-align: center"><span id="fig:queenptsgraph"></span>
+<img src="pics4b/3_836_queenptsgraph.png" alt="Connectivity graph for Thiessen queen contiguity" width="80%" />
+<p class="caption">
+Figure 32: Connectivity graph for Thiessen queen contiguity
+</p>
+</div>
+<p>Before moving on to the next option, we save the weights information in a <strong>Project File</strong>
+(e.g., <strong>clev_sls_154_core.gda</strong>), using <strong>File &gt; Save Project</strong>.</p>
 </div>
 </div>
 <div id="distance-based-weights-for-polygons" class="section level3 unnumbered">
 <h3>Distance-based weights for polygons</h3>
-<p>To illustrate the application of distance-based weights to polygons, the current project needs to be cleared and the U.S. county homicide file (<strong>natregimes</strong>) loaded, either as a shape file (<strong>natregimes.shp</strong>, without any weights information), or as a project file (<strong>natregimes.gda</strong>, with the weights information).</p>
-<p>As we have seen before, the polygon layer has a series of <strong>Shape Center</strong> options to add the centroid or mean center information to the data table, display those points on the map, or save them as a separate point layer.</p>
-<p>In order to create distance weights for polygons, such as the U.S. counties, there is no need to explicitly save or display the centroids. The calculation happens in the background, whenever a distance option is chosen in the weights file creation dialog. For example, with <strong>fipsno</strong> as the ID variable, checking the <strong>Threshold Distance</strong> radio button displays the corresponding distance cut-off value.</p>
-<div class="figure" style="text-align: center">
+<p>To illustrate the application of distance-based weights to polygons, the current project
+needs to be cleared and the U.S. county homicide file (<strong>natregimes</strong>) loaded, either
+as a shape file (<strong>natregimes.shp</strong>, without any weights information), or from a
+previously created project
+file (<strong>natregimes.gda</strong>, with the weights information).</p>
+<p>As we have seen before, the polygon layer has a series of <strong>Shape Center</strong> options to
+add the centroid or mean center information to the data table, display those points on the
+map, or save them as a separate point layer.</p>
+<p>In order to create distance weights for polygons, such as the U.S. counties, there is no need
+to explicitly save or display the centroids. The calculation happens in the background, whenever a distance option is chosen in the weights file creation dialog.</p>
+<p>We proceed as usual, and select the <strong>Distance Weight</strong> option in the <strong>Weights File Creation</strong>
+dialog. With
+<strong>fipsno</strong> as the ID variable and <strong>Distance Band</strong> as the type of weight, the <strong>Specify bandwidth</strong>
+box will show a cut-off distance of 1.465776, as in Figure <a href="#fig:degreedistance">33</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:degreedistance"></span>
 <img src="pics4b/4_393_countydist1.png" alt="Distance cut-off in decimal degrees" width="60%" />
 <p class="caption">
-Distance cut-off in decimal degrees
+Figure 33: Distance cut-off in decimal degrees
 </p>
 </div>
-<p>However, the value that is displayed (about 1.47) is for the default setting of <strong>Euclidean Distance</strong>. For the U.S. counties, the geographic layer is provided in latitude-longitude decimal degrees (i.e., the coordinates are unprojected). Consequently, the use of a straight line Euclidean distance is inappropriate (at least, for larger distances). Instead, the great circle distance or arc distance needs to be computed. So far, we have only considered Euclidean distance (the default), but the drop down list in the weights file creation interface also includes <strong>Arc Distance</strong> (in miles or in kilometers).</p>
-<div class="figure" style="text-align: center">
+<p>However, this distance cut-off is for the default setting of <strong>Euclidean
+Distance</strong>. For the U.S. counties, the geographic layer is provided in latitude-longitude
+decimal degrees (i.e., the coordinates are unprojected). Consequently, the use of a straight line Euclidean distance is inappropriate (at least, for larger distances). Instead, the great circle distance or arc distance needs to be computed. So far, we have only considered Euclidean distance (the default), but the drop down list in the weights file creation interface also includes <strong>Arc Distance</strong> (in miles or in kilometers), as shown in Figure <a href="#fig:arcdistanceoption">34</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:arcdistanceoption"></span>
 <img src="pics4b/4_394_arcdist.png" alt="Arc distance option" width="60%" />
 <p class="caption">
-Arc distance option
+Figure 34: Arc distance option
 </p>
 </div>
-<p>With the <strong>Arc Distance (mi)</strong> option checked, the threshold distance becomes about 91 miles, as displayed in the dialog.</p>
-<div class="figure" style="text-align: center">
+<p>With the <strong>Arc Distance (mi)</strong> option checked, the threshold distance becomes about
+91 miles, as displayed in the dialog in Figure <a href="#fig:arccutoffdistance">35</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:arccutoffdistance"></span>
 <img src="pics4b/4_395_countydistarc.png" alt="Arc distance cut-off distance" width="60%" />
 <p class="caption">
-Arc distance cut-off distance
+Figure 35: Arc distance cut-off distance
 </p>
 </div>
-<p>Proceeding in the usual fashion (and saving the weights as <strong>natregimes_darc</strong>) adds the properties of the new weights to the list in the weights manager (in this example, the earlier project file was loaded, so that the previously created contiguity weights are already contained in the weights manager list). Note how the properties include the distance unit as well as the threshold value, with the distance metric now set to <strong>arc</strong>.</p>
-<div class="figure" style="text-align: center">
+<p>Proceeding in the usual fashion (and saving the weights as <strong>natregimes_darc</strong>) adds the
+properties of the new weights to the list in the weights manager, shown in
+Figure <a href="#fig:arcweights">36</a>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> Note how the properties include the
+distance unit (<strong>mile</strong>), the points for which the distances were
+computed (<strong>centroids</strong>), as well as the threshold value, with the distance metric now set to <strong>arc</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:arcweights"></span>
 <img src="pics4b/4_396_darcweightsprops.png" alt="Arc distance weights properties" width="40%" />
 <p class="caption">
-Arc distance weights properties
+Figure 36: Arc distance weights properties
 </p>
 </div>
-<p>The resulting weights clearly illustrate the pitfalls of using a distance-band when polygons (i.e., counties) are of widely varying sizes. This is similar to the issues encountered for points with different densities.</p>
-<p>For example, in the connectivity map for the just created weights, we find that there is only one neighbor for Elko county, NV (FIPS code 32007). As it turns out, the distance between the centroid of this county and its nearest neighbor (Twin Falls, ID, FIPS code 16083) drives the critical distance to designate neighbors for all the other counties in the U.S.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/00_726_elko.png" alt="Elko county connectivity map" width="40%" />
+<p>The resulting weights clearly demonstrate the pitfalls of using a distance-band when polygons (such
+as U.S. counties) are of widely varying sizes. This is similar to the issues encountered for
+points with different densities. From the property list in Figure <a href="#fig:arcweights">36</a>, we see that the range of weights goes from 1 to 85. The connectivity
+histogram in Figure <a href="#fig:archist">37</a> illustrates the extensive range of neighbor cardinalities, very
+similar to what we obtained for the Cleveland data in Figure <a href="#fig:disthistogram">9</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:archist"></span>
+<img src="pics4b/3_843_archistogram.png" alt="Connectivity histogram for arc distance weights" width="80%" />
 <p class="caption">
-Elko county connectivity map
+Figure 37: Connectivity histogram for arc distance weights
 </p>
 </div>
-<p>Clearly, this has major consequences for the smaller counties east of the Mississippi. As an illustration, consider Cheshire county (NH) with FIPS code 33005, which ends up with 33 neighbors using the 91 mile distance cut-off.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/3_nat_33neighbors.png" alt="Cheshire county connectivity map" width="60%" />
+<p>To illustrate the problem with the max-min cut-off distance, we search in the GWT file for the pair of observations that are
+a distance of 90.8652 apart. As shown in Figure <a href="#fig:elkodist">38</a>, the cut-off distance is
+between the centroids of fipsno 32007 (Elko county, NV) and fipsno 16083 (Twin Falls, ID).</p>
+<div class="figure" style="text-align: center"><span id="fig:elkodist"></span>
+<img src="pics4b/4_007_elkoingwt.png" alt="Max nearest neighbor distance for US counties" width="40%" />
 <p class="caption">
-Cheshire county connectivity map
+Figure 38: Max nearest neighbor distance for US counties
 </p>
 </div>
-<p>In practice, policy or theoretical considerations often dictate a given distance band (e.g., commuting distance). As we have seen, we need to be cautious before we uncritically translate these criteria into distance bands. Especially when the areal units in question are of widely varying sizes, there will be problems with the distribution of the neighbor cardinalities, or isolates will be created when the distance is insufficiently large.</p>
-</div>
-</div>
-<div id="applications-of-spatial-weights" class="section level2">
-<h2>Applications of Spatial Weights</h2>
-<p>The most direct application of spatial weights is undoubtedly in the calculation of various measures of spatial autocorrelation. Before closing, we illustrate two other applications, i.e., the computation of a spatially lagged variable and the calculation of spatially smoothed rates. For the former, we will return to the Cleveland house price data, for the latter to the Ohio lung cancer data.</p>
-<div id="spatially-lagged-variable" class="section level3 unnumbered">
-<h3>Spatially lagged variable</h3>
-<p>After clearing the current project, and loading the project file <strong>clev_sls_154_core.gda</strong>, the weights manager should list the various distance weights and the queen contiguity weight for the Cleveland point data set.</p>
-<p>Spatially lagged variables are a weighted average of the values for neighboring observations, where the neighbors are defined through the spatial weights. The computation is a simple average based on the neighbor structure only and (currently) does not take into account the distances themselves. More formally, for a variable <span class="math inline">\(z_i\)</span> observed at location <span class="math inline">\(i\)</span>, and with weights matrix elements <span class="math inline">\(w_{ij}\)</span>, the spatial lag would be <span class="math inline">\(\sum_j w_{ij} z_j\)</span>.</p>
-<p>In GeoDa, this computation is carried out through the <strong>Calculator</strong> dialog activated from the table menu (<strong>Table &gt; Calculator</strong>), using the <strong>Spatial Lag</strong> tab. Note the <strong>Weight</strong> drop down list, which contains all the spatial weights available to the project, with the current one listed, e.g., <strong>clev_sls_154_core_q</strong> in the example below.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/5_397_spatial_lag_tab.png" alt="Spatial Lag tab in calculator" width="60%" />
+<p>Selecting the observation with fipsno 32007 in the Table (using the <strong>Selection Tool</strong>) highlights
+this location in all the open views. With the <strong>Connectivity Map</strong> open, we find that there
+is only one neighbor for the selected/highlighted Elko county, NV (FIPS code 32007).</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="pics4b/00_726_elko.png" alt="Elko county connectivity map" width="80%" />
 <p class="caption">
-Spatial Lag tab in calculator
+Figure 39: Elko county connectivity map
 </p>
 </div>
-<p>In the standard fashion, we first <strong>Add</strong> a variable to the table, say, <strong>n_price</strong> (e.g., insert next to <strong>SALE_PRICE</strong> and set the display precision to 2). In the second step, we carry out the actucal calculation, by selecting <strong>SALE_PRICE</strong> as the variable. We leave the default row-standardization in place.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/5_398_spatial_lag_price.png" alt="Spatial Lag for sales price" width="60%" />
+<p>Clearly, the cut-off distance
+has major consequences for the smaller counties east of the Mississippi. As an illustration, we
+select the right-most bar in the connectivity histogram, the single location that has 85 neighbors.
+Checking the linked location in the table reveals this selection refers to Jessamine county, KY, with fipsno 21113.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> We
+can now identify this county in the <strong>Connectivity Graph</strong>. As shown in Figure <a href="#fig:conngraph85">40</a>,
+we find that the roughly 91 mile range selects the 85 small counties that neighbor Jessamin county.</p>
+<div class="figure" style="text-align: center"><span id="fig:conngraph85"></span>
+<img src="pics4b/3_842_countiesw85.png" alt="Connectivity graph for Jessamine county, KY" width="80%" />
 <p class="caption">
-Spatial Lag for sales price
+Figure 40: Connectivity graph for Jessamine county, KY
 </p>
 </div>
-<p>Upon clicking <strong>Apply</strong>, the new variable will be added to the table.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/5_399_neighborsales.png" alt="Spatial Lag for sales price in table" width="25%" />
-<p class="caption">
-Spatial Lag for sales price in table
-</p>
-</div>
-<p>We can quickly assess the effect of the spatial averaging by comparing the descriptive statistics between the original price variable and its spatial lag (for example, by viewing the descriptive statistics associated with a histogram or box plot graph). The main effect of the spatial lag is a compression of the range and variance of the variable. The range from $1,049 to $527,409 for the original variable changes to $5530-$213,735 for the spatial lag. Similarly, the standard deviation is considerably reduced from 60,654 to 38,165.</p>
-<p>A more dramatic view of the influence of high-valued or low-valued neighbors on the spatial lag is given by the PCP. In several instances, the line goes from a high price to a much lower spatial lag, and vice versa. In other words, if there is high spatial heterogeneity in the data, the choice of the neighborhood (the spatial weights) becomes very important, and the spatial lag may not be a good proxy for the value observed at a given location (recall that the value at a given loctaion is <em>not</em> included in the spatial lag calculation). This relates directly to the notion of <em>local spatial autocorrelation</em> that we will examine in a later chapter.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/5_404_pcp.png" alt="PCP for sales price and its spatial lag" width="80%" />
-<p class="caption">
-PCP for sales price and its spatial lag
-</p>
-</div>
-</div>
-<div id="spatial-rate-smoothing" class="section level3 unnumbered">
-<h3>Spatial rate smoothing</h3>
-<p>We return to the rate smoothing examples using the Ohio county lung cancer data. We need to close the current project and load the <strong>ohlung</strong> data set. Next, we need to create a spatial weights file. In order to make sure that some smoothing will occur, we take a fairly wide definition of neighbors, as second order queen contiguity inclusive of first order neighbors, e.g., using <strong>FIPSNO</strong> as the ID variable and saved in the file <strong>ohlung_q2inc.gal</strong>.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a></p>
-<p>If the raw or crude rate for lung cancer among white females in 68 that we computed in an earlier exercise is not part of the data table, then we need to create it. Using the <strong>Rates</strong> tab in the calculator, first add a new variable, e.g., <strong>RATE1</strong>, then compute the crude rate with <strong>LFW68</strong> as the <strong>Event Variable</strong> and <strong>POPFW68</strong> as the <strong>Base Variable</strong>. In order to present the results on a more intuitive scale, we also multiply <strong>RATE1</strong> by 10,000, using the <strong>Bivariate</strong> tab with the <strong>Multiply</strong> function (the result gives the number of lung cancer cases per 10,000 white females). A standard deviational map for the rates shows the familiar pattern from the earlier exercise.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/6_406_crudestdevmap.png" alt="Standard deviational map for crude rates" width="80%" />
-<p class="caption">
-Standard deviational map for crude rates
-</p>
-</div>
-<p>First, we illustrate how <em>not</em> to proceed, but use this as a way to show how to include the observation itself in the computation of the spatial lag. In other words, the lag variable now becomes a <em>window average</em>, including both the observation as well as its neighboring values in the calculation of the average. More precisely, with the crude rate at observation <span class="math inline">\(i\)</span> as <span class="math inline">\(o_i/p_i\)</span> (observed events over population), the window average would be <span class="math inline">\(\sum_j w_{ij} o_j/p_j\)</span>, where now <span class="math inline">\(w_{ii} \neq 0\)</span>.</p>
-<p>To compute this expression, we activate the <strong>Spatial Lag</strong> tab, add a new variable, e.g., <strong>W_RATE1</strong>, and check the box next to <strong>Self neighbors included</strong>. The active weights matrix is <strong>ohlung_q2inc</strong>. At this point, we can calculate the spatial window average of the rates as a spatial lag.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/6_405_windowavg_rate.png" alt="Spatial window average of crude rates" width="60%" />
-<p class="caption">
-Spatial window average of crude rates
-</p>
-</div>
-<p>The corresponding standard deviational map is given below.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/6_408_wratestdevmap.png" alt="Crude rate spatial window average" width="80%" />
-<p class="caption">
-Crude rate spatial window average
-</p>
-</div>
-<p>Characteristic of the spatial averaging, several larger groupings of similarly classified observations appear. Also, the upper outliers have disappeared (there is one new lower outlier).</p>
-<p>As mentioned, this is <em>not</em> the proper way to operate, since this approach ignores the differences between the populations of the different counties and the associated variance instability of the rates. The <strong>Spatial Rate</strong> smoothing option is the correct alternative. Rather than taking the spatial lag of the rates, the spatial smoothing takes the sum window values for both numerator (the events) and denominator (population) and computes the ratio of these. More precisely, in the same notation as above, the spatially smoothed rate would be <span class="math inline">\(\sum_j w_{ij} o_j / \sum_j w_{ij} p_j\)</span>. In this expression, the weights <span class="math inline">\(w_{ij}\)</span> are binary (0 or 1) with <span class="math inline">\(w_{ii} = 1\)</span>, so that numerator and denominator consist of a simple sum of the respective values.</p>
-<p>We invoke this calculation from the <strong>Map &gt; Rates-Calculated Map</strong> options as <strong>Spatial Rate</strong>. The resulting dialog requires the selection of the <strong>Event Variable</strong> (<strong>LFW68</strong>), the <strong>Base Variable</strong> (<strong>POPFW68</strong>), the <strong>Map Theme</strong> (<strong>Standard Deviation Map</strong>), and a specification for the spatial weights (<strong>ohlung_q2inc</strong>).<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/6_409_spatialrate.png" alt="Spatial rate dialog" width="50%" />
-<p class="caption">
-Spatial rate dialog
-</p>
-</div>
-<p>Clicking <strong>OK</strong> brings up a standard deviation map with the smoothed rates. In order to make the category ranges meaningful, we use a legend option to give the results in scientific notation (right click on the legend pane and select (<strong>Use Scientific Notation</strong>). Again, we observe the larger groupings of observations, but now several outliers remain, although not in the same locations as for the crude rate.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/6_410_spatialratemap.png" alt="Spatial rate smoothing map" width="80%" />
-<p class="caption">
-Spatial rate smoothing map
-</p>
-</div>
-<p>We can add the smoothed rates to the data table by means of the <strong>Save Rates</strong> option (keeping the default variable name of <strong>R_SPAT_R</strong>). As before, we multiply the ratio by 10,000 in the calculator to make the results easier to interpret.</p>
-<p>We can now compare the just computed spatial rates with the spatial lag of the crude rates we had stored as <strong>W_RATE1</strong>. A simple scatter plot illustrates that they are far from the same. In fact, the R<sup>2</sup> of the linear fit is only 0.60.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/6_411_scatplotrates.png" alt="Comparison of spatial rates" width="60%" />
-<p class="caption">
-Comparison of spatial rates
-</p>
-</div>
-<p>Finally, we carry out the calculation of the spatial rate explicitly, to illustrate the use of the spatial lag operator without row-standardized weights. Specifically, this means that the lag variable is the <em>sum</em> of the values in the neighboring locations, rather than their average. We achieve this by unchecking the box next to <strong>Use row-standardized weights</strong> in the calculator dialog with the <strong>Spatial Lag</strong> tab activated. We calculate the window sum of the lung cancer rates and then the window sum of the matching populations. The ratio between these two variables should be the smoothed spatial rate.</p>
-<p>First, we add a variable for the sum of lung cancer cases as <strong>WLUNG</strong> and compute the spatial lag with the row-standardized option unchecked and the self-neighbor option checked, as below.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/6_412_lag_lung.png" alt="Spatial window sum" width="60%" />
-<p class="caption">
-Spatial window sum
-</p>
-</div>
-<p>Next, we proceed in the same fashion for the population window sum, say <strong>WPOP</strong>. We then use the <strong>Bivariate</strong> tab with <strong>Divide</strong> to compute the ratio between lung cases and the population at risk as <strong>W_RATE2</strong>. Finally, we rescale the result by 10,000 to get comparable values. The result is exactly the same as that obtained from the <strong>Save Rates</strong> operation earlier.</p>
-<div class="figure" style="text-align: center">
-<img src="pics4b/6_413_calcrates.png" alt="Comparison of calculated rates" width="30%" />
-<p class="caption">
-Comparison of calculated rates
-</p>
-</div>
-<p>The second option for spatial rate smoothing is <strong>Spatial Empirical Bayes</strong>. This operates in the same way as the standard empirical bayes smoother, except that the reference rate is computed for a spatial window for each individual observation, rather than taking the same overall reference rate for all. This only works well for larger data sets, when the window (as defined by the spatial weights) is large enough to allow for effective smoothing. We will not further consider it here.</p>
+<p>In practice, policy or theoretical considerations often dictate a given distance band (e.g., commuting distance). As we have seen, we need to be cautious before we uncritically translate these criteria into distance bands. Especially when the areal units in question are of widely varying sizes, there will be problems with the distribution of the neighbor cardinalities. In addition, isolates will result when the distance is insufficiently large.</p>
 </div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references">
-<div id="ref-AnselinRey14">
-<p>Anselin, Luc, and Sergio Rey. 2014. <em>Modern Spatial Econometrics in Practice</em>. GeoDa Press, LLC, Chicago, IL.</p>
+<div id="ref-AnselinRey:14">
+<p>Anselin, Luc, and Sergio J. Rey. 2014. <em>Modern Spatial Econometrics in Practice, a Guide to Geoda, Geodaspace and Pysal</em>. Chicago, IL: GeoDa Press.</p>
+</div>
+<div id="ref-Yamada:16">
+<p>Yamada, Ikuho. 2016. “Thiessen Polygons.” <em>The International Encyclopedia of Geography</em>, 1–6.</p>
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>The right click needs to be exactly on the rectangle, since clicking in the white legend panel will result in a set of options that does not include the color choice for the category. Also, it has to be a right click; just clicking on the box will select all the points in the map.<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>The selection tool with <strong>unique_id</strong> = 11359 will select the observation in the table. It will also be highlighted in the map.<a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p>Note that the points in the connectivity map are colored brown, and the neighbors are black.<a href="#fnref4">↩</a></p></li>
-<li id="fn5"><p>If the <em>spatial window</em> to average over is not sufficiently wide, such as with first order contiguity weights, very little smoothing occurs, and the results may be somewhat erratic.<a href="#fnref5">↩</a></p></li>
-<li id="fn6"><p>Alternatively, we can compute the spatial rates in the calculator, using the <strong>Rates</strong> tab.<a href="#fnref6">↩</a></p></li>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>The right click needs to be
+exactly on the rectangle, since clicking in the white legend panel will result in
+a set of options that does
+not include the color choice for the category. Also, it has to be a right click; just clicking on the box will select all the points in the map.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>The latitude
+is the <span class="math inline">\(y\)</span> dimension, and the longitude the <span class="math inline">\(x\)</span> dimension, so that
+the traditional reference to the pair (lat, lon) actually
+pertains to the coordinates as (y,x) and not (x,y).<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>The nearest neighbor distance
+is the smallest distance from a given point to all the other
+points, or, the distance from a point to its nearest neighbor.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>The selection tool with <strong>unique_id</strong> = 11359 will select the observation in
+the table. Through the process of linking, it will also be highlighted in the map.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p><span class="math inline">\(\mathbf{W&#39;}\)</span> is the <em>transpose</em>
+of the weights matrix <span class="math inline">\(\mathbf{W}\)</span>, such that rows of the original matrix become columns in the transpose. Each
+new weight is then <span class="math inline">\((w_{ij} + w_{ji})/2\)</span>.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>For a more extensive technical discussion and historical background, see, e.g., <span class="citation">Yamada (<a href="#ref-Yamada:16">2016</a>)</span>.<a href="#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>Most algorithms to construct Thiessen polygons break down when multiple locations
+have the same coordinates. This can be the result of rounding errors in the coordinates, but
+also when there are several observations at the same location (e.g., with data over different
+time periods). To create a valid layer with Thiessen polygons, only unique coordinates can
+be included in the point layer.<a href="#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>In this example, the
+earlier project file was loaded, so that the previously created contiguity weights
+are already contained in the weights manager list.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>The county is
+easily identified by using the <strong>Move Selected to Top</strong> option in the table.<a href="#fnref10" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 
 <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</footer>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-      </section>
-
-            <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-72724100-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+</section>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

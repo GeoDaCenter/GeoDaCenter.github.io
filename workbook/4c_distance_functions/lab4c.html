@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Luc Anselin" />
+
+
+<title>Spatial Weights as Distance Functions</title>
+
+<link href="lab4c_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab4c_files/highlightjs-9.12.0/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	    .shadowfilter {
+	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	        filter: url(shadow.svg#drop-shadow);
+	     }
+	     .intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;}
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h3.subtitle {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Spatial Weights as Distance Functions</h1>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>03/17/2018 (revised and updated)</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#getting-started">Getting started</a></li>
+</ul></li>
+<li><a href="#inverse-distance-weights">Inverse Distance Weights</a><ul>
+<li><a href="#concepts">Concepts</a></li>
+<li><a href="#creating-inverse-distance-functions-for-distance-bands">Creating inverse distance functions for distance bands</a><ul>
+<li><a href="#properties-of-inverse-distance-weights">Properties of inverse distance weights</a></li>
+<li><a href="#inverse-distance-weights-in-the-gwt-file">Inverse distance weights in the GWT file</a></li>
+<li><a href="#using-non-geographical-coordinates">Using non-geographical coordinates</a></li>
+</ul></li>
+<li><a href="#creating-inverse-distance-functions-for-k-nearest-neighbors">Creating inverse distance functions for k-nearest neighbors</a></li>
+</ul></li>
+<li><a href="#kernel-weights">Kernel Weights</a><ul>
+<li><a href="#concepts-1">Concepts</a></li>
+<li><a href="#creating-kernel-weights">Creating kernel weights</a><ul>
+<li><a href="#properties-of-kernel-weights">Properties of kernel weights</a></li>
+<li><a href="#treatment-of-diagonal-elements">Treatment of diagonal elements</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered">
+<h2>Introduction</h2>
+<p>In this Chapter, we consider two situations where the values for the spatial weights take
+on a special meaning. The weights are transformations of the original distances. The
+two examples covered consist of inverse
+distance functions and kernel weights.</p>
+<p>The resulting weights files primarily provide the basis for creating new spatially explicit variables
+for use in further analyses, such as in spatial regression specifications.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> The weights themselves
+are <em>not</em> used in measures of spatial autocorrelation or other exploratory analyses in GeoDa,
+where only the existence of a neighbor relation is taken into account.</p>
+<p>We will illustrate this functionality with the data set that we used earlier for point locations of house sales for Cleveland, OH.</p>
+<div id="objectives" class="section level3 unnumbered">
+<h3>Objectives</h3>
+<ul>
+<li><p>Compute inverse distance functions</p></li>
+<li><p>Compute kernel weights functions</p></li>
+<li><p>Assess the characteristics of weights based on distance functions</p></li>
+<li><p>Understand the contents of KWT format weights files</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Weight File Creation dialog
+<ul>
+<li>inverse distance weights</li>
+<li>kernel weights</li>
+<li>bandwidth options</li>
+<li>diagonal element options</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started" class="section level3 unnumbered">
+<h3>Getting started</h3>
+<p>We will again use the data set that contains the location and sales price of 205 homes in a core area of Cleveland, OH for the fourth quarter of 2015.
+We get started by clearing the previous project and dropping the file <strong>clev_sls_154_core.shp</strong> into the <strong>Drop files here</strong> rectangle of the connect to data source dialog. Alternatively, we can use
+a project file if we saved one earilier (e.g., <strong>clev_sls_154_core.gda</strong>). The familiar themeless base map results, as
+in Figure <a href="#fig:homeclev">1</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:homeclev"></span>
+<img src="pics4c/0_361_pointsthemeless.png" alt="Cleveland home sales themeless map" width="80%" />
+<p class="caption">
+Figure 1: Cleveland home sales themeless map
+</p>
+</div>
+<p>If desired, we can again add the base layer and change the point colors and selection default. We
+pass on this for now.</p>
+</div>
+</div>
+<div id="inverse-distance-weights" class="section level2 unnumbered">
+<h2>Inverse Distance Weights</h2>
+<div id="concepts" class="section level3 unnumbered">
+<h3>Concepts</h3>
+<p>One can readily view spatial weights
+based on a distance cut-off as representing a step function,
+with a value of 1 for neighbors with <span class="math inline">\(d_{ij} &lt; \delta\)</span>, and a value of
+0 for others. As before, <span class="math inline">\(d_{ij}\)</span> stands for the distance between observations
+<span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, and <span class="math inline">\(\delta\)</span> is the bandwidth.</p>
+<p>A straightforward extension of this principle is to consider a
+continuous parameterized
+function of distance itself:
+<span class="math display">\[\begin{equation}
+w_{ij} = f(d_{ij},\mathbf{\theta}),
+\end{equation}\]</span>
+with <span class="math inline">\(f\)</span> as a functional form and <span class="math inline">\(\mathbf{\theta}\)</span> a
+vector of parameters.</p>
+<p>In order to conform to Tobler’s first law of geography,
+a distance <em>decay</em> effect must be respected.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> In other words, the value of the function of distance
+needs to <em>decrease</em> with a growing distance. More formally, the partial derivative
+of the distance function with respect to distance should be negative,
+<span class="math inline">\(\partial w_{ij} / \partial d_{ij} &lt; 0\)</span>.</p>
+<p>Commonly used distance functions are the inverse, with <span class="math inline">\(w_{ij} = 1 / d_{ij}^{\alpha}\)</span>
+(and <span class="math inline">\(\alpha\)</span> as a parameter),
+and the negative exponential, with <span class="math inline">\(w_{ij} = e^{-\beta d_{ij}}\)</span>
+(and <span class="math inline">\(\beta\)</span> as a parameter).
+The functions are often combined
+with a distance cut-off criterion, such that <span class="math inline">\(w_{ij} = 0\)</span> for <span class="math inline">\(d_{ij} &gt; \delta\)</span>.</p>
+<p>In practice, the parameters are seldom estimated, but typically set
+to a fixed value, such as <span class="math inline">\(\alpha = 1\)</span> for inverse distance weights (<span class="math inline">\(1/d_{ij}\)</span>), and
+<span class="math inline">\(\alpha = 2\)</span> for gravity weights (<span class="math inline">\(1/d_{ij}^{2}\)</span>).
+By convention, the diagonal elements
+of the spatial weights are set to zero and not computed. Plugging
+in a value of <span class="math inline">\(d_{ii} = 0\)</span> would
+yield division by zero for inverse distance weights.</p>
+<p>The distance-based weights depend not only on the parameter value and
+functional form, but also on the metric used for distance. Since the
+weights are inversely related to distance, large values for the latter
+will yield small values for the former, and vice versa. This may be a
+problem in practice when the distances are so large (i.e., measured
+in small units) that the corresponding
+inverse
+distance weights become close to zero, possibly resulting in a zero
+spatial weights matrix.</p>
+<p>In addition, a potential
+problem may occur when the distance metric is such that distances take
+on values less than one. As a consequence, some inverse distance values
+may be larger than one, which is typically not a desired result.</p>
+<p>Rescaling
+of the coordinates will fix both problems.</p>
+</div>
+<div id="creating-inverse-distance-functions-for-distance-bands" class="section level3 unnumbered">
+<h3>Creating inverse distance functions for distance bands</h3>
+<p>We proceed in the usual fashion to create spatial weights based on an inverse
+distance function. In the <strong>Weights File Creation</strong> interface, we specify
+<strong>unique_id</strong> as the ID variable, and select the <strong>Distance Weight</strong> option.</p>
+<p>As before, we choose <strong>Distance band</strong> from the three types of weights. The
+default bandwidth of 3598.055030 is the same as encountered previously. We
+keep it as is for now. The
+<strong>inverse distance</strong> option is invoked by the check box below the bandwidth
+entry, as in Figure <a href="#fig:invdistoption">2</a>. For now, we keep the <strong>Power</strong>
+value to its default of 1.</p>
+<div class="figure" style="text-align: center"><span id="fig:invdistoption"></span>
+<img src="pics4c/1_844_invdistoption.png" alt="Inverse distance option" width="60%" />
+<p class="caption">
+Figure 2: Inverse distance option
+</p>
+</div>
+<p>Clicking on the <strong>Create</strong> button results in the usual query for a file name specification. The inverse distance
+weights are saved in a file with a <strong>GWT</strong> extension, say <strong>clev_sls_154_core_id1.gwt</strong>.</p>
+<div id="properties-of-inverse-distance-weights" class="section level4 unnumbered">
+<h4>Properties of inverse distance weights</h4>
+<p>As soon as the file is created, the properties of the weights appear in the weights manager,
+as illustrated in Figure <a href="#fig:invdistprop">3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:invdistprop"></span>
+<img src="pics4c/1_845_id1properties.png" alt="Inverse distance weights properties" width="40%" />
+<p class="caption">
+Figure 3: Inverse distance weights properties
+</p>
+</div>
+<p>Since the properties only pertain to the connectivity structure implied by the weights, they
+are identical to the ones obtained for the standard distance-band weights. It is important to
+keep in mind that the actual values for the weights are <em>ignored</em> in this operation. The
+only differences between the two property lists are the listing of <strong>inverse distance</strong> as <strong>true</strong>,
+and the value for <strong>power</strong> as <strong>1</strong>.</p>
+<p>The connectivity map and the connectivity graph associated with the weights are the same
+as before as well.
+For example, the connectivity graph shown in Figure <a href="#fig:invdistconn">4</a> is identical
+to the one we obtained for the distance-band weights.</p>
+<div class="figure" style="text-align: center"><span id="fig:invdistconn"></span>
+<img src="pics4c/1_846_id1conngraph.png" alt="Connectivity graph for inverse distance weights" width="80%" />
+<p class="caption">
+Figure 4: Connectivity graph for inverse distance weights
+</p>
+</div>
+<p>The default bandwidth is such that each location is ensured to have at least one neighbor, but
+as we have seen before, this can be changed. This allows inverse distance weights to be calculated
+for any bandwidth specified. For example, if the bandwidth is set as the maximum inter-point distance,
+the resulting weights will be for a <em>full</em> matrix. This is not recommended for larger data sets, but
+it can provide a useful point of departure to compute various accessibility indices.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+</div>
+<div id="inverse-distance-weights-in-the-gwt-file" class="section level4 unnumbered">
+<h4>Inverse distance weights in the GWT file</h4>
+<p>Figure <a href="#fig:invdistgwt">5</a> provides a comparison of the entries in the GWT file for respectively
+the distance-band weights and the inverse distance weights. We notice that the pairs of neighbors
+are identical, as expected. Also, the value for the inverse distance weight is exactly the inverse
+of the distance.</p>
+<div class="figure" style="text-align: center"><span id="fig:invdistgwt"></span>
+<img src="pics4c/1_008_id1gwt.png" alt="GWT file for distance band and inverse distance weights" width="80%" />
+<p class="caption">
+Figure 5: GWT file for distance band and inverse distance weights
+</p>
+</div>
+</div>
+<div id="using-non-geographical-coordinates" class="section level4 unnumbered">
+<h4>Using non-geographical coordinates</h4>
+<p>So far, we have been using the default setting of <strong>&lt;X-Centroids&gt;</strong> and <strong>&lt;Y-Centroids&gt;</strong> for
+the coordinates that were the input into the distance calculations. However, this option is
+perfectly general, and any two variables contained in the data set can be specified as x, y coordinates.
+For example, this allows for the computation of so-called <em>socio-economic</em> weights, where the
+difference between two locations on any two variables can be used as the distance metric.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p>We illustrate this feature in Figure <a href="#fig:invdistxy">6</a>, where we explicitly specify the x and
+y coordinates as the variables <strong>x</strong> and <strong>y</strong> (the sample data set does not include any other
+meaningful variables besides the house price). Also, we compute inverse distance squared by
+setting the <strong>Power</strong> parameter to <strong>2</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:invdistxy"></span>
+<img src="pics4c/1_847_invdistxy.png" alt="Inverse distance for generic coordinates" width="60%" />
+<p class="caption">
+Figure 6: Inverse distance for generic coordinates
+</p>
+</div>
+<p>The contents of the resulting GWT file are shown in Figure <a href="#fig:invdist2gwt">7</a>. This highlights
+the problem alluded to above, i.e., that the value of the weights critically depends on the distance
+metric. In our example, the second power of the inverse distances result in weights that are
+essentially not distinguishable from zero.</p>
+<div class="figure" style="text-align: center"><span id="fig:invdist2gwt"></span>
+<img src="pics4c/1_009_id2gwt.png" alt="Inverse squared distance in GWT file" width="30%" />
+<p class="caption">
+Figure 7: Inverse squared distance in GWT file
+</p>
+</div>
+<p>Note that since the connectivity properties ignore the actual weights, they will again not differ
+from the ones obtained for the matching distance-band weights. However, any calculation of spatially
+explicit variables using these weights (e.g., a spatially lagged variable) would be largely
+meaningless, since the spatially lagged variables would all roughly equal zero. The importance of
+this potential problem
+cannot be stressed enough, since a <em>mechanical</em> computation using these weights could lead
+to very misleading results in further analyses.</p>
+</div>
+</div>
+<div id="creating-inverse-distance-functions-for-k-nearest-neighbors" class="section level3 unnumbered">
+<h3>Creating inverse distance functions for k-nearest neighbors</h3>
+<p>Computing inverse distance weights is not limited to a distance band specification. As shown
+in Figure <a href="#fig:knnid1">8</a>, the <strong>inverse distance</strong> option is also available for
+<strong>K-Nearest neighbors</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:knnid1"></span>
+<img src="pics4c/1_849._id1knnpng.png" alt="Inverse distance for k-nearest neighbors" width="60%" />
+<p class="caption">
+Figure 8: Inverse distance for k-nearest neighbors
+</p>
+</div>
+<p>This option works in the same way as for the distance bands. With the
+<strong>Number of neighbors</strong> and a <strong>Power</strong> specified, the
+new weights are computed from the distances between the k nearest neighbors for each location. In
+Figure <a href="#fig:knnid1gwt">9</a>, the original k-nearest distances (with k=6, as specified
+in Figure <a href="#fig:knnid1">8</a>) and the corresponding inverse weights entries are shown from the
+respective GWT files.</p>
+<div class="figure" style="text-align: center"><span id="fig:knnid1gwt"></span>
+<img src="pics4c/1_008_id1gwt.png" alt="GWT file for KNN and associated inverse distance weights" width="80%" />
+<p class="caption">
+Figure 9: GWT file for KNN and associated inverse distance weights
+</p>
+</div>
+<p>As is the case for the inverse distance band weights, the actual values of the inverse knn weights
+are ignored in further spatial analyses in GeoDa. They can only be used in the calculation of
+spatially explicit variables.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+</div>
+</div>
+<div id="kernel-weights" class="section level2 unnumbered">
+<h2>Kernel Weights</h2>
+<div id="concepts-1" class="section level3 unnumbered">
+<h3>Concepts</h3>
+<p>Kernel weights are used in non-parametric approaches to model
+spatial covariance, such as in the HAC method for heteroskedastic
+and spatial autocorrelation consistent variance estimates.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> In GeoDa, kernel functions can be computed, but as is the case for the other distance functions,
+the actual values of the weights are only used in the computation of spatially explicit variables.</p>
+<p>The kernel weights are defined as a function <span class="math inline">\(K(z)\)</span> of the ratio between the
+distance <span class="math inline">\(d_{ij}\)</span> from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>, and the bandwidth <span class="math inline">\(h_i\)</span>, with <span class="math inline">\(z = d_{ij} / h_i\)</span>. This ensures
+that <span class="math inline">\(z\)</span> is always less than 1. For distances greater than the bandwidth, <span class="math inline">\(K(z) = 0\)</span>.</p>
+<p>Five different kernel weights functions are currently supported:</p>
+<ul>
+<li>Uniform, <span class="math inline">\(K(z) = 1/2\)</span> for <span class="math inline">\(|z| &lt; 1\)</span>,</li>
+<li>Triangular, <span class="math inline">\(K(z) = (1 - |z| )\)</span> for <span class="math inline">\(|z| &lt; 1\)</span>,</li>
+<li>Quadratic or Epanechnikov, <span class="math inline">\(K(z) = (3/4) (1 - z^2)\)</span> for <span class="math inline">\(|z| &lt; 1\)</span>,<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></li>
+<li>Quartic, <span class="math inline">\(K(z) = (15/16)(1 - z^2)^2\)</span> for <span class="math inline">\(|z| &lt; 1\)</span>, and</li>
+<li>Gaussian. <span class="math inline">\(K(z) = (2 \pi)^{(1/2)} \exp(- z^2 / 2)\)</span>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></li>
+</ul>
+<p><br></p>
+<p>Typically, the value for the diagonal elements of the
+weights is set to 1, although GeoDa allows for the actual kernel value to be
+used as well.</p>
+<p>Many careful decisions must be made in selecting a kernel
+weights function. Apart from the choice of a functional form for
+<span class="math inline">\(K(\ )\)</span>, a crucial aspect is the selection of the bandwidth. In the
+literature, the latter is found to be more important than the functional
+form.</p>
+<p>A drawback of fixed bandwidth kernel weights is that the number
+of non-zero weights can vary considerably, especially when the
+density of the point locations is not uniform throughout space.
+This is the same problem encountered for the distance band spatial
+weights.</p>
+<p>In GeoDa, there are two types of fixed bandwidths for
+kernel weights. One is the max-min distance used earlier (the largest
+of the nearest-neighbor distances). The other is the maximum distance
+for a given specification of k-nearest neighbors. For example, with knn
+set to a given value, this is the distance between the selected k-nearest
+neighbors pairs that are the farthest apart.</p>
+<p>To correct for the issues associated with a fixed bandwidth, a <em>variable bandwidth</em> approach
+adjusts the bandwidth for each location to ensure equal or near-equal
+coverage. One common approach is to take the k-nearest neighbors,
+and to adjust the bandwidth for each location such that exactly k neighbors
+are included in the kernel function. The bandwidth specific to each location
+is then any distance
+larger than its k nearest neighbor distance, but less than the k+1
+nearest neighbor distance.</p>
+<p>In GeoDa, the default value for k equals the cube root of the number
+of observations <span class="citation">(following the recommendation in Kelejian and Prucha <a href="#ref-KelejianPrucha:07">2007</a>)</span>. In general,
+a wider bandwidth gives smoother and more robust results, so the bandwidth
+should always be set at least as large as the recommended default.</p>
+</div>
+<div id="creating-kernel-weights" class="section level3 unnumbered">
+<h3>Creating kernel weights</h3>
+<p>We create kernel weights in the by now familiar fashion, by selecting the
+<strong>Adaptive kernel</strong> option under the <strong>Distance Weight</strong> button of the
+<strong>Weights File Creation</strong> dialog. Figure <a href="#fig:kerneloption">10</a> illustrates the
+five kernel functions that are available.</p>
+<div class="figure" style="text-align: center"><span id="fig:kerneloption"></span>
+<img src="pics4c/2_851_kerneloptions.png" alt="Kernel weight options" width="60%" />
+<p class="caption">
+Figure 10: Kernel weight options
+</p>
+</div>
+<p>To illustrate this functionality, we select the <strong>Triangular</strong> option, with the
+<strong>Adaptive bandwidth</strong> set to the default number of neighbors of 6. We also leave
+the <strong>Diagonal weights</strong> option to its default of 1 (i.e., the kernel function is not applied
+to a distance of zero for the diagonal elements). These settings are illustrated in
+Figure <a href="#fig:triangular">11</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:triangular"></span>
+<img src="pics4c/2_852_tri_adaptive.png" alt="Triangular adaptive kernel" width="60%" />
+<p class="caption">
+Figure 11: Triangular adaptive kernel
+</p>
+</div>
+<p>The results are saved in a file with file extension <strong>KWT</strong>
+(such as <strong>clev_sls_154_core_tri6.kwt</strong>). The KWT file extension is adopted to retain
+compatibility with the conventions assumed for PySAL and its spreg module, as implemented
+in GeoDaSpace. Except for the inclusion of the diagonal element, its structure is the same
+as a GWT format file.</p>
+<p>The contents of the KWT file in our example are shown in the right-hand panel of
+Figure <a href="#fig:trianglekwt">12</a>, compared to the knn distances in the corresponding GWT file on the left.</p>
+<div class="figure" style="text-align: center"><span id="fig:trianglekwt"></span>
+<img src="pics4c/2_011_trikwt.png" alt="KWT file for triangular adaptive kernel" width="80%" />
+<p class="caption">
+Figure 12: KWT file for triangular adaptive kernel
+</p>
+</div>
+<p>A few characteristics of the results should be noted. First, the bandwidth is determined by the
+largest distance among the six neighbors. In the current example, for the first observation considered (with unique_id 1183), this is the
+distance given on the first row.
+The distance between 1183 and 6842 amounts to
+3253.02459, as shown in the left panel of Figure <a href="#fig:trianglekwt">12</a>. By convention, each other distance is
+converted to a value less than one by dividing it by this maximum distance.</p>
+<p>For example, for the second pair
+(between 1183 and 2024), this would yield 1858.90398/3253.02459 = 0.571439 (the <span class="math inline">\(z\)</span>-value referred
+to above). The result for the triangular kernel is then 1 - 0.571439 = 0.428561, i.e., the value
+shown on the second line of the KWT file.</p>
+<p>For the pair with the largest distance, the value of the kernel is zero (1 - 1). Finally, for the
+diagonal element (the pair 1183, 1183), the kernel is given as 1, by construction.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
+<div id="properties-of-kernel-weights" class="section level4 unnumbered">
+<h4>Properties of kernel weights</h4>
+<p>As soon as the weights are created, their properties appear in the weights manager.
+As illustrated in Figure <a href="#fig:triangleprop">13</a>, the descriptive statistics are again the
+same as for standard knn weights. The differences are in the first six items. The <strong>type</strong> of
+weights is given as kernel, the <strong>kernel method</strong> is identified (triangular), with the bandwidth
+definition (<strong>knn 6</strong>) and <strong>adptive kernel</strong> set to true. It is also indicated that
+the kernel is not applied to the diagonal elements (<strong>kernel to diagonal</strong> is false).
+Also, as for the knn weights, the resulting weights are asymmetric. These items will
+be saved to a project file when one is created.</p>
+<div class="figure" style="text-align: center"><span id="fig:triangleprop"></span>
+<img src="pics4c/2_853_tri_props.png" alt="Triangular adaptive kernel properties" width="40%" />
+<p class="caption">
+Figure 13: Triangular adaptive kernel properties
+</p>
+</div>
+<p>Since the connectivity histogram, map and graph ignore the actual weights values and are
+solely based on the implied connectivity structure, they are identical to those obtained
+for the corresponding knn weights. For example,
+Figure <a href="#fig:triangleconn">14</a> showns the connectivity graph, which is the same as generated
+in the previous Chapter.</p>
+<div class="figure" style="text-align: center"><span id="fig:triangleconn"></span>
+<img src="pics4c/2_854_triconngraph.png" alt="Connectivity graph for triangular kernel weights" width="80%" />
+<p class="caption">
+Figure 14: Connectivity graph for triangular kernel weights
+</p>
+</div>
+</div>
+<div id="treatment-of-diagonal-elements" class="section level4 unnumbered">
+<h4>Treatment of diagonal elements</h4>
+<p>As mentioned, for a triangular kernel, the diagonal elements equal one, irrespective of the
+setting for that option. To illustrate the effect of applying the kernel function to the diagonal
+elements, we choose the <strong>Epanechnikov</strong> option, as shown
+Figure <a href="#fig:epadiag">15</a>. The <strong>Apply kernel to diagonal weights</strong> radio button is selected as well.</p>
+<div class="figure" style="text-align: center"><span id="fig:epadiag"></span>
+<img src="pics4c/2_856_epadiag.png" alt="Epanechnikov kernel with diagonal option" width="60%" />
+<p class="caption">
+Figure 15: Epanechnikov kernel with diagonal option
+</p>
+</div>
+<p>All other options are the same as before. The contents of the resulting KWT file, again compared
+to the knn GWT file, are shown in Figure <a href="#fig:epakwt">16</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:epakwt"></span>
+<img src="pics4c/2_012_epadiagkwt.png" alt="KWT file for Epanechnikov adaptive kernel" width="80%" />
+<p class="caption">
+Figure 16: KWT file for Epanechnikov adaptive kernel
+</p>
+</div>
+<p>As before, the value for the most separated points is zero, but now the diagonal elements equal
+0.75, which results from the 3/4 scaling factor being applied to 1. In all other respects, these
+weights are treated in the same way as the others discussed in this Chapter.</p>
+</div>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-AnselinRey:14">
+<p>Anselin, Luc, and Sergio J. Rey. 2014. <em>Modern Spatial Econometrics in Practice, a Guide to Geoda, Geodaspace and Pysal</em>. Chicago, IL: GeoDa Press.</p>
+</div>
+<div id="ref-HallPatil:94">
+<p>Hall, P., and P. Patil. 1994. “Properties of Nonparametric Estimators of Autocovariance for Stationary Random Fields.” <em>Probability Theory and Related Fields</em> 99:399–424.</p>
+</div>
+<div id="ref-KelejianPrucha:07">
+<p>Kelejian, Harry H., and Ingmar R. Prucha. 2007. “HAC Estimation in a Spatial Framework.” <em>Journal of Econometrics</em> 140:131–54.</p>
+</div>
+<div id="ref-Tobler:70">
+<p>Tobler, Waldo. 1970. “A Computer Movie Simulating Urban Growth in the Detroit Region.” <em>Economic Geography</em> 46:234–40.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>The distance functions
+in GeoDa provide an alternative and more user-friendly way to calculate the weights included
+in PySAL and GeoDaSpace <span class="citation">(see Anselin and Rey <a href="#ref-AnselinRey:14">2014</a> for details)</span>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Tober’s so-called <em>first law of geography</em> postulates that
+everything is related to everything else, but closer things more so <span class="citation">(Tobler <a href="#ref-Tobler:70">1970</a>)</span>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Specific
+measures of accessibility are
+currently not explicitly supported in GeoDa. However, in some instances, the calculation of a
+spatially lagged variables using spatial weights with inverse distances (squared) between all the
+pairs of observations may be a meaningful measure of accessibility, as discussed in
+the next Chapter.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>For socio-economic
+distances to be meaningful, one has to be mindful of the scale in which those variables
+are expressed. One useful application that we will encounter in a later chapter is to use
+the coordinates obtained from a multi-dimensional scaling exercise as the input for distance
+computations. Also, the current implementation in GeoDa is limited to two dimensions, and
+multi-attribute distance measures are not supported.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Both inverse distance band and inverse distance knn weights can
+be used as inputs in the spatial regression analyses implemented in GeoDaSpace and PySAL
+<span class="citation">(see Anselin and Rey <a href="#ref-AnselinRey:14">2014</a>, for specifics)</span>.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>This method is currently
+not implemented in GeoDa, but is available in GeoDaSpace and PySal <span class="citation">(see Hall and Patil <a href="#ref-HallPatil:94">1994</a>; Kelejian and Prucha <a href="#ref-KelejianPrucha:07">2007</a>, among others, for technical aspects, and <span class="citation">Anselin and Rey (<a href="#ref-AnselinRey:14">2014</a>)</span>, for implementation
+details)</span>.<a href="#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>Note that the
+Epanechnikov kernel is sometimes referred to without the (3/4) scaling factor. GeoDa
+implements the scaling factor.<a href="#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>While the Gaussian kernel is in
+principle without a bandwidth constraint, in GeoDa it is implemented with the same
+bandwidth option as the other kernel functions.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>For this case,
+it turns out that the calculated kernel value is also one, since 1 - 0 = 1.<a href="#fnref10" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</footer>
+
+</section>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

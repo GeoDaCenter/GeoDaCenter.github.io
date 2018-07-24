@@ -118,7 +118,7 @@ if (window.hljs) {
 Univariate and Bivariate Analysis
 </h3></em></h3>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>03/13/2018 (revised and updated)</em></h4>
+<h4 class="date"><em>07/24/2018 (revised and updated)</em></h4>
 
 
 <div id="TOC">
@@ -376,9 +376,9 @@ Figure 18: Default box plot
 <p>The box plot focuses on the quantiles of the distribution. The data points are sorted from small to large. The median (50 percent point) is represented by the horizontal orange bar in the middle of the distribution. The brown rectangle goes from the first quartile (25th percentile) to the third quartile (75th percentile). The difference between the values that
 correspond to the third (39.6773) and the first quartile (26.6943) is referred to as the <em>inter-quartile range</em> (IQR). The inter-quartile range is a measure of the spread of the distribution, a non-parametric counterpart to the standard deviation. In our example, the IQR is roughly 13 (39.6773 - 26.6943 = 12.9831).</p>
 <p>The horizontal lines drawn at the top and bottom of the
-graph are the so-called <em>fences</em> or <em>hinges</em>. They correspond to the values of the first quartile less 1.5 IQR (i.e., roughly 26.7 - 1.5x13 = 7.2), and the third quartile plus 1.5 IQR
+graph are the so-called <em>fences</em> or <em>hinges</em>. They correspond to the values of the first quartile less 1.5xIQR (i.e., roughly 26.7 - 1.5x13 = 7.2), and the third quartile plus 1.5xIQR
 (i.e., roughly 39.7 + 1.5x13 = 59.2). Observations that fall outside the fences are considered to
-be <em>outliers</em>.</p>
+be <em>outliers</em>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>In our example in Figure <a href="#fig:boxplot">18</a>, we have a single lower outlier, but no upper outliers.
 Note that the one lower outlier is the observation that corresponds with a value of 0
 (the minimum), which we earlier had flagged as potentially suspicious. The outlier detection would seem to confirm this. Checking for <em>strange</em> values that may possibly be coding
@@ -386,7 +386,7 @@ errors or suggest other measurement problems is one of the very useful applicati
 a box plot.</p>
 <p>The default in GeoDa is to list the summary statistics at the bottom of the box plot. As
 was the case for the histogram, the statistics
-include the minumum, maximum, mean, median and standard deviation. In addition, the values for the first and third quartile and the resulting IQR are given as well. The listing
+include the minimum, maximum, mean, median and standard deviation. In addition, the values for the first and third quartile and the resulting IQR are given as well. The listing
 of descriptive statistics can be turned off by unchecking <strong>View &gt; Display Statistics</strong> (i.e., the
 default is the reverse of what held for the histogram, where the statistics had to be
 invoked explicitly).</p>
@@ -406,7 +406,7 @@ Figure 20: Box plot with hinge = 3.0
 </p>
 </div>
 <p>Several other options for the box plot are the same as for the histogram, such as saving the selection, copying the image to the clipboard, and saving the graph as an image file.</p>
-<p>Also, as is the case for any graph in GeoDa, linking is implemented. For example, selecting the lower outlier in the box plot will highlight the corresponding obbservation in the themeless map of sub-boroughs,
+<p>Also, as is the case for any graph in GeoDa, linking is implemented. For example, selecting the lower outlier in the box plot will highlight the corresponding observation in the themeless map of sub-boroughs,
 as shown in Figure <a href="#fig:linkboxmap">21</a>. The reverse process, consisting of first selecting in the map, works as well.</p>
 <div class="figure" style="text-align: center"><span id="fig:linkboxmap"></span>
 <img src="pics2a/2_158_linkboxmap.png" alt="Showing the outlier on a linked map" width="100%" />
@@ -519,7 +519,7 @@ Figure 30: LOWESS smoother without linear fit
 </div>
 <p>In our example, there is considerable evidence of a nonlinear relationship between the two variables. An alternative interpretation is to see this as an indication of a structural break, where in one subset of the data the slope is very steep, whereas in another it is fairly flat.</p>
 <p>The nonlinear fit is driven by a number of parameters, the most important of which is the bandwidth. The parameters can be changed in the options by selecting <strong>Edit LOWESS Parameters</strong> in the <strong>Smoother</strong> option. As shown in Figure <a href="#fig:bandwidth">31</a>, a small dialog is brought up in which the <strong>Bandwidth</strong> (default setting 0.20), <strong>Iterations</strong> and <strong>Delta Factor</strong> can be adjusted. The bandwidth determines the smoothness of the curve and is given as a fraction of the total range in X values. In other words, the default bandwidth of 0.20 implies that for each local fit (centered on a value for X), about one fifth of the scatter points are taken into account. The other options are technical and are best left
-to their default values.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+to their default values.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <p>To obtain Figure <a href="#fig:smooth40">32</a>, we changed the bandwidth to 0.40, which results in a much smoother curve that brings out a possible structural break in the data in a more striking fashion.</p>
 <div class="figure" style="text-align: center"><span id="fig:bandwidth"></span>
 <img src="pics2a/4_lowess040.png" alt="LOWESS bandwidth settings" width="30%" />
@@ -541,7 +541,7 @@ Figure 32: LOWESS smoother bandwidth 0.40
 Figure 33: LOWESS smoother bandwidth 0.10
 </p>
 </div>
-<p>The literature contains many discussions of the notion of an optimal bandwidth, but in practice a trial and error approach is often more effective. In any case, a value for the bandwidth that follows one of these rules of thumb can be entered in the dialog. Currently, GeoDa does not compute these for you.</p>
+<p>The literature contains many discussions of the notion of an optimal bandwidth, but in practice a trial and error approach is often more effective. In any case, a value for the bandwidth that follows one of these rules of thumb can be entered in the dialog. Currently, GeoDa does not compute optimal bandwidth values.</p>
 <p>Finally, while one might expect the LOWESS fit and a linear fit to coincide with a bandwidth of 1.0,
 this is not the case. The LOWESS fit will be near-linear, but slightly different from a standard
 least squares result due to the locally weighted nature of the algorithm.</p>
@@ -601,7 +601,7 @@ Figure 39: Linked scatter plot selection – 1
 with p &lt; 0.0031. In other words, the slope in the region we selected in the map is significantly
 different from the slope in the rest of the map, suggesting spatial heterogeneity.</p>
 <p>As we brush across the map, we can assess the degree to which the linear relationship is stable. Any systematically changing slopes between clearly defined sub-regions of the observations would suggest the presence of spatial heterogeneity. For example, moving
-the selection rectangle north, as in Figure <a href="#fig:brushmap4">40</a>, makes the evidence for stuctural change somewhat weaker
+the selection rectangle north, as in Figure <a href="#fig:brushmap4">40</a>, makes the evidence for structural change somewhat weaker
 (as evidenced by the Chow test with p &lt; 0.01 shown in Figure <a href="#fig:mapscat4">41</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:brushmap4"></span>
 <img src="pics2a/6_185_brushmap2.png" alt="Brushing the map -- 2" width="60%" />
@@ -657,11 +657,16 @@ is facilitated by <strong>Saving</strong> the selection in the form of an indica
 <ol>
 <li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
 <li id="fn2"><p>In the <strong>GeoDa Preference Setup</strong>, under <strong>System</strong>, the transparency of the unhighlighted objects in a selection operation can be adjusted. The default is 0.80, which means only about 20% of the regular color is shown.<a href="#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p>The LOWESS algorithm is complex and uses a weighted local polynomial fit.
+<li id="fn3"><p>Note that the fences are drawn even when they fall outside
+the actual range of the observations. This will be the case whenever
+the value of the third quartile + 1.5xIQR is larger than the maximum,
+(as in in Figure <a href="#fig:boxplot">18</a>), or when the value of the first quartile - 1.5xIQR is smaller than the
+minimum.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>The LOWESS algorithm is complex and uses a weighted local polynomial fit.
 The <strong>Iterations</strong> setting determines how many times the fit is adjusted by refining the weights. A
 smaller value for this option will speed up computation, but result in a less robust fit. The
 <strong>Delta Factor</strong> drops points from the calculation of the local fit if they are too close (within
-Delta) to speed up the computations. Technical details are covered in <span class="citation">Cleveland (<a href="#ref-Cleveland:79">1979</a>)</span>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+Delta) to speed up the computations. Technical details are covered in <span class="citation">Cleveland (<a href="#ref-Cleveland:79">1979</a>)</span>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

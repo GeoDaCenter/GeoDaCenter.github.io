@@ -118,7 +118,7 @@ if (window.hljs) {
 Multivariate Exploration
 </h3></em></h3>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>03/13/2018 (revised and updated)</em></h4>
+<h4 class="date"><em>07/24/2018 (most recent revision)</em></h4>
 
 
 <div id="TOC">
@@ -227,9 +227,11 @@ Figure 1: NYC sub-boroughs
 <div id="principle" class="section level3 unnumbered">
 <h3>Principle</h3>
 <p>A scatter plot matrix visualizes the bivariate relationships among several pairs of variables. The individual scatter plots are stacked such that each variable is in turn on the x-axis and on
-the y-axis. In a general sense, it is the visual counterpart of a correlation matrix, although unlike
-the latter, it is not symmetric. The main interest is in the magnitude and sign of the slope in each
-of the scatter plots, and the extent to which this points to a signficant bivariate relationship.</p>
+the y-axis. When applied to standardized variables (with mean zero and
+variance one), it is the visual counterpart of a correlation matrix. In
+general, however, while it shows the linear association between
+variables, it is not symmetric. The main interest is in the magnitude and sign of the slope in each
+of the scatter plots, and the extent to which this points to a significant bivariate relationship.</p>
 <p>Even though this method is included here, it is not really a <em>multivariate</em> exploration, but rather
 a collection of <em>bivariate</em> explorations for multiple variables.</p>
 <p>In GeoDa, the diagonal elements also contain a histogram for the variable in the corresponding row/column.</p>
@@ -293,7 +295,8 @@ Figure 7: Scatter Plot Matrix with smoothing
 </p>
 </div>
 <p>Finally, with the brushing and linking functionality enabled (<strong>View &gt; Regimes Regression</strong>
-checked), potential structural breaks can be further investigated dynamically. As in the standard scatter plot, the red linear fit corresponds to the selected observations, the blue line is for the unselected ones and the purple line is for the complete sample. As evidenced in Figure <a href="#fig:scatmatregimes">8</a>, the selected observations are also highlighted in the histograms on the diagonal, as well as in any other open windows/graphs.</p>
+checked), potential structural breaks can be further investigated dynamically
+(for ease of viewing, the <strong>LOWESS Smoother</strong> option is turned off). As in the standard scatter plot, the red linear fit corresponds to the selected observations, the blue line is for the unselected ones and the purple line is for the complete sample. As evidenced in Figure <a href="#fig:scatmatregimes">8</a>, the selected observations are also highlighted in the histograms on the diagonal, as well as in any other open windows/graphs.</p>
 <div class="figure" style="text-align: center"><span id="fig:scatmatregimes"></span>
 <img src="pics2b/7_192_scatmat_brush.png" alt="Scatter Plot Matrix with brushing" width="80%" />
 <p class="caption">
@@ -402,7 +405,7 @@ moved to the upper end of the Z dimension (high rent), and the low end of both X
 Figure 18: 3D Scatter Plot selection cube
 </p>
 </div>
-<p>The linking feature of GeoDa selectes these same five observations in the map, as
+<p>The linking feature of GeoDa selects these same five observations in the map, as
 in Figure <a href="#fig:3dscatmap">19</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:3dscatmap"></span>
 <img src="pics2b/9_208_linkedtomap.png" alt="3D Scatter Plot selection linked to map" width="80%" />
@@ -519,7 +522,7 @@ Figure 28: Linking PCP and map
 <p>Conditional plots, also known as facet graphs or Trellis graphs <span class="citation">(Becker, Cleveland, and Shyu <a href="#ref-Beckeretal:96">1996</a>)</span>, provide a means to assess interactions between more than two variables. Multiple graphs or maps are constructed for different subsets of the observations, obtained as a result of <em>conditioning</em> on the value of two variables.</p>
 <p>GeoDa supports conditional maps, histograms and scatter plots. We focus here on conditional scatter
 plots and histograms, and leave the discussion of conditional maps for a later Chapter.</p>
-<p>We first consider the conditional scatter plots and close the Chapter with a brief illustration
+<p>We first consider the conditional scatter plots and close with a brief illustration
 of conditional histograms.</p>
 </div>
 <div id="creating-conditional-scatter-plots" class="section level4 unnumbered">
@@ -589,7 +592,7 @@ Figure 34: 2x2 Conditional Scatter Plot
 <p>The result in Figure <a href="#fig:condfit">34</a> suggest a positive and significant slope between the number of kids and the degree of public assistance for those neighborhoods with more residential transition (smaller number of years lived in residence), as shown in the two graphs at the bottom. The slope is almost four times steeper in neighborhoods with larger household size (lower-right graph). However, the relationship is not significant for the more residentially stable neighborhoods (number of years lived in residence above the median), irrespective of the household size (top two graphs).</p>
 <p>Finally, the options also allow for a LOWESS smoother to be applied to the scatter plot points
 (by checking <strong>Show LOWESS Smoother</strong> in the options). For example, with the bandwidth set to 0.40 (after adjusting
-the bandwith with <strong>Edit LOWESS Parameters</strong>), this results in the graph
+the bandwidth with <strong>Edit LOWESS Parameters</strong>), this results in the graph
 shown in Figure <a href="#fig:condlowess">35</a>. We again see a more or less linear relationship in the bottom two scatter plots, but much more erratic behavior in the top ones. This confirms the lack of significance we found for the linear fit.</p>
 <div class="figure" style="text-align: center"><span id="fig:condlowess"></span>
 <img src="pics2b/11_229_condscatlowess.png" alt="LOWESS smooth of the Conditional Scatter Plot" width="80%" />

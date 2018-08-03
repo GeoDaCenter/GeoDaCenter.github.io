@@ -115,7 +115,7 @@ if (window.hljs) {
 
 <h1 class="title toc-ignore">Maps for Rates or Proportions</h1>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>03/15/2018 (revised and updated)</em></h4>
+<h4 class="date"><em>08/03/2018 (revised and updated)</em></h4>
 
 
 <div id="TOC">
@@ -224,7 +224,7 @@ systems and projections).</p>
 Figure 1: UTM Zone 17 projection
 </p>
 </div>
-<p>We can now select the <strong>.PRJ File</strong> linki from the various options to download the file with the correct
+<p>We can now select the <strong>.PRJ File</strong> link from the various options to download the file with the correct
 projection information. To match it up with our other files, we rename the file
 as <strong>ohlung.prj</strong>. We now have all the pieces to get started.</p>
 </div>
@@ -379,7 +379,7 @@ available under the <strong>Method</strong> drop down list.</p>
 Figure 12: Rate computation in table calculator
 </p>
 </div>
-<p>To calculate the rates, we operate in the customary fashion, by first adding a variable (say, <strong>LRATE</strong>) and then performing the computation. After selecting <strong>Raw Rate</strong> as the <strong>Method</strong>, we pick
+<p>To calculate the rates, we operate in the customary fashion, by first adding a variable (say, <strong>LRATE</strong>)<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> and then performing the computation. After selecting <strong>Raw Rate</strong> as the <strong>Method</strong>, we pick
 <strong>LFW68</strong> as the <strong>Event Variable</strong> and <strong>POPFW68</strong> as the <strong>Base Variable</strong> in the dialog,
 as illustrated in Figure <a href="#fig:calcratevars">13</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:calcratevars"></span>
@@ -483,7 +483,7 @@ methods shown in Figure <a href="#fig:calcratedialog">12</a>.</p>
 <h3>Borrowing strength</h3>
 <p>As mentioned in the introduction, rates have an intrinsic variance instability, which may
 lead to the identification of <em>spurious</em> outliers. In order to correct for this, we can
-use smoothing approaches or shrinkage estimators, which improve on the precision of the
+use smoothing approaches (also called shrinkage estimators), which improve on the precision of the
 crude rate by <em>borrowing strength</em> from the other observations. This idea goes back
 to the fundamental contributions of James and Stein (the so-called James-Stein paradox),
 who showed that in some instances biased estimators may have better precision in a
@@ -503,7 +503,7 @@ where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)
 given a value for the other. The second equality yields the formal expression of Bayes law as:
 <span class="math display">\[P[A | B] = \frac{P[B | A] \times P[A]}{P[B]}.\]</span>
 In most instances in practice, the denominator in this expression can be ignored, and the
-equality sign is replaced by a proportionality sign:<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>
+equality sign is replaced by a proportionality sign:<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>
 <span class="math display">\[P[A | B] \propto P[B | A] \times P[A].\]</span>
 In the context of estimation and inference, the <span class="math inline">\(A\)</span> typically stands for a parameter (or a set of
 parameters) and <span class="math inline">\(B\)</span> stands for the data. The general strategy is to update what we know about
@@ -511,14 +511,14 @@ the parameter <span class="math inline">\(A\)</span> <em>a priori</em> (reflecte
 data <span class="math inline">\(B\)</span>, to yield a <strong>posterior distribution</strong>, <span class="math inline">\(P[A | B]\)</span>. The link between the prior and
 posterior distribution is established through the <strong>likelihood</strong>, <span class="math inline">\(P[B | A]\)</span>. Using
 a more conventional notation with say <span class="math inline">\(\pi\)</span> as the parameter and <span class="math inline">\(y\)</span> as the observations, this
-gives:<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>
+gives:<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
 <span class="math display">\[P[\pi | y] \propto P[y | \pi] \times P[\pi].\]</span></p>
 </div>
 <div id="the-poisson-gamma-model" class="section level4 unnumbered">
 <h4>The Poisson-Gamma model</h4>
 <p>For each particular estimation problem, we need to specify distributions for the prior and the likelihood
 in such a way that a proper posterior distribution results. In the context of rate estimation, the standard approach is to specify a Poisson distribution for the observed count of events (conditional upon the risk parameter), and a Gamma distribution for the prior of the risk parameter <span class="math inline">\(\pi\)</span>. This is referred to
-as the <strong>Poisson-Gamma model</strong>.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+as the <strong>Poisson-Gamma model</strong>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
 <p>In this model, the prior distribution for the (unknown) risk parameter <span class="math inline">\(\pi\)</span> is Gamma(<span class="math inline">\(\alpha, \beta\)</span>),
 where <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are the shape and scale parameters of the Gamma distribution. In terms
 of the more familiar notions of mean and variance, this implies:
@@ -544,13 +544,13 @@ from the prior Gamma distribution.</p>
 crude rate, say <span class="math inline">\(r\)</span>, and the prior estimate, say <span class="math inline">\(\theta\)</span>. The latter is estimated as a reference
 rate, typically the overall statewide average or some other standard.</p>
 <p>In essense, the EB technique consists of computing a weighted average between the raw rate for each county and the state average, with weights proportional to the underlying
-population at risk. Simply put, small counties (i.e., with a small population at risk) will tend to have their rates adjusted considerably, whereas for larger counties the rates will barely change.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+population at risk. Simply put, small counties (i.e., with a small population at risk) will tend to have their rates adjusted considerably, whereas for larger counties the rates will barely change.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 <p>More formally, the EB estimate for the risk in location <span class="math inline">\(i\)</span> is:
 <span class="math display">\[\pi_i^{EB} = w_i r_i + (1 - w_i) \theta.\]</span>
 In this expression, the weights are:
 <span class="math display">\[w_i = \frac{\sigma^2}{(\sigma^2 + \mu/P_i)},\]</span>
 with <span class="math inline">\(P_i\)</span> as the population at risk in
-area <span class="math inline">\(i\)</span>, and <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> as the mean and variance of the prior distribution.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
+area <span class="math inline">\(i\)</span>, and <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> as the mean and variance of the prior distribution.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 <p>In the empirical Bayes approach, the mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> of the prior (which determine
 the scale and shape parameters of the Gamma distribution) are estimated from the data.</p>
 <p>For <span class="math inline">\(\mu\)</span> this estimate is simply the reference rate (the same reference used in the computation
@@ -655,16 +655,17 @@ underlying risk. The variance is <span class="math inline">\(\pi (1 - \pi) P_i /
 <li id="fn5"><p>Note that the
 current version of GeoDa does not support age-adjusted rates, which are common practice
 in epidemiology.<a href="#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p>There are several excellent books and articles on Bayesian statistics, with
-<span class="citation">Gelman et al. (<a href="#ref-Gelmanetal:14">2014</a>)</span> as a classic reference.<a href="#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>Note that in a
+<li id="fn6"><p>Also specify <strong>after last variable</strong> (at the bottom of the variables list) next to the <strong>insert before</strong> option to replicate the table screen shot in Figure <a href="#fig:calcrateadded">14</a>.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>There are several excellent books and articles on Bayesian statistics, with
+<span class="citation">Gelman et al. (<a href="#ref-Gelmanetal:14">2014</a>)</span> as a classic reference.<a href="#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>Note that in a
 Bayesian approach, the likelihood is expressed as a probability of the data conditional upon a
-value (or distribution) of the parameters. In classical statistics, it is the other way around.<a href="#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>For an extensive discussion, see, for example, the classic papers
-by <span class="citation">Clayton and Kaldor (<a href="#ref-ClaytonKaldor:87">1987</a>)</span> and <span class="citation">Marshall (<a href="#ref-Marshall:91">1991</a>)</span>.<a href="#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>For an extensive technical discussion, see also <span class="citation">Anselin, Lozano-Gracia, and Koschinky (<a href="#ref-Anselinetal:06c">2006</a>)</span>.<a href="#fnref9" class="footnote-back">↩</a></p></li>
-<li id="fn10"><p>In the Poisson-Gamma model, this turns out to be the same as
-<span class="math inline">\(w_i = P_i / (P_i + \beta)\)</span>.<a href="#fnref10" class="footnote-back">↩</a></p></li>
+value (or distribution) of the parameters. In classical statistics, it is the other way around.<a href="#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>For an extensive discussion, see, for example, the classic papers
+by <span class="citation">Clayton and Kaldor (<a href="#ref-ClaytonKaldor:87">1987</a>)</span> and <span class="citation">Marshall (<a href="#ref-Marshall:91">1991</a>)</span>.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>For an extensive technical discussion, see also <span class="citation">Anselin, Lozano-Gracia, and Koschinky (<a href="#ref-Anselinetal:06c">2006</a>)</span>.<a href="#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>In the Poisson-Gamma model, this turns out to be the same as
+<span class="math inline">\(w_i = P_i / (P_i + \beta)\)</span>.<a href="#fnref11" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

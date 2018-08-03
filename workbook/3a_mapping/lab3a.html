@@ -115,7 +115,7 @@ if (window.hljs) {
 
 <h1 class="title toc-ignore">Basic Mapping</h1>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>03/14/2018 (revised and updated)</em></h4>
+<h4 class="date"><em>08/02/2018 (revised and updated)</em></h4>
 
 
 <div id="TOC">
@@ -601,6 +601,10 @@ category of the natural breaks classification.</p>
 Figure 26: Map without outlines visible
 </p>
 </div>
+<p>One further option is to
+<strong>Show Map Boundary</strong>, only available with <strong>Outlines Visible</strong> turned <strong>off</strong>. This option is particularly useful when only a few polygons are
+colored in a map with many observations, for example, in the local cluster maps
+we will consider in a later chapter. Turning off the outlines in such an instance makes the polygons floating in white space. With the <strong>Show Map Boundary</strong> option turned on, the initial outline of the map is retained.</p>
 <p>The <strong>Background Color</strong> determines the background against which the map is drawn. In most instances, the default of white is the best choice.</p>
 </div>
 </div>
@@ -629,7 +633,7 @@ Figure 27: Percentile map
 <div id="box-map" class="section level3 unnumbered">
 <h3>Box map</h3>
 <p>A box map <span class="citation">(Anselin <a href="#ref-Anselin:94">1994</a>)</span> is the mapping counterpart of the idea behind a box plot. The point of departure
-is again a quantile map, more specifically, a quartile map. But the four categories are extended to six bins, to separately identify the lower and upper outliers.</p>
+is again a quantile map, more specifically, a <em>quartile</em> map. But the four categories are extended to six bins, to separately identify the lower and upper outliers.</p>
 <p>The map menu has two entries
 for the box map, one for each option for the hinges (1.5 and 3.0), identical to what we
 had for the box plot. For example, we invoke this map using <strong>Map &gt; Box Map (Hinge=1.5)</strong> from the menu or the map icon on the toolbar. After selecting <strong>rent2008</strong> as the variable, the map
@@ -643,7 +647,7 @@ Figure 28: Box map, hinge=1.5
 <p>Compared to the quartile map in Figure <a href="#fig:quartmap">5</a>, the box map in Figure <a href="#fig:boxmap">28</a> separates the three lower outliers (the observations with zero values) from
 the other four observations in the first quartile. They are depicted in dark blue. Similarly,
 it separates the six outliers in Manhattan from the eight other observations in the upper quartile. The upper outliers are colored dark red.</p>
-<p>To illustrate the correspondence between the box plot and the box map, we put the two side by side (<strong>Explore &gt; Box Plot</strong>) in Figure <a href="#fig:boxmapoutliers">29</a>. In the right-hand panel, we select the upper outliers in the box plot. Only the matching six outlier locations in the box map are highlighted. Note that the outliers in the box plot do not provide any information on the fact that these locations are also adjoining in space. This the <em>spatial</em> perspective that the box map adds
+<p>To illustrate the correspondence between the box plot and the box map, we put the two side by side (<strong>Explore &gt; Box Plot</strong>) in Figure <a href="#fig:boxmapoutliers">29</a>. In the right-hand panel, we select the upper outliers in the box plot. Only the matching six outlier locations in the box map are highlighted. Note that the outliers in the box plot do not provide any information on the fact that these locations are also adjoining in space. This the <em>spatial</em> perspective that the <em>box map</em> adds
 to the data exploration.</p>
 <div class="figure" style="text-align: center"><span id="fig:boxmapoutliers"></span>
 <img src="pics3a/2_252_outliers.png" alt="Outliers in box plot and box map" width="100%" />
@@ -654,7 +658,7 @@ Figure 29: Outliers in box plot and box map
 <p>From the current map, we can switch the box map between the hinge criterion of 1.5 and 3.0 by opening
 the options menu (right click on the map) and selecting
 <strong>Change Current Map Type &gt; Box Map (Hinge = 3.0)</strong>. Alternatively, we can also open a new map window from the main menu or map toolbar icon and select <strong>Box Map (Hinge=3.0)</strong> as the option.
-The resulting box map, shown in Figure <a href="#fig:boxmap3">30</a>, no longer has lower outliers and has only five upper outliers.</p>
+The resulting box map, shown in Figure <a href="#fig:boxmap3">30</a>, no longer has lower outliers and has only five upper outliers (compared to six for the 1.5 hinge).</p>
 <div class="figure" style="text-align: center"><span id="fig:boxmap3"></span>
 <img src="pics3a/2_253_boxmap3.png" alt="Box map, hinge=3.0" width="80%" />
 <p class="caption">
@@ -669,7 +673,8 @@ in a data set.</p>
 <p>The third type of extreme values map is a standard deviation map. In some way, this
 is a parametric counterpart to the box map, in that the standard deviation is used as
 the criterion to identify outliers, instead of the inter-quartile range.</p>
-<p>In a standard deviation map, the variable under consideration is transformed to standard deviational units (with mean 0 and standard deviation 1). The number of categories in the classification depends on the range of values, i.e., how many standard deviational units cover the range from lowest to highest. It is also quite common that some categories do not contain any observations.</p>
+<p>In a standard deviation map, the variable under consideration is transformed to standard deviational units (with mean 0 and standard deviation 1). The number of categories in the classification depends on the range of values, i.e., how many standard deviational units cover the range from lowest to highest. It is also quite common that some categories do not contain any observations (as in the
+example in Figure <a href="#fig:standardmap">31</a>).</p>
 <p>We continue with the variable <strong>rent2008</strong> and bring up a standard deviation map by means
 of <strong>Map &gt; Standard Deviation Map</strong> from the main menu or from the map toolbar icon.</p>
 <div class="figure" style="text-align: center"><span id="fig:standardmap"></span>
@@ -723,15 +728,19 @@ Figure 34: Categories switched
 </p>
 </div>
 <p>As a result of the switch in labels, all observations that used to be colored rosy
-in Figure <a href="#fig:uniquemap">32</a> are now colored dark green, and
-vice versa, as illustrated in Figure <a href="#fig:uniquemap2">35</a></p>
+(or, labeled 5)
+in Figure <a href="#fig:uniquemap">32</a> are now colored dark green (and, labeled 4), and
+vice versa, as illustrated in Figure <a href="#fig:uniquemap2">35</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:uniquemap2"></span>
 <img src="pics3a/3_260_newcats.png" alt="Unique value map with relabeled categories" width="80%" />
 <p class="caption">
 Figure 35: Unique value map with relabeled categories
 </p>
 </div>
-<p>It is important to keep in mind that the values in the legend are just labels,
+<p>It is important to
+keep in mind that in a categorical map, the labels have no meaning other than to
+distinguish between categories. So, whether we label the same group as 5 or 4 is irrelevant, only the grouping matters.
+Furthermore, the values in the legend are
 represented as integers for convenience, but they could just as well have been A, B, C, etc.,
 or other descriptors. This is a fundamental difference between the categorical maps and the
 other choropleth map types.</p>

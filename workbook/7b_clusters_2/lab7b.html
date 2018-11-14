@@ -116,7 +116,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Cluster Analysis (2)</h1>
 <h3 class="subtitle"><em>Classic Clustering Methods</em></h3>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>Latest update 11/11/2018</em></h4>
+<h4 class="date"><em>Latest update 11/14/2018</em></h4>
 
 
 <div id="TOC">
@@ -137,7 +137,6 @@ if (window.hljs) {
 <li><a href="#options-and-sensitivity-analysis">Options and sensitivity analysis</a><ul>
 <li><a href="#changing-the-number-of-initial-runs-in-k-means">Changing the number of initial runs in k-means++</a></li>
 <li><a href="#random-initialization">Random initialization</a></li>
-<li><a href="#distance-metric">Distance metric</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#hierarchical-clustering">Hierarchical Clustering</a><ul>
@@ -154,6 +153,7 @@ if (window.hljs) {
 <li><a href="#single-linkage">Single linkage</a></li>
 <li><a href="#complete-linkage">Complete linkage</a></li>
 <li><a href="#average-linkage">Average linkage</a></li>
+<li><a href="#distance-metric">Distance metric</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#references">References</a></li>
@@ -301,7 +301,9 @@ deviational units,<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></
 <p>The default algorithm is
 <strong>KMeans++</strong> with initialization re-runs set to 150 and maximal iterations to 1000.
 The <strong>seed</strong> is the global random number seed set for GeoDa, which can be changed by means of the
-<strong>Use specified seed</strong> option. Finally, the default <strong>Distance Function</strong> is <strong>Euclidean</strong>.</p>
+<strong>Use specified seed</strong> option. Finally, the default <strong>Distance Function</strong> is <strong>Euclidean</strong>.
+For k-means, this option cannot be changed, but for hierarchical clustering, there is also
+a <strong>Manhattan</strong> distance metric.</p>
 <p>The cluster classification will be
 saved in the variable specified in the <strong>Save Cluster in Field</strong> box. The default of <strong>CL</strong>
 is likely not very useful if several options will be explored. In our first example, we
@@ -454,37 +456,6 @@ as in Figure <a href="#fig:kppinitresults">13</a>. However, if we had run the ra
 much fewer runs (e.g., 10), the results would be inferior to what we obtained before.
 This highlights the effect of the starting values on the ultimate result.</p>
 </div>
-<div id="distance-metric" class="section level4 unnumbered">
-<h4>Distance metric</h4>
-<p>The default metric to gauge the distance between the center of each cluster is the
-Euclidean distance. In some context, it may be preferable to use absolute or Manhattan
-block distance, which penalizes larger distances less. This option can be selected
-through the <strong>Distance Function</strong> item in the dialog, as in Figure <a href="#fig:kmeansdist">15</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:kmeansdist"></span>
-<img src="pics7b/4_032_manhattan_distance.png" alt="Manhattan distance metric" width="40%" />
-<p class="caption">
-Figure 15: Manhattan distance metric
-</p>
-</div>
-<p>We run this with the default <strong>150</strong> initialization re-runs.
-The corresponding cluster map is shown in Figure <a href="#fig:mandistmap">16</a>, with the summary
-characteristics given in Figure <a href="#fig:mandistsummary">17</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:mandistmap"></span>
-<img src="pics7b/4_033_manhattan_map.png" alt="Manhattan distance cluster map" width="80%" />
-<p class="caption">
-Figure 16: Manhattan distance cluster map
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:mandistsummary"></span>
-<img src="pics7b/4_034_manhattan_results.png" alt="Manhattan distance cluster characteristics" width="80%" />
-<p class="caption">
-Figure 17: Manhattan distance cluster characteristics
-</p>
-</div>
-<p>Relative to the Euclidean distance results, the ratio of between to total sum of squares
-is somewhat worse, at 0.455839. However, this is not a totally fair comparison, since the
-criterion for grouping is not based on a variance measure, but on an absolute difference.</p>
-</div>
 </div>
 </div>
 <div id="hierarchical-clustering" class="section level2 unnumbered">
@@ -523,21 +494,21 @@ linkage tends to result in many singletons and a few very large clusters.</p>
 <h3>Implementation</h3>
 <p>Hierarchical clustering is invoked in GeoDa from the same toolbar icon as k-means, shown
 in Figure <a href="#fig:kmeansicon">2</a>, by selecting the proper item from the drop down list. The desired clustering functionality can also be selected by using <strong>Clusters &gt; Hierarchical</strong> from the
-menu, as shown in Figure <a href="#fig:hierarchicalmenu">18</a>.</p>
+menu, as shown in Figure <a href="#fig:hierarchicalmenu">15</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:hierarchicalmenu"></span>
 <img src="pics7b/4_035_hierarchical.png" alt="Hierarchical clustering option" width="15%" />
 <p class="caption">
-Figure 18: Hierarchical clustering option
+Figure 15: Hierarchical clustering option
 </p>
 </div>
 <div id="variable-settings-panel-1" class="section level4 unnumbered">
 <h4>Variable Settings Panel</h4>
 <p>As before, the variables to be clustered are selected in the <strong>Variables Settings</strong> panel. We
-continue with the same six variables, shown in Figure <a href="#fig:hiervars">19</a>.</p>
+continue with the same six variables, shown in Figure <a href="#fig:hiervars">16</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:hiervars"></span>
 <img src="pics7b/5_048_hiervars.png" alt="K Means variable selection" width="40%" />
 <p class="caption">
-Figure 19: K Means variable selection
+Figure 16: K Means variable selection
 </p>
 </div>
 <p>The panel also allows one to set several options, such as the <strong>Transformation</strong> (default value
@@ -556,7 +527,7 @@ but this can be changed interactively (see below). Once a cut point is selected,
 cluster classification in the data table.</p>
 <div id="dendrogram" class="section level4 unnumbered">
 <h4>Dendrogram</h4>
-<p>With all options set to the default, the resulting dendrogram is as in Figure <a href="#fig:dendrogram5">20</a>.
+<p>With all options set to the default, the resulting dendrogram is as in Figure <a href="#fig:dendrogram5">17</a>.
 The dashed red line corresponds to a cut point that yields five clusters (the default). The
 dendrogram shows how individual observations are combined into groups of two, and subsequently
 into larger and larger groups, by combining pairs of clusters. The colors on the right hand
@@ -564,30 +535,30 @@ side match the colors of the observations in the cluster map (see next).</p>
 <div class="figure" style="text-align: center"><span id="fig:dendrogram5"></span>
 <img src="pics7b/5_049_dendrogram5.png" alt="Dendrogram (k=5)" width="60%" />
 <p class="caption">
-Figure 20: Dendrogram (k=5)
+Figure 17: Dendrogram (k=5)
 </p>
 </div>
-<p>The dashed line (cut point) can be moved interactively. For example, in Figure <a href="#fig:dendrogram8">21</a>,
+<p>The dashed line (cut point) can be moved interactively. For example, in Figure <a href="#fig:dendrogram8">18</a>,
 we <em>grabbed</em> the line at the top (it can equally be grabbed at the bottom), and moved
 it to the right to yield eight clusters. The corresponding colors are shown on the
 right hand bar.</p>
 <div class="figure" style="text-align: center"><span id="fig:dendrogram8"></span>
 <img src="pics7b/5_050_dendrogram8.png" alt="Dendrogram (k=8)" width="60%" />
 <p class="caption">
-Figure 21: Dendrogram (k=8)
+Figure 18: Dendrogram (k=8)
 </p>
 </div>
 </div>
 <div id="cluster-map" class="section level4 unnumbered">
 <h4>Cluster map</h4>
 <p>As mentioned before, once the dendrogram cut point is specified, clicking on <strong>Save/Show Map</strong>
-will generate the cluster map, shown in Figure <a href="#fig:hiermapW5">22</a>. Note how the colors for
+will generate the cluster map, shown in Figure <a href="#fig:hiermapW5">19</a>. Note how the colors for
 the map categories match the colors in the dendrogram. Also, the number of observations
 in each class also are the same between the groupings in the dendrogram and the cluster map.</p>
 <div class="figure" style="text-align: center"><span id="fig:hiermapW5"></span>
 <img src="pics7b/5_051_hierclusmapW5.png" alt="Hierarchical cluster map (Ward, k=5)" width="80%" />
 <p class="caption">
-Figure 22: Hierarchical cluster map (Ward, k=5)
+Figure 19: Hierarchical cluster map (Ward, k=5)
 </p>
 </div>
 </div>
@@ -603,7 +574,7 @@ relative to the k-means solution.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="pics7b/5_052_hierW5summary.png" alt="Hierarchical cluster characteristics (Ward, k=5" width="80%" />
 <p class="caption">
-Figure 23: Hierarchical cluster characteristics (Ward, k=5
+Figure 20: Hierarchical cluster characteristics (Ward, k=5
 </p>
 </div>
 <p>The two k-means and hierarchical clustering approaches can also be used in conjunction with each other. For example, one could
@@ -613,39 +584,40 @@ or other partitioning method.</p>
 </div>
 <div id="options-and-sensitivity-analysis-1" class="section level3 unnumbered">
 <h3>Options and sensitivity analysis</h3>
-<p>The main option of interest in hierarchical clustering is the linkage <strong>Method</strong>. Other
-options, such as the <strong>Transformation</strong> and the <strong>Distance Function</strong> operate in the
+<p>The main option of interest in hierarchical clustering is the linkage <strong>Method</strong>. In
+addition, we can alter the <strong>Distance Function</strong> and the <strong>Transformation</strong>. The
+latter operates in the
 same fashion as for k-means.</p>
 <p>So far, we have used the default setting for <strong>Ward’s-linkage</strong>. We now consider each of the other linkage options in turn and illustrate the associated dendrogram, cluster map and cluster
 characteristics.</p>
 <div id="single-linkage" class="section level4 unnumbered">
 <h4>Single linkage</h4>
 <p>The linkage options are chosen from the <strong>Method</strong> item in the dialog. For example,
-in Figure <a href="#fig:singlelinkagemethod">24</a>, we select <strong>Single-linkage</strong>. The other
+in Figure <a href="#fig:singlelinkagemethod">21</a>, we select <strong>Single-linkage</strong>. The other
 options are chosen in the same way.</p>
 <div class="figure" style="text-align: center"><span id="fig:singlelinkagemethod"></span>
 <img src="pics7b/5_053_single_linkage.png" alt="Single linkage" width="40%" />
 <p class="caption">
-Figure 24: Single linkage
+Figure 21: Single linkage
 </p>
 </div>
 <p>The cluster results for single linkage are typically characterized by one or a few very
 large clusters and several singletons (one observation per cluster). In our example,
-this is illustrated by the dendrogram in Figure <a href="#fig:dendrosingle5">25</a>, and the
-corresponding cluster map in Figure <a href="#fig:single5map">26</a>. Four <em>clusters</em> consist of a
+this is illustrated by the dendrogram in Figure <a href="#fig:dendrosingle5">22</a>, and the
+corresponding cluster map in Figure <a href="#fig:single5map">23</a>. Four <em>clusters</em> consist of a
 single observation, with the main cluster collecting the 81 other observations. This
 situation is not remedied by moving the cut point such that more clusters result, since
 almost all of the additional clusters are singletons as well.</p>
 <div class="figure" style="text-align: center"><span id="fig:dendrosingle5"></span>
 <img src="pics7b/5_054_dendrogram_single.png" alt="Dendrogram single linkage (k=5)" width="60%" />
 <p class="caption">
-Figure 25: Dendrogram single linkage (k=5)
+Figure 22: Dendrogram single linkage (k=5)
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:single5map"></span>
 <img src="pics7b/5_055_single_map.png" alt="Hierarchical cluster map (single linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 26: Hierarchical cluster map (single linkage, k=5)
+Figure 23: Hierarchical cluster map (single linkage, k=5)
 </p>
 </div>
 <p>The characteristics of the single linkage hierarchical cluster are similarly dismal. Since
@@ -655,7 +627,7 @@ The resulting ratio of between to total sum of squares is only 0.214771.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="pics7b/5_056_single_summary5.png" alt="Hierarchical cluster characteristics (single linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 27: Hierarchical cluster characteristics (single linkage, k=5)
+Figure 24: Hierarchical cluster characteristics (single linkage, k=5)
 </p>
 </div>
 <p>In practice, in most situations, single linkage will not be a good choice, unless the
@@ -664,30 +636,30 @@ objective is to identify a lot of singletons.</p>
 <div id="complete-linkage" class="section level4 unnumbered">
 <h4>Complete linkage</h4>
 <p>The complete linkage method yields clusters that are similar in balance to Ward’s method.
-For example, in Figure <a href="#fig:dendrocomplete5">28</a>, the dendrogram is shown for our example,
+For example, in Figure <a href="#fig:dendrocomplete5">25</a>, the dendrogram is shown for our example,
 using a cut point with five clusters. The corresponding cluster map is given as
-Figure <a href="#fig:completemap">29</a>. The map is similar in structure to that obtained with Ward’s
-method (Figure <a href="#fig:hiermapW5">22</a>), but note that the largest category (at 39) is much larger
+Figure <a href="#fig:completemap">26</a>. The map is similar in structure to that obtained with Ward’s
+method (Figure <a href="#fig:hiermapW5">19</a>), but note that the largest category (at 39) is much larger
 than the largest for Ward (25).</p>
 <div class="figure" style="text-align: center"><span id="fig:dendrocomplete5"></span>
 <img src="pics7b/5_057_dendro_complete5.png" alt="Dendrogram complete linkage (k=5)" width="60%" />
 <p class="caption">
-Figure 28: Dendrogram complete linkage (k=5)
+Figure 25: Dendrogram complete linkage (k=5)
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:completemap"></span>
 <img src="pics7b/5_058_complete_map.png" alt="Hierarchical cluster map (complete linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 29: Hierarchical cluster map (complete linkage, k=5)
+Figure 26: Hierarchical cluster map (complete linkage, k=5)
 </p>
 </div>
-<p>In terms of the cluster characteristics, shown in Figure <a href="#fig:completesummary">30</a>, we note
+<p>In terms of the cluster characteristics, shown in Figure <a href="#fig:completesummary">27</a>, we note
 a slight deterioration relative to Ward’s results, with the ratio of between to total sum
 of squares at 0.423101 (but much better than single linkage).</p>
 <div class="figure" style="text-align: center"><span id="fig:completesummary"></span>
 <img src="pics7b/5_059_complete_summary.png" alt="Hierarchical cluster characteristics (complete linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 30: Hierarchical cluster characteristics (complete linkage, k=5)
+Figure 27: Hierarchical cluster characteristics (complete linkage, k=5)
 </p>
 </div>
 </div>
@@ -695,29 +667,60 @@ Figure 30: Hierarchical cluster characteristics (complete linkage, k=5)
 <h4>Average linkage</h4>
 <p>Finally, the average linkage criterion suffers from some of the same problems as single
 linkage, although it yields slightly better results. The dendrogram and cluster map
-are shown in Figures <a href="#fig:dendroavg5">31</a> and <a href="#fig:avgmap">32</a>.</p>
+are shown in Figures <a href="#fig:dendroavg5">28</a> and <a href="#fig:avgmap">29</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:dendroavg5"></span>
 <img src="pics7b/5_060_dendro_average.png" alt="Dendrogram average linkage (k=5)" width="60%" />
 <p class="caption">
-Figure 31: Dendrogram average linkage (k=5)
+Figure 28: Dendrogram average linkage (k=5)
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:avgmap"></span>
 <img src="pics7b/5_061_average_map.png" alt="Hierarchical cluster map (average linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 32: Hierarchical cluster map (average linkage, k=5)
+Figure 29: Hierarchical cluster map (average linkage, k=5)
 </p>
 </div>
-<p>As given in Figure <a href="#fig:avgsummary">33</a>, the summary characteristics are slighly better
+<p>As given in Figure <a href="#fig:avgsummary">30</a>, the summary characteristics are slighly better
 than in the single linkage case, with only two singletons. However, the overall ratio of
 between to total sum of squares is still much worse than for the other two methods,
 at 0.296838.</p>
 <div class="figure" style="text-align: center"><span id="fig:avgsummary"></span>
 <img src="pics7b/5_062_average_summary.png" alt="Hierarchical cluster characteristics (average linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 33: Hierarchical cluster characteristics (average linkage, k=5)
+Figure 30: Hierarchical cluster characteristics (average linkage, k=5)
 </p>
 </div>
+</div>
+<div id="distance-metric" class="section level4 unnumbered">
+<h4>Distance metric</h4>
+<p>The default metric to gauge the distance between the center of each cluster is the
+Euclidean distance. In some context, it may be preferable to use absolute or Manhattan
+block distance, which penalizes larger distances less. This option can be selected
+through the <strong>Distance Function</strong> item in the dialog, as in Figure <a href="#fig:kmeansdist">31</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:kmeansdist"></span>
+<img src="pics7b/6_065_hier_manhattan.png" alt="Manhattan distance metric" width="40%" />
+<p class="caption">
+Figure 31: Manhattan distance metric
+</p>
+</div>
+<p>We run this for the same variables using Ward’s linkage and a cut point yielding 5 clusters.
+The corresponding cluster map is shown in Figure <a href="#fig:mandistmap">32</a>, with the summary
+characteristics given in Figure <a href="#fig:mandistsummary">33</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:mandistmap"></span>
+<img src="pics7b/6_066_h_man_map.png" alt="Manhattan distance cluster map" width="80%" />
+<p class="caption">
+Figure 32: Manhattan distance cluster map
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:mandistsummary"></span>
+<img src="pics7b/6_067_h_man_summary.png" alt="Manhattan distance cluster characteristics" width="80%" />
+<p class="caption">
+Figure 33: Manhattan distance cluster characteristics
+</p>
+</div>
+<p>Relative to the Euclidean distance results, the ratio of between to total sum of squares
+is somewhat worse, at 0.44549 (compared to 0.482044). However, this is not a totally fair comparison, since the
+criterion for grouping is not based on a variance measure, but on an absolute difference.</p>
 <p><br></p>
 </div>
 </div>

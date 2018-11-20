@@ -137,6 +137,8 @@ if (window.hljs) {
 <li><a href="#options-and-sensitivity-analysis">Options and sensitivity analysis</a><ul>
 <li><a href="#changing-the-number-of-initial-runs-in-k-means">Changing the number of initial runs in k-means++</a></li>
 <li><a href="#random-initialization">Random initialization</a></li>
+<li><a href="#setting-a-minimum-bound">Setting a minimum bound</a></li>
+<li><a href="#aggregation-by-cluster">Aggregation by cluster</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#hierarchical-clustering">Hierarchical Clustering</a><ul>
@@ -187,9 +189,10 @@ moral statistics in 1830 France, which comes pre-installed with GeoDa.</p>
 <ul>
 <li><p>Carry out k-means clustering</p></li>
 <li><p>Interpret the characteristics of a cluster analysis</p></li>
-<li><p>Carry out a sensitivity analysis</p></li>
+<li><p>Carry out a sensitivity analysis to starting options</p></li>
+<li><p>Impose a bound on the clustering solutions</p></li>
+<li><p>Compute aggregate values for the new clusters</p></li>
 <li><p>Carry out hierarchical clustering</p></li>
-<li><p>Assess the sensitivity of clusters to the measure of cluster similarity</p></li>
 </ul>
 <div id="geoda-functions-covered" class="section level4 unnumbered">
 <h4>GeoDa functions covered</h4>
@@ -202,11 +205,13 @@ moral statistics in 1830 France, which comes pre-installed with GeoDa.</p>
 <li>mapping the clusters</li>
 <li>changing the cluster labels</li>
 <li>saving the cluster classification</li>
+<li>setting a minimum bound</li>
 </ul></li>
 <li>Clusters &gt; Hierarchical
 <ul>
 <li>select distance criterion</li>
 </ul></li>
+<li>Table &gt; Aggregate</li>
 </ul>
 <p><br></p>
 </div>
@@ -408,6 +413,14 @@ characteristics are then computed. This is repeated many times and the best solu
 as the starting point for the actual k-means algorithm.</p>
 <p>It is important to assess the sensitivity of the results to the starting point, and
 several combinations of settings should be compared.</p>
+<p>In addition to the starting options, it is also possible to <em>constrain</em> the k-means
+clustering by imposing a minimum value for a spatially extensive variable, such as a
+total population. This ensures that the clusters meet a minimum size for that variable.
+For example, we may want to create neighborhood types (clusters) based on a number
+of census variables, but we also want to make sure that each type has a minimum
+overall population size, to avoid creating clusters that are <em>too small</em> in terms
+of population. We will encounter this approach again when we discuss the max-p
+method for spatially constrained clustering.</p>
 <div id="changing-the-number-of-initial-runs-in-k-means" class="section level4 unnumbered">
 <h4>Changing the number of initial runs in k-means++</h4>
 <p>The default number of initial re-runs for the k-means++ algorithm is <strong>150</strong>. Sometimes,
@@ -457,6 +470,81 @@ as in Figure <a href="#fig:kppinitresults">13</a>. However, if we had run the ra
 much fewer runs (e.g., 10), the results would be inferior to what we obtained before.
 This highlights the effect of the starting values on the ultimate result.</p>
 </div>
+<div id="setting-a-minimum-bound" class="section level4 unnumbered">
+<h4>Setting a minimum bound</h4>
+<p>The minimum bound is set in the variable settings dialog by checking the
+box next to <strong>Minimum Bound</strong>, as in Figure <a href="#fig:minbound">15</a>. In our example, we
+select the variable <strong>Pop1831</strong> to set the constraint. Note that we specify a bound
+of <strong>15%</strong> (or <strong>4855</strong>) rather than the default <strong>10%</strong>. This is because the
+standard k-means solution satisfies the default constraint already, so that no actual bounding
+is carried out.</p>
+<div class="figure" style="text-align: center"><span id="fig:minbound"></span>
+<img src="pics7b/7_075_minbound.png" alt="Setting a minimum bound" width="40%" />
+<p class="caption">
+Figure 15: Setting a minimum bound
+</p>
+</div>
+<p>With the cluster size at 5 and all other options at their default value, we obtain
+the cluster result shown in the map in Figure <a href="#fig:minboundmap">16</a>. These results
+differ slightly from the unconstrained map in Figure <a href="#fig:kmeansmap5">5</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:minboundmap"></span>
+<img src="pics7b/7_076_minboundmap.png" alt="Cluster map with minimum bound constraint" width="80%" />
+<p class="caption">
+Figure 16: Cluster map with minimum bound constraint
+</p>
+</div>
+<p>The cluster characteristics show a slight deterioriation of our summary criterion,
+to a value of <strong>0.484033</strong> (compared to <strong>0.497772</strong>), as shown in
+Figure <a href="#fig:minboundresults">17</a>. This is the price to pay to
+satisfy the minimum population constraint.</p>
+<div class="figure" style="text-align: center"><span id="fig:minboundresults"></span>
+<img src="pics7b/7_077_minboundsummary.png" alt="Cluster characteristics with minimum bound" width="80%" />
+<p class="caption">
+Figure 17: Cluster characteristics with minimum bound
+</p>
+</div>
+</div>
+<div id="aggregation-by-cluster" class="section level4 unnumbered">
+<h4>Aggregation by cluster</h4>
+<p>With the clusters at hand, as defined for each observation by the category in the cluster
+field, we can now compute aggregate values for the new clusters. We illustrate this
+as a quick check on the population totals we imposed in the bounded cluster procedure.</p>
+<p>The aggregation is invoked from the <strong>Table</strong> as an option by right-clicking. This
+brings up the list of options, from which we select <strong>Aggregate</strong>, as in
+Figure <a href="#fig:tabagg">18</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:tabagg"></span>
+<img src="pics7b/7_002_table_aggregate.png" alt="Table Aggregate option" width="20%" />
+<p class="caption">
+Figure 18: Table Aggregate option
+</p>
+</div>
+<p>The following dialog, shown in Figure <a href="#fig:tabaggpop">19</a>, provides the specific
+aggregation method, i.e., count, average, max, min, or <strong>Sum</strong>, the <strong>key</strong> on which
+to aggregate and a selection of variable to aggregate. In our example, we use the
+cluster field key, e.g., <strong>CLb</strong> and select only the population variable <strong>Pop1831</strong>,
+which we will sum over the departments that make up each cluster. This can be readily
+extended to multiple variables, as well as to different summary measures, such
+as the average.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:tabaggpop"></span>
+<img src="pics7b/7_079_aggregate_vars.png" alt="Aggregation of total population by cluster" width="40%" />
+<p class="caption">
+Figure 19: Aggregation of total population by cluster
+</p>
+</div>
+<p>Pressing the <strong>Aggregate</strong> key brings up a dialog to select the file in which the new
+results will be saved. For example, we can select a <strong>dbf</strong> format and specify the
+file name. The contents of the new file are given in Figure <a href="#fig:clusterpop">20</a>,
+with the total population for each cluster. Clearly, each cluster meets the minimum
+requirement of 4855 that was specified.</p>
+<div class="figure" style="text-align: center"><span id="fig:clusterpop"></span>
+<img src="pics7b/7_084_minbound_agg.png" alt="Total population by cluster" width="40%" />
+<p class="caption">
+Figure 20: Total population by cluster
+</p>
+</div>
+<p>The same procedure can be used to create new values for any variable, aggregated
+to the new cluster scale.</p>
+</div>
 </div>
 </div>
 <div id="hierarchical-clustering" class="section level2 unnumbered">
@@ -495,21 +583,21 @@ linkage tends to result in many singletons and a few very large clusters.</p>
 <h3>Implementation</h3>
 <p>Hierarchical clustering is invoked in GeoDa from the same toolbar icon as k-means, shown
 in Figure <a href="#fig:kmeansicon">2</a>, by selecting the proper item from the drop down list. The desired clustering functionality can also be selected by using <strong>Clusters &gt; Hierarchical</strong> from the
-menu, as shown in Figure <a href="#fig:hierarchicalmenu">15</a>.</p>
+menu, as shown in Figure <a href="#fig:hierarchicalmenu">21</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:hierarchicalmenu"></span>
 <img src="pics7b/4_035_hierarchical.png" alt="Hierarchical clustering option" width="15%" />
 <p class="caption">
-Figure 15: Hierarchical clustering option
+Figure 21: Hierarchical clustering option
 </p>
 </div>
 <div id="variable-settings-panel-1" class="section level4 unnumbered">
 <h4>Variable Settings Panel</h4>
 <p>As before, the variables to be clustered are selected in the <strong>Variables Settings</strong> panel. We
-continue with the same six variables, shown in Figure <a href="#fig:hiervars">16</a>.</p>
+continue with the same six variables, shown in Figure <a href="#fig:hiervars">22</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:hiervars"></span>
 <img src="pics7b/5_048_hiervars.png" alt="Hierarchical clustering variable selection" width="40%" />
 <p class="caption">
-Figure 16: Hierarchical clustering variable selection
+Figure 22: Hierarchical clustering variable selection
 </p>
 </div>
 <p>The panel also allows one to set several options, such as the <strong>Transformation</strong> (default value
@@ -528,7 +616,7 @@ but this can be changed interactively (see below). Once a cut point is selected,
 cluster classification in the data table.</p>
 <div id="dendrogram" class="section level4 unnumbered">
 <h4>Dendrogram</h4>
-<p>With all options set to the default, the resulting dendrogram is as in Figure <a href="#fig:dendrogram5">17</a>.
+<p>With all options set to the default, the resulting dendrogram is as in Figure <a href="#fig:dendrogram5">23</a>.
 The dashed red line corresponds to a cut point that yields five clusters (the default). The
 dendrogram shows how individual observations are combined into groups of two, and subsequently
 into larger and larger groups, by combining pairs of clusters. The colors on the right hand
@@ -536,30 +624,30 @@ side match the colors of the observations in the cluster map (see next).</p>
 <div class="figure" style="text-align: center"><span id="fig:dendrogram5"></span>
 <img src="pics7b/5_049_dendrogram5.png" alt="Dendrogram (k=5)" width="60%" />
 <p class="caption">
-Figure 17: Dendrogram (k=5)
+Figure 23: Dendrogram (k=5)
 </p>
 </div>
-<p>The dashed line (cut point) can be moved interactively. For example, in Figure <a href="#fig:dendrogram8">18</a>,
+<p>The dashed line (cut point) can be moved interactively. For example, in Figure <a href="#fig:dendrogram8">24</a>,
 we <em>grabbed</em> the line at the top (it can equally be grabbed at the bottom), and moved
 it to the right to yield eight clusters. The corresponding colors are shown on the
 right hand bar.</p>
 <div class="figure" style="text-align: center"><span id="fig:dendrogram8"></span>
 <img src="pics7b/5_050_dendrogram8.png" alt="Dendrogram (k=8)" width="60%" />
 <p class="caption">
-Figure 18: Dendrogram (k=8)
+Figure 24: Dendrogram (k=8)
 </p>
 </div>
 </div>
 <div id="cluster-map" class="section level4 unnumbered">
 <h4>Cluster map</h4>
 <p>As mentioned before, once the dendrogram cut point is specified, clicking on <strong>Save/Show Map</strong>
-will generate the cluster map, shown in Figure <a href="#fig:hiermapW5">19</a>. Note how the colors for
+will generate the cluster map, shown in Figure <a href="#fig:hiermapW5">25</a>. Note how the colors for
 the map categories match the colors in the dendrogram. Also, the number of observations
 in each class also are the same between the groupings in the dendrogram and the cluster map.</p>
 <div class="figure" style="text-align: center"><span id="fig:hiermapW5"></span>
 <img src="pics7b/5_051_hierclusmapW5.png" alt="Hierarchical cluster map (Ward, k=5)" width="80%" />
 <p class="caption">
-Figure 19: Hierarchical cluster map (Ward, k=5)
+Figure 25: Hierarchical cluster map (Ward, k=5)
 </p>
 </div>
 </div>
@@ -575,7 +663,7 @@ relative to the k-means solution.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="pics7b/5_052_hierW5summary.png" alt="Hierarchical cluster characteristics (Ward, k=5" width="80%" />
 <p class="caption">
-Figure 20: Hierarchical cluster characteristics (Ward, k=5
+Figure 26: Hierarchical cluster characteristics (Ward, k=5
 </p>
 </div>
 <p>The two k-means and hierarchical clustering approaches can also be used in conjunction with each other. For example, one could
@@ -594,31 +682,31 @@ characteristics.</p>
 <div id="single-linkage" class="section level4 unnumbered">
 <h4>Single linkage</h4>
 <p>The linkage options are chosen from the <strong>Method</strong> item in the dialog. For example,
-in Figure <a href="#fig:singlelinkagemethod">21</a>, we select <strong>Single-linkage</strong>. The other
+in Figure <a href="#fig:singlelinkagemethod">27</a>, we select <strong>Single-linkage</strong>. The other
 options are chosen in the same way.</p>
 <div class="figure" style="text-align: center"><span id="fig:singlelinkagemethod"></span>
 <img src="pics7b/5_053_single_linkage.png" alt="Single linkage" width="40%" />
 <p class="caption">
-Figure 21: Single linkage
+Figure 27: Single linkage
 </p>
 </div>
 <p>The cluster results for single linkage are typically characterized by one or a few very
 large clusters and several singletons (one observation per cluster). In our example,
-this is illustrated by the dendrogram in Figure <a href="#fig:dendrosingle5">22</a>, and the
-corresponding cluster map in Figure <a href="#fig:single5map">23</a>. Four <em>clusters</em> consist of a
+this is illustrated by the dendrogram in Figure <a href="#fig:dendrosingle5">28</a>, and the
+corresponding cluster map in Figure <a href="#fig:single5map">29</a>. Four <em>clusters</em> consist of a
 single observation, with the main cluster collecting the 81 other observations. This
 situation is not remedied by moving the cut point such that more clusters result, since
 almost all of the additional clusters are singletons as well.</p>
 <div class="figure" style="text-align: center"><span id="fig:dendrosingle5"></span>
 <img src="pics7b/5_054_dendrogram_single.png" alt="Dendrogram single linkage (k=5)" width="60%" />
 <p class="caption">
-Figure 22: Dendrogram single linkage (k=5)
+Figure 28: Dendrogram single linkage (k=5)
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:single5map"></span>
 <img src="pics7b/5_055_single_map.png" alt="Hierarchical cluster map (single linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 23: Hierarchical cluster map (single linkage, k=5)
+Figure 29: Hierarchical cluster map (single linkage, k=5)
 </p>
 </div>
 <p>The characteristics of the single linkage hierarchical cluster are similarly dismal. Since
@@ -628,7 +716,7 @@ The resulting ratio of between to total sum of squares is only 0.214771.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="pics7b/5_056_single_summary5.png" alt="Hierarchical cluster characteristics (single linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 24: Hierarchical cluster characteristics (single linkage, k=5)
+Figure 30: Hierarchical cluster characteristics (single linkage, k=5)
 </p>
 </div>
 <p>In practice, in most situations, single linkage will not be a good choice, unless the
@@ -637,30 +725,30 @@ objective is to identify a lot of singletons.</p>
 <div id="complete-linkage" class="section level4 unnumbered">
 <h4>Complete linkage</h4>
 <p>The complete linkage method yields clusters that are similar in balance to Ward’s method.
-For example, in Figure <a href="#fig:dendrocomplete5">25</a>, the dendrogram is shown for our example,
+For example, in Figure <a href="#fig:dendrocomplete5">31</a>, the dendrogram is shown for our example,
 using a cut point with five clusters. The corresponding cluster map is given as
-Figure <a href="#fig:completemap">26</a>. The map is similar in structure to that obtained with Ward’s
-method (Figure <a href="#fig:hiermapW5">19</a>), but note that the largest category (at 39) is much larger
+Figure <a href="#fig:completemap">32</a>. The map is similar in structure to that obtained with Ward’s
+method (Figure <a href="#fig:hiermapW5">25</a>), but note that the largest category (at 39) is much larger
 than the largest for Ward (25).</p>
 <div class="figure" style="text-align: center"><span id="fig:dendrocomplete5"></span>
 <img src="pics7b/5_057_dendro_complete5.png" alt="Dendrogram complete linkage (k=5)" width="60%" />
 <p class="caption">
-Figure 25: Dendrogram complete linkage (k=5)
+Figure 31: Dendrogram complete linkage (k=5)
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:completemap"></span>
 <img src="pics7b/5_058_complete_map.png" alt="Hierarchical cluster map (complete linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 26: Hierarchical cluster map (complete linkage, k=5)
+Figure 32: Hierarchical cluster map (complete linkage, k=5)
 </p>
 </div>
-<p>In terms of the cluster characteristics, shown in Figure <a href="#fig:completesummary">27</a>, we note
+<p>In terms of the cluster characteristics, shown in Figure <a href="#fig:completesummary">33</a>, we note
 a slight deterioration relative to Ward’s results, with the ratio of between to total sum
 of squares at 0.423101 (but much better than single linkage).</p>
 <div class="figure" style="text-align: center"><span id="fig:completesummary"></span>
 <img src="pics7b/5_059_complete_summary.png" alt="Hierarchical cluster characteristics (complete linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 27: Hierarchical cluster characteristics (complete linkage, k=5)
+Figure 33: Hierarchical cluster characteristics (complete linkage, k=5)
 </p>
 </div>
 </div>
@@ -668,27 +756,27 @@ Figure 27: Hierarchical cluster characteristics (complete linkage, k=5)
 <h4>Average linkage</h4>
 <p>Finally, the average linkage criterion suffers from some of the same problems as single
 linkage, although it yields slightly better results. The dendrogram and cluster map
-are shown in Figures <a href="#fig:dendroavg5">28</a> and <a href="#fig:avgmap">29</a>.</p>
+are shown in Figures <a href="#fig:dendroavg5">34</a> and <a href="#fig:avgmap">35</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:dendroavg5"></span>
 <img src="pics7b/5_060_dendro_average.png" alt="Dendrogram average linkage (k=5)" width="60%" />
 <p class="caption">
-Figure 28: Dendrogram average linkage (k=5)
+Figure 34: Dendrogram average linkage (k=5)
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:avgmap"></span>
 <img src="pics7b/5_061_average_map.png" alt="Hierarchical cluster map (average linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 29: Hierarchical cluster map (average linkage, k=5)
+Figure 35: Hierarchical cluster map (average linkage, k=5)
 </p>
 </div>
-<p>As given in Figure <a href="#fig:avgsummary">30</a>, the summary characteristics are slighly better
+<p>As given in Figure <a href="#fig:avgsummary">36</a>, the summary characteristics are slighly better
 than in the single linkage case, with only two singletons. However, the overall ratio of
 between to total sum of squares is still much worse than for the other two methods,
 at 0.296838.</p>
 <div class="figure" style="text-align: center"><span id="fig:avgsummary"></span>
 <img src="pics7b/5_062_average_summary.png" alt="Hierarchical cluster characteristics (average linkage, k=5)" width="80%" />
 <p class="caption">
-Figure 30: Hierarchical cluster characteristics (average linkage, k=5)
+Figure 36: Hierarchical cluster characteristics (average linkage, k=5)
 </p>
 </div>
 </div>
@@ -697,26 +785,26 @@ Figure 30: Hierarchical cluster characteristics (average linkage, k=5)
 <p>The default metric to gauge the distance between the center of each cluster is the
 Euclidean distance. In some contexts, it may be preferable to use absolute or Manhattan
 block distance, which penalizes larger distances less. This option can be selected
-through the <strong>Distance Function</strong> item in the dialog, as in Figure <a href="#fig:kmeansdist">31</a>.</p>
+through the <strong>Distance Function</strong> item in the dialog, as in Figure <a href="#fig:kmeansdist">37</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:kmeansdist"></span>
 <img src="pics7b/6_065_hier_manhattan.png" alt="Manhattan distance metric" width="40%" />
 <p class="caption">
-Figure 31: Manhattan distance metric
+Figure 37: Manhattan distance metric
 </p>
 </div>
 <p>We run this for the same variables using Ward’s linkage and a cut point yielding 5 clusters.
-The corresponding cluster map is shown in Figure <a href="#fig:mandistmap">32</a>, with the summary
-characteristics given in Figure <a href="#fig:mandistsummary">33</a>.</p>
+The corresponding cluster map is shown in Figure <a href="#fig:mandistmap">38</a>, with the summary
+characteristics given in Figure <a href="#fig:mandistsummary">39</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:mandistmap"></span>
 <img src="pics7b/6_066_h_man_map.png" alt="Manhattan distance cluster map" width="80%" />
 <p class="caption">
-Figure 32: Manhattan distance cluster map
+Figure 38: Manhattan distance cluster map
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:mandistsummary"></span>
 <img src="pics7b/6_067_h_man_summary.png" alt="Manhattan distance cluster characteristics" width="80%" />
 <p class="caption">
-Figure 33: Manhattan distance cluster characteristics
+Figure 39: Manhattan distance cluster characteristics
 </p>
 </div>
 <p>Relative to the Euclidean distance results, the ratio of between to total sum of squares
@@ -753,6 +841,8 @@ a value directly.<a href="#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>The Z standardization subtracts the mean and divides by the
 standard deviation. An alternative standardization is to use the mean absolute
 deviation, MAD.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>In the current implementation, the same summary method needs to
+be applied to all the variables.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

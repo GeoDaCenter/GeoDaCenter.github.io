@@ -116,7 +116,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Cluster Analysis (2)</h1>
 <h3 class="subtitle"><em>Classic Clustering Methods</em></h3>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>Latest update 11/14/2018</em></h4>
+<h4 class="date"><em>Latest update 11/19/2018</em></h4>
 
 
 <div id="TOC">
@@ -198,13 +198,15 @@ moral statistics in 1830 France, which comes pre-installed with GeoDa.</p>
 <ul>
 <li>select variables</li>
 <li>select k-means starting algorithms</li>
-<li>select k-means distance criterion</li>
 <li>k-means characteristics</li>
 <li>mapping the clusters</li>
 <li>changing the cluster labels</li>
 <li>saving the cluster classification</li>
 </ul></li>
-<li>Clusters &gt; Hierarchical</li>
+<li>Clusters &gt; Hierarchical
+<ul>
+<li>select distance criterion</li>
+</ul></li>
 </ul>
 <p><br></p>
 </div>
@@ -230,7 +232,7 @@ Figure 1: French departments themeless map
 points into <strong>k</strong>
 groups, and then incrementally improves upon this until convergence. In a general sense,
 observations are assigned to the cluster centroid to which they are closest, using
-either an Euclidean (squared difference) or Manhattan (absolute difference) dissimilarity
+an Euclidean (squared difference) dissimilarity
 criterion.</p>
 <p>A key element in this method is the choice of the number of clusters, k. Typically,
 several values for k are considered, and the resulting clusters are then compared in terms of the
@@ -406,7 +408,6 @@ characteristics are then computed. This is repeated many times and the best solu
 as the starting point for the actual k-means algorithm.</p>
 <p>It is important to assess the sensitivity of the results to the starting point, and
 several combinations of settings should be compared.</p>
-<p>A final option for k-means is the choice of the distance metric, i.e., squared distance (the default) or Manhattan distance (absolute differences).</p>
 <div id="changing-the-number-of-initial-runs-in-k-means" class="section level4 unnumbered">
 <h4>Changing the number of initial runs in k-means++</h4>
 <p>The default number of initial re-runs for the k-means++ algorithm is <strong>150</strong>. Sometimes,
@@ -506,9 +507,9 @@ Figure 15: Hierarchical clustering option
 <p>As before, the variables to be clustered are selected in the <strong>Variables Settings</strong> panel. We
 continue with the same six variables, shown in Figure <a href="#fig:hiervars">16</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:hiervars"></span>
-<img src="pics7b/5_048_hiervars.png" alt="K Means variable selection" width="40%" />
+<img src="pics7b/5_048_hiervars.png" alt="Hierarchical clustering variable selection" width="40%" />
 <p class="caption">
-Figure 16: K Means variable selection
+Figure 16: Hierarchical clustering variable selection
 </p>
 </div>
 <p>The panel also allows one to set several options, such as the <strong>Transformation</strong> (default value
@@ -694,7 +695,7 @@ Figure 30: Hierarchical cluster characteristics (average linkage, k=5)
 <div id="distance-metric" class="section level4 unnumbered">
 <h4>Distance metric</h4>
 <p>The default metric to gauge the distance between the center of each cluster is the
-Euclidean distance. In some context, it may be preferable to use absolute or Manhattan
+Euclidean distance. In some contexts, it may be preferable to use absolute or Manhattan
 block distance, which penalizes larger distances less. This option can be selected
 through the <strong>Distance Function</strong> item in the dialog, as in Figure <a href="#fig:kmeansdist">31</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:kmeansdist"></span>

@@ -59,6 +59,13 @@ a {
     border-color: rgba(20, 20, 20, 0.2);
     text-align: center;
 }
+.nightly-btn {
+    background-color: rgba(100,100,100,0.9);
+    color: rgba(255,255,255,1);
+    border-color: rgba(20, 20, 20, 0.2);
+    text-align: center;
+}
+
 .lab-btn {
     background-color: rgba(255,255,255,0.9);
     color: rgba(0,0,0,1);
@@ -270,7 +277,7 @@ a {
 @media screen and (max-width: 42em) {
   .site-footer {
     font-size: 0.9rem; } }
-    
+
 #slider {
 	margin: 0px auto;
 	width: 845px;
@@ -283,7 +290,7 @@ a {
 }
 
 #slider [id^='image']:target img {
-	top: 0;  
+	top: 0;
 	left: 0;
 }
 

@@ -98,9 +98,9 @@
 
 <h2><a name="invdist">Does GeoDa include inverse distance weighting?</a></h2>
 
-<p>You can create two types of distance-based weights (with .gwt file extensions) in GeoDa:</p>
+<p>You can create different types of distance-based weights (with .gwt and .kwt file extensions) in GeoDa:</p>
 
-<p>GeoDa currently does not yet implement inverse distance weighting (i.e., the third column with distances in the .gwt file is only used to determine whether a point is within a distance band or not). The extent of the distance band is specified by your threshold distance (the default value ensures that you have no islands). GeoDa row-standardizes weights, i.e., the rows sum to 1. If you need inverse distance weights, consider <a href="GeoDaSpace">GeoDaSpace's weights tool</a>.</p>
+<p>GeoDa implements weights based on distance bands, inverse distance weights and kernel weights. For distance bands, the third column with distances in the .gwt file is only used to determine whether a point is within a distance band or not. The extent of the distance band is specified by your threshold distance (the default value ensures that you have no islands). GeoDa row-standardizes weights, i.e., the rows sum to 1. You can find more information about <a href="https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html">distance-based spatial weights> here</a> and inverse distance weights and kernel weights <a href="https://geodacenter.github.io/workbook/4c_distance_functions/lab4c.html">here</a>.</p>
 
 <p>If the size of your areas varies considerably, you might be interested in using K-nearest neighbors, which ensures that every point has the same number of neighbors. Note, however, that these weights cannot be used to estimate spatial regression models with Maximum Likelihood since these weights are asymmetric.</p>
 

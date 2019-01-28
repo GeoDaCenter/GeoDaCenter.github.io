@@ -114,9 +114,9 @@ if (window.hljs) {
 
 
 <h1 class="title toc-ignore">Local Spatial Autocorrelation (1)</h1>
-<h3 class="subtitle"><em>Common Univariate Local Statistics</em></h3>
+<h3 class="subtitle"><em>Univariate Local Statistics</em></h3>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>04/21/2018 (revised and updated)</em></h4>
+<h4 class="date"><em>01/28/2019 (latest update)</em></h4>
 
 
 <div id="TOC">
@@ -157,6 +157,14 @@ if (window.hljs) {
 <li><a href="#saving-the-results-1">Saving the results</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#local-join-count-statistic">Local Join Count Statistic</a><ul>
+<li><a href="#principle-3">Principle</a></li>
+<li><a href="#implementation-3">Implementation</a><ul>
+<li><a href="#preliminaries">Preliminaries</a></li>
+<li><a href="#cluster-map">Cluster map</a></li>
+<li><a href="#saving-the-results-2">Saving the results</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#references">References</a></li>
 </ul>
 </div>
@@ -165,7 +173,7 @@ if (window.hljs) {
 <div id="introduction" class="section level2 unnumbered">
 <h2>Introduction</h2>
 <p>In this chapter, we will explore the analysis of local spatial autocorrelation statistics, focusing
-on commonly used univariate measures. We will cover the Local Moran, Local Geary and Getis-Ord statistics, and how they can be utilized to discover hot spots and cold spots in the data, as well
+on commonly used univariate measures. We will cover the Local Moran, Local Geary, Getis-Ord statistics, and the more recently developed local join count statistic. We will explore how they can be utilized to discover hot spots and cold spots in the data, as well
 as spatial outliers. To illustrate these techniques, we will use the Guerry data set on
 moral statistics in 1830 France, which comes pre-installed with GeoDa.</p>
 <div id="objectives" class="section level3 unnumbered">
@@ -174,6 +182,7 @@ moral statistics in 1830 France, which comes pre-installed with GeoDa.</p>
 <li><p>Identify clusters with the Local Moran cluster map and significance map</p></li>
 <li><p>Identify clusters with the Local Geary cluster map and significance map</p></li>
 <li><p>Identify clusters with the Getis-Ord Gi and Gi* statistics</p></li>
+<li><p>Identify clusters with the Local Join Count statistic</p></li>
 <li><p>Interpret the spatial footprint of spatial clusters</p></li>
 <li><p>Assess potential interaction effects by means of conditional cluster maps</p></li>
 <li><p>Assess the significance by means of a randomization approach</p></li>
@@ -196,13 +205,14 @@ moral statistics in 1830 France, which comes pre-installed with GeoDa.</p>
 <li>Space &gt; Univariate Local Geary Cluster Map</li>
 <li>Space &gt; Local G Cluster Map</li>
 <li>Space &gt; Local G* Cluster Map</li>
+<li>Space &gt; Univariate Join Count</li>
 </ul>
 <p><br></p>
 </div>
 </div>
 <div id="getting-started" class="section level3 unnumbered">
 <h3>Getting started</h3>
-<p>With GeoDa launched and all previous projects closed, we load the Guerry sample data set from the <strong>Connect to Data Source</strong> interface. As before, we save this file in a working directory, so that we can easily add spatial weights files. We continue to use the ESRI Shape file format, so that we now have a file, say <strong>Guerry_85</strong> to load. This brings up the familiar themeless base map, showing the 85 French departments, as in Figure <a href="#fig:guerrybase">1</a>.</p>
+<p>With GeoDa launched and all previous projects closed, we load the Guerry sample data set from the <strong>Connect to Data Source</strong> interface. As before, we save this file in a working directory, so that we can easily add spatial weights files. We continue to use the ESRI Shape file format, so that we now have a file, say <strong>guerry_85</strong> to load. This brings up the familiar themeless base map, showing the 85 French departments, as in Figure <a href="#fig:guerrybase">1</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:guerrybase"></span>
 <img src="pics6a/0_547_themelessbasemap.png" alt="French departments themeless map" width="80%" />
 <p class="caption">
@@ -211,7 +221,7 @@ Figure 1: French departments themeless map
 </div>
 <p>To carry out the spatial autocorrelation analysis, we will need a spatial weights file, either created from scratch, or loaded from a previous analysis (ideally, contained in a project file).
 The <strong>Weights Manager</strong> should have at least one spatial weights file included, e.g.,
-<strong>Guerry_85_q</strong> for first order queen contiguity, as shown in Figure <a href="#fig:queenwchars">2</a>.</p>
+<strong>guerry_85_q</strong> for first order queen contiguity, as shown in Figure <a href="#fig:queenwchars">2</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:queenwchars"></span>
 <img src="pics6a/0_548_weightsmanager.png" alt="Weights manager contents" width="35%" />
 <p class="caption">
@@ -233,17 +243,20 @@ Figure 3: Donations – natural breaks map
 <div id="principle" class="section level3 unnumbered">
 <h3>Principle</h3>
 <p>The Local Moran statistic was suggested in <span class="citation">Anselin (<a href="#ref-Anselin:95">1995</a>)</span> as a way to identify local
-clusters and spatial outliers. Most global spatial autocorrelation statistics can be expressed as
-a double sum over the i and j indices, such as <span class="math inline">\(\sum_i \sum_j g_{ij}\)</span>. The local form of such a statistic would then be, for each i, the sum over the j index, <span class="math inline">\(\sum_j g_{ij}\)</span>.</p>
+clusters and local spatial outliers. Most global spatial autocorrelation statistics can be expressed as
+a double sum over the i and j indices, such as <span class="math inline">\(\sum_i \sum_j g_{ij}\)</span>. The local form of such a statistic would then be, for each observation (location) <span class="math inline">\(i\)</span>, the sum
+of the relevant expression over the <span class="math inline">\(j\)</span> index, <span class="math inline">\(\sum_j g_{ij}\)</span>.</p>
 <p>Specifically, the Local Moran statistic takes the form <span class="math inline">\(c. z_i \sum_j w_{ij} z_j\)</span>, with
 <span class="math inline">\(z\)</span> in deviations from the mean. The scalar <span class="math inline">\(c\)</span> is the same for all locations and therefore
 does not play a role in the assessment of significance. The latter is obtained by means of
 a conditional permutation method, where, in turn, each <span class="math inline">\(z_i\)</span> is held fixed, and the remaining
 z-values are randomly permuted to yield a <em>reference distribution</em> for the statistic. This
-operates in the same fashion as for the global Moran’s I, except that the permutation is carried out for each observation in turn. The result is a pseudo p-value for each location, which can then be used to assess significance.</p>
-<p>Significance as such is not that useful for the Local Moran, but is combined with the location of each observation in the Moran Scatterplot. This allows for a classification of the
+operates in the same fashion as for the global Moran’s I, except that the permutation is carried out for each observation in turn. The result is a pseudo p-value for each location, which can then be used to assess significance. Note that this notion of significance is not the standard one, and should not be interpreted that way
+(see the discussion of multiple comparisons below).</p>
+<p>Assessing significance in and of itself is not that useful for the Local Moran. However, when an indication of significance is combined with the location of each observation in the Moran Scatterplot, a very powerful interpretation becomes
+possible. The combined information allows for a classification of the
 significant locations as high-high and low-low <em>spatial clusters</em>, and high-low and
-low-high <em>spatial outliers</em>. Note that the reference to high and low is <em>relative</em> to the
+low-high <em>spatial outliers</em>. It is important to keep in mind that the reference to high and low is <em>relative</em> to the
 mean of the variable, and should not be interpreted in an absolute sense.</p>
 </div>
 <div id="implementation" class="section level3 unnumbered">
@@ -258,7 +271,7 @@ Figure 4: Cluster map toolbar icon
 </div>
 <p>It is included as the top level option in the resulting drop down list in Figure <a href="#fig:clustermapsdroplist">5</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:clustermapsdroplist"></span>
-<img src="pics6a/1_551_univariate_moran.png" alt="Univariate Local Moran from the toolbar" width="35%" />
+<img src="pics6a/1_551_univariate_moran.png" alt="Univariate Local Moran from the toolbar" width="25%" />
 <p class="caption">
 Figure 5: Univariate Local Moran from the toolbar
 </p>
@@ -267,7 +280,7 @@ Figure 5: Univariate Local Moran from the toolbar
 <strong>Space &gt; Univariate Local Moran’s I</strong>.</p>
 <p>Either approach brings up the familiar <strong>Variable Settings</strong> dialog in
 Figure <a href="#fig:localvarlist">6</a>, which lists the
-available variables as well as the default weights file, at the bottom (<strong>Guerry_85_q</strong>).
+available variables as well as the default weights file, at the bottom (<strong>guerry_85_q</strong>).
 We select <strong>Donatns</strong> as the variable name.</p>
 <div class="figure" style="text-align: center"><span id="fig:localvarlist"></span>
 <img src="pics6a/1_553_lm_variablesettings.png" alt="Univariate Local Moran variable settings" width="40%" />
@@ -523,8 +536,8 @@ computed in the <strong>Table Calculator</strong> as <strong>Special &gt; Enumer
 <p>Next, we create a new variable (FDR) that equals <span class="math inline">\(i \times \alpha / n\)</span>, where <span class="math inline">\(i\)</span> is the
 sequence number of the sorted observations (not the original observation order),
 <span class="math inline">\(\alpha\)</span> is the target, and <span class="math inline">\(n\)</span> is the number of observations.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> In our example,
-<span class="math inline">\(\alpha\)</span> is 0.01 and <span class="math inline">\(n\)</span> is 85, so that <span class="math inline">\(1 \times 0.01 / 85 = 0.00012\)</span> is the first entry.
-The second entry is <span class="math inline">\(2 \times 0.01 / 85 = 0.00024\)</span>, etc., as illustrated in the <strong>FDR</strong>
+<span class="math inline">\(\alpha\)</span> is 0.01 and <span class="math inline">\(n\)</span> is 85, so that <span class="math inline">\(1 \times 0.01 / 85 = 0.000118\)</span> is the first entry.
+The second entry is <span class="math inline">\(2 \times 0.01 / 85 = 0.000235\)</span>, etc., as illustrated in the <strong>FDR</strong>
 column in the
 table shown in Figure <a href="#fig:fdrtable">24</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:fdrtable"></span>
@@ -695,20 +708,20 @@ squaring of the differences removes the sign.</p>
 </div>
 <div id="implementation-1" class="section level3 unnumbered">
 <h3>Implementation</h3>
-<p>In the same way as for the Local Moran, the Local Geary can be invoked from the <strong>Cluster Maps</strong> toolbar icon, as <strong>Univariate Local Geary Cluster Map</strong> in the drop down menu,
+<p>In the same way as for the Local Moran, the Local Geary can be invoked from the <strong>Cluster Maps</strong> toolbar icon, as <strong>Univariate Local Geary</strong> in the drop down menu,
 shown in Figure <a href="#fig:localgearytoolbar">32</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:localgearytoolbar"></span>
-<img src="pics6a/7_586_localgeary_from_icon.png" alt="Local Geary option from cluster maps toolbar options" width="35%" />
+<img src="pics6a/7_586_localgeary_from_icon.png" alt="Local Geary option from cluster maps toolbar options" width="25%" />
 <p class="caption">
 Figure 32: Local Geary option from cluster maps toolbar options
 </p>
 </div>
 <p>Alternatively, it can be started from the main menu, as
-<strong>Space &gt; Univariate Local Geary Cluster Map</strong>.</p>
+<strong>Space &gt; Univariate Local Geary</strong>.</p>
 <p>The subsequent step is the same as before, bringing up the <strong>Variable Settings</strong> dialog that
 contains the names of the available variables as well as the spatial weights. Everything
 operates in the same way for all local statistics, so we will not dwell on those aspects here.
-We again select <strong>Donatns</strong> as the variable, with <strong>Guerry_85_q</strong> as the queen contiguity
+We again select <strong>Donatns</strong> as the variable, with <strong>guerry_85_q</strong> as the queen contiguity
 weights.</p>
 <p>The following dialog offering different window options is slightly different, in that there is no Moran scatter plot option. The
 only options are for the <strong>Significance Map</strong> and the <strong>Cluster Map</strong>. The default is that
@@ -855,7 +868,8 @@ one takes the value at the given location into account, and the other does not.<
 <span class="math display">\[G_i^* = \frac{\sum_j w_{ij} x_j}{\sum_j x_j}.\]</span>
 Note that in this case, the denominator is constant across all observations and simply
 consists of the total sum of all values in the data set.</p>
-<p>The interpretation of the Getis-Ord statistics is very straightforward: a positive value suggests a high-high cluster or hot spot, a negative value indicates a low-low cluster or cold spot. In contrast to the Local Moran and Local Geary statistics, the Getis-Ord approach does not consider spatial outliers.</p>
+<p>The interpretation of the Getis-Ord statistics is very straightforward: a value larger than the mean (or, a positive value for a standardized z-value) suggests a high-high cluster or hot spot, a value smaller than the mean (or, negative for a z-value) indicates a low-low cluster or cold spot. In contrast to the Local Moran and Local Geary statistics, the Getis-Ord approach does not consider
+spatial outliers.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>Inference is based on conditional permutation, using an identical
 procedure as for the other statistics.</p>
 </div>
@@ -863,17 +877,17 @@ procedure as for the other statistics.</p>
 <h3>Implementation</h3>
 <p>The implementation of the Getis-Ord statistics is largely identical to that of the
 other local statistics. Each statistic an be selected from the drop down menu
-generated by the <strong>Cluster Maps</strong> toolbar icon, either as <strong>Local G Cluster Map</strong>,
-or as <strong>Local G* Cluster Map</strong> in Figure <a href="#fig:localgmenu">43</a>.</p>
+generated by the <strong>Cluster Maps</strong> toolbar icon, either as <strong>Local G</strong>,
+or as <strong>Local G*</strong> in Figure <a href="#fig:localgmenu">43</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:localgmenu"></span>
-<img src="pics6a/8_599_localg_from_toolbar.png" alt="Getis-Ord statistics from cluster maps toolbar options" width="35%" />
+<img src="pics6a/8_599_localg_from_toolbar.png" alt="Getis-Ord statistics from cluster maps toolbar options" width="25%" />
 <p class="caption">
 Figure 43: Getis-Ord statistics from cluster maps toolbar options
 </p>
 </div>
 <p>Alternatively, the same two options are also available from the main menu, as
-<strong>Space &gt; Local G Cluster Map</strong> or <strong>Space &gt; Local G* Cluster Map</strong>.</p>
-<p>The next step brings up the <strong>Variable Settings</strong> dialog. Again, we select <strong>Donatns</strong> as the variable, with <strong>Guerry_85_q</strong> as the queen contiguity
+<strong>Space &gt; Local G</strong> or <strong>Space &gt; Local G*</strong>.</p>
+<p>The next step brings up the <strong>Variable Settings</strong> dialog. Again, we select <strong>Donatns</strong> as the variable, with <strong>guerry_85_q</strong> as the queen contiguity
 weights. This is followed by a choice of windows to be
 opened. The latter is again slightly different from the previous cases. The default,
 shown in Figure <a href="#fig:localgwindows">44</a>, is to <strong>use row-standardized weights</strong>
@@ -968,6 +982,100 @@ Figure 51: Getis-Ord statistics Save Results options
 <p>For the Getis-Ord statistics, there are only three cluster categories, with observations taking the
 value of 0 for not significant, 1 for a high-high cluster, and 2 for a low-low cluster.</p>
 <p>As always, the addition of the new variables to the table is made permanent by a save operation.</p>
+</div>
+</div>
+</div>
+<div id="local-join-count-statistic" class="section level2 unnumbered">
+<h2>Local Join Count Statistic</h2>
+<div id="principle-3" class="section level3 unnumbered">
+<h3>Principle</h3>
+<p>Recently, <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2018</a>)</span> showed how a constrained version of the <span class="math inline">\(G_i^*\)</span> statistic yields a local version of the well-known join count statistic for spatial autocorrelation of binary variables, popularized by <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:73">1973</a>)</span>. Expressed as a LISA statistic, a local version of the so-called BB join count statistic is
+<span class="math display">\[BB_i = x_i \sum_j w_{ij}x_j,\]</span>
+where <span class="math inline">\(x_{i,j}\)</span> can only take on the values of 1 and 0, and <span class="math inline">\(w_{ij}\)</span> are the elements of a <em>binary</em> spatial weights matrix (i.e., <em>not</em> row-standardized). For the most meaningful results, the value of 1 should be chosen for the case with the fewest observations (of course, the definition of what is 1 and 0 can easily be switched).</p>
+<p>The statistic is only meaningful for those observations where <span class="math inline">\(x_i = 1\)</span>, since for <span class="math inline">\(x_i = 0\)</span> the result will always equal zero. A pseudo p-value is obtained by means of a conditional permutation approach, in the same way as for the other local spatial autocorrelation statistics, but only for those observations with <span class="math inline">\(x_i = 1\)</span>. The same caveats as before should be kept in mind when interpreting the results, which are subject to multiple comparisons and the sensitivity of the pseudo p-value to the actual simulation experiment (random seed, number of permutations). Technical
+details are provided in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2018</a>)</span>.</p>
+</div>
+<div id="implementation-3" class="section level3 unnumbered">
+<h3>Implementation</h3>
+<div id="preliminaries" class="section level4 unnumbered">
+<h4>Preliminaries</h4>
+<p>To illustrate the implementation of the Local Join Count (or local BB) statistic, we will use a somewhat contrived example. The main point is to show how the statistic works and how it can be interpreted, not any substantive
+concern.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>To create a binary variable, we will select the three top categories in the natural breaks map for donations shown in Figure <a href="#fig:donatnatbreak">3</a>, which
+yields 16 observations. We next use
+<strong>Save Selected</strong> to create a binary variable that corresponds to the selection
+(for the sake of the example, we use the default variable name of <strong>SELECTED</strong>).
+The resulting unique values map (with the color for the 0 category set to white)
+is as in Figure <a href="#fig:selected">52</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:selected"></span>
+<img src="pics6a/9_002_selected.png" alt="Selected observations" width="80%" />
+<p class="caption">
+Figure 52: Selected observations
+</p>
+</div>
+<p>A cursory inspection of the map reveals several singletons and pairs, with
+a larger grouping of like observations near the center of the map. The local join
+count statistic comes into play to assess the extent to which this <em>perception</em> of
+a cluster has any degree of significance (in the limited sense used here).</p>
+</div>
+<div id="cluster-map" class="section level4 unnumbered">
+<h4>Cluster map</h4>
+<p>The statistic is invoked from the cluster map toolbar icon as
+<strong>Univariate Local Join Count</strong>, as shown in Figure <a href="#fig:localjcmenu">53</a>.
+Alternatively, one can use <strong>Space &gt; Univariate Local Join Count</strong> from the menu.</p>
+<div class="figure" style="text-align: center"><span id="fig:localjcmenu"></span>
+<img src="pics6a/9_001_localjcmenu.png" alt="Univariate Local Join Count from cluster maps toolbar options" width="25%" />
+<p class="caption">
+Figure 53: Univariate Local Join Count from cluster maps toolbar options
+</p>
+</div>
+<p>Next, we use <strong>SELECTED</strong> from the Variable Settings dialog. In contrast to the other univariate local spatial autocorrelation statistics, there is no cluster map, only a significance map. Hence there is no need for a dialog to choose which windows are requested.</p>
+<p>With the default significance level of 0.05 and 999 permutations, the result
+appears as in Figure <a href="#fig:localjcsig">54</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:localjcsig"></span>
+<img src="pics6a/9_003_localjcsig.png" alt="Local Join Count Significance Map" width="80%" />
+<p class="caption">
+Figure 54: Local Join Count Significance Map
+</p>
+</div>
+<p>Only four locations are deemed to be significant, three at 0.05 and one at 0.01. The minimum level p-value of 0.001 (with 999 permutations) is not reached for any
+of these observations.</p>
+<p>All the usual options for local statistics apply here as well, i.e., changing the randomization option, the significance filter, and selecting cores and neighbors.
+To illustrate the latter, we select the observation with p = 0.01 as the <em>core</em>, and choose <strong>Select All &gt; Cores and Neighbors</strong>. This highlights the observation in question and its (queen contiguity) neighbors in all other maps, including the
+unique value map from Figure <a href="#fig:selected">52</a>. The result is the <em>cluster</em> shown in
+Figure <a href="#fig:localjccluster">55</a>, with four of the six neighbors of the observation
+in question also taking the value of 1. The other significant locations have three out of five neighbors with the value of 1, which turns out to be less significant.</p>
+<div class="figure" style="text-align: center"><span id="fig:localjccluster"></span>
+<img src="pics6a/9_004_localjccluster.png" alt="Local Join Count Cluster Core with Neighbors" width="80%" />
+<p class="caption">
+Figure 55: Local Join Count Cluster Core with Neighbors
+</p>
+</div>
+</div>
+<div id="saving-the-results-2" class="section level4 unnumbered">
+<h4>Saving the results</h4>
+<p>An alternative way to check on the neighbor structure of the significant
+locations is to use the <strong>Save Results</strong> option. Similar to its
+operation for the other local spatial autocorrelation
+statistics, this saves the statistic, i.e., the number of BB joins (default
+variable name <strong>JC</strong>), the total number of neighbors (<strong>NN</strong>), and the pseudo p-value (<strong>PP_VAL</strong>),
+as in Figure <a href="#fig:localjcsave">56</a>. As usual, the new variables are only permanently added to the Table after a <strong>Save</strong> command.</p>
+<div class="figure" style="text-align: center"><span id="fig:localjcsave"></span>
+<img src="pics6a/9_005_localjcsave.png" alt="Local Join Count Save Results options" width="30%" />
+<p class="caption">
+Figure 56: Local Join Count Save Results options
+</p>
+</div>
+<p>Selecting the four significant locations and moving them to the top of the
+table, shows the corresponding values, as in
+Figure <a href="#fig:localjctable">57</a>. This matches what our visual inspection revealed.
+In larger data sets, it may be more difficult to carry out a visual inspection, and the table entries may be more insightful.</p>
+<div class="figure" style="text-align: center"><span id="fig:localjctable"></span>
+<img src="pics6a/9_006_localjctable.png" alt="Local Join Count Results in Table" width="25%" />
+<p class="caption">
+Figure 57: Local Join Count Results in Table
+</p>
+</div>
 <p><br></p>
 </div>
 </div>
@@ -976,36 +1084,47 @@ value of 0 for not significant, 1 for a high-high cluster, and 2 for a low-low c
 <h2>References</h2>
 <div id="refs" class="references">
 <div id="ref-Anselin:95">
-<p>Anselin, Luc. 1995. “Local Indicators of Spatial Association — LISA.” <em>Geographical Analysis</em> 27:93–115.</p>
+<p>Anselin, Luc. 1995. “Local Indicators of Spatial Association — LISA.” <em>Geographical Analysis</em> 27: 93–115.</p>
 </div>
 <div id="ref-Anselin:18">
 <p>———. 2018. “A Local Indicator of Multivariate Spatial Association, Extending Geary’s c.” <em>Geographical Analysis (in Press)</em>.</p>
 </div>
+<div id="ref-AnselinLi:18">
+<p>Anselin, Luc, and Xun Li. 2018. “Operational Local Join Count Statistics for Cluster Detection.” Working Paper. Chicago, IL: Center for Spatial Data Science, University of Chicago.</p>
+</div>
 <div id="ref-BenjaminiHochberg:95">
-<p>Benjamini, Y., and Y. Hochberg. 1995. “Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.” <em>Journal of the Royal Statistical Society B</em> 57 (1):289–300.</p>
+<p>Benjamini, Y., and Y. Hochberg. 1995. “Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.” <em>Journal of the Royal Statistical Society B</em> 57 (1): 289–300.</p>
+</div>
+<div id="ref-CliffOrd:73">
+<p>Cliff, Andrew, and J. Keith Ord. 1973. <em>Spatial Autocorrelation</em>. London: Pion.</p>
 </div>
 <div id="ref-deCastroSinger:06">
-<p>de Castro, Maria Caldas, and Burton H. Singer. 2006. “Controlling the False Discovery Rate: An Application to Account for Multiple and Dependent Tests in Local Statistics of Spatial Association.” <em>Geographical Analysis</em> 38:180–208.</p>
+<p>de Castro, Maria Caldas, and Burton H. Singer. 2006. “Controlling the False Discovery Rate: An Application to Account for Multiple and Dependent Tests in Local Statistics of Spatial Association.” <em>Geographical Analysis</em> 38: 180–208.</p>
 </div>
 <div id="ref-EfronHastie:16">
 <p>Efron, Bradley, and Trevor Hastie. 2016. <em>Computer Age Statistical Inference. Algorithms, Evidence, and Data Science</em>. Cambridge, UK: Cambridge University Press.</p>
 </div>
 <div id="ref-GetisOrd:92">
-<p>Getis, Arthur, and J. Keith Ord. 1992. “The Analysis of Spatial Association by Use of Distance Statistics.” <em>Geographical Analysis</em> 24:189–206.</p>
+<p>Getis, Arthur, and J. Keith Ord. 1992. “The Analysis of Spatial Association by Use of Distance Statistics.” <em>Geographical Analysis</em> 24: 189–206.</p>
 </div>
 <div id="ref-OrdGetis:95">
-<p>Ord, J. Keith, and Arthur Getis. 1995. “Local Spatial Autocorrelation Statistics: Distributional Issues and an Application.” <em>Geographical Analysis</em> 27:286–306.</p>
+<p>Ord, J. Keith, and Arthur Getis. 1995. “Local Spatial Autocorrelation Statistics: Distributional Issues and an Application.” <em>Geographical Analysis</em> 27: 286–306.</p>
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
 <li id="fn2"><p>Again, we accomplish
 this in the <strong>Table Calculator</strong>. First, we create a new column/variable as <strong>FDR</strong>,
 with the constant value <span class="math inline">\(\alpha / n\)</span>, using <strong>Univariate &gt; Assign</strong>. Next, we
 multiply the <strong>FDR</strong> value with the value for <strong>I</strong>, using <strong>Bivariate &gt; Multiply</strong>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>When all observations for a variable are positive, as is
+the case in our examples, the G statistics are positive ratios less than one. Large ratios (more precisely, less small values since all ratios are small)
+correspond with high-high hot spots, small ratios with low-low cold spots.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>For a more realistic example, see the empirical illustration
+in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2018</a>)</span>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

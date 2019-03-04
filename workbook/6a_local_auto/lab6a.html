@@ -116,7 +116,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Local Spatial Autocorrelation (1)</h1>
 <h3 class="subtitle"><em>Univariate Local Statistics</em></h3>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>01/28/2019 (latest update)</em></h4>
+<h4 class="date"><em>03/04/2019 (latest update)</em></h4>
 
 
 <div id="TOC">
@@ -1001,16 +1001,23 @@ details are provided in <span class="citation">Anselin and Li (<a href="#ref-Ans
 <h4>Preliminaries</h4>
 <p>To illustrate the implementation of the Local Join Count (or local BB) statistic, we will use a somewhat contrived example. The main point is to show how the statistic works and how it can be interpreted, not any substantive
 concern.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
-<p>To create a binary variable, we will select the three top categories in the natural breaks map for donations shown in Figure <a href="#fig:donatnatbreak">3</a>, which
-yields 16 observations. We next use
-<strong>Save Selected</strong> to create a binary variable that corresponds to the selection
+<p>We continue with the variable <strong>Donatns</strong> and will turn the continuous distribution reflected in the natural breaks map in Figure <a href="#fig:donatnatbreak">3</a> into a binary variable (the map is based on 6 categories). We select the three top categories, which
+yields 16 observations, shown in Figure <a href="#fig:natbrkselected">52</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:natbrkselected"></span>
+<img src="pics6a/9_007_donatselected.png" alt="Selected observations" width="80%" />
+<p class="caption">
+Figure 52: Selected observations
+</p>
+</div>
+<p>We next use the
+<strong>Save Selected</strong> option in the Table to create a binary variable that corresponds to the selection
 (for the sake of the example, we use the default variable name of <strong>SELECTED</strong>).
 The resulting unique values map (with the color for the 0 category set to white)
-is as in Figure <a href="#fig:selected">52</a>.</p>
+is as in Figure <a href="#fig:selected">53</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:selected"></span>
 <img src="pics6a/9_002_selected.png" alt="Selected observations" width="80%" />
 <p class="caption">
-Figure 52: Selected observations
+Figure 53: Selected observations
 </p>
 </div>
 <p>A cursory inspection of the map reveals several singletons and pairs, with
@@ -1021,34 +1028,34 @@ a cluster has any degree of significance (in the limited sense used here).</p>
 <div id="cluster-map" class="section level4 unnumbered">
 <h4>Cluster map</h4>
 <p>The statistic is invoked from the cluster map toolbar icon as
-<strong>Univariate Local Join Count</strong>, as shown in Figure <a href="#fig:localjcmenu">53</a>.
+<strong>Univariate Local Join Count</strong>, as shown in Figure <a href="#fig:localjcmenu">54</a>.
 Alternatively, one can use <strong>Space &gt; Univariate Local Join Count</strong> from the menu.</p>
 <div class="figure" style="text-align: center"><span id="fig:localjcmenu"></span>
 <img src="pics6a/9_001_localjcmenu.png" alt="Univariate Local Join Count from cluster maps toolbar options" width="25%" />
 <p class="caption">
-Figure 53: Univariate Local Join Count from cluster maps toolbar options
+Figure 54: Univariate Local Join Count from cluster maps toolbar options
 </p>
 </div>
 <p>Next, we use <strong>SELECTED</strong> from the Variable Settings dialog. In contrast to the other univariate local spatial autocorrelation statistics, there is no cluster map, only a significance map. Hence there is no need for a dialog to choose which windows are requested.</p>
 <p>With the default significance level of 0.05 and 999 permutations, the result
-appears as in Figure <a href="#fig:localjcsig">54</a>.</p>
+appears as in Figure <a href="#fig:localjcsig">55</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:localjcsig"></span>
 <img src="pics6a/9_003_localjcsig.png" alt="Local Join Count Significance Map" width="80%" />
 <p class="caption">
-Figure 54: Local Join Count Significance Map
+Figure 55: Local Join Count Significance Map
 </p>
 </div>
 <p>Only four locations are deemed to be significant, three at 0.05 and one at 0.01. The minimum level p-value of 0.001 (with 999 permutations) is not reached for any
 of these observations.</p>
 <p>All the usual options for local statistics apply here as well, i.e., changing the randomization option, the significance filter, and selecting cores and neighbors.
 To illustrate the latter, we select the observation with p = 0.01 as the <em>core</em>, and choose <strong>Select All &gt; Cores and Neighbors</strong>. This highlights the observation in question and its (queen contiguity) neighbors in all other maps, including the
-unique value map from Figure <a href="#fig:selected">52</a>. The result is the <em>cluster</em> shown in
-Figure <a href="#fig:localjccluster">55</a>, with four of the six neighbors of the observation
+unique value map from Figure <a href="#fig:selected">53</a>. The result is the <em>cluster</em> shown in
+Figure <a href="#fig:localjccluster">56</a>, with four of the six neighbors of the observation
 in question also taking the value of 1. The other significant locations have three out of five neighbors with the value of 1, which turns out to be less significant.</p>
 <div class="figure" style="text-align: center"><span id="fig:localjccluster"></span>
 <img src="pics6a/9_004_localjccluster.png" alt="Local Join Count Cluster Core with Neighbors" width="80%" />
 <p class="caption">
-Figure 55: Local Join Count Cluster Core with Neighbors
+Figure 56: Local Join Count Cluster Core with Neighbors
 </p>
 </div>
 </div>
@@ -1059,21 +1066,21 @@ locations is to use the <strong>Save Results</strong> option. Similar to its
 operation for the other local spatial autocorrelation
 statistics, this saves the statistic, i.e., the number of BB joins (default
 variable name <strong>JC</strong>), the total number of neighbors (<strong>NN</strong>), and the pseudo p-value (<strong>PP_VAL</strong>),
-as in Figure <a href="#fig:localjcsave">56</a>. As usual, the new variables are only permanently added to the Table after a <strong>Save</strong> command.</p>
+as in Figure <a href="#fig:localjcsave">57</a>. As usual, the new variables are only permanently added to the Table after a <strong>Save</strong> command.</p>
 <div class="figure" style="text-align: center"><span id="fig:localjcsave"></span>
 <img src="pics6a/9_005_localjcsave.png" alt="Local Join Count Save Results options" width="30%" />
 <p class="caption">
-Figure 56: Local Join Count Save Results options
+Figure 57: Local Join Count Save Results options
 </p>
 </div>
 <p>Selecting the four significant locations and moving them to the top of the
 table, shows the corresponding values, as in
-Figure <a href="#fig:localjctable">57</a>. This matches what our visual inspection revealed.
+Figure <a href="#fig:localjctable">58</a>. This matches what our visual inspection revealed.
 In larger data sets, it may be more difficult to carry out a visual inspection, and the table entries may be more insightful.</p>
 <div class="figure" style="text-align: center"><span id="fig:localjctable"></span>
 <img src="pics6a/9_006_localjctable.png" alt="Local Join Count Results in Table" width="25%" />
 <p class="caption">
-Figure 57: Local Join Count Results in Table
+Figure 58: Local Join Count Results in Table
 </p>
 </div>
 <p><br></p>

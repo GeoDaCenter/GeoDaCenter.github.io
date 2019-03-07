@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Luc Anselin" />
+
+
+<title>Local Spatial Autocorrelation (2)</title>
+
+<link href="lab6b_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab6b_files/highlightjs-9.12.0/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	    .shadowfilter {
+	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	        filter: url(shadow.svg#drop-shadow);
+	     }
+	     .intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;}
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h3.subtitle {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Local Spatial Autocorrelation (2)</h1>
+<h3 class="subtitle"><em>Advanced Topics</em></h3>
+<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
+<h4 class="date"><em>03/06/2019 (latest update)</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#extensions-of-local-morans-i">Extensions of Local Moran’s I</a><ul>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#bivariate-local-morans-i">Bivariate Local Moran’s I</a><ul>
+<li><a href="#concept">Concept</a></li>
+<li><a href="#implementation">Implementation</a></li>
+<li><a href="#interpretation">Interpretation</a></li>
+</ul></li>
+<li><a href="#differential-local-morans-i">Differential Local Moran’s I</a><ul>
+<li><a href="#concept-1">Concept</a></li>
+<li><a href="#implementation-1">Implementation</a></li>
+<li><a href="#interpretation-1">Interpretation</a></li>
+<li><a href="#saving-the-results">Saving the results</a></li>
+</ul></li>
+<li><a href="#local-moran-with-eb-rate">Local Moran with EB Rate</a><ul>
+<li><a href="#concept-2">Concept</a></li>
+<li><a href="#implementation-2">Implementation</a></li>
+<li><a href="#saving-the-results-1">Saving the results</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#bivariate-and-multivariate-local-join-count-statistics">Bivariate and Multivariate Local Join Count Statistics</a><ul>
+<li><a href="#bivariate---no-co-location">Bivariate - No Co-Location</a><ul>
+<li><a href="#preliminaries">Preliminaries</a></li>
+<li><a href="#concept-3">Concept</a></li>
+<li><a href="#implementation-3">Implementation</a></li>
+<li><a href="#interpretation-2">Interpretation</a></li>
+<li><a href="#saving-the-results-2">Saving the results</a></li>
+</ul></li>
+<li><a href="#bivariate-and-multivariate---co-location">Bivariate and Multivariate - Co-Location</a><ul>
+<li><a href="#preliminaries-1">Preliminaries</a></li>
+<li><a href="#concept-4">Concept</a></li>
+<li><a href="#quantile-local-spatial-autocorrelation">Quantile Local Spatial Autocorrelation</a></li>
+<li><a href="#implementation-4">Implementation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#multivariate-local-geary">Multivariate Local Geary</a><ul>
+<li><a href="#preliminaries-2">Preliminaries</a></li>
+<li><a href="#concept-5">Concept</a></li>
+<li><a href="#implementation-5">Implementation</a></li>
+<li><a href="#interpretation-3">Interpretation</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered">
+<h2>Introduction</h2>
+<p>In this chapter, we will explore some more advanced aspects of local spatial autocorrelation statistics, focusing
+on bivariate and multivariate extensions. We will first cover the local counterparts
+of the bivariate Moran’s I, the differential Moran’s I and the Empirical Bayes (EB) standardized Moran’s I. Next, we introduct a bivariate and multivariate extension
+of the local Join Count statistic, for cases where the two variable can coincide
+in the same location (so-called, co-location), and (less common) cases where they
+cannot. Finally, we cover the multivariate extension of the Local Geary statistic.</p>
+<div id="objectives" class="section level3 unnumbered">
+<h3>Objectives</h3>
+<ul>
+<li><p>Identify clusters and outliers with the bivariate extensions
+of the local Moran statistic</p></li>
+<li><p>Correct the local Moran statistic for variance instability in rates</p></li>
+<li><p>Assess clusters of binary variables with and without co-location with a local Join Count statistic</p></li>
+<li><p>Identify multivariate clusters by means of the local Geary statistic</p></li>
+<li><p>Interpret interaction effects</p></li>
+<li><p>Interpret significance</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Space &gt; Bivariate Local Moran’s I</li>
+<li>Space &gt; Differential Local Moran’s I</li>
+<li>Space &gt; Local Moran’s I with EB rate</li>
+<li>Space &gt; Bivariate Local Join Count</li>
+<li>Space &gt; Multivariate Local Join Count</li>
+<li>Space &gt; Multivariate Local Geary</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="extensions-of-local-morans-i" class="section level2 unnumbered">
+<h2>Extensions of Local Moran’s I</h2>
+<div id="getting-started" class="section level3 unnumbered">
+<h3>Getting Started</h3>
+<p>To illustrate the extensions of local Moran’s I, we will follow the examples we
+used for their global counterparts. We will use the familiar U.S. county homicide data set <strong>natregimes</strong> with queen contiguity weights in <strong>natregimes_q</strong>. By means
+of the <strong>Time Editor</strong>, we first group the homicide rates <strong>hr60</strong> through <strong>hr90</strong>
+into the variable <strong>hr</strong>, the homicide counts <strong>hc60</strong> through <strong>hc90</strong> into the
+variable <strong>hc</strong>, and the population counts <strong>po60</strong> through <strong>po90</strong> into <strong>po</strong>.</p>
+<p>At this point, we are ready to proceed.</p>
+</div>
+<div id="bivariate-local-morans-i" class="section level3 unnumbered">
+<h3>Bivariate Local Moran’s I</h3>
+<div id="concept" class="section level4 unnumbered">
+<h4>Concept</h4>
+<p>The treatment of the bivariate local Moran’s I closely follows that of its
+global counterpart <span class="citation">(see also Anselin, Syabri, and Smirnov <a href="#ref-Anselinetal:02b">2002</a>)</span>. In essence, it captures the relationship between the value
+for one variable at location <span class="math inline">\(i\)</span>, <span class="math inline">\(x_i\)</span>, and the average of the neighboring values for
+<em>another variable</em>, i.e., its spatial lag <span class="math inline">\(\sum_j w_{ij} y_j\)</span>. Apart from a constant scaling factor (that
+can be ignored), the statistic is the product of <span class="math inline">\(x_i\)</span> with the
+spatial lag of <span class="math inline">\(y_i\)</span> (i.e., <span class="math inline">\(\sum_j w_{ij}y_j\)</span>), with both variables standardized, such that their
+means are zero and variances equal one:</p>
+<p><span class="math display">\[ I_{B,i} = c x_i \sum_j w_{ij} y_j,\]</span>
+where <span class="math inline">\(w_{ij}\)</span> are the elements of the spatial weights matrix.</p>
+<p>As for its global counterpart, this statistic needs to be interpreted with caution, since it ignores in-situ correlation between the two variables (see the discussion of global bivariate spatial autocorrelation for details).</p>
+<p>A special case of the bivariate local Moran statistic is comparing the same variable at two points in time. The most meaningful application is where one variable is for time period <span class="math inline">\(t\)</span>, say <span class="math inline">\(z_t\)</span>, and the other variable is for the neighbors in the previous time period, say <span class="math inline">\(z_{t-1}\)</span>. This is illustrated in the example below.</p>
+</div>
+<div id="implementation" class="section level4 unnumbered">
+<h4>Implementation</h4>
+<p>The bivariate local Moran functionality is invoked from the <strong>Cluster Maps</strong> toolbar icon, or from the menu as <strong>Space &gt; Bivariate Local Moran’s I</strong>, as shown in
+Figure <a href="#fig:bivariatelisa">1</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivariatelisa"></span>
+<img src="pics6b/1_bivariate_local.png" alt="Bivariate Local Moran from the toolbar" width="20%" />
+<p class="caption">
+Figure 1: Bivariate Local Moran from the toolbar
+</p>
+</div>
+<p>Next, we proceed in the usual fashion by selecting a variable for <span class="math inline">\(x\)</span>, for example
+<strong>hr(90)</strong>, and a variable for <span class="math inline">\(y\)</span>, say <strong>hr(80)</strong>, in the variable selection
+dialog, shown in Figure <a href="#fig:bivlisavars">2</a>. Since the variables are time enabled, the proper period is selected by means of the <strong>Time</strong> drop down list. Also note that the spatial weights
+matrix has been set to <strong>natregimes_q</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivlisavars"></span>
+<img src="pics6b/1_bivloc_vars.png" alt="Bivariate Local Moran variable selection" width="35%" />
+<p class="caption">
+Figure 2: Bivariate Local Moran variable selection
+</p>
+</div>
+<p>The next prompt gives the familiar choice of a <strong>Significance Map</strong>, <strong>Cluster Map</strong>,
+and <strong>Moran Scatter Plot</strong>, with just the <strong>Cluster Map</strong> selected as the default. With the default setting, the result is based on 999 permutations with a p-value of 0.05, as shown in Figure <a href="#fig:bivlisacluster">3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivlisacluster"></span>
+<img src="pics6b/1_bilisa_map.png" alt="Bivariate Local Moran cluster map" width="80%" />
+<p class="caption">
+Figure 3: Bivariate Local Moran cluster map
+</p>
+</div>
+<p>All the options for randomization, significance filter, saving the results, etc., are the same as for the univariate local Moran and will not be further discussed here.</p>
+</div>
+<div id="interpretation" class="section level4 unnumbered">
+<h4>Interpretation</h4>
+<p>As mentioned, the interpretation of the bivariate local Moran cluster map warrants some caution, since it does not control for the correlation between the two variables at each location (i.e., the correlation between <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span>). To illustrate this issue, consider the space-time case, where one can interpret the results of the high-high and low-low clusters in Figure <a href="#fig:bivlisacluster">3</a> as locations where high/low values at time <span class="math inline">\(t\)</span> (in our example, homicide rates in 1990) were surrounded by high/low values at time <span class="math inline">\(t -1\)</span> (homicide rates in 1980) more so than would be the case randomly. This could either be attributed to the surrounding locations in the past affecting the central location at the current time (a form of a diffusion effect), but could also be due to a strong inertia, in which case there would be no diffusion. More precisely, if the homicide rates in all locations are highly correlated over time, then if the surrounding values in <span class="math inline">\(t - 1\)</span> were correlated with the value at <span class="math inline">\(i\)</span> in <span class="math inline">\(t - 1\)</span>, then they would also tend to be correlated with the value at <span class="math inline">\(i\)</span> in <span class="math inline">\(t\)</span> (through the correlation between <span class="math inline">\(y_{j,t-1}\)</span> and <span class="math inline">\(y_{j,t}\)</span>). Hence, while these findings <em>could</em> be compatible with diffusion, this is not necessarily the case. The same complication affects the interpretation of the bivariate local Moran coefficient between two variables at the same point in time.</p>
+<p>To illustrate the problems with interpreting bivariate local cluster maps, we take the case of spatial outliers. In addition to the bivariate results, we also consider the univariate local
+Moran cluster maps for the variable in each time period, i.e., in <span class="math inline">\(t - 1\)</span>
+and in <span class="math inline">\(t\)</span>, i.e., <strong>hr(80)</strong> and <strong>hr(90)</strong>, as shown in Figures <a href="#fig:bivspacetime">4</a> and <a href="#fig:localhr90">5</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivspacetime"></span>
+<img src="pics6b/1_bivspacetime.png" alt="Local Moran cluster map -- hr80" width="80%" />
+<p class="caption">
+Figure 4: Local Moran cluster map – hr80
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:localhr90"></span>
+<img src="pics6b/1_hr90.png" alt="Local Moran cluster map -- hr90" width="80%" />
+<p class="caption">
+Figure 5: Local Moran cluster map – hr90
+</p>
+</div>
+<p>The highlighted county is Inyo county (CA), which is identified as a low-high spatial outlier in Figure <a href="#fig:bivlisacluster">3</a>. In 1980, this county was part of a high-high cluster, whereas in 1990, it was not significant. In this instance, we can interpret the spatial outlier in the space-time cluster map as indicating a
+(relative) decrease in the homicide rate for that county in 1990 relative to 1980, when it was surrounded by high homicide rate counties. However, what we cannot conclude is that the surrounding counties still have high homicide rates in 1990. In fact, the pattern is
+insufficient to be considered significant.</p>
+</div>
+</div>
+<div id="differential-local-morans-i" class="section level3 unnumbered">
+<h3>Differential Local Moran’s I</h3>
+<div id="concept-1" class="section level4 unnumbered">
+<h4>Concept</h4>
+<p>The differential local Moran statistic is the local counterpart to the differential Moran scatter plot, discussed in an earlier chapter. Instead of using the observations on a variable at two different time periods, this statistic is based on the change over time, i.e., the difference between <span class="math inline">\(y_t\)</span> and <span class="math inline">\(y_{t-1}\)</span>. Note that this is the actual difference and not the absolute difference, so that a positive change will be viewed as <em>high</em>, and a negative change as <em>low</em>. The differences are used in standardized form, i.e., they are not the differences between the standardized variable at two points in time, but the standardized differences between the original values for the variable.</p>
+<p>The formal expression for this statistic follows the same logic as before, and
+consists of the cross product of the difference between <span class="math inline">\(y_t\)</span> and <span class="math inline">\(y_{t-1}\)</span> at <span class="math inline">\(i\)</span> with the associated spatial lag:</p>
+<p><span class="math display">\[I_{D,i} = c (y_{i,t} - y_{i,t-1}) \sum_j w_{ij} (y_{j,t} - y_{j,t-1})\]</span>
+The scaling constant <span class="math inline">\(c\)</span> can be ignored. Inference is based on conditional permutation. All the usual caveats hold about multiple comparisons, etc.</p>
+</div>
+<div id="implementation-1" class="section level4 unnumbered">
+<h4>Implementation</h4>
+<p>The differential local Moran functionality is invoked from the <strong>Cluster Maps</strong> toolbar icon, or from the menu as <strong>Space &gt; Differential Local Moran’s I</strong>, as shown in
+Figure <a href="#fig:difflisa">6</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:difflisa"></span>
+<img src="pics6b/2_difflisa.png" alt="Differential Local Moran from the toolbar" width="20%" />
+<p class="caption">
+Figure 6: Differential Local Moran from the toolbar
+</p>
+</div>
+<p>Next follows a variable selection dialog. This takes on a slightly different form (but the same as for the differential Moran scatter plot), as illustrated in
+Figure <a href="#fig:difflisavars">7</a>. First, the variable of interest is selected
+(here, <strong>hr</strong>), and then the two time periods are chosen (here, <strong>90</strong> and <strong>80</strong>).
+Note that the system is agnostic about the actual time periods, so that any combination can be selected. The statistic is computed for the difference between the time period specified as the first item and that given as the second item. In our
+example, the spatial weights are <strong>natregime_q</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:difflisavars"></span>
+<img src="pics6b/2_difflisavars.png" alt="Differential Local Moran variable selection" width="45%" />
+<p class="caption">
+Figure 7: Differential Local Moran variable selection
+</p>
+</div>
+<p>As before, a choice is presented between a <strong>Significance Map</strong>, <strong>Cluster Map</strong>,
+and <strong>Moran Scatter Plot</strong>, with just the <strong>Cluster Map</strong> selected as the default. With the default setting, the result is based on 999 permutations with a p-value of 0.05, as shown in Figure <a href="#fig:difflisamap">8</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:difflisamap"></span>
+<img src="pics6b/2_difflisamap.png" alt="Differential Local Moran cluster map" width="80%" />
+<p class="caption">
+Figure 8: Differential Local Moran cluster map
+</p>
+</div>
+<p>All the options for randomization, significance filter, saving the results, etc., are the same as for the univariate local Moran and will not be further discussed here.</p>
+</div>
+<div id="interpretation-1" class="section level4 unnumbered">
+<h4>Interpretation</h4>
+<p>The first aspect of the results is a much smaller number of significant locations compared to the univariate and bivariate cluster maps. These are locations where the change in the variable over time is matched by similar/dissimilar changes in the surrounding locations. It is important to keep in mind that the focus is on change, and there is no direct connection to whether this changes is from high or low values.</p>
+<p>Two situations can be distinguished, depending on whether the change variable takes on both positive and negative values, or when all the changes are of the same sign (i.e., all observations either increase or decrease over time).</p>
+<p>When both positive and negative change values are present, the <em>high-high</em> locations will tend to be locations with a large increase (positive change), surrounded by locations with similar large increases. The <em>low-low</em> locations will be observations with a large decrease (negative change), surrounded by locations with similar large decreases. Spatial outliers will be locations where an increase is surrounded by a decrease and vice versa.</p>
+<p>When all changes are of the same sign, the interpretation of high-high and low-low depends on the sign. Due to the standardization, large positive values will be considered <em>high</em> (above the mean), whereas large negative values will be labeled <em>low</em> (below the mean). This should be kept in mind when interpreting the results.</p>
+</div>
+<div id="saving-the-results" class="section level4 unnumbered">
+<h4>Saving the results</h4>
+<p>Similar to the functionality for the differential Moran scatter plot, the <strong>Save Results</strong> option includes an item to save the actual change variable (in raw form, not in standardized form). In the dialog, this corresponds to the <strong>Diff Values</strong> item, as shown in Figure <a href="#fig:difflisaresults">9</a>. The other options are the same as for all local spatial autocorrelation statistics, i.e., the value of the statistic, cluster type, and p-value.</p>
+<div class="figure" style="text-align: center"><span id="fig:difflisaresults"></span>
+<img src="pics6b/2_save_results.png" alt="Saving the results for differential local Moran" width="30%" />
+<p class="caption">
+Figure 9: Saving the results for differential local Moran
+</p>
+</div>
+</div>
+</div>
+<div id="local-moran-with-eb-rate" class="section level3 unnumbered">
+<h3>Local Moran with EB Rate</h3>
+<div id="concept-2" class="section level4 unnumbered">
+<h4>Concept</h4>
+<p>The last of the extensions of the local Moran’s I pertains to the special case where the variable of interest is a rate or proportion. As discussed for the Moran scatter plot, the resulting variance instability can cause problems for the Moran statistic. The EB standardization suggested by <span class="citation">Assunção and Reis (<a href="#ref-AssuncaoReis:99">1999</a>)</span> for the global case can be extended to the local statistic in a straightforward manner. The statistic has the usual form, but is computed for the standardized rates, <span class="math inline">\(z\)</span>.</p>
+<p><span class="math display">\[I_{EB,i} = c z_i \sum_j w_{ij} z_j,\]</span></p>
+<p>The standardization of the raw rate <span class="math inline">\(r_i\)</span> is the same as before, and is repeated here for completeness (for a more detailed discussion, see the relevant chapter):</p>
+<p><span class="math display">\[z_i = \frac{r_i - \beta}{\sqrt{\alpha + (\beta/P_i)}}\]</span>
+with <span class="math inline">\(\beta\)</span> as an estimate of the mean and the denominator as an estimate of the standard error.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>All inference and interpretation is the same as for the univariate case and is not further pursued here.</p>
+</div>
+<div id="implementation-2" class="section level4 unnumbered">
+<h4>Implementation</h4>
+<p>The local Moran functionality for standardized rates is invoked from the <strong>Cluster Maps</strong> toolbar icon, or from the menu as <strong>Space &gt; Local Moran’s I with EB Rate</strong>, as shown in
+Figure <a href="#fig:eblisa">10</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:eblisa"></span>
+<img src="pics6b/3_eblisa.png" alt="Local Moran for EB rates from the toolbar" width="20%" />
+<p class="caption">
+Figure 10: Local Moran for EB rates from the toolbar
+</p>
+</div>
+<p>Since the rate standardization is computed as part of the operation, the variable selection interface is similar to that used for rate maps. With the time enabled variables, we need to make sure the <strong>Time</strong> is synchronized so that both the numerator (the events) and the denominator (the population at risk) pertain to the same period (here, <strong>90</strong>). In our example, shown in Figure <a href="#fig:eblisavars">11</a>,
+we take the <strong>Event Variable</strong> as homicide counts, <strong>hc(90)</strong>, and the <strong>Base Variable</strong> as population, <strong>po(90)</strong>. As before, we use the queen contiguity, <strong>natregimes_q</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:eblisavars"></span>
+<img src="pics6b/3_eblisavars.png" alt="EB rates local Moran variable selection" width="35%" />
+<p class="caption">
+Figure 11: EB rates local Moran variable selection
+</p>
+</div>
+<p>Again, we can choose between a <strong>Significance Map</strong>, a <strong>Cluster Map</strong> and the <strong>Moran Scatter Plot</strong> options. With the default settings (cluster map, 999 permutations and p = 0.05), the resulting map is as in
+Figure <a href="#fig:eblisamap">12</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:eblisamap"></span>
+<img src="pics6b/3_eblisamap.png" alt="Local Moran cluster map for EB rates - hr90" width="80%" />
+<p class="caption">
+Figure 12: Local Moran cluster map for EB rates - hr90
+</p>
+</div>
+<p>Compared to the cluster map for the raw rates in Figure <a href="#fig:localhr90">5</a>, we observe major differences in the low-low clusters in the upper midwest. Typically, the greater the variation among values for the base variable (population at risk), especially when the latter is small, the more the two maps will tend to differ. However, when the base population is more or less equal by design (e.g., for census tracts in the U.S.), there is little gain from using the EB rates.</p>
+</div>
+<div id="saving-the-results-1" class="section level4 unnumbered">
+<h4>Saving the results</h4>
+<p>Here again, the <strong>Save Results</strong> option includes an item to save the actual EB rate (this is identical to the EB Rate standardization that can be computed with the <strong>Table Calculator</strong> option). In the dialog, this corresponds to the <strong>EB Rates</strong> item, as shown in Figure <a href="#fig:eblisaresults">13</a>. The other options are the same as for all local spatial autocorrelation statistics, i.e., the value of the statistic, cluster type, and p-value.</p>
+<div class="figure" style="text-align: center"><span id="fig:eblisaresults"></span>
+<img src="pics6b/3_eblisaresults.png" alt="Saving the results for EB rates" width="30%" />
+<p class="caption">
+Figure 13: Saving the results for EB rates
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="bivariate-and-multivariate-local-join-count-statistics" class="section level2 unnumbered">
+<h2>Bivariate and Multivariate Local Join Count Statistics</h2>
+<p>In addition to introducing a univariate local Join Count statistic, <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2019</a>)</span> also include extensions to a bivariate and multivariate setting. In each instance, the variables under consideration, say <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span>, only take on a value of 0 and 1.</p>
+<p>We distinguish between two cases, referred to as <em>co-location</em> and <em>no co-location</em>.
+In the first, it is possible for both variables to take the same value at a location. In orther words, at location <span class="math inline">\(i\)</span>, it is possible to have <span class="math inline">\(x_i = z_i = 1\)</span>. For example, this would be the case when the variables pertain to two different types of events that can occur in all locations, such as the presence of several non-exclusive characteristics (e.g., a city block that is both low-density and commercial). In the second instance, whenever <span class="math inline">\(x_i = 1\)</span>, then <span class="math inline">\(z_i = 0\)</span> and vice versa. In other words, the two <em>events</em> cannot happen in the same location. This would be case where the classification of a location is exclusive, i.e., if a location is of one type, it cannot be of another type (e.g., a zoning classification).</p>
+<p>In GeoDa, the co-location case is treated under <em>Multivariate Local Join Count</em> (which includes the bivariate setup as a special case), whereas the no co-location case is implemented under <em>Bivariate Local Join Count</em>.</p>
+<p>While the natural application of Join Count statistics is to deal with binary variables, they can also be extended to a notion of <em>quantile spatial autocorrelation</em>, which is further elaborated upon below.</p>
+<div id="bivariate---no-co-location" class="section level3 unnumbered">
+<h3>Bivariate - No Co-Location</h3>
+<div id="preliminaries" class="section level4 unnumbered">
+<h4>Preliminaries</h4>
+<p>To illustrate the no co-location case, we will use a data set with population figures for the 77 Community areas in Chicago (<strong>commpop</strong>).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> This data set contains two binary variables, one with value 1 for areas with positive population change between 2000 and 2010 (<strong>popplus</strong>, with 17 observations = 1), and the other with value 1 for areas with negative population change (<strong>popneg</strong>, with 60 observations = 1). In other words, by construction the two variables are the complement of each other so that they cannot both have the same value at the same location.</p>
+<p>We illustrate <strong>popplus</strong> in the unique values map shown in Figure <a href="#fig:popchange">14</a>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:popchange"></span>
+<img src="pics6b/5_popchange.png" alt="Positive population change - Chicago Community Areas" width="80%" />
+<p class="caption">
+Figure 14: Positive population change - Chicago Community Areas
+</p>
+</div>
+<p>We are interested in instances of <em>negative spatial autocorrelation</em>, where locations with <strong>popneg</strong> = 1 are surrounded by more locations with <strong>popplus</strong> = 1 than would be expected under randomness. Note that it is important to formulate the research question in this fashion. Since the majority of locations has <strong>popneg</strong> = 1 (60/77, or 0.78), the phenomenon of a <strong>popplus</strong> = 1 to be surrounded by locations with <strong>popneg</strong> = 1 is <em>not rare</em>. In such a situation, the significance test is not meaningful.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> This will generally be the case when a variable has more than 50% of the observations equal to 1. Since only 0.22 of the observations have <strong>popplus</strong> = 1, it is of interest to see the extent to which these cluster among themselves (e.g., by means of a univariate local Join Count test), or, group around locations with negative population change. Those instances of <strong>popneg</strong> = 1 could then be characterized as <em>spatial outliers</em>, i.e., areas with population decline surrounded by neighbors with population increase.</p>
+<p>This example is primarily to illustrate the functionality of the bivariate test, and is less of substantive interest. For a more meaningful example, see the empirical illustration in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2019</a>)</span>.</p>
+<p>Before we can proceed, we also need a spatial weights matrix. We use queen contiguity in the file <strong>commarea_q.gal</strong>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> Note that this weights matrix will be used in unstandardized (binary) form.</p>
+</div>
+<div id="concept-3" class="section level4 unnumbered">
+<h4>Concept</h4>
+<p>In its general form, the expression for a bivariate local join count statistic is
+<span class="math display">\[BJC_i = x_i (1 - z_i) \sum_j w_{ij} z_j (1 - x_j),\]</span>
+with <span class="math inline">\(w_{ij}\)</span> as unstandardized (binary) spatial weights.</p>
+<p>The roles of <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> may be reversed, but the statistic is not symmetric, so that the results will tend to differ whether <span class="math inline">\(x\)</span> or <span class="math inline">\(z\)</span> is the focus. In addition, it is important to keep in mind that the statistic will only be meaningful when the proportion of the second variable (for the neighbors) in the population is small.</p>
+<p>Since the condition of no co-location ensures that <span class="math inline">\(1 - z_i = 0\)</span> whenever <span class="math inline">\(x_i = 1\)</span>, and vice versa, the statistic simplifies to:
+<span class="math display">\[BJC_i = x_i \sum_j w_{ij} z_j.\]</span></p>
+<p>A pseudo p-value can be obtained from a one-sided conditional permutation test. This is implemented by carrying out a series of <span class="math inline">\(k_i\)</span> draws (with <span class="math inline">\(k_i\)</span> as the number of neighbors) for each location <span class="math inline">\(i\)</span> where <span class="math inline">\(x_i = 1\)</span> (and thus <span class="math inline">\(z_i = 0\)</span>). The draws are without replacement from N − 1 data tuples <span class="math inline">\((x_j, z_j)\)</span> of which <span class="math inline">\(Q\)</span> observations have <span class="math inline">\(z = 1\)</span> (since <span class="math inline">\(z_i = 0\)</span>) and <span class="math inline">\(P − 1\)</span> observations have <span class="math inline">\(x = 1\)</span>. In practice, we only need to draw the <span class="math inline">\(z_j\)</span>, since the matching <span class="math inline">\(x_j\)</span> are zero by construction. The number of times the resulting local join count statistic equals or exceeds the observed value yields a pseudo p-value, in the usual way.</p>
+</div>
+<div id="implementation-3" class="section level4 unnumbered">
+<h4>Implementation</h4>
+<p>The bivariate local Join Count functionality for the no co-location case is invoked from the <strong>Cluster Maps</strong> toolbar icon, or from the menu as <strong>Space &gt; Bivariate Local Join Count</strong>, as shown in Figure <a href="#fig:bivjc">15</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivjc"></span>
+<img src="pics6b/5_bivariatejc.png" alt="No Co-Location bivariate local Join Count from the toolbar" width="20%" />
+<p class="caption">
+Figure 15: No Co-Location bivariate local Join Count from the toolbar
+</p>
+</div>
+<p>Next follows the selection of the two binary variables. The first one (<span class="math inline">\(x\)</span>) is selected from the left-hand column in the dialog, the second (<span class="math inline">\(z\)</span>) from the right-hand column. In our example, these are <strong>popneg</strong> and <strong>popplus</strong>, as shown in
+Figure <a href="#fig:bivjcvars">16</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivjcvars"></span>
+<img src="pics6b/5_bivjcvars.png" alt="Bivariate local Join Count variable selection" width="35%" />
+<p class="caption">
+Figure 16: Bivariate local Join Count variable selection
+</p>
+</div>
+<p>As is the case for the univariate local Join Count statistic, only one map is created, i.e., a <em>significance map</em> that highlights the significant locations. For the default settings with 999 permutation and p = 0.05, the result is as shown in Figure <a href="#fig:bivjcmap">17</a>, with two significant locations.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivjcmap"></span>
+<img src="pics6b/5_bivjcmap.png" alt="Bivariate local Join Count significance map" width="80%" />
+<p class="caption">
+Figure 17: Bivariate local Join Count significance map
+</p>
+</div>
+</div>
+<div id="interpretation-2" class="section level4 unnumbered">
+<h4>Interpretation</h4>
+<p>As mentioned earlier, in the current context, the result can be interpreted as evidence of <em>negative</em> spatial autocorrelation, i.e., evidence of spatial outliers.
+We can illustrate this with a unique values map for <strong>popneg</strong>. Invoking the map option (right click) <strong>Connectivity &gt; Show Selection and Neighbors</strong> will outline the neighbors of a selected observation. With the selection of the most significant location (the Garfield Ridge community area), its neighbors are highlighted, as shown in Figure <a href="#fig:bivjneighbors">18</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivjneighbors"></span>
+<img src="pics6b/5_bivjcneighbors.png" alt="Spatial outlier" width="80%" />
+<p class="caption">
+Figure 18: Spatial outlier
+</p>
+</div>
+<p>In our example, the significant area (with negative population change) is surrounded by one other neighbor with negative population change, but four neighbors with positive population change. Having four of the five neighbors with the opposite sign is sufficient to identify this location as a <em>spatial outlier</em>.</p>
+</div>
+<div id="saving-the-results-2" class="section level4 unnumbered">
+<h4>Saving the results</h4>
+<p>As is the case for the other local spatial autocorrelation coefficients, the results for each location can be saved to the data table by means of the <strong>Save Results</strong> option. Three items are included: the join count statistic (i.e., the number of neighbors with value <span class="math inline">\(z_j = 1\)</span>), the total number of neighbors, and the pseudo p-value, as shown in Figure <a href="#fig:bivjcsave">19</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivjcsave"></span>
+<img src="pics6b/5_bivjc_saveresults.png" alt="Bivariate Local Join Count Save Results" width="35%" />
+<p class="caption">
+Figure 19: Bivariate Local Join Count Save Results
+</p>
+</div>
+<p>In our example, this gives the entries for the two significant locations as
+in Figure <a href="#fig:bivjctable">20</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivjctable"></span>
+<img src="pics6b/5_bivjc_intable.png" alt="Bivariate Local Join Count results in Table" width="60%" />
+<p class="caption">
+Figure 20: Bivariate Local Join Count results in Table
+</p>
+</div>
+<p>This confirms that for Garfield Ridge, 4 of the 5 neighbors were of the opposite sign, yielding a pseudo p-value of 0.008.</p>
+</div>
+</div>
+<div id="bivariate-and-multivariate---co-location" class="section level3 unnumbered">
+<h3>Bivariate and Multivariate - Co-Location</h3>
+<div id="preliminaries-1" class="section level4 unnumbered">
+<h4>Preliminaries</h4>
+<p>We will confine our illustration of this statistic to the bivariate case, since the multivariate setting follows as a straightforward extension. Again, we will use a somewhat contrived example, converting continuous variables to categories. We will take observations in the top quintile for two variables in the <strong>Guerry</strong> sample data set and turn them into a binary variable. Specifically, we will select the observations in the top quintile for the variables <strong>Infants</strong> (children born out of wedlock)<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> and <strong>Donatns</strong> (donations). We employ the usual procedure by selecting the category in the quintile map (click on the corresponding box in the legend) and saving the selection. The spatial pattern of the resulting binary variables is illustrated in Figures <a href="#fig:infantq5">21</a> and <a href="#fig:donatq5">22</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:infantq5"></span>
+<img src="pics6b/4_infantq5.png" alt="Infants - fifth quintile" width="80%" />
+<p class="caption">
+Figure 21: Infants - fifth quintile
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:donatq5"></span>
+<img src="pics6b/4_donatq5.png" alt="Donations - fifth quintile" width="80%" />
+<p class="caption">
+Figure 22: Donations - fifth quintile
+</p>
+</div>
+<p>We are interested in detecting instances where the co-location of a top quintile for both variables coincides with such a co-location for the neighbors, more so than expected under spatial randomness. In other words, we assess whether a location with high values for both variables is also surrounded by neighboring locations with high values for both.</p>
+<p>We can gain an initial insight into the potential for such clusters from a simple co-location map for the two variables, shown in Figure <a href="#fig:colocation">23</a>. In all, there are only 5 potential significant cluster locations.</p>
+<div class="figure" style="text-align: center"><span id="fig:colocation"></span>
+<img src="pics6b/4_colocation.png" alt="Co-Location map - top quintile Infants and Donations" width="80%" />
+<p class="caption">
+Figure 23: Co-Location map - top quintile Infants and Donations
+</p>
+</div>
+<p>As the spatial weights matrix, we use queen contiguity, <strong>guerry_85_q</strong>. We are now ready to proceed.</p>
+</div>
+<div id="concept-4" class="section level4 unnumbered">
+<h4>Concept</h4>
+<p>A bivariate co-location cluster requires that <span class="math inline">\(x_i = z_i = 1\)</span> coincides with neighbors for which also <span class="math inline">\(x_j = z_j = 1\)</span>. For the bivariate case, the corresponding local Join Count statistic takes the form:
+<span class="math display">\[CLC_i = x_iz_i \sum_j w_{ij}x_jz_j,\]</span>
+with <span class="math inline">\(w_{ij}\)</span> as unstandardized (binary) spatial weights.</p>
+<p>As before, a conditional permutation approach can be constructed for those locations with <span class="math inline">\(x_i = z_i = 1\)</span>. We draw <span class="math inline">\(k_i\)</span> pairs of observations <span class="math inline">\((x_j, z_j)\)</span> from the set of <span class="math inline">\(N−1\)</span> (this contains <span class="math inline">\(P−1\)</span> observations with <span class="math inline">\(x_j = 1\)</span> and <span class="math inline">\(Q−1\)</span> observations with <span class="math inline">\(z_j = 1\)</span>). In a one-sided test, we again count the number of times the statistic equals or exceeds the observed join count value at <span class="math inline">\(i\)</span>.</p>
+<p>The extension to more than two variables is mathematically straightforward. We consider <span class="math inline">\(m\)</span> variables at each location <span class="math inline">\(i\)</span>, i.e., <span class="math inline">\(x_{hi}\)</span>, for <span class="math inline">\(h = 1, \dots, m\)</span>, with <span class="math inline">\(\Pi_{h=1}^m x_{hi} = 1\)</span>, which enforces the co-location requirement.</p>
+<p>The corresponding statistic is then:
+<span class="math display">\[CLC_i = \Pi_{h=1}^m x_{hi} \sum_j w_{ij} \Pi_{h=1}^m x_{hj}.\]</span></p>
+<p>The implementation of a conditional permutation strategy follows as a direct generalization of the bivariate co-location cluster. However, for a large number of variables, such co-locations become less and less likely, and a different conceptual framework may be more appropriate.</p>
+</div>
+<div id="quantile-local-spatial-autocorrelation" class="section level4 unnumbered">
+<h4>Quantile Local Spatial Autocorrelation</h4>
+<p>The local Join Count statistics are designed to deal with binary variables. However, as we illustrate with our example, they can also be applied to assess the spatial autocorrelation between quantiles of a continuous variable, something that can be referred to as <em>quantile local spatial autocorrelation</em>. As mentioned, the continuous (linear) association between two variables that is measured by the bivariate local Moran suffers from the problem of in-situ correlation. The quantile local spatial autocorrelation sidesteps this problem by converting the continuous variable to a binary variable that takes the value of 1 for a specific quantile. For example, as in our illustration, the spatial assocation between two continuous variables can be simplified by focusing on the local autocorrelation between binary variables for the upper quintile. Since the bivariate (or multivariate) local Join Count statistic enforces co-location, the problem of in-situ correlation is controlled for. This provides an alternative to other bivariate and multivariate local spatial autocorrelation statistics, albeit with a loss of information (going from the continuous variable to a binary category).</p>
+</div>
+<div id="implementation-4" class="section level4 unnumbered">
+<h4>Implementation</h4>
+<p>The bivariate and multivariate local Join Count functionality for the co-location case is invoked from the <strong>Cluster Maps</strong> toolbar icon, or from the menu as <strong>Space &gt; Multivariate Local Join Count</strong>, as shown in Figure <a href="#fig:multijc">24</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:multijc"></span>
+<img src="pics6b/6_multijc.png" alt="Co-Location bivariate and multivariate local Join Count from the toolbar" width="20%" />
+<p class="caption">
+Figure 24: Co-Location bivariate and multivariate local Join Count from the toolbar
+</p>
+</div>
+<p>The variable selection dialog takes on a special form, to allow multiple variables to be chosen. In our example, we select <strong>infq5</strong> (top quintile for Infants) and <strong>donq5</strong> (top quintile for Donations) as the two variables, with the spatial weights set to <strong>guerry_85_q</strong>, as in Figure <a href="#fig:multijcvars">25</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:multijcvars"></span>
+<img src="pics6b/6_multi_vars.png" alt="Co-Location bivariate local Join Count variable selection" width="35%" />
+<p class="caption">
+Figure 25: Co-Location bivariate local Join Count variable selection
+</p>
+</div>
+<p>Again, there is only the significance map as the result option, which gives the map in Figure <a href="#fig:multijcmap">26</a> for the default settings of 999 permutations and p = 0.05. All the usual options for local spatial autocorrelation statistics can be set as well.</p>
+<div class="figure" style="text-align: center"><span id="fig:multijcmap"></span>
+<img src="pics6b/6_multijcmap.png" alt="Co-Location bivariate local Join Count significance map" width="80%" />
+<p class="caption">
+Figure 26: Co-Location bivariate local Join Count significance map
+</p>
+</div>
+<p>The results show three significant locations. With the <strong>Save Results</strong> option, we can again add the join counts, number of neighbors and pseudo p-value to the data table. This is illustrated in Figure <a href="#fig:multijctable">27</a> for the three significant locations in our example.</p>
+<div class="figure" style="text-align: center"><span id="fig:multijctable"></span>
+<img src="pics6b/6_multijcresults.png" alt="Co-Location bivariate local Join Count significant locations" width="50%" />
+<p class="caption">
+Figure 27: Co-Location bivariate local Join Count significant locations
+</p>
+</div>
+<p>In each instance, only two of the neighbors belong to the same category, but given the small number of neighbors, that is sufficient to indicate (weak) significance. The locations that were identified as significant constitute clusters where high values (in the upper quintile) for both variables co-locate.</p>
+</div>
+</div>
+</div>
+<div id="multivariate-local-geary" class="section level2 unnumbered">
+<h2>Multivariate Local Geary</h2>
+<p>In <span class="citation">Anselin (<a href="#ref-Anselin:18">2018</a>)</span>, a multivariate extension of the local Geary statistic is proposed. This statistic measures the extent to which neighbors in multiattribute space (i.e., data points that are close together in the multidimensional variable space) are also neighbors in geographical space. While the mathematical formalism is easily extended to many variables, in practice one quickly runs into the <em>curse of dimensionality</em>.</p>
+<p>In essence, the multivariate local Geary statistic measures the extent to which the average distance in attribute space between the values at a location and the values at its neighboring locations are smaller or larger than what they would be under spatial randomness. The former case corresponds to positive spatial autocorrelation, the latter to negative spatial autocorrelation.</p>
+<p>An important aspect of the multivariate statistic is that it is not simply the superposition of univariate statistics. In other words, even though a location may be identified as a cluster using the univariate local Geary for each of the variables separately, this does not mean that it is also a multivariate cluster. The univariate statistics deal with distances in attribute space projected onto a single dimension, whereas the multivariate statistics are based on distances in a higher dimensional space. The multivariate statistic thus provides an additional perspective to measuring the tension between attribute similarity and locational similarity.</p>
+<div id="preliminaries-2" class="section level3 unnumbered">
+<h3>Preliminaries</h3>
+<p>To illustrate the multivariate local Geary statistic, we will continue to use a bivariate example with the variables Infants (<strong>Infants</strong>) and Donations (<strong>Donatns</strong>) from the Guerry sample data set. A general sense of their overall spatial distribution can be gleaned from Figures <a href="#fig:infantq5">21</a> and <a href="#fig:donatq5">22</a> (ignoring the selection).</p>
+<p>To provide some further perspective, the cluster maps from a univariate local Geary statistic are provided in Figures <a href="#fig:unigearyinfants">28</a> and <a href="#fig:unigearydonations">29</a>. The weights matrix is queen contiguity (<strong>guerry_85_q</strong>), and all the standard defaults are used, i.e., 999 permutations and p = 0.05.</p>
+<div class="figure" style="text-align: center"><span id="fig:unigearyinfants"></span>
+<img src="pics6b/7_unigeary_infants.png" alt="Univariate local Geary cluster map - Infants" width="80%" />
+<p class="caption">
+Figure 28: Univariate local Geary cluster map - Infants
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unigearydonations"></span>
+<img src="pics6b/7_unigeary_donations.png" alt="Univariate local Geary cluster map - Donations" width="80%" />
+<p class="caption">
+Figure 29: Univariate local Geary cluster map - Donations
+</p>
+</div>
+</div>
+<div id="concept-5" class="section level3 unnumbered">
+<h3>Concept</h3>
+<p>The multivariate local Geary statistic is formally the sum of individual local Geary statistics for each of the variables under consideration. For example, with <span class="math inline">\(m\)</span> variables, indexed by <span class="math inline">\(h\)</span>, the corresponding expression is:
+<span class="math display">\[c_i = \sum_{h=1}^m \sum_j w_{ij} (x_{hi} - x_{hj})^2.\]</span>
+This measure corresponds to a weighted average of the squared distances in multidimensional attribute space between the values observed at a given geographic location <span class="math inline">\(i\)</span> and those at its geographic neighbors <span class="math inline">\(j\)</span>.</p>
+<p>Inference can again be based on a conditional permutation approach. This consists of holding the tuple of values observed at <span class="math inline">\(i\)</span> fixed, and computing the statistic for a number of permutations of the remaining tuples over the other locations. This results in an empirical reference distribution that represents a computational approach at obtaining the distribution of the statistic under the null. The resulting pseudo p-value corresponds to the fraction of statistics in the empirical reference distribution that are equal to or more extreme than the observed statistic.</p>
+<p>Such an approach suffers from the same problem of multiple comparisons mentioned for all the other local statistics. In addition, there is a further complication. When comparing the results for <span class="math inline">\(m\)</span> univariate Local Geary statistics, these multiple comparisons need to be accounted for as well. For example, for each univariate test, the target p-value of <span class="math inline">\(\alpha\)</span> would typically be adjusted to <span class="math inline">\(\alpha / m\)</span> (with <span class="math inline">\(m\)</span> variables, each with a univariate test), as a Bonferroni bound. Since the multivariate statistic is in essence a sum of the statistics for the univariate cases, this would suggest a similar approach by dividing the target p-value by the number of variables (<span class="math inline">\(m\)</span>). Alternatively, and preferable, a FDR strategy can be pursued. The extent to which this actually compensates for the two dimensions of multiple comparison (multiple variables and multiple observations) remains to be further investigated.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+</div>
+<div id="implementation-5" class="section level3 unnumbered">
+<h3>Implementation</h3>
+<p>The multivariate local Geary functionality is invoked from the <strong>Cluster Maps</strong> toolbar icon, or from the menu as <strong>Space &gt; Multivariate Local Geary</strong>, as shown in
+Figure <a href="#fig:multigeary">30</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:multigeary"></span>
+<img src="pics6b/7_multigeary.png" alt="Multivariate local Geary from the toolbar" width="20%" />
+<p class="caption">
+Figure 30: Multivariate local Geary from the toolbar
+</p>
+</div>
+<p>The variable selection dialog takes on the same form as for the multivariate local Join Counts, to allow multiple variables to be chosen. In our example, we select <strong>Donatns</strong> (Donations) and <strong>Infants</strong> as the two variables, with the spatial weights set to <strong>guerry_85_q</strong>, as in Figure <a href="#fig:multigearyvars">31</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:multigearyvars"></span>
+<img src="pics6b/7_multigeary_vars.png" alt="Multivariate local Geary variable selection" width="35%" />
+<p class="caption">
+Figure 31: Multivariate local Geary variable selection
+</p>
+</div>
+<p>A dialog offers the option of a significance map and a cluster map, with the latter as the default. To illustrate the two types of results, we check both options.</p>
+<p>With all the other options set to their defaults (999 permutations, p = 0.05), this yields the significance map shown in Figure <a href="#fig:multigearymap">32</a> and
+the cluster map in Figure <a href="#fig:multigearycluster">33</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:multigearymap"></span>
+<img src="pics6b/7_multigearymap.png" alt="Multivariate local Geary significance map" width="80%" />
+<p class="caption">
+Figure 32: Multivariate local Geary significance map
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:multigearycluster"></span>
+<img src="pics6b/7_multigearycluster.png" alt="Multivariate local Geary cluster map" width="80%" />
+<p class="caption">
+Figure 33: Multivariate local Geary cluster map
+</p>
+</div>
+<p>Note that for this p-value, we obtain 24 positive clusters as well as 2 negative ones. For the latter, the distance in multi-attribute space to the neighboring locations is larger than would be the case under randomness.</p>
+<p>All the usual options regarding the number of permutations, the significance filter, saving the results, etc. hold as for any other local spatial statistic in GeoDa. While we do not pursue this further here, it should be noted that a sensitivity analysis with respect to different significance levels is highly recommended.</p>
+</div>
+<div id="interpretation-3" class="section level3 unnumbered">
+<h3>Interpretation</h3>
+<p>The results of the multivariate local Geary significance or cluster map are not always easy to interpret. Mainly, this is because we tend to simply superimpose the results of the univariate tests, whereas the multivariate statistic involves different tradeoffs.</p>
+<p>As mentioned, the problem of multiple comparisons means that the use of the default p-value of 0.05 is almost certainly misleading. Instead, it is preferred to use the False Discovery Rate, which corresponds to about 0.0065. For example, this yields the slightly more conservative result in Figure <a href="#fig:multigearyfdr">34</a>, with 11 locations deemed significant.</p>
+<div class="figure" style="text-align: center"><span id="fig:multigearyfdr"></span>
+<img src="pics6b/7_multigeary_fdr.png" alt="Multivariate local Geary significance map - False Discovery Rate" width="80%" />
+<p class="caption">
+Figure 34: Multivariate local Geary significance map - False Discovery Rate
+</p>
+</div>
+<p>Comparing this to the two univariate local Geary cluster maps, also using the FDR criterion, reveals some interesting patterns, shown in Figure <a href="#fig:multiuni">35</a>.</p>
+<p>In the map for Donations, with only 7 significant locations, only three of those locations are shared with the bivariate map. Also, in the map for Infants, with only 2 significant locations, only one of those (the spatial outlier) is shared with the bivariate map. In other words, the bivariate cluster map seems to be more lenient in terms of identifying significant locations and provides additional insights beyond the univariate maps.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:multiuni"></span>
+<img src="pics6b/7_multi_uni.png" alt="Multivariate compared to Univariate local Geary" width="100%" />
+<p class="caption">
+Figure 35: Multivariate compared to Univariate local Geary
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Anselin:18">
+<p>Anselin, Luc. 2018. “A Local Indicator of Multivariate Spatial Association, Extending Geary’s c.” <em>Geographical Analysis</em>.</p>
+</div>
+<div id="ref-AnselinLi:18">
+<p>Anselin, Luc, and Xun Li. 2019. “Operational Local Join Count Statistics for Cluster Detection.” <em>Journal of Geographical Systems</em>.</p>
+</div>
+<div id="ref-Anselinetal:02b">
+<p>Anselin, Luc, Ibnu Syabri, and Oleg Smirnov. 2002. “Visualizing Multivariate Spatial Correlation with Dynamically Linked Windows.” In <em>New Tools for Spatial Data Analysis: Proceedings of the Specialist Meeting</em>, edited by Luc Anselin and Sergio Rey. University of California, Santa Barbara: Center for Spatially Integrated Social Science (CSISS).</p>
+</div>
+<div id="ref-AssuncaoReis:99">
+<p>Assunção, Renato, and Edna A. Reis. 1999. “A New Proposal to Adjust Moran’s I for Population Density.” <em>Statistics in Medicine</em> 18: 2147–61.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>To recap, <span class="math inline">\(\beta = \sum_i O_i / \sum_i P_i\)</span>, where <span class="math inline">\(O_i\)</span> is the number of events at <span class="math inline">\(i\)</span> and <span class="math inline">\(P_i\)</span> is the population at risk. The estimate of
+<span class="math inline">\(\alpha = [\sum_i P_i ( r_i - \beta )^2 ] / P - \beta / ( P / n),\)</span>, with <span class="math inline">\(n\)</span> as the total number of observations, such that <span class="math inline">\(P/n\)</span> is the average
+population. Note that the estimate of <span class="math inline">\(\alpha\)</span> can be negative, in which case it is set to zero.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Load the data set into the <strong>Connect to Data Source</strong> interface in the usual way.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Use <strong>Map &gt; Unique Values Map</strong>, and specify <strong>popplus</strong> as the variable. To get the same map as in the Figure, change the color of the zero category to white (right click on the legend box and set the <strong>Color for Category</strong> option to white).<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Since the permutation test is designed to identify <em>rare</em> occurrences, it will mistakenly flag as significant locations that have <em>fewer</em> neighbors of the predominant type than expected randomly. This is because the proportion of such values in the population is larger than 0.5 so that it is likely to have a large number of neighbors of the type.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>If you need to create this weights file, use the weights manager with <strong>NID</strong> as the ID variable.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>Recall that the variables in the Guerry data set are scaled such that a larger value is <em>better</em>. In other words, large values for <strong>Infants</strong> correspond to a low degree of children born out of wedlock.<a href="#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>See <span class="citation">Anselin (<a href="#ref-Anselin:18">2018</a>)</span> for further technical discussion.<a href="#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>Note that when a significance value of p=0.05 is used for the univariate map, each of the 11 locations in the bivariate map is also significant for one or both of the univariate maps, so similar information is being captured.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</footer>
+
+</section>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -116,7 +116,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Global Spatial Autocorrelation (2)</h1>
 <h3 class="subtitle"><em>Bivariate, Differential and EB Rate Moran Scatter Plot</em></h3>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>03/06/2019 (latest update)</em></h4>
+<h4 class="date"><em>04/03/2018 (revised and updated)</em></h4>
 
 
 <div id="TOC">
@@ -146,9 +146,7 @@ if (window.hljs) {
 </ul></li>
 <li><a href="#moran-scatter-plot-for-eb-rates">Moran Scatter Plot for EB Rates</a><ul>
 <li><a href="#concept-2">Concept</a></li>
-<li><a href="#implementation-1">Implementation</a><ul>
-<li><a href="#saving-the-results">Saving the results</a></li>
-</ul></li>
+<li><a href="#implementation-1">Implementation</a></li>
 </ul></li>
 <li><a href="#references">References</a></li>
 </ul>
@@ -627,18 +625,8 @@ Figure 16: Moran scatter plot for the raw rate
 ignores the intrinsic variance instability of the rates. In a strict sense, the Moran’s I
 test for spatial autocorrelation is based on an assumption of a constant mean (obtained by
 de-meaning the variables) <em>and</em> a constant variance. The latter is violated in the case
-of rates. The EBI transformation ensures that this does not affect the resulting inference.</p>
-<div id="saving-the-results" class="section level4 unnumbered">
-<h4>Saving the results</h4>
-<p>A slight difference with the options for the standard Moran scatter plot pertains to the <strong>Save Results</strong> item. An additional option allows for the transformed rates to be added to the data table. The values are the actual EBI rates, not their standardized form that is used in the computation of Moran’s I. The results are identical to what would be obtained using the <strong>Rates</strong> option in the <strong>Table Calculator</strong>. The option is given as <strong>EB Rates</strong> in Figure <a href="#fig:ebsaveresults">17</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:ebsaveresults"></span>
-<img src="pics5b/3_EB_saveresults.png" alt="Save EB rates" width="35%" />
-<p class="caption">
-Figure 17: Save EB rates
-</p>
-</div>
-<p><br></p>
-</div>
+of rates. The EBI transformation ensures that this does not affect the resulting inference.
+<br></p>
 </div>
 </div>
 <div id="references" class="section level2 unnumbered">
@@ -651,20 +639,20 @@ Figure 17: Save EB rates
 <p>Anselin, Luc, Ibnu Syabri, and Oleg Smirnov. 2002. “Visualizing Multivariate Spatial Correlation with Dynamically Linked Windows.” In <em>New Tools for Spatial Data Analysis: Proceedings of the Specialist Meeting</em>, edited by Luc Anselin and Sergio Rey. University of California, Santa Barbara: Center for Spatially Integrated Social Science (CSISS).</p>
 </div>
 <div id="ref-AssuncaoReis:99">
-<p>Assunção, Renato, and Edna A. Reis. 1999. “A New Proposal to Adjust Moran’s I for Population Density.” <em>Statistics in Medicine</em> 18: 2147–61.</p>
+<p>Assunção, Renato, and Edna A. Reis. 1999. “A New Proposal to Adjust Moran’s I for Population Density.” <em>Statistics in Medicine</em> 18:2147–61.</p>
 </div>
 <div id="ref-LeeS:01">
-<p>Lee, Sang-Il. 2001. “Developing a Bivariate Spatial Association Measure: An Integration of Pearson’s r and Moran’s I.” <em>Journal of Geographical Systems</em> 3: 369–85.</p>
+<p>Lee, Sang-Il. 2001. “Developing a Bivariate Spatial Association Measure: An Integration of Pearson’s r and Moran’s I.” <em>Journal of Geographical Systems</em> 3:369–85.</p>
 </div>
 <div id="ref-Marshall:91">
-<p>Marshall, R. J. 1991. “Mapping Disease and Mortality Rates Using Empirical Bayes Estimators.” <em>Applied Statistics</em> 40: 283–94.</p>
+<p>Marshall, R. J. 1991. “Mapping Disease and Mortality Rates Using Empirical Bayes Estimators.” <em>Applied Statistics</em> 40:283–94.</p>
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
 <li id="fn2"><p>In the case of the regression of <span class="math inline">\(x\)</span> on <span class="math inline">\(Wx\)</span>, the
 explanatory variable <span class="math inline">\(Wx\)</span> is <em>endogenous</em>, so that the ordinary least squares estimation
 of the linear fit is <em>biased</em>. However, with <span class="math inline">\(Wy\)</span> referring to a different variable,

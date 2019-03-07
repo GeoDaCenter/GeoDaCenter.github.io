@@ -116,7 +116,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Local Spatial Autocorrelation (1)</h1>
 <h3 class="subtitle"><em>Univariate Local Statistics</em></h3>
 <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>03/04/2019 (latest update)</em></h4>
+<h4 class="date"><em>03/06/2019 (latest update)</em></h4>
 
 
 <div id="TOC">
@@ -989,11 +989,11 @@ value of 0 for not significant, 1 for a high-high cluster, and 2 for a low-low c
 <h2>Local Join Count Statistic</h2>
 <div id="principle-3" class="section level3 unnumbered">
 <h3>Principle</h3>
-<p>Recently, <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2018</a>)</span> showed how a constrained version of the <span class="math inline">\(G_i^*\)</span> statistic yields a local version of the well-known join count statistic for spatial autocorrelation of binary variables, popularized by <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:73">1973</a>)</span>. Expressed as a LISA statistic, a local version of the so-called BB join count statistic is
+<p>Recently, <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2019</a>)</span> showed how a constrained version of the <span class="math inline">\(G_i^*\)</span> statistic yields a local version of the well-known join count statistic for spatial autocorrelation of binary variables, popularized by <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:73">1973</a>)</span>. Expressed as a LISA statistic, a local version of the so-called BB join count statistic is
 <span class="math display">\[BB_i = x_i \sum_j w_{ij}x_j,\]</span>
 where <span class="math inline">\(x_{i,j}\)</span> can only take on the values of 1 and 0, and <span class="math inline">\(w_{ij}\)</span> are the elements of a <em>binary</em> spatial weights matrix (i.e., <em>not</em> row-standardized). For the most meaningful results, the value of 1 should be chosen for the case with the fewest observations (of course, the definition of what is 1 and 0 can easily be switched).</p>
 <p>The statistic is only meaningful for those observations where <span class="math inline">\(x_i = 1\)</span>, since for <span class="math inline">\(x_i = 0\)</span> the result will always equal zero. A pseudo p-value is obtained by means of a conditional permutation approach, in the same way as for the other local spatial autocorrelation statistics, but only for those observations with <span class="math inline">\(x_i = 1\)</span>. The same caveats as before should be kept in mind when interpreting the results, which are subject to multiple comparisons and the sensitivity of the pseudo p-value to the actual simulation experiment (random seed, number of permutations). Technical
-details are provided in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2018</a>)</span>.</p>
+details are provided in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2019</a>)</span>.</p>
 </div>
 <div id="implementation-3" class="section level3 unnumbered">
 <h3>Implementation</h3>
@@ -1094,10 +1094,10 @@ Figure 58: Local Join Count Results in Table
 <p>Anselin, Luc. 1995. “Local Indicators of Spatial Association — LISA.” <em>Geographical Analysis</em> 27: 93–115.</p>
 </div>
 <div id="ref-Anselin:18">
-<p>———. 2018. “A Local Indicator of Multivariate Spatial Association, Extending Geary’s c.” <em>Geographical Analysis (in Press)</em>.</p>
+<p>———. 2018. “A Local Indicator of Multivariate Spatial Association, Extending Geary’s c.” <em>Geographical Analysis</em>.</p>
 </div>
 <div id="ref-AnselinLi:18">
-<p>Anselin, Luc, and Xun Li. 2018. “Operational Local Join Count Statistics for Cluster Detection.” Working Paper. Chicago, IL: Center for Spatial Data Science, University of Chicago.</p>
+<p>Anselin, Luc, and Xun Li. 2019. “Operational Local Join Count Statistics for Cluster Detection.” <em>Journal of Geographical Systems</em>.</p>
 </div>
 <div id="ref-BenjaminiHochberg:95">
 <p>Benjamini, Y., and Y. Hochberg. 1995. “Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.” <em>Journal of the Royal Statistical Society B</em> 57 (1): 289–300.</p>
@@ -1131,7 +1131,7 @@ multiply the <strong>FDR</strong> value with the value for <strong>I</strong>, u
 the case in our examples, the G statistics are positive ratios less than one. Large ratios (more precisely, less small values since all ratios are small)
 correspond with high-high hot spots, small ratios with low-low cold spots.<a href="#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>For a more realistic example, see the empirical illustration
-in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2018</a>)</span>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18">2019</a>)</span>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

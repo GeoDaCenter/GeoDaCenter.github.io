@@ -176,9 +176,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script type="text/javascript">
       google.load('visualization', '1', {packages: ['areachart']});
       function drawVisualization() {
-      	$.get( "http://la1.rcc.uchicago.edu/media/geoda_files/geoda_downloads_monthly.txt", function( data ) {
-  		console.log(data);
-	});
+   
         var data = google.visualization.arrayToDataTable(
             [['Month', 'Downloads'], ['Apr2005', 391], ['May2005', 765], ['Jun2005', 1074], ['Jul2005', 1322], ['Aug2005', 1530], ['Sep2005', 1828], ['Oct2005', 2205], ['Nov2005', 2646], ['Dec2005', 3007], 
 	     ['Jan2006', 3379], ['Feb2006', 3818], ['Mar2006', 4333], ['Apr2006', 4876], ['May2006', 5360], ['Jun2006', 5831], ['Jul2006', 6270], ['Aug2006', 6702], ['Sep2006', 7249], ['Oct2006', 7961], ['Nov2006', 8671], ['Dec2006', 9312], 

@@ -65,6 +65,12 @@ a {
     border-color: rgba(20, 20, 20, 0.2);
     text-align: center;
 }
+.nightly-btn:hover {
+    background-color: rgba(100,100,100,0.5);
+    color: rgba(255,255,255,1);
+    border-color: rgba(20, 20, 20, 0.2);
+    text-align: center;
+}
 
 .lab-btn {
     background-color: rgba(255,255,255,0.9);

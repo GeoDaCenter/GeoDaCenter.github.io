@@ -61,22 +61,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <section class="main-content">
       <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introducing GeoDa 1.12</h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introducing GeoDa 1.14</h3>
 
 <p>GeoDa is a free and open source software tool that serves as an introduction to spatial data analysis. It is designed to facilitate new insights from data analysis by exploring and modeling spatial patterns.</p>
 
-<p>GeoDa was developed by <a href="https://en.wikipedia.org/wiki/Luc_Anselin">Dr. Luc Anselin</a> and his <a href="https://github.com/orgs/GeoDaCenter/people">team</a>. The program provides a user-friendly and graphical interface to methods of exploratory spatial data analysis (ESDA), such as spatial autocorrelation statistics for aggregate data (several thousand records), and basic spatial regression analysis for point and polygon data (tens of thousands of records). To work with big data in GeoDa it should first be aggregated to areal units.</p>
+<p>GeoDa was developed by <a href="https://en.wikipedia.org/wiki/Luc_Anselin">Dr. Luc Anselin</a> and his <a href=" https://spatial.uchicago.edu/directories/full/team">team</a>. The program provides a user-friendly and graphical interface to methods of exploratory spatial data analysis (ESDA), such as spatial autocorrelation statistics for aggregate data (several thousand records), and basic spatial regression analysis for point and polygon data (tens of thousands of records). To work with big data in GeoDa it should first be aggregated to areal units.</p>
 
-<p>Since its initial release in February 2003, GeoDa's user numbers have increased exponentially to over 200,000 (June 2017). This includes lab users at universities such as Harvard, MIT, and Cornell. The user community and press embraced the program enthusiastically, calling it a "hugely important analytic tool," a "very fine piece of software," and an "exciting development."</p>
+<p>Since its initial release in February 2003, GeoDa's user numbers have increased exponentially to over 300,000 (August 2019). This includes lab users at universities such as Harvard, MIT, and Cornell. The user community and press embraced the program enthusiastically, calling it a "hugely important analytic tool," a "very fine piece of software," and an "exciting development."</p>
 
-<p>The latest version 1.10 contains several new local cluster features, including <a href="https://s3.amazonaws.com/geoda/docs/LA_multivariateGeary1.pdf" target="_blank">univariate and multivariate local Geary cluster maps</a> and several classic non-spatial cluster techniques (principal component analysis, k-means, and hierarchical clustering) implemented in <a href="http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" target="_blank">Hoon et al.'s (2013) C Clustering Library</a>. GeoDa 1.10 also continues to support more spatial file formats, full space-time data support in all views, basemap layers for all maps, averages charts, scatter plot matrices, nonparametric spatial autocorrelation (correlogram), and flexible data categorization.</p>
+<p>The latest version 1.14 contains multi-layer support, several new local cluster features, including <a href="https://s3.amazonaws.com/geoda/docs/LA_multivariateGeary1.pdf" target="_blank">univariate and multivariate local Geary cluster maps</a>, redcap, skater, spectral clustering and max-p, and local join count maps for categorical data. It also implements several classic non-spatial cluster techniques (principal component analysis, k-means, and hierarchical clustering) implemented in <a href="http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" target="_blank">Hoon et al.'s (2013) C Clustering Library</a>, as well as HDBScan.</p>
 
-<p>A new workbook is under development. In the meantime, <a href="documentation.html"  onclick="ga('send', 'event', 'GeoDaTutorial18O', 'GeoDaDocument', 'GeoDa Tutorial 18');">here are interim resources</a>, including an overview of features in 1.12.</p>
+<p>A new workbook is under development. In the meantime, <a href="documentation.html"  onclick="ga('send', 'event', 'GeoDaTutorial18O', 'GeoDaDocument', 'GeoDa Tutorial 18');">here are interim resources</a>, including an overview of features in 1.14.</p>
 
 <br/>
 <h3>
-<a id="intro-toolbar" class="anchor" href="#intro-toolbar" aria-hidden="true"><span class="octicon octicon-link"></span></a>A New Look</h3>
-<p>After years of using the same old icons, GeoDa now has a new look:</p>
+<a id="intro-toolbar" class="anchor" href="#intro-toolbar" aria-hidden="true"><span class="octicon octicon-link"></span></a>GeoDa 1.14</h3>
 <p>
 <div class="bss-slides num2" tabindex="2">
    <figure>
@@ -98,9 +97,7 @@ var opts = {
 };
 makeBSS('.num2', opts);
 </script>
-
 </p>
-
 <p>GeoDa runs on Windows, MacOSX and Linux (Ubuntu)</p>
 
 <br/>
@@ -111,8 +108,14 @@ makeBSS('.num2', opts);
 
 <br/>
 <h3>
-<a id="intro-cartodb" class="anchor" href="#intro-cartodb" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect to CartoDB from Within GeoDa</h3>
-<p>You can now load data from CartoDB into GeoDa and save results back to the CartoDB table. See <a href="http://www.slideshare.net/lixun910/cartodb-fans-geoda18-provides-extra-power-of-spatial-analysis">how this works.</a></p>
+<a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Now With Multi-layer Support!</h3>
+<p>For the first time, you can now load additional layers into Geoda for visualization purposes. The analysis will still be done on the layer you load first. In this example, the map shows transit access from housing blocks, with the transit station locations as an additional layer.</p>
+<p><img src="images/multi-layer.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-cartodb" class="anchor" href="#intro-cartodb" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect to Carto from Within GeoDa</h3>
+<p>You can now load data from Carto into GeoDa and save results back to the Carto table. See <a href="http://www.slideshare.net/lixun910/cartodb-fans-geoda18-provides-extra-power-of-spatial-analysis">how this works.</a></p>
 <p><img src="images/cartodb.png" class="shadowfilter"></p>
 
 <br/>
@@ -150,6 +153,18 @@ makeBSS('.num2', opts);
 
 <br/>
 <h3>
+<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Find Statistically Significant Spatial Clusters</h3>
+<p>GeoDa has long supported uni-and bivariate local tests of spatial autocorrelation like local Moran. Now the program also includes local G/G*, and a variety of local join count statistics for categorical data. In this example, local Moran cluster maps identify higher % GOP votes in central US areas in both the 2012 and 2016 presidential elections (left). The colocation join count map (top right) shows which of the high-high cluster values in both years overlapped in space while the differential local Moran map reveals clusters in % point differences between 2016 and 2012 (bottom right) .</p>
+<p><img src="images/Lisa.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compare a Suite of Spatially Constrained Cluster Techniques</h3>
+<p>GeoDa now has lots of new techniques to identify clusters with spatial constraints, including skater, redcap, max-p, k-means, k-medians, k-medoids, and spectral clustering. Here are a few examples of how foreign-born white residents, foreign-born Hispanic residents and median monthly rents in 2008-2009 in New York are clustered.</p>
+<p><img src="images/sc_clusters.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
 <a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Determine if Changes Over Time Are Spatially Clustered</h3>
 <p>Use a global or local Differential Moran's I test to find out if a variable's change over time in a given location is statistically related to that of its neighbors. For instance, this local (LISA) cluster map shows hotspots in New York with larger changes in the share of kids between 2002 and 2008 (and coldspots with smaller changes).</p>
 <p><img src="images/DiffMI.png" class="shadowfilter"></p>
@@ -163,7 +178,7 @@ makeBSS('.num2', opts);
 <br/>
 <h3>
 <a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Map Patterns of Non-Spatial Cluster Statistics</h3>
-<p>You can now map patterns of several classic non-spatial cluster techniques, including principal component analysis (left maps), k-means (top right), and hierarchical clustering (bottom right). Using the same data as in the example above, the maps below show local clusters of property crime, literacy, and suicide.</p>
+<p>You can now map patterns of several classic non-spatial cluster techniques, including principal component analysis (left maps), k-means (top right), and hierarchical clustering (bottom right) and multi-dimensional scaling. Using the same data as in the example above, the maps below show local clusters of property crime, literacy, and suicide.</p>
 <p><img src="images/nonspatial_clusters.png" class="shadowfilter"></p>
 
 <br/>
@@ -256,7 +271,7 @@ Links: <a href="http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" targ
 
 <h3>
 <a id="intro-support" class="anchor" href="#intro-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support</h3>
-<p>We are currently updating the <a href="documentation.html">documentation</a> to reflect the new features in GeoDa 1.12.
+<p>We are currently updating the <a href="documentation.html">documentation</a> to reflect the new features in GeoDa 1.14.
 The <a href="support.html">Openspace listserv</a> supports technical questions about GeoDa.</p>
 
 <h3>

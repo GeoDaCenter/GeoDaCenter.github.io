@@ -34,15 +34,16 @@
       <h2 class="project-tagline">Answers to Technical GeoDa Questions</h2>
       <a href="//geodacenter.github.io/download.html" class="btn">Download</a>
       <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
-      <a href="https://geodacenter.github.io/data-and-lab/"  target="_blank" class="btn">Data</a>      
+      <a href="https://geodacenter.github.io/data-and-lab/"  target="_blank" class="btn">Data</a>
+      <a href="//geodacenter.github.io/cheatsheet.html" class="btn">Cheat Sheet</a>
        <a href="documentation.html" class="btn">Documentation</a>
-       <a href="//geodacenter.github.io/support.html" class="btn">Support</a>       
+       <a href="//geodacenter.github.io/support.html" class="btn">Support</a>
        <a href="//geodacenter.github.io/index-cn.html" class="btn">中文</a>
     </section>
 
 
     <section class="main-content">
- 
+
   <ul>
  	<li><a href="#data">What characteristics should my data have?</a></li>
          <li><a href="#datasize">What are data size limits in GeoDa?</a></li>
@@ -112,7 +113,7 @@
 https://s3.amazonaws.com/geoda/software/docs/geoda093.pdf" target="_self">GeoDa 0.9.3 User&#39;s Guide</a>, pp. 80-81). You will need to assign a mainland area ID to the island ID, and vice versa, assign the island ID to the mainland ID.</p>
 
 <h2><a name="projection">How do I assign projections and coordinate systems to my spatial file?</a></h2>
-<p>GeoDa does not contain any tools to set or change map projections or geographic coordinate systems. Geographic coordinate systems are relevant for adding a basemap to your map (you need WGS84). They can be relevant when using GeoDa&#39;s distance weights, which are based on the distances between points. You can set the distance units displayed in the weights distance dialog (e.g., feet, meters, or miles) by first projecting the spatial file in a <a href="glossary.html#gis">GIS</a> outside of GeoDa. 
+<p>GeoDa does not contain any tools to set or change map projections or geographic coordinate systems. Geographic coordinate systems are relevant for adding a basemap to your map (you need WGS84). They can be relevant when using GeoDa&#39;s distance weights, which are based on the distances between points. You can set the distance units displayed in the weights distance dialog (e.g., feet, meters, or miles) by first projecting the spatial file in a <a href="glossary.html#gis">GIS</a> outside of GeoDa.
 
 <h2><a name="lisactr">LISA maps only show cluster center</a></h2>
 <p>Note that the LISA cluster map only shows the <i>center</i> of the cluster in color (e.g., red for a high-high cluster). The actual extend of the cluster includes the center and the surrounding neighbors as defined by the <a href="glossary.html#wghts">weights matrix</a>. If you are not sure which units are neighbors, use the connectivity map in the Weights Editor.</p>

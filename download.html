@@ -77,6 +77,11 @@
       .q8-11 { fill:rgb(215,48,31); }
       .q9-11 { fill:rgb(179,0,0); }
       .q10-11 { fill:rgb(127,0,0); }
+
+      .legend {
+  font-size: 12px;
+}
+
     </style>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="//d3js.org/d3.v3.min.js"></script>
@@ -176,14 +181,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 <h3>Live Update of GeoDa Users Across the Globe</h3>
-<p>
 	<!--<iframe width="100%" height="520" frameborder="0" src="https://lixun910.cartodb.com/viz/d1b90530-3fbd-11e6-93d2-0e3a376473ab/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>-->
-  <div id="geoda_map" style="width: 50%; height: 500px;border: 0px solid red; "> </div>
+<a id="map_selector" style="float:left;">2D/3D</a>
+<p>
+<div id="geoda_map" style="width: 50%; height: 500px;border: 0px solid red; "> </div>
+<div id="geoda_map_2d" style="width: 50%; height: 500px;border: 0px solid red; display: none;"> </div>
 </p>
+<br/>
+<script>
+$('#map_selector').click(function(){
+  if ($('#geoda_map').css("display") == "block"){
+    $('#geoda_map').css("display", "none");
+    $('#geoda_map_2d').css("display", "block");
+  } else {
+    $('#geoda_map').css("display", "block");
+    $('#geoda_map_2d').css("display", "none");
+  }
+});
+</script>
 <p>
 	<div id="visualization" style="width: 75%; height: 400px;"> </div>
-
 </p>
+  
+
 <script type="text/javascript">
       google.load('visualization', '1', {packages: ['areachart']});
       function drawVisualization() {
@@ -223,12 +243,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <script>
 
+// 2d map
+var projection_2d = d3.geo.equirectangular().scale(150);
+var path_2d = d3.geo.path().projection(projection_2d);
+var svg_2d = d3.select("#geoda_map_2d").append("svg").attr("width", 900,).attr("height", 500);
+svg_2d.append("path").datum({type: "Sphere"}).attr("class", "water").attr("d", path_2d);
+
+// 3D map
   var width = 600,
       height = 500,
       sens = 0.25,
       focused;
 
-var interrupt = false;
+  var interrupt = false;
   var scales = {};
 
   //Setting projection
@@ -239,8 +266,7 @@ var interrupt = false;
   .translate([width / 2, height / 2])
   .clipAngle(90);
 
-  var path = d3.geo.path()
-  .projection(projection);
+  var path = d3.geo.path().projection(projection);
 
   //SVG container
 
@@ -251,28 +277,26 @@ var interrupt = false;
   //Adding water
 
   svg.append("path")
-  .datum({type: "Sphere"})
-  .attr("class", "water")
-  .attr("d", path)
-  //Drag event
-.call(d3.behavior.drag()
-  .origin(function() {
-    interrupt = true;
-    var r = projection.rotate();
-    return {x: r[0] / sens, y: -r[1] / sens};
-  })
-  .on("drag", function() {
-
-    var rotate = projection.rotate();
-    projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
-    svg.selectAll("path.land").attr("d", path);
-    svg.selectAll(".focused").classed("focused", focused = false);
-  })
-);
+    .datum({type: "Sphere"})
+    .attr("class", "water")
+    .attr("d", path)
+    //Drag event
+    .call(d3.behavior.drag()
+      .origin(function() {
+        interrupt = true;
+        var r = projection.rotate();
+        return {x: r[0] / sens, y: -r[1] / sens};
+      })
+    .on("drag", function() {
+      var rotate = projection.rotate();
+      projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+      svg.selectAll("path.land").attr("d", path);
+      svg.selectAll(".focused").classed("focused", focused = false);
+    })
+  );
 
 
   var countryTooltip = d3.select("body").append("div").attr("class", "countryTooltip");
-
 
   queue()
   .defer(d3.json, "./data/world-110m.json")
@@ -320,7 +344,35 @@ var interrupt = false;
        .domain([0, sum_down])
        .range(d3.range(11).map(function(i) { return "q" + i + "-11"; }));
 
-
+    // Drawing 2d globe
+    var world_2d = svg_2d.selectAll("path.land")
+                   .data(countries)
+                   .enter().append("path")
+                   .attr("class", function(d) {
+                     var down = 0;
+                     if (d.id in downloadById) {
+                       down = downloadById[d.id];
+                     }
+                     var clr = scales["jenks9"](down);
+                     if (clr == undefined) {
+                       console.log(d.id);
+                     }
+                     return "land " + clr;
+                   })
+                   .attr("d", path_2d)
+                   .on("mouseover", function(d) {
+      countryTooltip.text(function() {
+        var cnt = 0;
+        if (d.id in downloadById) {
+            cnt = downloadById[d.id];
+        }
+        return countryById[d.id] + ": " + cnt;
+      })
+      .style("left", (d3.event.pageX + 7) + "px")
+      .style("top", (d3.event.pageY - 15) + "px")
+      .style("display", "block")
+      .style("opacity", 1);
+    });
 
     //Drawing countries on the globe
     var world = svg.selectAll("path.land")
@@ -382,13 +434,61 @@ var interrupt = false;
 
     d3.timer(function() {
       if (interrupt == false) {
-    var dt = Date.now() - t0;
-    projection.rotate([velocity[0] * dt + origin[0], velocity[1] * dt + origin[1]]);
-    svg.selectAll("path.land").attr("d", path);
+        var dt = Date.now() - t0;
+        projection.rotate([velocity[0] * dt + origin[0], velocity[1] * dt + origin[1]]);
+        svg.selectAll("path.land").attr("d", path);
         svg.selectAll(".focused").classed("focused", focused = false);
       }
-
     });
+
+    //Adding legend for our Choropleth
+    var legend_cat = ss.jenks(down_data, 10);
+
+    var legend = svg.selectAll("g.legend")
+    .data(legend_cat)
+    .enter().append("g")
+    .attr("class", "legend");
+
+    var ls_w = 20, ls_h = 20;
+
+    legend.append("rect")
+    .attr("x", 20)
+    .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
+    .attr("width", ls_w)
+    .attr("height", ls_h)
+    .attr("class", function(d,i) { return "q" + i + "-11";})
+    //.style("fill", function(d, i) { return color(d); })
+    .style("opacity", 0.8);
+
+    legend.append("text")
+    .attr("x", 50)
+    .attr("y", function(d, i){ return height - ((i+1)*ls_h) - ls_h - 4;})
+    .text(function(d, i){ 
+      return down_cat[i]; 
+      });
+
+    legend = svg_2d.selectAll("g.legend")
+    .data(legend_cat)
+    .enter().append("g")
+    .attr("class", "legend");
+
+    var ls_w = 20, ls_h = 20;
+
+    legend.append("rect")
+    .attr("x", 20)
+    .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
+    .attr("width", ls_w)
+    .attr("height", ls_h)
+    .attr("class", function(d,i) { return "q" + i + "-11";})
+    //.style("fill", function(d, i) { return color(d); })
+    .style("opacity", 0.8);
+
+    legend.append("text")
+    .attr("x", 50)
+    .attr("y", function(d, i){ return height - ((i+1)*ls_h) - ls_h - 4;})
+    .text(function(d, i){ 
+      return down_cat[i]; 
+      });
 
   };
   </script>

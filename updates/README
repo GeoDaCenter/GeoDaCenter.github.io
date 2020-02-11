@@ -5,11 +5,11 @@ For Mac Users, all upgrade to 1.8.16 will be made through
 checklist.macosx.txt
 
 After upgrade to 1.8.16, MacOSX10.6 users will check 
-https://s3.amazonaws.com/geodaupdate/checklist.macosx106.txt
+https://s3.dualstack.us-east-1.amazonaws.com/geodaupdate/checklist.macosx106.txt
 for upgrade.
 
 After upgrade to 1.8.16, MacOSX10.7+ users will check
-https://s3.amazonaws.com/geodaupdate/checklist.macosx107.txt
+https://s3.dualstack.us-east-1.amazonaws.com/geodaupdate/checklist.macosx107.txt
 for upgrade.
 
 1.8.16.2 with retina support will be available for MacOSX10.7+ users for upgrade.
@@ -20,8 +20,8 @@ For Windows Users, all upgrade to 1.8.16 will be made through
 checklist.win32.txt and checklist.win64.txt.
 
 After upgrade to 1.8.16, all Windows users will check
-https://s3.amazonaws.com/geodaupdate/checklist.win32.txt
-https://s3.amazonaws.com/geodaupdate/checklist.win64.txt
+https://s3.dualstack.us-east-1.amazonaws.com/geodaupdate/checklist.win32.txt
+https://s3.dualstack.us-east-1.amazonaws.com/geodaupdate/checklist.win64.txt
 for upgrade.
 
 The new checklist file will add one line (3rd line) as download message, which will be shown on the auto-upgrade dialog

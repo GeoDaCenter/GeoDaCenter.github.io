@@ -110,7 +110,7 @@
 
 <h2><a name="isle">What to do with islands?</a></h2>
 <p>Islands should not be used for LISA maps and can be problematic for GeoDa&#39;s regression models. One option to ensure no islands is to use distance weights (distance bands or k-nearest neighbors). You can also remove islands in GeoDa by exporting a new spatial file without islands or by assigning them to other areas that are similar by editing the weights matrix in a text editor (for details on the weights formats, see the <a href="
-https://s3.amazonaws.com/geoda/software/docs/geoda093.pdf" target="_self">GeoDa 0.9.3 User&#39;s Guide</a>, pp. 80-81). You will need to assign a mainland area ID to the island ID, and vice versa, assign the island ID to the mainland ID.</p>
+docs/geoda093.pdf" target="_self">GeoDa 0.9.3 User&#39;s Guide</a>, pp. 80-81). You will need to assign a mainland area ID to the island ID, and vice versa, assign the island ID to the mainland ID.</p>
 
 <h2><a name="projection">How do I assign projections and coordinate systems to my spatial file?</a></h2>
 <p>GeoDa does not contain any tools to set or change map projections or geographic coordinate systems. Geographic coordinate systems are relevant for adding a basemap to your map (you need WGS84). They can be relevant when using GeoDa&#39;s distance weights, which are based on the distances between points. You can set the distance units displayed in the weights distance dialog (e.g., feet, meters, or miles) by first projecting the spatial file in a <a href="glossary.html#gis">GIS</a> outside of GeoDa.
@@ -136,7 +136,7 @@ https://s3.amazonaws.com/geoda/software/docs/geoda093.pdf" target="_self">GeoDa 
 <p>You can access GeoDa&#39;s regression functionality without opening a spatial file by going directly to Regress after opening GeoDa. This option is particularly useful if you are working with large datasets (e.g., several hundred thousand observations), to avoid loading times of the map file.</p>
 
 <h2><a name="output">Where can I get help interpreting the regression output?</a></h2>
-<p>The <a href="https://s3.amazonaws.com/geoda/software/docs/geodaworkbook.pdf" target="_self">GeoDa workbook</a> contains several regression chapters with more detail on interpretation of output. For further background reading, see the <a href="https://spatial.uchicago.edu/spatial-analysis-references>regression references</a> and, in particular, Anselin (1988)</a>.</p>
+<p>The <a href="docs/geodaworkbook.pdf" target="_self">GeoDa workbook</a> contains several regression chapters with more detail on interpretation of output. For further background reading, see the <a href="https://spatial.uchicago.edu/spatial-analysis-references>regression references</a> and, in particular, Anselin (1988)</a>.</p>
 
 
 <h3>

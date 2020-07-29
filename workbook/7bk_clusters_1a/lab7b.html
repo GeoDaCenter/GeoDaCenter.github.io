@@ -15,6 +15,7 @@
 
 <title>Cluster Analysis (1)</title>
 
+<script src="lab7b_files/header-attrs-2.3/header-attrs.js"></script>
 <link href="lab7b_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="lab7b_files/highlightjs-9.12.0/highlight.js"></script>
     <title>GeoDa on Github</title>
@@ -119,32 +120,38 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Cluster Analysis (1)</h1>
 <h3 class="subtitle">K-Means Clustering</h3>
 <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
-<h4 class="date">06/29/2020 (latest update)</h4>
+<h4 class="date">07/29/2020 (latest update)</h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction">Introduction</a><ul>
-<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#objectives">Objectives</a>
+<ul>
 <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#k-means">K Means</a><ul>
-<li><a href="#principle">Principle</a><ul>
+<li><a href="#k-means">K Means</a>
+<ul>
+<li><a href="#principle">Principle</a>
+<ul>
 <li><a href="#partitioning-methods">Partitioning methods</a></li>
 <li><a href="#k-means-objective-function">K-means objective function</a></li>
 <li><a href="#iterative-relocation">Iterative relocation</a></li>
 <li><a href="#the-choice-of-k">The choice of K</a></li>
 <li><a href="#k-means-algorithms">K-means algorithms</a></li>
 </ul></li>
-<li><a href="#implementation">Implementation</a><ul>
+<li><a href="#implementation">Implementation</a>
+<ul>
 <li><a href="#variable-settings-panel">Variable Settings panel</a></li>
 <li><a href="#cluster-results">Cluster results</a></li>
 <li><a href="#adjusting-cluster-labels">Adjusting cluster labels</a></li>
 <li><a href="#cluster-variables">Cluster variables</a></li>
 <li><a href="#saving-the-cluster-results">Saving the cluster results</a></li>
 </ul></li>
-<li><a href="#options-and-sensitivity-analysis">Options and sensitivity analysis</a><ul>
+<li><a href="#options-and-sensitivity-analysis">Options and sensitivity analysis</a>
+<ul>
 <li><a href="#changing-the-number-of-k-means-initial-runs">Changing the number of k-means++ initial runs</a></li>
 <li><a href="#random-initialization">Random initialization</a></li>
 <li><a href="#selecting-a-different-standardization">Selecting a different standardization</a></li>
@@ -152,15 +159,18 @@ if (window.hljs) {
 <li><a href="#elbow-plot">Elbow plot</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#cluster-categories-as-variables">Cluster Categories as Variables</a><ul>
+<li><a href="#cluster-categories-as-variables">Cluster Categories as Variables</a>
+<ul>
 <li><a href="#conditional-plots">Conditional plots</a></li>
 <li><a href="#aggregation-by-cluster">Aggregation by cluster</a></li>
 </ul></li>
-<li><a href="#clustering-with-dimension-reduction">Clustering with Dimension Reduction</a><ul>
+<li><a href="#clustering-with-dimension-reduction">Clustering with Dimension Reduction</a>
+<ul>
 <li><a href="#pca">PCA</a></li>
 <li><a href="#mds">MDS</a></li>
 </ul></li>
-<li><a href="#appendix">Appendix</a><ul>
+<li><a href="#appendix">Appendix</a>
+<ul>
 <li><a href="#equivalence-of-euclidean-distances-and-sum-of-squared-errors-sse">Equivalence of Euclidean distances and Sum of Squared Errors (SSE)</a></li>
 <li><a href="#k-means-worked-example">K-means worked example</a></li>
 </ul></li>
@@ -169,7 +179,7 @@ if (window.hljs) {
 </div>
 
 <p><br></p>
-<div id="introduction" class="section level2 unnumbered">
+<div id="introduction" class="section level2 unnumbered" number="">
 <h2>Introduction</h2>
 <p>We now move from reducing the dimensionality of the variables to reducing the number of observations, or <em>clustering</em>. In general terms, clustering methods group <em>n</em> observations into <em>k</em> <strong>clusters</strong> such that
 the intra-cluster similarity is maximized, and the
@@ -178,14 +188,14 @@ dissimilarity and maximizing between-cluster dissimilarity.</p>
 <p>In other words, the goal of clustering methods is to achieve compact groups of <em>similar observations</em> that are separated as much as possible from the other
 groups.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>There are a very large number of clustering techniques and algorithms. They are standard tools of so-called <em>unsupervised learning</em> and constitute a core element in
-any machine learning toolbox. Classic texts include <span class="citation">Hartigan (<a href="#ref-Hartigan:75">1975</a>)</span>, <span class="citation">Jain and Dubes (<a href="#ref-JainDubes:88">1988</a>)</span>,
-<span class="citation">Kaufman and Rousseeuw (<a href="#ref-KaufmanRousseeuw:05">2005</a>)</span>, and <span class="citation">Everitt et al. (<a href="#ref-Everittetal:11">2011</a>)</span>. A fairly recent overview of methods can be found in <span class="citation">Jain (<a href="#ref-Jain:10">2010</a>)</span>. In addition, excellent treatments of some of the more technical aspects are contained in Chapter 14 of <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-Hastieetal:09">2009</a>)</span>, Chapters 10 and 11 of <span class="citation">Han, Kamber, and Pei (<a href="#ref-Hanetal:12">2012</a>)</span>, and Chapter 10 of <span class="citation">James et al. (<a href="#ref-Jamesetal:13">2013</a>)</span>, among others.</p>
-<p>Clustering methods can be organized along a number of different dimensions. A common distinction is between partitioning methods, hierarchical methods, density-based methods and grid-based methods <span class="citation">(see, e.g., Han, Kamber, and Pei <a href="#ref-Hanetal:12">2012</a>, 448–50)</span>. In addition, there are model-based approaches developed in the statistical literature, such as mixture models and Bayesian clusters.</p>
-<p>In this and the next two chapters, we focus on the three most common approaches, namely <em>partitioning</em> methods, <em>hierarchical</em> methods and <em>density-based</em> methods. We do not cover the model-based techniques, since they are less compatible with an exploratory mindset (more precisely, they require a formal probabilistic model). We also restrict our discussion to exact clustering methods and do not cover fuzzy clustering (where an observation may belong to more than one cluster). In exact clustering, the clusters are both <em>exhaustive</em> and <em>exclusive</em>. This means that every observation must belong to one cluster, and only one cluster.</p>
+any machine learning toolbox. Classic texts include <span class="citation">Hartigan (<a href="#ref-Hartigan:75" role="doc-biblioref">1975</a>)</span>, <span class="citation">Jain and Dubes (<a href="#ref-JainDubes:88" role="doc-biblioref">1988</a>)</span>,
+<span class="citation">Kaufman and Rousseeuw (<a href="#ref-KaufmanRousseeuw:05" role="doc-biblioref">2005</a>)</span>, and <span class="citation">Everitt et al. (<a href="#ref-Everittetal:11" role="doc-biblioref">2011</a>)</span>. A fairly recent overview of methods can be found in <span class="citation">Jain (<a href="#ref-Jain:10" role="doc-biblioref">2010</a>)</span>. In addition, excellent treatments of some of the more technical aspects are contained in Chapter 14 of <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-Hastieetal:09" role="doc-biblioref">2009</a>)</span>, Chapters 10 and 11 of <span class="citation">Han, Kamber, and Pei (<a href="#ref-Hanetal:12" role="doc-biblioref">2012</a>)</span>, and Chapter 10 of <span class="citation">James et al. (<a href="#ref-Jamesetal:13" role="doc-biblioref">2013</a>)</span>, among others.</p>
+<p>Clustering methods can be organized along a number of different dimensions. A common distinction is between partitioning methods, hierarchical methods, density-based methods and grid-based methods <span class="citation">(see, e.g., Han, Kamber, and Pei <a href="#ref-Hanetal:12" role="doc-biblioref">2012</a>, 448–50)</span>. In addition, there are model-based approaches developed in the statistical literature, such as Gaussian mixture models (GMM) and Bayesian clusters.</p>
+<p>In this and the next two chapters, we focus on the two most common approaches, namely <em>partitioning</em> methods and <em>hierarchical</em> methods. We do not cover the model-based techniques, since they are less compatible with an exploratory mindset (more precisely, they require a formal probabilistic model). We also restrict our discussion to exact clustering methods and do not consider fuzzy clustering (where an observation may belong to more than one cluster). In exact clustering, the clusters are both <em>exhaustive</em> and <em>exclusive</em>. This means that every observation must belong to one cluster, and only one cluster.</p>
 <p>In the current chapter, we deal with <strong>k-means</strong> clustering, the most familiar example of a partitioning method. Hierarchical clustering is covered in the next chapter and more advanced techniques in a third.</p>
 <p>To illustrate these methods, we will continue to use the Guerry data set on
 moral statistics in 1830 France, which comes pre-installed with <code>GeoDa</code>.</p>
-<div id="objectives" class="section level3 unnumbered">
+<div id="objectives" class="section level3 unnumbered" number="">
 <h3>Objectives</h3>
 <ul>
 <li><p>Understand the principles behind k-means clustering</p></li>
@@ -197,7 +207,7 @@ moral statistics in 1830 France, which comes pre-installed with <code>GeoDa</cod
 <li><p>Use the cluster categories as a variable</p></li>
 <li><p>Combine dimension reduction and cluster analysis</p></li>
 </ul>
-<div id="geoda-functions-covered" class="section level4 unnumbered">
+<div id="geoda-functions-covered" class="section level4 unnumbered" number="">
 <h4>GeoDa functions covered</h4>
 <ul>
 <li>Clusters &gt; K Means
@@ -219,11 +229,11 @@ moral statistics in 1830 France, which comes pre-installed with <code>GeoDa</cod
 </div>
 </div>
 </div>
-<div id="k-means" class="section level2 unnumbered">
+<div id="k-means" class="section level2 unnumbered" number="">
 <h2>K Means</h2>
-<div id="principle" class="section level3 unnumbered">
+<div id="principle" class="section level3 unnumbered" number="">
 <h3>Principle</h3>
-<div id="partitioning-methods" class="section level4 unnumbered">
+<div id="partitioning-methods" class="section level4 unnumbered" number="">
 <h4>Partitioning methods</h4>
 <p>A <em>partitioning</em> clustering method consists of assigning each observation to one out of <span class="math inline">\(k\)</span> clusters. For each observation <span class="math inline">\(i\)</span>, this can be symbolized by an <em>encoder</em> C, such that <span class="math inline">\(C(i) = h\)</span>, where <span class="math inline">\(h\)</span>, the cluster indicator is an element from the set <span class="math inline">\(\{1, \dots, k\}\)</span>. The cluster labels (<span class="math inline">\(h\)</span>) are meaningless, and could just as well be letters or other distinct symbols.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>The overall objective is to end up with a grouping that minimizes the dissimilarity within each cluster. Mathematically, we can think of an overall loss function that consists of summing the <em>distances</em> between all the pairs of observations (in general, any measure of dissimilarity):
@@ -238,7 +248,7 @@ where the first term (<span class="math inline">\(W\)</span>) is referred to as 
 <p>Partitioning methods differ in terms of how the dissimilarity <span class="math inline">\(d_{ij}\)</span> is defined and how the term <span class="math inline">\(W\)</span> is minimized. Complete enumeration of all the possible allocations is infeasible except for toy problems, and there is
 no analytical solution. The problem is NP-hard, so the solution has to be approached by means of a heuristic, as an iterative descent process. This is accomplished through an algorithm that changes the assignment of observations to clusters so as to improve the objective function at each step. All feasible approaches are based on what is called <em>iterative greedy descent</em>. A greedy algorithm is one that makes a locally optimal decision at each stage. It is therefore not guaranteed to end up in a <em>global</em> optimum, but may get stuck in a <em>local</em> one instead. The k-means method uses an <em>iterative relocation</em> heuristic as the optimization strategy (see <a href="#iterative-relocation">Iterative relocation</a>). First, we consider the associated dissimilarity measure more closely.</p>
 </div>
-<div id="k-means-objective-function" class="section level4 unnumbered">
+<div id="k-means-objective-function" class="section level4 unnumbered" number="">
 <h4>K-means objective function</h4>
 <p>The K-means algorithm is based on the squared Euclidean distance as the measure of dissimilarity:
 <span class="math display">\[d_{ij}^2 = \sum_{v=1}^p (x_{iv} - x_{jv})^2 = ||x_i - x_j||^2,\]</span>
@@ -252,9 +262,9 @@ where, in general, <span class="math inline">\(x_i\)</span> and <span class="mat
 <p>In other words, minimizing the sum of (one half) of all squared distances is equivalent to minimizing
 the sum of squared deviations from the mean in each cluster, the <em>within</em> sum of squared errors.</p>
 </div>
-<div id="iterative-relocation" class="section level4 unnumbered">
+<div id="iterative-relocation" class="section level4 unnumbered" number="">
 <h4>Iterative relocation</h4>
-<p>The k-means algorithm is based on the principle of <em>iterative relocation</em>. In essence, this means that after an initial solution is established, subsequent moves (i.e., allocating observations to clusters) are made to improve the objective function. As mentioned, this is a greedy algorithm, that ensures that at each step the total across clusters of the within-cluster sums of squared errors (from the respective cluster means) is lowered. The algorithm stops when no improvement is possible. However, this does not ensure that a <em>global</em> optimum is achieved <span class="citation">(for an early discussion, see Hartigan and Wong <a href="#ref-HartiganWong:79">1979</a>)</span>. Therefore sensitivity analysis is essential. This is addressed by trying many different initial allocations (typically assigned randomly).</p>
+<p>The k-means algorithm is based on the principle of <em>iterative relocation</em>. In essence, this means that after an initial solution is established, subsequent moves (i.e., allocating observations to clusters) are made to improve the objective function. As mentioned, this is a greedy algorithm, that ensures that at each step the total across clusters of the within-cluster sums of squared errors (from the respective cluster means) is lowered. The algorithm stops when no improvement is possible. However, this does not ensure that a <em>global</em> optimum is achieved <span class="citation">(for an early discussion, see Hartigan and Wong <a href="#ref-HartiganWong:79" role="doc-biblioref">1979</a>)</span>. Therefore sensitivity analysis is essential. This is addressed by trying many different initial allocations (typically assigned randomly).</p>
 <p>To illustrate the logic behind the algorithm, we consider a simple toy example of seven observations, as depicted in Figure <a href="#fig:kmexample">1</a>. The full numerical details are given in the <a href="#appendix">Appendix</a>. The plot shows the location of the seven points in two-dimensional <span class="math inline">\(X-Y\)</span> space, with the center (the mean of <span class="math inline">\(X\)</span> and the mean of <span class="math inline">\(Y\)</span>) shown in a lighter color (note that the center is <em>not</em> one of the observations). The objective is to group the seven points into two clusters.</p>
 <div class="figure" style="text-align: center"><span id="fig:kmexample"></span>
 <img src="pics7b/00_initial_step0.png" alt="K-means toy example" width="35%" />
@@ -262,7 +272,7 @@ the sum of squared deviations from the mean in each cluster, the <em>within</em>
 Figure 1: K-means toy example
 </p>
 </div>
-<p>The initial step of the algorithm is to <em>randomly</em> pick two <em>seeds</em>, one for each cluster. The seeds are actual observations, not some other random location. In our example, we selected observations four and seven, shown by the lighter color in the upper left panel of Figure <a href="#fig:kmsteps">2</a>. The other observations are allocated to the cluster whose seed they are closest to. In the figure, we see that the green cluster has one other observation (in dark green), and the blue cluster four more (in dark blue). This is the initial layout, shown in the top right panel of the figure: two observations in one cluster and five in the other.</p>
+<p>The initial step of the algorithm is to <em>randomly</em> pick two <em>seeds</em>, one for each cluster. The seeds are actual observations, not some other random location. In our example, we selected observations 4 and 7, shown by the lighter color in the upper left panel of Figure <a href="#fig:kmsteps">2</a>. The other observations are allocated to the cluster whose seed they are closest to. We see that the green cluster has one other observation (6, in dark green), and the blue cluster four more (in dark blue). This is the initial layout, shown in the top right panel of the figure: two observations in one cluster and five in the other.</p>
 <div class="figure" style="text-align: center"><span id="fig:kmsteps"></span>
 <img src="pics7b/00_allsteps1_markup2.png" alt="Steps in the k-means algorithm" width="75%" />
 <p class="caption">
@@ -270,15 +280,15 @@ Figure 2: Steps in the k-means algorithm
 </p>
 </div>
 <p>Next, we compute the <em>center</em> for each cluster, i.e., the mean of each coordinate, shown in the figure in the lighter color. Note that from this point on, the center is no longer one of the observations (or only by coincidence).</p>
-<p>The first real step of the algorithm allocates observations to the cluster center they are closest to. In the top right panel, we see that one observation from the original blue cluster is <em>closer</em> to the new center for the green cluster than to the new center for the blue cluster. Consequently, it moves to join the green cluster, which now consists of three observations (in the lower left panel).</p>
-<p>We repeat the process with the new centers in the lower left panel and again find one member from the blue cluster closer to the updated center for the green cluster, so it joins the latter.
-This yields one cluster of three (green) observations (closest to the center in the upper right panel) and one of four (blue) observations.</p>
+<p>The first real step of the algorithm allocates observations to the cluster center they are closest to. In the top right panel, we see that point 5 from the original blue cluster is <em>closer</em> to the new center for the green cluster than to the new center for the blue cluster. Consequently, it moves to join the green cluster, which now consists of three observations (in the lower left panel).</p>
+<p>We repeat the process with the new centers in the lower left panel and again find point 4 from the blue cluster closer to the updated center for the green cluster, so it joins the latter.
+This yields one cluster of four (green) observations (closest to the center in the upper right panel) and one of three (blue) observations.</p>
 <p>This process is repeated until no more improvement is possible. In our example, we are done after the two steps, since all observations are closest to their center. The lower-right panel in the figure shows the final allocation with associated centers.</p>
-<p>The final solution corresponds to the allocation that would result from a Voronoi diagram or Thiessen polygon around the cluster centers. All observations are closer to their center than to any other center. This is indicated by the black line in the graph,
+<p>This solution corresponds to the allocation that would result from a Voronoi diagram or Thiessen polygon around the cluster centers. All observations are closer to their center than to any other center. This is indicated by the black line in the graph,
 which is perpendicular at the midpoint to an imaginary line connecting the two centers and separates the area into two
 compact <em>regions</em>.</p>
 </div>
-<div id="the-choice-of-k" class="section level4 unnumbered">
+<div id="the-choice-of-k" class="section level4 unnumbered" number="">
 <h4>The choice of K</h4>
 <p>A key element in the k-means method is the choice of the number of clusters, k. Typically,
 several values for k are considered, and the resulting clusters are then compared in terms of the
@@ -290,20 +300,20 @@ separation of the clusters. However, since this ratio increases with k, the sele
 of a <em>best</em> k is not straightforward. Several ad hoc rules have been suggested, but none is totally satisfactory.</p>
 <p>One useful approach is to plot the objective function against increasing values of k. This could be either the within sum of squares (WSS), a decreasing function with k, or the ratio BSS/TSS, a value that increases with k. The goal of a so-called <em>elbow plot</em> is to find a <em>kink</em> in the progression of the objective function against the value of k. The rationale behind this is that as long as the optimal number of clusters has not been reached, the improvement in the objective should be substantial, but as soon as the optimal k has been exceeded, the curve flattens out. This is somewhat subjective and often not that easy to interpret in practice. <code>GeoDa</code>’s functionality does not include an elbow plot, but all the information regarding the objective functions needed to create such a plot is provided in the output.</p>
 <p>A more formal approach is the so-called Gap statistic of
-<span class="citation">Tibshirani, Walther, and Hastie (<a href="#ref-Tibshiranietal:01">2001</a>)</span>, which employs the difference between the log of the WSS and the log of the WSS of a uniformly randomly generated reference distribution (uniform over a hypercube that contains the data) to construct a <em>test</em> for the optimal k. Since this approach is computationally quite demanding, we do not consider it here.</p>
+<span class="citation">Tibshirani, Walther, and Hastie (<a href="#ref-Tibshiranietal:01" role="doc-biblioref">2001</a>)</span>, which employs the difference between the log of the WSS and the log of the WSS of a uniformly randomly generated reference distribution (uniform over a hypercube that contains the data) to construct a <em>test</em> for the optimal k. Since this approach is computationally quite demanding, we do not consider it here.</p>
 </div>
-<div id="k-means-algorithms" class="section level4 unnumbered">
+<div id="k-means-algorithms" class="section level4 unnumbered" number="">
 <h4>K-means algorithms</h4>
-<p>The earliest solution of the k-means problem is commonly attributed to <span class="citation">Lloyd (<a href="#ref-Lloyd:82">1982</a>)</span> and referred to as <em>Lloyd’s algorithm</em> (the algorithm was first contained in a Bell Labs technical report by Lloyd from 1957). While the progression of the iterative relocation is fairly straightforward, the choice of the initial starting point is not.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p>The earliest solution of the k-means problem is commonly attributed to <span class="citation">Lloyd (<a href="#ref-Lloyd:82" role="doc-biblioref">1982</a>)</span> and referred to as <em>Lloyd’s algorithm</em> (the algorithm was first contained in a Bell Labs technical report by Lloyd from 1957). While the progression of the iterative relocation is fairly straightforward, the choice of the initial starting point is not.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <p>Typically, the assignment of the first set of k cluster centers is obtained by uniform random sampling k distinct observations from the full set of n observations. In other words, each observation has the same probability of being selected.</p>
 <p>The standard approach is to try several random assignments and start with the one that gives the best value for the objective function (e.g., the smallest WSS). This is one of the two approaches implemented in <code>GeoDa</code>. In order to ensure replicability, it
 is important to set a seed value for the random number generator. Also, to further assess the
 sensitivity of the result to the starting point, different seeds should be tried (as well as a
-different number of initial solutions). <code>GeoDa</code> implements this approach by leveraging the functionality contained in the <em>C Clustering Library</em> <span class="citation">(Hoon, Imoto, and Miyano <a href="#ref-deHoonetal:17">2017</a>)</span>.</p>
+different number of initial solutions). <code>GeoDa</code> implements this approach by leveraging the functionality contained in the <em>C Clustering Library</em> <span class="citation">(Hoon, Imoto, and Miyano <a href="#ref-deHoonetal:17" role="doc-biblioref">2017</a>)</span>.</p>
 <p>A second approach uses a careful consideration of initial seeds, following the procedure
-outlined in <span class="citation">Arthur and Vassilvitskii (<a href="#ref-ArthurVassilvitskii:07">2007</a>)</span>, commonly referred to as <strong>k-means++</strong>. The rationale behind k-means++ is that rather than sampling uniformly from the n observations, the probability of selecting a new cluster seed is changed in function of the distance to the nearest existing seed. Starting with a uniformly random selection of the first seed, say <span class="math inline">\(c_1\)</span>, the probabilities for the remaining observations are computed as:
+outlined in <span class="citation">Arthur and Vassilvitskii (<a href="#ref-ArthurVassilvitskii:07" role="doc-biblioref">2007</a>)</span>, commonly referred to as <strong>k-means++</strong>. The rationale behind k-means++ is that rather than sampling uniformly from the n observations, the probability of selecting a new cluster seed is changed in function of the distance to the nearest existing seed. Starting with a uniformly random selection of the first seed, say <span class="math inline">\(c_1\)</span>, the probabilities for the remaining observations are computed as:
 <span class="math display">\[p_{j \neq c_1} = \frac{d_{jc_1}^2}{\sum_{j \neq c_1} d_{jc_1}^2 }.\]</span>
-In other words, the probability is no longer uniform, but changes with the squared distance to the existing seed: the smaller the distance, the smaller the probability. This is referred to by <span class="citation">Arthur and Vassilvitskii (<a href="#ref-ArthurVassilvitskii:07">2007</a>)</span> as the squared distance (<span class="math inline">\(d^2\)</span>) weighting.</p>
+In other words, the probability is no longer uniform, but changes with the squared distance to the existing seed: the smaller the distance, the smaller the probability. This is referred to by <span class="citation">Arthur and Vassilvitskii (<a href="#ref-ArthurVassilvitskii:07" role="doc-biblioref">2007</a>)</span> as the squared distance (<span class="math inline">\(d^2\)</span>) weighting.</p>
 <p>The weighting increases the chance that the next seed is further away from the existing seeds, providing a better coverage over the support of the sample points. Once the second seed is selected, the probabilities are updated in function of the new distances to the closest seed, and the process continues until all k seeds are picked.</p>
 <p>While generally being
 faster and
@@ -314,7 +324,7 @@ yield a better outcome than the application of k-means++, at the expense of a
 somewhat longer execution time.</p>
 </div>
 </div>
-<div id="implementation" class="section level3 unnumbered">
+<div id="implementation" class="section level3 unnumbered" number="">
 <h3>Implementation</h3>
 <p>We invoke the k-means functionality from the same <strong>Clusters</strong> toolbar icon as we
 have seen previously for dimension reduction. It is part of the second subset of
@@ -330,7 +340,7 @@ Figure 3: K Means Option
 <p>This brings up the <strong>K Means Clustering Settings</strong> dialog, shown
 in Figure <a href="#fig:kmeansvars">4</a>, the main interface through which variables
 are chosen, options selected, and summary results are provided.</p>
-<div id="variable-settings-panel" class="section level4 unnumbered">
+<div id="variable-settings-panel" class="section level4 unnumbered" number="">
 <h4>Variable Settings panel</h4>
 <p>We select the variables and set the parameters for the K Means cluster analysis
 through the options in the left hand panel of the interface. We choose the same six
@@ -359,7 +369,7 @@ saved in the variable specified in the <strong>Save Cluster in Field</strong> bo
 is likely not very useful if several options will be explored. In our first example, we
 set the variable name to <strong>CLa</strong>.</p>
 </div>
-<div id="cluster-results" class="section level4 unnumbered">
+<div id="cluster-results" class="section level4 unnumbered" number="">
 <h4>Cluster results</h4>
 <p>After pressing <strong>Run</strong>, and keeping all the settings as above, a cluster map is created as a new view and the characteristics of
 the cluster are listed in the <strong>Summary</strong> panel.</p>
@@ -393,7 +403,7 @@ Figure 6: K Means cluster characteristics (k=5)
 </p>
 </div>
 </div>
-<div id="adjusting-cluster-labels" class="section level4 unnumbered">
+<div id="adjusting-cluster-labels" class="section level4 unnumbered" number="">
 <h4>Adjusting cluster labels</h4>
 <p>The cluster labels (and colors in the map) are arbitrary and can be changed in the cluster
 map, using the same technique we saw earlier for unique value maps (in fact, the cluster
@@ -416,7 +426,7 @@ Figure 8: Relabeled cluster map
 </p>
 </div>
 </div>
-<div id="cluster-variables" class="section level4 unnumbered">
+<div id="cluster-variables" class="section level4 unnumbered" number="">
 <h4>Cluster variables</h4>
 <p>As the clusters are computed, a new categorical variable is added to the data table
 (the variable name is specified in the <strong>Save Cluster in Field</strong> option).
@@ -437,7 +447,7 @@ Figure 9: Cluster categories in table
 </p>
 </div>
 </div>
-<div id="saving-the-cluster-results" class="section level4 unnumbered">
+<div id="saving-the-cluster-results" class="section level4 unnumbered" number="">
 <h4>Saving the cluster results</h4>
 <p>The summary results listed in the <strong>Summary</strong> panel can be saved to a text file. Right clicking
 on the panel to brings up a dialog with a <strong>Save</strong> option,
@@ -451,11 +461,11 @@ Figure 10: Saving summary results to a text file
 </div>
 </div>
 </div>
-<div id="options-and-sensitivity-analysis" class="section level3 unnumbered">
+<div id="options-and-sensitivity-analysis" class="section level3 unnumbered" number="">
 <h3>Options and sensitivity analysis</h3>
 <p>The k-means algorithm depends crucially on its initialization and on the various parameters specified.
 It is important to assess the sensitivity of the results to the starting point and other parameters and settings. We consider a few of these next.</p>
-<div id="changing-the-number-of-k-means-initial-runs" class="section level4 unnumbered">
+<div id="changing-the-number-of-k-means-initial-runs" class="section level4 unnumbered" number="">
 <h4>Changing the number of k-means++ initial runs</h4>
 <p>The default number of initial re-runs for the k-means++ algorithm is <strong>150</strong>. Sometimes,
 this is not sufficient to guarantee the best possible result (e.g., in terms of the ratio of between
@@ -487,7 +497,7 @@ Figure 13: Cluster characteristics for 1000 initial reruns
 </p>
 </div>
 </div>
-<div id="random-initialization" class="section level4 unnumbered">
+<div id="random-initialization" class="section level4 unnumbered" number="">
 <h4>Random initialization</h4>
 <p>The alternative to the Kmeans++ initialization is to select the traditional random initialization with uniform probabilities across the observations. This is accomplished by choosing <strong>Random</strong> as the <strong>Initialization Method</strong>,
 as shown in Figure <a href="#fig:randominit">14</a>. We keep the number of initialization re-runs
@@ -505,7 +515,7 @@ as in Figure <a href="#fig:kppinitresults">13</a>. However, if we had run the ra
 much fewer runs (e.g., 10), the results would be inferior to what we obtained before.
 This highlights the effect of the starting values on the ultimate result.</p>
 </div>
-<div id="selecting-a-different-standardization" class="section level4 unnumbered">
+<div id="selecting-a-different-standardization" class="section level4 unnumbered" number="">
 <h4>Selecting a different standardization</h4>
 <p>The objective function for k-means clustering is sensitive to the scale in which the variables are
 expressed. When these scales are very different (e.g., one variable is as a percentage and another is expressed
@@ -518,7 +528,7 @@ around zero (by subtracting the mean) and rescaled to have a variance of one (by
 deviation). However, this is by no means the only way to <em>correct</em> for the effect of different spreads
 among the variables. Some other approaches, which may be more robust to the effect of outliers (on the
 estimates of mean and variance used in the standardization) are the MAD, mentioned in the context of PCA, as
-well as range standardization. The latter is often recommended for cluster excercises <span class="citation">(e.g., Everitt et al. <a href="#ref-Everittetal:11">2011</a>)</span>.
+well as range standardization. The latter is often recommended for cluster excercises <span class="citation">(e.g., Everitt et al. <a href="#ref-Everittetal:11" role="doc-biblioref">2011</a>)</span>.
 It rescales each variable such that its minimum is zero and its maximum becomes one by subtracting the minimum and
 dividing by the range.</p>
 <p>We assess the effect of such a standardization on the k-means result by selecting the associated option, as
@@ -554,7 +564,7 @@ as the only available option. Depending on the relative ranges and variances of 
 one standardization may achieve a better grouping than another. Also, in some circumstances, when the variables
 are already on similar scales, standardization is not necessary.</p>
 </div>
-<div id="setting-a-minimum-bound" class="section level4 unnumbered">
+<div id="setting-a-minimum-bound" class="section level4 unnumbered" number="">
 <h4>Setting a minimum bound</h4>
 <p>It is also possible to <em>constrain</em> the k-means
 clustering by imposing a minimum value for a spatially extensive variable, such as a
@@ -581,7 +591,7 @@ Figure 18: Setting a minimum bound
 </p>
 </div>
 <p>With the cluster size at 5 and all other options back to their default value, (specifically, with 150 kmeans++ initialization runs) we obtain
-the cluster result shown in the map in Figure <a href="#fig:minboundmap">19</a>. The categories have been re-ordered to show a similar color scheme to the unconstrained map in Figure <a href="#fig:kmeansmap5">5</a>.</p>
+the cluster result shown in the map in Figure <a href="#fig:minboundmap">19</a>. The categories have been re-ordered to show a similar color scheme to the unconstrained map in Figure <a href="#fig:kmeansmap5">5</a> (using <strong>CLc</strong> as the cluster variable).</p>
 <div class="figure" style="text-align: center"><span id="fig:minboundmap"></span>
 <img src="pics7b/7_076_minboundmap.png" alt="Cluster map with minimum bound constraint" width="60%" />
 <p class="caption">
@@ -600,7 +610,7 @@ Figure 20: Cluster characteristics with minimum bound
 </p>
 </div>
 </div>
-<div id="elbow-plot" class="section level4 unnumbered">
+<div id="elbow-plot" class="section level4 unnumbered" number="">
 <h4>Elbow plot</h4>
 <p>We now illustrate the use of an <em>elbow plot</em> to assess the best value for k. This plot is not included in the <code>GeoDa</code> functionality, but it is easy to construct from the output of a cluster analysis.</p>
 <p>The results for runs of k-means with all the default settings are given in Figure <a href="#fig:elbowdata">21</a>, for k ranging from 1 through 12. As the number of clusters increases, the resulting groupings become less and less informative and tend to yield several singleton clusters (with only one observation). Both WSS and BSS/TSS are listed, with the associated change as the value of k increases.</p>
@@ -621,13 +631,13 @@ Figure 22: Elbow plots
 </div>
 </div>
 </div>
-<div id="cluster-categories-as-variables" class="section level2 unnumbered">
+<div id="cluster-categories-as-variables" class="section level2 unnumbered" number="">
 <h2>Cluster Categories as Variables</h2>
 <p>Once added to the data table, the cluster categories can be visualized like any other integer variable.
 We already saw their use in the unique values map that is provided with the standard output. Two other
 particularly useful applications are as a conditioning variable in a conditional plot and as
 a variable to guide aggregation of observations to the cluster level.</p>
-<div id="conditional-plots" class="section level3 unnumbered">
+<div id="conditional-plots" class="section level3 unnumbered" number="">
 <h3>Conditional plots</h3>
 <p>A particularly useful conditional plot is a conditional box plot, in which the distribution of a variable
 can be shown for each cluster. This supplements the summary characteristics of each cluster provided in the standard
@@ -667,7 +677,7 @@ range between the two groups (2 and 3, relative to 1-4-5). Conditional box plots
 of the different clusters in that they provide more than just a summary measure, such as a mean or median, but portray
 the whole distribution.</p>
 </div>
-<div id="aggregation-by-cluster" class="section level3 unnumbered">
+<div id="aggregation-by-cluster" class="section level3 unnumbered" number="">
 <h3>Aggregation by cluster</h3>
 <p>With the clusters at hand, as defined for each observation by the category in the cluster
 field, we can now compute aggregate values for the new clusters and even
@@ -686,7 +696,7 @@ Figure 26: Table Aggregate option
 <p>The following dialog, shown in Figure <a href="#fig:tabaggpop">27</a>, provides the specific
 aggregation method, i.e., count, average, max, min, or <strong>Sum</strong>, the <strong>key</strong> on which
 to aggregate and a selection of variable to aggregate. In our example, we use the
-cluster field key, e.g., <strong>CLc</strong> and select only the population variable <strong>Pop1831</strong>,
+cluster field key, e.g., <strong>CLc</strong> (from the bounded clustering solution) and select only the population variable <strong>Pop1831</strong>,
 which we will sum over the departments that make up each cluster. This can be readily
 extended to multiple variables, as well as to different summary measures, such
 as the average.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
@@ -718,7 +728,7 @@ Figure 29: Dissolve function
 </p>
 </div>
 <p>The next interface is the same as for the aggregate functionality, shown in
-Figure <a href="#fig:tabaggpop">27</a>. We again select <strong>Clc</strong> as the <em>key</em> to aggregate the spatial units and specify <strong>Pop1831</strong> as the variable to be summed into the new units. After saving the new layer, we can bring it back into GeoDa and create a unique values map of the population totals, as in Figure
+Figure <a href="#fig:tabaggpop">27</a>. We again select <strong>CLc</strong> as the <em>key</em> to aggregate the spatial units and specify <strong>Pop1831</strong> as the variable to be summed into the new units. After saving the new layer, we can bring it back into GeoDa and create a unique values map of the population totals, as in Figure
 <a href="#fig:dissolvepoptot">30</a>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> The table associated with this layer is identical to the
 one shown in Figure <a href="#fig:clusterpop">28</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:dissolvepoptot"></span>
@@ -729,12 +739,12 @@ Figure 30: Map of clusters with population totals
 </div>
 </div>
 </div>
-<div id="clustering-with-dimension-reduction" class="section level2 unnumbered">
+<div id="clustering-with-dimension-reduction" class="section level2 unnumbered" number="">
 <h2>Clustering with Dimension Reduction</h2>
 <p>In practice, it is often more effective to carry out a clustering exercise after dimension reduction,
 instead of using the full set of variables. This is typically based on principal components, but can
 equally be computed from the MDS coordinates. Both approaches are illustrated below.</p>
-<div id="pca" class="section level3 unnumbered">
+<div id="pca" class="section level3 unnumbered" number="">
 <h3>PCA</h3>
 <p>Instead of specifying all six variables, we carry out k-means clustering for the first two principal components,
 say the variables PC1 and PC2. Since the principal components are already standardized, we can set that option
@@ -759,7 +769,7 @@ Figure 32: PCA cluster summary
 </p>
 </div>
 </div>
-<div id="mds" class="section level3 unnumbered">
+<div id="mds" class="section level3 unnumbered" number="">
 <h3>MDS</h3>
 <p>The same principle can be applied to the coordinates obtained from multidimensional scaling. While this is less used in practice,
 it is in fact equivalent to using principal components. We have already seen that for classic metric scaling the two-dimensional plots of the two approaches
@@ -783,9 +793,9 @@ Figure 34: MDS cluster summary
 </div>
 </div>
 </div>
-<div id="appendix" class="section level2 unnumbered">
+<div id="appendix" class="section level2 unnumbered" number="">
 <h2>Appendix</h2>
-<div id="equivalence-of-euclidean-distances-and-sum-of-squared-errors-sse" class="section level3 unnumbered">
+<div id="equivalence-of-euclidean-distances-and-sum-of-squared-errors-sse" class="section level3 unnumbered" number="">
 <h3>Equivalence of Euclidean distances and Sum of Squared Errors (SSE)</h3>
 <p>We start with the objective function as the within sum of squared distances. More precisely,
 this is expressed as one half the sum of the squared Euclidean distances
@@ -824,7 +834,7 @@ which gives the contribution of cluster <span class="math inline">\(h\)</span> t
 <p>In other words, minimizing the sum of (one half) of all squared distances is equivalent to minimizing
 the sum of squared deviations from the mean in each cluster, the within sum of squared errors.</p>
 </div>
-<div id="k-means-worked-example" class="section level3 unnumbered">
+<div id="k-means-worked-example" class="section level3 unnumbered" number="">
 <h3>K-means worked example</h3>
 <p>We now provide the details behind the k-means algorithm portrayed in
 Figures <a href="#fig:kmexample">1</a> and <a href="#fig:kmsteps">2</a>. The coordinates of the seven points are given in the X and Y columns of Figure <a href="#fig:kmeansex1">35</a>. The column labeled as SSE shows the squared distance from each point to the center of the point cloud, computed as the average of the X and Y coordinates (X=5.714, Y=5.143).<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> The sum of the squared distances constitutes the total sum of squared errors, or TSS, which equals 62.286 in this example. This value does not change as we iterate, since it pertains to all the observations taken together and ignores the cluster allocations.</p>
@@ -895,14 +905,14 @@ Figure 43: K-means results from GeoDa
 <p><br></p>
 </div>
 </div>
-<div id="references" class="section level2 unnumbered">
+<div id="references" class="section level2 unnumbered" number="">
 <h2>References</h2>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-ArthurVassilvitskii:07">
 <p>Arthur, David, and Sergei Vassilvitskii. 2007. “k-means++: The Advantages of Careful Seeding.” In <em>SODA 07, Proceedings of the Eighteenth Annual ACM-SIAM Symposium on Discrete Algorithms</em>, edited by Harold Gabow, 1027–35. Philadelphia, PA: Society for Industrial and Applied Mathematics.</p>
 </div>
 <div id="ref-Dempsteretal:77">
-<p>Dempster, A.P., N.M. Laird, and D.B. Rubin. 1977. “Maximum Likelihood from Incomplete Data via the EM Algorithm.” <em>Journal of the Royal Statistical Society, Series B</em> 39: 1–38.</p>
+<p>Dempster, A. P., N. M. Laird, and D. B. Rubin. 1977. “Maximum Likelihood from Incomplete Data via the EM Algorithm.” <em>Journal of the Royal Statistical Society, Series B</em> 39: 1–38.</p>
 </div>
 <div id="ref-Everittetal:11">
 <p>Everitt, Brian S., Sabine Landau, Morven Leese, and Daniel Stahl. 2011. <em>Cluster Analysis, 5th Edition</em>. New York, NY: John Wiley.</p>
@@ -941,7 +951,7 @@ Figure 43: K-means results from GeoDa
 <p>Lloyd, Stuart P. 1982. “Least Squares Quantization in PCM.” <em>IEEE Transactions on Information Theory</em> 28: 129–36.</p>
 </div>
 <div id="ref-PadilhaCampello:17">
-<p>Padilha, Victor A., and Ricardo J.G.B. Campello. 2017. “A Systematic Comparative Evaluation of Biclustering Techniques.” <em>BMC Bioinformatics</em> 18: 55. <a href="https://doi.org/10.1186/s12859-017-1487-1">https://doi.org/10.1186/s12859-017-1487-1</a>.</p>
+<p>Padilha, Victor A., and Ricardo J. G. B. Campello. 2017. “A Systematic Comparative Evaluation of Biclustering Techniques.” <em>BMC Bioinformatics</em> 18: 55. <a href="https://doi.org/10.1186/s12859-017-1487-1">https://doi.org/10.1186/s12859-017-1487-1</a>.</p>
 </div>
 <div id="ref-Tanayetal:04">
 <p>Tanay, Amos, Roded Sharan, and Ron Shamir. 2004. “Biclustering Algorithms: A Survey.” In <em>Handbook of Computational Molecular Biology</em>, edited by Srinivas Aluru, 26–21–17. Boca Raton, FL: Chapman &amp; Hall/CRC.</p>
@@ -954,26 +964,26 @@ Figure 43: K-means results from GeoDa
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>While we discuss dimension reduction and clustering separately, so-called <em>biclustering</em> techniques group both variables and observations simultaneously. While old, going back to an article by <span class="citation">Hartigan (<a href="#ref-Hartigan:72">1972</a>)</span>, these techniques have gained a lot of interest more recently in the field of gene expression analysis. For overviews, see, e.g., <span class="citation">Tanay, Sharan, and Shamir (<a href="#ref-Tanayetal:04">2004</a>)</span> and <span class="citation">Padilha and Campello (<a href="#ref-PadilhaCampello:17">2017</a>)</span>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>While we discuss dimension reduction and clustering separately, so-called <em>biclustering</em> techniques group both variables and observations simultaneously. While old, going back to an article by <span class="citation">Hartigan (<a href="#ref-Hartigan:72" role="doc-biblioref">1972</a>)</span>, these techniques have gained a lot of interest more recently in the field of gene expression analysis. For overviews, see, e.g., <span class="citation">Tanay, Sharan, and Shamir (<a href="#ref-Tanayetal:04" role="doc-biblioref">2004</a>)</span> and <span class="citation">Padilha and Campello (<a href="#ref-PadilhaCampello:17" role="doc-biblioref">2017</a>)</span>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>The discussion in this section is loosely based on part of
-the presentation in <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-Hastieetal:09">2009</a>)</span> Chapter 14.<a href="#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>Since each pair is counted twice, the total sum is divided by 2. While this seems arbitrary at this point, it helps later on when we establish the equivalence between the Euclidean distances and the sum of squared errors.<a href="#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>As shown in <span class="citation">Han, Kamber, and Pei (<a href="#ref-Hanetal:12">2012</a>)</span>, p. 505, the k-means algorithm can be considered to be a special case of the so-called EM (expectation-maximization) algorithm of <span class="citation">Dempster, Laird, and Rubin (<a href="#ref-Dempsteretal:77">1977</a>)</span>. The expectation step consists of allocating each observation to its nearest cluster center, and the maximization step is the recalculation
-of those cluster centers for each new layout.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+the presentation in <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-Hastieetal:09" role="doc-biblioref">2009</a>)</span> Chapter 14.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Since each pair is counted twice, the total sum is divided by 2. While this seems arbitrary at this point, it helps later on when we establish the equivalence between the Euclidean distances and the sum of squared errors.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>As shown in <span class="citation">Han, Kamber, and Pei (<a href="#ref-Hanetal:12" role="doc-biblioref">2012</a>)</span>, p. 505, the k-means algorithm can be considered to be a special case of the so-called EM (expectation-maximization) algorithm of <span class="citation">Dempster, Laird, and Rubin (<a href="#ref-Dempsteretal:77" role="doc-biblioref">1977</a>)</span>. The expectation step consists of allocating each observation to its nearest cluster center, and the maximization step is the recalculation
+of those cluster centers for each new layout.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
 <li id="fn6"><p>The drop-down list goes from 2 to 85,
-which may be insufficient in <em>big data</em> settings. Hence GeoDa now offers the option to enter
-a value directly.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+which may be insufficient in <em>big data</em> settings. Hence <code>GeoDa</code> now offers the option to enter
+a value directly.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
 <li id="fn7"><p>The Z standardization subtracts the mean and divides by the
 standard deviation. Alternative standardizations are to use the mean absolute
-deviation, MAD, the range adjust or range standardization methods.<a href="#fnref7" class="footnote-back">↩</a></p></li>
+deviation, MAD, the range adjust or range standardization methods.<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
 <li id="fn8"><p>In the current implementation, the same summary method needs to
-be applied to all the variables.<a href="#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>The categories have been adjusted to keep the same color pattern as with the cluster map in Figure <a href="#fig:minboundmap">19</a>.<a href="#fnref9" class="footnote-back">↩</a></p></li>
-<li id="fn10"><p>For a similar logic, see for example Chapter 2 in <span class="citation">Everitt et al. (<a href="#ref-Everittetal:11">2011</a>)</span>, where a <em>visual inspection</em> of two-dimensional
-scatter plots of principal components is illustrated as way to identify clusters.<a href="#fnref10" class="footnote-back">↩</a></p></li>
-<li id="fn11"><p>Each squared distance is <span class="math inline">\((x_i - \bar{x})^2 + (y_i - \bar{y})^2\)</span>.<a href="#fnref11" class="footnote-back">↩</a></p></li>
-<li id="fn12"><p>This is accomplished by loading a csv file with the coordinates as the data input in <code>GeoDa</code>.<a href="#fnref12" class="footnote-back">↩</a></p></li>
+be applied to all the variables.<a href="#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>The categories have been adjusted to keep the same color pattern as with the cluster map in Figure <a href="#fig:minboundmap">19</a>.<a href="#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>For a similar logic, see for example Chapter 2 in <span class="citation">Everitt et al. (<a href="#ref-Everittetal:11" role="doc-biblioref">2011</a>)</span>, where a <em>visual inspection</em> of two-dimensional
+scatter plots of principal components is illustrated as way to identify clusters.<a href="#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>Each squared distance is <span class="math inline">\((x_i - \bar{x})^2 + (y_i - \bar{y})^2\)</span>.<a href="#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>This is accomplished by loading a csv file with the coordinates as the data input in <code>GeoDa</code>.<a href="#fnref12" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

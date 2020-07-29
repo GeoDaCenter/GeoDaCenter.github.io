@@ -15,7 +15,7 @@
 
 <title>Dimension Reduction Methods (1)</title>
 
-<script src="lab7aa_files/header-attrs-2.2/header-attrs.js"></script>
+<script src="lab7aa_files/header-attrs-2.3/header-attrs.js"></script>
 <link href="lab7aa_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="lab7aa_files/highlightjs-9.12.0/highlight.js"></script>
     <title>GeoDa on Github</title>
@@ -120,7 +120,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Dimension Reduction Methods (1)</h1>
 <h3 class="subtitle">Principal Component Annalysis (PCA)</h3>
 <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
-<h4 class="date">06/27/2020 (latest update)</h4>
+<h4 class="date">07/29/2020 (latest update)</h4>
 
 
 <div id="TOC">
@@ -235,7 +235,8 @@ given in Chapter 2 of <span class="citation">Hastie, Tibshirani, and Friedman (<
 <em>empty space phenomenon</em>. In essence, the same number of data points are much further apart in higher dimensional spaces than
 in lower dimensional ones. This means that we need (very) large data sets to do effective analysis in high dimensions.</p>
 <p>To illustrate this point, consider three variables, say <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, each generated as 10 uniform random variates in the unit interval (0-1). In one dimension, the observations on these variables are fairly close together. For example, in Figure
-<a href="#fig:onedimrandom">4</a>, the one-dimensional spread for each of the variables is shown on the horizontal axes of a PCP. Clearly, the points on each of the lines that correspond to the dimensions are spaced fairly closely together.</p>
+<a href="#fig:onedimrandom">4</a>, the one-dimensional spread for each of the variables is shown on the horizontal axes of a parallel coordinate
+plot (PCP). Clearly, the points on each of the lines that correspond to the dimensions are spaced fairly closely together.</p>
 <div class="figure" style="text-align: center"><span id="fig:onedimrandom"></span>
 <img src="pics7a/00_3d_random_linegraph.png" alt="Uniform random variables in one dimension" width="30%" />
 <p class="caption">
@@ -508,7 +509,7 @@ plot yields a horizontal line (with slope zero). Through linking and brushing, w
 identify the locations on the map for any point in the scatter plot.</p>
 <p>In addition, this type of bivariate plot is sometimes employed to visually identify <em>clusters</em> in the data.
 Such clusters would be suggested by distinct high density clumps of points in the graph. Such points are close in a multivariate sense,
-since the correspond to a linear combination of the original variables that maximizes explained
+since they correspond to a linear combination of the original variables that maximizes explained
 variance.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:pcascatplot"></span>
 <img src="pics7a/1_693_pc12_scatter.png" alt="First two principal components scatter plot - SVD method" width="40%" />

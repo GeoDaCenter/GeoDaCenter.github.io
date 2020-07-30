@@ -120,7 +120,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Cluster Analysis (2)</h1>
 <h3 class="subtitle">Hierarchical Clustering Methods</h3>
 <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
-<h4 class="date">07/18/2020 (latest update)</h4>
+<h4 class="date">07/30/2020 (latest update)</h4>
 
 
 <div id="TOC">
@@ -278,7 +278,7 @@ thus are far apart from all others.</p>
 <h3>Illustration: single linkage</h3>
 <p>To illustrate the logic of agglomerative hierarchical clustering algorithms, we use the example of
 <em>single linkage</em> applied to the same seven points as we used for k-means. For ease of reference,
-the points are shown in Figure <a href="#fig:slinkexample">1</a>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> The point IDs (not shown) are ordered with increasing values of X first, then Y, starting
+the points are shown in Figure <a href="#fig:slinkexample">1</a>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> As before, the point IDs are ordered with increasing values of X first, then Y, starting
 with observation 1 in the lower left corner. Full details are given in the <a href="#appendix">Appendix</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:slinkexample"></span>
 <img src="pics7b/01_points.png" alt="Single link hierarchical clustering toy example" width="35%" />
@@ -485,8 +485,10 @@ Figure 10: Hierarchical clustering variable selection
 </p>
 </div>
 <p>The panel also allows one to set the usual options, such as the <strong>Transformation</strong> (default value
-is a standardized z-value), the linkage <strong>Method</strong> (default is <strong>Ward’s linkage</strong>), and the
-<strong>Distance Function</strong> (default is <strong>Euclidean</strong>). In the same way as for k-means, the cluster
+is a standardized z-value), and the linkage <strong>Method</strong> (default is <strong>Ward’s linkage</strong>). The
+<strong>Distance Function</strong> option is not available for the default <strong>Ward’s linkage</strong> shown here (only <strong>Euclidean</strong>
+distance is allowed for this linkage), However, <strong>Manhattan</strong> distance is an option for
+the other linkage methods. In the same way as for k-means, the cluster
 classification is saved in the data table under the variable name specified in
 <strong>Save Cluster in Field</strong>.</p>
 </div>

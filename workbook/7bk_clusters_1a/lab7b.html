@@ -120,7 +120,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Cluster Analysis (1)</h1>
 <h3 class="subtitle">K-Means Clustering</h3>
 <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
-<h4 class="date">07/29/2020 (latest update)</h4>
+<h4 class="date">08/12/2020 (latest update)</h4>
 
 
 <div id="TOC">
@@ -189,7 +189,8 @@ dissimilarity and maximizing between-cluster dissimilarity.</p>
 groups.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>There are a very large number of clustering techniques and algorithms. They are standard tools of so-called <em>unsupervised learning</em> and constitute a core element in
 any machine learning toolbox. Classic texts include <span class="citation">Hartigan (<a href="#ref-Hartigan:75" role="doc-biblioref">1975</a>)</span>, <span class="citation">Jain and Dubes (<a href="#ref-JainDubes:88" role="doc-biblioref">1988</a>)</span>,
-<span class="citation">Kaufman and Rousseeuw (<a href="#ref-KaufmanRousseeuw:05" role="doc-biblioref">2005</a>)</span>, and <span class="citation">Everitt et al. (<a href="#ref-Everittetal:11" role="doc-biblioref">2011</a>)</span>. A fairly recent overview of methods can be found in <span class="citation">Jain (<a href="#ref-Jain:10" role="doc-biblioref">2010</a>)</span>. In addition, excellent treatments of some of the more technical aspects are contained in Chapter 14 of <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-Hastieetal:09" role="doc-biblioref">2009</a>)</span>, Chapters 10 and 11 of <span class="citation">Han, Kamber, and Pei (<a href="#ref-Hanetal:12" role="doc-biblioref">2012</a>)</span>, and Chapter 10 of <span class="citation">James et al. (<a href="#ref-Jamesetal:13" role="doc-biblioref">2013</a>)</span>, among others.</p>
+<span class="citation">Kaufman and Rousseeuw (<a href="#ref-KaufmanRousseeuw:05" role="doc-biblioref">2005</a>)</span>, and <span class="citation">Everitt et al. (<a href="#ref-Everittetal:11" role="doc-biblioref">2011</a>)</span>. A fairly recent overview of methods can be found in <span class="citation">Jain (<a href="#ref-Jain:10" role="doc-biblioref">2010</a>)</span>, and an evaluation of k-means on a number
+of benchmark data sets is contained in <span class="citation">Fränti and Sieranoja (<a href="#ref-FrantiSieranoja:18" role="doc-biblioref">2018</a>)</span>. In addition, excellent treatments of some of the more technical aspects are contained in Chapter 14 of <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-Hastieetal:09" role="doc-biblioref">2009</a>)</span>, Chapters 10 and 11 of <span class="citation">Han, Kamber, and Pei (<a href="#ref-Hanetal:12" role="doc-biblioref">2012</a>)</span>, and Chapter 10 of <span class="citation">James et al. (<a href="#ref-Jamesetal:13" role="doc-biblioref">2013</a>)</span>, among others.</p>
 <p>Clustering methods can be organized along a number of different dimensions. A common distinction is between partitioning methods, hierarchical methods, density-based methods and grid-based methods <span class="citation">(see, e.g., Han, Kamber, and Pei <a href="#ref-Hanetal:12" role="doc-biblioref">2012</a>, 448–50)</span>. In addition, there are model-based approaches developed in the statistical literature, such as Gaussian mixture models (GMM) and Bayesian clusters.</p>
 <p>In this and the next two chapters, we focus on the two most common approaches, namely <em>partitioning</em> methods and <em>hierarchical</em> methods. We do not cover the model-based techniques, since they are less compatible with an exploratory mindset (more precisely, they require a formal probabilistic model). We also restrict our discussion to exact clustering methods and do not consider fuzzy clustering (where an observation may belong to more than one cluster). In exact clustering, the clusters are both <em>exhaustive</em> and <em>exclusive</em>. This means that every observation must belong to one cluster, and only one cluster.</p>
 <p>In the current chapter, we deal with <strong>k-means</strong> clustering, the most familiar example of a partitioning method. Hierarchical clustering is covered in the next chapter and more advanced techniques in a third.</p>
@@ -916,6 +917,9 @@ Figure 43: K-means results from GeoDa
 </div>
 <div id="ref-Everittetal:11">
 <p>Everitt, Brian S., Sabine Landau, Morven Leese, and Daniel Stahl. 2011. <em>Cluster Analysis, 5th Edition</em>. New York, NY: John Wiley.</p>
+</div>
+<div id="ref-FrantiSieranoja:18">
+<p>Fränti, Pasi, and Sami Sieranoja. 2018. “K-Means Properties on Six Clustering Benchmark Datasets.” <em>Applied Intelligence</em> 48: 4743–59.</p>
 </div>
 <div id="ref-Hanetal:12">
 <p>Han, Jiawei, Micheline Kamber, and Jian Pei. 2012. <em>Data Mining (Third Edition)</em>. Amsterdam: MorganKaufman.</p>

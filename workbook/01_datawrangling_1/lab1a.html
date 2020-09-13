@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Luc Anselin" />
+
+
+<title>Spatial Data Wrangling (1) – Basic Operations</title>
+
+<script src="lab1a_files/header-attrs-2.3/header-attrs.js"></script>
+<link href="lab1a_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab1a_files/highlightjs-9.12.0/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	    .shadowfilter {
+	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	        filter: url(shadow.svg#drop-shadow);
+	     }
+	     .intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;}
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h3.subtitle {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Spatial Data Wrangling (1) – Basic Operations</h1>
+<h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+<h4 class="date">09/10/2020 (updated)</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#objectives">Objectives</a>
+<ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#preliminaries">Preliminaries</a></li>
+</ul></li>
+<li><a href="#spatial-data">Spatial Data</a>
+<ul>
+<li><a href="#gis-files">GIS files</a>
+<ul>
+<li><a href="#spatial-file-formats">Spatial file formats</a></li>
+<li><a href="#polygon-layers">Polygon layers</a></li>
+<li><a href="#file-format-conversion">File format conversion</a></li>
+<li><a href="#point-layers">Point layers</a></li>
+</ul></li>
+<li><a href="#tabular-files">Tabular files</a></li>
+<li><a href="#other-spatial-data-input">Other spatial data input</a></li>
+</ul></li>
+<li><a href="#creating-spatial-layers">Creating Spatial Layers</a>
+<ul>
+<li><a href="#point-layers-from-coordinates">Point layers from coordinates</a>
+<ul>
+<li><a href="#a-first-note-about-projections">A first note about projections</a></li>
+</ul></li>
+<li><a href="#grid">Grid</a></li>
+</ul></li>
+<li><a href="#table-manipulations">Table Manipulations</a>
+<ul>
+<li><a href="#variable-properties">Variable properties</a>
+<ul>
+<li><a href="#edit-variable-properties">Edit variable properties</a></li>
+<li><a href="#other-variable-operations">Other variable operations</a></li>
+<li><a href="#operating-on-the-table">Operating on the table</a></li>
+</ul></li>
+<li><a href="#calculator">Calculator</a>
+<ul>
+<li><a href="#special">Special</a></li>
+<li><a href="#univariate">Univariate</a></li>
+<li><a href="#variable-standardization">Variable standardization</a></li>
+<li><a href="#bivariate">Bivariate</a></li>
+<li><a href="#date-and-time">Date and time</a></li>
+</ul></li>
+<li><a href="#merging-tables">Merging tables</a></li>
+</ul></li>
+<li><a href="#queries">Queries</a>
+<ul>
+<li><a href="#table-selection">Table Selection</a>
+<ul>
+<li><a href="#new-selection">New selection</a></li>
+<li><a href="#other-selection-options">Other selection options</a></li>
+</ul></li>
+<li><a href="#indicator-variable">Indicator variable</a></li>
+<li><a href="#save-selected-observations">Save selected observations</a></li>
+<li><a href="#spatial-selection">Spatial selection</a>
+<ul>
+<li><a href="#selection-by-shape">Selection by shape</a></li>
+<li><a href="#selection-on-map-classification">Selection on map classification</a></li>
+<li><a href="#save-selection-indicator-variable">Save selection indicator variable</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered" number="">
+<h2>Introduction</h2>
+<p>In this and the following two chapters, we tackle the topic of <em>data wrangling</em>, i.e., the process of getting
+data from its raw input into a form that is amenable for analysis. This is often considered to be the
+most time consuming part of a data science project, taking as much as 80% of the effort <span class="citation">(Dasu and Johnson <a href="#ref-DasuJohnson:03" role="doc-biblioref">2003</a>)</span>.
+Even though the focus in these notes is on <em>analysis</em> and not on data manipulation per se, we provide
+a quick overview of the functionality contained in <code>GeoDa</code> to assist with these operations. Increasingly,
+data wrangling has evolved into a field of its own, with a growing number of operations turning
+into automatic procedures embedded into software <span class="citation">(Rattenbury et al. <a href="#ref-Tattenburyetal:17" role="doc-biblioref">2017</a>)</span>. A detailed discussion of this is beyond our scope.</p>
+<p>In the current chapter, we focus on essential input operations and data manipulations included in the
+<strong>Table</strong> functionality of <code>GeoDa</code>, including data queries. The second chapter in the series covers basic GIS operations.
+In the third chapter, we work through an extensive illustration using an example of information from an
+open data portal.</p>
+<div id="objectives" class="section level3 unnumbered" number="">
+<h3>Objectives</h3>
+<ul>
+<li><p>Load a spatial layer from a range of formats</p></li>
+<li><p>Convert between spatial formats</p></li>
+<li><p>Create a point layer from coordinates in a table</p></li>
+<li><p>Create a grid layer</p></li>
+<li><p>Become familiar with the table options</p></li>
+<li><p>Use the Calculator Tool to create new variables</p></li>
+<li><p>Variable standardization</p></li>
+<li><p>Merging tables</p></li>
+<li><p>Use the Selection Tool to select observations in a table</p></li>
+<li><p>Use a selection shape to select observations in a map</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered" number="">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>File &gt; Open</li>
+<li>File &gt; Save As</li>
+<li>Tools &gt; Shape &gt; Points from Table</li>
+<li>Tools &gt; Shape &gt; Create Grid</li>
+<li>Table &gt; Edit Variable Properties</li>
+<li>Table &gt; Add Variable</li>
+<li>Table &gt; Delete Variable(s)</li>
+<li>Table &gt; Rename Variable</li>
+<li>Table &gt; Encode</li>
+<li>Table &gt; Setup Number Formatting</li>
+<li>Table &gt; Move Selected to Top</li>
+<li>Table &gt; Calculator</li>
+<li>Table &gt; Selection Tool</li>
+<li>File &gt; Save Selected As</li>
+<li>Map &gt; Unique Values Map</li>
+<li>Map &gt; Selection Shape</li>
+<li>Map &gt; Save Selection</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="preliminaries" class="section level3 unnumbered" number="">
+<h3>Preliminaries</h3>
+<p>We will illustrate the basic data input operations by means of a series of example data sets,
+all contained in the <a href="https://geodacenter.github.io/data-and-lab/">GeoDa Center data set collection</a>.</p>
+<p>Specifically, we will use files from the following data sets:</p>
+<ul>
+<li><p><a href="https://geodacenter.github.io/data-and-lab/commpop/">Chicago commpop</a>: population data for 77 Chicago
+Community Areas in 2000 and 2010</p></li>
+<li><p><a href="https://geodacenter.github.io/data-and-lab//chicago_sup_vars/">Groceries</a>: the location of 148 supermarkets
+in Chicago in 2015</p></li>
+<li><p><a href="https://geodacenter.github.io/data-and-lab/natregimes/">Natregimes</a>: homicide and socio-economic data for
+3085 U.S. counties in 1960-1990</p></li>
+<li><p><a href="https://geodacenter.github.io/data-and-lab/SFcrimes_vars/">SanFran Crime</a>: San Francisco crime incidents
+in 2012 (point data)</p></li>
+</ul>
+<p>Make sure to have these data sets downloaded, unzipped and available in a working directory for analysis.</p>
+</div>
+</div>
+<div id="spatial-data" class="section level2 unnumbered" number="">
+<h2>Spatial Data</h2>
+<p>Spatial data are characterized by the combination of two important aspects. First, there
+is information on traditional
+variables just as in any other statistical analysis. In the spatial analysis world,
+this is referred to as <em>attribute</em> information.
+Typically, this is contained in a <em>flat</em> (rectangular) table with observations as rows
+and variables as columns.</p>
+<p>The second aspect of spatial data is distinct, and is referred to as <em>locational</em> information. This
+consists of
+the precise
+definition of spatial objects, classified as points, lines or areas.
+In essence, the formal characterization of any spatial object boils down to the description of x,y coordinates of points in space,
+as well as of a mechanism that spells out how these points are combined into spatial entities.</p>
+<p>For a single point, this simply
+consists of its coordinates. For areal units, such as census tracts, counties, or states, the
+boundary is defined as a series of line segments, each characterized by the coordinates of their
+starting and ending points. In other words, what may seem like a continuous boundary, is turned
+into <em>discrete</em> segments.</p>
+<p>Traditional data tables have no problem including x and y coordinates as columns, but as such cannot
+deal with the boundary definition of irregular spatial units. Since the number of line segments defining
+an areal boundary can easily vary from observation to observation, there is no efficient way to include
+this in
+a fixed number of columns of a flat table. Consequently, a specialized <em>data structure</em> is required,
+typically contained in a geographic information system or GIS.</p>
+<p>Several specialized formats have been developed to efficiently combine both the
+attribute information and the locational information. Such spatial data can be contained in files with a special structure, or in spatially
+enabled relational data base systems.</p>
+<p>In this section, we first consider common GIS file formats as input to <code>GeoDa</code>. We next illustrate
+simple tabular input of non-spatial files. We close with a brief overview of connections to other
+input formats.</p>
+<div id="gis-files" class="section level3 unnumbered" number="">
+<h3>GIS files</h3>
+<p>Historically, a wide range of different formats have been developed for GIS data, both proprietary as well as open source.
+In addition, there has been considerable effort at standardization, led by the <a href="https://www.ogc.org">Open Geospatial Consortium</a> (OGC). <code>GeoDa</code> leverages the open source <a href="https://gdal.org"><code>GDAL</code> library</a> to
+support many of the most popular formats in use today.</p>
+<p>While it is impossible to cover all of these specifications in detail, we will illustrate the use of the proprietary <a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"><em>shape file</em> format
+of ESRI</a>, the open source <a href="https://geojson.org"><em>GeoJSON</em></a> format, and the <a href="https://www.ogc.org/standards/gml"><em>Geography Markup Language</em></a> of the OGC as a standard XML grammar for defining geographical features.</p>
+<p><code>GeoDa</code> can load both polygon and point GIS data, but in the current implementation, line files (e.g., representing road networks) are <em>not</em> supported.</p>
+<div id="spatial-file-formats" class="section level4 unnumbered" number="">
+<h4>Spatial file formats</h4>
+<p>Arguably, the most familiar proprietary spatial data format is the <em>shape file</em> format, developed by ESRI.
+The terminology is a bit confusing, since there is no such thing as <em>one</em> shape file, but there is instead
+a collection of three (or four) files. One file has the extension <strong>.shp</strong>, one <strong>.shx</strong>, one <strong>.dbf</strong>, and
+one <strong>.prj</strong> (with the projection information). The first three are required, the fourth one is optional,
+but highly recommended. The files should all be in the same directory and have the same file name.</p>
+<p>In the open source world, an increasingly common format is <em>GeoJSON</em>, the geographic augmentation of the JSON standard,
+which stands from <em>JavaScript Object Notation</em>. This format is contained in a text file and due to its highly
+structured nature is easy for machines to read.</p>
+<p>Finally, the <em>GML</em> standard, or geographic markup language, is a XML implementation that prescribes the formal
+description of geographic features.</p>
+<p>A detailed discussion of the individual formats is beyond our scope, but they are well-documented. For our
+purposes, there is no need to know the underlying formats, since the interaction with the data structures
+is handled by <code>GeoDa</code> under the hood.</p>
+<p>The main file manipulations are invoked from the <strong>File</strong> item in the menu, or by one of the left-most
+icons on the toolbar, shown in Figure <a href="#fig:fileicons">1</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:fileicons"></span>
+<img src="pics1a/00_file_icons.png" alt="Toolbar icons for file manipulation" width="20%" />
+<p class="caption">
+Figure 1: Toolbar icons for file manipulation
+</p>
+</div>
+</div>
+<div id="polygon-layers" class="section level4 unnumbered" number="">
+<h4>Polygon layers</h4>
+<p>Most of the analyses covered in these chapters will pertain to areal units, or polygon layers.
+We load these by invoking <strong>File &gt; Open File</strong> from the menu, or by clicking on the left-most <strong>Open</strong> icon
+on the toolbar in Figure <a href="#fig:fileicons">1</a>.</p>
+<p>This brings up the <strong>Connect to Data Source</strong> dialog, shown in Figure <a href="#fig:filedialog">2</a>.
+The left panel has <strong>File</strong> as the active input format. Other formats are <strong>Database</strong> and <strong>Web</strong>, which
+we briefly cover below. The right panel shows a series of <strong>Sample Data</strong> data are included with <code>GeoDa</code>. After
+some files have been loaded, the <strong>Recent</strong> panel lists their file names. Files listed in either panel
+can be loaded by simply clicking on their icon.</p>
+<div class="figure" style="text-align: center"><span id="fig:filedialog"></span>
+<img src="pics1a/00_openfiledialog.png" alt="Connect to Data Source dialog" width="60%" />
+<p class="caption">
+Figure 2: Connect to Data Source dialog
+</p>
+</div>
+<p>When clicking on the small folder icon to the right of the <strong>Input file</strong> box, a list of supported
+file formats appears, as in Figure <a href="#fig:fileformats">3</a>. In this first example, we select the top
+item in the list, <strong>ESRI Shapefile (*.shp)</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:fileformats"></span>
+<img src="pics1a/00_fileformats.png" alt="Supported spatial file formats" width="60%" />
+<p class="caption">
+Figure 3: Supported spatial file formats
+</p>
+</div>
+<p>Next comes the familiar directory navigation dialog,
+specific to each operating system. After moving to the proper folder and selecting <strong>commpop.shp</strong>,
+a map window opens up with the spatial layer represented as a themeless choropleth map with 77 observations
+(listed in the top left).
+In our example, this is as in Figure <a href="#fig:openingmap">4</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:openingmap"></span>
+<img src="pics1a/00_initial_commpop.png" alt="Themeless polygon map" width="60%" />
+<p class="caption">
+Figure 4: Themeless polygon map
+</p>
+</div>
+<p>We clear the current layer by clicking on the <strong>Close</strong> toolbar icon, the second item on the left.
+This removes the base map and the icon becomes inactive.</p>
+<p>A more efficient way to open files is to select and drag the file onto the
+<strong>Drop files here</strong> box in the dialog.</p>
+<p>Before we proceed with this, consider the contents of the file <strong>chicago_comm.geojson</strong>.
+In contrast to the shape file format, which is binary, a GeoJSON file is simple text and
+can easily be read by humans. As shown in Figure <a href="#fig:geojsonfile">5</a>, we see how the
+<em>locational</em> information is combined with the attributes. After some header information
+follows a list of <strong>features</strong>. Each of these contains <strong>properties</strong>, of which the first
+set consists of the different variable names with the associated values, just as would
+be the case in any standard data table. However, the final item refers to the <strong>geometry</strong>.
+It includes the <strong>type</strong>, here a <strong>MultiPolygon</strong>, followed by a list of x-y <strong>coordinates</strong>.
+In this fashion, the spatial information is integrated with the attribute information.</p>
+<div class="figure" style="text-align: center"><span id="fig:geojsonfile"></span>
+<img src="pics1a/00_geojson.png" alt="Example GeoJSON file contents" width="80%" />
+<p class="caption">
+Figure 5: Example GeoJSON file contents
+</p>
+</div>
+<p>To view the corresponding map, we select the
+<strong>chicago_comm.geojson</strong> file and drag it onto the <strong>Drop files here</strong> box. This brings up the same
+base map as in Figure <a href="#fig:openingmap">4</a>.</p>
+</div>
+<div id="file-format-conversion" class="section level4 unnumbered" number="">
+<h4>File format conversion</h4>
+<p>The file we just loaded was in GeoJSON format. Let’s say we want to convert this into GML.
+This is accomplished in <code>GeoDa</code> by means of <strong>Save As</strong> and selecting
+<strong>Geographic Markup Language (*.gml)</strong>
+from the drop down list shown in Figure <a href="#fig:fileformats">3</a>.</p>
+<p>For example, if we save the
+file as <strong>commpop.gml</strong>, it is converted to the GML XML format, as illustrated in
+Figure <a href="#fig:gmlfile">6</a>. We notice the characteristic &lt; &gt; and &lt;/ &gt; delimiters of the markup elements.
+In our file snippet, the top lines pertain to the geography of the first polygon, ended by
+<strong>&lt;/ogr:geometryProperty&gt;</strong>. Next follow the actual observations with variable names and associated
+values, finally closed off with <strong>&lt;/gml:featureMember&gt;</strong>. After this, a new observation is given, delineated
+by the <strong>&lt;gml:featureMember&gt;</strong> tag, followed by
+the geographic characteristics. Again, this illustrates how spatial information is combined
+with attribute information in an efficient file format.</p>
+<div class="figure" style="text-align: center"><span id="fig:gmlfile"></span>
+<img src="pics1a/00_gml.png" alt="Example GML file contents" width="90%" />
+<p class="caption">
+Figure 6: Example GML file contents
+</p>
+</div>
+<p>The <strong>Save As</strong> feature in <code>GeoDa</code> turns it into an effective GIS format converter.</p>
+</div>
+<div id="point-layers" class="section level4 unnumbered" number="">
+<h4>Point layers</h4>
+<p>Point layer GIS files are loaded in the same fashion. For example, we can drag the
+file <strong>chicago_sup.shp</strong> from the Grocery sample data folder onto the
+<strong>Drop files here</strong> box. This generates a point map of 148 supermarket locations,
+as in Figure <a href="#fig:openingpoints">7</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:openingpoints"></span>
+<img src="pics1a/00_initial_chicagosup.png" alt="Themeless point map" width="60%" />
+<p class="caption">
+Figure 7: Themeless point map
+</p>
+</div>
+</div>
+</div>
+<div id="tabular-files" class="section level3 unnumbered" number="">
+<h3>Tabular files</h3>
+<p>In addition to GIS files, <code>GeoDa</code> can also read regular non-spatial tabular data. While this does
+not allow for <em>spatial</em> analysis (unless coordinates are contained in the table, see below), all
+non-spatial operations and graphs are supported.</p>
+<p>For example, we can input a comma separated file (<strong>csv</strong> format) by dragging the file <strong>commpopulation.csv</strong>
+from the commpop sample data set onto
+the <strong>Drop files here</strong> box. This generates the dialog shown in Figure <a href="#fig:csvdialog">8</a>. Since
+a csv file is pure text, there is no information on the type of the variables. <code>GeoDa</code> tries to guess
+the type and lists the <strong>Data Type</strong> for each field, as well as a brief preview of the table. At this point, the type can be changed before the
+data are moved into the actual data table.</p>
+<div class="figure" style="text-align: center"><span id="fig:csvdialog"></span>
+<img src="pics1a/00_csv_input_dialog.png" alt="CSV format file input dialog" width="50%" />
+<p class="caption">
+Figure 8: CSV format file input dialog
+</p>
+</div>
+<p>Instead of a base map, when the process is completed, the data table is brought up, as shown in Figure <a href="#fig:csvtable">9</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:csvtable"></span>
+<img src="pics1a/00_initial_table.png" alt="Table contents" width="25%" />
+<p class="caption">
+Figure 9: Table contents
+</p>
+</div>
+<p>In addition to comma separated files, <code>GeoDa</code> also supports tabular input from <strong>dBase</strong> database files,
+Microsoft <strong>Excel</strong>, and <strong>Open Document Spreadsheet (*.ods)</strong> formatted files.</p>
+</div>
+<div id="other-spatial-data-input" class="section level3 unnumbered" number="">
+<h3>Other spatial data input</h3>
+<p>In addition to file input, <code>GeoDa</code> can connect to a number of spatially enabled relational data bases,
+such as PostgesQL/PostGIS, Oracle Spatial and MySQL Spatial. This is available through the <strong>Database</strong>
+button in the <strong>Connect to Data Source</strong> interface, as shown in Figure <a href="#fig:database">10</a>. Each data
+base system has its own requirements in terms of specifying the host, port, user name, password and
+other settings. Once the connection is established, the data can also be saved to a file format.
+In the current version, the data base connection is limited to loading a single table, but it does
+not support additional SQL commands.</p>
+<div class="figure" style="text-align: center"><span id="fig:database"></span>
+<img src="pics1a/00_database_connection.png" alt="Spatial data base connections" width="40%" />
+<p class="caption">
+Figure 10: Spatial data base connections
+</p>
+</div>
+<p>A third data source option is referred to as <strong>Web</strong> in the interface. It allows data to be loaded
+directly from a <strong>GeoJSON URL</strong> or from the older web feature server <strong>WFS URL</strong>, as shown in
+Figure <a href="#fig:web">11</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:web"></span>
+<img src="pics1a/00_web_connection.png" alt="Web connections" width="40%" />
+<p class="caption">
+Figure 11: Web connections
+</p>
+</div>
+</div>
+</div>
+<div id="creating-spatial-layers" class="section level2 unnumbered" number="">
+<h2>Creating Spatial Layers</h2>
+<p>In addition to loading spatial layers from existing files or data base sources, the <strong>Tools</strong> functionality
+of <code>GeoDa</code> includes the capacity to create new spatial layers. This is invoked from the <strong>Tools</strong> icon
+on the toolbar, as in Figure <a href="#fig:toolspts">12</a>, or from the menu as <strong>Tools &gt; Shape</strong>. Two different operations
+are supported: one is to turn x-y coordinates from a table into a point layer, the other creates a rectangular
+shape of grid cells.</p>
+<div class="figure" style="text-align: center"><span id="fig:toolspts"></span>
+<img src="pics1a/00_tools_pointsfromtable.png" alt="Tools Shape functions" width="30%" />
+<p class="caption">
+Figure 12: Tools Shape functions
+</p>
+</div>
+<div id="point-layers-from-coordinates" class="section level3 unnumbered" number="">
+<h3>Point layers from coordinates</h3>
+<p>Point layers can be created from two variables contained in a data table as <strong>Tools &gt; Shape &gt; Points from Table</strong>.
+To illustrate this, we first create a copy of <strong>chicago_sup.dbf</strong> from the grocery sample data set, say
+<strong>chicago_sup1.dbf</strong>. After loading the file onto the <strong>Drop files here</strong> box, the data table opens, as in
+Figure <a href="#fig:tablecoords">13</a>. The latitude and longitude of the points (in decimal degrees) are included as
+<strong>Ycoord</strong> and <strong>Xcoord</strong>. Note that latitude is the vertical dimension (Y) and longitude is the horizontal
+one (X).</p>
+<div class="figure" style="text-align: center"><span id="fig:tablecoords"></span>
+<img src="pics1a/00_points_from_table.png" alt="Coordinate variables in data table" width="80%" />
+<p class="caption">
+Figure 13: Coordinate variables in data table
+</p>
+</div>
+<p>At this point, we invoke the <strong>Points from Table</strong> command. A dialog opens up listing all numerical variables
+in the data table. In our example, shown in Figure <a href="#fig:pointcoords">14</a>, there are very few such variables,
+and the obvious candidates are <strong>Xcoord</strong> and <strong>Ycoord</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:pointcoords"></span>
+<img src="pics1a/00_newmap_coords.png" alt="Specifying the point coordinates" width="40%" />
+<p class="caption">
+Figure 14: Specifying the point coordinates
+</p>
+</div>
+<p>After selecting the coordinate variables and clicking on <strong>OK</strong>, a point map appears, as in Figure <a href="#fig:pointmapxy">15</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:pointmapxy"></span>
+<img src="pics1a/00_chicago_sup_from_xy.png" alt="Point layer from coordinates" width="60%" />
+<p class="caption">
+Figure 15: Point layer from coordinates
+</p>
+</div>
+<p>At this stage, we can save the point layer as a GIS file, such as a shape file, using <strong>File &gt; Save As</strong>.</p>
+<div id="a-first-note-about-projections" class="section level4 unnumbered" number="">
+<h4>A first note about projections</h4>
+<p>At the bottom of the file dialog is an option to enter <strong>CRS (proj4 format)</strong>. This refers to the projection
+information. We will discuss projections in more detail in the next chapter, but at this point it is useful
+to be aware of the implications.</p>
+<p>A careful comparison of the point pattern in Figure <a href="#fig:pointmapxy">15</a> and in Figure <a href="#fig:openingpoints">7</a>
+will reveal that they are not identical. While the relative positions of the points are the same, they appear
+more spread out in Figure <a href="#fig:pointmapxy">15</a>. The reason for the discrepancy is in the use of different
+projections.</p>
+<p>If, as described, a copy of the initial dbf file was used to create the point layer, then the <em>Coordinate
+Reference System</em> (CRS) entry will be empty, as in Figure <a href="#fig:crs1">16</a>. In other words, there is no
+projection information. As a result, if the result was saved as a shape file, it will <em>not</em> include
+a <strong>prj</strong> file.</p>
+<div class="figure" style="text-align: center"><span id="fig:crs1"></span>
+<img src="pics1a/00_emptycrs.png" alt="Blank CRS" width="60%" />
+<p class="caption">
+Figure 16: Blank CRS
+</p>
+</div>
+<p>In contrast, if we had used the original <strong>chicago_sup.dbf</strong> file, the CRS box would contain the
+entry as in Figure <a href="#fig:crs2">17</a>. The reason for this difference is that <code>GeoDa</code> checks for the
+existence of a <strong>prj</strong> file with the same file name. If there is such a file present (as is the case
+in our sample data set), the information is used to populate the CRS entry, which then is saved
+into a <strong>prj</strong> file associated with the new point layer. We pursue this in greater detail in the
+next chapter.</p>
+<div class="figure" style="text-align: center"><span id="fig:crs2"></span>
+<img src="pics1a/00_crswithinfo.png" alt="CRS with projection information" width="60%" />
+<p class="caption">
+Figure 17: CRS with projection information
+</p>
+</div>
+</div>
+</div>
+<div id="grid" class="section level3 unnumbered" number="">
+<h3>Grid</h3>
+<p>The second type of spatial layer that can be created is a set of grid cells. Such cells are rarely of
+interest in and of themselves, but are useful to aggregate counts of point locations in order to
+calculate point pattern statistics, such as quadrat counts.</p>
+<p>The grid creation can be invoked from the menu without any
+table or layer open, as <strong>Tools &gt; Shape &gt; Create Grid</strong>. This brings up a dialog containing a range of options, shown
+in Figure <a href="#fig:griddialog">18</a>. The most important aspect to enter is the <strong>Number of Rows</strong> and the
+<strong>Number of Columns</strong>, listed under <strong>Grid Size</strong> at the bottom of the dialog. This determines the number of
+observations. In our example, we have entered <strong>10</strong> rows and <strong>5</strong> columns, for 50 observations.</p>
+<p>There are four options to determine the <strong>Grid Bounding Box</strong>, i.e., the rectangular extent of the grids. The
+most likely approach is to use the bounding box of a currently open layer or of an available shape data source.
+The <strong>Lower-left</strong> and <strong>Upper-right</strong> corners of the bounding box can also be set manually, or read from
+an ASCII file.</p>
+<p>In our example in Figure <a href="#fig:griddialog">18</a>, we have selected the <strong>commpop</strong> shape file as the source
+for the bounding box.</p>
+<div class="figure" style="text-align: center"><span id="fig:griddialog"></span>
+<img src="pics1a/00_creategriddialog.png" alt="Grid creation dialog" width="40%" />
+<p class="caption">
+Figure 18: Grid creation dialog
+</p>
+</div>
+<p>After the grid layer is saved, it can be loaded into <code>GeoDa</code>. In Figure <a href="#fig:gridlayer">19</a>, the result
+is shown, superimposed onto the community areas layer (we will cover in the next chapter how to implement this).
+Clearly, the extent of the grid cells matches the bounding box for the area layer.</p>
+<div class="figure" style="text-align: center"><span id="fig:gridlayer"></span>
+<img src="pics1a/00_gridlayer.png" alt="Grid layer over Chicago community areas" width="60%" />
+<p class="caption">
+Figure 19: Grid layer over Chicago community areas
+</p>
+</div>
+</div>
+</div>
+<div id="table-manipulations" class="section level2 unnumbered" number="">
+<h2>Table Manipulations</h2>
+<p>A range of variable transformations are supported through the <strong>Table</strong> functionality in <code>GeoDa</code>.
+To illustrate these, we will use the <strong>Natregimes</strong> sample data set. After loading the
+<strong>natregimes.shp</strong> file, we obtain the base map of 3085 U.S. counties, shown in Figure <a href="#fig:natregimes">20</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:natregimes"></span>
+<img src="pics1a/11_natregimes_map.png" alt="U.S counties base map" width="60%" />
+<p class="caption">
+Figure 20: U.S counties base map
+</p>
+</div>
+<p>The table is openened by means of second icon from right on the toolbar shown in Figure <a href="#fig:fileicons">1</a>, or
+from the menu. The data table associated with the <strong>natregimes</strong> layer is as in Figure <a href="#fig:natregimestable">21</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:natregimestable"></span>
+<img src="pics1a/11_natregimes_table.png" alt="U.S counties data table" width="80%" />
+<p class="caption">
+Figure 21: U.S counties data table
+</p>
+</div>
+<p>The options associated with table manipulations are invoked from the menu, or by right clicking
+on the table itself, as in Figure <a href="#fig:tableoptions">22</a>. In addition to a range of variable transformations,
+the options menu also includes the <strong>Selection Tool</strong> to carry out data queries. We discuss those options in
+the next section, first we review some of the more often used variable manipulations.</p>
+<div class="figure" style="text-align: center"><span id="fig:tableoptions"></span>
+<img src="pics1a/11_table_options.png" alt="Table options" width="20%" />
+<p class="caption">
+Figure 22: Table options
+</p>
+</div>
+<div id="variable-properties" class="section level3 unnumbered" number="">
+<h3>Variable properties</h3>
+<div id="edit-variable-properties" class="section level4 unnumbered" number="">
+<h4>Edit variable properties</h4>
+<p>One of the most used initial transformations pertains to getting the data into the right format. Often,
+observation identifiers, such as the FIPS code used by the U.S. census, are recorded as character or string
+variables, not in a numeric format. In order to use these variables effectively, we need to convert them
+to a different format. This is accomplished through the <strong>Edit Variable Properties</strong> option.</p>
+<p>After this option is invoked, a list of all variables is given, with their <strong>type</strong>, as well as a number of
+other properties, like precision, as shown in Figure <a href="#fig:varprops">23</a>. In our example, the indicator variable
+<strong>NOSOUTH</strong> is listed as <strong>real</strong>, whereas it really should be integer. By selecting the proper format from the
+drop down list, the change is immediate. As mentioned, the most common use of this functionality is to change
+<strong>string</strong> variables to a numeric format.</p>
+<div class="figure" style="text-align: center"><span id="fig:varprops"></span>
+<img src="pics1a/11_variableprops.png" alt="Edit variable properties" width="50%" />
+<p class="caption">
+Figure 23: Edit variable properties
+</p>
+</div>
+</div>
+<div id="other-variable-operations" class="section level4 unnumbered" number="">
+<h4>Other variable operations</h4>
+<p>The other variable operations listed in the drop down list in Figure <a href="#fig:tableoptions">22</a> are mostly
+self-explanatory. For example, a new variable can be included through <strong>Add Variable</strong> (its value is obtained
+through the <strong>Calculator</strong>, see next), or variables can be removed by means of <strong>Delete Variable(s)</strong>.
+<strong>Rename Variable</strong> operates on a specific column, which needs to be selected first.</p>
+<p>Two more obscure options are <strong>Encode</strong> and <strong>Setup Number Formatting</strong>. The default encoding in <code>GeoDa</code> is
+<strong>Unicode (UTF-8)</strong>, but a range of other encodings that support non-western characters are available as well.
+The default numeric formatting is to use a period for decimals and to separate thousands by a comma, but the
+reverse can be specified as well, which is common in Europe.</p>
+</div>
+<div id="operating-on-the-table" class="section level4 unnumbered" number="">
+<h4>Operating on the table</h4>
+<p>The columns, rows and cells of the table can be manipulated directly, similar to spreadsheet operations. For example, the values in a column can be sorted in increasing or decreasing order by clicking on the variable name. A <strong>&gt;</strong> or <strong>&lt;</strong> sign appears next to the variable name to indicate the sorting order. The original order can be restored by <em>sorting</em> on the
+row numbers (the left-most column).</p>
+<p>Individual cell values can be edited by selecting the cell and entering a new value. Such changes are only permanent
+after the table is saved. This is easily accomplished by clicking on the <strong>Save</strong> icon on the toolbar, i.e., the
+middle icon in Figure <a href="#fig:fileicons">1</a>. Alternatively <strong>File &gt; Save</strong> can be invoked from the menu.</p>
+<p>Specific observations can be selected by clicking on their row number. The corresponding entries will be highlighted
+in yellow. Additional observations can be added to the selection in the usual way, by means of shift-click or
+command-click. The selected observations can be located at the top of the table by means of <strong>Move Selected to Top</strong>.</p>
+<p>Finally, the arrangement of the columns in the table can be altered by dragging the variable name and moving it
+to a different position. This is often handy to move related variables next to each other in the table for
+easy comparison (for an illustration, see Figure <a href="#fig:monthintable">32</a>).</p>
+</div>
+</div>
+<div id="calculator" class="section level3 unnumbered" number="">
+<h3>Calculator</h3>
+<p>To illustrate the <strong>Calculator</strong> functionality, we return to the Chicago community area sample data and load
+the <strong>commpopulation.csv</strong> file. This file only contains the population totals, as shown in Figure <a href="#fig:csvtable">9</a>.</p>
+<p>The <strong>Calculator</strong> interface is shown in Figure <a href="#fig:calculator">24</a>. It contains six tabs, dealing, respectively,
+with <strong>Special</strong> functions, <strong>Univariate</strong> and <strong>Bivariate</strong> operations, <strong>Spatial Lag</strong>, <strong>Rates</strong> and <strong>Date/Time</strong>.
+<strong>Spatial Lag</strong> and <strong>Rates</strong> are advanced functions that are discussed separately in later chapters.</p>
+<div class="figure" style="text-align: center"><span id="fig:calculator"></span>
+<img src="pics1a/11_calculator.png" alt="Calculator interface" width="60%" />
+<p class="caption">
+Figure 24: Calculator interface
+</p>
+</div>
+<p>Each operation begins by identifying a target variable in which the result of the operation will be stored.
+Typically, this will be a new variable, which is created by means of the <strong>Add Variable</strong> button. For example,
+in Figure <a href="#fig:addvar">25</a>, the dialog is shown for a new variable <strong>POPCH</strong> that we will use below to illustrate
+bivariate operations.</p>
+<div class="figure" style="text-align: center"><span id="fig:addvar"></span>
+<img src="pics1a/11_add_variables.png" alt="Add Variable interface" width="35%" />
+<p class="caption">
+Figure 25: Add Variable interface
+</p>
+</div>
+<p>The <strong>Type</strong> of the variable can be specified, as well as its precision and where to insert it into the
+table. The default is to place a new variable to the left of the first column in the table, but any other
+variable can be taken as a reference point. In addition, the new variable can be placed at the right most
+end of the table.</p>
+<div id="special" class="section level4 unnumbered" number="">
+<h4>Special</h4>
+<p>The three <strong>Special</strong> functions are shown in the drop down list in Figure <a href="#fig:calculator">24</a>.
+Both <strong>NORMAL</strong> and <strong>UNIFORM RANDOM</strong> variables can be created. The <strong>ENUMERATE</strong> function is somewhat
+unique. It creates a variable with the <em>current order</em> of the observations. This is especially useful
+to retain the order of observations after sorting on a given variable.</p>
+</div>
+<div id="univariate" class="section level4 unnumbered" number="">
+<h4>Univariate</h4>
+<p>Operations that pertain to a single variable are included in the <strong>Univariate</strong> drop down list,
+shown in Figure <a href="#fig:univar">26</a>. The first six operations are straightforward transformations,
+such as changing the sign, taking the inverse or the square root, or carrying out a log transformation.
+<strong>ASSIGN</strong> allows a variable to be set equal to any other variable, or to a constant (the typical use).</p>
+<div class="figure" style="text-align: center"><span id="fig:univar"></span>
+<img src="pics1a/11_calculator_univariate.png" alt="Univariate operations" width="15%" />
+<p class="caption">
+Figure 26: Univariate operations
+</p>
+</div>
+<p><strong>SHUFFLE</strong> randomly permutes the values for a given variable to different observations. This is
+an efficient way to implement <em>spatial randomness</em>, i.e., an allocation of values to locations, but where
+the location itself does not matter (any location is equally likely to receive a given observation value).</p>
+</div>
+<div id="variable-standardization" class="section level4 unnumbered" number="">
+<h4>Variable standardization</h4>
+<p>The univariate operations also include five types of variable standardization. The most commonly used
+is undoubtedly <strong>STANDARDIZED (Z)</strong>. This converts the specified variable
+such that its mean is zero and variance one, i.e., it creates a z-value as
+<span class="math display">\[z = \frac{(x - \bar{x})}{\sigma(x)},\]</span>
+with <span class="math inline">\(\bar{x}\)</span> as the mean of the original variable <span class="math inline">\(x\)</span>, and <span class="math inline">\(\sigma(x)\)</span> as its standard deviation.</p>
+<p>A subset of this standardization is <strong>DEVIATION FROM MEAN</strong>, which only computes the numerator of the z-transformation.</p>
+<p>An alternative standardization is <strong>STANDARDIZED (MAD)</strong>, which uses the <em>mean absolute deviation</em> (MAD) as the denominator in the standardization. This is preferred in some of the clustering literature, since it diminishes the effect of outliers on the standard deviation
+<span class="citation">(see, for example, the illustration in Kaufman and Rousseeuw <a href="#ref-KaufmanRousseeuw:05" role="doc-biblioref">2005</a>, 8–9)</span>. The mean absolute deviation for a variable <span class="math inline">\(x\)</span> is computed as:
+<span class="math display">\[\mbox{mad} = (1/n) \sum_i |x_i - \bar{x}|,\]</span>
+i.e., the average of the absolute deviations between an observation and the mean for that variable. The estimate for <span class="math inline">\(\mbox{mad}\)</span> takes the place of <span class="math inline">\(\sigma(x)\)</span> in the denominator of the standardization expression.</p>
+<p>Two additional transformations that are based on the range of the observations, i.e., the difference between the maximum and minimum. These the
+<strong>RANGE ADJUST</strong> and the <strong>RANGE STANDARDIZE</strong> options.</p>
+<p><strong>RANGE ADJUST</strong> divides each value by the range of observations:
+<span class="math display">\[r_a = \frac{x_i}{x_{max} - x_{min}}.\]</span>
+While <strong>RANGE ADJUST</strong> simply rescales observations in function of their range, <strong>RANGE STANDARDIZE</strong> turns them into a value
+between zero (for the minimum) and one (for the maximum):
+<span class="math display">\[r_s = \frac{x_i - x_{min}}{x_{max} - x_{min}}.\]</span>
+Note that any standardization is limited to one variable at a time, which is not very efficient.
+However, most analyses where variable standardization is recommended, such as in the multivariate
+clustering techniques, include a transformation option that can be applied to all the variables in
+the analysis simultaneously. The same five options as discussed here are available to each analysis.</p>
+</div>
+<div id="bivariate" class="section level4 unnumbered" number="">
+<h4>Bivariate</h4>
+<p>The bivariate functionality includes all classic algebraic operations. The target variable is selected from
+the drop down list on the left in Figure <a href="#fig:bivar">27</a>. Then the respective variables (or a constant) are
+entered in the dialog with the appropriate operation taken from the drop down list. In the example in
+Figure <a href="#fig:bivar">27</a>, we compute the population change for the Chicago community areas between 2010 and 2000.
+The result is added to the table, but is only permanent afer a <strong>Save</strong> operation.</p>
+<div class="figure" style="text-align: center"><span id="fig:bivar"></span>
+<img src="pics1a/11_popch.png" alt="Example bivariate operations" width="60%" />
+<p class="caption">
+Figure 27: Example bivariate operations
+</p>
+</div>
+</div>
+<div id="date-and-time" class="section level4 unnumbered" number="">
+<h4>Date and time</h4>
+<p>The calculator also contains limited functionality to operate on date and time fields. In practice, this
+can be quite challenging, due to the proliferation of formats used to define variables pertaining to dates
+and time. To illustrate these operations, we will use the <strong>SanFran Crime</strong> data set from the sample collection,
+which is one of the few sample data sets that contains a date stamp.</p>
+<p>We load the <strong>sf_cartheft.shp</strong> shape file from
+the <strong>Crime Events</strong> subdirectory of the sample data set. This data set
+contains the locations of 3384 car thefts in San Francisco between July and December 2012. After loading the data,
+the point layer base map appears, as in Figure <a href="#fig:sfpoints">28</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:sfpoints"></span>
+<img src="pics1a/11_cartheft_points.png" alt="San Francisco car theft point map" width="60%" />
+<p class="caption">
+Figure 28: San Francisco car theft point map
+</p>
+</div>
+<p>We bring up the data table and note the variable <strong>Date</strong> in the seventh column in Figure <a href="#fig:sftable">29</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:sftable"></span>
+<img src="pics1a/11_sf_cartheft_table.png" alt="San Francisco car theft table" width="80%" />
+<p class="caption">
+Figure 29: San Francisco car theft table
+</p>
+</div>
+<p>At first sight, it seems like the date is formatted as a string, since it is left-aligned. However, when
+we examine the type by means of the <strong>Edit Properties</strong> function, we see that it is indeed in the <strong>date</strong> format,
+as shown in Figure <a href="#fig:dateprop">30</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:dateprop"></span>
+<img src="pics1a/11_data_var_prop.png" alt="Variable property of Date" width="50%" />
+<p class="caption">
+Figure 30: Variable property of Date
+</p>
+</div>
+<p>The date format supports a number of functions to extract components of the date as integers. This is often
+necessary, because the date type currently cannot be used in queries. For example, in Figure <a href="#fig:month">31</a>, the
+operator <strong>Get Month</strong> turns the month that is contained in the <strong>Date</strong> variable into an integer, assigned to the
+new variable <strong>Month</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:month"></span>
+<img src="pics1a/11_getmonth.png" alt="Get Month in Calculator" width="50%" />
+<p class="caption">
+Figure 31: Get Month in Calculator
+</p>
+</div>
+<p>As shown in Figure <a href="#fig:monthintable">32</a> (after moving the columns around to put the original date next to the
+new variable), the transition from dates in July to August is reflected in the <strong>Month</strong> variable changing from 7 to 8.</p>
+<div class="figure" style="text-align: center"><span id="fig:monthintable"></span>
+<img src="pics1a/11_month_extracted.png" alt="Extracted month in table" width="40%" />
+<p class="caption">
+Figure 32: Extracted month in table
+</p>
+</div>
+</div>
+</div>
+<div id="merging-tables" class="section level3 unnumbered" number="">
+<h3>Merging tables</h3>
+<p>An important operation on tables is the ability to <strong>Merge</strong> new variables into an existing data set. We illustrate
+this with the Chicago community area population data and load <strong>commpop.shp</strong>. We also bring up the data table and
+select <strong>Merge</strong> from the options. The resulting dialog is as in Figure <a href="#fig:mergedialog">33</a>.</p>
+<p>A number of important
+parameters need to be selected. First is the <strong>datasource</strong> from which the data will be merged. In our example,
+we have chosen <strong>commpopulation.csv</strong>. Even though this contains the same information as we already have, we select it to
+illustrate the principles behind the merging operation.</p>
+<p>We click on the open file icon and use the standard procedure to load the csv file. After this, the file name <strong>commpopulation</strong> is listed as the data source. The default method is <strong>Merge</strong>, but <strong>Stack</strong> is supported as well.
+The latter operation is used to add <em>observations</em> to an existing data set.</p>
+<p>Best practice to carry out a merging operation is to select a <strong>key</strong>, i.e., a variable that contains (numeric) values that match the observations in both data sets. Using a key is superior to merging <strong>by record order</strong>, since there is often
+no guarantee that the actual ordering of the data in the two sets is the same, even though it may seem so in the
+interface (such as the table view). In our example, we select <strong>NID</strong> as the key in both data sets.</p>
+<p>Finally, we need to decide which variables will be merged. Here, we used the <strong>&gt;&gt;</strong> key to move all variables from
+the <strong>Exclude</strong> box to the <strong>Include</strong> box.</p>
+<div class="figure" style="text-align: center"><span id="fig:mergedialog"></span>
+<img src="pics1a/11_merge_dialog.png" alt="Merge dialog" width="40%" />
+<p class="caption">
+Figure 33: Merge dialog
+</p>
+</div>
+<p>Upon clicking <strong>Merge</strong>, the new variables will be added to the data table, unless there is a potential conflict
+of variable names. This conflict can be two-fold. First, when variables have identical names in both data sets,
+they need to be differentiated. Clearly, this is the case here, as shown in Figure <a href="#fig:updatenames">34</a>, where
+alternatives are suggested. These alternatives are not always the most intuitive and can be readily edited in the
+entry box. A second potential conflict is when the variable name has more than 10 characters. In csv input files,
+there are no constraints on variable name length, but the <strong>dbf</strong> format used for the attribute values in a shape
+file format has a limit of 10 characters for a variable name. Again, an alternative will be suggested in the dialog,
+but it can be easily edited (as long as it stays within the 10 character limit).</p>
+<div class="figure" style="text-align: center"><span id="fig:updatenames"></span>
+<img src="pics1a/11_updatenames.png" alt="Update the names of the variables to be merged" width="40%" />
+<p class="caption">
+Figure 34: Update the names of the variables to be merged
+</p>
+</div>
+<p>The merged tables are as in Figure <a href="#fig:mergedtable">35</a>. We can verify that the correct observations line up.
+As before, the merger only becomes permanent after a <strong>Save</strong> operation.</p>
+<div class="figure" style="text-align: center"><span id="fig:mergedtable"></span>
+<img src="pics1a/11_merged_table.png" alt="Merged tables" width="80%" />
+<p class="caption">
+Figure 35: Merged tables
+</p>
+</div>
+</div>
+</div>
+<div id="queries" class="section level2 unnumbered" number="">
+<h2>Queries</h2>
+<p>While queries of the data are somewhat distinct from data wrangling per se, <em>drilling down</em> the
+data is often an important part of selecting the right subset of variables and observations.
+We have already seen how we can remove variables from the data table by using the <strong>Delete</strong>
+function. In order to select particular observations or rows in the data table, we need
+the <strong>Selection Tool</strong>. The latter is arguably one of the most important features of the
+table options.</p>
+<p>We will illustrate queries with the San Francisco car theft example and load the <strong>sf_cartheft</strong> shape file. We assume that the integer
+variable <strong>Month</strong> has been added to the table. If not, use the steps in the previous section
+to accomplish this.</p>
+<div id="table-selection" class="section level3 unnumbered" number="">
+<h3>Table Selection</h3>
+<p>With the data loaded and the table open, we choose <strong>Selection Tool</strong> from the options. The interface,
+shown in Figure <a href="#fig:selectiontool">36</a>, has several options and it supports quite complex searches, even though it may seem
+somewhat rudimentary.</p>
+<div class="figure" style="text-align: center"><span id="fig:selectiontool"></span>
+<img src="pics1a/22_selection_tool.png" alt="Selection Tool" width="60%" />
+<p class="caption">
+Figure 36: Selection Tool
+</p>
+</div>
+<div id="new-selection" class="section level4 unnumbered" number="">
+<h4>New selection</h4>
+<p>The main panel of the interface deals with the selection criteria. In our example, we start a <strong>New Selection</strong>,
+as indicated by the radio button in the top line. We want to select the car thefts that occurred in the month
+of November. To that end, we specify the just created variable <strong>Month</strong> as the <strong>Selection Variable</strong>. Since
+we want the observations with <strong>Month = 11</strong>, we set the beginning and end value of the <strong>Select All in Range</strong> option
+to <strong>11</strong>. Clicking on this button will select the observations that meet the selection criterion.</p>
+<p>As we have already seen,
+the selected observations are highlighted in the table (and can be moved to the top of the table). They are also
+highlighted in the themeless point map, or rather, they retain their original shading, while unselected observations
+become transparent. This is illustrated in Figure <a href="#fig:selectionmap">37</a>. The status bar lists that 568 observations
+have been selected. In addition, the selected observations are also immediately highlighted in any other open graph or map. This
+is the implementation of <em>linking</em>, which will be discussed in more detail in a later chapter.</p>
+<div class="figure" style="text-align: center"><span id="fig:selectionmap"></span>
+<img src="pics1a/22_selected_in_map.png" alt="Selected observations in themeless map" width="60%" />
+<p class="caption">
+Figure 37: Selected observations in themeless map
+</p>
+</div>
+</div>
+<div id="other-selection-options" class="section level4 unnumbered" number="">
+<h4>Other selection options</h4>
+<p>The <strong>Selection Tool</strong> contains several more options to refine a selection. For example, a second
+criterion can be chosen to <strong>Select From Current Selection</strong>. For example, this would be the case
+if we wanted to select a particular day of the month of November (provided we created the corresponding integer variable).
+Alternatively, we could <strong>Append To Current Selection</strong>, say if we wanted both November <em>and</em> December.</p>
+<p>A useful feature is to use <strong>Invert Selection</strong> to choose all observations <em>except</em> the selected ones. For example,
+we could use this to choose all months but November. This is often the most practical way to
+<em>remove</em> unwanted observations. First, we select them, and then we invert the selection, at which point we
+can <strong>Save Selected As</strong> (see below). This option is often used in combination with <strong>Select All Undefined</strong>, which
+identifies the observations with missing values for a given variable. After selecting them, we invert
+the selection and save this as a data set without missing values.</p>
+<p>We will discuss <strong>Add Neighbors To Selection</strong> in the chapters dealing with spatial weights.</p>
+</div>
+</div>
+<div id="indicator-variable" class="section level3 unnumbered" number="">
+<h3>Indicator variable</h3>
+<p>Once observations are selected in the table, a new <em>indicator variable</em> can be created that typically
+holds the value of 1 for the selected observations, and 0 for the others, as shown in the bottom
+panel of Figure <a href="#fig:selectiontool">36</a>. However, any value can be specified in the dialog.</p>
+<p>With a <strong>Target Variable</strong> specified, clicking on <strong>Apply</strong> will add the 0-1 values to the table.</p>
+</div>
+<div id="save-selected-observations" class="section level3 unnumbered" number="">
+<h3>Save selected observations</h3>
+<p>Arguably one of the most useful features of the selection tool in terms of data wrangling, is the
+ability to save the selected observations as a new data set. In our example, we chose
+<strong>File &gt; Save Selected As</strong> and specify a new file name to save just the observations for November,
+say <strong>cartheftsNov</strong>. If we close the project and load the new file, the themeless map is as
+in Figure <a href="#fig:cartheftsnov">38</a>. Note how the point pattern has the same shape as the selected
+observations in Figure <a href="#fig:selectionmap">37</a>, but the number of observations is now listed
+as 568.</p>
+<div class="figure" style="text-align: center"><span id="fig:cartheftsnov"></span>
+<img src="pics1a/22_cartheftsnov.png" alt="Selected observations in new map" width="60%" />
+<p class="caption">
+Figure 38: Selected observations in new map
+</p>
+</div>
+</div>
+<div id="spatial-selection" class="section level3 unnumbered" number="">
+<h3>Spatial selection</h3>
+<p>So far, we have carried out all selections through the <strong>Selection Tool</strong> in the <strong>Table</strong>.
+However, observations can also be selected visually from any map. To illustrate this,
+we bring back the <strong>sf_cartheft</strong> shape file (with the <strong>Month</strong> variable).</p>
+<p>Even though a discussion of the mapping functionality in <code>GeoDa</code> is beyond the scope of the
+current chapter, we will first create a simple map of the points classified by month.
+To accomplish this, select <strong>Map &gt; Unique Values Map</strong> from the menu, and chose the
+variable <strong>Month</strong>. The resulting map is as in Figure <a href="#fig:cartheftsmonth">39</a>, with a different color associated
+with each month.</p>
+<div class="figure" style="text-align: center"><span id="fig:cartheftsmonth"></span>
+<img src="pics1a/22_uniquevalues_month.png" alt="Car thefts by month" width="60%" />
+<p class="caption">
+Figure 39: Car thefts by month
+</p>
+</div>
+<div id="selection-by-shape" class="section level4 unnumbered" number="">
+<h4>Selection by shape</h4>
+<p>The map selection tool is the default interaction with a map view. It can also be designated
+explicitly by clicking on the left-most icon in the map view toolbar (the arrow symbol).</p>
+<p>Observations are selected by clicking on them or by drawing a selection shape around the target
+area. The default selection shape is a <strong>Rectangle</strong>, as in Figure <a href="#fig:rectangleselect">40</a>, but
+<strong>Circle</strong> and <strong>Line</strong> are available as well. The particular shape is chosen by selecting
+<strong>Selection Shape</strong> from the map options menu (right click on the map).</p>
+<div class="figure" style="text-align: center"><span id="fig:rectangleselect"></span>
+<img src="pics1a/22_rectangle_selection.png" alt="Selection on the map" width="60%" />
+<p class="caption">
+Figure 40: Selection on the map
+</p>
+</div>
+<p>Identical to table selection, all selected observations are highlighted in the table in yellow and in
+any other open map or graph (through linking). Also, they can be saved to a new data set using
+<strong>File &gt; Save Selected As</strong>, in the same way as for a table selection.</p>
+<p>The selection can be inverted by clicking on the second left-most icon in the map toolbar. This works
+in the same way as for table selection.</p>
+</div>
+<div id="selection-on-map-classification" class="section level4 unnumbered" number="">
+<h4>Selection on map classification</h4>
+<p>In addition to using a selection shape on a map, observations that fall into a particular map classification
+category can be selected by clicking on the corresponding legend icon. We discuss map classifications in
+a later chapter, but in Figure <a href="#fig:legendselect">41</a>, we can see how the observations for the month November
+are selected by clicking on the small rectangle next to 11. The selected points match the pattern
+in Figure <a href="#fig:selectionmap">37</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:legendselect"></span>
+<img src="pics1a/22_map_select_nov.png" alt="Selection on a map category" width="60%" />
+<p class="caption">
+Figure 41: Selection on a map category
+</p>
+</div>
+</div>
+<div id="save-selection-indicator-variable" class="section level4 unnumbered" number="">
+<h4>Save selection indicator variable</h4>
+<p>Finally, as is the case for a table selection, a new indicator variables can be saved to the table,
+with, by default, a value of 1 for the selected observations, and 0 for the others. This is invoked
+from the map options (right click on the map) by selecting <strong>Save Selection</strong>. The dialog shown
+in Figure <a href="#fig:selectvar">42</a> appears, with the default variables name of <strong>SELECTED</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:selectvar"></span>
+<img src="pics1a/22_save_selection_dialog.png" alt="Selection variable dialog" width="25%" />
+<p class="caption">
+Figure 42: Selection variable dialog
+</p>
+</div>
+<p>As before,
+the variable name can be changed, as can the values assigned to selected and unselected. After
+the indictor variable is added to the table, it must be made permanent through a <strong>Save</strong> command.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered" number="">
+<h2>References</h2>
+<div id="refs" class="references hanging-indent">
+<div id="ref-DasuJohnson:03">
+<p>Dasu, Tamraparni, and Theodore Johnson. 2003. <em>Exploratory Data Mining and Data Cleaning</em>. Hoboken, NJ: John Wiley &amp; Sons.</p>
+</div>
+<div id="ref-KaufmanRousseeuw:05">
+<p>Kaufman, L., and P. Rousseeuw. 2005. <em>Finding Groups in Data: An Introduction to Cluster Analysis</em>. New York, NY: John Wiley.</p>
+</div>
+<div id="ref-Tattenburyetal:17">
+<p>Rattenbury, Tye, Joseph M. Hellerstein, Jeffrey Heer, Sean Kandel, and Connor Carreras. 2017. <em>Principles of Data Wrangling. Practical Techniques for Data Preparation</em>. Sebastopol, CA: O’Reilly.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</footer>
+
+</section>
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

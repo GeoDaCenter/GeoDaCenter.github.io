@@ -15,6 +15,7 @@
 
 <title>Spatial Data Wrangling (3) – Practice</title>
 
+<script src="lab1_files/header-attrs-2.3/header-attrs.js"></script>
 <link href="lab1_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="lab1_files/highlightjs-9.12.0/highlight.js"></script>
     <title>GeoDa on Github</title>
@@ -118,57 +119,70 @@ if (window.hljs) {
 
 <h1 class="title toc-ignore">Spatial Data Wrangling (3) – Practice</h1>
 <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
-<h4 class="date">07/29/2020 (updated)</h4>
+<h4 class="date">09/13/2020 (updated)</h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction">Introduction</a><ul>
-<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#objectives">Objectives</a>
+<ul>
 <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#obtaining-data-from-the-chicago-open-data-portal">Obtaining data from the Chicago Open Data Portal</a><ul>
+<li><a href="#obtaining-data-from-the-chicago-open-data-portal">Obtaining data from the Chicago Open Data Portal</a>
+<ul>
 <li><a href="#finding-the-information">Finding the information</a></li>
 <li><a href="#downloading-the-data">Downloading the data</a></li>
 </ul></li>
-<li><a href="#selecting-observations-for-a-given-time-period">Selecting Observations for a Given Time Period</a><ul>
+<li><a href="#selecting-observations-for-a-given-time-period">Selecting Observations for a Given Time Period</a>
+<ul>
 <li><a href="#loading-the-data">Loading the data</a></li>
 <li><a href="#converting-a-string-to-date-format">Converting a string to date format</a></li>
 <li><a href="#extracting-the-month-and-year-from-the-creation-date">Extracting the month and year from the creation date</a></li>
 <li><a href="#extracting-observations-for-the-desired-time-period">Extracting observations for the desired time period</a></li>
 <li><a href="#selecting-the-final-list-of-variables">Selecting the final list of variables</a></li>
-<li><a href="#saving-the-data-table">Saving the data table</a><ul>
+<li><a href="#saving-the-data-table">Saving the data table</a>
+<ul>
 <li><a href="#a-final-check">A final check</a></li>
 <li><a href="#inserting-a-unique-identifier">Inserting a unique identifier</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#creating-a-point-layer">Creating a Point Layer</a><ul>
-<li><a href="#creating-a-point-layer-from-coordinates-in-a-table">Creating a point layer from coordinates in a table</a><ul>
+<li><a href="#creating-a-point-layer">Creating a Point Layer</a>
+<ul>
+<li><a href="#creating-a-point-layer-from-coordinates-in-a-table">Creating a point layer from coordinates in a table</a>
+<ul>
 <li><a href="#projection-information">Projection information</a></li>
 <li><a href="#point-layer-using-x-y">Point layer using X-Y</a></li>
 <li><a href="#point-layer-cleanup">Point layer cleanup</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#community-area-boundary-file">Community Area Boundary File</a><ul>
+<li><a href="#community-area-boundary-file">Community Area Boundary File</a>
+<ul>
 <li><a href="#extracting-the-community-area-layer">Extracting the community area layer</a></li>
-<li><a href="#community-areas-base-map">Community Areas base map</a><ul>
+<li><a href="#community-areas-base-map">Community Areas base map</a>
+<ul>
 <li><a href="#changing-the-projection">Changing the projection</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#abandoned-vehicles-by-community-area">Abandoned Vehicles by Community Area</a><ul>
+<li><a href="#abandoned-vehicles-by-community-area">Abandoned Vehicles by Community Area</a>
+<ul>
 <li><a href="#spatial-join-count-points-in-area">Spatial join – count points in area</a></li>
-<li><a href="#spatial-join-area-id-for-each-point">Spatial join – area id for each point</a><ul>
+<li><a href="#spatial-join-area-id-for-each-point">Spatial join – area id for each point</a>
+<ul>
 <li><a href="#merging-the-new-identifiers-into-the-original-point-data-set">Merging the new identifiers into the original point data set</a></li>
 <li><a href="#a-word-of-caution">A word of caution</a></li>
 </ul></li>
 <li><a href="#aggregation">Aggregation</a></li>
 </ul></li>
-<li><a href="#community-area-population-data">Community Area Population Data</a><ul>
+<li><a href="#community-area-population-data">Community Area Population Data</a>
+<ul>
 <li><a href="#community-area-population-data-table">Community area population data table</a></li>
 <li><a href="#merging-the-population-data-into-the-community-area-layer">Merging the population data into the community area layer</a></li>
 </ul></li>
-<li><a href="#mapping-community-area-abandoned-vehicles-per-capita">Mapping Community Area Abandoned Vehicles Per Capita</a><ul>
+<li><a href="#mapping-community-area-abandoned-vehicles-per-capita">Mapping Community Area Abandoned Vehicles Per Capita</a>
+<ul>
 <li><a href="#abandoned-vehicles-per-capita">Abandoned vehicles per capita</a></li>
 <li><a href="#quantile-map">Quantile map</a></li>
 </ul></li>
@@ -176,13 +190,14 @@ if (window.hljs) {
 </div>
 
 <p><br></p>
-<div id="introduction" class="section level2 unnumbered">
+<div id="introduction" class="section level2 unnumbered" number="">
 <h2>Introduction</h2>
 <p>In this lab, we will put into practice the data wrangling capability in <code>GeoDa</code> using a realistic example, illustrating a range of issues that may be encountered in practice. We will use the City of Chicago open data portal to download data on abandoned vehicles. Our end goal is to create a simple choropleth map that illustrates the spatial distribution of abandoned vehicles per capita for Chicago community areas in the month of April 2020.</p>
-<p>In order to accomplish this, we will employ functionality outlined in more detail in the previous two chapters, to which we refer for specifics. Before we can create the maps, we will need to access the data source, select observations, aggregate data, join different files and carry out variable transformations in order to obtain a so-called <em>spatially intensive</em> variable (per capita abandoned vehicles) for mapping.</p>
-<div id="objectives" class="section level3 unnumbered">
+<p>In order to accomplish this, we will employ functionality outlined in more detail in the previous two chapters, to which we refer for specifics. However, this chapter can also be read on its own, since all required operations are
+explained in full.</p>
+<p>Before we can create the maps, we will need to access the data source, select observations, aggregate data, join different files and carry out variable transformations in order to obtain a so-called <em>spatially intensive</em> variable (per capita abandoned vehicles) for mapping.</p>
+<div id="objectives" class="section level3 unnumbered" number="">
 <h3>Objectives</h3>
-<p>After completing the lab, you should know how to carry out the following tasks:</p>
 <ul>
 <li><p>Identify the necessary data and download from the proper source, such as any Socrata-driven open data portal, e.g., the
 <a href="https://data.cityofchicago.org">City of Chicago open data portal</a></p></li>
@@ -198,13 +213,13 @@ if (window.hljs) {
 <li><p>Calculate new variables</p></li>
 <li><p>Create a simple quantile map</p></li>
 </ul>
-<div id="geoda-functions-covered" class="section level4 unnumbered">
+<div id="geoda-functions-covered" class="section level4 unnumbered" number="">
 <h4>GeoDa functions covered</h4>
 <ul>
 <li>File &gt; Open
 <ul>
 <li>data source connection dialog</li>
-<li>CSV input file configuration</li>
+<li>csv input file configuration</li>
 </ul></li>
 <li>File &gt; Save As
 <ul>
@@ -230,10 +245,10 @@ if (window.hljs) {
 </div>
 </div>
 </div>
-<div id="obtaining-data-from-the-chicago-open-data-portal" class="section level2 unnumbered">
+<div id="obtaining-data-from-the-chicago-open-data-portal" class="section level2 unnumbered" number="">
 <h2>Obtaining data from the Chicago Open Data Portal</h2>
 <p>Our first task is to find the information for abandoned vehicles on the data portal and download it to a file so that we can manipulate it in <code>GeoDa</code>. The format of choice is a comma delimited file, or <strong>csv</strong> file. This is basically a spreadsheet-like table with the variables as columns and the observations as rows.</p>
-<div id="finding-the-information" class="section level3 unnumbered">
+<div id="finding-the-information" class="section level3 unnumbered" number="">
 <h3>Finding the information</h3>
 <p>We start by going to the <a href="https://data.cityofchicago.org">City of Chicago open data portal</a>. The first interface looks as in Figure <a href="#fig:chicago">1</a>:</p>
 <div class="figure" style="text-align: center"><span id="fig:chicago"></span>
@@ -269,15 +284,15 @@ Figure 4: Abandoned Vehicles table content
 </p>
 </div>
 </div>
-<div id="downloading-the-data" class="section level3 unnumbered">
+<div id="downloading-the-data" class="section level3 unnumbered" number="">
 <h3>Downloading the data</h3>
 <p>Note that this data table contains some 258,000 observations (as of June 23, 2020 – this will change over time). Below the summary of the variables, there is a snapshot
 of the table and there are some visualization options. We will not pursue those, but download the data as a comma
 separated (csv) file, by selecting the <strong>Export</strong> butten and clicking on <strong>CSV</strong>, as shown in Figure <a href="#fig:downloadcsv">5</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:downloadcsv"></span>
-<img src="pics/download.png" alt="Download CSV Format" width="30%" />
+<img src="pics/download.png" alt="Download csv Format" width="30%" />
 <p class="caption">
-Figure 5: Download CSV Format
+Figure 5: Download csv Format
 </p>
 </div>
 <p>The file will be downloaded to your drive. Note: this is a very large file (some 72 Mb) so it may take a while!</p>
@@ -287,11 +302,11 @@ Inspecting the cells, you can identify many empty ones. In addition, the coding 
 order to keep things manageable.</p>
 </div>
 </div>
-<div id="selecting-observations-for-a-given-time-period" class="section level2 unnumbered">
+<div id="selecting-observations-for-a-given-time-period" class="section level2 unnumbered" number="">
 <h2>Selecting Observations for a Given Time Period</h2>
 <p>For the sake of this exercise, we don’t want to deal with all observations. Instead, say we are interested in analyzing the abandoned vehicle locations for a given time period, such as the month of April 2020, in the middle of the COVID crisis in Chicago. To get to this point, we will need to move through the following steps:</p>
 <ul>
-<li><p>import the csv file into GeoDa</p></li>
+<li><p>import the csv file into <code>GeoDa</code></p></li>
 <li><p>convert the date stamp into the proper Date/Time format</p></li>
 <li><p>extract the year and month from the date format</p></li>
 <li><p>select those observations for the year and month we want</p></li>
@@ -299,9 +314,9 @@ order to keep things manageable.</p>
 <li><p>create a new data set with the selected observations and variables</p></li>
 </ul>
 <p>The end result of this process will be a data table saved in the legacy dBase (<strong>dbf</strong>) format.</p>
-<div id="loading-the-data" class="section level3 unnumbered">
+<div id="loading-the-data" class="section level3 unnumbered" number="">
 <h3>Loading the data</h3>
-<p>The first step is to load the data from the csv file into <code>GeoDa</code>. After launchig GeoDa, the
+<p>The first step is to load the data from the csv file into <code>GeoDa</code>. After launchig <code>GeoDa</code>, the
 <strong>Connect to Data Source</strong> dialog should open.
 Next, we drag the file <strong>_311_Service_Requests_-_Abandoned_Vehicles.csv_</strong> (or its equivalent, if you renamed the file) into the <strong>Drop files here</strong> box of the data dialog, as illustrated in the previous chapters.
 Since the csv format is a simple text file without any metadata, there is no way for <code>GeoDa</code> to know what type the variables are, or other such characteristics of the data set. To set some simple parameters, the <strong>CSV File Configuration</strong> dialog pops up, as in Figure <a href="#fig:csvinfo">6</a>.</p>
@@ -315,16 +330,17 @@ Figure 6: CSV File Configuration
 We will deal with this later. For now, make sure the <strong>First record has field names</strong> item
 is set to <strong>YES</strong> (the default setting), and leave all other options as they are. After clicking
 the <strong>OK</strong> button, the data table will show the contents of the file, with the number of observations (258153) in the status bar
-at the bottom, as in Figure <a href="#fig:bigtable1">7</a>. For data sets downloaded other than on June 23, 2020, the number of observations will be different. However, since we limit the analysis to April 2020, those data will be the same, no matter when the full file is downloaded.</p>
+at the bottom, as in Figure <a href="#fig:bigtable1">7</a>. For data sets downloaded other than on June 23, 2020, the number of observations will be different. However, since we limit the analysis to April 2020, those data will be the same, no matter when the full file is downloaded (unless the data for April were somehow updated at a later point in time).</p>
 <div class="figure" style="text-align: center"><span id="fig:bigtable1"></span>
 <img src="pics/2_big_table_1.png" alt="Table Contents" width="100%" />
 <p class="caption">
 Figure 7: Table Contents
 </p>
 </div>
-<p>Note the many empty cells in the table, as well as some non-standard notation, such as the <strong>?</strong> for the <strong>License Plate</strong> variable of the first observations. As is typically the case for public information downloaded from open data portals, the resulting files are far from clean and require quite a bit of pre-processing before they can be used for analysis.</p>
+<p>Note the many empty cells in the table, as well as some non-standard notation, such as the <strong>?</strong> for the <strong>License Plate</strong> variable of the first observations. As is typically the case for public information downloaded from open data portals, the resulting files are far from clean and require quite a bit of pre-processing before they can be used for analysis. This
+is the 80% effort devoted to <em>data wrangling</em> that we referred to in the first chapter.</p>
 </div>
-<div id="converting-a-string-to-date-format" class="section level3 unnumbered">
+<div id="converting-a-string-to-date-format" class="section level3 unnumbered" number="">
 <h3>Converting a string to date format</h3>
 <p>We want to select the observations for the month of April in 2020. Before we can create the query, we need to transform the <strong>Creation Date</strong> to something manageable that we can search on. As it stands, the entries are in <strong>string</strong> format (sometimes also referred to as character format). We can check this by means of the <strong>Edit Variable Properties</strong> option in the <strong>Table</strong> menu, invoked either by right-clicking,
 or by selecting <strong>Table &gt; Edit Variable Properties</strong> from the menu.</p>
@@ -347,11 +363,11 @@ Figure 9: Creation Date in Table
 </p>
 </div>
 </div>
-<div id="extracting-the-month-and-year-from-the-creation-date" class="section level3 unnumbered">
+<div id="extracting-the-month-and-year-from-the-creation-date" class="section level3 unnumbered" number="">
 <h3>Extracting the month and year from the creation date</h3>
 <p>Currently, search functionality on date formats is not implemented in <code>GeoDa</code>. However, we can
-extract the year and month as integer and then use those in the Table <strong>Selection Tool</strong>. In
-order to get the year and month, we need to use the <strong>Calculator</strong> functionality in the Table menu (<strong>Table &gt; Calculator</strong>). or choose this item in the Table option menu (right click in the table).</p>
+extract the year and month as integer and then use those in the table <strong>Selection Tool</strong>. In
+order to get the year and month, we need to use the <strong>Calculator</strong> functionality in the table menu (<strong>Table &gt; Calculator</strong>). or choose this item in the table option menu (right click in the table).</p>
 <p>As we have seen in the previous chapters,
 the calculation of new or transformed variables operates in two steps:</p>
 <ul>
@@ -382,11 +398,11 @@ Figure 11: Month and Year in Data Table
 </p>
 </div>
 </div>
-<div id="extracting-observations-for-the-desired-time-period" class="section level3 unnumbered">
+<div id="extracting-observations-for-the-desired-time-period" class="section level3 unnumbered" number="">
 <h3>Extracting observations for the desired time period</h3>
-<p>We now have all the elements in place to design some queries to select the observations for the month of April 2020 (or any other time period). We invoke the Table <strong>Selection Tool</strong> from the main menu, as <strong>Table &gt; Selection Tool</strong>, or from the options menu by right-clicking on the table. We proceed in two steps. First, we select the observations for the year 2020, then we select <em>from that selection</em> the observations for the month of April.</p>
+<p>We now have all the elements in place to design some queries to select the observations for the month of April 2020 (or any other time period). We invoke the table <strong>Selection Tool</strong> from the main menu, as <strong>Table &gt; Selection Tool</strong>, or from the options menu by right-clicking on the table. We proceed in two steps. First, we select the observations for the year 2020, then we select <em>from that selection</em> the observations for the month of April.</p>
 <p>The first query is carried out with the <strong>New Selection</strong> radio button checked, and <strong>year</strong> as the <strong>Selection Variable</strong>. We specify the year by entering <strong>2020</strong> in both boxes for the &lt;= conditions. Then we click on <strong>Select All in Range</strong>,
-as in Figure <a href="#fig:selectyear">12</a>. The selected observations will be highlighted in yellow in the Table (since this is a large file, you may not see any yellow observations in the current table view – the selected observations can be brought to the top by choosing <strong>Move Selected to Top</strong> from the Table menu, or by right clicking in the Table and selecting this option). The number of selected
+as in Figure <a href="#fig:selectyear">12</a>. The selected observations will be highlighted in yellow in the table (since this is a large file, you may not see any yellow observations in the current table view – the selected observations can be brought to the top by choosing <strong>Move Selected to Top</strong> from the table menu, or by right clicking in the table and selecting this option). The number of selected
 observations will be listed in the status bar. In this example, there were 13,237 abandoned vehicles in Chicago in 2020 as of June 23 (results may be slightly different, depending on the download date).</p>
 <div class="figure" style="text-align: center"><span id="fig:selectyear"></span>
 <img src="pics/00_selectyear.png" alt="Select Year" width="50%" />
@@ -396,7 +412,7 @@ Figure 12: Select Year
 </div>
 <p>For the second query, we check the radio button for <strong>Select From Current Selection</strong> and
 now specify <strong>month</strong> as the <strong>Selection Variable</strong>. We enter <strong>4</strong> in the selection bounds boxes and again click on <strong>Select All in Range</strong>,
-as in Figure <a href="#fig:selectmonth">13</a>. The selected observations will now be limited to those in 2020 <strong>and</strong> in the month of April. Again, the corresponding lines in the table will be highlighted in yellow, and the size of the selection given in the
+as in Figure <a href="#fig:selectmonth">13</a>. The selected observations will now be limited to those in 2020 <em>and</em> in the month of April. Again, the corresponding lines in the table will be highlighted in yellow, and the size of the selection given in the
 status bar. In this case, there were 1,383 abandoned vehicles.</p>
 <div class="figure" style="text-align: center"><span id="fig:selectmonth"></span>
 <img src="pics/00_selectmonth.png" alt="Select Month From Selection" width="50%" />
@@ -405,7 +421,7 @@ Figure 13: Select Month From Selection
 </p>
 </div>
 </div>
-<div id="selecting-the-final-list-of-variables" class="section level3 unnumbered">
+<div id="selecting-the-final-list-of-variables" class="section level3 unnumbered" number="">
 <h3>Selecting the final list of variables</h3>
 <p>Our immediate objective is to save the selected observations as a new table. However, before we proceed with that,
 we want to remove some variables that we are really not interested in or that don’t contain useful information.
@@ -424,16 +440,16 @@ Figure 14: Data table with selected variables
 </p>
 </div>
 </div>
-<div id="saving-the-data-table" class="section level3 unnumbered">
+<div id="saving-the-data-table" class="section level3 unnumbered" number="">
 <h3>Saving the data table</h3>
 <p>So far, all operations have been carried out in memory, and if we close <code>GeoDa</code>, all the
 changes will be lost. In order to make them permanent, we need to save the selected observations
-to a new file. While we initially read the data from a CSV file, we will save the selected
-observations as a new table in the DBF format using <strong>File &gt; Save Selected As</strong>. We next select
+to a new file. While we initially read the data from a csv file, we will save the selected
+observations as a new table in the dbf format using <strong>File &gt; Save Selected As</strong>. We next select
 <strong>dBase Database File</strong> from the available output formats and specify <strong>vehicles_April_2020.dbf</strong>
 as the file name.</p>
 <p>However, there is
-a minor problem. The DBF file format is extremely picky about variable names (e.g., no
+a minor problem. The dbf file format is extremely picky about variable names (e.g., no
 more than 10 characters, no spaces) and several of the variable names from the Chicago Open Data Portal do not conform to this standard.
 <code>GeoDa</code> flags the violating variable names and suggests new field names, as shown in Figure <a href="#fig:suggestedvars">15</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:suggestedvars"></span>
@@ -451,7 +467,7 @@ Figure 16: Variable Name Correction Suggestion
 </div>
 <p>Now, we can safely save the file.</p>
 <p>We close the current project by selecting <strong>File &gt; Close</strong> from the menu, or by selecting the <strong>Close</strong> icon from the toolbar (the second icon from the left). Make sure to reply that you do <strong>not</strong> want to save any changes if prompted.</p>
-<div id="a-final-check" class="section level4 unnumbered">
+<div id="a-final-check" class="section level4 unnumbered" number="">
 <h4>A final check</h4>
 <p>We check the contents of the new file by selecting the <strong>Open</strong> icon and dragging the file <strong>vehicles_April_2020.dbf</strong> into the <strong>Drop files here</strong> area. The table will open with the new content. The status bar reports that there are 1383 observations. The new variable names appear as the column headers, as shown in Figure <a href="#fig:vehiclestable">17</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:vehiclestable"></span>
@@ -490,7 +506,7 @@ that area. As it happens, all the observations with missing Community Area codes
 (even though some of them do not have valid lat-lon). Therefore, we will use the x-y coordinates to
 create a point layer. Also, there are fewer missing values for x-y than for lat-lon.</p>
 </div>
-<div id="inserting-a-unique-identifier" class="section level4 unnumbered">
+<div id="inserting-a-unique-identifier" class="section level4 unnumbered" number="">
 <h4>Inserting a unique identifier</h4>
 <p>In order to facilitate later operations that might involve merging different files, we want to make sure that
 each point is uniquely identified. As it stands, there is no such identifier in the current table.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
@@ -517,11 +533,11 @@ new file name. To keep the files distinct, we use the latter option and create a
 </div>
 </div>
 </div>
-<div id="creating-a-point-layer" class="section level2 unnumbered">
+<div id="creating-a-point-layer" class="section level2 unnumbered" number="">
 <h2>Creating a Point Layer</h2>
 <p>So far, we have only dealt with a regular table, without taking advantage of any <em>spatial</em> features. However, our table contains fields with coordinates. Therefore, <code>GeoDa</code> can turn the table into an explicit spatial points layer that can be saved in a range of GIS formats. We can then
 use the <em>spatial join</em> functionality to determine the community area for those locations (points) that have missing values.</p>
-<div id="creating-a-point-layer-from-coordinates-in-a-table" class="section level3 unnumbered">
+<div id="creating-a-point-layer-from-coordinates-in-a-table" class="section level3 unnumbered" number="">
 <h3>Creating a point layer from coordinates in a table</h3>
 <p>In <code>GeoDa</code>, it is straightforward to create a GIS point layer from tabular data that contain coordinate information.
 The process is started from the main menu, as
@@ -532,7 +548,7 @@ a dialog appears to let you specify the X and Y coordinates.</p>
 <strong>Longitude</strong> (the horizontal, or x-coordinate) and <strong>Latitude</strong> (the vertical, or y-coordinate).
 Given that the observations with missing community area codes all have X-Y coordinates, we will
 employ the latter to create a point layer.</p>
-<div id="projection-information" class="section level4 unnumbered">
+<div id="projection-information" class="section level4 unnumbered" number="">
 <h4>Projection information</h4>
 <p>It is easy to create a point layer with just the coordinates, but without
 any projection information. However, as a result, there will be no such information associated with the layer, which
@@ -554,7 +570,7 @@ This turns out to work, and we can enter the CRS information for <strong>EPSG:34
 <p>The CRS information will allow us to create a point layer with the appropriate projection information. Note that
 <code>GeoDa</code> requires the complete CRS information, not just the EPSG code.</p>
 </div>
-<div id="point-layer-using-x-y" class="section level4 unnumbered">
+<div id="point-layer-using-x-y" class="section level4 unnumbered" number="">
 <h4>Point layer using X-Y</h4>
 <p>We create a point layer using X and Y as the coordinates.
 After invoking <strong>Tools &gt; Shape &gt; Points from Table</strong>, we select <strong>X</strong> and <strong>Y</strong> from the dialog, as
@@ -588,7 +604,7 @@ the file type in the dialog. Next we spell out a file name, such as <strong>vehi
 We saw above what the entry should be for EPSG:3435 (Illinois State Plane Coordinates). With that entry in the CRS
 box, we can save the new file with the proper projection information.</p>
 </div>
-<div id="point-layer-cleanup" class="section level4 unnumbered">
+<div id="point-layer-cleanup" class="section level4 unnumbered" number="">
 <h4>Point layer cleanup</h4>
 <p>After completing the save operation, we close the current project (make sure to respond <strong>No</strong> to the query about saving
 the geography information). We next load the file <strong>vehiclepts_xy.shp</strong>. We get the same base map as in Figure <a href="#fig:pointmap00">24</a>,
@@ -611,9 +627,9 @@ Since the correct CRS is already contained in the dialog, we can click <strong>O
 </div>
 </div>
 </div>
-<div id="community-area-boundary-file" class="section level2 unnumbered">
+<div id="community-area-boundary-file" class="section level2 unnumbered" number="">
 <h2>Community Area Boundary File</h2>
-<div id="extracting-the-community-area-layer" class="section level3 unnumbered">
+<div id="extracting-the-community-area-layer" class="section level3 unnumbered" number="">
 <h3>Extracting the community area layer</h3>
 <p>We resort to the City of Chicago open data portal again to obtain the boundary file for the Community Areas.
 From the opening screen, select the button for
@@ -643,7 +659,7 @@ Figure 29: Download boundaries as a shape file
 <p>This will download a zipped file to your drive that contains the four basic files associated with a shape file, with
 file extensions <strong>shp</strong>, <strong>shx</strong>, <strong>dbf</strong> and <strong>prj</strong>. The file name is the rather uninformative <strong>geo_export_9af88a41-660e-4b6a-91e3-b959e3e51ced</strong> (it may differ slightly for downloads carried out on different dates).</p>
 </div>
-<div id="community-areas-base-map" class="section level3 unnumbered">
+<div id="community-areas-base-map" class="section level3 unnumbered" number="">
 <h3>Community Areas base map</h3>
 <p>To generate a base map for the community areas, we start a new project in <code>GeoDa</code> and drop the just downloaded file into the <strong>Drop files here</strong> area of the data source dialog. This will open a green base map, as shown in Figure <a href="#fig:commareabase">30</a>. Note how the status bar lists the number of observations as 77.</p>
 <div class="figure" style="text-align: center"><span id="fig:commareabase"></span>
@@ -673,7 +689,7 @@ Figure 32: Community ID as Integer
 </div>
 <p>Finally, we do some cleanup and delete all the variables we will not need. We end up with just two variables: <strong>area_num_1</strong> (the community area ID)
 and <strong>community</strong> (the community are name).</p>
-<div id="changing-the-projection" class="section level4 unnumbered">
+<div id="changing-the-projection" class="section level4 unnumbered" number="">
 <h4>Changing the projection</h4>
 <p>There is one more wrinkle. The downloaded layer is expressed as lat-lon coordinates and thus is unprojected.
 We can verify this by selecting <strong>Save As</strong> and checking the contents of the CRS box, which is as in
@@ -710,14 +726,14 @@ Figure 35: Community Area Base Map
 </div>
 </div>
 </div>
-<div id="abandoned-vehicles-by-community-area" class="section level2 unnumbered">
+<div id="abandoned-vehicles-by-community-area" class="section level2 unnumbered" number="">
 <h2>Abandoned Vehicles by Community Area</h2>
 <p>Our ultimate goal is to map the abandoned vehicles by community area. But, so far, what we have are the individual locations of the vehicles. What we need is a count of the number of such vehicles by community area. In GIS-speak, this is referred to as <em>spatial aggregation</em> or
 <em>spatial join</em>. The simplest case is the one we will illustrate here, where all we need is a count of the number of observations that fall within a given community area.</p>
 <p>We will approach this in two different ways. In the first, we will simply carry out the spatial join to add the number of vehicles as an
 additional field to the data table of <strong>commarea</strong>. However, we have a small problem, in that the point layer for the vehicles is short
 of 10 observations. Therefore, we also tackle the problem in a slightly more circuitous way. We first use a different form of <em>spatial join</em> to obtain an areal identifier (the community area) for each point. Because all the points with missing community areas have x-y coordinates, we can use the <strong>vehiclepts_xyc</strong> file for that, even though it is missing 10 points. We then use the <strong>merge</strong> functionality to add the missing community areas to the original vehicle file and employ <strong>aggregate</strong> to compute the total points in each area.</p>
-<div id="spatial-join-count-points-in-area" class="section level3 unnumbered">
+<div id="spatial-join-count-points-in-area" class="section level3 unnumbered" number="">
 <h3>Spatial join – count points in area</h3>
 <p>The spatial join is part of the limited multilayer functionality that has been implemented in <code>GeoDa</code>.
 In order to fully understand how this works, it is important to keep in mind that whatever is to be
@@ -728,7 +744,7 @@ window. This is the point layer, <strong>vehiclepts_xyc</strong> (containing onl
 <p>The resulting map window is as in Figure <a href="#fig:layers1">36</a>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> The <strong>Map Layer Settings</strong> dialog shows the <strong>commarea</strong> layer on top of the <strong>vehiclepts_xyc</strong>
 layer.</p>
 <div class="figure" style="text-align: center"><span id="fig:layers1"></span>
-<img src="pics/33_layers1.png" alt="Multiple layers - option 1" width="60%" />
+<img src="pics/99_commarea.png" alt="Multiple layers - option 1" width="60%" />
 <p class="caption">
 Figure 36: Multiple layers - option 1
 </p>
@@ -759,12 +775,12 @@ Figure 38: Spatial counts added to community area layer
 <p>If the points layer were complete, this is all we would have to do. However, we will try to get a full count
 of all the vehicles, not just the ones with valid x-y. This is carried out next.</p>
 </div>
-<div id="spatial-join-area-id-for-each-point" class="section level3 unnumbered">
+<div id="spatial-join-area-id-for-each-point" class="section level3 unnumbered" number="">
 <h3>Spatial join – area id for each point</h3>
 <p>We now load the files in the reverse order, with the <strong>vehiclepts_xyc</strong> layer first and the <strong>commarea</strong> layer
 added through the <strong>+</strong> icon. The resulting base map is as in Figure <a href="#fig:layers2">39</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:layers2"></span>
-<img src="pics/33_layers2.png" alt="Multiple layers - option 2" width="60%" />
+<img src="pics/99_vehiclepts.png" alt="Multiple layers - option 2" width="60%" />
 <p class="caption">
 Figure 39: Multiple layers - option 2
 </p>
@@ -789,7 +805,7 @@ The missing codes correspond to community areas 51, 52 and 69 (the order of obse
 Figure 41: Community ID added to vehicle point layer
 </p>
 </div>
-<div id="merging-the-new-identifiers-into-the-original-point-data-set" class="section level4 unnumbered">
+<div id="merging-the-new-identifiers-into-the-original-point-data-set" class="section level4 unnumbered" number="">
 <h4>Merging the new identifiers into the original point data set</h4>
 <p>The new data set for <strong>vehiclepts_xyc</strong> has a full set of community area identifiers, but for an incomplete
 set of points. On the other hand, the original point data set <strong>vehicles_April_2020_id</strong> has all the points,
@@ -817,7 +833,7 @@ Figure 43: Editing the merged community ID fields
 </p>
 </div>
 </div>
-<div id="a-word-of-caution" class="section level4 unnumbered">
+<div id="a-word-of-caution" class="section level4 unnumbered" number="">
 <h4>A word of caution</h4>
 <p>Upon closer examination of the values for the community indicator <strong>SA</strong>, we find several values of <strong>-1</strong>.
 Clearly, this is not a valid community area indicator, but it means that the coordinates of the point in
@@ -836,7 +852,7 @@ coordinates from the original address information.</p>
 <p>This illustrates the many often ad hoc choices one needs to make in an actual data wrangling process.</p>
 </div>
 </div>
-<div id="aggregation" class="section level3 unnumbered">
+<div id="aggregation" class="section level3 unnumbered" number="">
 <h3>Aggregation</h3>
 <p>Since every point in the <strong>vehicles_April_2020_id</strong> table now has a community area value in the <strong>comm</strong> field,
 we can use this value to <em>aggregate</em> the points by community area. This is an alternative way to obtain the
@@ -886,7 +902,7 @@ Figure 47: Aggregated count added to community area layer
 </div>
 </div>
 </div>
-<div id="community-area-population-data" class="section level2 unnumbered">
+<div id="community-area-population-data" class="section level2 unnumbered" number="">
 <h2>Community Area Population Data</h2>
 <p>So far, we only have information on the abandoned vehicles. As it turns out, obtaining data for the population by community area is not
 that straightforward. The
@@ -902,7 +918,7 @@ fields.</p>
 Figure 48: CMAP community data snapshots
 </p>
 </div>
-<div id="community-area-population-data-table" class="section level3 unnumbered">
+<div id="community-area-population-data-table" class="section level3 unnumbered" number="">
 <h3>Community area population data table</h3>
 <p>After we download the csv file, we can load it into <code>GeoDa</code>. The associated data table is shown
 in Figure <a href="#fig:cmapinitial">49</a>. In addition to the population figures, the table contains many
@@ -926,7 +942,7 @@ Figure 50: CMAP community data table with identifier
 </p>
 </div>
 </div>
-<div id="merging-the-population-data-into-the-community-area-layer" class="section level3 unnumbered">
+<div id="merging-the-population-data-into-the-community-area-layer" class="section level3 unnumbered" number="">
 <h3>Merging the population data into the community area layer</h3>
 <p>The next step is to merge the new <strong>cmap.dbf</strong> file into the community area layer. In order to implement that,
 we need a matching unique identifier in each table, but we currently don’t have such an identifier. We could
@@ -973,15 +989,15 @@ Figure 54: Community area layer with population data
 </div>
 </div>
 </div>
-<div id="mapping-community-area-abandoned-vehicles-per-capita" class="section level2 unnumbered">
+<div id="mapping-community-area-abandoned-vehicles-per-capita" class="section level2 unnumbered" number="">
 <h2>Mapping Community Area Abandoned Vehicles Per Capita</h2>
 <p>Variables that represent <em>counts</em>, like the number of abandoned vehicles or the area population are so-called
 <em>spatially-extensive</em> variables. Everything else being the same, we would expect there to be more abandoned
 vehicles where there are more cars (people). Consequently, mapping spatially extensive variables may not be
 that informative. In fact, it may actually be quite misleading since such variables are basically correlated with size.</p>
 <p>In order to correct for that, maps should represent <em>spatially-intensive</em> variables, such as rates and densities.
-To make our final map, we therefore have to first compute the per capital rate.</p>
-<div id="abandoned-vehicles-per-capita" class="section level3 unnumbered">
+To make our final map, we therefore have to first compute the per capita rate.</p>
+<div id="abandoned-vehicles-per-capita" class="section level3 unnumbered" number="">
 <h3>Abandoned vehicles per capita</h3>
 <p>We first use <strong>Table &gt; Add Variable</strong> to create a new (real) variable, say <strong>vehpcap</strong>. Next, we
 use the <strong>Bivariate</strong> tab in the <strong>Calculator</strong> with the <strong>DIVIDE</strong> operator to divide <strong>SC</strong> by
@@ -995,7 +1011,7 @@ Figure 55: Abandoned vehicles per capita
 </p>
 </div>
 </div>
-<div id="quantile-map" class="section level3 unnumbered">
+<div id="quantile-map" class="section level3 unnumbered" number="">
 <h3>Quantile map</h3>
 <p>We create a simple quintile map with the observations ordered into five quantiles. We select the
 map icon in the toolbar and choose <strong>Quantile Map</strong> with <strong>5</strong> categories, as in Figure <a href="#fig:quantmapoption">56</a>.</p>
@@ -1013,7 +1029,7 @@ Because 77 (the number of observations) does not divide cleanly into 5, three ca
 Figure 57: Quantile map for abandoned vehicles per capita
 </p>
 </div>
-<p>This ends our journey from the open data portal all the way to a visual representation of the spatial distribution of abandoned vehicles. The maps do suggest some patterning and some potential association with proximity to the major interstates. Also, we may be interested in the
+<p>This ends our journey from the open data portal all the way to a visual representation of the spatial distribution of abandoned vehicles. The map does suggest some patterning and some potential association with proximity to the major interstates. Also, we may be interested in the
 degree to which the spatial pattern for April 2020 is similar to that for other years, or for other months. We leave a more formal analysis of patterns (and clusters) to later chapters.</p>
 <p>The moral of the story is that careful attention needs to be paid at every step of the way. Even though lots of information is provided through open data portals, metadata are often missing, and there are many quality issues as well as inconsistencies in the way the data are recorded. Data wrangling is still very labor intensive. Although much progress has been made in terms of automated tools (for big data), in practice, there remain many edge cases and <em>gotcha</em> situations. User beware!</p>
 </div>
@@ -1021,16 +1037,16 @@ degree to which the spatial pattern for April 2020 is similar to that for other 
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>In the original
-table, there is a variable called <strong>Service Request Number</strong> (as a string), but we removed it from our working data.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+table, there is a variable called <strong>Service Request Number</strong> (as a string), but we removed it from our working data.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>Extensive projection information
-can be found at <a href="https://spatialreference.org/ref/epsg/wgs-84/">the spatialreference.org web site</a>, including CRS codes for a variety of formats.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+can be found at <a href="https://spatialreference.org/ref/epsg/wgs-84/">the spatialreference.org web site</a>, including CRS codes for a variety of formats.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p>To obtain the actual appearance as in Figure <a href="#fig:layers1">36</a>,
 we need to make some minor changes. The default is that the top layer will <em>hide</em> the bottom layer, unless its
 <em>opacity</em> is reduced. We accomplish this by clicking on the green icon in the legend and selecting
 <strong>Fill Color for Category</strong>. We next set the <strong>Opacity</strong> to 0%. Finally, we change the fill color for the
-point layer to black.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+point layer to black.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

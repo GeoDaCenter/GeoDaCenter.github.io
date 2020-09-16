@@ -119,7 +119,7 @@ if (window.hljs) {
 
 <h1 class="title toc-ignore">Spatial Data Wrangling (2) – GIS Operations</h1>
 <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
-<h4 class="date">09/13/2020 (updated)</h4>
+<h4 class="date">09/16/2020 (updated)</h4>
 
 
 <div id="TOC">
@@ -763,36 +763,47 @@ Figure 38: Community area layer on top of supermarkets
 <p>We again invoke the process as <strong>Tools &gt; Spatial Join</strong>, but now the interface is slightly different, as
 in Figure <a href="#fig:spjoindialog2">39</a>. The <strong>current map</strong> is now the area layer, <strong>commpop_proj</strong>. Again,
 there is a drop down list to select the second layer, which in our example is simply <strong>chicago_sup</strong>. Since
-we are not carrying out any spatial aggregation on a specific variable, the <strong>Join Variable</strong> is left to
-the default <strong>(Spatial Count)</strong>.</p>
+we are not carrying out any spatial aggregation on a specific variable, the radio button checked is left to
+the default <strong>Spatial Count</strong>.</p>
 <div class="figure" style="text-align: center"><span id="fig:spjoindialog2"></span>
-<img src="pics1b/55_spatialjoin_dialog2.png" alt="Spatial join dialog -- points for community area" width="40%" />
+<img src="pics1b/100_spatialjoin1.png" alt="Spatial join dialog -- points for community area" width="50%" />
 <p class="caption">
 Figure 39: Spatial join dialog – points for community area
 </p>
 </div>
-<p>Clicking <strong>OK</strong> brings up the dialog to select the spatial count variable. In Figure <a href="#fig:spjoindvar2">40</a>,
+<p>While we don’t illustrate this feature here, the spatial join operation can also carry out an aggregation over
+the points in each area. This allows us to select multiple variables that are available at the point level (in our
+example, there are no interesting variables other than location) and carry out one of the aggregation options
+<strong>Sum</strong>, <strong>Mean</strong>, <strong>Median</strong> and <strong>Standard Deviation</strong>, as listed in Figure <a href="#fig:spjoindialog3">40</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:spjoindialog3"></span>
+<img src="pics1b/100_spatialjoin2.png" alt="Spatial join dialog -- aggregation options" width="50%" />
+<p class="caption">
+Figure 40: Spatial join dialog – aggregation options
+</p>
+</div>
+<p>In our example, we want a simple count of supermarkets by community area, so we leave the radio
+button to <strong>Spatial Count</strong>. Clicking <strong>OK</strong> brings up the dialog to select the spatial count variable. In Figure <a href="#fig:spjoindvar2">41</a>,
 we keep the default as <strong>SC</strong>.</p>
 <div class="figure" style="text-align: center"><span id="fig:spjoindvar2"></span>
 <img src="pics1b/55_spatialcount.png" alt="Spatial count -- number of supermarkets" width="20%" />
 <p class="caption">
-Figure 40: Spatial count – number of supermarkets
+Figure 41: Spatial count – number of supermarkets
 </p>
 </div>
-<p>Figure <a href="#fig:scintable">41</a> shows how the variable <strong>SC</strong> has been added as an additional column in
+<p>Figure <a href="#fig:scintable">42</a> shows how the variable <strong>SC</strong> has been added as an additional column in
 the community area data table.</p>
 <div class="figure" style="text-align: center"><span id="fig:scintable"></span>
 <img src="pics1b/55_sc_intable.png" alt="Grocery count in community area table" width="60%" />
 <p class="caption">
-Figure 41: Grocery count in community area table
+Figure 42: Grocery count in community area table
 </p>
 </div>
 <p>We can now use the <strong>Selection Tool</strong> on the community area layer to find out which community areas
-lack any supermarkets, by setting <strong>SC=0</strong>. The result is shown in Figure <a href="#fig:nogrocery">42</a>.</p>
+lack any supermarkets, by setting <strong>SC=0</strong>. The result is shown in Figure <a href="#fig:nogrocery">43</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:nogrocery"></span>
 <img src="pics1b/55_zerostores.png" alt="Community areas without supermarkets" width="60%" />
 <p class="caption">
-Figure 42: Community areas without supermarkets
+Figure 43: Community areas without supermarkets
 </p>
 </div>
 <p>As in any table operations, the results are not permanent until a <strong>Save</strong> command has been executed.</p>
@@ -816,46 +827,46 @@ code zones. With the main layer as zip code zones, the connection is between zon
 <div id="from-point-to-area" class="section level3 unnumbered" number="">
 <h3>From point to area</h3>
 <p>We start by loading the house sale location data from the <strong>kc_house.shp</strong> data set. Using the <strong>+</strong> icon, we add the
-<strong>King_county_zip.shp</strong> layer with the zip code zones. The point of departure is shown in Figure <a href="#fig:pt2area">43</a>.
+<strong>King_county_zip.shp</strong> layer with the zip code zones. The point of departure is shown in Figure <a href="#fig:pt2area">44</a>.
 The <strong>Map Layer Settings</strong> indicates that <strong>kc_house</strong> is the <strong>current map</strong>, i.e., the main layer.</p>
 <div class="figure" style="text-align: center"><span id="fig:pt2area"></span>
 <img src="pics1b/77_kc_housemain.png" alt="King county house sales with zip code zones" width="60%" />
 <p class="caption">
-Figure 43: King county house sales with zip code zones
+Figure 44: King county house sales with zip code zones
 </p>
 </div>
 <p>Right clicking on <strong>kc_house</strong> in the <strong>Map Layer Settings</strong> interface, triggers the options menu. From this,
-we select <strong>Set Highlight Association</strong>, as in Figure <a href="#fig:highlight">44</a>.</p>
+we select <strong>Set Highlight Association</strong>, as in Figure <a href="#fig:highlight">45</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:highlight"></span>
 <img src="pics1b/77_sethighlight1.png" alt="Set Highlight Assocation option" width="30%" />
 <p class="caption">
-Figure 44: Set Highlight Assocation option
+Figure 45: Set Highlight Assocation option
 </p>
 </div>
 <p>This brings up the <strong>Set Association Dialog</strong> for the <strong>from</strong> layer, i.e., <strong>kc_house</strong> (listed
-in parentheses), as shown in Figure <a href="#fig:assoc1">45</a>. From the drop down list, we select the <strong>to</strong> layer, which
+in parentheses), as shown in Figure <a href="#fig:assoc1">46</a>. From the drop down list, we select the <strong>to</strong> layer, which
 is <strong>King_coun…</strong> in our example. Next, we need to specify the common <strong>key</strong>. In the area layer, the numeric
 zip code is contained in <strong>ZIP</strong>, whereas in the point layer, it is the variable <strong>zipcode</strong>. For now, we
 keep the <strong>Show connect line</strong> box unchecked.</p>
 <div class="figure" style="text-align: center"><span id="fig:assoc1"></span>
 <img src="pics1b/77_association_house.png" alt="Set association dialog -- house sales" width="80%" />
 <p class="caption">
-Figure 45: Set association dialog – house sales
+Figure 46: Set association dialog – house sales
 </p>
 </div>
 <p>Clicking the <strong>OK</strong> button establishes the connection between a selection in the main layer and the associated
-observations in the other layer. For example, in Figure <a href="#fig:link1a">46</a>, we selected 806 house locations in the
+observations in the other layer. For example, in Figure <a href="#fig:link1a">47</a>, we selected 806 house locations in the
 center of the map, and the associated zip code zones are highlighted. This contrasts with selection in the standard
 situation (without highlight association), where only the selected items for the main layer would be highlighted,
 as in Figure <a href="#fig:pointselect">31</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:link1a"></span>
 <img src="pics1b/77_houses_selected.png" alt="King county house sales selected with associates zip code zones" width="60%" />
 <p class="caption">
-Figure 46: King county house sales selected with associates zip code zones
+Figure 47: King county house sales selected with associates zip code zones
 </p>
 </div>
 <p>With the <strong>Show connect line</strong> box checked, the connection is visualized by means of lines between the selected
-points and a center point for the zip code zone. In Figure <a href="#fig:link1">47</a>, we selected 16 observations in the remote eastern
+points and a center point for the zip code zone. In Figure <a href="#fig:link1">48</a>, we selected 16 observations in the remote eastern
 part of the county and show the associated links (to enhance
 visibility we changed the <strong>Associate Line Color</strong> for <strong>kc_house</strong> to red). If the codes were correct, we
 would expect the lines to go to the center point of the zip code zone in which the points are located. However,
@@ -864,7 +875,7 @@ zip code zone or in the lat-lon for the sales location.</p>
 <div class="figure" style="text-align: center"><span id="fig:link1"></span>
 <img src="pics1b/77_houses_selectedwlink.png" alt="King county house sales with incorrect zip code zones" width="60%" />
 <p class="caption">
-Figure 47: King county house sales with incorrect zip code zones
+Figure 48: King county house sales with incorrect zip code zones
 </p>
 </div>
 </div>
@@ -872,22 +883,22 @@ Figure 47: King county house sales with incorrect zip code zones
 <h3>From area to point</h3>
 <p>We now illustrate the reverse logic. We start by loading the <strong>King_county_zip.shp</strong> layer and add the
 <strong>kc_house.shp</strong> data set. In order to make the points visible, we change the <strong>Opacity</strong> of the <strong>Fill Color</strong>
-of the zip code zone layer to 0 and the <strong>Outline Color</strong> for the points to blue. The result is shown in Figure <a href="#fig:area2pt">48</a>.</p>
+of the zip code zone layer to 0 and the <strong>Outline Color</strong> for the points to blue. The result is shown in Figure <a href="#fig:area2pt">49</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:area2pt"></span>
 <img src="pics1b/77_zipontop.png" alt="King county zip code zones with house sales" width="60%" />
 <p class="caption">
-Figure 48: King county zip code zones with house sales
+Figure 49: King county zip code zones with house sales
 </p>
 </div>
 <p>We again right click on the top layer (now the zip code zones) in the <strong>Map Layer Settings</strong> interface to
 select <strong>Set Highlight Association</strong>, in the same way as before. Now, the <strong>from</strong> layer in the
-<strong>Set Association Dialog</strong> is <strong>King_county_zip</strong>, as in Figure <a href="#fig:assoc2">49</a>. We select the <strong>to</strong> layer
+<strong>Set Association Dialog</strong> is <strong>King_county_zip</strong>, as in Figure <a href="#fig:assoc2">50</a>. We select the <strong>to</strong> layer
 as <strong>kc_house</strong>, and again the <strong>key</strong> variable is <strong>zipcode</strong> in the point layer and <strong>ZIP</strong> in the area layer.
 With the <strong>Show connect line</strong> box checked, this establishes the connection.</p>
 <div class="figure" style="text-align: center"><span id="fig:assoc2"></span>
 <img src="pics1b/66_association2.png" alt="Set association dialog -- zip code zones" width="80%" />
 <p class="caption">
-Figure 49: Set association dialog – zip code zones
+Figure 50: Set association dialog – zip code zones
 </p>
 </div>
 <p>Now, if we select an observation in the main layer of zip code zones, the links to the house sales are shown (again, changing
@@ -896,7 +907,7 @@ but several are linked to locations well beyond, confirming the likely coding er
 <div class="figure" style="text-align: center"><span id="fig:link2"></span>
 <img src="pics1b/77_association2.png" alt="King county zip code zones incorrect house sales" width="60%" />
 <p class="caption">
-Figure 50: King county zip code zones incorrect house sales
+Figure 51: King county zip code zones incorrect house sales
 </p>
 </div>
 </div>
@@ -906,47 +917,47 @@ Figure 50: King county zip code zones incorrect house sales
 <div id="prims-minimum-spanning-tree-algorithm" class="section level3 unnumbered" number="">
 <h3>Prim’s Minimum Spanning Tree algorithm</h3>
 <p>We illustrate Prim’s MST algorithm by means of a small toy example consisting of 10 points. The
-coordinates of the points are given in Figure <a href="#fig:toypoints">51</a>.</p>
+coordinates of the points are given in Figure <a href="#fig:toypoints">52</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:toypoints"></span>
 <img src="pics1b/22_db_data.png" alt="Toy example point coordinates" width="20%" />
 <p class="caption">
-Figure 51: Toy example point coordinates
+Figure 52: Toy example point coordinates
 </p>
 </div>
-<p>The corresponding inter-point distance matrix is given in Figure <a href="#fig:toydistance">52</a>.</p>
+<p>The corresponding inter-point distance matrix is given in Figure <a href="#fig:toydistance">53</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:toydistance"></span>
 <img src="pics1b/22_distance_matrix.png" alt="Inter-point distance matrix" width="60%" />
 <p class="caption">
-Figure 52: Inter-point distance matrix
+Figure 53: Inter-point distance matrix
 </p>
 </div>
 <p>We can now use the inter-point distances to construct a <em>connectivity graph</em> for a distance band that ensures
 that each point is connected to at least one other point. In our example, this distance is 29.15.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> The corresponding graph representation
-is given in Figure <a href="#fig:graph0">53</a>, where each point is a node and the vertices show the connections and associated distances.</p>
+is given in Figure <a href="#fig:graph0">54</a>, where each point is a node and the vertices show the connections and associated distances.</p>
 <div class="figure" style="text-align: center"><span id="fig:graph0"></span>
 <img src="pics1b/22_db_points_example0.png" alt="Connectivity graph" width="50%" />
 <p class="caption">
-Figure 53: Connectivity graph
+Figure 54: Connectivity graph
 </p>
 </div>
 <p>Prim’s algorithm proceeds by starting at a random node and selecting the shortest vertex to the next node. Let’s say
 we start at node 1. Since there is only a single vertex, the first path is from node 1 to 2. At node 2, there are two
 vertices, 2-4 with length 15.81, and 2-6 with length 18.03. We therefore connect 2 to 4. So far, our shortest path follows
-the red lines as in Figure <a href="#fig:graph1">54</a>.</p>
+the red lines as in Figure <a href="#fig:graph1">55</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:graph1"></span>
 <img src="pics1b/22_db_points_example1.png" alt="Initial steps in Prim's algorithm" width="50%" />
 <p class="caption">
-Figure 54: Initial steps in Prim’s algorithm
+Figure 55: Initial steps in Prim’s algorithm
 </p>
 </div>
 <p>At node 4, the two vertices have the same length, so we can connect 4 to either 6 or 5. The order is immaterial,
 since the length of 15 is the smallest in the network and will have priority over any other vertex. At this point,
 the path consists of 1-2, 2-4, 4-6, and 4-5. The next step connects 5 to 7 (18.03), then 7 to 8 (18.03), and 8 to 9 (15). The only
-remaining unconnected point is 3, which is linked to 5 (29.15). The resulting MST follows the red lines in Figure <a href="#fig:graph2">55</a>. Every point is visited and the total distance of the path is minimized.</p>
+remaining unconnected point is 3, which is linked to 5 (29.15). The resulting MST follows the red lines in Figure <a href="#fig:graph2">56</a>. Every point is visited and the total distance of the path is minimized.</p>
 <div class="figure" style="text-align: center"><span id="fig:graph2"></span>
 <img src="pics1b/22_db_points_example2.png" alt="Minimum spanning tree" width="50%" />
 <p class="caption">
-Figure 55: Minimum spanning tree
+Figure 56: Minimum spanning tree
 </p>
 </div>
 <p><br></p>

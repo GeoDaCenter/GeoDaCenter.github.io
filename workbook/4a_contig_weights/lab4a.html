@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Luc Anselin" />
 
 
 <title>Contiguity-Based Spatial Weights</title>
 
+<script src="lab4a_files/header-attrs-2.3/header-attrs.js"></script>
 <link href="lab4a_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="lab4a_files/highlightjs-9.12.0/highlight.js"></script>
     <title>GeoDa on Github</title>
@@ -93,6 +94,9 @@ if (window.hljs) {
 
 
 
+
+
+
 </head>
 
 <body>
@@ -114,24 +118,30 @@ if (window.hljs) {
 
 
 <h1 class="title toc-ignore">Contiguity-Based Spatial Weights</h1>
-<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>03/16/2018 (revised and updated)</em></h4>
+<h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+<h4 class="date">10/02/2020 (updated)</h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction">Introduction</a><ul>
-<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#objectives">Objectives</a>
+<ul>
 <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
 </ul></li>
-<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#preliminaries">Preliminaries</a></li>
 </ul></li>
 <li><a href="#spatial-weights---basic-concepts">Spatial Weights - Basic Concepts</a></li>
-<li><a href="#contiguity-weights">Contiguity Weights</a><ul>
-<li><a href="#the-weights-manager">The weights manager</a><ul>
+<li><a href="#contiguity-weights">Contiguity Weights</a>
+<ul>
+<li><a href="#principle">Principle</a></li>
+<li><a href="#the-weights-manager">The weights manager</a>
+<ul>
 <li><a href="#id-variable">ID variable</a></li>
 </ul></li>
-<li><a href="#rook-contiguity">Rook contiguity</a><ul>
+<li><a href="#rook-contiguity">Rook contiguity</a>
+<ul>
 <li><a href="#precision-threshold">Precision threshold</a></li>
 <li><a href="#summary-properties">Summary properties</a></li>
 <li><a href="#gal-weights-file">GAL weights file</a></li>
@@ -140,47 +150,55 @@ if (window.hljs) {
 <li><a href="#loading-weights-from-a-file">Loading weights from a file</a></li>
 <li><a href="#weights-in-the-project-file">Weights in the Project File</a></li>
 </ul></li>
-<li><a href="#higher-order-contiguity">Higher order contiguity</a></li>
-<li><a href="#weights-characteristics">Weights Characteristics</a><ul>
-<li><a href="#connectivity-histogram">Connectivity histogram</a><ul>
+<li><a href="#higher-order-contiguity">Higher Order Contiguity</a></li>
+<li><a href="#weights-characteristics">Weights Characteristics</a>
+<ul>
+<li><a href="#connectivity-histogram">Connectivity histogram</a>
+<ul>
 <li><a href="#saving-the-neighbor-cardinality-to-the-table">Saving the neighbor cardinality to the table</a></li>
 </ul></li>
-<li><a href="#connectivity-map">Connectivity map</a><ul>
+<li><a href="#connectivity-map">Connectivity map</a>
+<ul>
 <li><a href="#connectivity-map-options">Connectivity map options</a></li>
 </ul></li>
-<li><a href="#connectivity-graph">Connectivity graph</a><ul>
+<li><a href="#connectivity-graph">Connectivity graph</a>
+<ul>
 <li><a href="#connectivity-graph-options">Connectivity graph options</a></li>
-<li><a href="#neighbors-of-a-selection-in-map">Neighbors of a selection in map</a></li>
-<li><a href="#neighbors-of-a-selection-in-table">Neighbors of a selection in table</a></li>
 </ul></li>
+</ul></li>
+<li><a href="#connectivity-option">Connectivity Option</a>
+<ul>
+<li><a href="#connectivity-option-in-the-map">Connectivity Option in the Map</a></li>
+<li><a href="#connectivity-option-in-the-table">Connectivity Option in the Table</a></li>
 </ul></li>
 <li><a href="#references">References</a></li>
 </ul>
 </div>
 
 <p><br></p>
-<div id="introduction" class="section level2 unnumbered">
+<div id="introduction" class="section level2 unnumbered" number="">
 <h2>Introduction</h2>
-<p>In this chapter, we will begin to explore the spatial weights functionality in GeoDa. We
+<p>In this chapter, we will begin to explore the spatial weights functionality in <code>GeoDa</code>. We
 focus initially on spatial weights based
-on the notion of contiguity between polygons. We will use the <strong>U.S. Homicides</strong> sample data
-set that comes pre-installed with GeoDa. It contains values for homicides and several socio-economic determinants for the 3085 counties in the continental United States.</p>
-<p>After a brief review of important concepts, we consider rook and queen contiguity-based weights, as well as higher order contiguity. We highlight the importance of the Project File to keep track of
+on the notion of contiguity between polygons. We will use the <strong>ncovr</strong> sample data set with socio-economic data related
+to homicides in U.S. counties
+set that comes pre-installed with <code>GeoDa</code>.</p>
+<p>After a brief review of important concepts, we consider rook and queen contiguity-based weights, as well as higher order contiguity. We highlight the importance of the <strong>Project File</strong> to keep track of
 weights metadata. We next examine the characteristics of the weights using the connectivity histogram, and explore the connectivity map and
 connectivity graph. The connectivity information can also be exploited to
 select locations with their neighbors.</p>
 <p>Distance-based weights and some more advanced concepts are covered in the chapters that follow.</p>
-<div id="objectives" class="section level3 unnumbered">
+<div id="objectives" class="section level3 unnumbered" number="">
 <h3>Objectives</h3>
 <ul>
 <li><p>Construct rook and queen contiguity-based spatial weights</p></li>
 <li><p>Compute higher order contiguity weights</p></li>
-<li><p>Store the weights information in a GeoDa Project File</p></li>
+<li><p>Store the weights information in a <code>GeoDa</code> Project File</p></li>
 <li><p>Assess the characteristics of spatial weights</p></li>
 <li><p>Visualize the graph structure of spatial weights</p></li>
 <li><p>Identify the neighbors of selected observations</p></li>
 </ul>
-<div id="geoda-functions-covered" class="section level4 unnumbered">
+<div id="geoda-functions-covered" class="section level4 unnumbered" number="">
 <h4>GeoDa functions covered</h4>
 <ul>
 <li>Weights Manager (Tools &gt; Weights Manager)
@@ -207,27 +225,35 @@ select locations with their neighbors.</p>
 <p><br></p>
 </div>
 </div>
-<div id="getting-started" class="section level3 unnumbered">
-<h3>Getting started</h3>
-<p>With GeoDa launched and all previous projects closed, we start a new project and
-load the U.S. Homicides sample data set from the
-<strong>Sample Data</strong> tab of the <strong>Connect to Data Source</strong> dialog (second data set from the
-top). This yields the familiar themeless base map of the U.S. counties, shown in Figure <a href="#fig:usbasemap">1</a>.</p>
+<div id="preliminaries" class="section level3 unnumbered" number="">
+<h3>Preliminaries</h3>
+<p>We again use a data set that is comes built-in with <code>GeoDa</code> and is also
+contained in the <a href="https://geodacenter.github.io/data-and-lab/">GeoDa Center data set collection</a>.</p>
+<ul>
+<li><a href="https://geodacenter.github.io/data-and-lab/ncovr/">ncovr</a>: homicide and socio-economic data for 3085 U.S. counties</li>
+</ul>
+<p><br>
+You can either load this data from the <strong>Sample Data</strong> tab, or, if you previously downloaded the files, drop the <strong>natregimes</strong> shape file into the usual
+<strong>Drop files here</strong> box in the dialog.
+This yields a themeless base map of the U.S. counties, shown in Figure <a href="#fig:usbasemap">1</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:usbasemap"></span>
-<img src="pics4a/0_341_uscountiesmap.png" alt="U.S. counties themeless map" width="80%" />
+<img src="pics4a/00_natregimes_themeless.png" alt="U.S. counties themeless map" width="60%" />
 <p class="caption">
 Figure 1: U.S. counties themeless map
 </p>
 </div>
-<p>In order to make sure that the weights files we are about to construct end up in the same directory
-as the data, we should create a copy of the sample data. To this effect, we invoke <strong>File &gt; Save As</strong> to create a duplicate of the respective files in
+<p>If you used the file from the <strong>Sample Data</strong> collection in <code>GeoDa</code>, a copy of this data should be
+created to make sure that the weights files we are about to construct end up in the same directory
+as the data. To this effect, invoke <strong>File &gt; Save As</strong> to create a duplicate of the respective files in
 a working directory (choose <strong>ESRI Shapefile</strong> as the file type).</p>
 <p>Close the project and load the new file in the usual fashion. In the example that follows,
 the file name is <strong>natregimes</strong> (with four matching files with extensions .shp, .shx,
-.dbf, and .prj). We are now ready to proceed.</p>
+.dbf, and .prj).</p>
+<p>If you loaded <strong>natregimes</strong> from a downloaded folder, you do not need to carry out this extra step.</p>
+<p>We are now ready to proceed.</p>
 </div>
 </div>
-<div id="spatial-weights---basic-concepts" class="section level2 unnumbered">
+<div id="spatial-weights---basic-concepts" class="section level2 unnumbered" number="">
 <h2>Spatial Weights - Basic Concepts</h2>
 <p>Spatial weights are a key component in any cross-sectional analysis of spatial dependence.
 They are an essential element in the construction of spatial autocorrelation statistics, and
@@ -251,7 +277,7 @@ The spatial weights <span class="math inline">\(w_{ij}\)</span> are non-zero
 when <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are neighbors, and zero otherwise.
 By convention, the self-neighbor relation is excluded, so that the diagonal
 elements of <span class="math inline">\(\mathbf{W}\)</span> are zero, <span class="math inline">\(w_{ii} = 0\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<p>In its most simple form, the spatial weights matrix expresses the
+<p>In its simplest form, the spatial weights matrix expresses the
 existence of a neighbor relation as a binary relationship, with weights
 1 and 0. Formally, each spatial unit is
 represented in the matrix by a row <span class="math inline">\(i\)</span>, and the potential neighbors
@@ -259,7 +285,7 @@ by the columns <span class="math inline">\(j\)</span>, with <span class="math in
 between the spatial unit corresponding to row <span class="math inline">\(i\)</span> and the
 one matching column <span class="math inline">\(j\)</span> follows
 then as <span class="math inline">\(w_{ij} = \mathbf{W}_{i,j} = 1\)</span>.</p>
-<p>With a few exceptions, the analyses in GeoDa that employ spatial weights use
+<p>With a few exceptions, the analyses in <code>GeoDa</code> that employ spatial weights use
 them in so-called <em>row-standardized</em> form.
 Row-standardization takes the given
 weights <span class="math inline">\(w_{ij}\)</span> (e.g, the binary zero-one weights) and divides them by the row sum:
@@ -274,10 +300,12 @@ number of observations.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</s
 no such matrix is actually used in the operations. Spatial weights are typically very sparse
 matrices, and this sparsity is exploited by using specialized data structures (there is no point in
 storing lots and lots of zeros).</p>
-<p>Further technical details on spatial weights are contained Chapters 3 and 4 of <span class="citation">Anselin and Rey (<a href="#ref-AnselinRey:14">2014</a>)</span>, although the software illustrations in that book are based on a GeoDa interface for an earlier version.</p>
+<p>Further technical details on spatial weights are contained Chapters 3 and 4 of <span class="citation">Anselin and Rey (<a href="#ref-AnselinRey:14" role="doc-biblioref">2014</a>)</span>, although the software illustrations in that book are based on a <code>GeoDa</code> interface for an earlier version.</p>
 </div>
-<div id="contiguity-weights" class="section level2 unnumbered">
+<div id="contiguity-weights" class="section level2 unnumbered" number="">
 <h2>Contiguity Weights</h2>
+<div id="principle" class="section level3 unnumbered" number="">
+<h3>Principle</h3>
 <p>Contiguity means that two spatial units share a
 common border of non-zero length. Operationally, we can further
 distinguish between a <em>rook</em> and a <em>queen</em> criterion
@@ -294,7 +322,7 @@ the geometry of the data cannot be done by
 visual inspection or manual calculation, except in the
 most trivial of situations. To assess whether two polygons are contiguous requires the use of explicit spatial data structures to
 deal with the location and arrangement of the polygons. This is implemented through the spatial
-weights functionality in GeoDa.</p>
+weights functionality in <code>GeoDa</code>.</p>
 <p>It is important to keep in mind that the spatial weights are critically dependent
 on the quality of the spatial data source (GIS) from which they are constructed. Problems with the
 topology in the GIS (e.g., slivers) will result in inaccuracies for the neighbor
@@ -302,8 +330,9 @@ relations included in the spatial weights. In practice, it is essential to check
 the characteristics of the weights for any evidence of problems.
 When problems are detected,
 the solution is to go back to the GIS and fix or clean the topology of the
-data set. Editing of spatial layers is not implemented in GeoDa, but this is a routine operation in most GIS software.</p>
-<div id="the-weights-manager" class="section level3 unnumbered">
+data set. Editing of spatial layers is not implemented in <code>GeoDa</code>, but this is a routine operation in most GIS software.</p>
+</div>
+<div id="the-weights-manager" class="section level3 unnumbered" number="">
 <h3>The weights manager</h3>
 <p>We invoke the weights creation through the <strong>Weights Manager</strong> icon in the toolbar,
 as shown in Figure <a href="#fig:weightsmanagericon">2</a>, or by selecting <strong>Tools &gt; Weights Manager</strong> in the menu.</p>
@@ -313,9 +342,9 @@ as shown in Figure <a href="#fig:weightsmanagericon">2</a>, or by selecting <str
 Figure 2: Weights Manager toolbar icon
 </p>
 </div>
-<p>Clicking on the <strong>W</strong> icon brings up the <strong>Weights Manager</strong> dialog in Figure <a href="#fig:wmdialogempty">3</a>. At this point, it should be totally empty. By selecting the <strong>Create</strong> button, we can start constructing the weights.</p>
+<p>This brings up the <strong>Weights Manager</strong> dialog in Figure <a href="#fig:wmdialogempty">3</a>. At this point, it should be totally empty. By selecting the <strong>Create</strong> button, we can start constructing the weights.</p>
 <div class="figure" style="text-align: center"><span id="fig:wmdialogempty"></span>
-<img src="pics4a/1_weights_manager_dialog.png" alt="Weights Manager dialog" width="40%" />
+<img src="pics4a/00_weightsmanager.png" alt="Weights Manager dialog" width="30%" />
 <p class="caption">
 Figure 3: Weights Manager dialog
 </p>
@@ -324,36 +353,37 @@ Figure 3: Weights Manager dialog
 shown in Figure <a href="#fig:weightscreation1">4</a>. This provides the entry point to all the available options. Two buttons correspond to the main types of weights, based either on <strong>Contiguity</strong>
 or on <strong>Distance</strong>.</p>
 <div class="figure" style="text-align: center"><span id="fig:weightscreation1"></span>
-<img src="pics4a/1_weights_creation_dialog.png" alt="Weights File Creation interface" width="60%" />
+<img src="pics4a/1_weights_creation_dialog.png" alt="Weights File Creation interface" width="40%" />
 <p class="caption">
 Figure 4: Weights File Creation interface
 </p>
 </div>
-<div id="id-variable" class="section level4 unnumbered">
+<div id="id-variable" class="section level4 unnumbered" number="">
 <h4>ID variable</h4>
 <p>The first item to specify is the <strong>ID Variable</strong>. This variable is a critical element to make sure that the weights are connected to the correct observations in the data table. In other words, the ID variable is a so-called <em>key</em> that links the data to the weights.</p>
-<p>In GeoDa, it is best to have the ID Variable be integer. In practice, this is often not the case, and
+<p>In <code>GeoDa</code>, it is best to have the ID Variable be integer. In practice, this is often not the case, and
 even though the identifier may <em>look</em> like an integer value, it is often stored as a string. For
 example, the standard FIPS code that comes with the U.S. county file is such a string. One way to deal with this problem is to use the <strong>Edit Variable Properties</strong> functionality in the table to turn a string into an integer, as we have seen earlier. However, sometimes there is no easy way to identify an ID variable. In that case, the <strong>Add ID Variable</strong> button provides the solution: the added ID variable is simply an integer sequence number that is added to the data table (as always, you must <strong>Save</strong> the data to make the addition permanent).</p>
-<p>For the natregimes data set, we use <strong>fipsno</strong> as the ID variable,
+<p>For the natregimes data set, we use <strong>FIPSNO</strong> as the ID variable,
 as in Figure <a href="#fig:weightscreationwID">5</a>. This is the county FIPS code turned into an integer value. Once the ID variable is entered, the options for the weights become available. In the opening setting,
 the <strong>Contiguity Weight</strong> button is active, which provides options to create queen and rook weights,
 as well as higher order contiguity weights. Queen contiguity with first order contiguity is
 set as the default, shown in Figure <a href="#fig:weightscreationwID">5</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:weightscreationwID"></span>
-<img src="pics4a/1_344_idvariable.png" alt="Weights File Creation activated" width="60%" />
+<img src="pics4a/00_idvariable.png" alt="Weights File Creation activated" width="40%" />
 <p class="caption">
 Figure 5: Weights File Creation activated
 </p>
 </div>
 </div>
 </div>
-<div id="rook-contiguity" class="section level3 unnumbered">
+<div id="rook-contiguity" class="section level3 unnumbered" number="">
 <h3>Rook contiguity</h3>
 <p>We first consider <strong>Rook contiguity</strong>, i.e., when only common sides of the polygons are
 considered to define the neighbor relation (common vertices are ignored). With
 the <strong>Rook contiguity</strong> radio button checked, as in Figure <a href="#fig:precisionthreshold">6</a>, a click on <strong>Create</strong> will start
-the weights construction process. First, a file dialog appears in which a file name for the weights
+the weights construction process.</p>
+<p>First, a file dialog appears in which a file name for the weights
 must be specified (the file extension <strong>GAL</strong> is added automatically). For example,
 we could use <strong>natregimes_r.gal</strong>. Since there are no real metadata in a
 spatial weights file, it is a good practice to make the file name something meaningful, so that you can remember what type of weight you just created. In our example, we added _<strong>r</strong>
@@ -361,23 +391,23 @@ to the name of the data set to suggest rook weights. However, as we will see bel
 a <strong>Project File</strong> is saved, several of the characteristics of the weights (i.e., its metadata) are stored in
 that file.</p>
 <div class="figure" style="text-align: center"><span id="fig:precisionthreshold"></span>
-<img src="pics4a/1_342_widvariable.png" alt="Rook contiguity with precision threshold option" width="60%" />
+<img src="pics4a/00_rook_contiguity.png" alt="Rook contiguity with precision threshold option" width="40%" />
 <p class="caption">
 Figure 6: Rook contiguity with precision threshold option
 </p>
 </div>
 <p>After entering a file name and clicking on <strong>OK</strong>, the weights are computed and written to the file. At the end of this operation, a success message will appear (or an <strong>Error</strong> message if something went wrong).</p>
-<div id="precision-threshold" class="section level4 unnumbered">
+<div id="precision-threshold" class="section level4 unnumbered" number="">
 <h4>Precision threshold</h4>
-<p>A useful option in the weights file creation dialog is the specification of a <strong>Precision threshold</strong> (highlighted in Figure <a href="#fig:precisionthreshold">6</a>). In most cases, this is not needed, but in some instances the precision of the underlying shape file is insufficient to allow for an exact match of coordinates (to determine which polygons are neighbors). When this happens, GeoDa suggests a default error band to allow for a fuzzy comparison. For example, this would be needed to create contiguity weights in the NYC sample data set.</p>
+<p>A useful option in the weights file creation dialog is the specification of a <strong>Precision threshold</strong> (highlighted in Figure <a href="#fig:precisionthreshold">6</a>). In most cases, this is not needed, but in some instances the precision of the underlying shape file is insufficient to allow for an exact match of coordinates (to determine which polygons are neighbors). When this happens, <code>GeoDa</code> suggests a default error band to allow for a fuzzy comparison. For example, this would be needed to create contiguity weights in the NYC sample data set.</p>
 </div>
-<div id="summary-properties" class="section level4 unnumbered">
+<div id="summary-properties" class="section level4 unnumbered" number="">
 <h4>Summary properties</h4>
 <p>After the weights are created, the weights manager becomes populated, as shown
 in Figure <a href="#fig:wmanagerwRook">7</a>. The name for the file that was just created is now
 listed under the <strong>Weights Name</strong>. In addition, under the item <strong>Property</strong>, several summary
 properties are given. This includes simple descriptions, such as
-the type (<strong>rook</strong>), whether the weights are inherently symmetric or not (<strong>symmetric</strong>), the full file name (<strong>natregimes_r.gal</strong>), the id variable (<strong>fipsno</strong>), the order of contiguity (<strong>1</strong>), and
+the type (<strong>rook</strong>), whether the weights are inherently symmetric or not (<strong>symmetric</strong>), the full file name (<strong>natregimes_r.gal</strong>), the id variable (<strong>FIPSNO</strong>), the order of contiguity (<strong>1</strong>), and
 the number of observations (<strong>3085</strong>).</p>
 <p>In addition, a number of summary statistics are listed, including the minimum (<strong>1</strong>) and maximum
 (<strong>13</strong>) number of neighbors, the mean (<strong>5.57</strong>) and median (<strong>6</strong>) number of neighbors, and
@@ -385,18 +415,18 @@ the percent nonzero cells in the matrix (<strong>0.18%</strong>). The latter is 
 sparsity of the weights. In the case of rook contiguity for U.S. counties, only 0.18 percent of the cells designate
 a neighbor relation (the rest are zeros).</p>
 <div class="figure" style="text-align: center"><span id="fig:wmanagerwRook"></span>
-<img src="pics4a/1_343_wmanagerwrook.png" alt="Rook contiguity listed in Weights Manager" width="40%" />
+<img src="pics4a/00_rook_manager.png" alt="Rook contiguity listed in Weights Manager" width="30%" />
 <p class="caption">
 Figure 7: Rook contiguity listed in Weights Manager
 </p>
 </div>
 </div>
-<div id="gal-weights-file" class="section level4 unnumbered">
+<div id="gal-weights-file" class="section level4 unnumbered" number="">
 <h4>GAL weights file</h4>
-<p>The GAL weights file is a simple text file that contains, for each observation, the number of neighbors and their identifiers. The format was suggested in the 1980s by the Geometric Algorithms Lab at Nottingham University and achieved widespread use after its inclusion in SpaceStat <span class="citation">(Anselin <a href="#ref-Anselin:92b">1992</a>)</span>, and subsequent adoption by the R spdep package and others.</p>
-<p>The one innovation SpaceStat added was the inclusion of a header line, with some metadata for the weights, such as the number of observations, the name of the shape file from which the weights were derived, and the name of the ID variable. As illustrated in Figure <a href="#fig:galfile">8</a>, for each observation, the number of neighbors is listed after its ID (e.g., for county 27077, there are 3 neighbors), followed by the IDs of the neighbors (27135 27071 27007).</p>
+<p>The GAL weights file is a simple text file that contains, for each observation, the number of neighbors and their identifiers. The format was suggested in the 1980s by the Geometric Algorithms Lab at Nottingham University and achieved widespread use after its inclusion in <code>SpaceStat</code> <span class="citation">(Anselin <a href="#ref-Anselin:92b" role="doc-biblioref">1992</a>)</span>, and subsequent adoption by the <code>R</code> <code>spdep</code> package and others.</p>
+<p>The one innovation <code>SpaceStat</code> added was the inclusion of a header line, with some metadata for the weights, such as the number of observations, the name of the shape file from which the weights were derived, and the name of the ID variable. As illustrated in Figure <a href="#fig:galfile">8</a>, for each observation, the number of neighbors is listed after its ID (e.g., for county 27077, there are 3 neighbors), followed by the IDs of the neighbors (27135 27071 27007).</p>
 <div class="figure" style="text-align: center"><span id="fig:galfile"></span>
-<img src="pics4a/1_003_galfile.png" alt="Contents of GAL weights file" width="50%" />
+<img src="pics4a/00_galfile.png" alt="Contents of GAL weights file" width="30%" />
 <p class="caption">
 Figure 8: Contents of GAL weights file
 </p>
@@ -404,7 +434,7 @@ Figure 8: Contents of GAL weights file
 <p>Since the GAL file is a simple text file, it can easily be edited (e.g., to add or remove neighbors), although this is not recommended: it is easy to break the inherent symmetry of the contiguity weights.</p>
 </div>
 </div>
-<div id="queen-contiguity" class="section level3 unnumbered">
+<div id="queen-contiguity" class="section level3 unnumbered" number="">
 <h3>Queen contiguity</h3>
 <p>We proceed in the same fashion to construct queen contiguity weights. The difference between
 the rook and queen criterion to determine neighbors is that the latter also includes
@@ -416,31 +446,31 @@ inaccuracies in the polygon file (such as rounding errors), using the queen crit
 <p>After checking the <strong>Queen contiguity</strong> radio button, clicking on <strong>Create</strong> and
 entering a file name (e.g., <strong>natregimes_q.gal</strong>), the new weights will be saved to the weights file. At this point, the file name for the queen weights is included among the weights
 names listed in the weights manager, shown in Figure <a href="#fig:managerwQueen">9</a>.</p>
-<p>In the dialog, the highlighted weights file is the active one. This determines what weights are used in any analysis, but also drives the properties that are listed in the dialog, and what is generated by the <strong>Connectivity Histogram</strong>, <strong>Connectivity Map</strong>, and <strong>Connectivity Graph</strong>. In the example
-in Figure <a href="#fig:managerwQueen">9</a>, the summary properties for the queen weights are shown, since that is the highlighted weights name. The properties are almost the same as for the rook weights, except
-for slightly less sparsity (0.19% non-zero weights compared to 0.18% for rook weights).</p>
+<p>In the dialog, the highlighted weights file is the active one. This determines what weights are used in any analysis, but also drives the properties that are listed in the dialog, and what is generated by the <strong>Connectivity Histogram</strong>, <strong>Connectivity Map</strong>, and <strong>Connectivity Graph</strong>.</p>
+<p>In the example
+in Figure <a href="#fig:managerwQueen">9</a>, the summary properties for the queen weights are shown, since that is the highlighted weights name. The properties are almost the same as for the rook weights, except for minor differences in
+the maximum number of neighbors (14 vs. 13), the mean number of neighbors (5.89 vs 5.57), and the sparsity (0.19% non-zero weights compared to 0.18% for rook weights).</p>
 <div class="figure" style="text-align: center"><span id="fig:managerwQueen"></span>
-<img src="pics4a/1_345_queenweights.png" alt="Queen contiguity added to weights manager" width="40%" />
+<img src="pics4a/00_queen_manager.png" alt="Queen contiguity added to weights manager" width="30%" />
 <p class="caption">
 Figure 9: Queen contiguity added to weights manager
 </p>
 </div>
 </div>
-<div id="loading-weights-from-a-file" class="section level3 unnumbered">
+<div id="loading-weights-from-a-file" class="section level3 unnumbered" number="">
 <h3>Loading weights from a file</h3>
 <p>The <strong>Weights Manager</strong> can also be used to <strong>Load</strong> weights files that are already available on disk. To start with a clean slate, we first <strong>Remove</strong> the two weights currently in the list (highlight the file name and click on <strong>Remove</strong>). Next, we select the <strong>Load</strong> button (center top) and specify the name of the weights file. In the example shown in Figure <a href="#fig:loadweights">10</a>, we use <strong>natregimes_q</strong> as the file.</p>
 <p>Unlike what held for the weights created on the fly in the current session, only limited descriptive items are contained in the properties list, since there are no metadata for the weights files.</p>
-<p>In our example, GeoDa has no way of knowing whether the loaded file represents queen or rook contiguity (given as <strong>custom</strong> in the properties list), whether it is symmetric (<strong>unknown</strong>), or the order of contiguity (not listed). Therefore, it is highly recommended to use a Project
-File to store the weights characteristics. The descriptive statistics are computed as the file is
+<p>In our example, <code>GeoDa</code> has no way of knowing whether the loaded file represents queen or rook contiguity (given as <strong>custom</strong> in the properties list), whether it is symmetric (<strong>unknown</strong>), or the order of contiguity (not listed). Therefore, it is highly recommended to use a <strong>Project File</strong> to store the weights characteristics. The descriptive statistics are computed as the file is
 read, so those are given as before, as shown in Figure <a href="#fig:loadweights">10</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:loadweights"></span>
-<img src="pics4a/1_346_loadweights.png" alt="Loaded weights in weights manager" width="40%" />
+<img src="pics4a/00_load_weights.png" alt="Loaded weights in weights manager" width="30%" />
 <p class="caption">
 Figure 10: Loaded weights in weights manager
 </p>
 </div>
 </div>
-<div id="weights-in-the-project-file" class="section level3 unnumbered">
+<div id="weights-in-the-project-file" class="section level3 unnumbered" number="">
 <h3>Weights in the Project File</h3>
 <p>Upon closing the current project, the information on the characteristics of the spatial weights is lost. When the same polygon layer is later reloaded (e.g., natregimes), each weights file has to be
 separately added to the project by means of the <strong>Load</strong> button in the weights manager. As illustrated
@@ -454,7 +484,7 @@ scratch (remove any currenly listed weights that were loaded, and either use new
 file names, or overwrite the current files when creating the weights).</p>
 <p>The current project information is kept in memory. As we saw earlier, it can be saved by means of the <strong>Save Project</strong> item in the <strong>File</strong> menu, as shown in Figure <a href="#fig:saveprojectw">11</a>. This will prompt for a file name and save the project file with a file extension <strong>gda</strong>.</p>
 <div class="figure" style="text-align: center"><span id="fig:saveprojectw"></span>
-<img src="pics4a/4_360_saveproject.png" alt="Save Project option" width="25%" />
+<img src="pics4a/4_360_saveproject.png" alt="Save Project option" width="15%" />
 <p class="caption">
 Figure 11: Save Project option
 </p>
@@ -463,7 +493,7 @@ Figure 11: Save Project option
 the one we created for the custom categories, e.g., <strong>weights.gda</strong>.</p>
 <p>The project file is an editable XML text file that contains all the characteristics of the spatial weights. As shown in Figure <a href="#fig:wgdafile">12</a>, the two contiguity weights created so far are included, with the properties as they were listed in the weights manager.</p>
 <div class="figure" style="text-align: center"><span id="fig:wgdafile"></span>
-<img src="pics4a/4_gda_file.png" alt="Weights information in project file" width="60%" />
+<img src="pics4a/00_project_weights.png" alt="Weights information in project file" width="40%" />
 <p class="caption">
 Figure 12: Weights information in project file
 </p>
@@ -472,52 +502,56 @@ Figure 12: Weights information in project file
 loading the project file instead of opening a shape file (or other geographical layer). This will automatically load all the spatial weights contained in the project file and list their properties in the weights manager (in addition to custom categories, time grouped variables, etc.).</p>
 </div>
 </div>
-<div id="higher-order-contiguity" class="section level2 unnumbered">
-<h2>Higher order contiguity</h2>
+<div id="higher-order-contiguity" class="section level2 unnumbered" number="">
+<h2>Higher Order Contiguity</h2>
 <p>Higher order contiguity weights are constructed in the same general manner as the first order weights we just covered. However, now we must specify a value larger than the default of 1 in the <strong>Order of contiguity</strong> box, as
 shown in Figure <a href="#fig:orderofcontig">13</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:orderofcontig"></span>
-<img src="pics4a/3_358_higherorder.png" alt="Higher order contiguity" width="60%" />
+<img src="pics4a/00_higher_order.png" alt="Higher order contiguity" width="40%" />
 <p class="caption">
 Figure 13: Higher order contiguity
 </p>
 </div>
 <p>As before, the weights are saved to a file after selecting the <strong>Create</strong> button and specifying a file name.</p>
-<p>One important aspect of higher order contiguity weights is whether or not the lower order neighbors should be included in the weights structure. This is determined by a check box (highlighted in Figure <a href="#fig:orderofcontig">13</a>). Importantly, there is quite a difference between the two concepts. The <em>pure</em> higher order contiguity does not include any lower order neighbors. This is the notion appropriate for use in a statistical analysis of spatial autocorrelation for different <em>spatial lag</em> orders. In order to achieve this, all redundant
-and circular paths need to be removed <span class="citation">(see Anselin and Smirnov <a href="#ref-AnselinSmirnov:96">1996</a>, for a technical discussion)</span>.</p>
-<p>In contrast, an encompassing notion of second order neighbors would include the first order neighbors as well, since there are two steps – back and forth – connecting each observation to its first order neighbor. In practice, the notion of inclusive increasing orders of contiguity can be used in a
-way similar to increasing distance bands, i.e., consisting of both first and second order neighbors.</p>
-<p>We proceed and create two forms of second order queen contiguity weights, one without the box checked (pure second order contiguity), and one with the box checked (inclusive second
-order contiguity). Both weights should now be listed in the weights manager, as shown
-in Figures <a href="#fig:q2inmanager">14</a> and <a href="#fig:q2incinmanager">15</a>.</p>
+<p>One important aspect of higher order contiguity weights is whether or not the lower order neighbors should be included in the weights structure. This is determined by a check box (highlighted in Figure <a href="#fig:orderofcontig">13</a>).</p>
+<p>Importantly, there is quite a difference between the two concepts. The <em>pure</em> higher order contiguity does not include any lower order neighbors. This is the notion appropriate for use in a statistical analysis of spatial autocorrelation for different <em>spatial lag</em> orders. In order to achieve this, all redundant
+and circular paths need to be removed <span class="citation">(see Anselin and Smirnov <a href="#ref-AnselinSmirnov:96" role="doc-biblioref">1996</a>, for a technical discussion)</span>.</p>
+<p>With the weights file as <strong>natregimes_q2.gal</strong>, the properties are listed in the weights manager shown in
+Figure <a href="#fig:q2inmanager">14</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:q2inmanager"></span>
-<img src="pics4a/3_796_q2inmanager.png" alt="Second order queen weights in manager" width="40%" />
+<img src="pics4a/00_q2.png" alt="Second order queen weights in manager" width="30%" />
 <p class="caption">
 Figure 14: Second order queen weights in manager
 </p>
 </div>
+<p>In contrast, an encompassing notion of second order neighbors would include the first order neighbors as well. The <em>pure</em> second order excludes these, even though there are two steps – back and forth – connecting each observation to its first order neighbor. However, as mentioned, to avoid redundancy, these are excluded.</p>
+<p>The notion of inclusive increasing orders of contiguity side steps the redundancy issue, since both
+first and second neighbors are included. This can be used in a
+way similar to increasing distance bands, i.e., bands increasing by order of contiguity.</p>
+<p>We also create the inclusive second order type queen contiguity weights, now with the box checked and with file name <strong>natregimes_q2i.gal</strong>. Its characteristics are listed in the weights manager, shown
+in Figure <a href="#fig:q2incinmanager">15</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:q2incinmanager"></span>
-<img src="pics4a/3_797_q2incinmanager.png" alt="Inclusived second order weights in manager" width="40%" />
+<img src="pics4a/00_q2inclusive.png" alt="Inclusived second order weights in manager" width="30%" />
 <p class="caption">
 Figure 15: Inclusived second order weights in manager
 </p>
 </div>
 <p>The difference between the two concepts can be easily gathered from the descriptive statistics.
 As expected, the inclusive second order weights are denser, as illustrated by the mean and median
-number of neighbors (respectively 12.55 compared to 18.44; and 13 compared to 19), and
-the percent non-zero (0.41% compared to 0.60%).</p>
+number of neighbors (respectively 18.44 compared to 12.55; and 19 compared to 13), and
+the percent non-zero (0.60% compared to 0.41%).</p>
 </div>
-<div id="weights-characteristics" class="section level2 unnumbered">
+<div id="weights-characteristics" class="section level2 unnumbered" number="">
 <h2>Weights Characteristics</h2>
 <p>Some useful characteristics of the currently selected weights are provided in the <strong>Weights Manager</strong> by means of the <strong>Connectivity Histogram</strong>, the <strong>Connectivity Map</strong>, and the
 <strong>Connectivity Graph</strong>. To continue, we should have at least the queen contiguity weights
 available in the weights manager.</p>
-<div id="connectivity-histogram" class="section level3 unnumbered">
+<div id="connectivity-histogram" class="section level3 unnumbered" number="">
 <h3>Connectivity histogram</h3>
-<p>The <strong>Histogram</strong> button at the left-hand side of the bottom of the weights manager produces a connectivity histogram. This shows the number of observations for each value of the cardinality of neighbors (i.e., how many observations have the given number of neighbors). The graph, illustrated in Figure <a href="#fig:connhistogram">16</a> for the queen contiguity associated with the
-U.S. counties, is a standard GeoDa histogram, with a number of options available, some of which are generic, and some specific to the connectivity histogram.</p>
+<p>The <strong>Histogram</strong> button at the left-hand side of the bottom of the weights manager produces a connectivity histogram. This shows the number of observations for each value of the <em>cardinality</em> of neighbors (i.e., how many observations have the given number of neighbors). The graph, illustrated in Figure <a href="#fig:connhistogram">16</a> for the queen contiguity associated with the
+U.S. counties, is a standard <code>GeoDa</code> histogram, with a number of options available, some of which are generic, and some specific to the connectivity histogram.</p>
 <div class="figure" style="text-align: center"><span id="fig:connhistogram"></span>
-<img src="pics4a/2_connectivity_queen.png" alt="Connectivity histogram - queen weights" width="60%" />
+<img src="pics4a/2_connectivity_queen.png" alt="Connectivity histogram - queen weights" width="40%" />
 <p class="caption">
 Figure 16: Connectivity histogram - queen weights
 </p>
@@ -527,7 +561,7 @@ neighbors). In addition to the visual inspection, the usual statistics of the di
 can be added to the bottom of the table by means of the <strong>View &gt; Display Statistics</strong> option,
 in Figure <a href="#fig:connviewdisplay">17</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:connviewdisplay"></span>
-<img src="pics4a/2_347_conhist_displaystats.png" alt="Display connectivity statistics" width="40%" />
+<img src="pics4a/2_347_conhist_displaystats.png" alt="Display connectivity statistics" width="30%" />
 <p class="caption">
 Figure 17: Display connectivity statistics
 </p>
@@ -535,14 +569,14 @@ Figure 17: Display connectivity statistics
 <p>From the descriptive statistics listed at the bottom of the graph in Figure <a href="#fig:connstatistics">18</a>, we can see that the median number of neighbors is 6, the average is 5.89, and the maximum is 14. This
 matches the descriptive statistics listed in the properties of the weights manager. In addition, the number of observations in each interval is listed as well.</p>
 <div class="figure" style="text-align: center"><span id="fig:connstatistics"></span>
-<img src="pics4a/2_hist_w_statistics.png" alt="Connectivity histogram with statistics" width="60%" />
+<img src="pics4a/2_hist_w_statistics.png" alt="Connectivity histogram with statistics" width="40%" />
 <p class="caption">
 Figure 18: Connectivity histogram with statistics
 </p>
 </div>
-<p>In standard GeoDa fashion, the connectivity histogram is connected to all the other views through linking and brushing. For example, as shown in Figure <a href="#fig:connhistlink">19</a>, by selecting the modal bar, all 1037 counties with six neighbors are highlighted in the U.S. county map.</p>
+<p>In standard <code>GeoDa</code> fashion, the connectivity histogram is connected to all the other views through linking and brushing. For example, as shown in Figure <a href="#fig:connhistlink">19</a>, by selecting the modal bar, all 1037 counties with six neighbors are highlighted in the U.S. county map.</p>
 <div class="figure" style="text-align: center"><span id="fig:connhistlink"></span>
-<img src="pics4a/2_349_modalneighbors.png" alt="Counties with six neighbors" width="100%" />
+<img src="pics4a/00_conthist_mode.png" alt="Counties with six neighbors" width="80%" />
 <p class="caption">
 Figure 19: Counties with six neighbors
 </p>
@@ -554,7 +588,7 @@ had six neighbors in queen contiguity (the selected observations go from 1037 to
 neighbors in rook) have fewer neighbors according to rook contiguity (we see their
 distribution spread over four and five neighbors).</p>
 <div class="figure" style="text-align: center"><span id="fig:connhistlinkrook"></span>
-<img src="pics4a/2_788_rookmodal.png" alt="Counties with six queen neighbors in rook histogram" width="60%" />
+<img src="pics4a/2_788_rookmodal.png" alt="Counties with six queen neighbors in rook histogram" width="40%" />
 <p class="caption">
 Figure 20: Counties with six queen neighbors in rook histogram
 </p>
@@ -563,12 +597,12 @@ Figure 20: Counties with six queen neighbors in rook histogram
 will be covered in the discussion of distance-based weights.</p>
 <p>Ideally, we like the distribution of the cardinalities to be nice and symmetric, with
 a limited range. We are on the lookout for bimodal distributions (some observations have few neighbors and some many) and other deviations from symmetry.</p>
-<div id="saving-the-neighbor-cardinality-to-the-table" class="section level4 unnumbered">
+<div id="saving-the-neighbor-cardinality-to-the-table" class="section level4 unnumbered" number="">
 <h4>Saving the neighbor cardinality to the table</h4>
-<p>A second useful option of the connectivity histogram is to save the neighbor cardinality to the data table as an additional column/variable to be used in further analysis. The <strong>Save Connectivity to Table</strong> option is invoked in the usual way by right clicking on the histogram view, which
+<p>A useful option of the connectivity histogram is to save the neighbor cardinality to the data table as an additional column/variable to be used in further analysis. The <strong>Save Connectivity to Table</strong> option is invoked in the usual way by right clicking on the histogram view, which
 yields the menu shown in Figure <a href="#fig:saveconn">21</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:saveconn"></span>
-<img src="pics4a/2_348_conntotable.png" alt="Save connectivity to table" width="30%" />
+<img src="pics4a/2_348_conntotable.png" alt="Save connectivity to table" width="20%" />
 <p class="caption">
 Figure 21: Save connectivity to table
 </p>
@@ -576,7 +610,7 @@ Figure 21: Save connectivity to table
 <p>After selecting the option, a small dialog appears in which the name for the new variable can be specified. The default,
 shown in Figure <a href="#fig:saveconnvar">22</a>, is a generic <strong>NUM_NBRS</strong>, which may not be the most insightful when different spatial weights are being compared. For now, we keep the variable name as is.</p>
 <div class="figure" style="text-align: center"><span id="fig:saveconnvar"></span>
-<img src="pics4a/2_save_connectivity.png" alt="Variable for neighbor cardinality" width="40%" />
+<img src="pics4a/2_save_connectivity.png" alt="Variable for neighbor cardinality" width="25%" />
 <p class="caption">
 Figure 22: Variable for neighbor cardinality
 </p>
@@ -587,157 +621,148 @@ that was used for the connectivity histogram. The number of neighbors is an impo
 significance of the local join count statistic, covered
 in a later chapter.</p>
 <div class="figure" style="text-align: center"><span id="fig:datawconn"></span>
-<img src="pics4a/2_number_neighbors_in_table.png" alt="Cardinality added to table" width="40%" />
+<img src="pics4a/2_number_neighbors_in_table.png" alt="Cardinality added to table" width="30%" />
 <p class="caption">
 Figure 23: Cardinality added to table
 </p>
 </div>
 </div>
 </div>
-<div id="connectivity-map" class="section level3 unnumbered">
+<div id="connectivity-map" class="section level3 unnumbered" number="">
 <h3>Connectivity map</h3>
-<p>The middle button at the bottom of the <strong>Weights Manager</strong> interface (e.g., see Figure <a href="#fig:managerwQueen">9</a>) brings up a <strong>Connectivity Map</strong>. This is a standard GeoDa map view (with all the usual map features
+<p>The middle button at the bottom of the <strong>Weights Manager</strong> interface (e.g., see Figure <a href="#fig:managerwQueen">9</a>) brings up a <strong>Connectivity Map</strong>. This is a standard <code>GeoDa</code> map view (with all the usual map features
 invoked through toolbar icons, including zooming and panning), but with a special functionality that highlights the neighbors of any <em>selected</em> observation.</p>
 <p>In our example, using queen contiguity,
 this starts with the
-usual green themeless map of all the U.S. counties, shown in Figure <a href="#fig:contigmap">24</a>. The
-name of the matching spatial weights file is listed in the window
-header (here, <strong>natregimes_q</strong>).</p>
-<div class="figure" style="text-align: center"><span id="fig:contigmap"></span>
-<img src="pics4a/2_357_contiguitymap.png" alt="Connectivity map -- US counties" width="60%" />
-<p class="caption">
-Figure 24: Connectivity map – US counties
-</p>
-</div>
-<p>As soon as the pointer is moved over one of the observations, it is selected and its neighbors are highlighted. Note that this behavior is slightly different from the standard selection in a map, since it does not require a click to select. As soon as the pointer moves outside the main map, the whole country
+usual green themeless map of all the U.S. counties, with the
+name of the matching spatial weights file listed in the window
+header (here, <strong>natregimes_q</strong>), as in Figure <a href="#fig:contigmapselect">24</a>.</p>
+<p>As soon as the pointer is moved over one of the observations, it is selected and its neighbors are highlighted. Note that this behavior is slightly different from the standard selection in a map, since it does not require a click to select.
+Instead, the pointer is in so-called <em>hover</em> mode. As soon as the pointer moves outside the main map, the whole country
 is shown again.</p>
-<p>In Figure <a href="#fig:contigmapselect">25</a>, the pointer is over Coconino county, AZ. The
+<p>In Figure <a href="#fig:contigmapselect">24</a>, the pointer is over Coconino county, AZ. The
 county is selected (the other counties become transparent) and the outlines of the neighboring counties
-are shown. Its ID (fipsno=4005) and the IDs of the six neighbors are shown in the status
+are shown. Its ID (FIPSNO=4005) and the IDs of the six neighbors are shown in the status
 bar (49037, 49025, 4017, 4015, 4025, and 4007). The ID values shown in the status bar match
 the ID variable selected for the spatial weights. This is different from the behavior in a generic
-map, where the simple observation sequence number is shown for selected observations.</p>
+map, where the simple observation sequence number is shown only for the selected observations (not the neighbors).</p>
 <div class="figure" style="text-align: center"><span id="fig:contigmapselect"></span>
-<img src="pics4a/2_790_contiguitymap_select.png" alt="Connectivity map -- Coconino county AZ selected" width="60%" />
+<img src="pics4a/00_conn_map.png" alt="Connectivity map -- Coconino county AZ selected" width="60%" />
 <p class="caption">
-Figure 25: Connectivity map – Coconino county AZ selected
+Figure 24: Connectivity map – Coconino county AZ selected
 </p>
 </div>
-<p>The Connectivity Map allows us to investigate strange patterns in the neighbor structure for
+<p>The <strong>Connectivity Map</strong> allows us to investigate strange patterns in the neighbor structure for
 some counties. For example, several counties in the state of Virginia are so-called city counties,
-surrounded by a larger area county. Zooming in on Charlotsville, VA (fipsno=51540) illustates this
-phenomenon, as shown in Figure <a href="#fig:charlotsville">26</a>.</p>
+surrounded by a larger area county. Zooming in on Charlotsville, VA (fipsno=51540) illustrates this
+phenomenon, as shown in Figure <a href="#fig:charlotsville">25</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:charlotsville"></span>
-<img src="pics4a/2_792_charlotsville.png" alt="Neighbors for Charlotsville, VA" width="60%" />
+<img src="pics4a/00_charlotsville.png" alt="Neighbors for Charlotsville, VA" width="60%" />
 <p class="caption">
-Figure 26: Neighbors for Charlotsville, VA
+Figure 25: Neighbors for Charlotsville, VA
 </p>
 </div>
 <p>The sole neighbor of Charlotsville is Albermarle county (fipsno=51003), which itself has nine neighbors, including
 Charlotsville, as indicated by the tiny outline within its polygon,
-shown in Figure <a href="#fig:albermarle">27</a>.</p>
+shown in Figure <a href="#fig:albermarle">26</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:albermarle"></span>
-<img src="pics4a/2_connectivity_map_zoom.png" alt="Neighbors for Albermarle, VA" width="60%" />
+<img src="pics4a/00_abermarle.png" alt="Neighbors for Albermarle, VA" width="60%" />
 <p class="caption">
-Figure 27: Neighbors for Albermarle, VA
+Figure 26: Neighbors for Albermarle, VA
 </p>
 </div>
-<div id="connectivity-map-options" class="section level4 unnumbered">
+<div id="connectivity-map-options" class="section level4 unnumbered" number="">
 <h4>Connectivity map options</h4>
-<p>Close examination of the neighbor structure depicted in Figure <a href="#fig:albermarle">27</a> might
+<p>Close examination of the neighbor structure depicted in Figure <a href="#fig:albermarle">26</a> might
 suggest an inconsistency. The status bar mentions nine neighbors, but counting the polygons
 would imply 12, when including the small islands within the larger neighboring counties.
 However, in fact, these city-counties are not actual neighbors. In the map,
 they are rendered in a slightly different shade (the same transparent
 green as the other not selected counties) than the white for the neighbors, but it is
 difficult to distinguish.</p>
-<p>To highlight the contrast, the shading of the neighbors should be changed. This is possible
-through the <strong>Connectivity &gt; Change Fill Color of Neighbors</strong> option. It is invoked in the
-usual way, by right clicking on the map, which brings up the map options menu, shown in
-Figure <a href="#fig:fillneighbors">28</a> (we return to the other options in the discussion
-of the connectivity graph).</p>
+<p>To highlight the contrast, the shading of the neighbors should be changed. The
+<strong>Connectivity</strong> item in the list of map options contains a number of ways to adjust
+the fill and outline color of the neighbors and the selection, as listed
+in Figure <a href="#fig:fillneighbors">27</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:fillneighbors"></span>
-<img src="pics4a/2_809_neighborfillcolor.png" alt="Neighbor fill color option" width="40%" />
+<img src="pics4a/00_conn_map_fillcolor.png" alt="Neighbor fill color option" width="35%" />
 <p class="caption">
-Figure 28: Neighbor fill color option
+Figure 27: Neighbor fill color option
 </p>
 </div>
-<p>For example, changing the fill color to red results in the selection as depicted in
-Figure <a href="#fig:redneighbors">29</a>. Now it is clear that there are only nine red polygons that
+<p>For example, changing the fill color for the neighbors to red results in the selection as depicted in
+Figure <a href="#fig:redneighbors">28</a>. Now it is clear that there are only nine red polygons that
 correspond to the neighbors of the selection.</p>
 <div class="figure" style="text-align: center"><span id="fig:redneighbors"></span>
-<img src="pics4a/2_810_neighborsinred.png" alt="Neighbor fill with red color option" width="60%" />
+<img src="pics4a/00_neighbors_red.png" alt="Neighbor fill with red color option" width="60%" />
 <p class="caption">
-Figure 29: Neighbor fill with red color option
+Figure 28: Neighbor fill with red color option
 </p>
 </div>
 </div>
 </div>
-<div id="connectivity-graph" class="section level3 unnumbered">
+<div id="connectivity-graph" class="section level3 unnumbered" number="">
 <h3>Connectivity graph</h3>
-<p>The right-most button at the bottom of the <strong>Weights Manager</strong> interface (e.g., see Figure <a href="#fig:managerwQueen">9</a>) brings up a <strong>Connectivity Graph</strong>. Like the Connectivity Map, this is a standard GeoDa map view, with all the usual map features
-invoked through toolbar icons, including zooming and panning. In addition, the graph structure that
+<p>The right-most button at the bottom of the <strong>Weights Manager</strong> interface (e.g., see Figure <a href="#fig:managerwQueen">9</a>) brings up a <strong>Connectivity Graph</strong>. Like the Connectivity Map, this is a standard <code>GeoDa</code> map view, with all the usual map features
+invoked through toolbar icons, including zooming and panning.</p>
+<p>In this map, the graph structure that
 corresponds to the spatial weights connectivity is superimposed on the map. For the U.S. counties as
-a whole, using queen contiguity, this view tends to be somewhat cluttered, as in Figure <a href="#fig:conngraph">30</a>. As for the Connectivity Map, the window header lists the corresponding
+a whole, using queen contiguity, this view tends to be somewhat cluttered, as in Figure <a href="#fig:conngraph">29</a>. As for the Connectivity Map, the window header lists the corresponding
 spatial weights file (here, again, <strong>natregimes_q</strong>).</p>
 <div class="figure" style="text-align: center"><span id="fig:conngraph"></span>
-<img src="pics4a/2_794_conngraph.png" alt="Connectivity graph - US counties " width="100%" />
+<img src="pics4a/00_conn_graph.png" alt="Connectivity graph - US counties " width="60%" />
 <p class="caption">
-Figure 30: Connectivity graph - US counties
+Figure 29: Connectivity graph - US counties
 </p>
 </div>
 <p>All the standard map options work in the usual way. For example, we could zoom in on the Southwest and
-select Coconino county in Arizona, as in Figure <a href="#fig:conngraphcoconino">31</a>. The selection removes
+select Coconino county in Arizona, as in Figure <a href="#fig:conngraphcoconino">30</a>. The selection removes
 the graph structure for the other counties from the map, but shows the selected county and its
-neighbors, connected by the edges in the graph. The status bar shows the ID of the selected
-observation and its neighbors. This matches the value used for the ID variable in the weights (in our example, the fipsno of Coconino county is 4005).</p>
+neighbors, connected by the edges in the graph.</p>
 <div class="figure" style="text-align: center"><span id="fig:conngraphcoconino"></span>
-<img src="pics4a/2_793_conngraphcoconino.png" alt="Connectivity graph - Coconino county, AZ " width="60%" />
+<img src="pics4a/00_conngraph_coco.png" alt="Connectivity graph - Coconino county, AZ " width="60%" />
 <p class="caption">
-Figure 31: Connectivity graph - Coconino county, AZ
+Figure 30: Connectivity graph - Coconino county, AZ
 </p>
 </div>
-<div id="connectivity-graph-options" class="section level4 unnumbered">
+<div id="connectivity-graph-options" class="section level4 unnumbered" number="">
 <h4>Connectivity graph options</h4>
-<p>There are a few options that allow us to customize the representation of the graph structure. These
+<p>As in the connectivity map, there are a few options that allow us to customize the representation of the graph structure,
+listed in Figure <a href="#fig:fillneighbors">27</a>. These
 include the color and thickness of lines, and whether the background map is shown or not.</p>
-<p>These options are invoked by right clicking on the map. This brings up the standard map options
-menu, which includes a <strong>Connectivity</strong> item. We are particularly interested in the <strong>Change Edge Thickness</strong>,
-<strong>Change Edge Color</strong> and <strong>Hide Map</strong> options, shown in Figure <a href="#fig:conngraphoptions">32</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:conngraphoptions"></span>
-<img src="pics4a/2_798_conngraphoptions.png" alt="Connectivity graph options" width="40%" />
-<p class="caption">
-Figure 32: Connectivity graph options
-</p>
-</div>
-<p>The default edge thickness is <strong>Normal</strong>, as indicated in Figure <a href="#fig:conngraphoptions">32</a>.
-Two other options are available, to make the lines thicker (<strong>Strong</strong>) or thinner (<strong>Light</strong>).
+<p>The default edge thickness is <strong>Normal</strong>,
+but two other options are available, to make the lines thicker (<strong>Strong</strong>) or thinner (<strong>Light</strong>).
 It is also often useful to change the color of the graph to something different from the
 default black.</p>
 <p>The most dramatic of the options is the <strong>Hide Map</strong> feature. By selecting this, the background
-map is removed and only the pure graph structure remains, as in Figure <a href="#fig:graphwomap">33</a>.
+map is removed and only the pure graph structure remains, as in Figure <a href="#fig:graphwomap">31</a>.
 Unchecking this options brings the map back.</p>
 <div class="figure" style="text-align: center"><span id="fig:graphwomap"></span>
-<img src="pics4a/2_799_graphwomap.png" alt="Connectivity graph without background map" width="100%" />
+<img src="pics4a/00_conn_hidemap.png" alt="Connectivity graph without background map" width="60%" />
 <p class="caption">
-Figure 33: Connectivity graph without background map
+Figure 31: Connectivity graph without background map
 </p>
 </div>
 </div>
-<div id="neighbors-of-a-selection-in-map" class="section level4 unnumbered">
-<h4>Neighbors of a selection in map</h4>
-<p>A related feature that is part of the <strong>Connectivity</strong> options is to select
-the <em>neighbors</em> of a selection. This works for any choropleth map and is
-invoked by selecting <strong>Connectivity &gt; Show Selection and Neighbors</strong> from the
-options menu, as in Figure <a href="#fig:connoptions">34</a>.</p>
+</div>
+</div>
+<div id="connectivity-option" class="section level2 unnumbered" number="">
+<h2>Connectivity Option</h2>
+<div id="connectivity-option-in-the-map" class="section level3 unnumbered" number="">
+<h3>Connectivity Option in the Map</h3>
+<p>With an active weights matrix, the <strong>Connectivity</strong> item in the map options menu becomes active.
+This provides functionality similar to that in a <strong>Connectivity Map</strong>, but applied to any current map.</p>
+<p>The functionality is invoked
+by selecting <strong>Connectivity &gt; Show Selection and Neighbors</strong> from the
+options menu, as in Figure <a href="#fig:connoptions">32</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:connoptions"></span>
-<img src="pics4a/2_801_connectivitymapoptions.png" alt="Show selection and neighbors option" width="40%" />
+<img src="pics4a/00_map_neighbors_selected.png" alt="Show selection and neighbors option" width="35%" />
 <p class="caption">
-Figure 34: Show selection and neighbors option
+Figure 32: Show selection and neighbors option
 </p>
 </div>
 <p>With this option checked, the selection feature works the same as in the <strong>Connectivity Map</strong>,
-as illustrated in Figures <a href="#fig:contigmapselect">25</a> to <a href="#fig:albermarle">27</a>. The main
+as illustrated in Figures <a href="#fig:contigmapselect">24</a> to <a href="#fig:albermarle">26</a>. The main
 difference between the functionality in the Connectivity Map and the Connectivity option in
 any thematic map is that the latter is updated to the current active spatial weights file.
 In contrast, when selecting the Connectivity Map from the weights manager, there is only one
@@ -746,47 +771,43 @@ such map, tied directly to the weights file from which it was invoked.</p>
 <strong>Change Outline Color of Neighbors</strong>, and to <strong>Change Fill Color of Neighbors</strong>, in
 the same way as illustrated for the connectivity map.</p>
 </div>
-<div id="neighbors-of-a-selection-in-table" class="section level4 unnumbered">
-<h4>Neighbors of a selection in table</h4>
+<div id="connectivity-option-in-the-table" class="section level3 unnumbered" number="">
+<h3>Connectivity Option in the Table</h3>
 <p>Neighbors of selected observations can also be displayed by means of a
-a feature of the table <strong>Selection Tool</strong>.</p>
-<p>To illustrate this, we first select Coconino county in a generic themeless map (without the
-<strong>Show Selection and Neighbors</strong> option turned on). The view is as in Figure <a href="#fig:cocothemeless">35</a>.
-Note how the value for the selected observation in the status bar is given as 1709, which is a simple
-observation sequence number, not a value corresponding to the ID of a spatial weights file (the
-observation number is also included as the variable <strong>polyid</strong> in the data set).<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+a feature of the table <strong>Selection Tool</strong>, as long as a weights matrix is active.</p>
+<p>To illustrate this, we first select Coconino county in a generic themeless map (with the
+<strong>Show Selection and Neighbors</strong> option turned <em>off</em>). The view is as in Figure <a href="#fig:cocothemeless">33</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:cocothemeless"></span>
-<img src="pics4a/3_814_cocothemeless.png" alt="Coconino county selected in themeless map" width="100%" />
+<img src="pics4a/00_coco_selected.png" alt="Coconino county selected in themeless map" width="60%" />
 <p class="caption">
-Figure 35: Coconino county selected in themeless map
+Figure 33: Coconino county selected in themeless map
 </p>
 </div>
 <p>The <strong>Selection Tool</strong> is activated in the usual way by right clicking anywhere in the table.
 The <strong>Add Neighbors to Selection</strong> button is central in the middle panel of Figure
-<a href="#fig:tableselectneighbors">36</a>. Note that
+<a href="#fig:tableselectneighbors">34</a>. Note that
 the <strong>Weights</strong> must be specified and there has to be an active selection. By default, the drop-down list will show the
 currently active weights, i.e., <strong>natregimes_q</strong> in our example.</p>
 <div class="figure" style="text-align: center"><span id="fig:tableselectneighbors"></span>
-<img src="pics4a/2_351_addneighbors.png" alt="Adding neighbors to selection" width="60%" />
+<img src="pics4a/00_table_neighbors.png" alt="Adding neighbors to selection" width="40%" />
 <p class="caption">
-Figure 36: Adding neighbors to selection
+Figure 34: Adding neighbors to selection
 </p>
 </div>
 <p>Clicking on the button will add the neighbors of Coconino county to the map, as in
-Figure <a href="#fig:tablecoco">37</a>.</p>
+Figure <a href="#fig:tablecoco">35</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:tablecoco"></span>
-<img src="pics4a/3_815_tablecocowneighbors.png" alt="Coconino county with neighbors" width="100%" />
+<img src="pics4a/00_coco_w_neighbors.png" alt="Coconino county with neighbors" width="60%" />
 <p class="caption">
-Figure 37: Coconino county with neighbors
+Figure 35: Coconino county with neighbors
 </p>
 </div>
 <p><br></p>
 </div>
 </div>
-</div>
-<div id="references" class="section level2 unnumbered">
+<div id="references" class="section level2 unnumbered" number="">
 <h2>References</h2>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-Anselin:92b">
 <p>Anselin, Luc. 1992. <em>SpaceStat, a Software Program for Analysis of Spatial Data</em>. National Center for Geographic Information; Analysis (NCGIA), University of California, Santa Barbara, CA: National Center for Geographic Information; Analysis (NCGIA).</p>
 </div>
@@ -794,26 +815,23 @@ Figure 37: Coconino county with neighbors
 <p>Anselin, Luc, and Sergio J. Rey. 2014. <em>Modern Spatial Econometrics in Practice, a Guide to Geoda, Geodaspace and Pysal</em>. Chicago, IL: GeoDa Press.</p>
 </div>
 <div id="ref-AnselinSmirnov:96">
-<p>Anselin, Luc, and Oleg Smirnov. 1996. “Efficient Algorithms for Constructing Proper Higher Order Spatial Lag Operators.” <em>Journal of Regional Science</em> 36:67–89.</p>
+<p>Anselin, Luc, and Oleg Smirnov. 1996. “Efficient Algorithms for Constructing Proper Higher Order Spatial Lag Operators.” <em>Journal of Regional Science</em> 36: 67–89.</p>
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>An exception to this rule are the diagonal
-elements in kernel-based weights, which are considered in a later chapter.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+elements in kernel-based weights, which are considered in a later chapter.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>Strictly speaking, this is only correct in the
 absence of so-called isolates, i.e., observations without neighbors.
-With <span class="math inline">\(q\)</span> isolates, the sum <span class="math inline">\(S_0 = n - q\)</span>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+With <span class="math inline">\(q\)</span> isolates, the sum <span class="math inline">\(S_0 = n - q\)</span>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p>A third notion, referred to as <em>bishop</em>
 contiguity, is based on the existence of common vertices between
 two spatial units. It is seldom used in practice, and has not been
-implemented in GeoDa.<a href="#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>For a selection
-invoked by the <strong>Show Selection and Neighbors</strong> option, the value of the selected observation
-corresponds to the ID of the currently active spatial weights.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+implemented in <code>GeoDa</code>.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
@@ -823,6 +841,9 @@ corresponds to the ID of the currently active spatial weights.<a href="#fnref5" 
 </footer>
 
 </section>
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

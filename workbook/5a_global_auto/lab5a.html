@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Luc Anselin" />
 
 
 <title>Global Spatial Autocorrelation (1)</title>
 
+<script src="lab5a_files/header-attrs-2.3/header-attrs.js"></script>
 <link href="lab5a_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="lab5a_files/highlightjs-9.12.0/highlight.js"></script>
     <title>GeoDa on Github</title>
@@ -93,6 +94,9 @@ if (window.hljs) {
 
 
 
+
+
+
 </head>
 
 <body>
@@ -114,47 +118,69 @@ if (window.hljs) {
 
 
 <h1 class="title toc-ignore">Global Spatial Autocorrelation (1)</h1>
-<h3 class="subtitle"><em>Moran Scatter Plot and Spatial Correlogram</em></h3>
-<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>04/03/2018 (revised and updated)</em></h4>
+<h3 class="subtitle">Visualizing Spatial Autocorrelation</h3>
+<h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+<h4 class="date">10/09/2020 (revised and updated)</h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction">Introduction</a><ul>
-<li><a href="#objectives">Objectives</a><ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#objectives">Objectives</a>
+<ul>
 <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
 </ul></li>
-<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#preliminaries">Preliminaries</a></li>
 </ul></li>
-<li><a href="#the-moran-scatter-plot">The Moran Scatter PLot</a><ul>
-<li><a href="#concept">Concept</a><ul>
+<li><a href="#the-moran-scatter-plot">The Moran Scatter PLot</a>
+<ul>
+<li><a href="#concept">Concept</a>
+<ul>
 <li><a href="#morans-i">Moran’s I</a></li>
 <li><a href="#permutation-inference">Permutation inference</a></li>
 <li><a href="#moran-scatter-plot">Moran scatter plot</a></li>
 </ul></li>
-<li><a href="#creating-a-moran-scatter-plot">Creating a Moran scatter plot</a><ul>
+<li><a href="#creating-a-moran-scatter-plot">Creating a Moran scatter plot</a>
+<ul>
 <li><a href="#interpretation">Interpretation</a></li>
 <li><a href="#assessing-significance">Assessing significance</a></li>
 <li><a href="#reference-distribution">Reference distribution</a></li>
-<li><a href="#replicability---the-random-seed">Replicability - the random seed</a></li>
+<li><a href="#reproducibility---the-random-seed">Reproducibility - the random seed</a></li>
 </ul></li>
-<li><a href="#moran-scatter-plot-options">Moran scatter plot options</a><ul>
+<li><a href="#moran-scatter-plot-options">Moran scatter plot options</a>
+<ul>
 <li><a href="#saving-scatter-plot-variables">Saving scatter plot variables</a></li>
 <li><a href="#digression---creating-a-moran-scatter-plot-as-a-standard-scatter-plot">Digression - creating a Moran scatter plot as a standard scatter plot</a></li>
 <li><a href="#lowess-smoother">LOWESS smoother</a></li>
-<li><a href="#brushing-the-moran-scatter-plot">Brushing the Moran scatter plot</a></li>
+</ul></li>
+<li><a href="#brushing-the-moran-scatter-plot">Brushing the Moran scatter plot</a>
+<ul>
+<li><a href="#static-and-dynamic-spatial-weights">Static and dynamic spatial weights</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#spatial-correlogram">Spatial Correlogram</a><ul>
+<li><a href="#spatial-correlogram">Spatial Correlogram</a>
+<ul>
 <li><a href="#concept-1">Concept</a></li>
-<li><a href="#creating-a-spatial-correlogram">Creating a spatial correlogram</a><ul>
+<li><a href="#creating-a-spatial-correlogram">Creating a spatial correlogram</a>
+<ul>
 <li><a href="#interpretation-1">Interpretation</a></li>
 </ul></li>
-<li><a href="#spatial-correlogram-options">Spatial correlogram options</a><ul>
+<li><a href="#spatial-correlogram-options">Spatial correlogram options</a>
+<ul>
 <li><a href="#lowess-parameters">LOWESS parameters</a></li>
 <li><a href="#distance-settings">Distance settings</a></li>
 <li><a href="#larger-data-issues-random-sampling">Large(r) data issues – random sampling</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#smoothed-distance-scatter-plot">Smoothed Distance Scatter Plot</a>
+<ul>
+<li><a href="#concept-2">Concept</a></li>
+<li><a href="#creating-a-smoothed-distance-scatter-plot">Creating a smoothed distance scatter plot</a></li>
+<li><a href="#options">Options</a>
+<ul>
+<li><a href="#general-options">General options</a></li>
+<li><a href="#smoothing-options">Smoothing options</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#references">References</a></li>
@@ -162,12 +188,13 @@ if (window.hljs) {
 </div>
 
 <p><br></p>
-<div id="introduction" class="section level2 unnumbered">
+<div id="introduction" class="section level2 unnumbered" number="">
 <h2>Introduction</h2>
 <p>In this Chapter, we will explore the analysis of global spatial autocorrelation measures, focusing
-on the basics. We will use the Moran scatter plot and the non-parametric spatial correlogram
-to visualize the magnitude and the range of spatial autocorrelation. We will continue with the <a href="https://geodacenter.github.io/data-and-lab//clev_sls_154_core/">Cleveland house sales data set</a> that we used in the analysis of distance-based spatial weights.</p>
-<div id="objectives" class="section level3 unnumbered">
+on visualization. We will review the Moran scatter plot as a means to graphically express Moran’s I,
+as well as the non-parametric spatial correlogram and smoothed distance scatter plot to
+to assess the magnitude and the range of spatial autocorrelation. We will continue with the <a href="https://geodacenter.github.io/data-and-lab//clev_sls_154_core/">Cleveland house sales data set</a> that we used in the analysis of distance-based spatial weights.</p>
+<div id="objectives" class="section level3 unnumbered" number="">
 <h3>Objectives</h3>
 <ul>
 <li><p>Visualize Moran’s I by means of the Moran scatter plot</p></li>
@@ -177,12 +204,13 @@ to visualize the magnitude and the range of spatial autocorrelation. We will con
 <li><p>Brush Moran scatter plot to assess regional Moran’s I</p></li>
 <li><p>Appreciate the difference between dynamic weights and static weights in Moran scatter plot regime regression</p></li>
 <li><p>Analyze the range of spatial autocorrelation by means of a spatial correlogram</p></li>
-<li><p>Address the sensitivity of the spatial correlogram to the choice of maximum
+<li><p>Analyze the range of spatial autocorrelation by means of the smoothed distance scatter plot</p></li>
+<li><p>Address the sensitivity of the distance plots to the choice of maximum
 distance and number of bins</p></li>
-<li><p>Address the computation of the spatial correlogram for large(r) data sets by relying
+<li><p>Address the computation of the distance plots for large(r) data sets by relying
 on random sampling</p></li>
 </ul>
-<div id="geoda-functions-covered" class="section level4 unnumbered">
+<div id="geoda-functions-covered" class="section level4 unnumbered" number="">
 <h4>GeoDa functions covered</h4>
 <ul>
 <li>Space &gt; Univariate Moran’s I
@@ -201,42 +229,27 @@ on random sampling</p></li>
 <li>using a random sample of locations</li>
 <li>changing the smoothing parameters</li>
 </ul></li>
+<li>Space &gt; Distance Scatter Plot</li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="getting-started" class="section level3 unnumbered">
-<h3>Getting started</h3>
-<p>With GeoDa launched and all previous projects closed, we load the project file for the
-Cleveland house price data, <strong>clev_sls_154_core.gda</strong>. This should bring up the by now familiar
-themeless point map for the house sales locations shown in Figure <a href="#fig:clevelandpoints">1</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:clevelandpoints"></span>
-<img src="pics5a/0_419_clevbasemap.png" alt="Cleveland sales themeless map" width="80%" />
-<p class="caption">
-Figure 1: Cleveland sales themeless map
-</p>
-</div>
-<p>With the project file in place, the weights manager will contain all four weights that were created
-previously. The queen contiguity weights (from the Thiessen polygons) should be selected, as shown
-in Figure <a href="#fig:clevelandqueen">2</a>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<div class="figure" style="text-align: center"><span id="fig:clevelandqueen"></span>
-<img src="pics5a/0_420_weightsmanager.png" alt="Weights manager contents" width="40%" />
-<p class="caption">
-Figure 2: Weights manager contents
-</p>
-</div>
-<p>We will use this weights file in the spatial autocorrelation analysis that follows.</p>
+<div id="preliminaries" class="section level3 unnumbered" number="">
+<h3>Preliminaries</h3>
+<p>We need the <strong>clev_sls_154_core.gda</strong> project file, which already has the spatial weights included,
+or, alternatively, load the <strong>clev_sls_154.shp</strong> shape file and then create queen contiguity, say
+as <strong>clev_sls_154_core_q.gal</strong>.</p>
 </div>
 </div>
-<div id="the-moran-scatter-plot" class="section level2 unnumbered">
+<div id="the-moran-scatter-plot" class="section level2 unnumbered" number="">
 <h2>The Moran Scatter PLot</h2>
-<div id="concept" class="section level3 unnumbered">
+<div id="concept" class="section level3 unnumbered" number="">
 <h3>Concept</h3>
-<div id="morans-i" class="section level4 unnumbered">
+<div id="morans-i" class="section level4 unnumbered" number="">
 <h4>Moran’s I</h4>
 <p>Moran’s I statistic is arguably the most commonly used indicator of global spatial autocorrelation.
-It was initially suggested by <span class="citation">Moran (<a href="#ref-Moran:48">1948</a>)</span>, and popularized through the classic work
-on spatial autocorrelation by <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:73">1973</a>)</span>. In essence, it is a
+It was initially suggested by <span class="citation">Moran (<a href="#ref-Moran:48" role="doc-biblioref">1948</a>)</span>, and popularized through the classic work
+on spatial autocorrelation by <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:73" role="doc-biblioref">1973</a>)</span>. In essence, it is a
 cross-product statistic between a variable and its spatial lag, with the
 variable expressed in deviations from its mean. For an observation at location
 <span class="math inline">\(i\)</span>, this is expressed as <span class="math inline">\(z_i = x_i - \bar{x}\)</span>, where <span class="math inline">\(\bar{x}\)</span> is the mean of variable <span class="math inline">\(x\)</span>.</p>
@@ -246,19 +259,23 @@ statistic is then:
 with <span class="math inline">\(w_{ij}\)</span> as the elements of the spatial weights matrix, <span class="math inline">\(S_0 = \sum_i \sum_j w_{ij}\)</span> as
 the sum of all the weights, and <span class="math inline">\(n\)</span> as the number of observations.</p>
 </div>
-<div id="permutation-inference" class="section level4 unnumbered">
+<div id="permutation-inference" class="section level4 unnumbered" number="">
 <h4>Permutation inference</h4>
 <p>Inference for Moran’s I is based on a null hypothesis of spatial randomness. The distribution
 of the statistic under the null can be
 derived using either an assumption of normality (independent normal random variates), or
 so-called randomization (i.e., each value is equally likely to occur at any
-location).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
-<p>An alternative to an analytical derivation is a computational approach based on
+location). While the analytical derivations provide easy to interpret expressions for
+the mean and the variance of the statistic under the null hypothesis, inference
+based on them employs an approximation to a standard normal distribution, which
+may be inappropriate when the underlying assumptions are not satisfied.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>An alternative to the analytical derivation is a computational approach based on
 <em>permutation</em>. This calculates a reference distribution for the statistic under the null
 hypothesis of spatial randomness by randomly permuting the observed values over the locations.
 The statistic is computed for each of these randomly reshuffled data sets, which yields a
-<em>reference distribution</em>.</p>
-<p>This distribution is then used to calculate a
+<em>reference distribution</em>. This approach is not sensitive to potential violations of underlying
+assumptions, and is thus more robust, although limited in generality to the actual sample.</p>
+<p>The reference distribution is used to calculate a
 so-called pseudo p-value. This is found as
 <span class="math display">\[p = \frac{R+1}{M+1},\]</span>
 where <span class="math inline">\(R\)</span> is the number of times the computed Moran’s I from the spatial random
@@ -272,9 +289,9 @@ of <em>significance</em> is determined in part by the number of random pemutatio
 precisely, a result that has a p-value of 0.01 with 99 permutations is not necessarily
 more significant than a result with a p-value of 0.001 with 999 permutations.</p>
 </div>
-<div id="moran-scatter-plot" class="section level4 unnumbered">
+<div id="moran-scatter-plot" class="section level4 unnumbered" number="">
 <h4>Moran scatter plot</h4>
-<p>The Moran scatter plot, first outlined in <span class="citation">Anselin (<a href="#ref-Anselin:96">1996</a>)</span>, consists of a plot with the
+<p>The Moran scatter plot, first outlined in <span class="citation">Anselin (<a href="#ref-Anselin:96" role="doc-biblioref">1996</a>)</span>, consists of a plot with the
 spatially lagged variable on the y-axis and the original variable on the x-axis.
 The slope of the linear fit to the scatter plot equals Moran’s I.</p>
 <p>We consider a variable <span class="math inline">\(z\)</span>, given in deviations from the mean. With row-standardized weights, the sum
@@ -282,7 +299,7 @@ of all the weights (<span class="math inline">\(S_0\)</span>) equals the number 
 the expression for Moran’s I simplifies to:
 <span class="math display">\[I = \frac{\sum_i\sum_j w_{ij} z_i.z_j}{\sum_i z_i^2} = \frac{\sum_i (z_i \times \sum_j w_{ij} z_j)}{\sum_i z_i^2}. \]</span>
 Upon closer examination, this turns out to be the slope
-of a regression of <span class="math inline">\(\sum_j w_{ij}z_j\)</span> on <span class="math inline">\(z_i\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> This is the
+of a regression of <span class="math inline">\(\sum_j w_{ij}z_j\)</span> on <span class="math inline">\(z_i\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> This is the
 principle underlying the Moran scatter plot.</p>
 <p>An important aspect of the visualization in the Moran scatter plot is the
 classification of the <em>nature</em> of spatial autocorrelation into four categories.
@@ -303,201 +320,197 @@ to keep in mind that the classification as such does not imply significance. Thi
 further explored in our discussion of local indicators of spatial association (LISA).</p>
 </div>
 </div>
-<div id="creating-a-moran-scatter-plot" class="section level3 unnumbered">
+<div id="creating-a-moran-scatter-plot" class="section level3 unnumbered" number="">
 <h3>Creating a Moran scatter plot</h3>
 <p>To start the Moran scatter plot, we select the left-most button in the spatial analysis group
-on the toolbar, as shown in Figure <a href="#fig:morscattoolbar">3</a>.</p>
+on the toolbar, as shown in Figure <a href="#fig:morscattoolbar">1</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscattoolbar"></span>
-<img src="pics5a/0_421_morscat_icon.png" alt="Moran scatter plot toolbar icon" width="20%" />
+<img src="pics5a/0_421_morscat_icon.png" alt="Moran scatter plot toolbar icon" width="15%" />
 <p class="caption">
-Figure 3: Moran scatter plot toolbar icon
+Figure 1: Moran scatter plot toolbar icon
 </p>
 </div>
 <p>After selecting the toolbar icon, the next prompt is for the type of analysis. For now,
 we will stick to the <strong>Univariate Moran’s I</strong> option, first in the list shown
-in Figure <a href="#fig:unimoranoption">4</a>.</p>
+in Figure <a href="#fig:unimoranoption">2</a>. Alternatively, we can choose <strong>Space &gt; Univariate Moran’s I</strong> from the menu.</p>
 <div class="figure" style="text-align: center"><span id="fig:unimoranoption"></span>
-<img src="pics5a/0_422_univariatemoranoption.png" alt="Univariate Moran's I" width="25%" />
+<img src="pics5a/0_422_univariatemoranoption.png" alt="Univariate Moran's I" width="15%" />
 <p class="caption">
-Figure 4: Univariate Moran’s I
-</p>
-</div>
-<p>Alternatively, we can choose <strong>Space &gt; Univariate Moran’s I</strong> from the menu, listed
-in Figure <a href="#fig:spacemenu">5</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:spacemenu"></span>
-<img src="pics5a/0_425_moranfrommenu.png" alt="Moran scatter plot from menu" width="25%" />
-<p class="caption">
-Figure 5: Moran scatter plot from menu
+Figure 2: Univariate Moran’s I
 </p>
 </div>
 <p>After the univariate Moran’s I analysis is initiated, the next prompt is for the variable name, to
 be selected from the <strong>Variable Settings</strong> dialog. In our example, we take <strong>sale_price</strong>.
 In the dialog, the <strong>Weights</strong> drop down list shows the currently active weights. As
-illustrated in Figure <a href="#fig:moranvar">6</a>, in our example, this should be <strong>clev_sls_154_core_q</strong>.</p>
+illustrated in Figure <a href="#fig:moranvar">3</a>, in our example, this should be <strong>clev_sls_154_core_q</strong>,
+queen contiguity based on Thiessen polygons for the house sales locations.</p>
 <div class="figure" style="text-align: center"><span id="fig:moranvar"></span>
-<img src="pics5a/1_423_variable.png" alt="Moran's I variable selection" width="40%" />
+<img src="pics5a/1_423_variable.png" alt="Moran's I variable selection" width="30%" />
 <p class="caption">
-Figure 6: Moran’s I variable selection
+Figure 3: Moran’s I variable selection
 </p>
 </div>
-<p>Clicking <strong>OK</strong> brings up the Moran scatter plot, shown in Figure <a href="#fig:morscatplot">7</a>.</p>
+<p>Clicking <strong>OK</strong> brings up the Moran scatter plot, shown in Figure <a href="#fig:morscatplot">4</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatplot"></span>
-<img src="pics5a/1_424_moranscat.png" alt="Moran scatter plot" width="80%" />
+<img src="pics5a/11_morscat.png" alt="Moran scatter plot" width="60%" />
 <p class="caption">
-Figure 7: Moran scatter plot
+Figure 4: Moran scatter plot
 </p>
 </div>
-<div id="interpretation" class="section level4 unnumbered">
+<div id="interpretation" class="section level4 unnumbered" number="">
 <h4>Interpretation</h4>
-<p>In the Moran scatter plot in Figure <a href="#fig:morscatplot">7</a>, the points in the graph are a bit lopsided, because it is rendered as a square (the preferred approach when both axes are measured in the same units, to avoid distorting the data). The house prices are on the horizontal axis, and their spatially lagged counterparts on the vertical axis. Note that the house price values have been standardized, and are given in standard deviational units (the mean is zero and the standard deviation is one). Similarly, the spatial lag is computed for those standardized values.</p>
-<p>In its default setting, the plot shows a linear fit through the point cloud. The slope of this line corresponds to Moran’s I, and its value (0.282336) is listed at the top of the graph.</p>
-<p>We can see that the shape of the point cloud is determined by the presence of several outliers on the high end (e.g., larger than three standard deviational units from the mean). One observation, with a sales price of $527,409 (compared to the median sales prices of $20,000), is as large as 8 standard deviational units above the mean. On the lower end of the spectrum (to the left of the dashed line in the middle that represents the mean), there is much less spread in the house prices, and those points end up bunched together. By eliminating some of the outliers, one may be able to see more detail for the remaining observations, but we will not pursue that here.</p>
+<p>In the Moran scatter plot in Figure <a href="#fig:morscatplot">4</a>, the points in the graph are a bit lopsided, because it is rendered as a square (the preferred approach when both axes are measured in the same units, to avoid distorting the data). The house prices are on the horizontal axis, and their spatially lagged counterparts on the vertical axis. Note that the house price values have been standardized, and are given in standard deviational units (the mean is zero and the standard deviation is one). Similarly, the spatial lag is computed for those standardized values.</p>
+<p>In its default setting, the plot shows a linear fit through the point cloud. The slope of this line corresponds to Moran’s I, and its value (0.282) is listed at the top of the graph.</p>
+<p>We can see that the shape of the point cloud is influenced by the presence of several outliers on the high end (e.g., larger than three standard deviational units from the mean). One observation, with a sales price of $527,409 (compared to the median sales prices of $20,000), is as large as 8 standard deviational units above the mean. On the lower end of the spectrum (to the left of the dashed line in the middle that represents the mean), there is much less spread in the house prices, and those points end up bunched together. By eliminating some of the outliers, one may be able to see more detail for the remaining observations, but we will not pursue that here.</p>
 <p>Finally, we can select points in each of the quadrants (highlighted by the dashed lines) and
 identify locations in the map (or, in any other open view) associated with each of the four types of spatial autocorrelation.</p>
 </div>
-<div id="assessing-significance" class="section level4 unnumbered">
+<div id="assessing-significance" class="section level4 unnumbered" number="">
 <h4>Assessing significance</h4>
 <p>As such, the slope of the linear fit only provides an estimate of Moran’s I, but it does not
 reveal any information about the significance of the test statistic. This is obtained by
-means of the <strong>Randomization</strong> option. The full list of options is generated by right clicking
+means of the <strong>Randomization</strong> option.</p>
+<p>The full list of options is generated by right clicking
 (or, control clicking) on the plot, in the usual fashion. This yields the list shown in
-Figure <a href="#fig:morscatoptions">8</a>. We select <strong>Randomization</strong> and the number of permutations
+Figure <a href="#fig:morscatoptions">5</a>. We select <strong>Randomization</strong> and the number of permutations
 in the side panel. This value corresponds to the <span class="math inline">\(M\)</span> in the expression for the pseudo p-value
 given above.</p>
-<p>In our example, as shown in Figure <a href="#fig:morscatoptions">8</a>, we select <strong>999 Permutations</strong>, which is typically sufficient for reliable
+<p>In our example, as shown in Figure <a href="#fig:morscatoptions">5</a>, we select <strong>999 Permutations</strong>, which is typically sufficient for reliable
 inference. The most <em>extreme</em> pseudo p-value possible under this scenario is 0.001, which
 means that none of the permuted data sets yielded a statistic larger than the one observed
 in the actual data.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatoptions"></span>
-<img src="pics5a/2_436_randomization.png" alt="Randomization inference" width="40%" />
+<img src="pics5a/2_436_randomization.png" alt="Randomization inference" width="30%" />
 <p class="caption">
-Figure 8: Randomization inference
+Figure 5: Randomization inference
 </p>
 </div>
 </div>
-<div id="reference-distribution" class="section level4 unnumbered">
+<div id="reference-distribution" class="section level4 unnumbered" number="">
 <h4>Reference distribution</h4>
 <p>The result of the permutation operation is a reference distribution
-for the statistic, depicted as a histogram, as in Figure <a href="#fig:referencedist">9</a>. The green line shows the value of the statistic
-for the actual data, placed at 0.2823 in our example, well to the right of the reference distribution. This suggests a strong rejection of the null hypothesis.</p>
+for the statistic, depicted as a histogram, as in Figure <a href="#fig:referencedist">6</a>. The green line shows the value of the statistic
+for the actual data, placed at 0.282 in our example, well to the right of the reference distribution. This suggests a strong rejection of the null hypothesis.</p>
 <div class="figure" style="text-align: center"><span id="fig:referencedist"></span>
 <img src="pics5a/2_437_permutation.png" alt="Reference distribution for Moran's I" width="60%" />
 <p class="caption">
-Figure 9: Reference distribution for Moran’s I
+Figure 6: Reference distribution for Moran’s I
 </p>
 </div>
 <p>The graph contains several summary statistics. In the top left are shown the number of permutations used to construct the reference distribution (999) and the associated pseudo p-value. As mentioned, the latter is the ratio of the number of values for the statistic that are equal to or greater than the observed value (in our example, just 1 for the observed statistic itself) to the number of generated samples (999) + 1 (for the actual sample). Hence, the result is 1/(999+1) = 0.001.</p>
 <p>As pointed out earlier, this is also the smallest (most extreme) p-value that can be obtained. It is important to keep this in mind when comparing results where a different number of permutations is used. For example, a pseudo p-value of 0.001 for 999 permutations is not necessarily <em>more significant</em> than a pseudo p-value of 0.01 for 99 permutations. In both cases, not a single statistic computed from the randomly generated samples exceeded the actual statistic. This contrasts with the usual interpretation of an analytically derived p-value.</p>
-<p>In the status bar at the bottom of the graph appear several descriptive measures of the Moran’s I statistic. First is the actually observed value, I = 0.2823. Next follows the theoretical expected value, E[I], which equals -1/(n-1). The value of -0.0049 is indeed -1 / 204 (there are 205 observations in the data set). The mean is the average of the reference distribution. In our example, this result is -0.0071, slightly off from the theoretically expected value. The standard deviation of the reference distribution is 0.0372, compared to a theoretical value of 0.00158 under an analytical randomization approach (not computed in GeoDa).</p>
+<p>In the status bar at the bottom of the graph appear several descriptive measures of the Moran’s I statistic. First is the actually observed value, I = 0.2823. Next follows the theoretical expected value, E[I], which equals -1/(n-1). The value of -0.0049 is indeed -1 / 204 (there are 205 observations in the data set). The mean is the average of the reference distribution. In our example, this result is -0.0071, slightly off from the theoretically expected value. The standard deviation of the reference distribution is 0.0372, compared to a theoretical value of 0.00158 under an analytical randomization approach (not computed in <code>GeoDa</code>).</p>
 <p>These summary statistics illustrate a common feature in empirical work, namely that the theoretical indication of precision may be overly optimistic (the standard deviation is smaller in the analytical derivation). The z-value that corresponds to the computed Moran’s I, its empirical mean and standard deviation is 7.7721 (the last item to the right on the status bar). Even though a normal approximation would not be accurate, the z-value does suggest strong rejection of the null hypothesis.</p>
-<p>Clicking on the <strong>Run</strong> button in Figure <a href="#fig:referencedist">9</a> will generate a new empirical distribution. This allows for a sensitivity analysis of the results. Especially when only 99 permutations are used, the summary statistics may vary somewhat, but for 999 (and definitely for 99999, the largest possible value), they should be pretty stable.</p>
+<p>Clicking on the <strong>Run</strong> button in Figure <a href="#fig:referencedist">6</a> will generate a new empirical distribution. This allows for a sensitivity analysis of the results. Especially when only 99 permutations are used, the summary statistics may vary somewhat, but for 999 (and definitely for 99999, the largest possible value), they should be pretty stable.</p>
 </div>
-<div id="replicability---the-random-seed" class="section level4 unnumbered">
-<h4>Replicability - the random seed</h4>
-<p>In order to facilitate replication, the default setting in GeoDa is to use a specified
+<div id="reproducibility---the-random-seed" class="section level4 unnumbered" number="">
+<h4>Reproducibility - the random seed</h4>
+<p>In order to facilitate replication, the default setting in <code>GeoDa</code> is to use a specified
 seed for the random number generator. This is evidenced by the check mark
-next to <strong>Use Specified Seed</strong> in the options listed in Figure <a href="#fig:morscatoptions">8</a>.
+next to <strong>Use Specified Seed</strong> in the options listed in Figure <a href="#fig:morscatoptions">5</a>.
 The default seed value used is shown when selecting the <strong>Specify Seed …</strong> box, where it also can be changed.</p>
 <p>The random seed can also be set globally
-in the GeoDa <strong>Preferences</strong>, under the <strong>System</strong> tab, as shown in
-Figure <a href="#fig:randomseedpreference">10</a>. At the bottom of the dialog, under the item
+in the <code>GeoDa</code> <strong>Preferences</strong>, under the <strong>System</strong> tab, as shown in
+Figure <a href="#fig:randomseedpreference">7</a>. At the bottom of the dialog, under the item
 <strong>Method:</strong>, the
 box for using the specified seed is checked by default, and the value 123456789 is used
 as the default seed. This can be changed by typing in a different value.</p>
 <p>The same random seed
-is used in all operations in GeoDa that rely on some type of random permutations (i.e., all flavors
+is used in all operations in <code>GeoDa</code> that rely on some type of random permutations (i.e., all flavors
 of the Moran scatter plot, and all the local spatial autocorrelation statistics). This
 ensures that the results will be identical for each analysis that uses the same
 sequence of random numbers.</p>
 <div class="figure" style="text-align: center"><span id="fig:randomseedpreference"></span>
-<img src="pics5a/2_438_seed_option.png" alt="Random seed in GeoDa preferences" width="80%" />
+<img src="pics5a/2_438_seed_option.png" alt="Random seed in GeoDa preferences" width="60%" />
 <p class="caption">
-Figure 10: Random seed in GeoDa preferences
+Figure 7: Random seed in GeoDa preferences
 </p>
 </div>
-<p>Using the same random seed ensures replicability on a particular machine. However, due to the way
+<p>Using the same random seed ensures reproducibility on a particular machine. However, due to the way
 the random number generator is implemented, there may be differences depending on the hardware, specifically
-when a different number of CPU cores is used.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> In order
+when a different number of CPU cores is used.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> In order
 to control for any such discrepancies, it is possible to manually set the number of CPU cores.
-For example, in Figure <a href="#fig:randomseedpreference">10</a>, the box next to <strong>Set number of CPU
-cores manually</strong> is checked, and the number of cores is given as 8.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+For example, in Figure <a href="#fig:randomseedpreference">7</a>, the box next to <strong>Set number of CPU
+cores manually</strong> is checked, and the number of cores is given as 8.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 </div>
 </div>
-<div id="moran-scatter-plot-options" class="section level3 unnumbered">
+<div id="moran-scatter-plot-options" class="section level3 unnumbered" number="">
 <h3>Moran scatter plot options</h3>
 <p>In the usual way, a right click in the plot brings up the available options, shown earlier
-in Figure <a href="#fig:morscatoptions">8</a>.</p>
+in Figure <a href="#fig:morscatoptions">5</a>.</p>
 <p>Many of these are by now familiar. We have already discussed the <strong>Randomization</strong> option. We
 next briefly consider <strong>Save Results</strong> and <strong>View</strong>.</p>
-<div id="saving-scatter-plot-variables" class="section level4 unnumbered">
+<div id="saving-scatter-plot-variables" class="section level4 unnumbered" number="">
 <h4>Saving scatter plot variables</h4>
 <p>When selecting the <strong>Save Results</strong> option, the dialog offers suggested variable
 names for the standardized variable (recall that the variable specified was
 <strong>sale_price</strong>, not its standardized version), with default name <strong>MORAN_STD</strong>,
 and for its spatial lag, with default name <strong>MORAN_LAG</strong>. This is illustrated in
-Figure <a href="#fig:savelagvars">11</a>. A click on <strong>OK</strong> will add
+Figure <a href="#fig:savelagvars">8</a>. A click on <strong>OK</strong> will add
 these two variables to the data table.</p>
 <div class="figure" style="text-align: center"><span id="fig:savelagvars"></span>
-<img src="pics5a/1_427_save_vars.png" alt="Saving variables from Moran scatter plot" width="35%" />
+<img src="pics5a/1_427_save_vars.png" alt="Saving variables from Moran scatter plot" width="25%" />
 <p class="caption">
-Figure 11: Saving variables from Moran scatter plot
+Figure 8: Saving variables from Moran scatter plot
 </p>
 </div>
 <p>We can quickly verify the results by using the <strong>Table &gt; Calculator</strong> option to compute
 a standardized version of <strong>sale_price</strong> and its spatial lag. For the former, we use the
 <strong>Univariate</strong> tab and the <strong>STANDARDIZED (Z)</strong> operator (we first add <strong>M_ST</strong> as a new
-variable), as shown in Figure <a href="#fig:tablemorstand">12</a>.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
+variable), as shown in Figure <a href="#fig:tablemorstand">9</a>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:tablemorstand"></span>
-<img src="pics5a/1_428_standardize.png" alt="Standardized variable in calculator" width="80%" />
+<img src="pics5a/1_428_standardize.png" alt="Standardized variable in calculator" width="60%" />
 <p class="caption">
-Figure 12: Standardized variable in calculator
+Figure 9: Standardized variable in calculator
 </p>
 </div>
 <p>For the spatial lag, we use the <strong>Spatial Lag</strong> tab, with the weights file
-<strong>clev_sls_154_core_q</strong> specified and the previously standardized variable (again,
-after adding <strong>M_LAG</strong> as the new variable), as in Figure <a href="#fig:tablemorlag">13</a>.</p>
+<strong>clev_sls_154_core_q</strong> specified and the previously standardized variable <strong>M_ST</strong> (again,
+after adding <strong>M_LAG</strong> as the new variable), as in Figure <a href="#fig:tablemorlag">10</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:tablemorlag"></span>
-<img src="pics5a/1_429_lag.png" alt="Spatially lagged variable in calculator" width="80%" />
+<img src="pics5a/1_429_lag.png" alt="Spatially lagged variable in calculator" width="60%" />
 <p class="caption">
-Figure 13: Spatially lagged variable in calculator
+Figure 10: Spatially lagged variable in calculator
 </p>
 </div>
 <p>The table now has four extra columns, two generated by the Moran scatter plot option,
-and two calculated explicitly to replicate these results, shown in Figure <a href="#fig:morscatintable">14</a>.</p>
+and two calculated explicitly to replicate these results, shown in Figure <a href="#fig:morscatintable">11</a>.
+Clearly, the values are identical.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatintable"></span>
-<img src="pics5a/1_433_lagintable.png" alt="Variables added to table" width="60%" />
+<img src="pics5a/11_lag_in_table.png" alt="Variables added to table" width="40%" />
 <p class="caption">
-Figure 14: Variables added to table
+Figure 11: Variables added to table
 </p>
 </div>
 </div>
-<div id="digression---creating-a-moran-scatter-plot-as-a-standard-scatter-plot" class="section level4 unnumbered">
+<div id="digression---creating-a-moran-scatter-plot-as-a-standard-scatter-plot" class="section level4 unnumbered" number="">
 <h4>Digression - creating a Moran scatter plot as a standard scatter plot</h4>
 <p>The preferred way to construct a Moran scatter plot is to use the designated functionality
 in the <strong>Space</strong> menu. However, it is perfectly possible to create a plot <em>the hard way</em>,
 as a special case of a standard bivariate scatter plot. To accomplish this, we select a
 variable (standardized) for the x-axis, and its spatial lag for the y-axis.</p>
-<p>For example, in Figure <a href="#fig:morscathard">15</a>, we select the just created
+<p>For example, in Figure <a href="#fig:morscathard">12</a>, we use the standard scatter plot
+functionality (<strong>Explore &gt; Scatter Plot</strong>) and select the just created
 <strong>MORAN_STD</strong> in the variable selection dialog for the x-axis, and its spatial
 lag <strong>MORAN_LAG</strong> as the y-axis (or, alternatively, <strong>M_ST</strong> and <strong>M_LAG</strong>).</p>
 <div class="figure" style="text-align: center"><span id="fig:morscathard"></span>
-<img src="pics5a/1_434_morscat_as_scatplot.png" alt="Scatter plot with spatial variables" width="40%" />
+<img src="pics5a/1_434_morscat_as_scatplot.png" alt="Scatter plot with spatial variables" width="30%" />
 <p class="caption">
-Figure 15: Scatter plot with spatial variables
+Figure 12: Scatter plot with spatial variables
 </p>
 </div>
-<p>This yields the standard scatter plot, shown in Figure <a href="#fig:morscat2">16</a>. In contrast to the
+<p>This yields the standard scatter plot, shown in Figure <a href="#fig:morscat2">13</a>. In contrast to the
 specific Moran scatter plot, here the
 statistics are displayed below the plot (the default setting for a standard
 scatter plot). This reveals the slope of the linear fit to be <strong>0.282</strong>, the same
 as Moran’s I given by the Moran scatter plot.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscat2"></span>
-<img src="pics5a/1_435_morscat2.png" alt="Moran as a standard scatter plot" width="80%" />
+<img src="pics5a/11_scatplot_w_moran.png" alt="Moran as a standard scatter plot" width="40%" />
 <p class="caption">
-Figure 16: Moran as a standard scatter plot
+Figure 13: Moran as a standard scatter plot
 </p>
 </div>
-<p>We will revisit the plot in Figure <a href="#fig:morscat2">16</a> later when we consider the difference between <strong>regime regression</strong>
+<p>We will revisit the plot in Figure <a href="#fig:morscat2">13</a> later when we consider the difference between <strong>regime regression</strong>
 in the Moran scatter plot compared to the standard scatter plot.</p>
 <p>Apart from a purely pedagogic objective, there are some instances in practice when
 constructing a Moran scatter plot as a standard plot is the only way to obtain an
@@ -506,226 +519,241 @@ is when we use row-standardized weights derived from an inverse distance measure
 Such weights can be employed to create a spatially lagged variable in the usual way,
 which can then serve as the y-axis in the scatter plot.</p>
 <p>The current implementation of the Moran scatter plot functionality
-in GeoDa ignores the specific values for the weights and only takes
-into account the presence of connectivity (i.e., non-zero weights). In the computation
-of the spatial lag, all the neighbors receive the same weight. However, for row-standardized
-inverse distance weights, the values will be different. Since the weights are
-row-standardized, the slope of a standard scatter plot of the spatial
+in <code>GeoDa</code> ignores the specific values for the weights and only takes
+into account the presence of connectivity (i.e., non-zero weights). This is the approach
+taken for all spatial autocorrelation analyses in <code>GeoDa</code>. As a result,
+in the computation
+of the spatial lag in the Moran scatter plot, all the neighbors receive the same weight.</p>
+<p>In our discussion of inverse distance weights, we observed that it is often of interest
+<em>not</em> to row-standardize the weights. Similarly, this is the case for weights that
+include a diagonal element (kernel weights). As long as the weights are row-standardized
+and do not include a diagonal element, the slope of a standard scatter plot of the spatial
 lag against the variable will still be Moran’s I.</p>
-<p>Note that this approach does not work for inverse distance weights that are not row-standardized,
+<p>However, this does not work correclty for inverse distance weights that are not row-standardized,
 or for weights that include the diagonal element. In the former case, the slope estimate is
 off by a factor <span class="math inline">\(S_0 / n\)</span>. So, in order to recuperate the value for Moran’s I, the slope
-estimate would have to be multiplied by <span class="math inline">\(n / S_0\)</span>. However, the interpretation of Moran’s I
+estimate would have to be multiplied by <span class="math inline">\(n / S_0\)</span>. Moreover, the interpretation of Moran’s I
 for spatial weights that are not row-standardized may be difficult.</p>
 <p>In any case, the slope of the linear fit in a standard scatter plot is only an estimate for
 Moran’s I, but does not provide any inference. The usual standard errors and t-statistics
 provided in the scatter plot are <em>not appropriate</em> in the spatial case. An explicity
 permutation procedure would need to be carried out separately.</p>
 </div>
-<div id="lowess-smoother" class="section level4 unnumbered">
+<div id="lowess-smoother" class="section level4 unnumbered" number="">
 <h4>LOWESS smoother</h4>
-<p>In addition to the traditional linear smoother, GeoDa also supports a Lowess smoother for the Moran scatter plot (similar to the functionality in the standard scatter plot). This is accomplished by selecting the <strong>View &gt; LOWESS Smoother</strong> item in the options menu, illustrated in Figure <a href="#fig:morscatlowessoption">17</a>.</p>
+<p>In addition to the traditional linear smoother, <code>GeoDa</code> also supports a Lowess smoother for the Moran scatter plot (similar to the functionality in the standard scatter plot). This is accomplished by selecting the <strong>View &gt; LOWESS Smoother</strong> item in the options menu, illustrated in Figure <a href="#fig:morscatlowessoption">14</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatlowessoption"></span>
-<img src="pics5a/3_439_lowess_option.png" alt="Moran scatter plot LOWESS option" width="50%" />
+<img src="pics5a/11_lowess_option.png" alt="Moran scatter plot LOWESS option" width="30%" />
 <p class="caption">
-Figure 17: Moran scatter plot LOWESS option
+Figure 14: Moran scatter plot LOWESS option
 </p>
 </div>
-<p>With the <strong>View &gt; Linear Smoother</strong> option turned off, only the nonlinear fit from the local regression is shown on the Moran scatter plot, as in Figure <a href="#fig:morscatlowess">18</a>. The Lowess smoother can be explored to identify potential structural breaks in the pattern of spatial autocorrelation. For example, in some parts of the data set, the curve may be very steep and positive, suggesting strong positive spatial autocorrelation, whereas in other parts, it could be flat, indicating no autocorrelation.</p>
+<p>With the <strong>View &gt; Linear Smoother</strong> option turned off, only the nonlinear fit from the local regression is shown on the Moran scatter plot, as in Figure <a href="#fig:morscatlowess">15</a>. The Lowess smoother can be explored to identify potential structural breaks in the pattern of spatial autocorrelation. For example, in some parts of the data set, the curve may be very steep and positive, suggesting strong positive spatial autocorrelation, whereas in other parts, it could be flat, indicating no autocorrelation. In our example, the flatter slope of the curve for the largest values of z suggests an
+effect of the outlier (pulling the Moran’s I slope down). This can be more formally assessed by means of outlier and leverage statistics, but here we do not pursue this further.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatlowess"></span>
-<img src="pics5a/3_440_scat_lowess.png" alt="LOWESS smooth of Moran scatter plot" width="80%" />
+<img src="pics5a/11_moran_lowess.png" alt="LOWESS smooth of Moran scatter plot" width="60%" />
 <p class="caption">
-Figure 18: LOWESS smooth of Moran scatter plot
+Figure 15: LOWESS smooth of Moran scatter plot
 </p>
 </div>
 <p>The local smoother is fit through the points in the Moran scatter plot by utilizing only those observations within a given bandwidth. As for the standard scatter plot, the default is to use 0.20 of the range of values. The bandwidth (as well as other, more technical parameters) can be specified by selecting the
 <strong>View &gt; Edit LOWESS Parameters</strong> item in the options menu, as we have seen in the discussion
 of the standard scatter plot. All options work exactly the same as in the standard case.</p>
 </div>
-<div id="brushing-the-moran-scatter-plot" class="section level4 unnumbered">
-<h4>Brushing the Moran scatter plot</h4>
-<p>A final option of the <strong>View</strong> setting that we consider initiates <strong>Regimes Regression</strong>. As in the
+</div>
+<div id="brushing-the-moran-scatter-plot" class="section level3 unnumbered" number="">
+<h3>Brushing the Moran scatter plot</h3>
+<p>An important option to assess the stability of the spatial autocorrelation throughout the data
+set, or, alternatively, to search for potential spatial heterogeneity, is the exploration of
+the scatter plot through dynamic brushing.</p>
+<p>This is invoked by selecting <strong>Regimes Regression</strong> in the <strong>View</strong> option. As in the
 standard scatter plot, with this option selected, statistics for the slope and
 intercept are recomputed as observations are selected and unselected.
 We proceed with the <strong>LOWESS Smoother</strong> turned off and the <strong>Regimes Regression</strong> selected,
-as in Figure <a href="#fig:morscatregimeoption">19</a>.</p>
+as in Figure <a href="#fig:morscatregimeoption">16</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatregimeoption"></span>
-<img src="pics5a/3_441_regimes.png" alt="Moran scatter plot regimes" width="50%" />
+<img src="pics5a/11_regime_option.png" alt="Moran scatter plot regimes" width="30%" />
 <p class="caption">
-Figure 19: Moran scatter plot regimes
+Figure 16: Moran scatter plot regimes
 </p>
 </div>
-<p>This brings up the initial setting for the brushing operation. As illustrated
-in Figure <a href="#fig:morscatregime1">20</a>, there are now three Moran
-scatter plots. The one to the left (in red) is for the <strong>selected</strong> observations, currently empty,
+<p>The initial setting for the brushing operation shows three Moran scatter plots, as illustrated
+in Figure <a href="#fig:morscatregime1">17</a>.
+The one to the left (in red) is for the <strong>selected</strong> observations, currently empty,
 since no selection has been made. The one to the right is for the complement, referred to
 as <strong>unselected</strong> (in black), currently the same as the scatter plot in the center, which
 shows the slope for all observations.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatregime1"></span>
-<img src="pics5a/3_442_scat_regimes1.png" alt="Regimes starting setup" width="100%" />
+<img src="pics5a/11_regimes_1.png" alt="Regimes starting setup" width="60%" />
 <p class="caption">
-Figure 20: Regimes starting setup
+Figure 17: Regimes starting setup
 </p>
 </div>
 <p>We start the brushing operation by selecting a large rectangle with 51 observations
 (the number of selected observations is shown in the status bar) in the
-lower right of the point map, shown in the left panel of Figure <a href="#fig:morscatselect1">21</a>. As soon as the selection is made, the red and black graphs
+lower right of the point map, shown in the left panel of Figure <a href="#fig:morscatselect1">18</a>. As soon as the selection is made, the red and black graphs
 are updated in the right panel of the Figure.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatselect1"></span>
-<img src="pics5a/3_443_regimes_select1.png" alt="Brushing the Moran scatter plot - 1" width="100%" />
+<img src="pics5a/11_regimes_2.png" alt="Brushing the Moran scatter plot - 1" width="80%" />
 <p class="caption">
-Figure 21: Brushing the Moran scatter plot - 1
+Figure 18: Brushing the Moran scatter plot - 1
 </p>
 </div>
-<p>The distinguishing characteristics of this brushing operation (or, any selection) is that the spatial weights are dynamically updated for both the selection and the unselected observations.
-In other words, the edge effects are corrected for and no links are included to locations
-that are not part of the selection. The same holds for the unselected observations.</p>
+<p>The distinguishing characteristics of this brushing operation (or, any selection) is that the spatial weights are <em>dynamically updated</em> for both the selection and the unselected observations.
+More precisely, for each of the subset of observations, selected and unselected, the spatial
+weights are adjusted to remove links to observations belonging to the other subset.
+In other words, there are no edge effects and each subset is treated as a self-contained
+entity.</p>
 <p>As a
 result, the slope of the Moran scatter plots on the left and the right are as if the
 data set consisted only of the selected/unselected points. This is a visual implementation of
 a <em>regionalized</em> Moran’s I, where the indicator of spatial autocorrelation is calculated
-for a subset of the observations <span class="citation">(Munasinghe and Morris <a href="#ref-MunasingheMorris:96">1996</a>)</span>.</p>
+for a subset of the observations <span class="citation">(Munasinghe and Morris <a href="#ref-MunasingheMorris:96" role="doc-biblioref">1996</a>)</span>.</p>
 <p>In our initial selection, the selected observations show no spatial autocorrelation at all
-(a value of 0.0257),
-whereas the complement (unselected) obtain a Moran’s I of 0.2801, basically the same as the overall
-statistic of 0.282. This would suggest the presence of spatial heterogeneity in the strength
+(a value of 0.02),
+whereas the complement (unselected) obtain a Moran’s I of 0.280, basically the same as the overall
+statistic of 0.282.</p>
+<p>This finding would suggest the presence of spatial heterogeneity in the strength
 of the spatial autocorrelation, in the sense that the subset selected shows a very
 different degree of dependence than its complement (or the data set as a whole). Note that this is purely exploratory, and there is no
 actual <em>test</em> for the difference between the two statistics (this contrasts with the
-availability of the Chow test in the standard scatter plot).</p>
+availability of the Chow test in the standard scatter plot). In our example, this would suggest
+very little spatial autocorrelation among the sales prices in the 51 selected observations,
+whereas the rest of the data shows the same pattern as the whole.</p>
 <p>As we move the <em>brush</em> to the left in the point map, the selected and unselected scatter
 plots are updated in real time, showing the corresponding regional Moran’s I statistics
-in the panels of Figure <a href="#fig:morscatselect2">22</a>.</p>
+in the panels of Figure <a href="#fig:morscatselect2">19</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatselect2"></span>
-<img src="pics5a/3_443_regimes_select2.png" alt="Brushing the Moran scatter plot - 2" width="100%" />
+<img src="pics5a/11_regimes_3.png" alt="Brushing the Moran scatter plot - 2" width="80%" />
 <p class="caption">
-Figure 22: Brushing the Moran scatter plot - 2
+Figure 19: Brushing the Moran scatter plot - 2
 </p>
 </div>
 <p>In our example, the second selection shows much less evidence of spatial heterogeneity, with
-a Moran’s I of 0.2888 for the selected observations and 0.2977 for the complement, as
-shown in the Figure.</p>
-<p>Of course, because of the linking of all graphs in GeoDa, the selection is also reflected
-in the <em>standard</em> scatter plot we constructed for the standardized price variable and
-its spatial lag.</p>
-<p>The difference between this and the Moran scatter plot brushing pertains
-to the
-dynamically updated spatial weights. In the standard scatter plot, the spatially lagged
-variable is included in the selection as is, which also includes neighbors that are <em>not</em>
-part of the selection. This contrasts
-to the selection in the Moran scatter plot, which dynamically updates the spatial weights
-for both the selected and unselected.</p>
-<p>The difference is highlighted in Figure <a href="#fig:morscatplotselect3">23</a>.</p>
+a Moran’s I of 0.322 for the selected observations and 0.268 for the complement, as
+shown at the top of each plot.</p>
+<div id="static-and-dynamic-spatial-weights" class="section level4 unnumbered" number="">
+<h4>Static and dynamic spatial weights</h4>
+<p>In the example just shown, the spatial weights were updated dynamically, to remove any edge effects.
+In contrast, in the scatter plot in Figure <a href="#fig:morscat2">13</a>, where the (standardized) sales price
+was plotted against its spatial lag, there is no such dynamic adjustment of the spatial weights.</p>
+<p>More precisely, this means that the spatial lag for a selected/unselected observation consists of all
+its original neighbors, including the ones that belong to the other subset.</p>
+<p>This is illustrated by the updated selection in the scatter plot, in Figure <a href="#fig:morscatplotselect3">20</a>,
+which matches the selection of 51 observations in Figure <a href="#fig:morscatselect1">18</a>. In the
+updated plot, the slope for the selected is found to be 0.170 (in red), a far cry from the 0.02 we found
+above. The slope for the unselected is 0.272, not that different from 0.280 above. The standard Chow test only provides
+weak evidence for spatial heterogeneity (p = 0.0517).</p>
 <div class="figure" style="text-align: center"><span id="fig:morscatplotselect3"></span>
-<img src="pics5a/3_445_scatplotselect.png" alt="Brushing the standard scatter plot" width="80%" />
+<img src="pics5a/11_regimes_standard.png" alt="Brushing the standard spatial lag scatter plot" width="40%" />
 <p class="caption">
-Figure 23: Brushing the standard scatter plot
+Figure 20: Brushing the standard spatial lag scatter plot
 </p>
 </div>
-<p>The scatter plot with the same 51 selected observations as in the first example above
-yields a slope of 0.170 for the selected (in red, contrasted with 0.026 above) and 0.272
-for the unselected (in blue, compared with 0.280 above). The usual Chow test does not provide
-strong evidence for spatial heterogeneity.</p>
 <p>This result needs to be interpreted with caution,
 since the weights structure has not been adjusted to reflect the actual <em>breaks</em> within
-the data set. On the other hand, the standard scatter plot <em>ignores</em> boundary effects
-(in the sense that it includes neighbors <em>outside</em> the regimes), so in some contexts,
-this may be the interpretation sought. GeoDa provides both options.</p>
+the data set. In addition, the Thiessen polygon contiguity weights may have introduced
+artificial neighbors, which are eliminated when dynamically adjusting the weights to
+exclude neighbors outside the selected subset.</p>
+<p>The standard scatter plot <em>ignores</em> boundary effects
+(in the sense that it includes neighbors <em>outside</em> the regimes), which, in some contexts,
+may be the interpretation sought. <code>GeoDa</code> provides both options.</p>
 </div>
 </div>
 </div>
-<div id="spatial-correlogram" class="section level2 unnumbered">
+<div id="spatial-correlogram" class="section level2 unnumbered" number="">
 <h2>Spatial Correlogram</h2>
-<div id="concept-1" class="section level3 unnumbered">
+<div id="concept-1" class="section level3 unnumbered" number="">
 <h3>Concept</h3>
 <p>A non-parametric spatial correlogram is an alternative measure of global spatial autocorrelation
 that does not rely on the specification of a spatial weights matrix. Instead, a local
 regression is fit to the covariances or correlations computed for all pairs of
 observations as a function of the distance between them <span class="citation">(for example,
-as outlined in Bjornstad and Falck <a href="#ref-BjornstadFalck:01">2001</a>)</span>.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+as outlined in Bjornstad and Falck <a href="#ref-BjornstadFalck:01" role="doc-biblioref">2001</a>)</span>.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
 <p>With standardized variables <span class="math inline">\(z\)</span>, this boils
 down to a local regression:
 <span class="math display">\[z_i.z_j = f(d_{ij}) + u,\]</span>
 where <span class="math inline">\(d_{ij}\)</span> is the distance between a pair of locations <span class="math inline">\(i-j\)</span>, u is an error term, and <span class="math inline">\(f\)</span> is the non-parametric
 function to be determined from the data. Typically, the latter
 is a LOWESS or kernel regression.</p>
-<p>GeoDa implements a spatial correlogram, i.e., the computation is based on
+<p><code>GeoDa</code> implements a spatial correlogram, i.e., the computation is based on
 standardized variables such that the cross-products correspond to correlations.
 The nonlinear curve is a LOWESS regression fit to the
 average correlation for all pairs of observations
 in a distance bin. This uses a similar logic as underlying the empirical variogram
 of geostatistics, but with a non-linear smoother applied to the bin estimates.</p>
 </div>
-<div id="creating-a-spatial-correlogram" class="section level3 unnumbered">
+<div id="creating-a-spatial-correlogram" class="section level3 unnumbered" number="">
 <h3>Creating a spatial correlogram</h3>
-<p>The spatial correlogram functionality is invoked by clicking on the corresponding icon in the toolbar (the middle icon in the spatial analysis group, as in Figure <a href="#fig:correlogramicon">24</a>), or by selecting <strong>Space &gt; Spatial Correlogram</strong> from the menu (the item at the very bottom of the list of options).</p>
+<p>The spatial correlogram functionality is invoked by clicking on the corresponding icon in the toolbar (the middle icon in the spatial analysis group, as in Figure <a href="#fig:correlogramicon">21</a>) and choosing <strong>Spatial Correlogram</strong>, or,
+from the menu, by selecting <strong>Space &gt; Spatial Correlogram</strong> (the item near the very bottom of the list of options).</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogramicon"></span>
-<img src="pics5a/5_462_correlogram_icon.png" alt="Non-parametric correlogram icon" width="30%" />
+<img src="pics5a/11_correlogram_icon.png" alt="Non-parametric correlogram icon" width="25%" />
 <p class="caption">
-Figure 24: Non-parametric correlogram icon
+Figure 21: Non-parametric correlogram icon
 </p>
 </div>
 <p>This brings up a dialog with the default parameter settings and a graph in the background,
-as shown in Figure <a href="#fig:correlogramdefault">25</a>. This graph is not informative at this point, since it shows a correlogram for the first variable, which is <strong>unique_id</strong>.</p>
+as shown in Figure <a href="#fig:correlogramdefault">22</a>. This graph is not informative at this point, since it shows a correlogram for the first variable, which is <strong>unique_id</strong>.</p>
 <p>First, we need to choose the proper settings in the dialog.</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogramdefault"></span>
-<img src="pics5a/5_463_initial_correlogram.png" alt="Initial correlogram dialog" width="50%" />
+<img src="pics5a/5_463_initial_correlogram.png" alt="Initial correlogram dialog" width="30%" />
 <p class="caption">
-Figure 25: Initial correlogram dialog
+Figure 22: Initial correlogram dialog
 </p>
 </div>
-<p>The items at the top of the dialog are the <strong>Variable</strong> (available from a drop down list), the <strong>Distance</strong> metric (default is Euclidean, but Arc distance is also available), and the <strong>Number of Bins</strong>.</p>
-<p>The non-parametric correlogram is computed by means of a local regression on the pairwise correlations that fall within a distance bin. The number of bins determines the distance range of each bin. This range is the maximum distance divided by the number of bins. The more bins are chosen, the more fine-grained the correlogram will be. However, this also potentially can lead to too few pairs in some bins (the rule of thumb is to have at least 30).</p>
-<p>The number of elements in each bin is a result of the interplay between the number of bins and the maximum distance. As the default, all pairs are used (in our example, with 205 observations, this yields: <span class="math inline">\([205^2 - 205]/2 = 20910\)</span> pairs), and thus all the pairwise distances are taken into account. However, in many instances in practice, this may not be a good choice. For example, when there are many observations, the number of pairs quickly becomes unwieldy and GeoDa will run out of memory. Also, the correlations computed for pairs that are far apart are not that meaningful (they should be zero due to Tobler’s law). The bottom half of the dialog provides options for fine-tuning these choices.</p>
+<p>The items at the top of the dialog are the <strong>Variable</strong> (available from a drop down list), the <strong>Distance</strong> metric (default is <strong>Euclidean</strong>, but Arc distance is also available), and the <strong>Number of Bins</strong>.</p>
+<p>The non-parametric correlogram is computed by means of a local regression on the pairwise correlations that fall within each distance bin. The number of bins determines the distance range of each bin. This range is the maximum distance divided by the number of bins. The more bins are chosen, the more fine-grained the correlogram will be. However, this also potentially can lead to too few pairs in some bins (the rule of thumb is to have at least 30).</p>
+<p>The number of elements in each bin is a result of the interplay between the number of bins and the maximum distance. As the default, all pairs are used (in our example, with 205 observations, this yields: <span class="math inline">\([205^2 - 205]/2 = 20910\)</span> pairs), and thus all the pairwise distances are taken into account. However, in many instances in practice, this may not be a good choice. For example, when there are many observations, the number of pairs quickly becomes unwieldy and <code>GeoDa</code> will run out of memory. Also, the correlations computed for pairs that are far apart are not that meaningful (they should be zero due to Tobler’s law). The bottom half of the dialog provides options for fine-tuning these choices.</p>
 <p>First, we consider the default, which uses all pairs and does not impose any constraints in terms of maximum distance. The number of bins is set to <strong>10</strong>. As before, the
 <strong>Variable</strong> we analyze is <strong>sale_price</strong>. These selections are shown in the dialog in
-Figure <a href="#fig:correlogram1vars">26</a>.</p>
+Figure <a href="#fig:correlogram1vars">23</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogram1vars"></span>
-<img src="pics5a/5_464_saleprice.png" alt="Variable setting for correlogram" width="30%" />
+<img src="pics5a/5_464_saleprice.png" alt="Variable setting for correlogram" width="20%" />
 <p class="caption">
-Figure 26: Variable setting for correlogram
+Figure 23: Variable setting for correlogram
 </p>
 </div>
-<p>Clicking the <strong>Apply</strong> button yields the spatial correlogram shown in Figure <a href="#fig:correlogram1price">27</a>. Slight adjustments
+<p>Clicking the <strong>Apply</strong> button yields the spatial correlogram shown in Figure <a href="#fig:correlogram1price">24</a>. Slight adjustments
 to the size of the window may be necessary in order to see all the detail on the
 horizontal axis, especially since the distances are expressed in feet (so they are large numbers).</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogram1price"></span>
-<img src="pics5a/5_465_default_correlogram.png" alt="Default spatial correlogram" width="80%" />
+<img src="pics5a/5_465_default_correlogram.png" alt="Default spatial correlogram" width="60%" />
 <p class="caption">
-Figure 27: Default spatial correlogram
+Figure 24: Default spatial correlogram
 </p>
 </div>
-<div id="interpretation-1" class="section level4 unnumbered">
+<div id="interpretation-1" class="section level4 unnumbered" number="">
 <h4>Interpretation</h4>
-<p>At the top of the graph in Figure <a href="#fig:correlogram1price">27</a> is the actual correlogram, depicting how the spatial autocorrelation changes with distance. Hovering the pointer over each blue dot, gives the spatial autocorrelation associated with that distance band in the status bar. In our example, the first dot corresponds to 0.202048 for distances between 0 and 4823 feet (or about 0.9 miles).</p>
+<p>At the top of the graph in Figure <a href="#fig:correlogram1price">24</a> is the actual correlogram, depicting how the spatial autocorrelation changes with distance. Hovering the pointer over each blue dot, gives the spatial autocorrelation associated with that distance band in the status bar. In our example, the first dot corresponds to 0.202048 for distances between 0 and 4823 feet (or about 0.9 miles).</p>
 <p>The intersection between the correlogram and the dashed zero axis (which determines the range of spatial autocorrelation) happens in the midpoint of the second range (4823 to 9647 feet), i.e., 7235, or roughly around 1.4 miles. Beyond that range, the autocorrelation is first negative and then fluctuates around the zero line.</p>
 <p>At the bottom of the graph is a histogram that shows the number of pairs of observations in each bin. Hovering the pointer over a given bin shows how many pairs
 are contained in the bin in the status bar. In our example, each bin clearly has more than sufficient observation pairs. Even the last bin, which seems small (a function of the vertical scale), uses 75 pairs for the computation.</p>
 <p>Further detail is provided when selecting the <strong>Display Statistics</strong> option (right click
-on the graph). As shown in Figure <a href="#fig:correlogram1wstats">28</a>, for each bin, the computed autocorrelation is provided, as well as the distance range for the bin (lower and upper bound), and the number of pairs used to compute the statistic.</p>
+on the graph). As shown in Figure <a href="#fig:correlogram1wstats">25</a>, for each bin, the computed autocorrelation is provided, as well as the distance range for the bin (lower and upper bound), and the number of pairs used to compute the statistic.</p>
 <p>In addition, there is a summary with the minimum and maximum distance, the total number of pairs, and an estimate
 for the range (i.e., the distance at which the estimated autocorrelation first becomes zero).
 In our example, the latter is estimated to be about 7,225 feet (about 1.4 miles). Right
 after the listing of the value for the range, the lower and upper bound of the bin where the
 correlogram crosses the axis is given (this provides an alternative, but less precise approximation of the range).</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogram1wstats"></span>
-<img src="pics5a/5_466_correlogram_w_stats.png" alt="Spatial correlogram with statistics" width="80%" />
+<img src="pics5a/5_466_correlogram_w_stats.png" alt="Spatial correlogram with statistics" width="60%" />
 <p class="caption">
-Figure 28: Spatial correlogram with statistics
+Figure 25: Spatial correlogram with statistics
 </p>
 </div>
 </div>
 </div>
-<div id="spatial-correlogram-options" class="section level3 unnumbered">
+<div id="spatial-correlogram-options" class="section level3 unnumbered" number="">
 <h3>Spatial correlogram options</h3>
-<p>In GeoDa, there are two sets of spatial correlogram options. One consists of the <strong>parameters</strong>
-of the model, as specified in the dialog shown in Figure <a href="#fig:correlogram1vars">26</a>. The other
+<p>In <code>GeoDa</code>, there are two sets of spatial correlogram options. One consists of the <strong>parameters</strong>
+of the model, as specified in the dialog shown in Figure <a href="#fig:correlogram1vars">23</a>. The other
 set of options are invoked in the usual way, by right clicking on the graph. We already referred
-to the <strong>Display Statistics</strong> option above. The full list of options is shown in Figure <a href="#fig:correlogramoptions">29</a>.</p>
+to the <strong>Display Statistics</strong> option above. The full list of options is shown in Figure <a href="#fig:correlogramoptions">26</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogramoptions"></span>
-<img src="pics5a/5_911_correlogramoptions.png" alt="Spatial correlogram options" width="20%" />
+<img src="pics5a/11_corr_lowess_params.png" alt="Spatial correlogram options" width="20%" />
 <p class="caption">
-Figure 29: Spatial correlogram options
+Figure 26: Spatial correlogram options
 </p>
 </div>
 <p>One interesting option is to <strong>Save Results</strong>. This provides a record of the descriptive
@@ -733,83 +761,206 @@ statistics of the correlogram in a text file (with file extension csv). The file
 the information listed at the bottom of the graph when <strong>Display Statistics</strong> has been selected.
 This includes the estimates of the spatial autocorrelation, bin ranges, number of observations in
 the bins and the summary items.</p>
-<div id="lowess-parameters" class="section level4 unnumbered">
+<div id="lowess-parameters" class="section level4 unnumbered" number="">
 <h4>LOWESS parameters</h4>
-<p>The selection highlighted in Figure <a href="#fig:correlogramoptions">29</a> pertains to the
+<p>The selection highlighted in Figure <a href="#fig:correlogramoptions">26</a> pertains to the
 <strong>LOWESS Parameters</strong>, i.e., the bandwidth and other technical options that can be
 specified for any LOWESS smoother. The default is to use a bandwidth of 0.20, which works
 well in most situations. As usual, a larger bandwidth will yield a (slightly) smoother curve,
 and a smaller bandwidth the opposite. This works in exactly the same way as for the standard
 LOWESS nonlinear smoother.</p>
 </div>
-<div id="distance-settings" class="section level4 unnumbered">
+<div id="distance-settings" class="section level4 unnumbered" number="">
 <h4>Distance settings</h4>
 <p>In most situations, the default use of all the distance pairs is too overwhelming. Also,
 there is a good reason to limit the maximum distance, since correlations at large(r) distances
 are both sparser (fewer pairs in a bin, which leads to less precise estimates) and supposed
 to be near zero (Tobler’s law).</p>
-<p>There are several rules of thumb to set the maximum distance. GeoDa uses half of the
+<p>There are several rules of thumb to set the maximum distance. <code>GeoDa</code> uses half of the
 maximum distance as a point of departure. By checking the box next to <strong>Max Distance</strong> and
 clicking on the button in the middle of the slider bar, half the maximum distance
-(<strong>24131.4</strong>) is listed in the box, shown in Figure <a href="#fig:distancebox">30</a>. This reduces the number of pairs used to compute
-the correlations almost by half, from 20910 to roughly 10557.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+(<strong>24131.4</strong>) is listed in the box, shown in Figure <a href="#fig:distancebox">27</a>. This reduces the number of pairs used to compute
+the correlations almost by half, from 20910 to roughly 10557.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:distancebox"></span>
-<img src="pics5a/5_467_dist24131.png" alt="Adjusting maximum distance" width="30%" />
+<img src="pics5a/5_467_dist24131.png" alt="Adjusting maximum distance" width="20%" />
 <p class="caption">
-Figure 30: Adjusting maximum distance
+Figure 27: Adjusting maximum distance
 </p>
 </div>
-<p>The corresponding correlogram in Figure <a href="#fig:correlogram2">31</a> emphasizes the autocorrelation pattern over the shorter distance ranges. It suggests a range for the correlation that is basically the same as the
+<p>The corresponding correlogram in Figure <a href="#fig:correlogram2">28</a> emphasizes the autocorrelation pattern over the shorter distance ranges. It suggests a range for the correlation that is basically the same as the
 initial result, about 7,244 feet (compared to 7,225). The status bar lists the autocorrelation given by the point over which the pointer hovers (in our example, about -0.056 for the
 fourth bin).</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogram2"></span>
-<img src="pics5a/5_468_corr_w_dist24.png" alt="Correlogram with half max distance" width="80%" />
+<img src="pics5a/11_corr_dist24.png" alt="Correlogram with half max distance" width="60%" />
 <p class="caption">
-Figure 31: Correlogram with half max distance
+Figure 28: Correlogram with half max distance
 </p>
 </div>
 <p>In order to get an even more precise measure of the range, we can specify the maximum distance as 20000 feet (3.8 miles) by typing this value into the bin, and select 20 bins (there are plenty of observations, so there is no danger of having fewer than 30 pairs in any bin).</p>
-<p>The resulting correlogram, shown in Figure <a href="#fig:correlogram3">32</a>, has a distance range for each bin of 1000 feet (about 0.2 miles). This provides a much finer grained measure of the range of spatial autocorrelation (this may require some expansion of the window to clearly see all the values on the horizontal axis and the displayed statistics).</p>
+<p>The resulting correlogram, shown in Figure <a href="#fig:correlogram3">29</a>, has a distance range for each bin of 1000 feet (about 0.2 miles). This provides a much finer grained measure of the range of spatial autocorrelation (this may require some expansion of the window to clearly see all the values on the horizontal axis and the displayed statistics).</p>
 <p>The intersection between the correlogram and the zero axis is almost exactly in the middle of the 6000-7000 foot range, about 6775 feet (or 1.3 miles). In sum, by changing the correlogram parameters from the default to a much smaller value and increasing the number
 of bins, the estimate of our range of spatial interaction goes from about 7200 feet to about 6800 feet. This highlights the importance of sensitivity analysis and going beyond the default values.</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogram3"></span>
-<img src="pics5a/5_469_20bins.png" alt="Custom distance and bins" width="80%" />
+<img src="pics5a/11_corr_20bins.png" alt="Custom distance and bins" width="60%" />
 <p class="caption">
-Figure 32: Custom distance and bins
+Figure 29: Custom distance and bins
 </p>
 </div>
 </div>
-<div id="larger-data-issues-random-sampling" class="section level4 unnumbered">
+<div id="larger-data-issues-random-sampling" class="section level4 unnumbered" number="">
 <h4>Large(r) data issues – random sampling</h4>
-<p>A final feature of the correlogram in GeoDa is the ability to compute the spatial correlations for a sample of locations, which reduces the number of pairs used in the calculations. This is especially useful when the data set is large, in which case the number of pairs could quickly become prohibitive.</p>
+<p>A final feature of the correlogram in <code>GeoDa</code> is the ability to compute the spatial correlations for a sample of locations, which reduces the number of pairs used in the calculations. This is especially useful when the data set is large, in which case the number of pairs could quickly become prohibitive.</p>
 <p>In our example, this is not really necessary, since the default sample size of 1,000,000 that is used to generate the random sample exceeds the current total number of pairs in the actual data. Nevertheless, to illustrate the process, we go back and use <strong>20000</strong> for the maximum distance, with 10 bins, and check the <strong>Random Sample</strong> radio button, with <strong>10000</strong> for the sample size, as in
-Figure <a href="#fig:correlogramrandomoption">33</a>. To allow exact replication, we make sure that the
+Figure <a href="#fig:correlogramrandomoption">30</a>. To allow exact replication, we make sure that the
 <strong>Use specified seed</strong> option is checked.</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogramrandomoption"></span>
-<img src="pics5a/5_470_random.png" alt="Randomly sampled observation pairs" width="30%" />
+<img src="pics5a/5_470_random.png" alt="Randomly sampled observation pairs" width="20%" />
 <p class="caption">
-Figure 33: Randomly sampled observation pairs
+Figure 30: Randomly sampled observation pairs
 </p>
 </div>
-<p>In our example, the correlogram that results from the sampled observation pairs is not that different from the default case. As demonstrated in Figure <a href="#fig:correlogram4">34</a>, the first correlation is higher, at 0.513, but the range is again roughly 7000 feet. In general, the sampling approximation is quite good, as long as the selected sample size is not too small relative to the original data size.</p>
+<p>In our example, the correlogram that results from the sampled observation pairs is not that different from the default case. As demonstrated in Figure <a href="#fig:correlogram4">31</a>, the first correlation is higher, at 0.513, but the range is again roughly 7000 feet. In general, the sampling approximation is quite good, as long as the selected sample size is not too small relative to the original data size.</p>
 <div class="figure" style="text-align: center"><span id="fig:correlogram4"></span>
-<img src="pics5a/5_471_corr_w_random.png" alt="Correlogram for random observation pairs" width="80%" />
+<img src="pics5a/5_471_corr_w_random.png" alt="Correlogram for random observation pairs" width="60%" />
 <p class="caption">
-Figure 34: Correlogram for random observation pairs
+Figure 31: Correlogram for random observation pairs
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="smoothed-distance-scatter-plot" class="section level2 unnumbered" number="">
+<h2>Smoothed Distance Scatter Plot</h2>
+<div id="concept-2" class="section level3 unnumbered" number="">
+<h3>Concept</h3>
+<p>The smoothed distance scatter plot, outlined in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:20" role="doc-biblioref">2020</a>)</span>, provides yet another way
+to visualize global spatial autocorrelation. Instead of using a correlation measure, this approach
+employs the distance in (multi-)attribute space as a measure of dissimilarity. This is analogous in
+spirit to the approach taken for Geary’s c statistic. However, rather than using squared differences, the actual distance is employed,
+i.e., the square root of the squared distances. This also contrasts with the semi-variogram, where an estimate
+of the squared difference is used as well.</p>
+<p>For a single variable, the attribute distance between observations for z at i and j is:
+<span class="math display">\[v_{ij} = \sqrt{(z_i - z_j)^2}.\]</span>
+In contrast to the correlation measures considered so far, this concept of distance in attribute space
+can readily be extended to multiple variables:
+<span class="math display">\[v_{ij} = \sqrt{\sum_{h=1}^k (z_{ih} - z_{jh})^2},\]</span>
+where <span class="math inline">\(h\)</span> is an index for the variable under consideration, going from 1 to <span class="math inline">\(k\)</span>.</p>
+<p>The idea of the distance scatter plot is to use the attribute distance measure on the vertical axis, with the
+usual Euclidean distance between observations on the horizontal axis:
+<span class="math display">\[d_{ij} = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2},\]</span>
+with <span class="math inline">\(x, y\)</span> as the observation’s locational coordinates.</p>
+<p>For any but the smallest data sets, the resulting scatter plot will have too many points
+(for all pairs) to be very insightful. Therefore, smoothing the scatter plot is critical.</p>
+<p>In contrast to the approach taken in the correlogram, a local regression smoother
+is applied to the full scatter plot, and not to averages computed for distance bins.
+The resulting graph should increase with distance (Tobler’s law) up to a point where the
+<em>range</em> of interaction is reached. Beyond this distance, there is typically little relation
+between increases in Euclidean distance and increase in dissimilarity, suggesting a lack
+of spatial correlation.</p>
+<p>A slightly different pattern occurs when similar subregions are
+distributed over space, in which case the curve can show alternating positive and negative
+slopes. The negative slope does not necessarily violate Tobler’s law, but suggests the
+presence of negative spatial autocorrelation at a larger scale, where similar subregions are spread out in space, separated
+by dissimilar areas. As a result, once the distance separating observations is large enough to
+reach the next similar subregion, the dissimilarity goes down.</p>
+<p>Our main interest in this graph is to obtain an estimate of the range of interaction, i.e.,
+the point where the curve begins to flatten out (or turns negative).</p>
+</div>
+<div id="creating-a-smoothed-distance-scatter-plot" class="section level3 unnumbered" number="">
+<h3>Creating a smoothed distance scatter plot</h3>
+<p>The smoothed distance plot is invoked as the second option from the spatial correlogram icon shown
+in Figure <a href="#fig:correlogramicon">21</a>, or as <strong>Space &gt; Distance Scatter Plot</strong> from the menu.
+The following dialog allows for the selection of the variable(s) and the parameters for the analysis.
+In our illustration, we only select <strong>sale_price</strong>, since the sample data set does not contain any
+other meaningful variables. However, the extension to multiple variables is straightforward. The
+corresponding distance measure is the distance in multi-attribute space.</p>
+<div class="figure" style="text-align: center"><span id="fig:distdialog"></span>
+<img src="pics5a/22_distance_plot_dialog.png" alt="Distance scatter plot dialog" width="30%" />
+<p class="caption">
+Figure 32: Distance scatter plot dialog
+</p>
+</div>
+<p>The main parameters are the choice of distance metric, i.e., <strong>Euclidean</strong> (the default) or <strong>Manhattan</strong> distance for
+either the attributes (variables) and geographic distance.</p>
+<p>The other selections are the same as for the correlogram. The default distance range is 1/2 of the maximum distance,
+with the other built-in option as 1/2 the diameter of the bounding box. As before, this distance can be set manually
+as well. Finally, there is a choice between considering all observation pairs within the given distance range,
+or to use the same random sampling technique as for the spatial correlogram.</p>
+<p>With all the options set to their default values, clicking on <strong>Apply</strong> yields the plot shown in
+Figure <a href="#fig:distplot">33</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:distplot"></span>
+<img src="pics5a/22_default_dist_plot.png" alt="Default distance scatter plot" width="50%" />
+<p class="caption">
+Figure 33: Default distance scatter plot
+</p>
+</div>
+<p>We will adjust the plot using the options to bring out the overall pattern more clearly, but
+in general the plot increases until a distance of about mid-way between 10,000 and 15,000 feet, after which
+it flattens out and even decreases.</p>
+</div>
+<div id="options" class="section level3 unnumbered" number="">
+<h3>Options</h3>
+<div id="general-options" class="section level4 unnumbered" number="">
+<h4>General options</h4>
+<p>In the usual fashion, a right click (or control-click) on the distance scatter plot window brings
+up the options, shown in Figure <a href="#fig:distoptions">34</a>. Most of these are the same as for the spatial correlogram,
+and will not be further discussed.</p>
+<p>One option that is particularly useful in this context is to customize the scale on the vertical axis.
+The default result does not always allow finer changes in the plot to be revealed.</p>
+<div class="figure" style="text-align: center"><span id="fig:distoptions"></span>
+<img src="pics5a/22_distplot_options.png" alt="Distance scatter plot options" width="35%" />
+<p class="caption">
+Figure 34: Distance scatter plot options
+</p>
+</div>
+<p>In the option, we select <strong>Enable User Defined Value Range of Y-Axis</strong> and then use <strong>Adjust Value Range of Y-Axis</strong>
+to set the maximum to 1.60. The result is the graph shown in Figure <a href="#fig:distplot2">35</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:distplot2"></span>
+<img src="pics5a/22_distplot_2.png" alt="Distance scatter plot with adjusted y-axis" width="50%" />
+<p class="caption">
+Figure 35: Distance scatter plot with adjusted y-axis
+</p>
+</div>
+<p>With the maximum distance set to 15,000, we obtain a much subtler view of the change of attribute distance with
+geographical distance at smaller distances, as illustrated in Figure <a href="#fig:distplot3">36</a></p>
+<div class="figure" style="text-align: center"><span id="fig:distplot3"></span>
+<img src="pics5a/22_distplot_15.png" alt="Distance scatter plot with 15,000 maximum distance" width="50%" />
+<p class="caption">
+Figure 36: Distance scatter plot with 15,000 maximum distance
+</p>
+</div>
+</div>
+<div id="smoothing-options" class="section level4 unnumbered" number="">
+<h4>Smoothing options</h4>
+<p>The smoothing of the distance scatter plot is based on the local polynomial regression fitting by means of the LOESS algorithm.
+This operates in a slightly different way from the LOWESS approach, but is equally based on a moving fit over a subset
+of the observations, with observations that are further from the reference point downweighted.</p>
+<p>The parameters of the LOESS smooth are set as one of the options. The details are shown in
+Figure <a href="#fig:loessoptions">37</a>. As before, the most important parameter is the bandwidth, referred to as the <strong>span</strong>
+in the LOESS context. The default value of 0.75 is usually appropriate (a smaller value yields a spikier smooth, a larger value a more linear one). Other choices are the degree for the polynomial, typically parabolic (2). The estimation method is set in the <strong>Family</strong> parameter, with the default as <strong>gaussian</strong> (i.e., least squares fit). An alternative option is a
+more robust M estimator (<strong>symmetric</strong>).</p>
+<p>The default settings are appropriate in most circumstances.</p>
+<div class="figure" style="text-align: center"><span id="fig:loessoptions"></span>
+<img src="pics5a/22_loess_parameters.png" alt="LOESS smoothing options" width="35%" />
+<p class="caption">
+Figure 37: LOESS smoothing options
 </p>
 </div>
 <p><br></p>
 </div>
 </div>
 </div>
-<div id="references" class="section level2 unnumbered">
+<div id="references" class="section level2 unnumbered" number="">
 <h2>References</h2>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-Anselin:96">
 <p>Anselin, Luc. 1996. “The Moran Scatterplot as an ESDA Tool to Assess Local Instability in Spatial Association.” In <em>Spatial Analytical Perspectives on Gis in Environmental and Socio-Economic Sciences</em>, edited by Manfred Fischer, Henk Scholten, and David Unwin, 111–25. London: Taylor; Francis.</p>
 </div>
+<div id="ref-AnselinLi:20">
+<p>Anselin, Luc, and Xun Li. 2020. “Tobler’s Law in a Multivariate World.” <em>Geographical Analysis</em>. <a href="https://doi.org/10.111/gean.12237">https://doi.org/10.111/gean.12237</a>.</p>
+</div>
 <div id="ref-BjornstadFalck:01">
-<p>Bjornstad, Ottar N., and Wilhelm Falck. 2001. “Nonparametric Spatial Covariance Functions: Estimation and Testing.” <em>Environmental and Ecological Statistics</em> 8:53–70.</p>
+<p>Bjornstad, Ottar N., and Wilhelm Falck. 2001. “Nonparametric Spatial Covariance Functions: Estimation and Testing.” <em>Environmental and Ecological Statistics</em> 8: 53–70.</p>
 </div>
 <div id="ref-CliffOrd:73">
 <p>Cliff, Andrew, and J. Keith Ord. 1973. <em>Spatial Autocorrelation</em>. London: Pion.</p>
@@ -818,41 +969,38 @@ Figure 34: Correlogram for random observation pairs
 <p>———. 1981. <em>Spatial Processes: Models and Applications</em>. London: Pion.</p>
 </div>
 <div id="ref-HallPatil:94">
-<p>Hall, P., and P. Patil. 1994. “Properties of Nonparametric Estimators of Autocovariance for Stationary Random Fields.” <em>Probability Theory and Related Fields</em> 99:399–424.</p>
+<p>Hall, P., and P. Patil. 1994. “Properties of Nonparametric Estimators of Autocovariance for Stationary Random Fields.” <em>Probability Theory and Related Fields</em> 99: 399–424.</p>
 </div>
 <div id="ref-Moran:48">
-<p>Moran, Patrick A.P. 1948. “The Interpretation of Statistical Maps.” <em>Biometrika</em> 35:255–60.</p>
+<p>Moran, Patrick A. P. 1948. “The Interpretation of Statistical Maps.” <em>Biometrika</em> 35: 255–60.</p>
 </div>
 <div id="ref-MunasingheMorris:96">
-<p>Munasinghe, Rajika L., and Robert D. Morris. 1996. “Localization of Disease Clusters Using Regional Measures of Spatial Autocorrelation.” <em>Statistics in Medicine</em> 15:893–905.</p>
+<p>Munasinghe, Rajika L., and Robert D. Morris. 1996. “Localization of Disease Clusters Using Regional Measures of Spatial Autocorrelation.” <em>Statistics in Medicine</em> 15: 893–905.</p>
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>If the project was started without the right project file, then
-at the very least, the queen contiguity weights need to be created that are based on the Thiessen
-polygons (previously <strong>clev_sls_154_core_q</strong>).<a href="#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p>See <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:73">1973</a>)</span> or <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:81">1981</a>)</span> for an extensive technical discussion.<a href="#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>In a bivariate linear regression <span class="math inline">\(y = \alpha + \beta x\)</span>, the least squares estimate for <span class="math inline">\(\beta\)</span> is <span class="math inline">\(\sum_i (x_i \times y_i) / \sum_i x_i^2\)</span>. In the Moran scatter plot, the role of y is taken by the spatial lag <span class="math inline">\(\sum_j w_{ij} z_j\)</span>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>The implementation of the random numbers
-in GeoDa takes advantage of multi-threading, a built-in form of parallel computing.<a href="#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p>This is the number of software
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>See <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:73" role="doc-biblioref">1973</a>)</span> or <span class="citation">Cliff and Ord (<a href="#ref-CliffOrd:81" role="doc-biblioref">1981</a>)</span> for an extensive technical discussion.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>In a bivariate linear regression <span class="math inline">\(y = \alpha + \beta x\)</span>, the least squares estimate for <span class="math inline">\(\beta\)</span> is <span class="math inline">\(\sum_i (x_i \times y_i) / \sum_i x_i^2\)</span>. In the Moran scatter plot, the role of y is taken by the spatial lag <span class="math inline">\(\sum_j w_{ij} z_j\)</span>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>The implementation of the random numbers
+in <code>GeoDa</code> takes advantage of multi-threading, a built-in form of parallel computing.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>This is the number of software
 multithreading cores, typically twice the number of physical cores (the example shown is on a
 machine with 4 CPU hardware cores, which yield 8 multi-threading cores, the number
-listed).<a href="#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>The <strong>STANDARDIZED (Z)</strong> option is the usual standardization, based on subtracting
+listed).<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>The <strong>STANDARDIZED (Z)</strong> option is the usual standardization, based on subtracting
 the mean and dividing by the standard deviation. The Calculator also contains an alternative,
 based on the standardized mean absolute deviation, <strong>STANDARDIZED (MAD)</strong>. This operation
-is not used in the Moran scatter plot.<a href="#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>See also <span class="citation">Hall and Patil (<a href="#ref-HallPatil:94">1994</a>)</span> for a technical discussion
-of the general principle.<a href="#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>Since the estimated
+is not used in the Moran scatter plot.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>See also <span class="citation">Hall and Patil (<a href="#ref-HallPatil:94" role="doc-biblioref">1994</a>)</span> for a technical discussion
+of the general principle.<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Since the estimated
 number of pairs is computed on the fly, as the maximum distance is adjusted by means
 of the slider, it is only an approximation. The actual number of pairs used in the
-calcuation of the pairwise correlations is given in the status bar of the correlogram.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+calcuation of the pairwise correlations is given in the status bar of the correlogram.<a href="#fnref8" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
@@ -862,6 +1010,9 @@ calcuation of the pairwise correlations is given in the status bar of the correl
 </footer>
 
 </section>
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

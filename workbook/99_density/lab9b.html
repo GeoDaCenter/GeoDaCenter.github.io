@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Luc Anselin" />
+
+
+<title>Density-Based Clustering Methods</title>
+
+<script src="lab9b_files/header-attrs-2.3/header-attrs.js"></script>
+<link href="lab9b_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab9b_files/highlightjs-9.12.0/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	    .shadowfilter {
+	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	        filter: url(shadow.svg#drop-shadow);
+	     }
+	     .intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;}
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h3.subtitle {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Density-Based Clustering Methods</h1>
+<h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+<h4 class="date">10/30/2020 (latest update)</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#objectives">Objectives</a>
+<ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#getting-started">Getting started</a></li>
+</ul></li>
+<li><a href="#heat-map">Heat Map</a>
+<ul>
+<li><a href="#principle">Principle</a></li>
+<li><a href="#implementation">Implementation</a></li>
+</ul></li>
+<li><a href="#dbscan">DBSCAN</a>
+<ul>
+<li><a href="#principle-1">Principle</a></li>
+<li><a href="#implementation-1">Implementation</a>
+<ul>
+<li><a href="#border-points-and-minimum-cluster-size">Border points and minimum cluster size</a></li>
+<li><a href="#sensitivity-analysis">Sensitivity analysis</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#dbscan-1">DBSCAN*</a>
+<ul>
+<li><a href="#principle-2">Principle</a></li>
+<li><a href="#implementation-2">Implementation</a>
+<ul>
+<li><a href="#exploring-the-dendrogram">Exploring the dendrogram</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#hdbscan">HDBSCAN</a>
+<ul>
+<li><a href="#principle-3">Principle</a>
+<ul>
+<li><a href="#persistence">Persistence</a></li>
+<li><a href="#cluster-membership">Cluster membership</a></li>
+<li><a href="#outlier-detection">Outlier detection</a></li>
+</ul></li>
+<li><a href="#implementation-3">Implementation</a>
+<ul>
+<li><a href="#exploring-the-condensed-tree">Exploring the condensed tree</a></li>
+<li><a href="#cluster-membership-1">Cluster membership</a></li>
+<li><a href="#outliers">Outliers</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#appendix">Appendix</a>
+<ul>
+<li><a href="#dbscan-worked-example">DBSCAN worked example</a></li>
+<li><a href="#hdbscan-worked-example">HDBSCAN worked example</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered" number="">
+<h2>Introduction</h2>
+<p>In this chapter, we consider density based clustering methods. These approaches look in the data for high density subregions of arbitrary
+shape,
+separated by low-density regions. Alternatively, the regions can be interpreted as
+modes in the spatial distribution over the support of the observations.</p>
+<p>These methods are situated in between the local spatial autocorrelation statistics and the regionalization methods
+we consider in later chapters. They pertain primarily to point patterns, but can also be extended to a full
+multivariate setting. Even though they show many similarities with spatially constrained clustering methods,
+they are not quite the same, in that they do not necessarily yield a complete partitioning of the data.
+Therefore, they are considered separately, even though they are included under the <strong>Cluster Methods</strong> in <code>GeoDa</code>.</p>
+<p>Attempts to discover high density regions in the data distribution go back to the classic paper on mode analysis by <span class="citation">Wishart (<a href="#ref-Wishart:69" role="doc-biblioref">1969</a>)</span>,
+and its refinement in <span class="citation">Hartigan (<a href="#ref-Hartigan:75" role="doc-biblioref">1975</a>)</span>. In the literature, these methods are also referred to as <em>bump hunting</em>, i.e., looking for
+bumps (high regions) in the data distribution.</p>
+<p>In this chapter, we will focus on the application of density-based clustering methods to the geographic location of
+points, but they are generalizable to locations in high-dimensional attribute space as well.</p>
+<p>An important concept in this respect is that of a <em>level set</em> associated with a given density level <span class="math inline">\(\lambda\)</span>:
+<span class="math display">\[L(\lambda; p) = \{ x | p(x) \gt \lambda\},\]</span>
+i.e., the collection of data points <span class="math inline">\(x\)</span> for which the probability exceeds the given threshold. A subset of such points that contains the maximum number of points that are <em>connected</em> (so-called connected components) is called a <em>density-contour cluster</em> of the density function. A
+<em>density-contour tree</em> is then a tree formed of nested clusters that are obtained by varying the level <span class="math inline">\(\lambda\)</span> <span class="citation">(Hartigan <a href="#ref-Hartigan:75" role="doc-biblioref">1975</a>; Müller and Sawitzki <a href="#ref-MullerSawitzki:91" role="doc-biblioref">1991</a>; Stuetzle and Nugent <a href="#ref-StuetzleNugent:10" role="doc-biblioref">2010</a>)</span>.</p>
+<p>To visualize this concept, consider the data distribution represented as a three-dimensional surface. Then, a level
+set consists of those data points that are above a horizontal plane at <span class="math inline">\(\lambda\)</span>, e.g., as islands sticking out of the ocean. As <span class="math inline">\(\lambda\)</span> increases, the level set
+becomes smaller. In our island analogy, this corresponds to a rising ocean level (the islands become smaller and may even disappear). In the other direction, as <span class="math inline">\(\lambda\)</span> decreases, or the ocean level goes down, connections between islands (a land bridge) may become visible so that they no longer appear separated, but rather as a single entity.</p>
+<p>As mentioned, in contrast to the classic cluster methods discussed in later methods, density-based methods do not
+necessarily yield a complete regionalization, and some observations (points)
+may not be assigned to any cluster. In turn, some of these points can be interpreted
+as <em>outliers</em>, which is of main interest in certain applications.
+In a sense, the density-based cluster methods are similar in spirit to the local spatial autocorrelation statistics, although
+most of them are not formulated as hypothesis tests.</p>
+<p>We consider four approaches. We begin with a simple heat map as a uniform density kernel centered on each location.
+The logic behind this graph is similar to that of Openshaw’s
+<em>geographical analysis machine</em> <span class="citation">(Openshaw et al. <a href="#ref-Openshawetal:87" role="doc-biblioref">1987</a>)</span> and the approach
+taken in spatial
+scan statistics <span class="citation">(Kulldorff <a href="#ref-Kulldorff:97" role="doc-biblioref">1997</a>)</span>, i.e., a simple count of the points within the given radius.</p>
+<p>The next methods are all related to DBSCAN <span class="citation">(Ester et al. <a href="#ref-Esteretal:96" role="doc-biblioref">1996</a>)</span>, or <em>Density Based
+Spatial Clustering of Applications with Noise</em>. We consider both the original DBSCAN,
+as well as its <em>improved</em> version, referred to as DBSCAN*,
+and its <em>Hierarchical</em> version, referred to as HDBSCAN (or, sometimes, HDBSCAN*)
+<span class="citation">(Campello, Moulavi, and Sander <a href="#ref-Campelloetal:13" role="doc-biblioref">2013</a>; Campello et al. <a href="#ref-Campelloetal:15" role="doc-biblioref">2015</a>)</span>.</p>
+<p>The methods are illustrated here using the
+point locations of liquor stores in Chicago (in 2015), but they can pertain to other
+geometric forms as well, such as clustering of polygons <span class="citation">(Sander et al. <a href="#ref-Sanderetal:98" role="doc-biblioref">1998</a>)</span>. In general, they can
+also be applied to any set of points in multi-attribute space (i.e., non-geographical),
+although that use is perhaps less common.</p>
+<div id="objectives" class="section level3 unnumbered" number="">
+<h3>Objectives</h3>
+<ul>
+<li><p>Interpret the results of a uniform kernel heat map</p></li>
+<li><p>Understand the principles behind DBSCAN</p></li>
+<li><p>Set the parameters for a DBSCAN approach</p></li>
+<li><p>Interpret the clustering results yielded by DBSCAN</p></li>
+<li><p>Understand the difference between DBSCAN and DBSCAN*</p></li>
+<li><p>Analyze the dendrogram generated by DBSCAN*</p></li>
+<li><p>Understand the logic underlying HDBSCAN</p></li>
+<li><p>Interpret the condensed tree and clustering results yielded by HDBSCAN</p></li>
+<li><p>Understand soft clustering and outlier identification in HDBSCAN</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered" number="">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Map option &gt; Heat Map</li>
+<li>Clusters &gt; DBscan</li>
+<li>Clusters &gt; HDBscan</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started" class="section level3 unnumbered" number="">
+<h3>Getting started</h3>
+<p>We will use the <strong>liq_Chicago</strong> shape file with 571 point locations of liquor stores
+in the city of Chicago during 2015. This data set is included as one of the sample
+data sets, named <a href="https://geodacenter.github.io/data-and-lab//liq_chicago/">liquor stores</a>. The point locations
+were scraped from Google maps and converted to the Illinois State Plane projection.</p>
+<p>In Figure <a href="#fig:liquorbase">1</a>, the points are shown against a backdrop of the Chicago community area boundaries.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:liquorbase"></span>
+<img src="pics9b/00_liquorpoints.png" alt="Chicago liquor store locations (2015)" width="60%" />
+<p class="caption">
+Figure 1: Chicago liquor store locations (2015)
+</p>
+</div>
+</div>
+</div>
+<div id="heat-map" class="section level2 unnumbered" number="">
+<h2>Heat Map</h2>
+<div id="principle" class="section level3 unnumbered" number="">
+<h3>Principle</h3>
+<p>The heat map as implemented in <code>GeoDa</code> is a simple uniform kernel for a given bandwidth. A circle with radius equal
+to the bandwidth is centered on each point in turn, and the number of points within the radius are counted. The
+density of the points is reflected in the color shading.</p>
+<p>This is the same principle as underlying the <em>Geographical Analysis Machine</em> or GAM of <span class="citation">Openshaw et al. (<a href="#ref-Openshawetal:87" role="doc-biblioref">1987</a>)</span>, where the
+uniform kernel is computed for a range of bandwidths to identify high intensity <em>clusters</em>. In our
+implementation, no significance
+is assigned, and the heat map is used primarily as a visual device to highlight differences in the density
+of the points.</p>
+</div>
+<div id="implementation" class="section level3 unnumbered" number="">
+<h3>Implementation</h3>
+<p>The heat map is not invoked from the cluster menu, but as an option on a point map. Right click to bring up
+the list of options and select <strong>Heat Map &gt; Specify Bandwidth</strong> as in Figure <a href="#fig:heatband">2</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:heatband"></span>
+<img src="pics9b/55_heatmap1.png" alt="Specify bandwidth for heat map" width="40%" />
+<p class="caption">
+Figure 2: Specify bandwidth for heat map
+</p>
+</div>
+<p>This brings up the default heat map, created for a bandwidth that corresponds with the max-min distance, i.e.,
+the largest of the nearest neighbor distances. This ensures that each point has at least one neighbor. The
+corresponding distance is shown in the dialog, as in Figure <a href="#fig:heatdefault">3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:heatdefault"></span>
+<img src="pics9b/55_default_heatmap.png" alt="Default settings for heat map" width="40%" />
+<p class="caption">
+Figure 3: Default settings for heat map
+</p>
+</div>
+<p>The default setting is almost never very informative, especially when the points are distributed unevenly. For
+example, after setting the bandwidth to 3000, a much more interesting pattern is revealed, with a greater
+concentration of points in the near north side of the city, shown in Figure <a href="#fig:heat3000">4</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:heat3000"></span>
+<img src="pics9b/55_heatmap_3000.png" alt="Heat map with bandwidth of 3000" width="30%" />
+<p class="caption">
+Figure 4: Heat map with bandwidth of 3000
+</p>
+</div>
+<p>In addition to the bandwidth, the heat map also has the option to select a variable other than the x-y coordinates
+to compute the kernel. This is selected in <strong>Core Distance</strong>. We do not pursue this further here.</p>
+<p>Finally, the heat map has all the usual customization options, such as changing the fill color, the
+outline color, or the transparency.</p>
+</div>
+</div>
+<div id="dbscan" class="section level2 unnumbered" number="">
+<h2>DBSCAN</h2>
+<div id="principle-1" class="section level3 unnumbered" number="">
+<h3>Principle</h3>
+<p>The DBSCAN algorithm was originally outlined in <span class="citation">Ester et al. (<a href="#ref-Esteretal:96" role="doc-biblioref">1996</a>)</span> and
+<span class="citation">Sander et al. (<a href="#ref-Sanderetal:98" role="doc-biblioref">1998</a>)</span>, and was more recently elaborated upon in <span class="citation">Gan and Tao (<a href="#ref-GanTao:17" role="doc-biblioref">2017</a>)</span>
+and <span class="citation">Schubert et al. (<a href="#ref-Schubertetal:17" role="doc-biblioref">2017</a>)</span>. Its logic is similar to that just outlined
+for the uniform kernel. In essence, the method again consists of
+placing circles of a given radius on each point in turn, and identifying
+those groupings of points where a lot of locations are within each
+others range.</p>
+<p>In order to quantify this, DBSCAN introduces a special terminology. Points are classified
+as <em>Core</em>, <em>Border</em> or <em>Noise</em> depending on how many other points are within a critical
+distance band, the so-called <em>Eps neighborhood</em>. To visualize this, Figure <a href="#fig:dbscanterms">5</a>
+contains nine points, each with a circle centered on it with radius equal to <em>Eps</em>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
+Note that in
+DBSCAN, any distance metric can be used, not just Euclidean distance as in this illustration.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscanterms"></span>
+<img src="pics9b/00_dbscan.png" alt="DBSCAN Core, Border and Noise points" width="40%" />
+<p class="caption">
+Figure 5: DBSCAN Core, Border and Noise points
+</p>
+</div>
+<p>A second critical concept is the number of points that need to be included in the distance band
+in order for the spatial distribution of points to be considered as dense. This is the so-called
+minimum number of points, or <em>MinPts</em> criterion. In our example, we take that to be four. Note, that
+in contrast to the convention we used before in defining k-nearest neighbors, the <em>MinPts</em> criterion
+includes the point itself. So a <em>MinPts</em> = 4 corresponds to a point having 3 neighbors within the <em>Eps</em> radius
+.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>In Figure <a href="#fig:dbscanterms">5</a>, all red
+points with associated red circles have at least four points within the critical range (including the central point). They are labeled
+as <em>Core</em> points and are included in the cluster (point C and the other red points). The points in magenta (labeled B), with associated magenta circles have some points within
+the distance range (one, to be precise), but not sufficient to meet the <em>MinPts</em> criterion. They
+are potential <em>Border</em> points and may or may not be included in the cluster. Finally, the blue point (labeled N) with associated blue circle does not have
+any points within the critical range and is labeled <em>Noise</em>. Such a point cannot become part of any cluster.</p>
+<p>A point is <em>directly density reachable</em> from another point if it belongs to the <em>Eps</em> neighborhood of that point and
+is one of <em>MinPts</em> neighbors of that point.
+This is not a symmetric relationship.</p>
+<p>In our example, any red point is directly density reachable from at least
+one other red point. In turn that point is within the critical range from the original point. However, for points
+B, the relationship only holds in one direction, as shown by the arrow. They are directly density reachable from a red point, but since
+the B points only have one neighbor, their range does not meet the minimum criterion. Therefore, the neighbor is <em>not</em>
+directly density reachable from B. A chain of points in which each point is directly density reachable from the previous one is called
+<em>density reachable</em>. In order to be included, each point in the chain has to have at least <em>MinPts</em> neighbors and could serve as the core
+of a cluster. All our red points are density reachable.</p>
+<p>In order to decide whether a border point should be included in a cluster, the concept of <em>density connected</em> is introduced.
+Two points are density connected if they are both density reachable from a third point. In our example, the points B are density
+connected to the other core points through their neighbor, which is itself directly density reachable from the red points in its
+neighborhood.</p>
+<p>In DBSCAN, a cluster is then defined as collection of points that are density connected and maximize the density reachability.
+The algorithm starts by randomly selecting a point and determining whether it can be classified as <em>Core</em> – with at least <em>MinPts</em>
+in its <em>Eps</em> neighborhood – or rather as <em>Border</em> or <em>Noise</em>. A <em>Border</em> point can later be included in a cluster if it is
+<em>density connected</em> to another <em>Core</em> point. It is then assigned the cluster label of the core point and no longer further considered.
+One implication of this aspect of the algorithm is that once a <em>Border</em> point is assigned a cluster label, it cannot be assigned
+to a different cluster, even though it might actually be closer to the corresponding core point. In a later version, labeled
+DBSCAN* (considered in the next section), the notion of border points is dropped, and only <em>Core</em> points are considered to form clusters.</p>
+<p>The algorithm systematically moves through all the points in the data set
+and repeats the process. The search
+for neighbors is facilitated by using an efficient spatial data structure, such as an R* tree. When two clusters are density
+connected, they are merged. The process continues until all points have been evaluated.</p>
+<p>Two critical parameters in the DBSCAN algorithm are the distance range and the minimum number of neighbors. In addition,
+sometimes a tolerance for noise points is specified as well. The latter
+constitute zones of low density that are not deemed to be interesting.</p>
+<p>In order to avoid any noise points, the critical distance
+must be large enough so that every point is at least density connected. An analogy is the specification of a max-min distance
+band in the creation of spatial weights, which ensures that each point has at least one neighbor. In practice, this is typically not desirable, but in some implementations a maximum
+percentage of noise points can be set to avoid too many low density areas.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p><span class="citation">Ester et al. (<a href="#ref-Esteretal:96" role="doc-biblioref">1996</a>)</span> recommend that <em>MinPts</em> be set at 4 and the
+critical distance adjusted accordingly to make sure that sufficient observations can be classified as <em>Core</em>. As in other cluster
+methods, some trial and error it typically necessary. Finding a proper value for <em>Eps</em> is often considered a major
+drawback of the DBSCAN algorithm.</p>
+<p>An illustration of the detailed steps and logic of the algorithm is provided by a worked example in the <a href="#appendix">Appendix</a>.</p>
+</div>
+<div id="implementation-1" class="section level3 unnumbered" number="">
+<h3>Implementation</h3>
+<p>DBSCAN is invoked from the cluster toolbar icon as the first item in the density cluster group, or
+from the menu as <strong>Clusters &gt; DBScan </strong>, as shown in Figure <a href="#fig:dbscanoption">6</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscanoption"></span>
+<img src="pics9b/22_dbscan.png" alt="DBscan option" width="10%" />
+<p class="caption">
+Figure 6: DBscan option
+</p>
+</div>
+<p>The usual cluster interface appears, listing the variables in the data table and the various
+parameters to be selected, as in Figure <a href="#fig:dbscanvars">7</a>. In our example, we only have <strong>&lt;X-Centroids&gt;</strong>
+and <strong>&lt;Y-Centroids&gt;</strong>, since only the location information of the stores has been included. The default
+is to have the <strong>Method</strong> selected as <strong>DBScan</strong> (DBSCAN* is uses the same interface and is discussed next).
+In addition, we make sure that the <strong>Transformation</strong> is set to <strong>Raw</strong>, in order to use the original coordinates,
+without any transformations.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscanvars"></span>
+<img src="pics9b/55_dbscan_settings.png" alt="DBSCAN variable selection" width="30%" />
+<p class="caption">
+Figure 7: DBSCAN variable selection
+</p>
+</div>
+<p>As seen in Figure <a href="#fig:dbscanvars">7</a>, the default uses the largest nearest neighbor distance of 8179 (feet) such that
+all observations are connected (note that this is the same distance as the default bandwidth in
+Figure <a href="#fig:heatdefault">3</a>). We can check in the weights manager dialog that this is indeed the distance
+that would be the default to create a fully connected distance band spatial weight. This yields a median number of neighbors
+of 30, with a minimum of 1 and a maximum of 79. Needless to say, the default <strong>Min Points</strong> value of 4 is not
+very meaningful in this context.</p>
+<p>The resulting cluster map is shown in Figure <a href="#fig:dbscandefault">8</a>. It contains two clusters, one very large
+one with 561 observations, and a small one with 7 observations. In addition, three points are classified as <em>Noise</em>.
+The <strong>Summary</strong> panel contains the usual information on cluster centers
+and sum of squares, which is not very relevant in this example. There is also a button for <strong>Dendrogram</strong>, which
+is only used for <strong>DBSCAN*</strong> and is empty in the current example.</p>
+<p>We assess more meaningful parameter values in the
+next set of examples.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscandefault"></span>
+<img src="pics9b/44_liq_default.png" alt="DBSCAN cluster map for default settings" width="60%" />
+<p class="caption">
+Figure 8: DBSCAN cluster map for default settings
+</p>
+</div>
+<div id="border-points-and-minimum-cluster-size" class="section level4 unnumbered" number="">
+<h4>Border points and minimum cluster size</h4>
+<p>The DBSCAN algorithm depends critically on the choice of two parameters. One is the <strong>Distance Threshold</strong>, or <em>Eps</em>.
+The other is the
+minimum number of neighbors within this epsilon distance band that an observation must have in order to
+be considered a <em>Core</em> point, i.e., the <strong>Min Points</strong> parameter. Each cluster must contain at least one core point.</p>
+<p>As <em>Eps</em> decreases, more and more points will become disconnected and thus will be automatically categorized as <em>Noise</em>.
+For example, for a distance band of 3000 (as in the heat map in Figure <a href="#fig:heat3000">4</a>), we can visualize the connectivity graph of the corresponding distance band
+spatial weights, as in Figure <a href="#fig:dbscanconn">9</a>. This yields 37 unconnected points with neighbors
+ranging from 0 to 30, with a median of 4.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscanconn"></span>
+<img src="pics9b/55_conn_d3000.png" alt="Connectivity graph for d=3000" width="30%" />
+<p class="caption">
+Figure 9: Connectivity graph for d=3000
+</p>
+</div>
+<p>With the distance set to 3000 and leaving Min Points at 4, we obtain the result for DBSCAN shown in Figure <a href="#fig:dbscand3000">10</a>.
+There are 19 clusters identified, ranging in size from 233 to 4 observations, with 122 points designated as noise.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscand3000"></span>
+<img src="pics9b/55_dbscan_3000_4.png" alt="DBSCAN cluster map with d=3000 and MinPts = 4 " width="60%" />
+<p class="caption">
+Figure 10: DBSCAN cluster map with d=3000 and MinPts = 4
+</p>
+</div>
+<p>In rare instances, a cluster may be identified that has less than the <strong>Min Points</strong> specified. This is
+an artifact of
+the treatment of <em>Border</em> points in the algorithm. Since border points are assigned to the first cluster
+to which they are connected, they are no longer available for inclusion in a later cluster. Say a later
+core point is connected to the same border point, which is counted as part of the <strong>Min Points</strong> for the
+new core. However, since it is already assigned to another cluster, it is no longer available and the
+new cluster seems to have fewer members than the specified <strong>Min Points</strong>. This particular feature
+of the DBSCAN algorithm can lead to
+counterintuitive results, although this rarely happens. We illustrate such an instance below.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+</div>
+<div id="sensitivity-analysis" class="section level4 unnumbered" number="">
+<h4>Sensitivity analysis</h4>
+<p>We further assess the sensitivity of the cluster results to the two main parameters by increasing <strong>Min Points</strong> to
+10, while keeping the distance at 3000. The corresponding cluster map is shown in Figure <a href="#fig:dbscand300010">11</a>.
+The number of clusters is drastically reduced to 6, ranging in size from 110 to 12. In all, 310 points (more than half)
+are designated as noise.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscand300010"></span>
+<img src="pics9b/55_dbscan_3000_10.png" alt="DBSCAN cluster map with d=3000 and MinPts = 10 " width="60%" />
+<p class="caption">
+Figure 11: DBSCAN cluster map with d=3000 and MinPts = 10
+</p>
+</div>
+<p>Finally, we decrease the distance to 1000, while keeping <strong>Min Points</strong> at 4. In Figure <a href="#fig:dbscand10004">12</a>, we now find 21 clusters, with the largest
+one consisting of 12 observations, whereas the smallest one has only 3 observations. A majority of the points (456) are
+not assigned to any cluster.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscand10004"></span>
+<img src="pics9b/55_dbscan_1000_4.png" alt="DBSCAN cluster map with d=1000 and MinPts = 4 " width="60%" />
+<p class="caption">
+Figure 12: DBSCAN cluster map with d=1000 and MinPts = 4
+</p>
+</div>
+<p>Note that this is an instance where a cluster (cluster 21) has <em>less than</em> <strong>Min Points</strong> observations assigned to it.
+Consider the close up view in Figure <a href="#fig:dbscanborder">13</a>, which gives the connectivity structure that corresponds
+to a distance band of 1000. Cluster 21 consists of points with <strong>id</strong> 501, 72 and 807. Point 501 is clearly a <em>Core</em> point,
+since it is connected to 72 and 807, as well as to 710, so it has three neighbors and meets the <strong>Min Points</strong> criterion of 4.
+Both 72 and 807 are assigned to 501 as <em>Border</em> points, since they do not meet the minimum connectivity requirement (each only has two neighbors). The same is the case for 710, but since 710 is already assigned to a different cluster (cluster 2),
+it cannot be reassigned to cluster 21. As a result, the latter only has 3 observations.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscanborder"></span>
+<img src="pics9b/55_bordercase.png" alt="Border points in DBSCAN clusters" width="30%" />
+<p class="caption">
+Figure 13: Border points in DBSCAN clusters
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="dbscan-1" class="section level2 unnumbered" number="">
+<h2>DBSCAN*</h2>
+<div id="principle-2" class="section level3 unnumbered" number="">
+<h3>Principle</h3>
+<p>As we have seen, one of the potentially confusing aspects of DBSCAN is the inclusion of so-called
+<em>Border</em> points in a cluster. The DBSCAN* algorithm, outlined in <span class="citation">Campello, Moulavi, and Sander (<a href="#ref-Campelloetal:13" role="doc-biblioref">2013</a>)</span> and further
+elaborated upon in <span class="citation">Campello et al. (<a href="#ref-Campelloetal:15" role="doc-biblioref">2015</a>)</span>, does away
+with the notion of border points, and only considers <em>Core</em> and <em>Noise</em> points.</p>
+<p>Similar to the approach in DBSCAN, a <em>Core</em> object is defined with respect to a distance threshold (<span class="math inline">\(\epsilon\)</span>) as the
+center of a neighborhood that contains at least <em>Min Points</em> other observations. All non-core
+objects are classified as <em>Noise</em> (i.e., they do not have any other point within the distance range <span class="math inline">\(\epsilon\)</span>).
+Two observations are <span class="math inline">\(\epsilon\)</span>-<em>reachable</em> if each is part of the <span class="math inline">\(\epsilon\)</span>-neighborhood of the other.
+<em>Core</em> points are <em>density-connected</em> when they are part of a chain of <span class="math inline">\(\epsilon\)</span>-reachable points.
+A <em>cluster</em> is then any largest (i.e., all eligible points are included) subset of density
+connected pairs. In other words, a cluster consists of a chain of pairs of points that belong to
+each others <span class="math inline">\(\epsilon\)</span>-neighborhoods.</p>
+<p>An alternative way to view <span class="math inline">\(\epsilon\)</span>-reachability is to consider the minimum radius such that two points
+satisfy this criterion for a given <em>Min Points</em>, or k, where k = <em>Min Points</em> - 1 (more precisely, whereas <em>Min Points</em>
+includes the point itself, k does not). For k &gt; 1 (or, Min Points &gt; 2), this is the so-called
+<em>mutual reachability distance</em>, the maximum between the distance needed to include the required number
+of neighbors for each point (the k-nearest neighbor distance, called <em>core distance</em> in HDBSCAN, <span class="math inline">\(d_{core}\)</span>, see below)
+and the actual inter-point distance. This has the effect of <em>pushing</em>
+points apart that may be close together, but otherwise are in a region of low density, so
+that their respective k-nearest neighbor distances are (much) larger than the distance between them. Formally,
+the concept of
+<em>mutual reachability distance</em> between points A and B is defined as:
+<span class="math display">\[d_{mr}(A,B) = max[d_{core}(A),d_{core}(B),d_{AB}].\]</span>
+The mutual reachibility distance between the points forms the basis to construct a <em>minimum spanning tree</em> (MST) from
+which a hierarchy of clusters can be obtained. The hiearchy follows from applying cuts to the edges in the MST in
+decreasing order of core distance.</p>
+<p>Conceptually, this means that one starts by applying a cut between two edges that
+are the furthest apart. This either results in a single point splitting off (a <em>Noise</em> point), or in the single cluster
+to split into two (two subtrees of the MST). Subsequent cuts are applied for smaller and smaller distances. Decreasing the critical distance
+is the same as increasing the density of points, referred to as <span class="math inline">\(\lambda\)</span> (see below for a formal definition).</p>
+<p>As <span class="citation">Campello et al. (<a href="#ref-Campelloetal:15" role="doc-biblioref">2015</a>)</span> show, applying cuts to the MST with decreasing distance (or increasing density)
+is equivalent to applying cuts to a dendrogram obtained from single linkage hierarchical clustering using the mutual
+reachability distance as the dissimilarity matrix.</p>
+<p>DBSCAN* derives a set of <em>flat</em> clusters by applying a <em>cut</em> to the dendrogram associated with a given
+distance threshold. The main differences with the original DBSCAN is that <em>border</em> points are no longer
+considered and the clustering process is visualized by means of a dendrogram. However, in all other respects it is similar in spirit,
+and it still suffers from the need to select a distance threshold.</p>
+<p>HDBSCAN (or HDBSCAN*) improves upon this by eliminating the arbitrariness of the threshold. This is considered next.</p>
+</div>
+<div id="implementation-2" class="section level3 unnumbered" number="">
+<h3>Implementation</h3>
+<p>DBSCAN* is invoked from the cluster menu as <strong>Clusters &gt; DBSCAN</strong> in the same way as DBSCAN, but by
+selecting the <strong>Method</strong> as <strong>DBSCAN* </strong>. This also activates the <strong>Min Cluster Size</strong> option, set to equal to
+<strong>Min Points</strong> by default. The latter is initialized at <strong>4</strong>. As shown in Figure <a href="#fig:dbscanstar">14</a>, the starting
+point for the <strong>Distance Threshold</strong> is again the distance that ensures that each point has at least one neighbor. The
+value is in feet, which follows from using <strong>Raw</strong> for the <strong>Transformation</strong>, to keep the original coordinate units.
+Since this max-min value is typically not a very informative distance, we will change it to <strong>3000</strong>. All the other
+settings are the same as before.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscanstar"></span>
+<img src="pics9b/66_dbscan*.png" alt="DBSCAN* parameters" width="30%" />
+<p class="caption">
+Figure 14: DBSCAN* parameters
+</p>
+</div>
+<p>After invoking <strong>Run</strong>, the dendrogram is populated, as shown in Figure <a href="#fig:dbstardendro1">15</a>. The horizontal scale
+shows the mutual reachability distance, and the <em>cut</em> line (dashed red line) is positioned at 3000. This yields
+12 clusters, color coded in the graph. As was the case for classical hierarchical clustering, the dendrogram supports
+linking and brushing (not illustrated here).</p>
+<div class="figure" style="text-align: center"><span id="fig:dbstardendro1"></span>
+<img src="pics9b/66_dbscanstar_dendrogram.png" alt="DBSCAN* dendrogram for d=3000 and MinPts=4" width="50%" />
+<p class="caption">
+Figure 15: DBSCAN* dendrogram for d=3000 and MinPts=4
+</p>
+</div>
+<p><strong>Save/Show Map</strong> saves the cluster classification to the data table and renders the corresponding cluster map,
+as in Figure <a href="#fig:dbstarmap1">16</a>. The 12 clusters range in size from 221 to 4, with 194 observations classified
+as noise. They follow the same general pattern
+as for DBSCAN in Figure <a href="#fig:dbscand3000">10</a>, but seem more compact. Recall, the latter yielded 19 clusters ranging
+in size from 233 to 4, with 122 noise points.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbstarmap1"></span>
+<img src="pics9b/66_dbscan_star_map.png" alt="DBSCAN* cluster map with d=3000 and MinPts=4" width="60%" />
+<p class="caption">
+Figure 16: DBSCAN* cluster map with d=3000 and MinPts=4
+</p>
+</div>
+<p>In addition to the cluster map, the <strong>Summary</strong> panel contains the usual measures of fit, which are not that
+meaningful in this context.</p>
+<div id="exploring-the-dendrogram" class="section level4 unnumbered" number="">
+<h4>Exploring the dendrogram</h4>
+<p>As long as <strong>Min Points</strong> (and the minimum cluster size) remains the same, we can explore the dendrogram for
+different threshold distance cut values. This can be accomplished by moving the cut line in the graph, or
+by typing a different value in the <strong>Distance Threshold</strong> box. For example, in Figure <a href="#fig:dbstardendro2">17</a>,
+the cut line has been moved to 2000. There are still 12 clusters, but their makeup is quite different from before.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbstardendro2"></span>
+<img src="pics9b/66_dbscan_star_dendro_2000.png" alt="DBSCAN* dendrogram for d=2000 and MinPts=4" width="50%" />
+<p class="caption">
+Figure 17: DBSCAN* dendrogram for d=2000 and MinPts=4
+</p>
+</div>
+<p>As we see in the cluster map in Figure <a href="#fig:dbstarmap2">18</a>, the clusters are now much smaller, ranging in size
+from 74 to 4, with 334 noise points. More interestingly, it seems like the large cluster in the northern part of
+the city (cluster 1 in Figure <a href="#fig:dbstarmap1">16</a>) is being decomposed into a number of smaller sub-clusters.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbstarmap2"></span>
+<img src="pics9b/66_dbstar_map_2000.png" alt="DBSCAN* cluster map with d=2000 and MinPts=4" width="60%" />
+<p class="caption">
+Figure 18: DBSCAN* cluster map with d=2000 and MinPts=4
+</p>
+</div>
+<p>Note that for a different value of <strong>Min Points</strong>, the dendrogram needs to be reconstructed, since this critically
+affects the mutual reachability distance (through the new core distance).</p>
+<p>The main advantage of DBSCAN* over DBSCAN is a much more straightforward treatment of <em>Border</em> points (they are all classified as <em>Noise</em>), and an easy visualization of the sensitivity to the threshold distance by means of a
+dendrogram. However, just as for DBSCAN, the need to select a fixed threshold distance (to obtain a <em>flat</em> cluster) remains
+an important drawback.</p>
+</div>
+</div>
+</div>
+<div id="hdbscan" class="section level2 unnumbered" number="">
+<h2>HDBSCAN</h2>
+<div id="principle-3" class="section level3 unnumbered" number="">
+<h3>Principle</h3>
+<p>HDBSCAN was originally proposed by <span class="citation">Campello, Moulavi, and Sander (<a href="#ref-Campelloetal:13" role="doc-biblioref">2013</a>)</span>, and more recently elaborated upon by <span class="citation">Campello et al. (<a href="#ref-Campelloetal:15" role="doc-biblioref">2015</a>)</span> and
+<span class="citation">McInnes and Healy (<a href="#ref-McInnesHealy:17" role="doc-biblioref">2017</a>)</span>.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> As in DBSCAN*, the algorithm implements the notion of <em>mutual reachability distance</em>. However,
+rather than applying a fixed value of <span class="math inline">\(\epsilon\)</span> or <span class="math inline">\(\lambda\)</span> to produce a level set,
+a hierarchical process is implemented that finds an optimal set of clusters. This allows for different levels of
+<span class="math inline">\(\lambda\)</span> for each cluster. In order to accomplish this, the concept of cluster
+<em>stability</em> or <em>persistence</em> is introduced. Optimal clusters are selected based on their <em>relative excess of mass</em> value,
+which is a measure of their persistence.</p>
+<p>HDBSCAN keeps the notion of <em>Min Points</em> from DBSCAN, but introduces the concept of <em>core distance</em> of an object (<span class="math inline">\(d_{core}\)</span>)
+as the distance between an object and its k-nearest neighbor, where k = Min Points - 1 (in other words, as for DBSCAN, the
+object itself is included in <em>Min Points</em>).</p>
+<p>Intuitively, for the same k, the core distance will be much smaller for
+densely distributed points than for sparse distributions. Associated with the core distance for each object <span class="math inline">\(p\)</span> is
+an estimate of <em>density</em> or <span class="math inline">\(\lambda_p\)</span> as the inverse of the core distance. As the core distance becomes smaller,
+<span class="math inline">\(\lambda\)</span> increases, indicating a higher density of points.</p>
+<p>As in DBSCAN*, the mutual reachability distance is employed to construct a minimum spanning tree, or, rather,
+the associated dendrogram from single linkage clustering. In constrast to DBSCAN*, there is not a global
+cut applied to the dendrogram that uses the same value of <span class="math inline">\(\lambda\)</span> for all clusters. Instead, HDBSCAN derives
+an optimal solution, based on the notion of <em>persistence</em>
+or <em>stability</em> of the cluster. A detailed illustration of these concepts and their implementation in the
+algorithm is given in the <a href="#appendix">Appendix</a>. Next, we consider each of these concepts more formally.</p>
+<div id="persistence" class="section level4 unnumbered" number="">
+<h4>Persistence</h4>
+<p>As the value of <span class="math inline">\(\lambda\)</span> increases (or, equivalently, the core distance becomes smaller), larger clusters break into subclusters (our analogy with rising ocean levels), or shed <em>Noise</em> points. Note that a <em>Noise</em> point dropping out is not
+considered a split of the cluster. The cluster remains, but just becomes smaller.</p>
+<p>The objective is to identify the most prominent clusters
+as those that continue to exist longest. This is formalized through the concept of <em>excess of mass</em> <span class="citation">(Müller and Sawitzki <a href="#ref-MullerSawitzki:91" role="doc-biblioref">1991</a>)</span>, or
+the total density contained in a cluster after it is formed, i.e., after a level <span class="math inline">\(\lambda_{min}\)</span> is reached.</p>
+<p>In our island analogy, <span class="math inline">\(\lambda_{min}\)</span> would correspond to the ocean level where the land bridge is first covered by water, such that the islands are no longer connected and
+appear as separate entities. The excess of mass would be the volume of the island above that ocean level, as illustrated in
+Figure <a href="#fig:excessmass">19</a>. At the highest density (p in the Figure), two separate clusters are shown on the left, which appear at p = 0.10. With lower density, they are united into a single cluster, which appears around 0.03. At that level, there is an additional smaller cluster as well. With density below this level, there are no separate clusters.</p>
+<div class="figure" style="text-align: center"><span id="fig:excessmass"></span>
+<img src="pics9b/66_excess_of_mass.png" alt="Excess of mass [Source: @StuetzleNugent:10]" width="30%" />
+<p class="caption">
+Figure 19: Excess of mass <span class="citation">(Source: Stuetzle and Nugent <a href="#ref-StuetzleNugent:10" role="doc-biblioref">2010</a>)</span>
+</p>
+</div>
+<p>More formally, a notion of <em>relative excess of mass</em> of a cluster <span class="math inline">\(C_i\)</span> that appears at level <span class="math inline">\(\lambda_{min}(C_i)\)</span> is
+used to define the <em>stability</em> or <em>persistence</em> of a cluster <span class="math inline">\(C_i\)</span> as:
+<span class="math display">\[S(C_i) = \sum_{x_j \in C_i} (\lambda_{max}(x_j,C_i) - \lambda_{min} C_i),\]</span>
+where <span class="math inline">\(\lambda_{min} C_i\)</span> is the minimum density level at which <span class="math inline">\(C_i\)</span> exists, and <span class="math inline">\(\lambda_{max}(x_j,C_i)\)</span> is the
+density level after which point <span class="math inline">\(x_j\)</span> no longer belongs to the cluster.</p>
+<p>In Figure <a href="#fig:excessmass">19</a>, we see how the cluster on the left side comes into being at p = 0.03. At p = 0.10,
+it splits into two new clusters. So, for the large cluster, <span class="math inline">\(\lambda_{min}\)</span>, or the point where the cluster comes
+into being is 0.03. The cluster stops existing (it splits) for <span class="math inline">\(\lambda_{max}\)</span> = 0.10. In turn, p = 0.10 represents
+<span class="math inline">\(\lambda_{min}\)</span> for the two smaller clusters.</p>
+<p>A <em>condensed dendrogram</em> is obtained by evaluating the stability of each cluster relative to the clusters into which it splits.
+If the sum of the stability of the two descendants is larger than the stability of the parent node, then the
+two children are kept as clusters and the parent is discarded. Alternatively, if the stability of the parent is larger
+than that of the children, the children and all their descendants are discarded. In other words, the large cluster is
+kept and all the smaller clusters that descend from it are eliminated. Here again, a split that sheds a single point
+is not considered a cluster split, but only a shrinking of the original cluster (which retains its label). Only <em>true</em> splits that result in subclusters that contain at least two observations are considered in the simplification of the tree. Sometimes a further constraint is imposed on the minimum size of a cluster, which would pertain to the splits as well.
+As suggested in <span class="citation">Campello et al. (<a href="#ref-Campelloetal:15" role="doc-biblioref">2015</a>)</span>, a simple solution is to set the minimum cluster size equal to <em>Min Points</em>.</p>
+<p>For example, in the illustration in Figure <a href="#fig:excessmass">19</a>, the area in the left cluster between 0.03 and 0.10 is
+larger than the sum of the areas in the smaller clusters obtained at 0.10. As a result, the latter would not be
+considered as separate clusters.</p>
+<p>This yields a much simpler tree and an identification of <em>clusters</em> that maximize the sum of the individual cluster
+stabilities.</p>
+<p>The C++ software implementation of HDBSCAN in <code>GeoDa</code> is based on the Python code published in <span class="citation">McInnes, Healy, and Astels (<a href="#ref-McInnesetal:17" role="doc-biblioref">2017</a>)</span>.</p>
+</div>
+<div id="cluster-membership" class="section level4 unnumbered" number="">
+<h4>Cluster membership</h4>
+<p>The first distance for which a point can become part of a cluster is <span class="math inline">\(d_{p,core}\)</span>, i.e., the k-nearest neighbor
+distance that satisfies the <em>Min Points</em> criterion. The inverse of this distance is an estimate of density associated
+with that entry point, or
+<span class="math inline">\(\lambda_p = 1 / d_{p,core}\)</span>. Once a point is part of a cluster, it remains there until the threshold distance
+becomes small enough such that all the points in the cluster become <em>Noise</em>. This smallest distance, <span class="math inline">\(d_{min}\)</span>, corresponds with the largest density,
+or, <span class="math inline">\(\lambda_{max} = 1/d_{min}\)</span>. The <em>strength</em> of the cluster membership of point <span class="math inline">\(p\)</span> can now be expressed as the
+ratio of the smallest core distance for the cluster to the core distance for point p, <span class="math inline">\(d_{min} / d_{p,core}\)</span>, or,
+equivalently, as the ratio of the density that corresponds to the point’s core distance to the maximum density,
+or, <span class="math inline">\(\lambda_p / \lambda_{max}\)</span>.</p>
+<p>This ratio gives a measure of the degree to which a point <em>belongs</em> to a cluster. For example, for points that
+meet the <span class="math inline">\(d_{min}\)</span> thresholds, i.e., observations in the highest density region, the ratio will be 1. On the other
+hand, for <em>Noise</em> points, the ratio is set to 0. Points that are part of the cluster, but do not meet the
+strictest density criterion will have a value smaller than 1. The higher the ratio, the stronger the membership
+of the point in the corresponding cluster.</p>
+<p>This ratio can be exploited as the basis of a <em>soft</em> or <em>fuzzy</em> clustering approach, in which the degree of membership
+in a cluster is considered. This is beyond our scope. Nevertheless, the ratio, or <em>probability</em> of cluster
+membership, remains a useful indicator of the extent to which the cluster is concentrated in high density points.</p>
+</div>
+<div id="outlier-detection" class="section level4 unnumbered" number="">
+<h4>Outlier detection</h4>
+<p>An interest related to the identification of density clusters is to find points that do <em>not</em> belong to
+a cluster and are therefore classified as <em>outliers</em>. Parametric approaches are typically based on some function
+of the spread of the underlying distribution, such as the well-known 3-sigma rule for a normal density.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<p>An alternative approach is based on non-parametric principles. Specifically, the distance of an observation to
+the nearest cluster can be considered as a criterion to classify outliers. We already saw a form of this
+with the <em>Noise</em> points in DBSCAN, i.e., points that are <em>too far</em> from other points (given a neighborhood
+radius, or <em>Eps</em>) to be considered members of a cluster.</p>
+<p><span class="citation">Campello et al. (<a href="#ref-Campelloetal:15" role="doc-biblioref">2015</a>)</span> proposed a post-processing of the HDBSCAN results to characterize the degree to which
+an observation can be considered an outlier. The method is referred to as GLOSH, which stands for
+<em>Global-Local Outlier Scores from Hierarchies</em>.</p>
+<p>The logic underlying the outlier detection is closely related to the notion of cluster membership just discussed.
+In fact, the probability of being an outlier can be seen to be the complement of the cluster membership.</p>
+<p>The rationale behind the index is to compare the lowest density threshold for which the point is attached to
+a cluster (<span class="math inline">\(\lambda_p\)</span> in the previous discussion) and the highest density threshold <span class="math inline">\(\lambda_{max}\)</span>. The
+GLOSH index for a point <span class="math inline">\(p\)</span> is then:
+<span class="math display">\[\mbox{GLOSH}_p = \frac{\lambda_{max} - \lambda_p}{\lambda_{max}},\]</span>
+or, equivalently, <span class="math inline">\(1 - \lambda_p / \lambda_{max}\)</span>, the complement of the cluster membership for
+all but <em>Noise</em> points. For the latter, since the cluster membership was set to zero, the
+actual <span class="math inline">\(\lambda_{max}\)</span> needs to be used. Given the inverse relationship between density and
+distance threshold, an alternative formulation of the outlier index is as:
+<span class="math display">\[\mbox{GLOSH}_p = 1 - \frac{d_{min}}{d_{p,core}}.\]</span></p>
+</div>
+</div>
+<div id="implementation-3" class="section level3 unnumbered" number="">
+<h3>Implementation</h3>
+<p>HDBSCAN is invoked from the Menu or the cluster toolbar icon as the second item in
+the density clusters subgroup, <strong>Clusters &gt; HDBSCAN</strong>, as in Figure <a href="#fig:hdbscanoption">20</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscanoption"></span>
+<img src="pics9b/66_hdbscan_option.png" alt="HDBSCAN option" width="10%" />
+<p class="caption">
+Figure 20: HDBSCAN option
+</p>
+</div>
+<p>The overall setup is very similar to that for DBSCAN, except that there is no threshold distance. The two main parameters
+are <strong>Min Cluster Size</strong> and <strong>Min Points</strong>. These are typically set to the same value, but there may be
+instances where a larger value for <strong>Min Cluster Size</strong> is desired. The <strong>Min Points</strong> parameter drives the
+computation of the core distance for each point, which forms the basis for the construction of the minimum
+spanning tree. As before, we make sure that the <strong>Transformation</strong> is set to <strong>Raw</strong>, as in Figure <a href="#fig:hdbscaninput">21</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscaninput"></span>
+<img src="pics9b/66_hdbscan_input.png" alt="HDBSCAN input parameters" width="30%" />
+<p class="caption">
+Figure 21: HDBSCAN input parameters
+</p>
+</div>
+<p>The first item that appears after selecting <strong>Run</strong> is the dendrogram representation of the minimum spanning tree,
+shown in Figure <a href="#fig:hdbscandendro">22</a>.
+This is mostly for the sake of completeness, and to allow for comparisons with HDBSCAN*. In and of itself, the raw dendrogram is
+not of that much interest. One interesting feature of the dendrogram is that it supports linking
+and brushing, which makes it possible to explore what branches in the tree subsets of points or clusters belong to (selected in one of the maps). The reverse is supported as well, so that branches in the tree can be selected and their counterparts
+identified in other maps and graphs.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscandendro"></span>
+<img src="pics9b/66_hdbscan_dendro.png" alt="HDBSCAN dendrogram, Min Points = 10" width="50%" />
+<p class="caption">
+Figure 22: HDBSCAN dendrogram, Min Points = 10
+</p>
+</div>
+<p>In addition to the dendrogram, a cluster map is generated, with the cluster categories saved to the data table.
+In our example, as seen in Figure <a href="#fig:hdbscanmap">23</a>, there are five clusters, ranging in size from 181 to 13
+observations. There are 221 noise points. The overall pattern is quite distinct from the results of DBSCAN and DBSCAN*,
+showing more clustering in the southern part of the city. For example, compare to the cluster map for DBSCAN
+with d = 3000 and MinPts = 10, shown in Figure <a href="#fig:dbscand300010">11</a>, where the six clusters are all located in
+the nothern part of the city.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscanmap"></span>
+<img src="pics9b/66_hdbscan_clustermap.png" alt="HDBSCAN cluster map, Min Points = 10" width="60%" />
+<p class="caption">
+Figure 23: HDBSCAN cluster map, Min Points = 10
+</p>
+</div>
+<p>As for the other clustering methods, the usual measures of fit are contained in the <strong>Summary</strong> panel.</p>
+<div id="exploring-the-condensed-tree" class="section level4 unnumbered" number="">
+<h4>Exploring the condensed tree</h4>
+<p>An important and distinct feature of the HDBSCAN method is the visualization of cluster persistence (or stability)
+in the <em>condensed tree</em> or condensed dendrogram. This is invoked by means of the middle button in the results panel.
+The tree visualizes the relative excess of mass that results in the identification of clusters for different values
+of <span class="math inline">\(\lambda\)</span>. Starting at the root (top), with <span class="math inline">\(\lambda\)</span> = 0, the left hand axis shows how increasing values of
+<span class="math inline">\(\lambda\)</span> (going down) results in branching of the tree. Note how the shaded areas are not rectangles, but they
+gradually taper off, as single points are shedded from the main cluster.</p>
+<p>The optimal clusters are identified by an oval with the same color
+as the cluster label in the cluster map. The shading of the tree branches corresponds to the number of points contained
+in the branch, with lighter suggesting more points.</p>
+<p>In our application, the corresponding tree is shown in Figure <a href="#fig:hdbscancondens">24</a>. We see how some clusters correspond
+with leaf nodes, whereas others occur at higher stages in the tree. For example, cluster 1, the left-most cluster in
+the tree takes precedence over its descendants. In contrast, the second cluster from left (cluster 5) is the last node of
+the branch, which
+exists until all its elements become singletons (or, are smaller than the minimum cluster size).</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscancondens"></span>
+<img src="pics9b/66_hdbscan_condensed.png" alt="HDBSCAN condensed dendrogram, Min Points = 10" width="50%" />
+<p class="caption">
+Figure 24: HDBSCAN condensed dendrogram, Min Points = 10
+</p>
+</div>
+<p>The condensed tree supports linking and brushing as well as a limited form of zoom operations. The latter may be necessary for larger
+data sets, where the detail is difficult to distinguish in the overall tree. Zooming is implemented as a specialized
+mouse scrolling operation, slightly different in each system. For example, on a MacBook track pad, this works by moving
+two fingers up or down. There is no panning, but the focus of the zoom can be moved to specific subsets of the graph.</p>
+<p>Figure <a href="#fig:hdbscanzoom">25</a> illustrates this feature. All points belonging to cluster 1 are selected
+in the cluster map, and the corresponding observations are highlighted in red in the zoomed in condensed tree.
+While some observations are shedded in the core part of the cluster (the area surrounded by the oval), we
+see how many only disappear from the cluster at lower nodes in the tree. However, the relative excess of mass
+of those lower branches was dominated by the one of the parent node, hence its selection as the <em>cluster</em>.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscanzoom"></span>
+<img src="pics9b/66_hdbscan_zoom.png" alt="HDBSCAN zooming in on the condensed dendrogram, Min Points = 10" width="60%" />
+<p class="caption">
+Figure 25: HDBSCAN zooming in on the condensed dendrogram, Min Points = 10
+</p>
+</div>
+</div>
+<div id="cluster-membership-1" class="section level4 unnumbered" number="">
+<h4>Cluster membership</h4>
+<p>The <strong>Save</strong> button provides the option to add the core distance, cluster membership probability and outlier
+index (GLOSH) to the data table. The interface, shown in Figure <a href="#fig:hdbscansave">26</a>, suggests default names
+for the variables, but in most instances one will want to customize those.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscansave"></span>
+<img src="pics9b/66_save_results.png" alt="HDBSCAN save results option" width="25%" />
+<p class="caption">
+Figure 26: HDBSCAN save results option
+</p>
+</div>
+<p>The membership probability provides some useful insight into the strength of the clusters. For example,
+in Figure <a href="#fig:hdbscancluser4">27</a>, the 23 observations that belong to cluster 4 have been selected in
+the data table (and moved to the top). The column labeled <strong>HDB_PVAL</strong> lists the probabilities.
+The column labeled <strong>HDB_CORE</strong> shows the core distance for each point. Clearly, points are grouped in
+the same cluster with a range of different core distances, corresponding to different values of <span class="math inline">\(\lambda\)</span>.</p>
+<p>Ten of the 23 points have a probability of 1.0, which means that they meet the strictest <span class="math inline">\(\lambda\)</span> criterion for the
+cluster. The other values range from 0.961 to 0.786, suggesting a quite strong degree of overall clustering.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscancluser4"></span>
+<img src="pics9b/66_hdbscan_cluster4.png" alt="HDBSCAN cluster 4 membership strength" width="50%" />
+<p class="caption">
+Figure 27: HDBSCAN cluster 4 membership strength
+</p>
+</div>
+<p>The probabilities can be visualized in any map in order to further visualize the strength of cluster membership
+for a particular cluster. For example, in Figure <a href="#fig:hdbscanprobmap">28</a>, the points in cluster 4 are selected
+in the cluster map on the left, and their probability values are visualized in a natural breaks map on the right.
+This clearly illustrates how points further from the core of the cluster have lower probabilities.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscanprobmap"></span>
+<img src="pics9b/66_hdbscan_probmap.png" alt="HDBSCAN cluster 4 membership strength map" width="100%" />
+<p class="caption">
+Figure 28: HDBSCAN cluster 4 membership strength map
+</p>
+</div>
+</div>
+<div id="outliers" class="section level4 unnumbered" number="">
+<h4>Outliers</h4>
+<p>A final characteristic of the HDBSCAN output is the GLOSH outlier index, contained in the data table as
+the column <strong>HDB_OUT</strong>. In Figure <a href="#fig:hdbscanoutliers">29</a>, this column has been sorted in descending order,
+showing the points with <strong>id</strong> 185 and 630 with an outlier index of respectively 0.661 and 0.614. These observations
+correspond to two points in the very southern part of the city and they appear quite separated from the
+nearest cluster (cluster 3, the southernmost cluster). The two points are surrounded by other <em>Noise</em> points and
+are far removed from cluster 3.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbscanoutliers"></span>
+<img src="pics9b/66_outliers.png" alt="HDBSCAN outliers" width="60%" />
+<p class="caption">
+Figure 29: HDBSCAN outliers
+</p>
+</div>
+<p>As any other variable in the data table, the outlier index can be mapped to provide further visual interpretation of these
+data patterns.</p>
+</div>
+</div>
+</div>
+<div id="appendix" class="section level2 unnumbered" number="">
+<h2>Appendix</h2>
+<div id="dbscan-worked-example" class="section level4 unnumbered" number="">
+<h4>DBSCAN worked example</h4>
+<p>In order to illustrate the logic behind the DBSCAN algorithm, we consider a toy example of 9 points,
+the coordinates of which are listed in Figure <a href="#fig:dbpointdata">30</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbpointdata"></span>
+<img src="pics9b/11_db_data.png" alt="Toy point data set" width="20%" />
+<p class="caption">
+Figure 30: Toy point data set
+</p>
+</div>
+<p>We can use <code>GeoDa</code> to create this as a point layer and use the distance weights functionality to
+obtain the connectivity structure that ensures that each point has at least one neighbor. From the
+weights characteristics, we find that for a distance of 29.1548, the number of neighbors ranges from
+1 to 5. The matching connectivity graph is shown in Figure <a href="#fig:dbpointsall">31</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbpointsall"></span>
+<img src="pics9b/11_db_points_example.png" alt="Connectivity graph for full connectivity" width="40%" />
+<p class="caption">
+Figure 31: Connectivity graph for full connectivity
+</p>
+</div>
+<p>To illustrate the concept of <em>Noise</em> points (i.e., unconnected points for a given critical distance), we
+lower the distance cut-off to 20. Now, we have one isolate (point 3) and the maximum number of neighbors
+drops to 3. The corresponding connectivity graph is shown in Figure <a href="#fig:dbpoints20">32</a> with the
+matching weights in Figure <a href="#fig:dbpointsw20">33</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbpoints20"></span>
+<img src="pics9b/11_db_points_20.png" alt="Connectivity graph for Eps = 20" width="40%" />
+<p class="caption">
+Figure 32: Connectivity graph for Eps = 20
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:dbpointsw20"></span>
+<img src="pics9b/11_db_points_weights20.png" alt="Spatial Distance Weights for Eps = 20" width="20%" />
+<p class="caption">
+Figure 33: Spatial Distance Weights for Eps = 20
+</p>
+</div>
+<p>With <em>MinPts</em> as 4 (i.e., 3 neighbors for a core point), we can now move through each point, one at a time. Starting with point 1, we find that it only has one neighbor
+(point 2) and thus does not meet the <em>MinPts</em> criterion. Therefore, we label it as <em>Noise</em> for now. Next,
+we move to point 2. It has 3 neighbors, meaning that it meets the <em>Core</em> criterion and it is labeled cluster 1.
+All its neighbors, i.e., 1, 4 and 5 are also labeled cluster 1 and are no longer considered. Note that this
+changes the status of point 1 from <em>Noise</em> to <em>Border</em>. We next move
+to point 3, which has no neighbors and is therefore labeled <em>Noise</em>.</p>
+<p>We move to point 6, which is a neighbor of point 4, which belongs to cluster 1. Since 6 is therefore <em>density connected</em>,
+it is added to cluster 1 (as a <em>Border</em> point). The same holds for point 7, which is similarly added to cluster 1.</p>
+<p>Point 8 has two neighbors, which is insufficient to reach the <em>MinPts</em> criterion. Therefore, it is labeled <em>Noise</em>, since
+point 7 is not a <em>Core</em> point. Finally, point 9 has only point 8 as neighbor and is therefore also labeled <em>Noise</em>.</p>
+<p>In the end, we have one cluster consisting of 6 points, shown as the dark blue points in Figure <a href="#fig:dbpointsdb20">34</a>.
+The remaining points are <em>Noise</em>, labeled as light blue in the Figure. They are not part of any cluster.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbpointsdb20"></span>
+<img src="pics9b/11_db_clust_20_4.png" alt="DBSCAN clusters for Eps = 20 and MinPts = 4" width="40%" />
+<p class="caption">
+Figure 34: DBSCAN clusters for Eps = 20 and MinPts = 4
+</p>
+</div>
+<p>We illustrate a more interesting outcome by lowering <em>Eps</em> to 15 with <em>MinPts</em> at 2. As a result, the points are
+less connected, shown in the connectivity graph in Figure <a href="#fig:dbpoints15">35</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbpoints15"></span>
+<img src="pics9b/11_db_points_15.png" alt="Connectivity graph for Eps = 15" width="40%" />
+<p class="caption">
+Figure 35: Connectivity graph for Eps = 15
+</p>
+</div>
+<p>Using the same logic as before, we find points 1, 2, and 3 to be unconnected. Point 4 is connected to 5 and 6, which
+meets the <em>MinPts</em> criterion and results in all three points being labeled cluster 1. Point 7 is again <em>Noise</em>,
+but points 8 and 9 are connected to each other, yielding cluster 2. The outcome is summarized in Figure <a href="#fig:dbpointsdb15">36</a>,
+which shows four <em>Noise</em> points, a cluster consisting of 4, 5, and 6, and a cluster consisting of points 8 and 9.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbpointsdb15"></span>
+<img src="pics9b/11_db_clust_15_2.png" alt="DBSCAN clusters for Eps = 15 and MinPts = 2" width="40%" />
+<p class="caption">
+Figure 36: DBSCAN clusters for Eps = 15 and MinPts = 2
+</p>
+</div>
+<p>This example illustrates the sensitivity of the results to the parameters <em>Eps</em> and <em>MinPts</em>.</p>
+</div>
+<div id="hdbscan-worked-example" class="section level4 unnumbered" number="">
+<h4>HDBSCAN worked example</h4>
+<p>We apply the HDBSCAN algorithm to the same nine points from Figure <a href="#fig:dbpointdata">30</a>. We set
+<strong>Min Cluster Size</strong> and <strong>Min Points</strong> to 2. As a result, the <em>mutual reachability distance</em> is the
+same as the original distance, given in Figure <a href="#fig:hdbdistance">37</a>. Since the core distance for each
+point is its nearest neighbor distance (smallest distance to have one neighbor), the maximum of the
+two core distances and the actual distance will always be the actual distance. While this avoids one
+of the innovations of the algorithm, it keeps our illustration simple.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbdistance"></span>
+<img src="pics9b/33_distance_matrix.png" alt="Distance matrix" width="65%" />
+<p class="caption">
+Figure 37: Distance matrix
+</p>
+</div>
+<p>The distance matrix can be used to find the <em>core distance</em> for each point as its nearest neighbor distance
+(the smallest element in a row of the distance matrix), as well as the associated <span class="math inline">\(\lambda_p\)</span> value. The latter is
+simply the inverse of the core distance. These results are shown in Figure <a href="#fig:hdblambda">38</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdblambda"></span>
+<img src="pics9b/33_core_distance.png" alt="Core distance and lambda for each point" width="20%" />
+<p class="caption">
+Figure 38: Core distance and lambda for each point
+</p>
+</div>
+<p>The distance matrix also forms the basis for a minimum spanning tree (MST), which is essential for the <em>hierarchical</em> nature
+of the algorithm. The MST is shown in Figure <a href="#fig:hdbmst">39</a>, with both the node identifiers and the edge weights listed (the
+distance between the two nodes the edge connects).</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbmst"></span>
+<img src="pics9b/33_mst.png" alt="Minimum Spanning Tree" width="40%" />
+<p class="caption">
+Figure 39: Minimum Spanning Tree
+</p>
+</div>
+<p>One interpretation of the HDBSCAN algorithm is to view it as a succession of <em>cuts</em> in the MST. These cuts
+start with the highest edge weight and move through all the edges in decreasing order of the weight.
+The first cut is illustrated in Figure <a href="#fig:hdbmst1">40</a>, where 3 is separated from 5 as a result of
+its edge weight of 29.15.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbmst1"></span>
+<img src="pics9b/33_mst0.png" alt="Minimum Spanning Tree - first cut" width="40%" />
+<p class="caption">
+Figure 40: Minimum Spanning Tree - first cut
+</p>
+</div>
+<p>The next cut is a bit more problematic in our example, since both 1-2, 5-7, and 7-8 are separated by the
+same distance of 18.03. This is an artifact of our simple example, and is much less likely to occur in
+practice. We proceed with a cut
+7 and 8, as shown in Figure <a href="#fig:hdbmst2">41</a>. A different cut will yield a different solution for this
+example. We ignore that aspect in our illustration.</p>
+<p>The
+process of selecting cuts continues until all the points are singletons and constitute their own cluster. Formally, this is equivalent to carrying
+out single linkage hierarchical clustering based on the mutual reachability distance matrix.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbmst2"></span>
+<img src="pics9b/33_mst1.png" alt="Minimum Spanning Tree - second cut" width="40%" />
+<p class="caption">
+Figure 41: Minimum Spanning Tree - second cut
+</p>
+</div>
+<p>An alternative visualization of the pruning process is in the form of a tree, shown in Figure <a href="#fig:hdbtree">42</a>.
+In the <em>root</em> node, all the points form a single cluster. The corresponding <span class="math inline">\(\lambda\)</span> level is set to zero. As
+<span class="math inline">\(\lambda\)</span> increases, or, equivalently, the <em>core distance</em> decreases, points fall out of the cluster, or the cluster
+splits into two subclusters. This process continues until each point is a <em>leaf</em> in the tree (i.e., it is by itself).</p>
+<p>We can think of this process using our island analogy. At first all points constitute a large island. As the
+ocean level rises, i.e., <span class="math inline">\(\lambda\)</span> increases, points on the island become submerged, dropping out of the cluster.
+Alternatively, two <em>hills</em> on the island connected by a valley become separate as the ocean submerges the valley.</p>
+<p>This process is formally represented in the tree in Figure <a href="#fig:hdbtree">42</a>. As <span class="math inline">\(\lambda\)</span> reaches 0.034 (for a
+distance of 29.15), point 3 gets removed and becomes a leaf (in our island analogy, it becomes submerged). In the <code>GeoDa</code> implementation of HDBSCAN, singletons
+are not considered to be valid clusters, so we move on to node C1, which becomes the new root, with <span class="math inline">\(\lambda\)</span> reset
+to zero.</p>
+<p>The next meaningful cut is for <span class="math inline">\(\lambda = 0.055\)</span>, or a distance of 18.03. As we see from Figure <a href="#fig:hdbmst2">41</a>,
+this creates two <em>clusters</em>, one consisting of the six points 1-7, but without 3, say C2, and the other
+consisting of 8 and 9, C3. The process continues for increasing values of <span class="math inline">\(\lambda\)</span>, although in each case
+the split involves a singleton and no further valid clusters are obtained. We consider this more closely when
+we examine the <em>stability</em> of the clusters.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbtree"></span>
+<img src="pics9b/33_tree2.png" alt="Pruning the MST" width="60%" />
+<p class="caption">
+Figure 42: Pruning the MST
+</p>
+</div>
+<p>First, note how the <span class="math inline">\(\lambda_p\)</span> values in Figure <a href="#fig:hdblambda">38</a> correspond to the <span class="math inline">\(\lambda\)</span> value where
+the corresponding point <em>falls out</em> of the clusters in the tree in Figure <a href="#fig:hdbtree">42</a>.
+For example, for point 7, this happens for <span class="math inline">\(\lambda\)</span> = 0.055, or a core distance of 18.03. The stability or
+persistence of each cluster is defined as the sum over all the points of the difference between <span class="math inline">\(\lambda_p\)</span> and
+<span class="math inline">\(\lambda_{min}\)</span>, where <span class="math inline">\(\lambda_{min}\)</span> is the <span class="math inline">\(\lambda\)</span> level where the cluster forms.</p>
+<p>To make this concrete, consider cluster C3, which is formed (i.e., splits off from C1) for <span class="math inline">\(\lambda\)</span> = 0.055463.
+Therefore, the value of <span class="math inline">\(\lambda_{min}\)</span> for C3 is 0.055463. The value of <span class="math inline">\(\lambda_p\)</span> for points 8 and 9 is
+0.066667, corresponding with a distance of 15.0 at which they become singletons (or leaves in the tree).
+The contribution of each point to the persistence of the cluster C3 is thus 0.066667 - 0.055463 = 0.011204,
+as shown in Figure <a href="#fig:hdbstability">43</a>. The total value of the persistence of cluster C3 is therefore
+0.022408. Similar calculations yield the persistence of cluster C2 as 0.041400. For the sake of completeness,
+we also include the results for cluster C1, although those are ignored by the algorithm, since C1 is reset
+as <em>root</em> of the tree.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbstability"></span>
+<img src="pics9b/33_stability.png" alt="Cluster stability" width="30%" />
+<p class="caption">
+Figure 43: Cluster stability
+</p>
+</div>
+<p>The <em>condensed</em> tree only includes C1 (as root), C2 and C3. Since the persistence of a singleton is zero,
+and C4 includes one less point than C2, but with the same value for <span class="math inline">\(\lambda_{min}\)</span>, the sum of the
+persistence of C4 and 7 is less than the value for C2, hence the condensed tree stops there.
+This allows for two different values of <span class="math inline">\(\lambda\)</span> to play a role in the clustering mechanism, rather
+than the single value that needs to be set a priori in DBSCAN.</p>
+<p>To compare, consider the clusters that would result from setting <span class="math inline">\(\lambda\)</span> = 0.055, or a core distance
+of 18.03, using the logic of
+DBSCAN* (no border points). From Figure <a href="#fig:hdbmst">39</a>, we see that this would result in a grouping
+of 8-9 and 2-4-5-6, with 1, 3 and 7 as noise points. In our tree, that would be represented by C3 and C5.
+The main contribution of HDBScan is that the optimal level of <span class="math inline">\(\lambda\)</span> is determined by the algorithm
+itself, and is adjusted in function of the structure of the data, rather than having a one size fits all that
+needs to be specified beforehand.</p>
+<p>The corresponding cluster map for our toy example is shown in Figure <a href="#fig:hdbclustermap">44</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbclustermap"></span>
+<img src="pics9b/33_clustermaptoy.png" alt="HDBScan cluster map - toy example" width="40%" />
+<p class="caption">
+Figure 44: HDBScan cluster map - toy example
+</p>
+</div>
+<p>A final set of outputs from the algorithm pertains to soft clustering and the identification of outliers.
+<code>GeoDa</code> saves these values for each point, together with the associated core distance, as shown in
+Figure <a href="#fig:hdbresults">45</a>. The core distance is the same as in Figure <a href="#fig:hdblambda">38</a>. The
+<em>probability</em> or strength for each point to be part of a cluster is computed as the ratio
+of <span class="math inline">\(\lambda_p\)</span> to <span class="math inline">\(\lambda_{max}\)</span>, with <span class="math inline">\(\lambda_{max}\)</span> as the largest value of the individual <span class="math inline">\(\lambda_p\)</span>.
+Equivalently, this is the ratio of the smallest core distance over the core distance of point p.
+This is listed as <strong>HDB_PVAL</strong> in the table. For example, since <span class="math inline">\(\lambda_{max}\)</span> is 0.066667 in our example,
+points 4-5-6 and 8-9 obtain a probability of 1.0, or certainty to be part of the cluster. In contrast,
+points 1, 2 and 7 have a lower value. For example, for point 7 the ratio is 15.0/18.03 = 0.832. For noise
+points, the probability is set to zero.</p>
+<div class="figure" style="text-align: center"><span id="fig:hdbresults"></span>
+<img src="pics9b/33_toyresults.png" alt="HDBScan saved results" width="45%" />
+<p class="caption">
+Figure 45: HDBScan saved results
+</p>
+</div>
+<p>The last piece of information is the probability that a point is an outlier. This is computed
+as <span class="math inline">\(1 - \lambda_p / \lambda_{max}\)</span>. For all but the noise points, this is the complement of the cluster probability.
+For example, for point 1, this is 1.0 - 0.0555/0.0667 = 1.0 - 0.832 = 0.168. However, for point 3, the noise point, the computation
+is slightly different. At first sight, one would expect the outlier probability to be 1.0. However, the <span class="math inline">\(\lambda_{max}\)</span>
+for this point is the <span class="math inline">\(\lambda\)</span> value for C1, or 0.055. Consequently the outlier probability is 1.0 - 0.034/0.055 = 0.382.</p>
+<p><br></p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered" number="">
+<h2>References</h2>
+<div id="refs" class="references hanging-indent">
+<div id="ref-Campelloetal:13">
+<p>Campello, Ricardo J. G. B., Davoud Moulavi, and Jörg Sander. 2013. “Density-Based Clustering Based on Hierarchical Density Estimates.” In <em>Advances in Knowledge Discovery and Data Mining. PAKDD 2013. Lecture Notes in Computer Science, Vol. 7819</em>, edited by Jian Pei, Vincent S. Tseng, Longbing Cao, Hiroshi Motoda, and Guandong Xu, 160–72.</p>
+</div>
+<div id="ref-Campelloetal:15">
+<p>Campello, Ricardo J. G. B., Davoud Moulavi, Arthur Zimek, and Jörg Sandler. 2015. “Hierarchical Density Estimates for Data Clustering, Visualization, and Outlier Detection.” <em>ACM Transactions on Knowledge Discovery from Data</em> 10,1. <a href="https://doi.org/10.1145/2733381">https://doi.org/10.1145/2733381</a>.</p>
+</div>
+<div id="ref-Esteretal:96">
+<p>Ester, Martin, Hans-Peter Kriegel, Jörg Sander, and Xiaowei Xu. 1996. “A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise.” In <em>KDD-96 Proceedings</em>, 226–31.</p>
+</div>
+<div id="ref-GanTao:17">
+<p>Gan, Junhao, and Yufei Tao. 2017. “On the Hardness and Approximation of Euclidean DBSCAN.” <em>ACM Transactions on Database Systems (TODS)</em> 42 (3): 14.</p>
+</div>
+<div id="ref-Hartigan:75">
+<p>Hartigan, John A. 1975. <em>Clustering Algorithms</em>. New York, NY: John Wiley.</p>
+</div>
+<div id="ref-Kulldorff:97">
+<p>Kulldorff, Martin. 1997. “A Spatial Scan Statistic.” <em>Communications in Statistics – Theory and Methods</em> 26: 1481–96.</p>
+</div>
+<div id="ref-McInnesHealy:17">
+<p>McInnes, Leland, and John Healy. 2017. “Accelerated Hierarchical Density Clustering.” In <em>2017 IEEE International Conference on Data Mining Workshops (ICDMW)</em>. New Orleans, LA. <a href="https://doi.org/10.1109/ICDMW.2017.12">https://doi.org/10.1109/ICDMW.2017.12</a>.</p>
+</div>
+<div id="ref-McInnesetal:17">
+<p>McInnes, Leland, John Healy, and Steve Astels. 2017. “hdbscan: Hierarchical Density Based Clustering.” <em>The Journal of Open Source Software</em> 2 (11). <a href="https://doi.org/10.21105/joss.00205">https://doi.org/10.21105/joss.00205</a>.</p>
+</div>
+<div id="ref-MullerSawitzki:91">
+<p>Müller, D. W., and G. Sawitzki. 1991. “Excess Mass Estimates and Tests for Multimodality.” <em>Journal of the American Statistical Association</em> 86: 738–46.</p>
+</div>
+<div id="ref-Openshawetal:87">
+<p>Openshaw, Stan, Martin E. Charlton, C. Wymer, and A. Craft. 1987. “A Mark I Geographical Analysis Machine for the Automated Analysis of Point Data Sets.” <em>International Journal of Geographical Information Systems</em> 1: 359–77.</p>
+</div>
+<div id="ref-Sanderetal:98">
+<p>Sander, Jörg, Martin Ester, Hans-Peter Kriegel, and Xiaowei Xu. 1998. “Density-Based Clustering in Spatial Databases: The Algorithm GDBSCAN and Its Applications.” <em>Data Mining and Knowledge Discovery</em> 2: 169–94.</p>
+</div>
+<div id="ref-Schubertetal:17">
+<p>Schubert, Erich, Jörg Sander, Martin Ester, Peter Kriegel, and Xiaowei Xu. 2017. “DBSCAN Revisited, Revisited: Why and How You Should (Still) Use DBSCAN.” <em>ACM Transactions on Database Systems (TODS)</em> 42 (3): 19.</p>
+</div>
+<div id="ref-StuetzleNugent:10">
+<p>Stuetzle, Werner, and Rebecca Nugent. 2010. “A Generalized Single Linkage Method for Estimating the Cluster Tree of a Density.” <em>Journal of Computational and Graphical Statistics</em> 19: 397–418.</p>
+</div>
+<div id="ref-Wishart:69">
+<p>Wishart, David. 1969. “Mode Analysis: A Generalization of Nearest Neighbor Which Reduces Chaining Effects.” In <em>Numerical Taxonomy</em>, edited by A. J. Cole, 282–311. New York, NY: Academic Press.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>To obtain the figure as shown, the size of the points was changed to 1pt, their fill and outline color set to black. Similarly, the community area outline color was also
+changed to black.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>The figure
+is loosely based on Figure 1 in <span class="citation">Schubert et al. (<a href="#ref-Schubertetal:17" role="doc-biblioref">2017</a>)</span>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>This definition of
+<em>MinPts</em> is from the original paper. In some software implementations, the minimum points pertain to the
+number of nearest neighbors, i.e., <em>MinPts</em> - 1. <code>GeoDa</code> follows the definition from the original papers.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p><code>GeoDa</code> currently does not support this option.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>The DBSCAN* algorithm avoids such issues by only considering core points to construct
+the clusters.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>This method is variously referred to as HDBSCAN or HDBSCAN*. For simplicity, we will use the
+former.<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>These approaches
+are sensitive to the influence of the outliers on the estimates of central tendency and spread. This works in two
+ways. On the one hand, outliers may influence the parameter estimates such that their presence could be
+<em>masked</em>, e.g., when the estimated variance is larger than the true variance. The reverse effect is
+called <em>swamping</em>, where observations that are legitimately part of the distribution are made to look
+like outliers.<a href="#fnref8" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</footer>
+
+</section>
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

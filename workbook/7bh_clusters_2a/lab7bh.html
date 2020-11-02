@@ -120,7 +120,7 @@ if (window.hljs) {
 <h1 class="title toc-ignore">Cluster Analysis (2)</h1>
 <h3 class="subtitle">Hierarchical Clustering Methods</h3>
 <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
-<h4 class="date">07/30/2020 (latest update)</h4>
+<h4 class="date">11/02/2020 (latest update)</h4>
 
 
 <div id="TOC">
@@ -765,7 +765,7 @@ of 1-4 (5.0) and 1-5 (5.83). The dissimilarities between the pairs of observatio
 dissimilarity in the matrix. This time, it is a dissimilarity of 2.0 between 4,5 and 7 (more precisely, between
 5 and 7). Consequently, observation 7 is added to the 4,5 cluster.</p>
 <div class="figure" style="text-align: center"><span id="fig:slinkstep2"></span>
-<img src="pics7b/01_slink_2.png" alt="Single Linkage - Step 2" width="72%" />
+<img src="pics7b/99_sgllink_st2_fix.png" alt="Single Linkage - Step 2" width="72%" />
 <p class="caption">
 Figure 30: Single Linkage - Step 2
 </p>
@@ -890,7 +890,7 @@ respective distances, <span class="math inline">\(n_a / (n_a + n_b) = n_b / (n_a
 rounding) as shown in Figure <a href="#fig:avgstep2">42</a>. The other dissimilarities from/to 4,5 are updated in the same way.
 The smallest dissimilarity (a tie) in the updated table is 2.24 between 1 and 2, which are grouped into a new cluster.</p>
 <div class="figure" style="text-align: center"><span id="fig:avgstep2"></span>
-<img src="pics7b/44_avg2.png" alt="Average Linkage - Step 2" width="72%" />
+<img src="pics7b/99_avglink_st2_fix.png" alt="Average Linkage - Step 2" width="72%" />
 <p class="caption">
 Figure 42: Average Linkage - Step 2
 </p>
@@ -898,7 +898,7 @@ Figure 42: Average Linkage - Step 2
 <p>The new dissimilarities are shown in Figure <a href="#fig:avgstep3">43</a>, obtained as the average of the dissimilarities to 1 and 2
 from the other points/clusters. In the new matrix, the smallest dissimilarity is again 2.24, between 6 and 7. They form the next cluster.</p>
 <div class="figure" style="text-align: center"><span id="fig:avgstep3"></span>
-<img src="pics7b/44_avg3.png" alt="Average Linkage - Step 3" width="62%" />
+<img src="pics7b/99_avglink_st3_fix.png" alt="Average Linkage - Step 3" width="62%" />
 <p class="caption">
 Figure 43: Average Linkage - Step 3
 </p>
@@ -906,7 +906,7 @@ Figure 43: Average Linkage - Step 3
 <p>The updated dissimilarity matrix is given in Figure <a href="#fig:avgstep4">44</a>. The smallest dissimilarity is between
 clusters 4,5 and 6,7, which are combined in the next step.</p>
 <div class="figure" style="text-align: center"><span id="fig:avgstep4"></span>
-<img src="pics7b/44_avg4.png" alt="Average Linkage - Step 4" width="52%" />
+<img src="pics7b/99_avglink_st4_fix.png" alt="Average Linkage - Step 4" width="52%" />
 <p class="caption">
 Figure 44: Average Linkage - Step 4
 </p>
@@ -914,7 +914,7 @@ Figure 44: Average Linkage - Step 4
 <p>In the updated dissimilarity matrix of Figure <a href="#fig:avgstep5">45</a>, the minimum dissimilarity is
 between 3 and cluster 1,2. This yields the next to final grouping of 1,2,3 and 4,5,6,7.</p>
 <div class="figure" style="text-align: center"><span id="fig:avgstep5"></span>
-<img src="pics7b/44_avg5.png" alt="Average Linkage - Step 5" width="42%" />
+<img src="pics7b/99_avglink_st5_fix.png" alt="Average Linkage - Step 5" width="42%" />
 <p class="caption">
 Figure 45: Average Linkage - Step 5
 </p>
@@ -923,7 +923,7 @@ Figure 45: Average Linkage - Step 5
 distance of 4,5,6,7 needs to be computed with respect to the merger of 1,2 and 3, the respective
 weights are 2/3 and 1/3. This yields the distance given in Figure <a href="#fig:avgstep6">46</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:avgstep6"></span>
-<img src="pics7b/44_avg6.png" alt="Average Linkage - Step 6" width="32%" />
+<img src="pics7b/99_avglink_st6_fix.png" alt="Average Linkage - Step 6" width="32%" />
 <p class="caption">
 Figure 46: Average Linkage - Step 6
 </p>

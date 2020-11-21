@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Luc Anselin" />
+
+
+<title>Spatial Clustering (1)</title>
+
+<script src="lab9a_files/header-attrs-2.3/header-attrs.js"></script>
+<link href="lab9a_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="lab9a_files/highlightjs-9.12.0/highlight.js"></script>
+    <title>GeoDa on Github</title>
+
+    <style>
+    	*{margin:0;padding:0;}
+	    .shadowfilter {
+	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	        filter: url(shadow.svg#drop-shadow);
+	     }
+	     .intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+    <style>
+    ul {padding-left:30px;}
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+
+        <style>
+    h1 {
+        text-align: center;
+    }
+    h3.subtitle {
+        text-align: center;
+    }
+    h4.author {
+        text-align: center;
+    }
+    h4.date {
+        text-align: center;
+    }
+    p.caption {
+        font-size : 12px;
+    }
+    </style>
+
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RVF8');</script>
+<!-- End Google Tag Manager -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Analysis</h2>
+      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
+       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+    <section class="main-content">
+
+
+<h1 class="title toc-ignore">Spatial Clustering (1)</h1>
+<h3 class="subtitle">Spatializing Classic Clustering Methods</h3>
+<h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+<h4 class="date">10/30/2020 (latest update)</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#objectives">Objectives</a>
+<ul>
+<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+</ul></li>
+<li><a href="#getting-started">Getting started</a></li>
+</ul></li>
+<li><a href="#clustering-on-geographical-coordinates">Clustering on Geographical Coordinates</a>
+<ul>
+<li><a href="#principle">Principle</a></li>
+<li><a href="#implementation">Implementation</a></li>
+</ul></li>
+<li><a href="#including-geographical-coordinates-in-the-feature-set">Including Geographical Coordinates in the Feature Set</a>
+<ul>
+<li><a href="#principle-1">Principle</a></li>
+<li><a href="#implementation-1">Implementation</a>
+<ul>
+<li><a href="#standard-solution">Standard solution</a></li>
+<li><a href="#solutions-with-x-y-coordinates-included">Solutions with x-y coordinates included</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#weighted-optimization-of-attribute-and-geographical-similarity">Weighted Optimization of Attribute and Geographical Similarity</a>
+<ul>
+<li><a href="#principle-2">Principle</a>
+<ul>
+<li><a href="#optimization">Optimization</a></li>
+</ul></li>
+<li><a href="#implementation-2">Implementation</a>
+<ul>
+<li><a href="#manual-specification-of-weights">Manual specification of weights</a></li>
+<li><a href="#optimal-weights">Optimal weights</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p><br></p>
+<div id="introduction" class="section level2 unnumbered" number="">
+<h2>Introduction</h2>
+<p>In the remaining cluster chapters, we move our focus to how we can include spatial aspects of the data explicitly into
+cluster analysis. Foremost among these aspects are location and contiguity, as a way to formalize <em>locational similarity</em>.
+In the current chapter, we start by <em>spatializing</em> classic cluster methods. We
+consider three aspects of this. First, we apply classic methods such as k-means, k-medoids, hierarchical and spectral clustering to
+geographical coordinates in order to create <em>regions</em> that are purely based on location in geographical space. This does
+not consider other attributes.</p>
+<p>The next two sets of methods attempt to construct a compromise between attribute similarity and locational similarity,
+without forcing a <em>hard</em> contiguity constraint. Both approaches use standard clustering techniques. In one, the feature set
+(i.e., the variables under consideration) is expanded with the coordinates of the location. This provides some weight to
+the locational pull (spatial compactness) of the observations, although this is by no means binding. In a second approach,
+the problem is turned into a form of multi-objective optimization, where both the objective of attribute similarity and the objective
+of geographical similarity (co-location) are weighted so that a compromise between the two can be evaluated.</p>
+<p>As before, the methods considered here share many of the same options with previously discussed techniques as implemented
+in <code>GeoDa</code>. Common options will not be considered, but the focus will be on aspects that are specific to the spatial
+perspective.</p>
+<p>In order to illustrate the pure spatial clustering, we use the Chicago abandoned vehicles data set that we explored in the spatial
+data wrangling practicum. For the mixed clustering that includes both attributes and location, we go back to the Guerry data set.</p>
+<div id="objectives" class="section level3 unnumbered" number="">
+<h3>Objectives</h3>
+<ul>
+<li><p>Understand the difference between spatial and a-spatial clustering</p></li>
+<li><p>Apply standard clustering methods to geographic coordinates</p></li>
+<li><p>Assess the effect of including geographical coordinates as cluster variables</p></li>
+<li><p>Gain insight into the tradeoff between attribute similarity and contiguity in classic clustering methods</p></li>
+</ul>
+<div id="geoda-functions-covered" class="section level4 unnumbered" number="">
+<h4>GeoDa functions covered</h4>
+<ul>
+<li>Clusters &gt; K Means</li>
+<li>Clusters &gt; K Medoids</li>
+<li>Clusters &gt; Spectral</li>
+<li>Clusters &gt; Hierarchical
+<ul>
+<li>use geometric centroids</li>
+<li>auto weighting</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started" class="section level3 unnumbered" number="">
+<h3>Getting started</h3>
+<p>With <code>GeoDa</code> launched and all previous projects closed, we first load the <strong>vehiclepts_xyc</strong> shape file into the <strong>Connect to Data Source</strong> interface.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> In Figure <a href="#fig:chicagobase">1</a>, the 1373 points are shown against a backdrop of the Chicago community area boundaries.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:chicagobase"></span>
+<img src="pics9a/00_chicagopoints.png" alt="Chicago abandoned vehicles locations" width="60%" />
+<p class="caption">
+Figure 1: Chicago abandoned vehicles locations
+</p>
+</div>
+</div>
+</div>
+<div id="clustering-on-geographical-coordinates" class="section level2 unnumbered" number="">
+<h2>Clustering on Geographical Coordinates</h2>
+<div id="principle" class="section level3 unnumbered" number="">
+<h3>Principle</h3>
+<p>Applying classic cluster methods to geographical coordinates results in clusters as <em>regions</em> in space.
+There is nothing special to this type of application. In fact, we have already seen several instances
+of this in previous chapters, such as the illustrations using the seven point toy example and spectral
+clustering applied to
+the canonical <em>spirals</em> data set. In addition,
+we also applied k-means clustering to MDS coordinates.</p>
+<p>When using actual geographical coordinates, it
+is important to make sure that the <strong>Transformation</strong> is set
+to <strong>Raw</strong>. This is to avoid distortions in the distance measure that may result from the transformations, such
+as z-standardize.</p>
+<p>For example, in the case of Chicago, the range of the coordinates in the North-South direction is much greater
+than the range in the East-West direction. Standardization of the coordinates would result in the transformed
+values to be more <em>compressed</em> in the North-South direction, since both transformed variables end up with the
+same variance (or range). This will directly affect the resulting inter-point distances used in the
+dissimilarity matrix.</p>
+<p>In addition, it is critical that the geographical coordinates are <em>projected</em> and not simply latitude-longitude.
+This ensures that the Euclidean distances are calculated correctly. Using latitude and longitude to calculate
+straight line distance is incorrect.</p>
+<p>For most methods, the clusters will tend to result in fairly compact regions. In fact, as we have seen, for k-means the regions
+correspond to Thiessen polygons around the cluster centers. For spectral clustering, the boundaries between regions
+can be more irregular. Finally, for hierarchical clustering, the result depends greatly on the linkage method chosen. In most
+situations, Ward’s and complete linkage will yield the most compact regions. In contrast, single and average linkage will tend to result
+in singletons and/or long chains of points.</p>
+</div>
+<div id="implementation" class="section level3 unnumbered" number="">
+<h3>Implementation</h3>
+<p>The cluster methods are invoked in the standard manner. In our example, the variables are <strong>X</strong> and <strong>Y</strong>, and, as
+mentioned, the <strong>Transformation</strong> is set to <strong>Raw</strong>. Note that whenever the coordinates are selected among the variables
+available in the data table (as we did here), there is no check on whether they are appropriate. In our example, they are.</p>
+<p>A common problem is that
+the coordinates are latitude-longitude, which does not allow for the proper Euclidean distances. On the other hand, this
+allows the flexibility to select any variable as a <em>coordinate</em>. In the next section, we illustrate a way to make sure
+that geographical coordinates are projected.</p>
+<p>The typical settings are
+illustrated for the application of k-means in Figure <a href="#fig:kmeansvars">2</a>. The number of clusters is selected as 6. All other options are kept to their default values.</p>
+<div class="figure" style="text-align: center"><span id="fig:kmeansvars"></span>
+<img src="pics9a/00_kmeans_variables.png" alt="Variable selection -- kmeans settings" width="35%" />
+<p class="caption">
+Figure 2: Variable selection – kmeans settings
+</p>
+</div>
+<p>The resulting cluster maps for four main methods are shown in Figure <a href="#fig:classicclusters">3</a>, including k-means, k-medoids,
+spectral and hierarchical clustering. In each case, the defaults were used, with knn=8 for spectral clustering and Ward’s linkage
+for hierarchical clustering. The point cluster map is shown on top of the Chicago community area boundaries, in order
+to highlight the differences between the results.</p>
+<p>The colors for the clusters have been adjusted to match the general layout for k-means.
+While the general organization of the regions is very similar for the four methods, the size of the clusters varies
+considerably.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>Using the between to total sum of squares as a criterion for comparison, the k-means results are best, with a value of 0.887,
+but hierarchical clustering is close with 0.878. The values for k-medoids and spectral clustering are slightly worse and almost identical,
+respectively 0.866 and 0.867 (but keep in mind that this is the wrong criterion to assess k-medoids). K-medoids achieves a reduction of the within distances to 0.337.</p>
+<p>It is hard to decide which method works best. K-means will always result in Thiessen polygon like regions, with straight line
+demarcations between them, which may not necessarily be the desired outcome. Both k-medoids and spectral clustering allow more flexibility
+in that respect, with k-medoids having an immediate interpretation as the solution to a location-allocation problem. The
+results for hierarchical clustering vary considerably depending on the linkage method. Strange, string-like regions may follow
+from the use of methods other than Ward’s or complete linkage in hierarchical clustering.</p>
+<div class="figure" style="text-align: center"><span id="fig:classicclusters"></span>
+<img src="pics9a/00_classicclusters.png" alt="Classic clustering methods applied to point locations" width="100%" />
+<p class="caption">
+Figure 3: Classic clustering methods applied to point locations
+</p>
+</div>
+</div>
+</div>
+<div id="including-geographical-coordinates-in-the-feature-set" class="section level2 unnumbered" number="">
+<h2>Including Geographical Coordinates in the Feature Set</h2>
+<div id="principle-1" class="section level3 unnumbered" number="">
+<h3>Principle</h3>
+<p>As we have seen in the previous chapters, the classic cluster procedures only deal with
+attribute similarity. They therefore do not guarantee that the resulting <em>clusters</em> are spatially
+contiguous, nor are they designed to do so. A number of ad hoc procedures have been suggested that start
+with the original result and proceed to create clusters where
+all members of the cluster are contiguous. In general, such approaches are unsatisfactory and
+none scale well to larger data sets.</p>
+<p>Early approaches started with the solution of a standard clustering algorithm, and subsequently adjusted
+this in order to obtain contiguous regions, as in <span class="citation">Openshaw (<a href="#ref-Openshaw:73" role="doc-biblioref">1973</a>)</span> and <span class="citation">Openshaw and Rao (<a href="#ref-OpenshawRao:95" role="doc-biblioref">1995</a>)</span>.
+For example,
+one could make every subset of contiguous observations a separate <em>cluster</em>, which would satisfy
+the spatial constraint. However, this would also increase the number of clusters. As a result, the initial
+value of k would no longer be valid. One could also <em>manually</em> move observations to an adjoining cluster and visually obtain
+contiguity while maintaining the same k. However, this becomes quickly impractical when the
+number of observations is larger.</p>
+<p>An alternative is to include the geometric centroids of the observations as part of the
+clustering process by adding them as variables in the collection of
+attributes. Early applications of this idea can be found in <span class="citation">Webster and Burrough (<a href="#ref-WebsterBurrough:72" role="doc-biblioref">1972</a>)</span> and
+<span class="citation">Murray and Shyy (<a href="#ref-MurrayShyy:00" role="doc-biblioref">2000</a>)</span>, among others. However, while this approach tends to yield more geographically compact clusters, it does not
+guarantee contiguity.</p>
+<p>Here again, it is important to ensure that the coordinates are in projected units. Even
+though it is sometimes suggested in the literature to include
+latitude and longitude, this is incorrect. Only for projected units are the associated
+Euclidean distances meaningful.</p>
+<p>Also, as pointed out earlier, the transformation of the variables, which is standard in the
+cluster procedures, may distort the geographical features when the East-West and North-South
+dimensions are very different. For a more or less square example like the departments in
+France in the Guerry data set, this is likely a minor issue, but for elongated geographies,
+such as the state of California or even Chicago, a standardization to a common range will
+give more importance
+to the shorter dimension. Due to the standardization, smaller distances in the shorter dimension
+will have the same weight as larger distances in the longer dimension, since the latter are
+more compressed in the standardization.</p>
+<p>Unlike what we pursued when clustering solely on geographic coordinates, keeping all the
+variables (including the non-geographical attributes) in a <strong>Raw</strong> format is <em>not advisable</em>.</p>
+</div>
+<div id="implementation-1" class="section level3 unnumbered" number="">
+<h3>Implementation</h3>
+<p>We start any clustering procedure in the usual fashion, either from the toolbar icon
+or from the <strong>Clusters</strong> menu. For this example, we will switch to the Guerry data set.
+We will use the
+same four methods as in the previous section: <strong>Kmeans</strong>, <strong>Kmedoids</strong>, <strong>Spectral</strong>,
+and <strong>Hierarchical</strong>.</p>
+<div id="standard-solution" class="section level4 unnumbered" number="">
+<h4>Standard solution</h4>
+<p>In order to provide a frame of reference, we first carry out the four cluster
+methods on the original six variables. We select them from the <strong>Input</strong> panel as
+<strong>Crm_prs</strong>, <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Donatns</strong>, <strong>Infants</strong> and <strong>Suicids</strong>.
+In this example, we set k to 4.</p>
+<p>For each method, we use the default settings. For spectral clustering, we set the
+parameter knn to 5 for the best result. To keep track of the various cases, we make
+sure to set the cluster <strong>Field</strong> name to something different in each instance
+(here, we simply use <strong>CL1</strong>, <strong>CL2</strong>, <strong>CL3</strong> and <strong>CL4</strong>).</p>
+<p>The four results are summarized in Figure <a href="#fig:standardguerryk4">4</a>. As before, the
+reference labels are those for k-means, with the other categories adjusted so as to
+mimic its geographic pattern as closely as possible.</p>
+<div class="figure" style="text-align: center"><span id="fig:standardguerryk4"></span>
+<img src="pics9a/11_classic_clustering_guerry.png" alt="Cluster maps for six variables with k=4" width="100%" />
+<p class="caption">
+Figure 4: Cluster maps for six variables with k=4
+</p>
+</div>
+<p>As we have seen before, the results differ by method. In terms of <em>fit</em>, k-means has the best
+result, with the ratio of between SS to total SS at 0.433. K-medoids achieves 0.369 (but this is
+not the proper performance measure for k-medoids), spectral 0.376, and hierarchical 0.420.</p>
+<p>The geographic grouping of the observations that are part of each cluster is far from
+contiguous. Typically, there are one or two clusters that come close, but all have
+some remote disconnected parts. The other clusters are more fragmented spatially.</p>
+</div>
+<div id="solutions-with-x-y-coordinates-included" class="section level4 unnumbered" number="">
+<h4>Solutions with x-y coordinates included</h4>
+<p>We now repeat the process, but include the two centroids among the attributes of the
+cluster analysis. In order to make sure that the geographical coordinates are checked for validity, we need to
+select the variables from the list as <strong>&lt;X-Centroids&gt;</strong> and <strong>&lt;Y-Centroids&gt;</strong>, as shown in Figure <a href="#fig:centroidsinfeature">5</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:centroidsinfeature"></span>
+<img src="pics9a/33_centroids.png" alt="Centroids included in feature set" width="35%" />
+<p class="caption">
+Figure 5: Centroids included in feature set
+</p>
+</div>
+<p>When we select these reserved variable names from the table, <code>GeoDa</code> carries out a check of the validity
+of the projection. If the coordinates are detected to be decimal degrees (lat-lon) or when no projection information
+is available, a warning is given, as in Figure <a href="#fig:projectionwarning">6</a>. If one is sure that the coordinates
+are in the proper projection, one can proceed anyway, but any use of latitude-longitude pairs will lead to incorrect results.</p>
+<div class="figure" style="text-align: center"><span id="fig:projectionwarning"></span>
+<img src="pics9a/33_warning.png" alt="Warning for projection issues" width="35%" />
+<p class="caption">
+Figure 6: Warning for projection issues
+</p>
+</div>
+<p>As in the previous application,
+we set k=4, and keep all other default settings (for spectral clustering, we now select knn=2 for the
+best result).</p>
+<p>The results for the four methods are shown in Figure <a href="#fig:xystandardguerryk4">7</a>. While not achieving completely
+contiguous clusters, the spatial layout is much more structured than in the base solutions. In terms of overall
+fit, again we have the highest between SS to total SS ratio for k-means (0.458), followed by hierarchical
+clustering (0.445), k-medoids (0.411), and spectral clustering (0.402). Note that this measure now includes the geometric
+coordinates as part of the dissimilarity measure, so the resulting
+ratio is not really comparable to the base case.</p>
+<p>For all but hierarchical clustering, two of the four clusters are contiguous, with a third missing only one
+or two observations, and the fourth more spatially scattered.
+For hierarchical clustering, only one grouping is contiguous, two almost and a fourth is more scattered.</p>
+<div class="figure" style="text-align: center"><span id="fig:xystandardguerryk4"></span>
+<img src="pics9a/11_clusterwithxy.png" alt="Cluster maps for six variables and x-y coordinates with k=4" width="100%" />
+<p class="caption">
+Figure 7: Cluster maps for six variables and x-y coordinates with k=4
+</p>
+</div>
+<p>The results illustrate that including the coordinates does provide a form of spatial forcing, albeit imperfect.
+The outcome varies by method and depends on the number of clusters specified (k), as well as the number of
+attribute variables. In essence, this method gives equal weight to all the variables, so the higher the attribute
+dimension of the input variables, the less weight the spatial coordinates will receive. As a consequence, less spatial forcing will be possible.</p>
+<p>In the next method, the relative weighting of attribute variables relative to geographic variables is made explicit.</p>
+</div>
+</div>
+</div>
+<div id="weighted-optimization-of-attribute-and-geographical-similarity" class="section level2 unnumbered" number="">
+<h2>Weighted Optimization of Attribute and Geographical Similarity</h2>
+<div id="principle-2" class="section level3 unnumbered" number="">
+<h3>Principle</h3>
+<p>When including geographic coordinates among the variables in a clustering excercise, each variable is weighted
+equally.
+In contrast, in a weighted optimization, the coordinate variables
+are treated separately from the regular attributes, in the sense that we can now think of the
+problem as having
+<em>two objective functions</em>. One is focused on the similarity of the regular attributes (in our
+example, the six variables), the other on the similarity of the geometric centroids. A
+weight changes the relative importance of each objective.</p>
+<p>Early formulations of the idea behind a weighted optimization of geographical and attribute
+features can be found in <span class="citation">Webster and Burrough (<a href="#ref-WebsterBurrough:72" role="doc-biblioref">1972</a>)</span>, <span class="citation">Wise, Haining, and Ma (<a href="#ref-Wiseetal:97" role="doc-biblioref">1997</a>)</span>, and
+<span class="citation">Haining, Wise, and Ma (<a href="#ref-Hainingetal:00" role="doc-biblioref">2000</a>)</span>. More recently, some other methods that have a <em>soft</em> enforcing of spatial constraints
+can be found in <span class="citation">Yuan et al. (<a href="#ref-Yuanetal:15" role="doc-biblioref">2015</a>)</span> and <span class="citation">Cheruvelil et al. (<a href="#ref-Cheruveliletal:17" role="doc-biblioref">2017</a>)</span>, applied to spectral clustering, and in
+<span class="citation">Chavent et al. (<a href="#ref-Chaventetal:18" role="doc-biblioref">2018</a>)</span> for hierarchical clustering. In these approaches a relative weight is given to the dissimilarity
+that pertains to the regular attributes and one that pertains to the geographic coordinates. As the weight of the
+geographic part is increased, more spatial forcing occurs.</p>
+<p>The approach we outline here is different, in that the weights are used to rescale the original variables in
+order to change the relative importance of attribute similarity versus locational similarity. This is a special
+case of <em>weighted</em> clustering, which is an option is several of the standard clustering implementations. The objective
+is to find a contiguous solution with the <em>smallest</em> weight given to the x-y coordinates, thus sacrificing
+the least of attribute similarity.</p>
+<p>Let’s say there are <span class="math inline">\(p\)</span> regular attributes in addition to the x-y coordinates.
+With a weight of <span class="math inline">\(w_1 \leq 1\)</span> for the geographic coordinates, the weight for the regular attributes as a whole is <span class="math inline">\(w_2 = 1 - w_1\)</span>.
+These weights are distributed over the variables to achieve a rescaling that reflects the relative importance of space vs attribute.</p>
+<p>Specifically, the weight <span class="math inline">\(w_1\)</span> is allocated to x and y with each <span class="math inline">\(w_1/2\)</span>, whereas the weight <span class="math inline">\(w_2\)</span> is allocated over the regular
+attributes as <span class="math inline">\(w_2/p\)</span>. For comparison, and using the same logic, in the previous method, each variable was given an equal weight of <span class="math inline">\(1/(p+2)\)</span>.
+In other words, all the variables, both attribute and locational were given the same weight.</p>
+<p>The rescaled variables can be used in all of the standard clustering algorithms, without any further adjustments.
+One other important difference with the previous method is that the x-y coordinates are <em>not</em> taken into account when
+assessing the cluster centers and performance measures. These are based on the original unweighted attributes.</p>
+<p>While the principle behind this approach is intuitive, in practice it does not always work, since the contiguity
+constraint is not actually part of the optimization process. Therefore, there are situations where simple
+re-weighting of the spatial and non-spatial attributes does not lead to a contiguous solution.</p>
+<p>For all methods except spectral clustering, there is a direct relation between the relative weight given to the attributes
+and the measure of fit (e.g., between to total sum of squares). As the weight for the x-y coordinates increases, the
+fit on the attribute dimension will become poorer. However, for spectral clustering, this is not necessarily the case, since this method is not
+based on the original variables, but on a projection of these (the principal components).</p>
+<p>In other words, the x-y coordinates are used to pull the original unconstrained solution towards a point where all
+clusters consist of contiguous observations. Only when the weight given to the coordinates is <em>small</em> is such a solution
+still meaningful in terms of the original attributes. A large weight for the x-y coordinates in essence forces a
+contiguous solution, similar to what would follow if only the coordinates were taken into account. While this
+obtains contiguity, it does not provide a meaningful result in terms of attribute similarity.</p>
+<div id="optimization" class="section level4 unnumbered" number="">
+<h4>Optimization</h4>
+<p>The spatial constraint can be incorporated into an optimization process. This approach exploits a bisection search to find the
+cluster solution with the <em>smallest</em> weight for the x-y coordinates that still satisfies a contiguity constraint. In most
+instances, this solution will also have the best fit of all the possible weights that satisfy the constraint. For spectral clustering,
+the solution only guarantees that it consists of contiguous clusters with the largest weight given to the original attributes.</p>
+<p>One limitation of this approach is that it does not deal well with islands, or disconnected observations.
+Consequently, only results that designate the island(s) as separate clusters will meet the contiguity
+constraint. In such instances, it may be more practical to remove the island observations before carrying out the analysis.</p>
+<p>The earlier methods
+allow <em>soft</em> spatial clustering, in the sense that not all clusters consist of spatially
+contiguous observations. In contrast, the approach outlined here enforces a <em>hard</em> spatial constraint, although possibly at
+the expense of a poor clustering performance for the attribute variables. This method is original to <code>GeoDa</code>.</p>
+<p>The point of departure is a purely spatial cluster that assigns a weight of <span class="math inline">\(w_1 = 1.0\)</span> to the x-y coordinates.
+Next, <span class="math inline">\(w_1\)</span> is set to 0.5 and the contiguity constraint is checked. As customary, contiguity is defined by a spatial
+weights specification. The spatial weights are represented internally as a graph. For each node in the graph, the
+algorithm keeps track of what cluster it belongs to.</p>
+<p>In order to check whether the elements of a cluster are contiguous, an efficient breadth first algorithm is
+implemented of complexity O(n). It starts at a random node and identifies all of the neighbors of that node that belong
+to the same cluster. Technically, the node IDs are pushed
+onto a <em>stack</em>. In this process, neighbors that are not part of the same cluster are ignored (i.e., they are not
+pushed onto the stack). Each element on the stack is examined in turn. If it has neighbors in the cluster that are
+not yet on the stack, they are added. Otherwise, nothing needs to be changed. After this evaluation, the node is popped from the stack.
+When the stack is empty, this means that all contiguous nodes have been examined. If at that point, there are still unexamined
+observations in the cluster, we can conclude that the cluster is <em>not</em> contiguous and the process stops. In general,
+the examination of nodes is carried out until contiguity fails. If all nodes are examined without a failure, all
+clusters consist of contiguous nodes (according to the definition used in the spatial weights specification). Since the
+algorithm is linear in the number of observations, it scales well.</p>
+<p>To illustrate this process, consider the partial connectivity graph in Figure <a href="#fig:constraint">8</a>. It only pertains to the connections for the
+observations in cluster 4 (dark green on the map). The cluster consists of 11 observations, distributed among four spatial
+units. If we would (randomly) select either of the singletons, the check would be completed immediately, since those
+observations only have connections to locations outside the cluster. Since 10 remaining observations have not been visited,
+the cluster is clearly not contiguous.</p>
+<p>The process is only slightly more complex if we start with an observation from one of the other two groups, one consisting
+of four observations, the other of five. In each instance, once the connections to the within group members have been
+checked, it is clear that the set of 11 observations has not be exhausted, so that the contiguity constraint fails.</p>
+<div class="figure" style="text-align: center"><span id="fig:constraint"></span>
+<img src="pics9a/33_connectivity.png" alt="Check on contiguity constraint using connectivity graph" width="60%" />
+<p class="caption">
+Figure 8: Check on contiguity constraint using connectivity graph
+</p>
+</div>
+<p>If the contiguity constraint is satisfied, that means that <span class="math inline">\(w_1\)</span> can be further decreased,
+to get a better fit on the attribute clustering. Using a bisection logic, the weight is set to 0.25 and the contiguity constraint
+is checked again.</p>
+<p>In contrast, if the contiguity constraint is not satisfied at <span class="math inline">\(w_1 = 0.5\)</span>, then the weight is increased to the mid-point
+between 0.5 and 1.0, i.e., 0.75, and the process is repeated. Each time, a failure to meet the contiguity constraint increases
+the weight, and the reverse results in a decrease of the weight. Following the bisection logic, the next point is always the
+midpoint between the current value and the closest previous value to the left or to the right.</p>
+<p>In an ideal situation (highly unlikely in practice), <span class="math inline">\(w_1 = 0\)</span> and the original cluster solution satisfies the spatial constraints.
+In the worst case, the search yields a weight close to 1.0, which implies that the attributes are essentially ignored.
+More precisely, this means that the contiguity constraint cannot be met jointly with the other attributes. Only a
+solution that gives all or most of the weight to the x-y coordinates meets the constraint.</p>
+<p>In practice, any final solution with a weight
+larger than 0.5 should be viewed with scepticism, since it diminishes the importance of attribute similarity. Also, it
+is possible that the contiguity constraint cannot be satisfied unless (almost) all weight is given to the coordinates.
+This implies that a spatial contiguous solution is incompatible with the underlying attribute similarity for the given
+combination of variables and number of clusters (k). The spatially constrained clustering approaches covered in
+later chapters address this tension explicitly.</p>
+</div>
+</div>
+<div id="implementation-2" class="section level3 unnumbered" number="">
+<h3>Implementation</h3>
+<p>The weighted clustering is invoked in the same manner for each of the five standard clustering techniques.
+Just below the list of variables is a check box next to <strong>Use geometric centroids</strong>,
+as shown in Figure <a href="#fig:geometriccheck">9</a>. The default value, or rather, starting point, is
+a weight of 1.0. This corresponds to clustering on the coordinates of the centroids of the spatial units. In contrast
+to the previous method, the coordinates do <em>not</em> need to be specified in the variable list. They are calculated under the hood.
+As before, a warning is generated when the projection information is invalid.</p>
+<p>In addition, a spatial weights file needs to be specified. This is used to assess the spatial constraint.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> In our example, we use queen contiguity as defined in the <strong>guerry_85_q</strong> file.</p>
+<div class="figure" style="text-align: center"><span id="fig:geometriccheck"></span>
+<img src="pics9a/22_geometriccoordinates.png" alt="Use Geometric Centroids" width="35%" />
+<p class="caption">
+Figure 9: Use Geometric Centroids
+</p>
+</div>
+<p>As a frame of reference, the cluster map and summaries that result for a pure geometric solution that uses hierarchical
+clustering with Ward’s linkage are given in Figures <a href="#fig:weight1map">10</a> and <a href="#fig:weight1summary">11</a>. Clearly,
+contiguity is achieved, but at the expense of a serious deterioration in fit relative to the unconstrained solution.
+For comparison, the cluster map for the latter can be found in the lower-right panel of Figure <a href="#fig:standardguerryk4">4</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:weight1map"></span>
+<img src="pics9a/22_ward_weight1_map.png" alt="Cluster map - pure geometric solution - Ward's linkage (k=4)" width="60%" />
+<p class="caption">
+Figure 10: Cluster map - pure geometric solution - Ward’s linkage (k=4)
+</p>
+</div>
+<p>The ratio of the between to total sum of squares was 0.420 for the unconstrained solution. Here, it is down to 0.266. Note how
+the summary in Figure <a href="#fig:weight1summary">11</a> shows the weights for both the centroids and the regular attribute variables.
+However, the cluster centers and summary statistics only take into account the latter. As in the regular case, the centroids
+are given in the scale of the original variables, whereas the sum of squares are listed for whatever standardization was
+used (z-standardize in our example).</p>
+<div class="figure" style="text-align: center"><span id="fig:weight1summary"></span>
+<img src="pics9a/22_ward_weight1_summary.png" alt="Cluster summary - pure geometric solution - Ward's linkage (k=4)" width="40%" />
+<p class="caption">
+Figure 11: Cluster summary - pure geometric solution - Ward’s linkage (k=4)
+</p>
+</div>
+<div id="manual-specification-of-weights" class="section level4 unnumbered" number="">
+<h4>Manual specification of weights</h4>
+<p>Any weight can be specified by typing its value in the box on the interface in Figure <a href="#fig:geometriccheck">9</a>, or by moving the slider until the
+desired value is shown. For example, in Figures <a href="#fig:weight05map">12</a> and <a href="#fig:weight05summary">13</a>, the cluster
+map and cluster summary are shown for a weight of 0.5 (continuing with hierarchical clustering using Ward’s linkage).</p>
+<p>In our example, it is possible to check the spatial contiguity constraint visually. In more realistic examples,
+this will very quickly become difficult to impossible to verify. Here, contiguity is cleary achieved for a
+weight of 0.5. This suggests
+that the weight could be further lowered to obtain a better solution (in terms of giving greater weight
+to the attribute variables).</p>
+<div class="figure" style="text-align: center"><span id="fig:weight05map"></span>
+<img src="pics9a/22_ward_weight05_map.png" alt="Cluster map - weight = 0.5 - Ward's linkage (k=4)" width="60%" />
+<p class="caption">
+Figure 12: Cluster map - weight = 0.5 - Ward’s linkage (k=4)
+</p>
+</div>
+<p>The cluster summary shown an improvement of the measure of fit to 0.381 relative to 0.266 for the pure geometric
+solution, but lower than the 0.420 for the unconstrained solution.</p>
+<div class="figure" style="text-align: center"><span id="fig:weight05summary"></span>
+<img src="pics9a/22_ward_weight05_summary.png" alt="Cluster summary - weight = 0.5 - Ward's linkage (k=4)" width="40%" />
+<p class="caption">
+Figure 13: Cluster summary - weight = 0.5 - Ward’s linkage (k=4)
+</p>
+</div>
+</div>
+<div id="optimal-weights" class="section level4 unnumbered" number="">
+<h4>Optimal weights</h4>
+<p>In our simple example, it is possible to carry out the bisection search manually, by changing the weight
+at each iteration and visually checking the contiguity constraint. To begin, since the spatial constraint
+is satisfied for 0.5, we know that the next step is to reduce the weight to 0.25. At this point, the constraint
+is no longer satisfied (not shown), so that we then have to move to the mid-point between 0.25 and 0.5, or 0.375.</p>
+<p>The full set of iterations until convergence at 4 decimal points is listed in Figure <a href="#fig:weightiteration">14</a>.
+In all, it takes 15 steps, at each stage moving left or right depending on whether the constraint is satisfied.
+In the table, an <strong>x</strong> in the second column corresponds with meeting the contiguity constraint. The third
+column indicates the change in the weight. Each time the constraint is met, the adjustment is negative, and the
+converse holds when the constraint is not met. The iteraction continues until there is no change in the
+fourth decimal of the weight. In our example, the final solution yields a weight of 0.480042.</p>
+<div class="figure" style="text-align: center"><span id="fig:weightiteration"></span>
+<img src="pics9a/22_manual_iteration.png" alt="Manual weight iterations - Ward's linkage (k=4)" width="30%" />
+<p class="caption">
+Figure 14: Manual weight iterations - Ward’s linkage (k=4)
+</p>
+</div>
+<p>Of course, in most realistic applications, it will be impractical to carry out these iterations
+by hand. By selecting the <strong>Auto Weighting</strong> button in the interface (shown in Figure <a href="#fig:geometriccheck">9</a>),
+the solution to the bisection search is given in the box for the weight.</p>
+<p>For the four methods we consider for k=4, this yields 0.45 for k-means, 0.35 for k-medoids, 0.51 for spectral clustering
+(using knn=5) and 0.48 for hierarchical clustering (using Ward’s linkage). The corresponding cluster maps
+are shown in Figure <a href="#fig:optimalwts">15</a>.</p>
+<p>The worst solution is for spectral clustering. Even though the resulting regions are quite compact, this
+is a reflection of a large weight given to the centroids relative to the regular attributes. The best
+solution is arguably obtained for k-medoids, with a weight of 0.35, although it is not the best in terms
+of overall fit (0.336 – albeit on an inappropriate measure). The best solution on the sum of squares
+criterion is hierarchical clustering, which, as we have seen, achieves 0.381, compared to 0.361 for k-means
+and 0.266 for spectral clustering.</p>
+<p>In general, for smaller values of the weight, a more irregular regionalization occurs, driven to a
+greater extent by the pure attribute similarity. On the other hand, with the weight around 0.5, the
+dominant factor becomes the centroids, which is less interesting in terms of attribute clustering.</p>
+<div class="figure" style="text-align: center"><span id="fig:optimalwts"></span>
+<img src="pics9a/22_weighted_cluster_maps.png" alt="Cluster maps for six variables and optimal weights with k=4" width="100%" />
+<p class="caption">
+Figure 15: Cluster maps for six variables and optimal weights with k=4
+</p>
+</div>
+<p>It is important to keep in mind that this approach will not yield satisfactory solutions in many instances
+in practice. It is primarily included as a pedagogic device, to illustrate the trade offs between attribute
+and locational similarity.
+In the methods covered in the following chapters, the spatial aspects of the clustering are taken
+into account in a fully explicit manner, rather than indirectly as discussed here.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered" number="">
+<h2>References</h2>
+<div id="refs" class="references hanging-indent">
+<div id="ref-Chaventetal:18">
+<p>Chavent, Marie, Vanessa Kuentz-Simonet, Amaury Labenne, and Jérôme Saracco. 2018. “ClustGeo: An R Package for Hierarchical Clustering with Spatial Constraints.” <em>Computational Statistics</em> 33: 1799–1822.</p>
+</div>
+<div id="ref-Cheruveliletal:17">
+<p>Cheruvelil, Kendra Spence, Shuai Yuan, Katherine E. Webster, Pang-Ning Tan, Jean-François, Sarah M. Collins, C. Emi Fergus, et al. 2017. “Creating Multithemed Ecological Regions for Macroscale Ecology: Testing a Flexible, Repeatable, and Accessible Clustering Method.” <em>Ecology and Evolution</em> 7: 3046–58.</p>
+</div>
+<div id="ref-Hainingetal:00">
+<p>Haining, Robert F., Stephen Wise, and Jingsheng Ma. 2000. “Designing and Implementing Software for Spatial Statistical Analysis in a GIS Environment.” <em>Journal of Geographical Systems</em> 2 (3): 257–86.</p>
+</div>
+<div id="ref-MurrayShyy:00">
+<p>Murray, Alan T., and Tung-Kai Shyy. 2000. “Integrating Attribute and Space Characteristics in Choropleth Display and Spatial Data Mining.” <em>International Journal of Geographical Information Science</em> 14: 649–67.</p>
+</div>
+<div id="ref-Openshaw:73">
+<p>Openshaw, Stan. 1973. “A Regionalisation Program for Large Data Sets.” <em>Computer Applications</em> 3-4: 136–47.</p>
+</div>
+<div id="ref-OpenshawRao:95">
+<p>Openshaw, Stan, and L. Rao. 1995. “Algorithms for Reengineering the 1991 Census Geography.” <em>Environment and Planning A</em> 27 (3): 425–46.</p>
+</div>
+<div id="ref-WebsterBurrough:72">
+<p>Webster, R., and P. Burrough. 1972. “Computer-Based Soil Mapping of Small Areas from Sample Data II. Classification Smoothing.” <em>Journal of Soil Science</em> 23 (2): 222–34.</p>
+</div>
+<div id="ref-Wiseetal:97">
+<p>Wise, Stephen, Robert Haining, and Jingsheng Ma. 1997. “Regionalisation Tools for Exploratory Spatial Analysis of Health Data.” In <em>Recent Developments in Spatial Analysis: Spatial Statistics, Behavioural Modelling, and Computational Intelligence</em>, edited by Manfred M. Fischer and Arthur Getis, 83–100. New York, NY: Springer.</p>
+</div>
+<div id="ref-Yuanetal:15">
+<p>Yuan, Shuai, Pang-Ning Tan, Kendra Spence Cheruvelil, Sarah M. Collins, and Patricia A. Soranno. 2015. “Constrained Spectral Clustering for Regionalization: Exploring the Trade-Off Between Spatial Contiguity and Landscape Homogeneity.” In <em>2015 IEEE International Conference on Data Science and Advanced Analytics (DSAA</em>. Paris, France. <a href="https://doi.org/10.1109/DSAA.2015.7344878">https://doi.org/10.1109/DSAA.2015.7344878</a>.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>This data set is also included as one of the sample data sets on the GeoDaCenter data page.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>To obtain the figure as shown, the size of the points was changed to 1pt, their fill and outline color set to black. Similarly, the community area outline color was also
+changed to black.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Note that only for k-means is the first label associated with the largest clusters. Since <code>GeoDa</code> orders the
+labels by cluster size, after the labels are re-arranged, this is no longer necessarily the case.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>In the absence
+of a weights file, a warning is generated.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+<footer class="site-footer">
+  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</footer>
+
+</section>
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

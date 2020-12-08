@@ -329,7 +329,7 @@ tabu list. In practice, this means that this move cannot be considered for <span
 of the tabu list, or the <strong>Tabu Length</strong> parameter in <code>GeoDa</code>.</p>
 <p>If the best swap does not improve the overall objective then the next available tabu move is considered (a so-called
 aspirational move). If the latter improves on the overall objective, it is carried out and the reverse
-move is added to the tabu list. If the aspirational move does not improve the objective, then the best swap is implemented anyway. In a sense, rather than making
+move is added to the tabu list. If the aspirational move does not improve the objective, then the best swap is implemented anyway and its reverse move is also added to the tabu list. In a sense, rather than making
 no move, a move is made that makes the overall objective (slightly) worse. The number of such non-improving
 moves is limited by the <strong>ConvTabu</strong> parameter.</p>
 <p>The tabu approach can dramatically improve the quality of the end result of the search. However, a critical
@@ -497,7 +497,7 @@ Figure 11: AZP with different random seed
 </div>
 <p>In general, it is a good idea to include experiments with different random seeds in the range of
 sensitivity analyses.</p>
-<p>To proceed, we return the innitial seed to its default value of 123456789.</p>
+<p>To proceed, we return the initial seed to its default value of 123456789.</p>
 </div>
 <div id="initial-regions" class="section level4 unnumbered" number="">
 <h4>Initial regions</h4>
@@ -688,8 +688,10 @@ Figure 18: Max-p simulated annealing - 9999 iterations
 </p>
 </div>
 <p>A more dramatic illustration of the effect of the number of iterations is shown in Figure <a href="#fig:maxpiterations2">19</a>.
-With 9999 iterations to grow a feasible initial solution, the maximum p value obtained is now 9. Note that none of
-the AZP routines are able to achieve a solution with p=9 that meets the minimum bound condition.</p>
+With 9999 iterations to grow a feasible initial solution, the maximum p value obtained is now 9. Note that it turns
+out to be very difficult for
+the AZP routines to achieve a solution with p=9 that meets the minimum bound condition. Most attempts fail
+this criterion.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 <p>Using a simulated annealing local search yields a between to total sum of squares ratio of 0.460.</p>
 <div class="figure" style="text-align: center"><span id="fig:maxpiterations2"></span>
 <img src="pics9d/44_sa_9999.png" alt="Max-p simulated annealing - 9999 iterations" width="80%" />
@@ -697,8 +699,8 @@ the AZP routines are able to achieve a solution with p=9 that meets the minimum 
 Figure 19: Max-p simulated annealing - 9999 iterations
 </p>
 </div>
-<p>Note that increasing the number of iterations somewhat obviates the need to fine tune the random number seed.
-Even though that is still possible, the effect of the initial seed disappears as the number of iterations increases.</p>
+<p>Increasing the number of iterations somewhat obviates the need to fine tune the random number seed.
+Even though that is still possible, the effect of the initial seed diminishes as the number of iterations increases.</p>
 <div id="optimizing-parallel-processing" class="section level4 unnumbered" number="">
 <h4>Optimizing parallel processing</h4>
 <p>A final optimization strategy consists of maximizing the number of cores utilized in parallel processing.
@@ -1024,6 +1026,8 @@ expression is <span class="math inline">\(e^{-a}\)</span>, the larger <span clas
 <li id="fn8"><p>See the
 discussion of k-means clustering for details.<a href="#fnref8" class="footnote-back">↩︎</a></p></li>
 <li id="fn9"><p>Further consideration of some computational aspects is given in <span class="citation">Laura et al. (<a href="#ref-Lauraetal:15" role="doc-biblioref">2015</a>)</span> and <span class="citation">Wei, Rey, and Knaap (<a href="#ref-Weietal:20" role="doc-biblioref">2020</a>)</span>.<a href="#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>One feasible solution is for a random seed of 1979972659. The resulting AZP solution
+achieves a between to total ratio of 0.421.<a href="#fnref10" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

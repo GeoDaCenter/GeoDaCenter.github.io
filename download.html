@@ -217,11 +217,11 @@ $('#map_selector').click(function(){
       function drawVisualization() {
         
         // Fetching download data from download_data.json file, then sets var data to the Data Table
-        var mydata = [];
+        var graphData = [];
         fetch("data.json")
           .then(res => res.json())
-          .then(mydata => {
-            var data = google.visualization.arrayToDataTable(mydata);
+          .then(graphData => {
+            var data = google.visualization.arrayToDataTable(graphData);
           }
         );
 

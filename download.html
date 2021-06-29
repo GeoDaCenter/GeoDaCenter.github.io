@@ -216,26 +216,25 @@ $('#map_selector').click(function(){
       google.load('visualization', '1', {packages: ['areachart']});
       function drawVisualization() {
         
-        // Fetching download data from download_data.json file, then sets var data to the Data Table
+        // Fetching download data from download_data.json file
         var graphData = [];
         fetch("data.json")
           .then(res => res.json())
           .then(graphData => {
             var data = google.visualization.arrayToDataTable(graphData);
+            // Create and draw the visualization.
+            new google.visualization.AreaChart(document.getElementById('visualization')).
+            draw(data,
+              {//width: 100%,
+                height: 300,
+                title: 'More than '+data.getValue(data.getNumberOfRows()-1,1)+' GeoDa Software users ('+
+                        data.getValue(data.getNumberOfRows()-1,0)+')',
+                colors:['#AAAAFC'],
+                legend:'none',
+                backgroundColor: {stroke:'none', fill:'#eee', strokeSize: 1}
+              });
           }
         );
-
-        // Create and draw the visualization.
-        new google.visualization.AreaChart(document.getElementById('visualization')).
-            draw(data,
-                  {//width: 100%,
-                   height: 300,
-                      title: 'More than '+data.getValue(data.getNumberOfRows()-1,1)+' GeoDa Software users ('+
-                              data.getValue(data.getNumberOfRows()-1,0)+')',
-                      colors:['#AAAAFC'],
-                      legend:'none',
-                      backgroundColor: {stroke:'none', fill:'#eee', strokeSize: 1}
-                     });
       }
       google.setOnLoadCallback(drawVisualization);
 </script>

@@ -12,3 +12,5 @@ logs/*
 s3/logs/*
 
 s3/logs/
+
+!download_update.py

@@ -1,0 +1,11 @@
+name: A workflow to automate graph updates
+on: push
+
+jobs:
+  build:
+    name: Downloads Update
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "this is a test message!"
+      

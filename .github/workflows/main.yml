@@ -23,7 +23,7 @@ jobs:
           pip install -r requirements.txt
       - name: Creating client_secrets.json file
         run: |
-          echo "$secrets.CLIENT_SECRETS" > client_secrets.json
+          echo "$CLIENT_SECRETS" > client_secrets.json
       - name: Execute download_update.py script
         run: |
           python download_update.py

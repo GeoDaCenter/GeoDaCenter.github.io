@@ -24,6 +24,8 @@ jobs:
       - name: Creating client_secrets.json file
         run: |
           echo "$CLIENT_SECRETS" > client_secrets.json
+          cat client_secrets.json
+          cat download_data.json
       - name: Execute download_update.py script
         run: |
           python download_update.py

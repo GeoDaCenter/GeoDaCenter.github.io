@@ -8,7 +8,7 @@ Note: The date in download_data.json represents downloads by the END of that mon
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from datetime import date
-import calendar, json, sys
+import calendar, json, sys, os
 
 
 #Declaring the name of each month, and the month of each name
@@ -43,8 +43,8 @@ TEXT_TO_MONTH = {
 
 #API specifics information
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
-KEY_FILE_LOCATION = 'client_secrets.json'
 VIEW_ID = '115222200'
+#KEY_FILE_LOCATION = 'client_secrets.json'
 
 
 def get_month_range(year, month):
@@ -77,8 +77,10 @@ def initialize_analyticsreporting():
   Returns:
     An authorized Analytics Reporting API V4 service object.
   """
-  credentials = service_account.Credentials.from_service_account_file(
-    KEY_FILE_LOCATION,
+  ACCOUNT_INFO = os.environ['ACCOUNT_INFO']
+  
+  credentials = service_account.Credentials.from_service_account_info(
+    ACCOUNT_INFO,
     scopes=SCOPES)
 
   # Build the service object.

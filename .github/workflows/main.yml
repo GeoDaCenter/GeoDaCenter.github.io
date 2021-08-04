@@ -2,6 +2,14 @@ name: A workflow to automate graph updates
 on:
   schedule:
     - cron: '0 1 1 * *'
+  workflow_dispatch:
+    inputs:
+      runMessage:
+        description: 'Run Message'
+        required: true
+        default: 'Testing'
+      comments:
+        description: 'Comments'
 
 jobs:
   build:

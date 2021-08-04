@@ -26,3 +26,8 @@ jobs:
           ACCOUNT_INFO: ${{ secrets.CLIENT_SECRETS }}
         run: |
           python download_update.py
+      - name: Commit changes to GitHub
+        run: |
+          git add download_data.json
+          git commit -m "Updated downloads graph for last month"
+          git push origin master

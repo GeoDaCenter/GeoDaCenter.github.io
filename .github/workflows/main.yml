@@ -2,9 +2,6 @@ name: A workflow to automate graph updates
 on:
   schedule:
     - cron: '0 1 1 * *'
-  push:
-    branches:
-      - master
 
 jobs:
   build:
@@ -12,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo "this is a test message!"
       - name: Set up Python
         uses: actions/setup-python@v2
         with:

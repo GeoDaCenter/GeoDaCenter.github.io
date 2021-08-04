@@ -80,7 +80,7 @@ def initialize_analyticsreporting():
   ACCOUNT_INFO = os.environ['ACCOUNT_INFO']
   
   credentials = service_account.Credentials.from_service_account_info(
-    JSON.stringify(ACCOUNT_INFO),
+    json.stringify(ACCOUNT_INFO),
     scopes=SCOPES)
 
   # Build the service object.

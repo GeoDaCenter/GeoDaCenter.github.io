@@ -31,8 +31,8 @@ jobs:
           python data/download_update.py
       - name: Push changes to GitHub
         run: |
-          git config --local user.email "bzlbzlbzl2000iscool@gmail.com"
-          git config --local user.name "Bzlbzlbzl"
+          git config --local user.email "evman124@gmail.com"
+          git config --local user.name "Evanz124"
           git add data/download_data.json
           git commit -m "Updated downloads graph for last month"
           git push origin master

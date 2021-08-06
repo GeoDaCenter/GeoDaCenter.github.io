@@ -147,7 +147,7 @@ def main():
 
   #Opening download_data.json and storing the data
   downloadData = []
-  with open('download_data.json',) as f:
+  with open('/data/download_data.json',) as f:
     downloadData = json.load(f)
   
   #For reference, downloadData[-1] is most recent data point of file, [0] element is the date string,
@@ -212,7 +212,7 @@ def main():
             str(downloadData[-1][1]) + "\n")
 
     #Writing new info to download_data.json
-    with open('download_data.json', "w") as f:
+    with open('/data/download_data.json', "w") as f:
       json.dump(downloadData, f, indent=4)
     print(str(monthsToUpdate) + " missing months have been successfully updated!")
 

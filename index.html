@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>GeoDa on Github</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    	*{margin:0;padding:0;}
+	.shadowfilter {
+	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+	////filter: url(shadow.svg#drop-shadow);
+	}
+	.intro1 { margin-left: -45px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/simple-slideshow-styles.css">
+    <style>
+	figcaption {
+	  top: .70em;
+   	  left: .35em;
+ 	  bottom: auto!important;
+	  right: auto!important;
+	}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  </head>
+  <body>
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-72724100-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+    <section class="page-header">
+      <h1 class="project-name">GeoDa</h1>
+      <h2 class="project-tagline">An Introduction to Spatial Data Science</h2>
+      <a href="//geodacenter.github.io/download.html" class="btn">Download</a>
+      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+      <a href="https://geodacenter.github.io/data-and-lab/"  target="_blank" class="btn">Data</a>
+      <a href="//geodacenter.github.io/cheatsheet.html" class="btn">Cheat Sheet</a>
+       <a href="documentation.html" class="btn">Documentation</a>
+       <a href="//geodacenter.github.io/support.html" class="btn">Support</a>
+       <a href="//geodacenter.github.io/index-cn.html" class="btn">中文</a>
+    </section>
+
+
+
+    <section class="main-content">
+      <h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introducing GeoDa 1.18</h3>
+
+<p>GeoDa is a free and open source software tool that serves as an introduction to spatial data science. It is designed to facilitate new insights from data analysis by exploring and modeling spatial patterns.</p>
+
+<div style="float: right; clear: right">
+<iframe width="360" height="215" src="https://www.youtube.com/embed/--8vhhmpgdM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p>GeoDa was developed by <a href="https://en.wikipedia.org/wiki/Luc_Anselin">Dr. Luc Anselin</a> and his <a href=" https://spatial.uchicago.edu/directories/full/team">team</a>. The program provides a user-friendly and graphical interface to methods of exploratory spatial data analysis (ESDA), such as spatial autocorrelation statistics for aggregate data (several thousand records), and basic spatial regression analysis for point and polygon data (tens of thousands of records). To work with big data in GeoDa it should first be aggregated to areal units.</p>
+<p>Since its initial release in February 2003, GeoDa's user numbers have increased exponentially to over 360,000 (Sept. 2020). This includes lab users at universities such as Harvard, MIT, and Cornell. The user community and press embraced the program enthusiastically, calling it a "hugely important analytic tool," a "very fine piece of software," and an "exciting development."</p>
+
+<p>The latest version 1.18 contains multi-layer support, several new local cluster features, including <a href="docs/LA_multivariateGeary1.pdf" target="_blank">univariate and multivariate local Geary cluster maps</a>, redcap, skater, spectral clustering and max-p, and local join count maps for categorical data. It also implements several classic non-spatial cluster techniques (principal component analysis, k-means, and hierarchical clustering) implemented in <a href="https://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" target="_blank">Hoon et al.'s (2013) C Clustering Library</a>, as well as HDBScan.</p>
+
+<p>A new workbook is under development. In the meantime, <a href="documentation.html"  onclick="ga('send', 'event', 'GeoDaTutorial18O', 'GeoDaDocument', 'GeoDa Tutorial 18');">here are interim resources</a>, including an overview of features in 1.18.</p>
+
+<br/>
+<h3>
+<a id="intro-toolbar" class="anchor" href="#intro-toolbar" aria-hidden="true"><span class="octicon octicon-link"></span></a>GeoDa 1.18</h3>
+<p>
+<div class="bss-slides num2" tabindex="2">
+   <figure>
+      <img src="images/intro1.png"  class="shadowfilter intro1" width="100%" /><figcaption>Mac OSX El Capitan</figcaption>
+   </figure>
+    <figure>
+      <img src="images/intro2.png" class="shadowfilter intro1" width="100%" /><figcaption>Windows 7/8/10</figcaption>
+   </figure>
+   <figure>
+      <img src="images/intro3.png"  class="shadowfilter intro1" width="100%" /><figcaption>Ubuntu 14.04</figcaption>
+   </figure>
+</div> <!-- // bss-slides -->
+<script src="javascripts/better-simple-slideshow.min.js"></script>
+<script>
+var opts = {
+    auto : {speed: 5000, pauseOnHover: true},
+    fullScreen : false,
+    swipe : true
+};
+makeBSS('.num2', opts);
+</script>
+</p>
+<p>GeoDa runs on Windows, MacOSX and Linux (Ubuntu)</p>
+
+<br/>
+<h3>
+<a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>GeoDa Now Supports More Spatial Data Formats</h3>
+<p>GeoDa now supports a larger variety of vector data in different formats (click <a href="formats.html">here</a> to see the details): You can work with shapefiles, geodatabases, GeoJSON, MapInfo, GML, KML, and other vector data formats supported by the GDAL library. The program also converts coordinates in table format (.csv, .dbf, .xls, .ods) to one of these spatial data formats and converts data between different file formats (such as .csv to .dbf or shapefile to GeoJSON). Selecting a subset and exporting it as a new file is now also possible.</p>
+<p><img src="images/dataformats.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Now With Multi-layer Support!</h3>
+<p>For the first time, you can now load additional layers into Geoda for visualization purposes. The analysis will still be done on the layer you load first. In this example, the map shows transit access from housing blocks, with the transit station locations as an additional layer.</p>
+<p><img src="images/multi-layer.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-esda" class="anchor" href="#intro-esda" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explore Statistical Results through Linked Maps and Charts</h3>
+<p>In contrast to programs that visualize raw data in maps, GeoDa focuses on exploring the results of statistical tests and models through linked maps and charts.</p>
+<p><img src="images/esda.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-time" class="anchor" href="#intro-time" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analyze Spatial and Temporal Patterns Across Linked Views</h3>
+<p>You can now group the same variable across time periods in the new Time Editor to explore statistical patterns across space and time. Then explore results as views change over time with the Time Player.</p>
+<p><img src="images/time.png" class="shadowfilter"></p>
+
+<h3>
+<a id="intro-ui" class="anchor" href="#intro-ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ground-Truth Map Results with Basemaps</h3>
+
+<p>If your spatial data are projected (.prj file), you can now add a basemap to any map view, including cluster maps, for better orientation and for ground-truthing results.</p>
+
+<p>
+<img src="images/intro4.png" class="shadowfilter fiximage" width=832>
+</p>
+
+<br/>
+<h3>
+<a id="intro-avg" class="anchor" href="#intro-avg" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compare Averages Across Time and Space</h3>
+<p>A new Averages Chart compares values that are averaged over time and/or space and tests if the differences in these means are significant. For instance, first select if you want to compare means of selected vs. unselected observations in the same time period or compare all observations for different time periods. A basic pre-post/impact-control test then indicates if your results changed over time and space (using an F-test and difference-in-difference test).</p>
+<p><img src="images/avgchart.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-sp-matrix" class="anchor" href="#intro-sp-matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Detect Relationships in Multivariate Space</h3>
+<p>A scatter plot matrix allows you to explore multiple bivariate correlations at once. In this example, the regression slopes for selected, unselected and all police precincts in San Francisco are shown to explore relationships between four types of crime.</p>
+<p><img src="images/scatter_matrix.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Find Statistically Significant Spatial Clusters</h3>
+<p>GeoDa has long supported uni-and bivariate local tests of spatial autocorrelation like local Moran. Now the program also includes local G/G*, and a variety of local join count statistics for categorical data. In this example, local Moran cluster maps identify higher % GOP votes in central US areas in both the 2012 and 2016 presidential elections (left). The colocation join count map (top right) shows which of the high-high cluster values in both years overlapped in space while the differential local Moran map reveals clusters in % point differences between 2016 and 2012 (bottom right) .</p>
+<p><img src="images/Lisa.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compare a Suite of Spatially Constrained Cluster Techniques</h3>
+<p>GeoDa now has lots of new techniques to identify clusters with spatial constraints, including skater, redcap, max-p, k-means, k-medians, k-medoids, and spectral clustering. Here are a few examples of how foreign-born white residents, foreign-born Hispanic residents and median monthly rents in 2008-2009 in New York are clustered.</p>
+<p><img src="images/sc_clusters.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Determine if Changes Over Time Are Spatially Clustered</h3>
+<p>Use a global or local Differential Moran's I test to find out if a variable's change over time in a given location is statistically related to that of its neighbors. For instance, this local (LISA) cluster map shows hotspots in New York with larger changes in the share of kids between 2002 and 2008 (and coldspots with smaller changes).</p>
+<p><img src="images/DiffMI.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Test if Multiple Variables Are Clustered in Space</h3>
+<p><a href="docs/LA_multivariateGeary1.pdf" target="_blank">Luc Anselin (2017)</a> recently extended Geary's c with a new local indicator of spatial association. This is applied to the classic data set of "moral statistics" of France (Guerry, 1833) to show significant high and low spatial concentrations of literacy (left map) and significant associations of property crime and literacy (right map).</p>
+<p><img src="images/localGeary.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Map Patterns of Non-Spatial Cluster Statistics</h3>
+<p>You can now map patterns of several classic non-spatial cluster techniques, including principal component analysis (left maps), k-means (top right), and hierarchical clustering (bottom right) and multi-dimensional scaling. Using the same data as in the example above, the maps below show local clusters of property crime, literacy, and suicide.</p>
+<p><img src="images/nonspatial_clusters.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-corr" class="anchor" href="#intro-corr" aria-hidden="true"><span class="octicon octicon-link"></span></a>Find the Threshold Where Spatial Correlation Ends</h3>
+<p>A nonparametric spatial autocorrelation test (correlogram) is now available to determine distance thresholds when the values of neighboring pairs are no longer correlated.</p>
+<p><img src="images/corr.png" class="shadowfilter"></p>
+
+<br/>
+<h3>
+<a id="intro-cat" class="anchor" href="#intro-cat" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explore the Impact of Flexible Data Categorization</h3>
+<p>With the new category editor, you can explore how sensitive your results are to changes in the thresholds that categorize your data. In this example the thresholds in the conditional map (right) are based on the categories that can be adjusted in the category editor (left).</p>
+<p><img src="images/cat_editor.png" class="shadowfilter"></p>
+
+
+
+
+<h3>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<p>GeoDa is released under a GPL license. It builds on several open source libraries and source-code files. Below is the list of the key projects that we would like to acknowledge.</p>
+
+<font style="font-size:small">
+<p>
+	GDAL Libraries, version 1.10.
+License: X/MIT style Open Source license.
+Authors: Many.
+Links: https://www.gdal.org/
+</p>
+<p>Boost Libraries, version 1.53.
+License: Boost Software License - Version 1.0.
+Authors: Many.
+Links: https://www.boost.org/
+
+<p>wxWidgets Cross-Platform GUI Library, version 2.9.4.
+License: The wxWindows Library Licence.
+Authors: Julian Smart, Robert Roebling, and others.
+Links: <a href="https://www.wxwidgets.org/">https://www.wxwidgets.org/</a>
+
+<p>CLAPACK Linear Algebra Libraries, version 3.2.1.
+Authors: Many.
+License: Custom by University of Tennessee.
+Links: <a href="https://www.netlib.org/clapack/">https://www.netlib.org/clapack/</a>
+
+<p>Approximate Nearest Neighbor Library, version 0.1.
+Note: Full source of 0.1 release included in kNN directory.
+Authors: Sunil Arya and David Mount.
+License: See kNN/AHH.h in included source files.
+Links: <a href="https://www.cs.umd.edu/%7Emount/ANN/">https://www.cs.umd.edu/~mount/ANN/</a></p>
+
+<p>FastArea.c++ source code.
+Note: The source for functions findArea and
+      ComputeArea2D are in the file GenGeomAlgs.h from FastArea.c++
+      in Journal of Graphics Tools, 7(2):9-13, 2002
+Author: Daniel Sunday.
+License: Unknown.
+Links: <a href="https://jgt.akpeters.com/papers/Sunday02/FastArea.html">https://jgt.akpeters.com/papers/Sunday02/FastArea.html</a></p>
+
+<p>logger.h source code.
+Author: Seweryn Habdank-Wojewodzki.
+Note: We have copied the source for logger.h and modified it slightly
+      to work with wxString.
+License: Boost Software License - Version 1.0.
+Links: <a href="https://accu.org/index.php/journals/1304">https://accu.org/index.php/journals/1304</a></p>
+
+<p>nullstream.h source code.
+Author: Maciej Sobczak.
+License: See logger.h in included source files.
+Links: <a href="https://www.msobczak.com/">https://www.msobczak.com/</a></p>
+
+<p>The C Clustering Library.
+Authors: Hoon, Michiel de, Seiya Imoto, Satoru Miyano. (2013). The University of Tokyo, Institute of Medical Science, Human Genome Center.
+License: Python License.
+Links: <a href="https://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" target="_blank">The C Clustering Library.</a></p>
+</font>
+
+<br/>
+<h3>
+<a id="intro-ackn" class="anchor" href="#intro-ackn" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgments</h3>
+<p>The development of GeoDa has most recently been supported by the National Science Foundation, the National Institutes of Health, the National Institute of Justice, and the Agency for Healthcare Research and Quality.</p>
+
+<h3>
+<a id="intro-support" class="anchor" href="#intro-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support</h3>
+<p>We are currently updating the <a href="documentation.html">documentation</a> to reflect the new features in GeoDa 1.18.
+The <a href="support.html">Openspace listserv</a> supports technical questions about GeoDa.</p>
+
+<h3>
+<a id="intro-license" class="anchor" href="#intro-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h3>
+<p>GeoDa uses a <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL License (General Public License)</a>.</p>
+
+
+<h3>
+<a id="intro-contact" class="anchor" href="#intro-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h3>
+<p>Questions? Contact <a href="mailto:spatial@uchicago.edu">us</a>.</p>
+
+<h3>
+<a id="intro-donate" class="anchor" href="#intro-donate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Donate</h3>
+<p>Help us keep GeoDa free by contributing <a href="https://giving.uchicago.edu/site/Donation2?1838.donation=form1&df_id=1838&mfc_pref=T&set.Designee=1901">here</a><br/>
+	Thank you for supporting free and open-source spatial software! <br/><a href="https://giving.uchicago.edu/site/Donation2?1838.donation=form1&df_id=1838&mfc_pref=T&set.Designee=1901"><img src="images/donate.png"></a></p>
+
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+  </body>
+</html>

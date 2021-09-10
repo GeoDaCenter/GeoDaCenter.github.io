@@ -8,7 +8,7 @@ Note: The date in download_data.json represents downloads by the END of that mon
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from datetime import date
-import calendar, sys, csv
+import calendar, sys, csv, os, json
 
 #Declaring the name of each month, and the month of each name
 MONTH_TO_TEXT = {
@@ -42,8 +42,8 @@ TEXT_TO_MONTH = {
 
 #API specifics information
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
-KEY_FILE_LOCATION = 'client_secrets.json'
 VIEW_ID = '115222200'
+#KEY_FILE_LOCATION = 'client_secrets.json'
 
 
 def get_month_range(year, month):
@@ -76,8 +76,10 @@ def initialize_analyticsreporting():
   Returns:
     An authorized Analytics Reporting API V4 service object.
   """
-  credentials = service_account.Credentials.from_service_account_file(
-    KEY_FILE_LOCATION,
+  ACCOUNT_INFO = os.environ['ACCOUNT_INFO']
+  
+  credentials = service_account.Credentials.from_service_account_info(
+    json.loads(ACCOUNT_INFO),
     scopes=SCOPES)
 
   # Build the service object.
@@ -148,7 +150,7 @@ def main():
   
   #Getting the last update dates
   last_update = ""
-  with open('last_globe_update.txt', 'r') as f:
+  with open('data/last_globe_update.txt', 'r') as f:
     last_update = f.read()
   lastUpdateMonth = TEXT_TO_MONTH[last_update[:3]]
   lastUpdateYear = int(last_update[3:])
@@ -197,7 +199,7 @@ def main():
 
       #Getting a dictionary of country to id number from world-110m-country-names.tsv
       country_to_id = {}
-      with open("country_to_id.csv", 'r', encoding="utf8") as f:
+      with open("data/country_to_id.csv", 'r', encoding="utf8") as f:
         country_to_id = dict(csv.reader(f))
 
       #API stuff to get the data
@@ -207,19 +209,19 @@ def main():
 
       #Reading the data csv file and adding the new downloads values to each country
       data = []
-      with open('down_by_country.csv', 'r', encoding="utf8") as f:
+      with open('data/down_by_country.csv', 'r', encoding="utf8") as f:
         data = list(csv.reader(f))
         for i in range(len(data[1:])):
           if data[i+1][0] in downloads.values() and downloads.get(data[i+1][0]) != None and data[i+1][1] != None:
             data[i+1][1] = str(int(data[i+1][1]) + int(downloads.get(data[i+1][0])))
 
       #Writing to down_by_country.csv to update the data
-      with open('down_by_country.csv', 'w', newline='', encoding="utf8") as f:
+      with open('data/down_by_country.csv', 'w', newline='', encoding="utf8") as f:
         writer = csv.writer(f)
         writer.writerows(data)
       
       #Updating last_globe_update.txt to have the correct date
-      with open('last_globe_update.txt', 'w') as f:
+      with open('data/last_globe_update.txt', 'w') as f:
         f.write(MONTH_TO_TEXT[workingMonth] + str(workingYear))
         print("SUCCESS: down_by_country.csv is now updated for " + MONTH_TO_TEXT[workingMonth] + str(workingYear)
              + "! \n")

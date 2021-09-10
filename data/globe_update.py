@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-"""download_update.py
-Updates the GeoDa Downloads Page Graph by updating the download_data.json
-file with the 'GeoDaDownload' info from the google analytics API.
-Will fill in for any missing points from the last updated datapoint
-Note: The date in download_data.json represents downloads by the END of that month"""
+"""globe_update.py
+Updates the GeoDa Downloads Page Globe by updating the country_to_id.csv
+file with the 'country' info from the google analytics API.
+Will fill in for any missing points from the last updated date"""
 
 from googleapiclient.discovery import build
 from google.oauth2 import service_account

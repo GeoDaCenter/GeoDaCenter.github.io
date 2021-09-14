@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """globe_update.py
-Updates the GeoDa Downloads Page Globe by updating the country_to_id.csv
+Updates the GeoDa Downloads Page Globe by updating the down_by_country.csv
 file with the 'country' info from the google analytics API.
 Will fill in for any missing points from the last updated date"""
 
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from datetime import date
-import calendar, sys, csv, os, json
+import calendar, sys, csv, json
 
 #Declaring the name of each month, and the month of each name
 MONTH_TO_TEXT = {
@@ -41,8 +41,8 @@ TEXT_TO_MONTH = {
 
 #API specifics information
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
+KEY_FILE_LOCATION = 'client_secrets.json'
 VIEW_ID = '115222200'
-#KEY_FILE_LOCATION = 'client_secrets.json'
 
 
 def get_month_range(year, month):
@@ -75,10 +75,8 @@ def initialize_analyticsreporting():
   Returns:
     An authorized Analytics Reporting API V4 service object.
   """
-  ACCOUNT_INFO = os.environ['ACCOUNT_INFO']
-  
-  credentials = service_account.Credentials.from_service_account_info(
-    json.loads(ACCOUNT_INFO),
+  credentials = service_account.Credentials.from_service_account_file(
+    KEY_FILE_LOCATION,
     scopes=SCOPES)
 
   # Build the service object.
@@ -116,9 +114,11 @@ def get_downloads(response, country_to_id):
     response: An Analytics Reporting API V4 response.
     country_to_id: A dictionary of country name to globe id string
   Returns:
-    A dictionary of country ids to their download counts 
+    A tuple containing a dictionary of country ids to their download counts 
+    and a dictionary of logged country names to their download counts
   """
   country_count = {}
+  log_count = {}
   
   for report in response.get('reports', []):
     columnHeader = report.get('columnHeader', {})
@@ -135,22 +135,25 @@ def get_downloads(response, country_to_id):
         for i, values in enumerate(dateRangeValues):
           for metricHeader, value in zip(metricHeaders, values.get('values')):
             print(str(metricHeader.get('name')) + ':', value)
-            if dimension in country_to_id:
+            if dimension in country_to_id and value != None:
               country_count[country_to_id[dimension]] = value
-            else:
-              print("ERROR: " + dimension + " not in country_to_id.csv dictionary")
+            elif value != None:
+              log_count[dimension] = value
 
-  return country_count
+  return (country_count, log_count)
 
 
 def main():
   #Getting today's date
   today = date.today()
   
-  #Getting the last update dates
+  #Getting the last update dates and logged counts
   last_update = ""
-  with open('data/last_globe_update.txt', 'r') as f:
-    last_update = f.read()
+  country_log = {}
+  with open('globe_log.json', 'r', encoding="utf8") as f:
+    data = json.load(f)
+    last_update = data['last_update']
+    country_log = dict(data['logged_downloads'])
   lastUpdateMonth = TEXT_TO_MONTH[last_update[:3]]
   lastUpdateYear = int(last_update[3:])
 
@@ -198,33 +201,50 @@ def main():
 
       #Getting a dictionary of country to id number from world-110m-country-names.tsv
       country_to_id = {}
-      with open("data/country_to_id.csv", 'r', encoding="utf8") as f:
+      with open("country_to_id.csv", 'r', encoding="utf8") as f:
         country_to_id = dict(csv.reader(f))
 
       #API stuff to get the data
       analytics = initialize_analyticsreporting()
       response = get_report(analytics, monthRange)
-      downloads = get_downloads(response, country_to_id)
+      downloads, log_count = get_downloads(response, country_to_id)
 
-      #Reading the data csv file and adding the new downloads values to each country
-      data = []
-      with open('data/down_by_country.csv', 'r', encoding="utf8") as f:
-        data = list(csv.reader(f))
-        for i in range(len(data[1:])):
-          if data[i+1][0] in downloads.values() and downloads.get(data[i+1][0]) != None and data[i+1][1] != None:
-            data[i+1][1] = str(int(data[i+1][1]) + int(downloads.get(data[i+1][0])))
+      #Reading the data csv file and adding the new downloads values to each country in downloads_data
+      # for reference, downloads_data[i][0] is the id, downloads_data[i][1] is the data count
+      # downloads is the dictionary of id to new downloads
+      downloads_data = []
+      with open('down_by_country.csv', 'r', encoding="utf8") as f:
+        downloads_data = list(csv.reader(f))
+        for i in range(len(downloads_data[1:])):
+          #print(str(downloads_data[i+1][0]) + " : " + str(downloads.get(downloads_data[i+1][0])))
+          if downloads_data[i+1][0] in downloads and downloads.get(downloads_data[i+1][0]) != None:
+            downloads_data[i+1][1] = str(int(downloads_data[i+1][1]) + int(downloads.get(downloads_data[i+1][0])))
+
+      #Looping through the log_count to add logged country counts to country_log
+      for i in log_count:
+        if i in country_log:
+          country_log[i] = str(int(log_count.get(i)) + int(country_log.get(i)))
+        else:
+          country_log[i] = log_count.get(i)
 
       #Writing to down_by_country.csv to update the data
-      with open('data/down_by_country.csv', 'w', newline='', encoding="utf8") as f:
+      with open('down_by_country.csv', 'w', newline='', encoding="utf8") as f:
         writer = csv.writer(f)
-        writer.writerows(data)
+        writer.writerows(downloads_data)
       
-      #Updating last_globe_update.txt to have the correct date
-      with open('data/last_globe_update.txt', 'w') as f:
-        f.write(MONTH_TO_TEXT[workingMonth] + str(workingYear))
-        print("SUCCESS: down_by_country.csv is now updated for " + MONTH_TO_TEXT[workingMonth] + str(workingYear)
-             + "! \n")
+      #Updating globe_log.json to have the correct date
+      with open('globe_log.json', 'w', encoding="utf8") as f:
+        log_data = {}
+        log_data['last_update'] = MONTH_TO_TEXT[workingMonth] + str(workingYear)
+        log_data['__comment'] = "Log starts from Jul2019. logged_downloads are the country downloads not included in the globe. unknown_ids are globe ID's that are not identified in country_to_id.csv"
+        log_data['logged_downloads'] = country_log
+        log_data['unknown_ids'] = ['52', '60', '48', '882', '638', '316', '312', '831', 
+                                  '344', '258', '666', '999', '28', '446', '480', '470', 
+                                  '462', '474', '520', '184', '383', '132', '174', '678', 
+                                  '690', '136', '702', '212', '175', '662', '438', '796', 
+                                  '20', '660', '850', '990', '61', '29']
+        json.dump(log_data, f, indent = 4)
+        print("SUCCESS: down_by_country.csv is now updated for " + MONTH_TO_TEXT[workingMonth] + str(workingYear) + "! \n")
 
 if __name__ == '__main__':
   main()
-

@@ -1,7 +1,11 @@
 {
-    "last_update": "Jun2021",
+    "last_update": "Aug2021",
     "__comment": "Log starts from Jul2019. logged_downloads are the country downloads not included in the globe. unknown_ids are globe ID's that are not identified in country_to_id.csv",
-    "logged_downloads": {},
+    "logged_downloads": {
+        "(not set)": "2",
+        "Cape Verde": "1",
+        "Mauritius": "1"
+    },
     "unknown_ids": [
         "52",
         "60",

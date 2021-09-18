@@ -103,24 +103,21 @@ def get_report(analytics, dateRange):
           'viewId': VIEW_ID,
           'dateRanges': [{'startDate': str(dateRange[0]), 'endDate': str(dateRange[1])}],
           'metrics': [{'expression': 'ga:totalEvents'}],
-          'dimensions': [{'name': 'ga:country'}]
+          'dimensions': [{'name': 'ga:countryIsoCode'}]
         }]
       }
   ).execute()
 
 
-def get_downloads(response, country_to_id):
+def get_downloads(response):
   """Parses the Analytics Reporting API V4 response.
 
   Args:
     response: An Analytics Reporting API V4 response.
-    country_to_id: A dictionary of country name to globe id string
   Returns:
-    A tuple containing a dictionary of country ids to their download counts 
-    and a dictionary of logged country names to their download counts
+    A dictionary containing country ISO Codes to their respective download counts
   """
-  country_count = {}
-  log_count = {}
+  new_downloads = {}
   
   for report in response.get('reports', []):
     columnHeader = report.get('columnHeader', {})
@@ -137,19 +134,16 @@ def get_downloads(response, country_to_id):
         for i, values in enumerate(dateRangeValues):
           for metricHeader, value in zip(metricHeaders, values.get('values')):
             print(str(metricHeader.get('name')) + ':', value)
-            if dimension in country_to_id and value != None:
-              country_count[country_to_id[dimension]] = value
-            elif value != None:
-              log_count[dimension] = value
+            new_downloads[dimension] = value
 
-  return (country_count, log_count)
+  return new_downloads
 
 
 def main():
   #Getting today's date
   today = date.today()
   
-  #Getting the last update dates and logged counts
+  #Getting the last update date and logged counts
   last_update = ""
   country_log = {}
   with open('data/globe_log.json', 'r', encoding="utf8") as f:
@@ -189,6 +183,7 @@ def main():
     monthsToUpdate = (today.year - lastUpdateYear) * 12 + today.month - lastUpdateMonth - 1
     print("Starting updating dates for " + str(monthsToUpdate) + " missing months...\n")
 
+
     #Loop through the number of months that needs to be updated
     for i in range(monthsToUpdate):
       #Adds one to the last updated month, checking for if the next month changes the year
@@ -201,33 +196,30 @@ def main():
       #Getting the month range tuple of the current working date
       monthRange = get_month_range(workingYear, workingMonth)
 
-      #Getting a dictionary of country to id number from world-110m-country-names.tsv
-      country_to_id = {}
-      with open("data/country_to_id.csv", 'r', encoding="utf8") as f:
-        country_to_id = dict(csv.reader(f))
-
       #API stuff to get the data
       analytics = initialize_analyticsreporting()
       response = get_report(analytics, monthRange)
-      downloads, log_count = get_downloads(response, country_to_id)
+      new_downloads = get_downloads(response)
 
-      #Reading the data csv file and adding the new downloads values to each country in downloads_data
-      # for reference, downloads_data[i][0] is the id, downloads_data[i][1] is the data count
-      # downloads is the dictionary of id to new downloads
+      #Reading the downloads data file and loops through new_downloads to update download_data
+      # for reference, downloads_data[i][2] is the ISO code, downloads_data[i][1] is the data count
+      # counted is a list of the ISO Codes that got counted
       downloads_data = []
+      counted = []
       with open('data/down_by_country.csv', 'r', encoding="utf8") as f:
         downloads_data = list(csv.reader(f))
         for i in range(len(downloads_data[1:])):
-          #print(str(downloads_data[i+1][0]) + " : " + str(downloads.get(downloads_data[i+1][0])))
-          if downloads_data[i+1][0] in downloads and downloads.get(downloads_data[i+1][0]) != None:
-            downloads_data[i+1][1] = str(int(downloads_data[i+1][1]) + int(downloads.get(downloads_data[i+1][0])))
-
-      #Looping through the log_count to add logged country counts to country_log
-      for i in log_count:
-        if i in country_log:
-          country_log[i] = str(int(log_count.get(i)) + int(country_log.get(i)))
-        else:
-          country_log[i] = log_count.get(i)
+          if downloads_data[i+1][2] in new_downloads and new_downloads.get(downloads_data[i+1][2]) != None:
+            downloads_data[i+1][1] = str(int(downloads_data[i+1][1]) + int(new_downloads.get(downloads_data[i+1][2])))
+            counted.append(downloads_data[i+1][2])
+      
+      #Adding the not counted downloads to the country_log
+      for i in new_downloads:
+        if i not in counted and new_downloads.get(i) != None:
+          if i in country_log:
+            country_log[i] = str(int(new_downloads.get(i)) + int(country_log.get(i)))
+          else:
+            country_log[i] = new_downloads.get(i)
 
       #Writing to down_by_country.csv to update the data
       with open('data/down_by_country.csv', 'w', newline='', encoding="utf8") as f:
@@ -237,16 +229,12 @@ def main():
       #Updating globe_log.json to have the correct date
       with open('data/globe_log.json', 'w', encoding="utf8") as f:
         log_data = {}
+        log_data['__comment'] = "Log starts from Jul2019. logged_downloads are the country downloads not included in the globe."
         log_data['last_update'] = MONTH_TO_TEXT[workingMonth] + str(workingYear)
-        log_data['__comment'] = "Log starts from Jul2019. logged_downloads are the country downloads not included in the globe. unknown_ids are globe ID's that are not identified in country_to_id.csv"
         log_data['logged_downloads'] = country_log
-        log_data['unknown_ids'] = ['52', '60', '48', '882', '638', '316', '312', '831', 
-                                  '344', '258', '666', '999', '28', '446', '480', '470', 
-                                  '462', '474', '520', '184', '383', '132', '174', '678', 
-                                  '690', '136', '702', '212', '175', '662', '438', '796', 
-                                  '20', '660', '850', '990', '61', '29']
         json.dump(log_data, f, indent = 4)
         print("SUCCESS: down_by_country.csv is now updated for " + MONTH_TO_TEXT[workingMonth] + str(workingYear) + "! \n")
 
 if __name__ == '__main__':
   main()
+

@@ -33,6 +33,7 @@ jobs:
         run: |
           git config --local user.email "bzlbzlbzl2000iscool@gmail.com"
           git config --local user.name "Bzlbzlbzl"
+          git pull
           git add data/download_data.json
           git commit -m "Updated downloads graph for last month"
           git push origin master
@@ -58,6 +59,8 @@ jobs:
         run: |
           git config --local user.email "bzlbzlbzl2000iscool@gmail.com"
           git config --local user.name "Bzlbzlbzl"
+          sleep 1m
+          git pull
           git add data/globe_log.json data/down_by_country.csv
           git commit -m "Updated downloads globe for last month"
           git push origin master

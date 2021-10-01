@@ -13,8 +13,6 @@ on:
 jobs:
   graph:
     name: Downloads Graph Update
-    strategy:
-      max-parallel: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -41,8 +39,6 @@ jobs:
           git push origin master
   globe:
     name: Downloads Globe Update
-    strategy:
-      max-parallel: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -63,6 +59,7 @@ jobs:
         run: |
           git config --local user.email "bzlbzlbzl2000iscool@gmail.com"
           git config --local user.name "Bzlbzlbzl"
+          sleep 30s
           git pull
           git add data/globe_log.json data/down_by_country.csv
           git commit -m "Updated downloads globe for last month"

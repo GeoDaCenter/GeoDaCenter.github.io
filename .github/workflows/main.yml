@@ -38,6 +38,7 @@ jobs:
           git commit -m "Updated downloads graph for last month"
           git push origin master
   globe:
+    needs: graph
     name: Downloads Globe Update
     runs-on: ubuntu-latest
     steps:

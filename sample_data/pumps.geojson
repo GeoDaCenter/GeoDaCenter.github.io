@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "ID": 1, "x": 529396.539395, "y": 181025.063047, "name": "Broad St Pump" }, "geometry": { "type": "Point", "coordinates": [ -0.136667876716997, 51.51334111712638 ] } },
+{ "type": "Feature", "properties": { "ID": 2, "x": 529192.537868, "y": 181079.391380, "name": "Great Malborough Pump" }, "geometry": { "type": "Point", "coordinates": [ -0.139586169059145, 51.513875990909746 ] } },
+{ "type": "Feature", "properties": { "ID": 3, "x": 529183.739766, "y": 181193.735013, "name": "Ramilies Place Pump" }, "geometry": { "type": "Point", "coordinates": [ -0.139671022700271, 51.514905572610409 ] } },
+{ "type": "Feature", "properties": { "ID": 5, "x": 529613.205238, "y": 180896.804121, "name": "Rupert St Pump" }, "geometry": { "type": "Point", "coordinates": [ -0.133594411488385, 51.512138879053616 ] } },
+{ "type": "Feature", "properties": { "ID": 6, "x": 529453.585995, "y": 180826.353152, "name": "Brewer St Pump" }, "geometry": { "type": "Point", "coordinates": [ -0.135919147673632, 51.511542318544514 ] } },
+{ "type": "Feature", "properties": { "ID": 8, "x": 529296.104419, "y": 180794.849037, "name": "Warwick St Pump" }, "geometry": { "type": "Point", "coordinates": [ -0.138198768040845, 51.511295226130393 ] } }
+]
+}

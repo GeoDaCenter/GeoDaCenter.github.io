@@ -21,6 +21,16 @@ ga('send', 'pageview');
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 <!-- End Google Analytics -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LC0QJ53WFS');
+</script>
+<!-- End Google tag -->
 
     <section class="page-header">
       <h1 class="project-name">GeoDa</h1>
@@ -59,7 +69,7 @@ ga('send', 'pageview');
 <p>Use control-click and select open to open the program (instead of double click) and accept at the prompt. You will not be asked this again. However, in order for this to work, you need to set your Security &amp; Privacy preferences to Mac App Store and identified developers; the default is Mac App store only, which will NOT WORK for GeoDa.</p>
 <h4>GeoDa 1.20</h4>
 <ul  style="margin-left: 20px">
-	<li><a href="https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa1.20.0-Installer.dmg" onclick="ga('send', 'event', 'GeoDaOSXDownloads120', 'GeoDaDownload', 'GeoDa Software Downloads Count for MacOSX 1.20');">GeoDa 1.20.0.8 (10/14/2021)&nbsp;for Mac OS X Intel x86_64 (Big Sur+)</a></li>
+	<li><a href="https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa1.20.0-Installer.dmg" onclick="gtag('event', 'GeoDaDownload', {'event_category': 'GeoDaOSXDownloads120', 'event_label': 'GeoDa Software Downloads Count for MacOSX 1.20'});">GeoDa 1.20.0.8 (10/14/2021)&nbsp;for Mac OS X Intel x86_64 (Big Sur+)</a></li>
 	<li><a href="https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa1.20.0-M1-Installer.dmg" onclick="ga('send', 'event', 'GeoDaOSXDownloads120', 'GeoDaDownload', 'GeoDa Software Downloads Count for MacOSX 1.20');">GeoDa 1.20.0.8 (10/14/2021)&nbsp;for Mac OS X Apple Silicon M1 (Big Sur only)</a></li>
 	<li><a href="https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa1.20.0.8-M1-Monterey-Installer.dmg" onclick="ga('send', 'event', 'GeoDaOSXDownloads120', 'GeoDaDownload', 'GeoDa Software Downloads Count for MacOSX 1.20');">GeoDa 1.20.0.8 (11/21/2021)&nbsp;for Mac OS X Apple Silicon M1 (Monterey+)</a></li>
 </ul>

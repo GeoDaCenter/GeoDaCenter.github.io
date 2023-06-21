@@ -4,90 +4,102 @@
 
 <head>
 
-<meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="pandoc" />
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Luc Anselin" />
+  <meta name="author" content="Luc Anselin" />
 
 
-<title>Space-Time Exploration</title>
+  <title>Space-Time Exploration</title>
 
-<link href="lab3c_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="lab3c_files/highlightjs-9.12.0/highlight.js"></script>
-    <title>GeoDa on Github</title>
+  <link href="lab3c_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+  <script src="lab3c_files/highlightjs-9.12.0/highlight.js"></script>
+  <title>GeoDa on Github</title>
 
-    <style>
-    	*{margin:0;padding:0;}
-	    .shadowfilter {
-	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-	        filter: url(shadow.svg#drop-shadow);
-	     }
-	     .intro1 { margin-left: -45px;}
-    </style>
-    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
-    <style>
-    ul {padding-left:30px;}
-	figcaption {
-	  top: .70em;
-   	  left: .35em;
- 	  bottom: auto!important;
-	  right: auto!important;
-	}
-    </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-        <style>
+    .shadowfilter {
+      -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      filter: url(shadow.svg#drop-shadow);
+    }
+
+    .intro1 {
+      margin-left: -45px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css"
+    media="screen">
+  <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+  <style>
+    ul {
+      padding-left: 30px;
+    }
+
+    figcaption {
+      top: .70em;
+      left: .35em;
+      bottom: auto !important;
+      right: auto !important;
+    }
+  </style>
+
+  <style>
     h1 {
-        text-align: center;
+      text-align: center;
     }
+
     h3.subtitle {
-        text-align: center;
+      text-align: center;
     }
+
     h4.author {
-        text-align: center;
+      text-align: center;
     }
+
     h4.date {
-        text-align: center;
+      text-align: center;
     }
+
     p.caption {
-        font-size : 12px;
+      font-size: 12px;
     }
-    </style>
+  </style>
 
-<!-- Google Analytics -->
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-72724100-1', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-<!-- End Google Analytics -->
-<!-- Google Tag Manager -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-53RVF8');</script>
-<!-- End Google Tag Manager -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
+    gtag('config', 'G-LC0QJ53WFS');
+  </script>
+  <!-- End Google tag -->
+
+  <style type="text/css">
+    code {
+      white-space: pre;
+    }
+  </style>
+  <script type="text/javascript">
+    if (window.hljs) {
+      hljs.configure({ languages: [] });
+      hljs.initHighlightingOnLoad();
+      if (document.readyState && document.readyState === "complete") {
+        window.setTimeout(function () { hljs.initHighlighting(); }, 0);
+      }
+    }
+  </script>
 
 
 
@@ -98,516 +110,596 @@ if (window.hljs) {
 <body>
 
 
-    <section class="page-header">
-      <h1 class="project-name">GeoDa</h1>
-      <h2 class="project-tagline">An Introduction to Spatial Data Science</h2>
-      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
-      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
-      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
-      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
-       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
-       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
-       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
-    </section>
+  <section class="page-header">
+    <h1 class="project-name">GeoDa</h1>
+    <h2 class="project-tagline">An Introduction to Spatial Data Science</h2>
+    <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+    <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
+    <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+    <a href="https://spatial.uchicago.edu/sample-data" target="_blank" class="btn">Data</a>
+    <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+    <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+    <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+  </section>
 
-    <section class="main-content">
-
-
-<h1 class="title toc-ignore">Space-Time Exploration</h1>
-<h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
-<h4 class="date"><em>03/15/2018 (revised and updated)</em></h4>
+  <section class="main-content">
 
 
-<div id="TOC">
-<ul>
-<li><a href="#introduction">Introduction</a><ul>
-<li><a href="#objectives">Objectives</a><ul>
-<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
-</ul></li>
-<li><a href="#getting-started">Getting started</a></li>
-</ul></li>
-<li><a href="#time-editor">Time Editor</a><ul>
-<li><a href="#grouping-variables">Grouping variables</a><ul>
-<li><a href="#editing-the-time-label">Editing the time label</a></li>
-</ul></li>
-<li><a href="#saving-the-group-definitions-to-a-project-file">Saving the group definitions to a Project File</a></li>
-</ul></li>
-<li><a href="#time-player">Time Player</a><ul>
-<li><a href="#box-plot-over-time">Box plot over time</a></li>
-<li><a href="#scatter-plot-over-time">Scatter plot over time</a><ul>
-<li><a href="#serially-autoregressive-scatter-plot">Serially autoregressive scatter plot</a></li>
-</ul></li>
-<li><a href="#maps-over-time">Maps over time</a></li>
-</ul></li>
-</ul>
-</div>
-
-<p><br></p>
-<div id="introduction" class="section level2 unnumbered">
-<h2>Introduction</h2>
-<p>In this chapter, we will cover the basic procedures for setting up <em>time-enabled</em> variables in
-GeoDa through the <strong>Time Editor</strong>. These variables then become available for a simple form
-of space-time exploration in the limited sense of comparative statics. By means of the <strong>Time Player</strong>,
-maps and graphs pertaining to a given variable can be shown for different time periods, allowing
-for an albeit limited assessment of space-time dynamics.</p>
-<p>One limitation of this approach is that it is cross-section oriented. More precisely, the different
-time periods are considered as separate cross-sectional variables (one cross-section for each
-time period). While this results in quite a bit of flexibility when it comes to <em>grouping</em>
-variables, it also means there is no inherent time-awareness, nor a dedicated panel data structure.</p>
-<p>To illustrate these features, we
-will again use the data set with socio-economic characteristics for 55 New York City sub-boroughs
-that is available as a sample data set.</p>
-<div id="objectives" class="section level3 unnumbered">
-<h3>Objectives</h3>
-<ul>
-<li><p>Create grouped variables by means of the Time Editor</p></li>
-<li><p>Save group definitions in the Project File</p></li>
-<li><p>Assess space-time patterns by means of the Time Player</p></li>
-</ul>
-<div id="geoda-functions-covered" class="section level4 unnumbered">
-<h4>GeoDa functions covered</h4>
-<ul>
-<li>Time &gt; Time Editor
-<ul>
-<li>grouping variables</li>
-<li>ungrouping variables</li>
-<li>editing the Time label of a variable</li>
-<li>removing time periods from a time-enabled variable</li>
-</ul></li>
-<li>Time &gt; Time Player
-<ul>
-<li>starting and pausing the player</li>
-</ul></li>
-<li>Box Plot
-<ul>
-<li>changing the number of time-enabled variables displayed</li>
-<li>changing axes and synchronization options</li>
-</ul></li>
-<li>Scatter Plot
-<ul>
-<li>moving a scatter plot through time</li>
-<li>time-wise autoregressive scatter plot</li>
-</ul></li>
-<li>Map
-<ul>
-<li>moving a choropleth map through time using custom categories</li>
-</ul></li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="getting-started" class="section level3 unnumbered">
-<h3>Getting started</h3>
-<p>With GeoDa launched and all previous projects closed, we start by loading the
-NYC Data from the <strong>Sample Data</strong> tab in the <strong>Connect to Data Source</strong> dialog.
-Since we will be creating a project file to store the space-time definitions that
-we construct, it is best to save a copy of this data set to a working directory.
-To accomplish this, we use <strong>File &gt; Save As</strong> and select ESRI Shapefile as the format.
-In the examples that follow, we have used <strong>NYC_Sub_borough_Area</strong> as the file name.</p>
-<p>Re-opening a project with the new data set yields the familiar themeless base map
-shown in Figure <a href="#fig:nycbasemap">1</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:nycbasemap"></span>
-<img src="pics3c/0_474_nyc_basemap.png" alt="NYC sub-borough themeless map" width="80%" />
-<p class="caption">
-Figure 1: NYC sub-borough themeless map
-</p>
-</div>
-</div>
-</div>
-<div id="time-editor" class="section level2 unnumbered">
-<h2>Time Editor</h2>
-<p>We start the process of <em>grouping</em> the data for the same variable over different time
-periods by invoking <strong>Time &gt; Editor</strong> from the main menu, as in Figure <a href="#fig:timeEditorMain">2</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:timeEditorMain"></span>
-<img src="pics3c/1_475_time_editor_menu.png" alt="Time Editor in menu" width="15%" />
-<p class="caption">
-Figure 2: Time Editor in menu
-</p>
-</div>
-<p>Alternatively, as shown in Figure <a href="#fig:timeEditorIcon">3</a>, we can select the <strong>Time</strong> icon on the toolbar (the latter brings up
-both the <strong>Time Editor</strong> and the <strong>Time Player</strong>).</p>
-<div class="figure" style="text-align: center"><span id="fig:timeEditorIcon"></span>
-<img src="pics3c/1_476_time_icon.png" alt="Time toolbar icon" width="10%" />
-<p class="caption">
-Figure 3: Time toolbar icon
-</p>
-</div>
-<p>The main <strong>Time Editor</strong> interface is as in Figure <a href="#fig:timeEditorDialog">4</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:timeEditorDialog"></span>
-<img src="pics3c/1_477_time_editor_interface.png" alt="Time Editor interface" width="80%" />
-<p class="caption">
-Figure 4: Time Editor interface
-</p>
-</div>
-<div id="grouping-variables" class="section level3 unnumbered">
-<h3>Grouping variables</h3>
-<p>The logic behind the time editor is that different variables are <em>grouped</em> under a single
-label, with an attached index that refers to the time period. For example, if we wanted to
-explore the evolution of the percentage households with children over time (the <strong>kidsxxxx</strong>
-variables in the data set), we would <em>group</em> the six variables <strong>kids2000</strong> to <strong>kids2009</strong> as
-a new time-enabled variable <strong>kids</strong>.</p>
-<p>The <strong>Time Editor</strong> interface is organized into three panels. The panel on the left, labeled
-<strong>Ungrouped Variables</strong>, contains the variables with their original variable name. In
-addition, after
-some operations, it also includes the variables that are not time-enabled (for example, a variable like the ID for the sub-borough, which does not change over time). The middle panel, <strong>New Group Details</strong>,
-is where the name and time labels for the new grouped variable can be edited. The
-right-most panel, <strong>Grouped Variables</strong>, lists the result of the grouping operations.</p>
-<p>The first step is to select the variables that are to be grouped in the left panel. For example,
-in Figure <a href="#fig:groupselectvars">5</a>, we highlighted six variables, from <strong>kids2000</strong> to <strong>kids2009</strong>.</p>
-<div class="figure" style="text-align: center"><span id="fig:groupselectvars"></span>
-<img src="pics3c/2_478_kids_group.png" alt="Selection of variables to be grouped" width="80%" />
-<p class="caption">
-Figure 5: Selection of variables to be grouped
-</p>
-</div>
-<p>Clicking on the arrow button <strong>&gt;</strong> moves the variables over to the central panel, with
-a suggested variable name (<strong>kids200</strong>) and time labels (<strong>time 0</strong> through <strong>time 5</strong>),
-as illustrated in Figure <a href="#fig:groupvarsinmiddle">6</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:groupvarsinmiddle"></span>
-<img src="pics3c/2_479_kids_movedover.png" alt="Grouping operation" width="80%" />
-<p class="caption">
-Figure 6: Grouping operation
-</p>
-</div>
-<div id="editing-the-time-label" class="section level4 unnumbered">
-<h4>Editing the time label</h4>
-<p>Both the time label and the variable name can be edited, as shown
-in Figures <a href="#fig:editTimeLabels">7</a>-<a href="#fig:editTimeLabels2">8</a>. Also, individual
-variables can be moved up or down in the sequence (the sequence determines the order
-of the comparatives static graphs and maps) by selecting the variable and using the
-buttons at the bottom of the panel. In addition, any variable can be moved out of the
-grouping, back to the ungrouped variables list, by selecting it and clicking on the left
-arrow button (<strong>&lt;</strong>) to the right of the central panel.</p>
-<p>For example, since the observations
-for 2005 to 2009 are every year, but the first observation is for 2000, we may want to remove <strong>kids2000</strong>
-from the list. This is accomplished by selecting the
-variable name and clicking on <strong>&lt;</strong>. This moves <strong>kids2000</strong> back to the
-ungrouped variables panel, but it leaves the first time label in place. We remove it
-by right clicking on the panel and selecting <strong>Remove Time</strong>, as shown in Figure <a href="#fig:editTimeLabels">7</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:editTimeLabels"></span>
-<img src="pics3c/2_496_removetime.png" alt="Removing variables and time labels" width="80%" />
-<p class="caption">
-Figure 7: Removing variables and time labels
-</p>
-</div>
-<p>Next, we change the variable
-<strong>name</strong> from the suggested <strong>kids200</strong> to <strong>kids</strong> and start editing the time labels to show the actual year, as in Figure <a href="#fig:editTimeLabels2">8</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:editTimeLabels2"></span>
-<img src="pics3c/2_480_editingtimelabel.png" alt="Editing variable name and time labels" width="80%" />
-<p class="caption">
-Figure 8: Editing variable name and time labels
-</p>
-</div>
-<p>At the end of the editing process, the <strong>New Group Details</strong> panels should look as in
-Figure <a href="#fig:cleanEditTimelabels">9</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:cleanEditTimelabels"></span>
-<img src="pics3c/2_481_kidsedited.png" alt="Variables ready to be grouped" width="80%" />
-<p class="caption">
-Figure 9: Variables ready to be grouped
-</p>
-</div>
-<p>The final step in the grouping process is to activate the group by selecting the <strong>&gt;</strong> arrow
-to the right of the central panel. This moves the new variable name to the
-<strong>Grouped Variables</strong> panel and clears the central panel, as in Figure <a href="#fig:variablesGrouped">10</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:variablesGrouped"></span>
-<img src="pics3c/2_482_kids_grouped.png" alt="Grouped variable defined" width="80%" />
-<p class="caption">
-Figure 10: Grouped variable defined
-</p>
-</div>
-<p>The original five variables in the data table are now replaced by a single entry, showing a
-new variable <strong>kids</strong>, with the first time period in parentheses (<strong>2005</strong>), as
-in Figure <a href="#fig:groupedVarsinTable">11</a>. The <strong>kids2000</strong>
-variable, which was not included in the grouping process, is still listed individually.</p>
-<div class="figure" style="text-align: center"><span id="fig:groupedVarsinTable"></span>
-<img src="pics3c/2_483_grouped_kids_intable.png" alt="Grouped variable in the table" width="30%" />
-<p class="caption">
-Figure 11: Grouped variable in the table
-</p>
-</div>
-<p>Note that the grouped variables have not been dropped as
-individual entries, they are just not displayed as such in the table. The new label in parentheses indicates that they have been grouped.</p>
-<p>Finally, GeoDa is agnostic to what variables are grouped and in which order they are
-arranged, so this procedure can
-also be used to group variables that do not necessarily correspond to different time periods.
-For example, this may be useful when constructing a box plot graph that shows the box
-plots for multiple variables in one window.</p>
-</div>
-</div>
-<div id="saving-the-group-definitions-to-a-project-file" class="section level3 unnumbered">
-<h3>Saving the group definitions to a Project File</h3>
-<p>As we have seen previously in the discussion of custom categories, any special definition
-such as a grouped variable will be lost if it is not saved in a project
-file (accomplished through <strong>File &gt; Save Project</strong>). Once contained in a project file, the grouped variables can
-be re-used in later analyses. There can be several different project files associated
-with the same data layer, each focused on a special aspect of time dynamics.</p>
-<p>The project file contains the <strong>time_ids</strong> specified in the time editor, and the new
-variable definitions under the <strong><group></strong> entry. In our example, illustrated
-in Figure <a href="#fig:groupVarsinProject">12</a>, the variable
-<strong>kids</strong> is shown to be composed of <strong>kids2005</strong> through <strong>kids2009</strong>.</p>
-<div class="figure" style="text-align: center"><span id="fig:groupVarsinProject"></span>
-<img src="pics3c/3_004_project.png" alt="Grouped variable in project file" width="60%" />
-<p class="caption">
-Figure 12: Grouped variable in project file
-</p>
-</div>
-<p>Note that in the current setup in GeoDa, the grouping of variables can only use one set of
-time periods, due to the synchronization mechanism that underlies the time player. So,
-in order to look at different time periods, such as six periods for one variable
-and three for another, two separate project files would need to be created. More
-precisely, any active grouping has to pertain to the same time labels for all the grouped
-variable.</p>
-<p>To illustrate the use of grouped variables, we create a new project file with the variables
-<strong>hhsiz</strong>, <strong>rent</strong>, <strong>rentpc</strong> and <strong>yrhom</strong> grouped for the three years 2002, 2005, and
-2008. We store this in a new project file, say <strong>nyc_project2.gda</strong>. Then, we close
-the current project and start a new one by dropping the project file in the <strong>Connect
-to Data Source</strong> interface.</p>
-</div>
-</div>
-<div id="time-player" class="section level2 unnumbered">
-<h2>Time Player</h2>
-<p>We start the time player by clicking on its icon, as in Figure <a href="#fig:timeEditorIcon">3</a>, or from the menu
-as <strong>Time &gt; Time Player</strong>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> This brings up
-the simple player interface shown in Figure <a href="#fig:timeplayer">13</a>, together with the time editor dialog
-(not shown). We will ignore the latter
-in the current discusion.</p>
-<div class="figure" style="text-align: center"><span id="fig:timeplayer"></span>
-<img src="pics3c/4_502_timeplayer.png" alt="Time player control" width="50%" />
-<p class="caption">
-Figure 13: Time player control
-</p>
-</div>
-<p>The time player shows the <strong>Current time</strong> at the top, which is the time label that
-corresponds with the first period of the grouped variable (2002 in our example). For
-any graph or map in a current window, the time player will cycle through the time
-periods for the grouped variable(s) displayed. The radio button on the slider shows
-the progression over time. The controls at the bottom move the player forward
-automatically using the single arrow <strong>&gt;</strong>, or manually forward or backward using
-the double arrows <strong>&gt;&gt;</strong> and <strong>&lt;&lt;</strong>. The default is to <strong>Loop</strong> (box checked) and
-to move forward (<strong>Reverse</strong> <em>not</em> checked). Note that <em>forward</em> is whatever order
-was used in the time editor, and is not automatically or necessarily the correct
-time sequence. As mentioned above, GeoDa is agnostic as to what is defined as the
-time order or time labels. Finally, the <strong>Speed</strong> of the automatic progression
-can be adjusted by means of the slider button.</p>
-<p>In practice, manual progressions typically provides the most insight.</p>
-<p>We will illustrate the use of the time player in some simple comparative
-static analysis of the a-spatial as well as the spatial distribution of a variable over time.
-We will consider the box plot, scatter plot and choropleth map as examples.</p>
-<div id="box-plot-over-time" class="section level3 unnumbered">
-<h3>Box plot over time</h3>
-<p>We start with a box plot. Selecting the box plot icon or menu item brings up the
-variable settings dialog, in the usual fashion, as shown in Figure <a href="#fig:timevarsettings">14</a>. However, there is a difference with
-the case where no grouped variables are present.</p>
-<div class="figure" style="text-align: center"><span id="fig:timevarsettings"></span>
-<img src="pics3c/5_504_boxplottimechoice.png" alt="Box plot variable selection" width="25%" />
-<p class="caption">
-Figure 14: Box plot variable selection
-</p>
-</div>
-<p>Below the list of variables is a
-<strong>Time</strong> box that shows the currently active time label (2002 in our example). All
-time-enabled (grouped) variables in the interface have the first time label in parentheses
-next to their name (the variables without the parentheses are not time-enabled). A
-different time period can be selected from the <strong>Time</strong> drop down list, as displayed
-in Figure <a href="#fig:timevarsettings">14</a>.
-Once a different label is chosen, all variables in the list will show the updated
-label in parentheses.</p>
-<p>For now, we stay with the initial setting of 2002 and click on <strong>OK</strong> to bring up the
-box plot. In the default case, the box plots for all time periods are shown side
-by side, using the same axis for the associated values, as in Figure <a href="#fig:threeboxplots">15</a>.</p>
-<p>In our example, this clearly
-demonstrates the upward trend in median rent, something that would not be obvious
-in a standard (not time-enabled) box plot, since such plot is centered on its own median.
-In the default setting, the descriptive statistics for each period are listed below the plot.</p>
-<div class="figure" style="text-align: center"><span id="fig:threeboxplots"></span>
-<img src="pics3c/5_505_rent3box.png" alt="Multiple time period box plot" width="80%" />
-<p class="caption">
-Figure 15: Multiple time period box plot
-</p>
-</div>
-<p>We can again use linking to identify the outliers, assess whether they remain outliers
-over time, and show them in a map. In this particular example, we have a few suspicious
-observations with a value of 0, likely due to a coding error. We ignore this aspect for now.</p>
-<p>The time-enabled box plot has a number of interesting options. Perhaps the most useful
-of these is the <strong>Number of Box Plots</strong>. As shown in Figure <a href="#fig:numberboxplots">16</a>, the default is to display <strong>All</strong>, but
-it is also possible to display any subset (1 or 2).</p>
-<div class="figure" style="text-align: center"><span id="fig:numberboxplots"></span>
-<img src="pics3c/5_005_singleboxoption.png" alt="Box plot options" width="30%" />
-<p class="caption">
-Figure 16: Box plot options
-</p>
-</div>
-<p>For example, after changing this option to <strong>1</strong>, a single box plot appears, as in
-Figure <a href="#fig:numberboxplots1">17</a>. This graph
-displays
-the data for the first period, with 2002 listed in parentheses at the top of the graph. Consecutive
-clicking on the <strong>&gt;&gt;</strong> icon in the <strong>Time Player</strong> will move the plot forward, one period
-at a time. The other options of the time player allow continuous looping, moving in
-reverse order, etc., as outlined above.</p>
-<div class="figure" style="text-align: center"><span id="fig:numberboxplots1"></span>
-<img src="pics3c/5_507_singlebox.png" alt="Single time period box plot" width="60%" />
-<p class="caption">
-Figure 17: Single time period box plot
-</p>
-</div>
-<p>Two other options of the time-enabled box plot warrant mentioning (the remaining options
-work the same way as for the standard box plot). The first item in the menu in
-Figure <a href="#fig:numberboxplots">16</a>,
-<strong>Scale Options</strong>, is set by default to <strong>Fixed scale over time</strong>. This only applies to
-the individual box plots, not to the (default) simultaneous graph. When cycling through
-the different time periods, the default is that the same scale is used for all. This allows
-for some visual impression of changing overall patterns over time (e.g., it would show
-the median bar moving up over time). When turned off, each individual time box plot is
-as it would be without having a time-enabled variable.</p>
-<p>The option at the bottom of the menu pertains to <strong>Time Variable Options</strong> and is set
-by default to synchronize all variables through the time control. This means that
-all graphs or maps that have been constructed for time-enabled variables
-will be synchronized to
-move through the time periods as managed by the time player. This is typically the
-desired behavior. Only in exceptional circumstances should this be turned off, for
-example, where a given plot should not change by time period.</p>
-</div>
-<div id="scatter-plot-over-time" class="section level3 unnumbered">
-<h3>Scatter plot over time</h3>
-<p>The scatter plot for time-enabled variables uses the same logic as the box plot.
-Again, the variables selection interface is enhanced with two <strong>Time</strong> boxes at the
-bottom, as in Figure <a href="#fig:timescattervars">18</a>. This allows for the time periods for the x and y variables
-to be different, for example, when comparing the same variable in two time periods, as illustrated
-in Figures <a href="#fig:timelagscattervars">21</a>-<a href="#fig:timelagscatterplot">22</a>.
-The time-enabled variables are listed with the corresponding time label in parentheses.</p>
-<div class="figure" style="text-align: center"><span id="fig:timescattervars"></span>
-<img src="pics3c/6_513_scatplotvarsrenthh.png" alt="Scatter plot variable selection" width="40%" />
-<p class="caption">
-Figure 18: Scatter plot variable selection
-</p>
-</div>
-<p>To illustrate the operation of the scatter plot, we select <strong>hhsiz (2002)</strong> as the
-variable for the x-axis and <strong>rentpc (2002)</strong> as the variable for the y-axis. The
-corresponding scatter plot takes on the usual form, but now has the time labels
-listed next to each variable at the top of the plot, shown in Figure <a href="#fig:timescatterplot">19</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:timescatterplot"></span>
-<img src="pics3c/6_511_scatplotrenthh1.png" alt="Household size and percent renters, 2002" width="80%" />
-<p class="caption">
-Figure 19: Household size and percent renters, 2002
-</p>
-</div>
-<p>The scatter plot for the next period is brought up by clicking on
-<strong>&gt;&gt;</strong> in the time player. In our example in Figure <a href="#fig:timescatterplot2">20</a>, we see how the slope of the linear
-fit is no longer significant in 2005. All the usual scatter plot options apply (brushing, LOWESS
-smoother, etc.)</p>
-<div class="figure" style="text-align: center"><span id="fig:timescatterplot2"></span>
-<img src="pics3c/6_512_scatplotrenthh2.png" alt="Household size and percent renters, 2005" width="80%" />
-<p class="caption">
-Figure 20: Household size and percent renters, 2005
-</p>
-</div>
-<div id="serially-autoregressive-scatter-plot" class="section level4 unnumbered">
-<h4>Serially autoregressive scatter plot</h4>
-<p>One special feature of the time-enabled scatter plot is that it is very easy to
-consider a time-lagged bivariate regression. For example, we can select the
-<strong>yrhom</strong> variable in 2002 for the x-axis and the corresponding variable for 2005 in
-the y-axis, as in Figure <a href="#fig:timelagscattervars">21</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:timelagscattervars"></span>
-<img src="pics3c/6_508_scatplotvars.png" alt="Scatter plot variable selection by period" width="40%" />
-<p class="caption">
-Figure 21: Scatter plot variable selection by period
-</p>
-</div>
-<p>This results in an assessment of the magnitude of a one period temporal
-autoregression. In the graph in Figure <a href="#fig:timelagscatterplot">22</a>, it follows that the slope of 0.842 is highly significant.</p>
-<div class="figure" style="text-align: center"><span id="fig:timelagscatterplot"></span>
-<img src="pics3c/6_509_scatplot1.png" alt="Years in neighborhood, 2002-2005" width="80%" />
-<p class="caption">
-Figure 22: Years in neighborhood, 2002-2005
-</p>
-</div>
-<p>In the same way as before, this can be moved forward over time. Since there are only
-three period labels, there will only be two scatter plots considering a one-period lag.
-All the usual options apply.
-We do not pursue this further here.</p>
-</div>
-</div>
-<div id="maps-over-time" class="section level3 unnumbered">
-<h3>Maps over time</h3>
-<p>As our final example, we consider the application of time-enabled variables to
-choropleth mapping. This is one instance where the use of custom categories is
-especially useful. Unlike for the statistical graphs, there is no built-in <em>fixed scales</em>
-option for maps, but such scales can be defined through the <strong>Category Editor</strong>.</p>
-<p>For example, say that we want to assess the spatial distribution of median household
-size by sub-borough over time. We could create any of the choropleth map options
-starting with the <strong>hhsiz (2002)</strong> variable and then cycle through the three time
-periods by means of the time player. However, each of these maps would have its own
-(relative) classification, making it less intuitive to assess changes in absolute
-magnitude over time (as opposed to relative magnitude).</p>
-<p>Instead, we use the category editor to create a <strong>custom1</strong> break, starting with the
-<strong>hhsiz (2002)</strong> variable, making the breaks <strong>User-Defined</strong>, and turning the color
-scheme into <strong>sequential</strong>, with <strong>5</strong> categories. We manually enter the break points (somewhat arbitrarily) as 2, 2.5, 2.8 and 3. The result is as shown in Figure <a href="#fig:timecustombreaks">23</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:timecustombreaks"></span>
-<img src="pics3c/8_517_custombreaks.png" alt="Custom break settings, household size" width="80%" />
-<p class="caption">
-Figure 23: Custom break settings, household size
-</p>
-</div>
-<p>We now create a new map and choose <strong>Custom Breaks</strong> from the map menu, with <strong>custom1</strong> as the desired
-classification. The resulting map in Figure <a href="#fig:timemapcustom1">24</a> shows the spatial distribution of median household size
-for 2002.</p>
-<div class="figure" style="text-align: center"><span id="fig:timemapcustom1"></span>
-<img src="pics3c/8_518_map1.png" alt="Household size, custom breaks 2002" width="80%" />
-<p class="caption">
-Figure 24: Household size, custom breaks 2002
-</p>
-</div>
-<p>Moving through to the next period (2005) with the time player yields the map
-shown in Figure <a href="#fig:timemapcustom2">25</a> with the same legend
-classifications as in Figure <a href="#fig:timemapcustom1">24</a>. This way, in addition to comparing the spatial patterns, we see how the second category (2, 2.5) grows from 15 observations
-to 20, and the next to highest category (2.8, 3) goes from 13 to 7 observations.</p>
-<div class="figure" style="text-align: center"><span id="fig:timemapcustom2"></span>
-<img src="pics3c/8_519_map2.png" alt="Household size, custom breaks 2005" width="80%" />
-<p class="caption">
-Figure 25: Household size, custom breaks 2005
-</p>
-</div>
-<p>Finally, moving to 2008 in Figure <a href="#fig:timemapcustom3">26</a> illustrates a further changing pattern, with now only 5 observations
-remaining in the categories above 2.8.</p>
-<div class="figure" style="text-align: center"><span id="fig:timemapcustom3"></span>
-<img src="pics3c/8_520_map3.png" alt="Household size, custom breaks 2008" width="80%" />
-<p class="caption">
-Figure 26: Household size, custom breaks 2008
-</p>
-</div>
-<p>The use of custom categories to evaluate changes in the spatial pattern over time is
-particularly useful when the breaks are dictated by substantive concerns, such as
-specific policy-related criteria.</p>
-<p><br></p>
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>The time icon on the toolbar brings up both the time editor
-and the time player. In the menu, the time editor can be selected separately,
-but the time player item generates both the player and the editor.<a href="#fnref2" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
-
-<footer class="site-footer">
-  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
-  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-</footer>
-
-</section>
+    <h1 class="title toc-ignore">Space-Time Exploration</h1>
+    <h4 class="author"><em>Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></h4>
+    <h4 class="date"><em>03/15/2018 (revised and updated)</em></h4>
 
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
+    <div id="TOC">
+      <ul>
+        <li><a href="#introduction">Introduction</a>
+          <ul>
+            <li><a href="#objectives">Objectives</a>
+              <ul>
+                <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+              </ul>
+            </li>
+            <li><a href="#getting-started">Getting started</a></li>
+          </ul>
+        </li>
+        <li><a href="#time-editor">Time Editor</a>
+          <ul>
+            <li><a href="#grouping-variables">Grouping variables</a>
+              <ul>
+                <li><a href="#editing-the-time-label">Editing the time label</a></li>
+              </ul>
+            </li>
+            <li><a href="#saving-the-group-definitions-to-a-project-file">Saving the group definitions to a Project
+                File</a></li>
+          </ul>
+        </li>
+        <li><a href="#time-player">Time Player</a>
+          <ul>
+            <li><a href="#box-plot-over-time">Box plot over time</a></li>
+            <li><a href="#scatter-plot-over-time">Scatter plot over time</a>
+              <ul>
+                <li><a href="#serially-autoregressive-scatter-plot">Serially autoregressive scatter plot</a></li>
+              </ul>
+            </li>
+            <li><a href="#maps-over-time">Maps over time</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <p><br></p>
+    <div id="introduction" class="section level2 unnumbered">
+      <h2>Introduction</h2>
+      <p>In this chapter, we will cover the basic procedures for setting up <em>time-enabled</em> variables in
+        GeoDa through the <strong>Time Editor</strong>. These variables then become available for a simple form
+        of space-time exploration in the limited sense of comparative statics. By means of the <strong>Time
+          Player</strong>,
+        maps and graphs pertaining to a given variable can be shown for different time periods, allowing
+        for an albeit limited assessment of space-time dynamics.</p>
+      <p>One limitation of this approach is that it is cross-section oriented. More precisely, the different
+        time periods are considered as separate cross-sectional variables (one cross-section for each
+        time period). While this results in quite a bit of flexibility when it comes to <em>grouping</em>
+        variables, it also means there is no inherent time-awareness, nor a dedicated panel data structure.</p>
+      <p>To illustrate these features, we
+        will again use the data set with socio-economic characteristics for 55 New York City sub-boroughs
+        that is available as a sample data set.</p>
+      <div id="objectives" class="section level3 unnumbered">
+        <h3>Objectives</h3>
+        <ul>
+          <li>
+            <p>Create grouped variables by means of the Time Editor</p>
+          </li>
+          <li>
+            <p>Save group definitions in the Project File</p>
+          </li>
+          <li>
+            <p>Assess space-time patterns by means of the Time Player</p>
+          </li>
+        </ul>
+        <div id="geoda-functions-covered" class="section level4 unnumbered">
+          <h4>GeoDa functions covered</h4>
+          <ul>
+            <li>Time &gt; Time Editor
+              <ul>
+                <li>grouping variables</li>
+                <li>ungrouping variables</li>
+                <li>editing the Time label of a variable</li>
+                <li>removing time periods from a time-enabled variable</li>
+              </ul>
+            </li>
+            <li>Time &gt; Time Player
+              <ul>
+                <li>starting and pausing the player</li>
+              </ul>
+            </li>
+            <li>Box Plot
+              <ul>
+                <li>changing the number of time-enabled variables displayed</li>
+                <li>changing axes and synchronization options</li>
+              </ul>
+            </li>
+            <li>Scatter Plot
+              <ul>
+                <li>moving a scatter plot through time</li>
+                <li>time-wise autoregressive scatter plot</li>
+              </ul>
+            </li>
+            <li>Map
+              <ul>
+                <li>moving a choropleth map through time using custom categories</li>
+              </ul>
+            </li>
+          </ul>
+          <p><br></p>
+        </div>
+      </div>
+      <div id="getting-started" class="section level3 unnumbered">
+        <h3>Getting started</h3>
+        <p>With GeoDa launched and all previous projects closed, we start by loading the
+          NYC Data from the <strong>Sample Data</strong> tab in the <strong>Connect to Data Source</strong> dialog.
+          Since we will be creating a project file to store the space-time definitions that
+          we construct, it is best to save a copy of this data set to a working directory.
+          To accomplish this, we use <strong>File &gt; Save As</strong> and select ESRI Shapefile as the format.
+          In the examples that follow, we have used <strong>NYC_Sub_borough_Area</strong> as the file name.</p>
+        <p>Re-opening a project with the new data set yields the familiar themeless base map
+          shown in Figure <a href="#fig:nycbasemap">1</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:nycbasemap"></span>
+          <img src="pics3c/0_474_nyc_basemap.png" alt="NYC sub-borough themeless map" width="80%" />
+          <p class="caption">
+            Figure 1: NYC sub-borough themeless map
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="time-editor" class="section level2 unnumbered">
+      <h2>Time Editor</h2>
+      <p>We start the process of <em>grouping</em> the data for the same variable over different time
+        periods by invoking <strong>Time &gt; Editor</strong> from the main menu, as in Figure <a
+          href="#fig:timeEditorMain">2</a>.</p>
+      <div class="figure" style="text-align: center"><span id="fig:timeEditorMain"></span>
+        <img src="pics3c/1_475_time_editor_menu.png" alt="Time Editor in menu" width="15%" />
+        <p class="caption">
+          Figure 2: Time Editor in menu
+        </p>
+      </div>
+      <p>Alternatively, as shown in Figure <a href="#fig:timeEditorIcon">3</a>, we can select the <strong>Time</strong>
+        icon on the toolbar (the latter brings up
+        both the <strong>Time Editor</strong> and the <strong>Time Player</strong>).</p>
+      <div class="figure" style="text-align: center"><span id="fig:timeEditorIcon"></span>
+        <img src="pics3c/1_476_time_icon.png" alt="Time toolbar icon" width="10%" />
+        <p class="caption">
+          Figure 3: Time toolbar icon
+        </p>
+      </div>
+      <p>The main <strong>Time Editor</strong> interface is as in Figure <a href="#fig:timeEditorDialog">4</a>.</p>
+      <div class="figure" style="text-align: center"><span id="fig:timeEditorDialog"></span>
+        <img src="pics3c/1_477_time_editor_interface.png" alt="Time Editor interface" width="80%" />
+        <p class="caption">
+          Figure 4: Time Editor interface
+        </p>
+      </div>
+      <div id="grouping-variables" class="section level3 unnumbered">
+        <h3>Grouping variables</h3>
+        <p>The logic behind the time editor is that different variables are <em>grouped</em> under a single
+          label, with an attached index that refers to the time period. For example, if we wanted to
+          explore the evolution of the percentage households with children over time (the <strong>kidsxxxx</strong>
+          variables in the data set), we would <em>group</em> the six variables <strong>kids2000</strong> to
+          <strong>kids2009</strong> as
+          a new time-enabled variable <strong>kids</strong>.</p>
+        <p>The <strong>Time Editor</strong> interface is organized into three panels. The panel on the left, labeled
+          <strong>Ungrouped Variables</strong>, contains the variables with their original variable name. In
+          addition, after
+          some operations, it also includes the variables that are not time-enabled (for example, a variable like the ID
+          for the sub-borough, which does not change over time). The middle panel, <strong>New Group Details</strong>,
+          is where the name and time labels for the new grouped variable can be edited. The
+          right-most panel, <strong>Grouped Variables</strong>, lists the result of the grouping operations.
+        </p>
+        <p>The first step is to select the variables that are to be grouped in the left panel. For example,
+          in Figure <a href="#fig:groupselectvars">5</a>, we highlighted six variables, from <strong>kids2000</strong>
+          to <strong>kids2009</strong>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:groupselectvars"></span>
+          <img src="pics3c/2_478_kids_group.png" alt="Selection of variables to be grouped" width="80%" />
+          <p class="caption">
+            Figure 5: Selection of variables to be grouped
+          </p>
+        </div>
+        <p>Clicking on the arrow button <strong>&gt;</strong> moves the variables over to the central panel, with
+          a suggested variable name (<strong>kids200</strong>) and time labels (<strong>time 0</strong> through
+          <strong>time 5</strong>),
+          as illustrated in Figure <a href="#fig:groupvarsinmiddle">6</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:groupvarsinmiddle"></span>
+          <img src="pics3c/2_479_kids_movedover.png" alt="Grouping operation" width="80%" />
+          <p class="caption">
+            Figure 6: Grouping operation
+          </p>
+        </div>
+        <div id="editing-the-time-label" class="section level4 unnumbered">
+          <h4>Editing the time label</h4>
+          <p>Both the time label and the variable name can be edited, as shown
+            in Figures <a href="#fig:editTimeLabels">7</a>-<a href="#fig:editTimeLabels2">8</a>. Also, individual
+            variables can be moved up or down in the sequence (the sequence determines the order
+            of the comparatives static graphs and maps) by selecting the variable and using the
+            buttons at the bottom of the panel. In addition, any variable can be moved out of the
+            grouping, back to the ungrouped variables list, by selecting it and clicking on the left
+            arrow button (<strong>&lt;</strong>) to the right of the central panel.</p>
+          <p>For example, since the observations
+            for 2005 to 2009 are every year, but the first observation is for 2000, we may want to remove
+            <strong>kids2000</strong>
+            from the list. This is accomplished by selecting the
+            variable name and clicking on <strong>&lt;</strong>. This moves <strong>kids2000</strong> back to the
+            ungrouped variables panel, but it leaves the first time label in place. We remove it
+            by right clicking on the panel and selecting <strong>Remove Time</strong>, as shown in Figure <a
+              href="#fig:editTimeLabels">7</a>.</p>
+          <div class="figure" style="text-align: center"><span id="fig:editTimeLabels"></span>
+            <img src="pics3c/2_496_removetime.png" alt="Removing variables and time labels" width="80%" />
+            <p class="caption">
+              Figure 7: Removing variables and time labels
+            </p>
+          </div>
+          <p>Next, we change the variable
+            <strong>name</strong> from the suggested <strong>kids200</strong> to <strong>kids</strong> and start editing
+            the time labels to show the actual year, as in Figure <a href="#fig:editTimeLabels2">8</a>.
+          </p>
+          <div class="figure" style="text-align: center"><span id="fig:editTimeLabels2"></span>
+            <img src="pics3c/2_480_editingtimelabel.png" alt="Editing variable name and time labels" width="80%" />
+            <p class="caption">
+              Figure 8: Editing variable name and time labels
+            </p>
+          </div>
+          <p>At the end of the editing process, the <strong>New Group Details</strong> panels should look as in
+            Figure <a href="#fig:cleanEditTimelabels">9</a>.</p>
+          <div class="figure" style="text-align: center"><span id="fig:cleanEditTimelabels"></span>
+            <img src="pics3c/2_481_kidsedited.png" alt="Variables ready to be grouped" width="80%" />
+            <p class="caption">
+              Figure 9: Variables ready to be grouped
+            </p>
+          </div>
+          <p>The final step in the grouping process is to activate the group by selecting the <strong>&gt;</strong>
+            arrow
+            to the right of the central panel. This moves the new variable name to the
+            <strong>Grouped Variables</strong> panel and clears the central panel, as in Figure <a
+              href="#fig:variablesGrouped">10</a>.
+          </p>
+          <div class="figure" style="text-align: center"><span id="fig:variablesGrouped"></span>
+            <img src="pics3c/2_482_kids_grouped.png" alt="Grouped variable defined" width="80%" />
+            <p class="caption">
+              Figure 10: Grouped variable defined
+            </p>
+          </div>
+          <p>The original five variables in the data table are now replaced by a single entry, showing a
+            new variable <strong>kids</strong>, with the first time period in parentheses (<strong>2005</strong>), as
+            in Figure <a href="#fig:groupedVarsinTable">11</a>. The <strong>kids2000</strong>
+            variable, which was not included in the grouping process, is still listed individually.</p>
+          <div class="figure" style="text-align: center"><span id="fig:groupedVarsinTable"></span>
+            <img src="pics3c/2_483_grouped_kids_intable.png" alt="Grouped variable in the table" width="30%" />
+            <p class="caption">
+              Figure 11: Grouped variable in the table
+            </p>
+          </div>
+          <p>Note that the grouped variables have not been dropped as
+            individual entries, they are just not displayed as such in the table. The new label in parentheses indicates
+            that they have been grouped.</p>
+          <p>Finally, GeoDa is agnostic to what variables are grouped and in which order they are
+            arranged, so this procedure can
+            also be used to group variables that do not necessarily correspond to different time periods.
+            For example, this may be useful when constructing a box plot graph that shows the box
+            plots for multiple variables in one window.</p>
+        </div>
+      </div>
+      <div id="saving-the-group-definitions-to-a-project-file" class="section level3 unnumbered">
+        <h3>Saving the group definitions to a Project File</h3>
+        <p>As we have seen previously in the discussion of custom categories, any special definition
+          such as a grouped variable will be lost if it is not saved in a project
+          file (accomplished through <strong>File &gt; Save Project</strong>). Once contained in a project file, the
+          grouped variables can
+          be re-used in later analyses. There can be several different project files associated
+          with the same data layer, each focused on a special aspect of time dynamics.</p>
+        <p>The project file contains the <strong>time_ids</strong> specified in the time editor, and the new
+          variable definitions under the <strong>
+            <group>
+          </strong> entry. In our example, illustrated
+          in Figure <a href="#fig:groupVarsinProject">12</a>, the variable
+          <strong>kids</strong> is shown to be composed of <strong>kids2005</strong> through <strong>kids2009</strong>.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:groupVarsinProject"></span>
+          <img src="pics3c/3_004_project.png" alt="Grouped variable in project file" width="60%" />
+          <p class="caption">
+            Figure 12: Grouped variable in project file
+          </p>
+        </div>
+        <p>Note that in the current setup in GeoDa, the grouping of variables can only use one set of
+          time periods, due to the synchronization mechanism that underlies the time player. So,
+          in order to look at different time periods, such as six periods for one variable
+          and three for another, two separate project files would need to be created. More
+          precisely, any active grouping has to pertain to the same time labels for all the grouped
+          variable.</p>
+        <p>To illustrate the use of grouped variables, we create a new project file with the variables
+          <strong>hhsiz</strong>, <strong>rent</strong>, <strong>rentpc</strong> and <strong>yrhom</strong> grouped for
+          the three years 2002, 2005, and
+          2008. We store this in a new project file, say <strong>nyc_project2.gda</strong>. Then, we close
+          the current project and start a new one by dropping the project file in the <strong>Connect
+            to Data Source</strong> interface.
+        </p>
+      </div>
+    </div>
+    <div id="time-player" class="section level2 unnumbered">
+      <h2>Time Player</h2>
+      <p>We start the time player by clicking on its icon, as in Figure <a href="#fig:timeEditorIcon">3</a>, or from the
+        menu
+        as <strong>Time &gt; Time Player</strong>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> This
+        brings up
+        the simple player interface shown in Figure <a href="#fig:timeplayer">13</a>, together with the time editor
+        dialog
+        (not shown). We will ignore the latter
+        in the current discusion.</p>
+      <div class="figure" style="text-align: center"><span id="fig:timeplayer"></span>
+        <img src="pics3c/4_502_timeplayer.png" alt="Time player control" width="50%" />
+        <p class="caption">
+          Figure 13: Time player control
+        </p>
+      </div>
+      <p>The time player shows the <strong>Current time</strong> at the top, which is the time label that
+        corresponds with the first period of the grouped variable (2002 in our example). For
+        any graph or map in a current window, the time player will cycle through the time
+        periods for the grouped variable(s) displayed. The radio button on the slider shows
+        the progression over time. The controls at the bottom move the player forward
+        automatically using the single arrow <strong>&gt;</strong>, or manually forward or backward using
+        the double arrows <strong>&gt;&gt;</strong> and <strong>&lt;&lt;</strong>. The default is to
+        <strong>Loop</strong> (box checked) and
+        to move forward (<strong>Reverse</strong> <em>not</em> checked). Note that <em>forward</em> is whatever order
+        was used in the time editor, and is not automatically or necessarily the correct
+        time sequence. As mentioned above, GeoDa is agnostic as to what is defined as the
+        time order or time labels. Finally, the <strong>Speed</strong> of the automatic progression
+        can be adjusted by means of the slider button.</p>
+      <p>In practice, manual progressions typically provides the most insight.</p>
+      <p>We will illustrate the use of the time player in some simple comparative
+        static analysis of the a-spatial as well as the spatial distribution of a variable over time.
+        We will consider the box plot, scatter plot and choropleth map as examples.</p>
+      <div id="box-plot-over-time" class="section level3 unnumbered">
+        <h3>Box plot over time</h3>
+        <p>We start with a box plot. Selecting the box plot icon or menu item brings up the
+          variable settings dialog, in the usual fashion, as shown in Figure <a href="#fig:timevarsettings">14</a>.
+          However, there is a difference with
+          the case where no grouped variables are present.</p>
+        <div class="figure" style="text-align: center"><span id="fig:timevarsettings"></span>
+          <img src="pics3c/5_504_boxplottimechoice.png" alt="Box plot variable selection" width="25%" />
+          <p class="caption">
+            Figure 14: Box plot variable selection
+          </p>
+        </div>
+        <p>Below the list of variables is a
+          <strong>Time</strong> box that shows the currently active time label (2002 in our example). All
+          time-enabled (grouped) variables in the interface have the first time label in parentheses
+          next to their name (the variables without the parentheses are not time-enabled). A
+          different time period can be selected from the <strong>Time</strong> drop down list, as displayed
+          in Figure <a href="#fig:timevarsettings">14</a>.
+          Once a different label is chosen, all variables in the list will show the updated
+          label in parentheses.
+        </p>
+        <p>For now, we stay with the initial setting of 2002 and click on <strong>OK</strong> to bring up the
+          box plot. In the default case, the box plots for all time periods are shown side
+          by side, using the same axis for the associated values, as in Figure <a href="#fig:threeboxplots">15</a>.</p>
+        <p>In our example, this clearly
+          demonstrates the upward trend in median rent, something that would not be obvious
+          in a standard (not time-enabled) box plot, since such plot is centered on its own median.
+          In the default setting, the descriptive statistics for each period are listed below the plot.</p>
+        <div class="figure" style="text-align: center"><span id="fig:threeboxplots"></span>
+          <img src="pics3c/5_505_rent3box.png" alt="Multiple time period box plot" width="80%" />
+          <p class="caption">
+            Figure 15: Multiple time period box plot
+          </p>
+        </div>
+        <p>We can again use linking to identify the outliers, assess whether they remain outliers
+          over time, and show them in a map. In this particular example, we have a few suspicious
+          observations with a value of 0, likely due to a coding error. We ignore this aspect for now.</p>
+        <p>The time-enabled box plot has a number of interesting options. Perhaps the most useful
+          of these is the <strong>Number of Box Plots</strong>. As shown in Figure <a href="#fig:numberboxplots">16</a>,
+          the default is to display <strong>All</strong>, but
+          it is also possible to display any subset (1 or 2).</p>
+        <div class="figure" style="text-align: center"><span id="fig:numberboxplots"></span>
+          <img src="pics3c/5_005_singleboxoption.png" alt="Box plot options" width="30%" />
+          <p class="caption">
+            Figure 16: Box plot options
+          </p>
+        </div>
+        <p>For example, after changing this option to <strong>1</strong>, a single box plot appears, as in
+          Figure <a href="#fig:numberboxplots1">17</a>. This graph
+          displays
+          the data for the first period, with 2002 listed in parentheses at the top of the graph. Consecutive
+          clicking on the <strong>&gt;&gt;</strong> icon in the <strong>Time Player</strong> will move the plot forward,
+          one period
+          at a time. The other options of the time player allow continuous looping, moving in
+          reverse order, etc., as outlined above.</p>
+        <div class="figure" style="text-align: center"><span id="fig:numberboxplots1"></span>
+          <img src="pics3c/5_507_singlebox.png" alt="Single time period box plot" width="60%" />
+          <p class="caption">
+            Figure 17: Single time period box plot
+          </p>
+        </div>
+        <p>Two other options of the time-enabled box plot warrant mentioning (the remaining options
+          work the same way as for the standard box plot). The first item in the menu in
+          Figure <a href="#fig:numberboxplots">16</a>,
+          <strong>Scale Options</strong>, is set by default to <strong>Fixed scale over time</strong>. This only applies
+          to
+          the individual box plots, not to the (default) simultaneous graph. When cycling through
+          the different time periods, the default is that the same scale is used for all. This allows
+          for some visual impression of changing overall patterns over time (e.g., it would show
+          the median bar moving up over time). When turned off, each individual time box plot is
+          as it would be without having a time-enabled variable.
+        </p>
+        <p>The option at the bottom of the menu pertains to <strong>Time Variable Options</strong> and is set
+          by default to synchronize all variables through the time control. This means that
+          all graphs or maps that have been constructed for time-enabled variables
+          will be synchronized to
+          move through the time periods as managed by the time player. This is typically the
+          desired behavior. Only in exceptional circumstances should this be turned off, for
+          example, where a given plot should not change by time period.</p>
+      </div>
+      <div id="scatter-plot-over-time" class="section level3 unnumbered">
+        <h3>Scatter plot over time</h3>
+        <p>The scatter plot for time-enabled variables uses the same logic as the box plot.
+          Again, the variables selection interface is enhanced with two <strong>Time</strong> boxes at the
+          bottom, as in Figure <a href="#fig:timescattervars">18</a>. This allows for the time periods for the x and y
+          variables
+          to be different, for example, when comparing the same variable in two time periods, as illustrated
+          in Figures <a href="#fig:timelagscattervars">21</a>-<a href="#fig:timelagscatterplot">22</a>.
+          The time-enabled variables are listed with the corresponding time label in parentheses.</p>
+        <div class="figure" style="text-align: center"><span id="fig:timescattervars"></span>
+          <img src="pics3c/6_513_scatplotvarsrenthh.png" alt="Scatter plot variable selection" width="40%" />
+          <p class="caption">
+            Figure 18: Scatter plot variable selection
+          </p>
+        </div>
+        <p>To illustrate the operation of the scatter plot, we select <strong>hhsiz (2002)</strong> as the
+          variable for the x-axis and <strong>rentpc (2002)</strong> as the variable for the y-axis. The
+          corresponding scatter plot takes on the usual form, but now has the time labels
+          listed next to each variable at the top of the plot, shown in Figure <a href="#fig:timescatterplot">19</a>.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:timescatterplot"></span>
+          <img src="pics3c/6_511_scatplotrenthh1.png" alt="Household size and percent renters, 2002" width="80%" />
+          <p class="caption">
+            Figure 19: Household size and percent renters, 2002
+          </p>
+        </div>
+        <p>The scatter plot for the next period is brought up by clicking on
+          <strong>&gt;&gt;</strong> in the time player. In our example in Figure <a href="#fig:timescatterplot2">20</a>,
+          we see how the slope of the linear
+          fit is no longer significant in 2005. All the usual scatter plot options apply (brushing, LOWESS
+          smoother, etc.)
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:timescatterplot2"></span>
+          <img src="pics3c/6_512_scatplotrenthh2.png" alt="Household size and percent renters, 2005" width="80%" />
+          <p class="caption">
+            Figure 20: Household size and percent renters, 2005
+          </p>
+        </div>
+        <div id="serially-autoregressive-scatter-plot" class="section level4 unnumbered">
+          <h4>Serially autoregressive scatter plot</h4>
+          <p>One special feature of the time-enabled scatter plot is that it is very easy to
+            consider a time-lagged bivariate regression. For example, we can select the
+            <strong>yrhom</strong> variable in 2002 for the x-axis and the corresponding variable for 2005 in
+            the y-axis, as in Figure <a href="#fig:timelagscattervars">21</a>.
+          </p>
+          <div class="figure" style="text-align: center"><span id="fig:timelagscattervars"></span>
+            <img src="pics3c/6_508_scatplotvars.png" alt="Scatter plot variable selection by period" width="40%" />
+            <p class="caption">
+              Figure 21: Scatter plot variable selection by period
+            </p>
+          </div>
+          <p>This results in an assessment of the magnitude of a one period temporal
+            autoregression. In the graph in Figure <a href="#fig:timelagscatterplot">22</a>, it follows that the slope
+            of 0.842 is highly significant.</p>
+          <div class="figure" style="text-align: center"><span id="fig:timelagscatterplot"></span>
+            <img src="pics3c/6_509_scatplot1.png" alt="Years in neighborhood, 2002-2005" width="80%" />
+            <p class="caption">
+              Figure 22: Years in neighborhood, 2002-2005
+            </p>
+          </div>
+          <p>In the same way as before, this can be moved forward over time. Since there are only
+            three period labels, there will only be two scatter plots considering a one-period lag.
+            All the usual options apply.
+            We do not pursue this further here.</p>
+        </div>
+      </div>
+      <div id="maps-over-time" class="section level3 unnumbered">
+        <h3>Maps over time</h3>
+        <p>As our final example, we consider the application of time-enabled variables to
+          choropleth mapping. This is one instance where the use of custom categories is
+          especially useful. Unlike for the statistical graphs, there is no built-in <em>fixed scales</em>
+          option for maps, but such scales can be defined through the <strong>Category Editor</strong>.</p>
+        <p>For example, say that we want to assess the spatial distribution of median household
+          size by sub-borough over time. We could create any of the choropleth map options
+          starting with the <strong>hhsiz (2002)</strong> variable and then cycle through the three time
+          periods by means of the time player. However, each of these maps would have its own
+          (relative) classification, making it less intuitive to assess changes in absolute
+          magnitude over time (as opposed to relative magnitude).</p>
+        <p>Instead, we use the category editor to create a <strong>custom1</strong> break, starting with the
+          <strong>hhsiz (2002)</strong> variable, making the breaks <strong>User-Defined</strong>, and turning the color
+          scheme into <strong>sequential</strong>, with <strong>5</strong> categories. We manually enter the break
+          points (somewhat arbitrarily) as 2, 2.5, 2.8 and 3. The result is as shown in Figure <a
+            href="#fig:timecustombreaks">23</a>.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:timecustombreaks"></span>
+          <img src="pics3c/8_517_custombreaks.png" alt="Custom break settings, household size" width="80%" />
+          <p class="caption">
+            Figure 23: Custom break settings, household size
+          </p>
+        </div>
+        <p>We now create a new map and choose <strong>Custom Breaks</strong> from the map menu, with
+          <strong>custom1</strong> as the desired
+          classification. The resulting map in Figure <a href="#fig:timemapcustom1">24</a> shows the spatial
+          distribution of median household size
+          for 2002.</p>
+        <div class="figure" style="text-align: center"><span id="fig:timemapcustom1"></span>
+          <img src="pics3c/8_518_map1.png" alt="Household size, custom breaks 2002" width="80%" />
+          <p class="caption">
+            Figure 24: Household size, custom breaks 2002
+          </p>
+        </div>
+        <p>Moving through to the next period (2005) with the time player yields the map
+          shown in Figure <a href="#fig:timemapcustom2">25</a> with the same legend
+          classifications as in Figure <a href="#fig:timemapcustom1">24</a>. This way, in addition to comparing the
+          spatial patterns, we see how the second category (2, 2.5) grows from 15 observations
+          to 20, and the next to highest category (2.8, 3) goes from 13 to 7 observations.</p>
+        <div class="figure" style="text-align: center"><span id="fig:timemapcustom2"></span>
+          <img src="pics3c/8_519_map2.png" alt="Household size, custom breaks 2005" width="80%" />
+          <p class="caption">
+            Figure 25: Household size, custom breaks 2005
+          </p>
+        </div>
+        <p>Finally, moving to 2008 in Figure <a href="#fig:timemapcustom3">26</a> illustrates a further changing
+          pattern, with now only 5 observations
+          remaining in the categories above 2.8.</p>
+        <div class="figure" style="text-align: center"><span id="fig:timemapcustom3"></span>
+          <img src="pics3c/8_520_map3.png" alt="Household size, custom breaks 2008" width="80%" />
+          <p class="caption">
+            Figure 26: Household size, custom breaks 2008
+          </p>
+        </div>
+        <p>The use of custom categories to evaluate changes in the spatial pattern over time is
+          particularly useful when the breaks are dictated by substantive concerns, such as
+          specific policy-related criteria.</p>
+        <p><br></p>
+      </div>
+    </div>
+    <div class="footnotes">
+      <hr />
+      <ol>
+        <li id="fn1">
+          <p>University of Chicago, Center for Spatial Data Science – <a
+              href="mailto:anselin@uchicago.edu">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩</a>
+          </p>
+        </li>
+        <li id="fn2">
+          <p>The time icon on the toolbar brings up both the time editor
+            and the time player. In the menu, the time editor can be selected separately,
+            but the time player item generates both the player and the editor.<a href="#fnref2"
+              class="footnote-back">↩</a></p>
+        </li>
+      </ol>
+    </div>
+
+    <footer class="site-footer">
+      <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a
+          href="#">lixun910</a>.</span>
+      <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>
+        using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a
+          href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+    </footer>
+
+  </section>
+
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
 
 </body>
+
 </html>

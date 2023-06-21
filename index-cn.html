@@ -1,293 +1,380 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
-    <meta charset="UTF-8">
-    <title>GeoDa on Github</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-    	*{margin:0;padding:0;}
-	.shadowfilter {
-	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-	//filter: url(shadow.svg#drop-shadow);
-	}
-	.intro1 { margin-left: -45px;}
-    </style>
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="stylesheets/simple-slideshow-styles.css">
-    <style>
-	figcaption {
-	  top: .70em;
-   	  left: .35em;
- 	  bottom: auto!important;
-	  right: auto!important;
-	}
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-  </head>
-  <body>
 
-<!-- Google Analytics -->
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-72724100-1', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-<!-- End Google Analytics -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<head>
+  <meta charset="UTF-8">
+  <title>GeoDa on Github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-  gtag('config', 'G-LC0QJ53WFS');
-</script>
-<!-- End Google tag -->
+    .shadowfilter {
+      -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      //filter: url(shadow.svg#drop-shadow);
+    }
 
+    .intro1 {
+      margin-left: -45px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/simple-slideshow-styles.css">
+  <style>
+    figcaption {
+      top: .70em;
+      left: .35em;
+      bottom: auto !important;
+      right: auto !important;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+</head>
 
-    <section class="page-header">
-      <h1 class="project-name">GeoDa</h1>
-      <h2 class="project-tagline">空间数据分析软件</h2>
-      <a href="//geodacenter.github.io/download_cn.html" class="btn">下载</a>
-      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">在GitHub上查看该项目</a>
-      <a href="https://geodacenter.github.io/data-and-lab/"  target="_blank" class="btn">数据</a>
-      <a href="//geodacenter.github.io/cheatsheet.html" class="btn">Cheat Sheet</a>
-      <a href="//geodacenter.github.io/documentation.html" class="btn">&#25991;&#26723;</a>
-      <a href="//geodacenter.github.io/support.html" class="btn">&#25216;&#26415;&#25903;&#25345;</a>
-      <a href="//geodacenter.github.io/" class="btn">English Version</a>
-    </section>
+<body>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    <section class="main-content">
-      <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
-  <span class="octicon octicon-link"></span></a>GeoDa 1.20 介绍</h3>
-
-<p>GeoDa是一个免费、开源的空间数据分析软件。 通过探索和建模空间模式，GeoDa向用户提供了全新的空间数据分析视角。</p>
-
-<p>GeoDa是由 <a href="https://en.wikipedia.org/wiki/Luc_Anselin">Luc Anselin</a> 博士和其<a href="https://github.com/orgs/GeoDaCenter/people">团队</a>开发的. 该程序提供了友好的用户界面以及丰富的用于探索性空间数据分析(ESDA)的方法，比如空间自相关统计(spatial autocorrelation statistics)和基本的空间回归分析(spatial regression analysis)。 </p>
-
-<p>从2003年2月GeoDa发布第一个版本以来， GeoDa的用户数量 成倍的增长。截止2017年6月，GeoDa的用户数量已经超过了20万。 包括哈佛，麻省理工、康奈尔等著名大学都在实验室中安装并使用GeoDa软件。GeoDa软件得到了用户和媒体广泛的好评，被称之为“一个非常重要的分析工具”，“一款制作精良的软件”，有着“激动人心的进展”。</p>
-
-<p>GeoDa最新发布的版本是1.20。新版本包含了很多新的功能，比如：单变量和多变量的局部Geary聚类分析，集成了经典的（非空间）聚类分析方法（PCA，K-Means,Hierarchical聚类--详细请参考Hoon et al's 2013 "<a href=https://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf>C Clustering Library</a>"）。同时GeoDa也支持更多的空间数据格式，支持时空（space-time)数据，支持包括Nokia和Carto提供的底图(Basemap)显示，均值比较图表(averages charts)，散点图矩阵(scatter plot matrices)，非参数的空间自相关图(nonparametric spatial autocorrelation--correlogram)，以及灵活的数据分类方法(flexible data categorization)。</p>
-
-<p>新的GeoDa使用手册正在编写中。如果您有兴趣，可以点击<a href="https://geodacenter.asu.edu/og_tutorials"  onclick="ga('send', 'event', 'GeoDaTutorial18O', 'GeoDaDocument', 'GeoDa Tutorial 18');">这个链接</a>阅读GeoDa 1.18中提供的空间数据分析功能。</p>
-
-<br/>
-<h3>
-<a id="intro-toolbar" class="anchor" href="#intro-toolbar" aria-hidden="true">
-	<span class="octicon octicon-link"></span></a>全新的外观</h3>
-<p>
-<div class="bss-slides num2" tabindex="2">
-   <figure>
-      <img src="images/intro1.png"  class="shadowfilter intro1" width="100%" /><figcaption>Mac OSX Yosemite</figcaption>
-   </figure>
-    <figure>
-      <img src="images/intro2.png" class="shadowfilter intro1" width="100%" /><figcaption>Windows 7/8/10</figcaption>
-   </figure>
-   <figure>
-      <img src="images/intro3.png"  class="shadowfilter intro1" width="100%" /><figcaption>Ubuntu 14.04</figcaption>
-   </figure>
-</div> <!-- // bss-slides -->
-<script src="javascripts/better-simple-slideshow.min.js"></script>
-<script>
-var opts = {
-    auto : {speed: 5000, pauseOnHover: true},
-    fullScreen : false,
-    swipe : true
-};
-makeBSS('.num2', opts);
-</script>
-
-</p>
-
-<p>跨平台：GeoDa可以运行在Windows， MacOSX 和 Linux (Ubuntu) 系统上。</p>
-
-<br/>
-<h3>
-<a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-GeoDa支持更多的空间数据格式</h3>
-<p>引入GDAL软件库后，GeoDa目前可以支持多种矢量数据格式，包括：ESRI Shapefile, ESRI geodatabase, GeoJson, MapInfo, GML, KML等。 同时GeoDa也能从表格数据(如：.csv, .dbf, .xls, .ods)中通过制定坐标数据（X，Y或者经纬度）来创建点空间数据。 GeoDa也能让用户将感兴趣的、选中的数据另存为一个新的矢量数据。</p>
-<p><img src="images/dataformats.png" class="shadowfilter"></p>
-
-<br/>
-<h3>
-<a id="intro-esda" class="anchor" href="#intro-esda" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-通过相互关联的地图和图表探索统计结果</h3>
-<p>In contrast to programs that visualize raw data in maps, GeoDa focuses on exploring the results of statistical tests and models through linked maps and charts.</p>
-<p><img src="images/esda.png" class="shadowfilter"></p>
-
-<br/>
-<h3>
-<a id="intro-time" class="anchor" href="#intro-time" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-时空模式分析</h3>
-<p>You can now group the same variable across time periods in the new Time Editor to explore statistical patterns across space and time. Then explore results as views change over time with the Time Player.</p>
-<p><img src="images/time.png" class="shadowfilter"></p>
-
-<h3>
-<a id="intro-ui" class="anchor" href="#intro-ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-添加包括Nokia和CartoDB提供的底图(Basemap)</h3>
-
-<p>If your spatial data are projected (.prj file), you can now add a basemap to any map view, including cluster maps, for better orientation and for ground-truthing results.</p>
-
-<p>
-<img src="images/intro4.png" class="shadowfilter fiximage" width=832>
-</p>
-
-<br/>
-<h3>
-<a id="intro-avg" class="anchor" href="#intro-avg" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-时空数据的均值比较</h3>
-<p>A new Averages Chart compares values that are averaged over time and/or space and tests if the differences in these means are significant. For instance, first select if you want to compare means of selected vs. unselected observations in the same time period or compare all observations for different time periods. A basic pre-post/impact-control test then indicates if your results changed over time and space (using an F-test and difference-in-difference test).</p>
-<p><img src="images/avgchart.png" class="shadowfilter"></p>
-
-<br/>
-<h3>
-<a id="intro-sp-matrix" class="anchor" href="#intro-sp-matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-检测多元空间关系</h3>
-<p>A scatter plot matrix allows you to explore multiple bivariate correlations at once. In this example, the regression slopes for selected, unselected and all police precincts in San Francisco are shown to explore relationships between four types of crime.</p>
-<p><img src="images/scatter_matrix.png" class="shadowfilter"></p>
-
-<br/>
-<h3>
-<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-检测随时间的变化在空间上聚集</h3>
-<p>Use a global or local Differential Moran?s I test to find out if a variable?s change over time in a given location is statistically related to that of its neighbors. For instance, this local (LISA) cluster map shows hotspots in New York with larger changes in the share of kids between 2002 and 2008 (and coldspots with smaller changes).</p>
-<p><img src="images/DiffMI.png" class="shadowfilter"></p>
-
-<br/>
-<h3>
-<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>单/多变量的空间聚类分析</h3>
-<p><a href="docs/LA_multivariateGeary1.pdf" target="_blank">Luc Anselin (2017)</a> recently extended Geary's c with a new local indicator of spatial association. This is applied to the classic data set of "moral statistics" of France (Guerry, 1833) to show significant high and low spatial concentrations of literacy (left map) and significant associations of property crime and literacy (right map).</p>
-<p><img src="images/localGeary.png" class="shadowfilter"></p>
-
-<br/>
-<h3>
-<a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span class="octicon octicon-link"></span></a>集成经典的数据聚类方法分析空间数据</h3>
-<p>You can now map patterns of several classic non-spatial cluster techniques, including principal component analysis (left maps), k-means (top right), and hierarchical clustering (bottom right). Using the same data as in the example above, the maps below show local clusters of property crime, literacy, and suicide.</p>
-<p><img src="images/nonspatial_clusters.png" class="shadowfilter"></p>
-
-<br/>
-<h3>
-<a id="intro-corr" class="anchor" href="#intro-corr" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-检测空间相关性边界阈值</h3>
-<p>A nonparametric spatial autocorrelation test (correlogram) is now available to determine distance thresholds when the values of neighboring pairs are no longer correlated.</p>
-<p><img src="images/corr.png" class="shadowfilter"></p>
-
-<br/>
-<h3>
-<a id="intro-cat" class="anchor" href="#intro-cat" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-探索多种空间数据分类</h3>
-<p>With the new category editor, you can explore how sensitive your results are to changes in the thresholds that categorize your data. In this example the thresholds in the conditional map (right) are based on the categories that can be adjusted in the category editor (left).</p>
-<p><img src="images/cat_editor.png" class="shadowfilter"></p>
-
-<h3>
-<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-GeoDa引用的相关的软件</h3>
-
-<p>GeoDa is released under a GPL license. It builds on several open source libraries and source-code files. Below is the list of the key projects that we would like to acknowledge.</p>
-
-<font style="font-size:small">
-<p>
-	GDAL Libraries, version 1.10.
-License: X/MIT style Open Source license.
-Authors: Many.
-Links: https://www.gdal.org/
-</p>
-<p>Boost Libraries, version 1.53.
-License: Boost Software License - Version 1.0.
-Authors: Many.
-Links: <a href="https://www.boost.org/">https://www.boost.org/</a>
-       <a href="https://www.boost.org/LICENSE_1_0.txt">https://www.boost.org/LICENSE_1_0.txt</a></p>
-
-<p>Boost.Polygon Voronoi Library, Boost version 1.53.
-License: Boost Software License - Version 1.0.
-Author: Andrii Sydorchuk.
-Links: <a href="https://www.boost.org/">https://www.boost.org/</a>
-       <a href="https://www.boost.org/LICENSE_1_0.txt">https://www.boost.org/LICENSE_1_0.txt</a></p>
-
-<p>wxWidgets Cross-Platform GUI Library, version 2.9.4.
-License: The wxWindows Library Licence.
-Authors: Julian Smart, Robert Roebling, and others.
-Links: <a href="https://www.wxwidgets.org/">https://www.wxwidgets.org/</a>
-       <a href="https://www.opensource.org/licenses/wxwindows.php">https://www.opensource.org/licenses/wxwindows.php</a></p>
-
-<p>CLAPACK Linear Algebra Libraries, version 3.2.1.
-Authors: Many.
-License: Custom by University of Tennessee.
-Links: <a href="https://www.netlib.org/clapack/">https://www.netlib.org/clapack/</a>
-       <a href="https://www.netlib.org/lapack/lapack-3.2/LICENSE">https://www.netlib.org/lapack/lapack-3.2/LICENSE</a></p>
-
-<p>Approximate Nearest Neighbor Library, version 0.1.
-Note: Full source of 0.1 release included in kNN directory.
-Authors: Sunil Arya and David Mount.
-License: See kNN/AHH.h in included source files.
-Links: <a href="https://www.cs.umd.edu/%7Emount/ANN/">https://www.cs.umd.edu/~mount/ANN/</a></p>
-
-<p>FastArea.c++ source code.
-Note: The source for functions findArea and
-      ComputeArea2D are in the file GenGeomAlgs.h from FastArea.c++
-      in Journal of Graphics Tools, 7(2):9-13, 2002
-Author: Daniel Sunday.
-License: Unknown.
-Links: <a href="https://jgt.akpeters.com/papers/Sunday02/FastArea.html">https://jgt.akpeters.com/papers/Sunday02/FastArea.html</a></p>
-
-<p>logger.h source code.
-Author: Seweryn Habdank-Wojewodzki.
-Note: We have copied the source for logger.h and modified it slightly
-      to work with wxString.
-License: Boost Software License - Version 1.0.
-Links: <a href="https://accu.org/index.php/journals/1304">https://accu.org/index.php/journals/1304</a></p>
-
-<p>nullstream.h source code.
-Author: Maciej Sobczak.
-License: See logger.h in included source files.
-Links: <a href="https://www.msobczak.com/">https://www.msobczak.com/</a></p>
-
-<p>The C Clustering Library.
-Authors: Hoon, Michiel de, Seiya Imoto, Satoru Miyano. (2013). The University of Tokyo, Institute of Medical Science, Human Genome Center.
-License: Python License.
-Links: <a href="https://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" target="_blank">The C Clustering Library.</a></p>
+    gtag('config', 'G-LC0QJ53WFS');
+  </script>
+  <!-- End Google tag -->
 
 
-</font>
+  <section class="page-header">
+    <h1 class="project-name">GeoDa</h1>
+    <h2 class="project-tagline">空间数据分析软件</h2>
+    <a href="//geodacenter.github.io/download_cn.html" class="btn">下载</a>
+    <a href="https://github.com/GeoDaCenter/geoda/" class="btn">在GitHub上查看该项目</a>
+    <a href="https://geodacenter.github.io/data-and-lab/" target="_blank" class="btn">数据</a>
+    <a href="//geodacenter.github.io/cheatsheet.html" class="btn">Cheat Sheet</a>
+    <a href="//geodacenter.github.io/documentation.html" class="btn">&#25991;&#26723;</a>
+    <a href="//geodacenter.github.io/support.html" class="btn">&#25216;&#26415;&#25903;&#25345;</a>
+    <a href="//geodacenter.github.io/" class="btn">English Version</a>
+  </section>
 
-<br/>
-<h3>
-<a id="intro-ackn" class="anchor" href="#intro-ackn" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-致谢</h3>
-<p>The development of GeoDa has most recently been supported by the National Science Foundation, the National Institutes of Health, the National Institute of Justice, and the Agency for Healthcare Research and Quality.</p>
+  <section class="main-content">
+    <h3>
+      <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+        <span class="octicon octicon-link"></span></a>GeoDa 1.20 介绍
+    </h3>
 
-<h3>
-<a id="intro-support" class="anchor" href="#intro-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>&#25216;&#26415;&#25903;&#25345;</h3>
-<p>We are currently updating the <a href="documentation.html">documentation</a> to reflect the new features in GeoDa 1.10.
-The <a href="support.html">Openspace listserv</a> supports technical questions about GeoDa.</p>
+    <p>GeoDa是一个免费、开源的空间数据分析软件。 通过探索和建模空间模式，GeoDa向用户提供了全新的空间数据分析视角。</p>
 
-<h3>
-<a id="intro-license" class="anchor" href="#intro-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>&#29256;&#26435;&#20449;&#24687;</h3>
-<p>GeoDa uses a <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL License (General Public License)</a>.</p>
+    <p>GeoDa是由 <a href="https://en.wikipedia.org/wiki/Luc_Anselin">Luc Anselin</a> 博士和其<a
+        href="https://github.com/orgs/GeoDaCenter/people">团队</a>开发的.
+      该程序提供了友好的用户界面以及丰富的用于探索性空间数据分析(ESDA)的方法，比如空间自相关统计(spatial autocorrelation statistics)和基本的空间回归分析(spatial regression
+      analysis)。 </p>
 
-<h3>
-<a id="intro-contact" class="anchor" href="#intro-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-联系方式</h3>
-<p>如果有任何疑问，请联系<a href="mailto:spatial@uchicago.edu">我们</a>。</p>
+    <p>从2003年2月GeoDa发布第一个版本以来， GeoDa的用户数量 成倍的增长。截止2017年6月，GeoDa的用户数量已经超过了20万。
+      包括哈佛，麻省理工、康奈尔等著名大学都在实验室中安装并使用GeoDa软件。GeoDa软件得到了用户和媒体广泛的好评，被称之为“一个非常重要的分析工具”，“一款制作精良的软件”，有着“激动人心的进展”。</p>
 
-<h3>
-<a id="intro-donate" class="anchor" href="#intro-donate" aria-hidden="true"><span class="octicon octicon-link"></span></a>捐赠</h3>
-<p>GeoDa软件的开源、免费发行离不开您的支持，请点击<a href="https://giving.uchicago.edu/site/Donation2?1838.donation=form1&df_id=1838&mfc_pref=T&set.Designee=1901">这里</a>支持我们的工作。谢谢！<br/>
-	<a href="https://giving.uchicago.edu/site/Donation2?1838.donation=form1&df_id=1838&mfc_pref=T&set.Designee=1901"><img src="images/donate.png"></a></p>
+    <p>GeoDa最新发布的版本是1.20。新版本包含了很多新的功能，比如：单变量和多变量的局部Geary聚类分析，集成了经典的（非空间）聚类分析方法（PCA，K-Means,Hierarchical聚类--详细请参考Hoon et
+      al's 2013 "<a href=https://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf>C Clustering
+        Library</a>"）。同时GeoDa也支持更多的空间数据格式，支持时空（space-time)数据，支持包括Nokia和Carto提供的底图(Basemap)显示，均值比较图表(averages
+      charts)，散点图矩阵(scatter plot matrices)，非参数的空间自相关图(nonparametric spatial
+      autocorrelation--correlogram)，以及灵活的数据分类方法(flexible data categorization)。</p>
+
+    <p>新的GeoDa使用手册正在编写中。如果您有兴趣，可以点击<a href="https://geodacenter.asu.edu/og_tutorials">这个链接</a>阅读GeoDa 1.18中提供的空间数据分析功能。
+    </p>
+
+    <br />
+    <h3>
+      <a id="intro-toolbar" class="anchor" href="#intro-toolbar" aria-hidden="true">
+        <span class="octicon octicon-link"></span></a>全新的外观
+    </h3>
+    <p>
+    <div class="bss-slides num2" tabindex="2">
+      <figure>
+        <img src="images/intro1.png" class="shadowfilter intro1" width="100%" />
+        <figcaption>Mac OSX Yosemite</figcaption>
+      </figure>
+      <figure>
+        <img src="images/intro2.png" class="shadowfilter intro1" width="100%" />
+        <figcaption>Windows 7/8/10</figcaption>
+      </figure>
+      <figure>
+        <img src="images/intro3.png" class="shadowfilter intro1" width="100%" />
+        <figcaption>Ubuntu 14.04</figcaption>
+      </figure>
+    </div> <!-- // bss-slides -->
+    <script src="javascripts/better-simple-slideshow.min.js"></script>
+    <script>
+      var opts = {
+        auto: { speed: 5000, pauseOnHover: true },
+        fullScreen: false,
+        swipe: true
+      };
+      makeBSS('.num2', opts);
+    </script>
+
+    </p>
+
+    <p>跨平台：GeoDa可以运行在Windows， MacOSX 和 Linux (Ubuntu) 系统上。</p>
+
+    <br />
+    <h3>
+      <a id="intro-data-formats" class="anchor" href="#intro-data-formats" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      GeoDa支持更多的空间数据格式
+    </h3>
+    <p>引入GDAL软件库后，GeoDa目前可以支持多种矢量数据格式，包括：ESRI Shapefile, ESRI geodatabase, GeoJson, MapInfo, GML, KML等。
+      同时GeoDa也能从表格数据(如：.csv, .dbf, .xls, .ods)中通过制定坐标数据（X，Y或者经纬度）来创建点空间数据。 GeoDa也能让用户将感兴趣的、选中的数据另存为一个新的矢量数据。</p>
+    <p><img src="images/dataformats.png" class="shadowfilter"></p>
+
+    <br />
+    <h3>
+      <a id="intro-esda" class="anchor" href="#intro-esda" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      通过相互关联的地图和图表探索统计结果
+    </h3>
+    <p>In contrast to programs that visualize raw data in maps, GeoDa focuses on exploring the results of statistical
+      tests and models through linked maps and charts.</p>
+    <p><img src="images/esda.png" class="shadowfilter"></p>
+
+    <br />
+    <h3>
+      <a id="intro-time" class="anchor" href="#intro-time" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      时空模式分析
+    </h3>
+    <p>You can now group the same variable across time periods in the new Time Editor to explore statistical patterns
+      across space and time. Then explore results as views change over time with the Time Player.</p>
+    <p><img src="images/time.png" class="shadowfilter"></p>
+
+    <h3>
+      <a id="intro-ui" class="anchor" href="#intro-ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+      添加包括Nokia和CartoDB提供的底图(Basemap)
+    </h3>
+
+    <p>If your spatial data are projected (.prj file), you can now add a basemap to any map view, including cluster
+      maps, for better orientation and for ground-truthing results.</p>
+
+    <p>
+      <img src="images/intro4.png" class="shadowfilter fiximage" width=832>
+    </p>
+
+    <br />
+    <h3>
+      <a id="intro-avg" class="anchor" href="#intro-avg" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      时空数据的均值比较
+    </h3>
+    <p>A new Averages Chart compares values that are averaged over time and/or space and tests if the differences in
+      these means are significant. For instance, first select if you want to compare means of selected vs. unselected
+      observations in the same time period or compare all observations for different time periods. A basic
+      pre-post/impact-control test then indicates if your results changed over time and space (using an F-test and
+      difference-in-difference test).</p>
+    <p><img src="images/avgchart.png" class="shadowfilter"></p>
+
+    <br />
+    <h3>
+      <a id="intro-sp-matrix" class="anchor" href="#intro-sp-matrix" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      检测多元空间关系
+    </h3>
+    <p>A scatter plot matrix allows you to explore multiple bivariate correlations at once. In this example, the
+      regression slopes for selected, unselected and all police precincts in San Francisco are shown to explore
+      relationships between four types of crime.</p>
+    <p><img src="images/scatter_matrix.png" class="shadowfilter"></p>
+
+    <br />
+    <h3>
+      <a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      检测随时间的变化在空间上聚集
+    </h3>
+    <p>Use a global or local Differential Moran?s I test to find out if a variable?s change over time in a given
+      location is statistically related to that of its neighbors. For instance, this local (LISA) cluster map shows
+      hotspots in New York with larger changes in the share of kids between 2002 and 2008 (and coldspots with smaller
+      changes).</p>
+    <p><img src="images/DiffMI.png" class="shadowfilter"></p>
+
+    <br />
+    <h3>
+      <a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>单/多变量的空间聚类分析
+    </h3>
+    <p><a href="docs/LA_multivariateGeary1.pdf" target="_blank">Luc Anselin (2017)</a> recently extended Geary's c with
+      a new local indicator of spatial association. This is applied to the classic data set of "moral statistics" of
+      France (Guerry, 1833) to show significant high and low spatial concentrations of literacy (left map) and
+      significant associations of property crime and literacy (right map).</p>
+    <p><img src="images/localGeary.png" class="shadowfilter"></p>
+
+    <br />
+    <h3>
+      <a id="intro-diff-mi" class="anchor" href="#intro-diff-mi" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>集成经典的数据聚类方法分析空间数据
+    </h3>
+    <p>You can now map patterns of several classic non-spatial cluster techniques, including principal component
+      analysis (left maps), k-means (top right), and hierarchical clustering (bottom right). Using the same data as in
+      the example above, the maps below show local clusters of property crime, literacy, and suicide.</p>
+    <p><img src="images/nonspatial_clusters.png" class="shadowfilter"></p>
+
+    <br />
+    <h3>
+      <a id="intro-corr" class="anchor" href="#intro-corr" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      检测空间相关性边界阈值
+    </h3>
+    <p>A nonparametric spatial autocorrelation test (correlogram) is now available to determine distance thresholds when
+      the values of neighboring pairs are no longer correlated.</p>
+    <p><img src="images/corr.png" class="shadowfilter"></p>
+
+    <br />
+    <h3>
+      <a id="intro-cat" class="anchor" href="#intro-cat" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      探索多种空间数据分类
+    </h3>
+    <p>With the new category editor, you can explore how sensitive your results are to changes in the thresholds that
+      categorize your data. In this example the thresholds in the conditional map (right) are based on the categories
+      that can be adjusted in the category editor (left).</p>
+    <p><img src="images/cat_editor.png" class="shadowfilter"></p>
+
+    <h3>
+      <a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      GeoDa引用的相关的软件
+    </h3>
+
+    <p>GeoDa is released under a GPL license. It builds on several open source libraries and source-code files. Below is
+      the list of the key projects that we would like to acknowledge.</p>
+
+    <font style="font-size:small">
+      <p>
+        GDAL Libraries, version 1.10.
+        License: X/MIT style Open Source license.
+        Authors: Many.
+        Links: https://www.gdal.org/
+      </p>
+      <p>Boost Libraries, version 1.53.
+        License: Boost Software License - Version 1.0.
+        Authors: Many.
+        Links: <a href="https://www.boost.org/">https://www.boost.org/</a>
+        <a href="https://www.boost.org/LICENSE_1_0.txt">https://www.boost.org/LICENSE_1_0.txt</a>
+      </p>
+
+      <p>Boost.Polygon Voronoi Library, Boost version 1.53.
+        License: Boost Software License - Version 1.0.
+        Author: Andrii Sydorchuk.
+        Links: <a href="https://www.boost.org/">https://www.boost.org/</a>
+        <a href="https://www.boost.org/LICENSE_1_0.txt">https://www.boost.org/LICENSE_1_0.txt</a>
+      </p>
+
+      <p>wxWidgets Cross-Platform GUI Library, version 2.9.4.
+        License: The wxWindows Library Licence.
+        Authors: Julian Smart, Robert Roebling, and others.
+        Links: <a href="https://www.wxwidgets.org/">https://www.wxwidgets.org/</a>
+        <a
+          href="https://www.opensource.org/licenses/wxwindows.php">https://www.opensource.org/licenses/wxwindows.php</a>
+      </p>
+
+      <p>CLAPACK Linear Algebra Libraries, version 3.2.1.
+        Authors: Many.
+        License: Custom by University of Tennessee.
+        Links: <a href="https://www.netlib.org/clapack/">https://www.netlib.org/clapack/</a>
+        <a href="https://www.netlib.org/lapack/lapack-3.2/LICENSE">https://www.netlib.org/lapack/lapack-3.2/LICENSE</a>
+      </p>
+
+      <p>Approximate Nearest Neighbor Library, version 0.1.
+        Note: Full source of 0.1 release included in kNN directory.
+        Authors: Sunil Arya and David Mount.
+        License: See kNN/AHH.h in included source files.
+        Links: <a href="https://www.cs.umd.edu/%7Emount/ANN/">https://www.cs.umd.edu/~mount/ANN/</a></p>
+
+      <p>FastArea.c++ source code.
+        Note: The source for functions findArea and
+        ComputeArea2D are in the file GenGeomAlgs.h from FastArea.c++
+        in Journal of Graphics Tools, 7(2):9-13, 2002
+        Author: Daniel Sunday.
+        License: Unknown.
+        Links: <a
+          href="https://jgt.akpeters.com/papers/Sunday02/FastArea.html">https://jgt.akpeters.com/papers/Sunday02/FastArea.html</a>
+      </p>
+
+      <p>logger.h source code.
+        Author: Seweryn Habdank-Wojewodzki.
+        Note: We have copied the source for logger.h and modified it slightly
+        to work with wxString.
+        License: Boost Software License - Version 1.0.
+        Links: <a href="https://accu.org/index.php/journals/1304">https://accu.org/index.php/journals/1304</a></p>
+
+      <p>nullstream.h source code.
+        Author: Maciej Sobczak.
+        License: See logger.h in included source files.
+        Links: <a href="https://www.msobczak.com/">https://www.msobczak.com/</a></p>
+
+      <p>The C Clustering Library.
+        Authors: Hoon, Michiel de, Seiya Imoto, Satoru Miyano. (2013). The University of Tokyo, Institute of Medical
+        Science, Human Genome Center.
+        License: Python License.
+        Links: <a href="https://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" target="_blank">The C Clustering
+          Library.</a></p>
 
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="https://github.com/lixun910">lixun910</a>.</span>
+    </font>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+    <br />
+    <h3>
+      <a id="intro-ackn" class="anchor" href="#intro-ackn" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      致谢
+    </h3>
+    <p>The development of GeoDa has most recently been supported by the National Science Foundation, the National
+      Institutes of Health, the National Institute of Justice, and the Agency for Healthcare Research and Quality.</p>
 
-    </section>
+    <h3>
+      <a id="intro-support" class="anchor" href="#intro-support" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>&#25216;&#26415;&#25903;&#25345;
+    </h3>
+    <p>We are currently updating the <a href="documentation.html">documentation</a> to reflect the new features in GeoDa
+      1.10.
+      The <a href="support.html">Openspace listserv</a> supports technical questions about GeoDa.</p>
 
-  </body>
+    <h3>
+      <a id="intro-license" class="anchor" href="#intro-license" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>&#29256;&#26435;&#20449;&#24687;
+    </h3>
+    <p>GeoDa uses a <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL License (General Public License)</a>.</p>
+
+    <h3>
+      <a id="intro-contact" class="anchor" href="#intro-contact" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>
+      联系方式
+    </h3>
+    <p>如果有任何疑问，请联系<a href="mailto:spatial@uchicago.edu">我们</a>。</p>
+
+    <h3>
+      <a id="intro-donate" class="anchor" href="#intro-donate" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>捐赠
+    </h3>
+    <p>GeoDa软件的开源、免费发行离不开您的支持，请点击<a
+        href="https://giving.uchicago.edu/site/Donation2?1838.donation=form1&df_id=1838&mfc_pref=T&set.Designee=1901">这里</a>支持我们的工作。谢谢！<br />
+      <a href="https://giving.uchicago.edu/site/Donation2?1838.donation=form1&df_id=1838&mfc_pref=T&set.Designee=1901"><img
+          src="images/donate.png"></a>
+    </p>
+
+
+    <footer class="site-footer">
+      <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a
+          href="https://github.com/lixun910">lixun910</a>.</span>
+
+      <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>
+        using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a
+          href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+    </footer>
+
+  </section>
+
+</body>
+
 </html>

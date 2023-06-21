@@ -1,177 +1,270 @@
-
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Documentation | GeoDa on Github</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-    	*{margin:0;padding:0;}
-	.shadowfilter {
-	-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-	filter: url(shadow.svg#drop-shadow);
-	}
-	.intro1 { margin-left: -45px;}
-    </style>
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="stylesheets/simple-slideshow-styles.css">
-    <style>
-	ul {padding-left:30px;}
-	figcaption {
-	  top: .70em;
-   	  left: .35em;
- 	  bottom: auto!important;
-	  right: auto!important;
-	}
-    </style>
-  </head>
-  <body>
-    <!-- Google Analytics -->
-    <script>
-    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-    ga('create', 'UA-72724100-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-LC0QJ53WFS');
-    </script>
-    <!-- End Google tag -->
+<head>
+  <meta charset="UTF-8">
+  <title>Documentation | GeoDa on Github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-    <section class="page-header">
-      <h1 class="project-name">GeoDa</h1>
-      <h2 class="project-tagline">Documentation</h2>
-      <a href="//geodacenter.github.io/" class="btn">Homepage</a>
-       <a href="//geodacenter.github.io/download.html" class="btn">Download</a>
-      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
-      <a href="//geodacenter.github.io/cheatsheet.html" class="btn">Cheat Sheet</a>
-       <a href="documentation.html" class="btn">Documentation</a>
-       <a href="//geodacenter.github.io/support.html" class="btn">Support</a>
-      <a href="//geodacenter.github.io/index-cn.html" class="btn">中文</a>
-    </section>
+    .shadowfilter {
+      -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      filter: url(shadow.svg#drop-shadow);
+    }
 
+    .intro1 {
+      margin-left: -45px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/simple-slideshow-styles.css">
+  <style>
+    ul {
+      padding-left: 30px;
+    }
 
-    <section class="main-content">
-      <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
-  <span class="octicon octicon-link"></span></a></h3>
+    figcaption {
+      top: .70em;
+      left: .35em;
+      bottom: auto !important;
+      right: auto !important;
+    }
+  </style>
+</head>
 
-<p>
-<h3>GeoDa Workbook</h3>
+<body>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-<p>Luc Anselin is currently working on an updated version of the workbook for GeoDa. We will be releasing new chapters of the workbook on a regular basis for the rest of the year.</p>
+    gtag('config', 'G-LC0QJ53WFS');
+  </script>
+  <!-- End Google tag -->
+
+  <section class="page-header">
+    <h1 class="project-name">GeoDa</h1>
+    <h2 class="project-tagline">Documentation</h2>
+    <a href="//geodacenter.github.io/" class="btn">Homepage</a>
+    <a href="//geodacenter.github.io/download.html" class="btn">Download</a>
+    <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+    <a href="//geodacenter.github.io/cheatsheet.html" class="btn">Cheat Sheet</a>
+    <a href="documentation.html" class="btn">Documentation</a>
+    <a href="//geodacenter.github.io/support.html" class="btn">Support</a>
+    <a href="//geodacenter.github.io/index-cn.html" class="btn">中文</a>
+  </section>
 
 
-<p class="rteindent1">&bull;
-       <a href="workbook/01_datawrangling_1/lab1a.html" onclick="ga('send', 'event', 'lab1a.html', 'NewGeoDaWorkbook', 'GeoDa workbook Spatial Data Wrangling 1');" target="_blank">Spatial Data Wrangling (1) - Basic Operations</a> </p>
-       &bull; <a href="workbook/01_datawrangling_2/lab1b.html" onclick="ga('send', 'event', 'lab1b.html', 'NewGeoDaWorkbook', 'GeoDa workbook Spatial Data Wrangling 2');"  target="_blank">Spatial Data Wrangling (2) - GIS Operations</a> </p>
-       &bull; <a href="workbook/01_datawrangling_3/lab1.html" onclick="ga('send', 'event', 'lab1.html', 'NewGeoDaWorkbook', 'GeoDa workbook Spatial Data Wrangling 3');"  target="_blank">Spatial Data Wrangling (3) - Practice</a> </p>
-       &bull; <a href="workbook/3a_mapping/lab3a.html" target="_blank" onclick="ga('send', 'event', 'lab3a.html', 'NewGeoDaWorkbook', 'GeoDa workbook Basic Mapping');" >Basic Mapping</a> </p>
-       &bull; <a href="workbook/3b_rates/lab3b.html" target="_blank" onclick="ga('send', 'event', 'lab3b.html', 'NewGeoDaWorkbook', 'GeoDa workbook RateMapping');" >Rate Mapping</a> </p>
-       &bull; <a href="workbook/2a_eda/lab2a.html" target="_blank" onclick="ga('send', 'event', 'lab2a.html', 'NewGeoDaWorkbook', 'GeoDa workbook Exploratory Data Analysis 1');" >Exploratory Data Analysis (1) - Univariate and Bivariate Analysis</a> </p>
-       &bull; <a href="workbook/2b_eda_multi/lab2b.html" target="_blank" onclick="ga('send', 'event', 'lab2b.html', 'NewGeoDaWorkbook', 'GeoDa workbook Exploratory Data Analysis 2');" >Exploratory Data Analysis (2) - Multivariate Exploration</a> </p>
-       &bull; <a href="workbook/3c_spacetime/lab3c.html" target="_blank" onclick="ga('send', 'event', 'lab3c.html', 'NewGeoDaWorkbook', 'GeoDa workbook Space-Time Exploration');" >Space-Time Exploration</a> </p>
-       &bull; <a href="workbook/4a_contig_weights/lab4a.html" target="_blank" onclick="ga('send', 'event', 'lab4a.html', 'NewGeoDaWorkbook', 'GeoDa workbook Contiguity-Based Spatial Weights');" >Contiguity-Based Spatial Weights</a> </p>
-       &bull; <a href="workbook/4b_dist_weights/lab4b.html" target="_blank" onclick="ga('send', 'event', 'lab4b.html', 'NewGeoDaWorkbook', 'GeoDa workbook Distance-Based Spatial Weights');" >Distance-Based Spatial Weights</a> </p>
-       &bull; <a href="workbook/4c_distance_functions/lab4c.html" target="_blank" onclick="ga('send', 'event', 'lab4c.html', 'NewGeoDaWorkbook', 'GeoDa workbook Spatial Weights as Distance Functions');" >Spatial Weights as Distance Functions</a> </p>
-       &bull; <a href="workbook/4d_weights_applications/lab4d.html" target="_blank" onclick="ga('send', 'event', 'lab4d.html', 'NewGeoDaWorkbook', 'GeoDa workbook Applications of Spatial Weights');" >Applications of Spatial Weights</a> </p>
-       &bull; <a href="workbook/5a_global_auto/lab5a.html" target="_blank" onclick="ga('send', 'event', 'lab5a.html', 'NewGeoDaWorkbook', 'GeoDa workbook Global Spatial Autocorrelation  1');" >Global Spatial Autocorrelation (1) - Moran Scatter Plot and Correlogram</a> </p>
-       &bull; <a href="workbook/5b_global_adv/lab5b.html" target="_blank" onclick="ga('send', 'event', 'lab5b.html', 'NewGeoDaWorkbook', 'GeoDa workbook Global Spatial Autocorrelation 2');" >Global Spatial Autocorrelation (2) - Bivariate, Differential and EB</a> </p>
-       &bull; <a href="workbook/6a_local_auto/lab6a.html" target="_blank" onclick="ga('send', 'event', 'lab6a.html', 'NewGeoDaWorkbook', 'GeoDa workbook Local Spatial Autocorrelation 1');" >Local Spatial Autocorrelation (1) - LISA and Local Moran</a> </p>
-       &bull; <a href="workbook/6b_local_adv/lab6b.html" target="_blank" onclick="ga('send', 'event', 'lab6b.html', 'NewGeoDaWorkbook', 'GeoDa workbook Local Spatial Autocorrelation 2');" >Local Spatial Autocorrelation (2) - Other Local Spatial Autocorrelation Statistics</a></p>
-       &bull; <a href="workbook/6c_local_multi/lab6c.html" target="_blank" onclick="ga('send', 'event', 'lab6c.html', 'NewGeoDaWorkbook', 'GeoDa workbook Local Spatial Autocorrelation 3');" >Local Spatial Autocorrelation (3) - Multivariate Local Spatial Autocorrelation</a> </p>
-       &bull; <a href="workbook/6d_local_discrete/lab6d.html" target="_blank" onclick="ga('send', 'event', 'lab6d.html', 'NewGeoDaWorkbook', 'GeoDa workbook Local Spatial Autocorrelation 4');" >Local Spatial Autocorrelation (4) - LISA for Discrete Variables</a> </p>
-       &bull; <a href="workbook/99_density/lab9b.html" target="_blank" onclick="ga('send', 'event', 'lab9b.html', 'NewGeoDaWorkbook', 'GeoDa workbook Density-Based Clustering Methods');" >Density-Based Clustering Methods</a> </p>
-       &bull; <a href="workbook/7aa_dimensionreduction/lab7aa.html" target="_blank" onclick="ga('send', 'event', 'lab7aa.html', 'NewGeoDaWorkbook', 'GeoDa workbook Dimension Reduction Methods 1');" >Dimension Reduction Methods (1) - Principal Component Analysis (PCA)</a></p>
-       &bull; <a href="workbook/7ab_mds/lab7ab.html" target="_blank" onclick="ga('send', 'event', 'lab7ab.html', 'NewGeoDaWorkbook', 'GeoDa workbook Dimension Reduction Methods 2');" >Dimension Reduction Methods (2) - Distance Preserving Methods</a></p>
-       &bull; <a href="workbook/7bk_clusters_1a/lab7b.html" target="_blank" onclick="ga('send', 'event', 'lab7b.html', 'NewGeoDaWorkbook', 'GeoDa workbook Cluster Analysis 1');" >Cluster Analysis (1) - K-Means Clustering</a></p>
-       &bull; <a href="workbook/7bh_clusters_2a/lab7bh.html" target="_blank" onclick="ga('send', 'event', 'lab7bh.html', 'NewGeoDaWorkbook', 'GeoDa workbook Cluster Analysis 2');" >Cluster Analysis (2) - Hierarchical Clustering Methods</a> </p>
-       &bull; <a href="workbook/7c_clusters_3/lab7c.html" target="_blank" onclick="ga('send', 'event', 'lab7c.html', 'NewGeoDaWorkbook', 'GeoDa workbook Cluster Analysis 3');" >Cluster Analysis (3) - Advanced Clustering Methods</a> </p>
-       &bull; <a href="workbook/9a_spatial1/lab9a.html" target="_blank" onclick="ga('send', 'event', 'lab9a.html', 'NewGeoDaWorkbook', 'GeoDa workbook Spatial Clustering 1');" >Spatial Clustering (1) - Spatializing Classic Clustering Methods</a> </p>
-       &bull; <a href="workbook/9c_spatial3/lab9c.html" target="_blank" onclick="ga('send', 'event', 'lab9c.html', 'NewGeoDaWorkbook', 'GeoDa workbook Spatial Clustering 2');" >Spatial Clustering (2) - Spatially Constrained Clustering, Hierarchical Methods</a> </p>
-       &bull; <a href="workbook/9d_spatial4/lab9d.html" target="_blank" onclick="ga('send', 'event', 'lab9d.html', 'NewGeoDaWorkbook', 'GeoDa workbook Spatial Clustering 3');" >Spatial Clustering (3) - Spatially Constrained Clustering, Partitioning Methods</a> </p>
+  <section class="main-content">
+    <h3>
+      <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+        <span class="octicon octicon-link"></span></a>
+    </h3>
+
+    <p>
+    <h3>GeoDa Workbook</h3>
+
+    <p>Luc Anselin is currently working on an updated version of the workbook for GeoDa. We will be releasing new
+      chapters of the workbook on a regular basis for the rest of the year.</p>
 
 
+    <p class="rteindent1">&bull;
+      <a href="workbook/01_datawrangling_1/lab1a.html"
+        onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab1a.html', 'event_label': 'GeoDa workbook Spatial Data Wrangling 1'});"
+        target="_blank">Spatial Data Wrangling (1) - Basic Operations</a>
+    </p>
+    &bull; <a href="workbook/01_datawrangling_2/lab1b.html"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab1b.html', 'event_label': 'GeoDa workbook Spatial Data Wrangling 2'});"
+      target="_blank">Spatial Data Wrangling (2) - GIS Operations</a> </p>
+    &bull; <a href="workbook/01_datawrangling_3/lab1.html"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab1.html', 'event_label': 'GeoDa workbook Spatial Data Wrangling 3'});"
+      target="_blank">Spatial Data Wrangling (3) - Practice</a> </p>
+    &bull; <a href="workbook/3a_mapping/lab3a.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab3a.html', 'event_label': 'GeoDa workbook Basic Mapping'});">Basic
+      Mapping</a>
+    </p>
+    &bull; <a href="workbook/3b_rates/lab3b.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab3b.html', 'event_label': 'GeoDa workbook RateMapping'});">Rate
+      Mapping</a>
+    </p>
+    &bull; <a href="workbook/2a_eda/lab2a.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab2a.html', 'event_label': 'GeoDa workbook Exploratory Data Analysis 1'});">Exploratory
+      Data Analysis (1) - Univariate and Bivariate Analysis</a> </p>
+    &bull; <a href="workbook/2b_eda_multi/lab2b.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab2b.html', 'event_label': 'GeoDa workbook Exploratory Data Analysis 2'});">Exploratory
+      Data Analysis (2) - Multivariate Exploration</a> </p>
+    &bull; <a href="workbook/3c_spacetime/lab3c.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab3c.html', 'event_label': 'GeoDa workbook Space-Time Exploration'});">Space-Time
+      Exploration</a> </p>
+    &bull; <a href="workbook/4a_contig_weights/lab4a.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab4a.html', 'event_label': 'GeoDa workbook Contiguity-Based Spatial Weights'});">Contiguity-Based
+      Spatial Weights</a> </p>
+    &bull; <a href="workbook/4b_dist_weights/lab4b.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab4b.html', 'event_label': 'GeoDa workbook Distance-Based Spatial Weights'});">Distance-Based
+      Spatial Weights</a> </p>
+    &bull; <a href="workbook/4c_distance_functions/lab4c.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab4c.html', 'event_label': 'GeoDa workbook Spatial Weights as Distance Functions'});">Spatial
+      Weights as Distance Functions</a> </p>
+    &bull; <a href="workbook/4d_weights_applications/lab4d.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab4d.html', 'event_label': 'GeoDa workbook Applications of Spatial Weights'});">Applications
+      of Spatial Weights</a> </p>
+    &bull; <a href="workbook/5a_global_auto/lab5a.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab5a.html', 'event_label': 'GeoDa workbook Global Spatial Autocorrelation  1'});">Global
+      Spatial Autocorrelation (1) - Moran Scatter Plot and Correlogram</a> </p>
+    &bull; <a href="workbook/5b_global_adv/lab5b.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab5b.html', 'event_label': 'GeoDa workbook Global Spatial Autocorrelation 2'});">Global
+      Spatial Autocorrelation (2) - Bivariate, Differential and EB</a> </p>
+    &bull; <a href="workbook/6a_local_auto/lab6a.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab6a.html', 'event_label': 'GeoDa workbook Local Spatial Autocorrelation 1'});">Local
+      Spatial Autocorrelation (1) - LISA and Local Moran</a> </p>
+    &bull; <a href="workbook/6b_local_adv/lab6b.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab6b.html', 'event_label': 'GeoDa workbook Local Spatial Autocorrelation 2'});">Local
+      Spatial Autocorrelation (2) - Other Local Spatial Autocorrelation Statistics</a></p>
+    &bull; <a href="workbook/6c_local_multi/lab6c.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab6c.html', 'event_label': 'GeoDa workbook Local Spatial Autocorrelation 3'});">Local
+      Spatial Autocorrelation (3) - Multivariate Local Spatial Autocorrelation</a> </p>
+    &bull; <a href="workbook/6d_local_discrete/lab6d.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab6d.html', 'event_label': 'GeoDa workbook Local Spatial Autocorrelation 4'});">Local
+      Spatial Autocorrelation (4) - LISA for Discrete Variables</a> </p>
+    &bull; <a href="workbook/99_density/lab9b.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab9b.html', 'event_label': 'GeoDa workbook Density-Based Clustering Methods'});">Density-Based
+      Clustering Methods</a> </p>
+    &bull; <a href="workbook/7aa_dimensionreduction/lab7aa.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab7aa.html', 'event_label': 'GeoDa workbook Dimension Reduction Methods 1'});">Dimension
+      Reduction Methods (1) - Principal Component Analysis (PCA)</a></p>
+    &bull; <a href="workbook/7ab_mds/lab7ab.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab7ab.html', 'event_label': 'GeoDa workbook Dimension Reduction Methods 2'});">Dimension
+      Reduction Methods (2) - Distance Preserving Methods</a></p>
+    &bull; <a href="workbook/7bk_clusters_1a/lab7b.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab7b.html', 'event_label': 'GeoDa workbook Cluster Analysis 1'});">Cluster
+      Analysis (1) - K-Means Clustering</a></p>
+    &bull; <a href="workbook/7bh_clusters_2a/lab7bh.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab7bh.html', 'event_label': 'GeoDa workbook Cluster Analysis 2'});">Cluster
+      Analysis (2) - Hierarchical Clustering Methods</a> </p>
+    &bull; <a href="workbook/7c_clusters_3/lab7c.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab7c.html', 'event_label': 'GeoDa workbook Cluster Analysis 3'});">Cluster
+      Analysis (3) - Advanced Clustering Methods</a> </p>
+    &bull; <a href="workbook/9a_spatial1/lab9a.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab9a.html', 'event_label': 'GeoDa workbook Spatial Clustering 1'});">Spatial
+      Clustering (1) - Spatializing Classic Clustering Methods</a> </p>
+    &bull; <a href="workbook/9c_spatial3/lab9c.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab9c.html', 'event_label': 'GeoDa workbook Spatial Clustering 2'});">Spatial
+      Clustering (2) - Spatially Constrained Clustering, Hierarchical Methods</a> </p>
+    &bull; <a href="workbook/9d_spatial4/lab9d.html" target="_blank"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'lab9d.html', 'event_label': 'GeoDa workbook Spatial Clustering 3'});">Spatial
+      Clustering (3) - Spatially Constrained Clustering, Partitioning Methods</a> </p>
+    <br />
+
+    <h3>Overview of Functionality - Latest Version of GeoDa (1.20)</h3>
+
+    <p>In addition, these resources give an overview of some of the new functionality in GeoDa 1.10+:</p>
+
+    <p class="rteindent1">&bull;
+      <a href="
+       docs/Geoda_tour.pdf"
+        onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'geoda_tour.pdf', 'event_label': 'GeoDa Pdf Downloads Count'});">Installing
+        GeoDa
+        and a Quick Tour of GeoDa's Functionality</a>
+    </p>
+
+    &bull;
+    <a href="
+docs/geoda_1.8_1.pdf"
+      onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'geoda_1.8.1.pdf', 'event_label': 'GeoDa Pdf Downloads Count'});">Overview,
+      Getting
+      Started, Geovisualization, Multivariate Exploratory Data Analysis</a></p>
+
+    &bull; <a href="docs/geoda_1.8_2.pdf" target="_blank">Spatial Weights, Spatial Autocorrelation, Space-Time
+      Exploration, Averages Tool, Spatial Regression</a></p>
+
+    &bull; On local multivariate cluster functionality (new as of GeoDa 1.10). <a href="docs/LA_multivariateGeary1.pdf"
+      target="_blank">Luc Anselin. (2017). A Local Indicator of Multivariate Spatial Association: Extending Geary's c.
+      Working Paper: Center for Spatial Data Science, University of Chicago.(forthcoming, Geographical Analysis)</a></p>
+
+    &bull; Non-spatial cluster functionality (new as of GeoDa 1.10). <a
+      href="http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" target="_blank">Hoon, Michiel de, Seiya Imoto,
+      Satoru Miyano. (2013). The C Clustering Library. The University of Tokyo, Institute of Medical Science, Human
+      Genome Center.</a></p>
+
+    <br />
+
+    <h3>Spatial Data Formats Supported in GeoDa</h3>
+
+    <p>GeoDa now supports not only shapefiles but many other spatial data formats. Find more information, including
+      setup instructions about these data formats <a href="formats.html">here</a>.</p>
+
+    <br />
+
+    <h3>Spatial Regression User's Guide (Book)</h3>
+
+    <p>The user's guide to the spatial regression functionality in GeoDa can be purchased here:</p>
+
+    <p class="rteindent1">&bull;
+      <a href="https://www.amazon.com/Modern-Spatial-Econometrics-Practice-GeoDaSpace/dp/0986342106?ie=UTF8&keywords=anselin%20spatial%20econometrics&qid=1421531753&ref_=sr_1_1&sr=8-1"
+        target="_blank">Luc Anselin and Sergio J. Rey. (2014). Modern Spatial Econometrics in Practice: A Guide to
+        GeoDa, GeoDaSpace and PySAL.</a>
+    </p>
+
+    <br />
 
 
+    <h3>Older Resources (2003-05)- Legacy GeoDa 0.95i</h3>
 
-<br />
+    <p>This workbook (2005) and the two documentation reports (2003) were developed for the Legacy version of GeoDa
+      (0.9.5i) and is still useful for understanding the main functionality. However, many of the screenshots and menu
+      options have been updated since. Here is a <a href="docs/GeoDa1.8_toolbar.pdf">1-page overview</a> of GeoDa
+      1.8&#39;s functionality with references to the workbook chapters.</p>
 
-<h3>Overview of Functionality - Latest Version of GeoDa (1.20)</h3>
+    <p class="rteindent1">&bull;
+      <a href="docs/geodaworkbook.pdf"
+        onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'geodaworkbook.pdf', 'event_label': 'GeoDa Pdf Downloads Count'});"
+        title="geodaworkbook.pdf">Exploring Spatial Data with GeoDa: A Workbook</a> (2005; 244 pp.,5.1Mb)
+    </p>
+    </ul>
 
-<p>In addition, these resources give an overview of some of the new functionality in GeoDa 1.10+:</p>
+    <p class="rteindent1">&bull;
+      <a href="docs/geoda093.pdf"
+        onclick="gtag('event', 'NewGeoDaWorkbook', {'event_category': 'geoda093.pdf', 'event_label': 'GeoDa Pdf Downloads Count'});">GeoDa
+        0.9.3 User's
+        Guide with overview of features</a> (2003; 125 pp., 2.4Mb)</br>
+      &bull; <a href="docs/geoda095i.pdf">GeoDa 0.9.5-i Release Notes with overview of 3D scatter plot, conditional
+        plots, and spatial regression</a>&nbsp;(2003; 64 pp., 1.5Mb)
+    </p>
 
-<p class="rteindent1">&bull;
-       <a href="
-       docs/Geoda_tour.pdf" onclick="ga('send', 'event', 'geoda_tour.pdf', 'PdfDownload', 'GeoDa Pdf Downloads Count');">Installing GeoDa and a Quick Tour of GeoDa's Functionality</a> </p>
+    <br />
 
-         &bull;
-	<a href="
-docs/geoda_1.8_1.pdf" onclick="ga('send', 'event', 'geoda_1.8.1.pdf', 'PdfDownload', 'GeoDa Pdf Downloads Count');">Overview, Getting Started, Geovisualization, Multivariate Exploratory Data Analysis</a></p>
+    <h3>Sample Data and Background Videos for Tutorials</h3>
 
-	&bull; <a href="docs/geoda_1.8_2.pdf" target="_blank">Spatial Weights, Spatial Autocorrelation, Space-Time Exploration, Averages Tool, Spatial Regression</a></p>
+    <p>Access the <a href="https://spatial.uchicago.edu/sample-data" target="_blank">sample data</a> referenced in the
+      documentation and find free online videos about spatial analytics <a
+        href="https://www.youtube.com/user/GeoDaCenter" target="_blank">here</a>.</p>
 
-	&bull; On local multivariate cluster functionality (new as of GeoDa 1.10). <a href="docs/LA_multivariateGeary1.pdf" target="_blank">Luc Anselin. (2017). A Local Indicator of Multivariate Spatial Association: Extending Geary's c. Working Paper: Center for Spatial Data Science, University of Chicago.(forthcoming, Geographical Analysis)</a></p>
+    <br />
 
-	&bull; Non-spatial cluster functionality (new as of GeoDa 1.10). <a href="http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf" target="_blank">Hoon, Michiel de, Seiya Imoto, Satoru Miyano. (2013). The C Clustering Library. The University of Tokyo, Institute of Medical Science, Human Genome Center.</a></p>
+    <h3>Algorithms Implemented in GeoDa</h3>
 
-<br />
+    <p><a href="refs.html">Here</a> is a list of references of algorithms implemented in Geoda.</p>
 
-<h3>Spatial Data Formats Supported in GeoDa</h3>
+    <footer class="site-footer">
+      <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a
+          href="https://github.com/lixun910">lixun910</a>.</span>
 
-<p>GeoDa now supports not only shapefiles but many other spatial data formats. Find more information, including setup instructions about these data formats <a href="formats.html">here</a>.</p>
+      <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>
+        using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a
+          href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+    </footer>
 
-<br />
+  </section>
 
-<h3>Spatial Regression User's Guide (Book)</h3>
+</body>
 
-	<p>The user's guide to the spatial regression functionality in GeoDa can be purchased here:</p>
-
-<p class="rteindent1">&bull;
-<a href="https://www.amazon.com/Modern-Spatial-Econometrics-Practice-GeoDaSpace/dp/0986342106?ie=UTF8&keywords=anselin%20spatial%20econometrics&qid=1421531753&ref_=sr_1_1&sr=8-1" target="_blank">Luc Anselin and Sergio J. Rey. (2014). Modern Spatial Econometrics in Practice: A Guide to GeoDa, GeoDaSpace and PySAL.</a></p>
-
-<br />
-
-
-<h3>Older Resources (2003-05)- Legacy GeoDa 0.95i</h3>
-
-<p>This workbook (2005) and the two documentation reports (2003) were developed for the Legacy version of GeoDa (0.9.5i) and is still useful for understanding the main functionality. However, many of the screenshots and menu options have been updated since. Here is a <a href="docs/GeoDa1.8_toolbar.pdf">1-page overview</a> of GeoDa 1.8&#39;s functionality with references to the workbook chapters.</p>
-
-<p class="rteindent1">&bull;
-<a href="docs/geodaworkbook.pdf" onclick="ga('send', 'event', 'geodaworkbook.pdf', 'PdfDownload', 'GeoDa Pdf Downloads Count');" title="geodaworkbook.pdf">Exploring Spatial Data with GeoDa: A Workbook</a> (2005; 244 pp.,5.1Mb)</p>
-</ul>
-
-<p class="rteindent1">&bull;
-<a href="docs/geoda093.pdf" onclick="ga('send', 'event', 'geoda093.pdf', 'PdfDownload', 'GeoDa Pdf Downloads Count');">GeoDa 0.9.3 User's Guide with overview of features</a> (2003; 125 pp., 2.4Mb)</br>
-&bull;  <a href="docs/geoda095i.pdf">GeoDa 0.9.5-i Release Notes with overview of 3D scatter plot, conditional plots, and spatial regression</a>&nbsp;(2003; 64 pp., 1.5Mb)</p>
-
-<br />
-
-<h3>Sample Data and Background Videos for Tutorials</h3>
-
-<p>Access the <a href="https://spatial.uchicago.edu/sample-data" target="_blank">sample data</a> referenced in the documentation and find free online videos about spatial analytics <a href="https://www.youtube.com/user/GeoDaCenter" target="_blank">here</a>.</p>
-
-<br />
-
-<h3>Algorithms Implemented in GeoDa</h3>
-
-<p><a href="refs.html">Here</a> is a list of references of algorithms implemented in Geoda.</p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="https://github.com/lixun910">lixun910</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  </body>
 </html>

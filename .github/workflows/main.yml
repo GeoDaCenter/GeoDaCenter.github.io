@@ -1,66 +1,42 @@
-name: A workflow to automate downloads graph and globe updates
+name: A workflow to automate updating download stats using Google Analytics 4
 
 on:
   schedule:
-    - cron: '0 1 1 * *'
+    - cron: "0 1 1 * *"
   workflow_dispatch:
     inputs:
       runMessage:
-        description: 'Run Message'
+        description: "Update Google Analytics"
         required: true
-        default: 'Testing'
+        default: "Testing"
 
 jobs:
   graph:
-    name: Downloads Graph Update
+    name: Google Analytics 4 Update
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.8"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Execute Python script
         env:
-          ACCOUNT_INFO: ${{ secrets.CLIENT_SECRETS }}
+          GA4_ACCOUNT_CRED: ${{ secrets.GA4_ACCOUNT_CRED }}
         run: |
-          python data/download_update.py
+          python data/google_analytics.py
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Push changes to GitHub
         run: |
-          git config --local user.email "bzlbzlbzl2000iscool@gmail.com"
-          git config --local user.name "Bzlbzlbzl"
+          git config --local user.email "lixun910@gmail.com"
+          git config --local user.name "Xun Li"
           git pull
-          git add data/download_data.json
-          git commit -m "Updated downloads graph for last month"
-          git push origin master
-  globe:
-    needs: graph
-    name: Downloads Globe Update
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Execute Python script
-        env:
-          ACCOUNT_INFO: ${{ secrets.CLIENT_SECRETS }}
-        run: |
-          python data/globe_update.py
-      - name: Push changes to GitHub
-        run: |
-          git config --local user.email "bzlbzlbzl2000iscool@gmail.com"
-          git config --local user.name "Bzlbzlbzl"
-          git pull
-          git add data/globe_log.json data/down_by_country.csv
-          git commit -m "Updated downloads globe for last month"
+          git add data/download_data.json data/globe_log.json data/down_by_country.csv
+          git commit -m "Updated google analytics stats ${{ steps.date.outputs.date }}"
           git push origin master

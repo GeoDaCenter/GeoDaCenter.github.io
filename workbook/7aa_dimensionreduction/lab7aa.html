@@ -4,91 +4,103 @@
 
 <head>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="author" content="Luc Anselin" />
+  <meta name="author" content="Luc Anselin" />
 
 
-<title>Dimension Reduction Methods (1)</title>
+  <title>Dimension Reduction Methods (1)</title>
 
-<script src="lab7aa_files/header-attrs-2.3/header-attrs.js"></script>
-<link href="lab7aa_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="lab7aa_files/highlightjs-9.12.0/highlight.js"></script>
-    <title>GeoDa on Github</title>
+  <script src="lab7aa_files/header-attrs-2.3/header-attrs.js"></script>
+  <link href="lab7aa_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+  <script src="lab7aa_files/highlightjs-9.12.0/highlight.js"></script>
+  <title>GeoDa on Github</title>
 
-    <style>
-    	*{margin:0;padding:0;}
-	    .shadowfilter {
-	       -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-	        filter: url(shadow.svg#drop-shadow);
-	     }
-	     .intro1 { margin-left: -45px;}
-    </style>
-    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
-    <style>
-    ul {padding-left:30px;}
-	figcaption {
-	  top: .70em;
-   	  left: .35em;
- 	  bottom: auto!important;
-	  right: auto!important;
-	}
-    </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-        <style>
+    .shadowfilter {
+      -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      filter: url(shadow.svg#drop-shadow);
+    }
+
+    .intro1 {
+      margin-left: -45px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css"
+    media="screen">
+  <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+  <style>
+    ul {
+      padding-left: 30px;
+    }
+
+    figcaption {
+      top: .70em;
+      left: .35em;
+      bottom: auto !important;
+      right: auto !important;
+    }
+  </style>
+
+  <style>
     h1 {
-        text-align: center;
+      text-align: center;
     }
+
     h3.subtitle {
-        text-align: center;
+      text-align: center;
     }
+
     h4.author {
-        text-align: center;
+      text-align: center;
     }
+
     h4.date {
-        text-align: center;
+      text-align: center;
     }
+
     p.caption {
-        font-size : 12px;
+      font-size: 12px;
     }
-    </style>
+  </style>
 
-<!-- Google Analytics -->
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-72724100-1', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-<!-- End Google Analytics -->
-<!-- Google Tag Manager -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RVF8"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-53RVF8');</script>
-<!-- End Google Tag Manager -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
+    gtag('config', 'G-LC0QJ53WFS');
+  </script>
+  <!-- End Google tag -->
+
+  <style type="text/css">
+    code {
+      white-space: pre;
+    }
+  </style>
+  <script type="text/javascript">
+    if (window.hljs) {
+      hljs.configure({ languages: [] });
+      hljs.initHighlightingOnLoad();
+      if (document.readyState && document.readyState === "complete") {
+        window.setTimeout(function () { hljs.initHighlighting(); }, 0);
+      }
+    }
+  </script>
 
 
 
@@ -102,756 +114,1169 @@ if (window.hljs) {
 <body>
 
 
-    <section class="page-header">
-      <h1 class="project-name">GeoDa</h1>
-      <h2 class="project-tagline">An Introduction to Spatial Data Science</h2>
-      <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
-      <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
-      <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
-      <a href="https://spatial.uchicago.edu/sample-data"  target="_blank" class="btn">Data</a>
-       <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
-       <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
-       <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
-    </section>
+  <section class="page-header">
+    <h1 class="project-name">GeoDa</h1>
+    <h2 class="project-tagline">An Introduction to Spatial Data Science</h2>
+    <a href="https://geodacenter.github.io/index.html" class="btn">Homepage</a>
+    <a href="https://geodacenter.github.io/download.html" class="btn">Download</a>
+    <a href="https://github.com/GeoDaCenter/geoda/" class="btn">View on GitHub</a>
+    <a href="https://spatial.uchicago.edu/sample-data" target="_blank" class="btn">Data</a>
+    <a href="https://geodacenter.github.io/documentation.html" class="btn">Documentation</a>
+    <a href="https://geodacenter.github.io/support.html" class="btn">Support</a>
+    <a href="https://geodacenter.github.io/index-cn.html" class="btn">中文</a>
+  </section>
 
-    <section class="main-content">
-
-
-<h1 class="title toc-ignore">Dimension Reduction Methods (1)</h1>
-<h3 class="subtitle">Principal Component Annalysis (PCA)</h3>
-<h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
-<h4 class="date">07/29/2020 (latest update)</h4>
+  <section class="main-content">
 
 
-<div id="TOC">
-<ul>
-<li><a href="#introduction">Introduction</a>
-<ul>
-<li><a href="#objectives">Objectives</a>
-<ul>
-<li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#the-curse-of-dimensionality">The Curse of Dimensionality</a>
-<ul>
-<li><a href="#the-empty-space-phenomenon">The Empty Space Phenomenon</a></li>
-</ul></li>
-<li><a href="#principal-component-analysis-pca">Principal Component Analysis (PCA)</a>
-<ul>
-<li><a href="#principles">Principles</a></li>
-<li><a href="#implementation">Implementation</a>
-<ul>
-<li><a href="#variable-settings-panel">Variable Settings Panel</a></li>
-<li><a href="#saving-the-results">Saving the Results</a></li>
-</ul></li>
-<li><a href="#interpretation">Interpretation</a>
-<ul>
-<li><a href="#explained-variance">Explained variance</a></li>
-<li><a href="#variable-loadings">Variable loadings</a></li>
-<li><a href="#variable-loadings-and-principal-components">Variable loadings and principal components</a></li>
-<li><a href="#substantive-interpretation-of-principal-components">Substantive interpretation of principal components</a></li>
-<li><a href="#visualizing-principal-components">Visualizing principal components</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#spatializing-principal-components">Spatializing Principal Components</a>
-<ul>
-<li><a href="#principal-component-maps">Principal component maps</a></li>
-<li><a href="#cluster-maps">Cluster maps</a></li>
-<li><a href="#principal-components-as-multivariate-cluster-maps">Principal components as multivariate cluster maps</a></li>
-</ul></li>
-<li><a href="#appendix">Appendix</a>
-<ul>
-<li><a href="#basics---eigenvalues-and-eigenvectors">Basics - eigenvalues and eigenvectors</a></li>
-<li><a href="#eigenvector-decomposition-of-a-square-matrix">Eigenvector decomposition of a square matrix</a></li>
-<li><a href="#singular-value-decomposition-svd">Singular Value Decomposition (SVD)</a></li>
-</ul></li>
-<li><a href="#references">References</a></li>
-</ul>
-</div>
-
-<p><br></p>
-<div id="introduction" class="section level2 unnumbered" number="">
-<h2>Introduction</h2>
-<p>In this chapter, we move fully into multivariate analysis and begin by addressing some approaches to reduce the dimensionality of the variable space. These are methods that help to address the so-called <em>curse of dimensionality</em>, a concept originally formulated by <span class="citation">Bellman (<a href="#ref-Bellman:61" role="doc-biblioref">1961</a>)</span>. In a nutshell, the curse of dimensionality means that techniques that work well in small dimensions (e.g., k-nearest neighbor searches), either break down or become unmanageably complex (i.e., computationally impractical) in higher dimensions.</p>
-<p>After a brief example to illustrate the curse of dimensionality in concrete terms, we move on to <strong>principal components analysis</strong> (PCA), a core method of both multivariate statistics and machine learning. Dimension reduction is particularly relevant in situations where many
-variables are available that are highly intercorrelated. In essence, the original variables are replaced by a smaller number of proxies that represent them well.</p>
-<p>In addition to a standard description of PCA and its implementation in <code>GeoDa</code>, we also introduce a
-<em>spatialized</em> approach, where we exploit geovisualization, linking and brushing to illustrate how the dimension reduction is represented in geographic space.</p>
-<p>To illustrate these techniques, we will again use the Guerry data set on
-moral statistics in 1830 France, which comes pre-installed with <code>GeoDa</code>.
-Before proceeding with a discussion of the PCA functionality, we briefly illustrate some aspects of the curse of dimensionality.</p>
-<div id="objectives" class="section level3 unnumbered" number="">
-<h3>Objectives</h3>
-<ul>
-<li><p>Illustrate the curse of dimensionality</p></li>
-<li><p>Illustrate the mathematics behind principal component analysis</p></li>
-<li><p>Compute principal components for a set of variables</p></li>
-<li><p>Interpret the characteristics of a principal component analysis</p></li>
-<li><p>Spatialize the principal components</p></li>
-</ul>
-<div id="geoda-functions-covered" class="section level4 unnumbered" number="">
-<h4>GeoDa functions covered</h4>
-<ul>
-<li>Clusters &gt; PCA
-<ul>
-<li>select variables</li>
-<li>PCA parameters</li>
-<li>PCA summary statistics</li>
-<li>saving PCA results</li>
-</ul></li>
-</ul>
-<p><br></p>
-</div>
-</div>
-</div>
-<div id="the-curse-of-dimensionality" class="section level2 unnumbered" number="">
-<h2>The Curse of Dimensionality</h2>
-<p>The curse of dimensionality was originally described by <span class="citation">Bellman (<a href="#ref-Bellman:61" role="doc-biblioref">1961</a>)</span> in the context of optimization problems. Consider the following simple example where we look for the maximum of a function in one variable dimension, as in Figure <a href="#fig:onedimopt">1</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:onedimopt"></span>
-<img src="pics7a/00_one_dim_maximum.png" alt="Discrete optimization in one variable dimension" width="25%" />
-<p class="caption">
-Figure 1: Discrete optimization in one variable dimension
-</p>
-</div>
-<p>One simple way to try to find the maximum is to evaluate the function at a number of discrete values for <span class="math inline">\(x\)</span> and find the point(s) where the function value is highest. For example, in Figure <a href="#fig:onedimopt">1</a>, we have 10 evaluation points, equally dividing the x-range of <span class="math inline">\(0-10\)</span>. In our example, the maximum is between 5 and 6. In a naive one-dimensional numerical optimization routine, we could then divide the interval between 5 and 6 into ten more subintervals and proceed. However, let’s consider the problem from a different perspective. What if the optimization was with respect to two variables? Now, we are in a two-dimensional attribute domain and using 10 discrete points for each variable actually results in 100 evaluation points, as shown in Figure <a href="#fig:twodimopt">2</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:twodimopt"></span>
-<img src="pics7a/00_twodim.png" alt="Discrete evaluation points in two variable dimensions" width="25%" />
-<p class="caption">
-Figure 2: Discrete evaluation points in two variable dimensions
-</p>
-</div>
-<p>Similarly, for three dimensions, there would be <span class="math inline">\(10^3\)</span> or 1,000 evaluation points, as in Figure <a href="#fig:threedimopt">3</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:threedimopt"></span>
-<img src="pics7a/00_threed2.png" alt="Discrete evaluation points in three variable dimensions" width="25%" />
-<p class="caption">
-Figure 3: Discrete evaluation points in three variable dimensions
-</p>
-</div>
-<p>In general, if we keep the principle of 10 evaluation points per dimension, the required number of evaluation points is <span class="math inline">\(10^k\)</span>, with <span class="math inline">\(k\)</span> as the number of variables. This very quickly becomes unwieldy, e.g., for 10 dimensions, there would need to be <span class="math inline">\(10^{10}\)</span>, or 10 billion evaluation points, and for 20 dimensions <span class="math inline">\(10^{20}\)</span> or 100,000,000,000,000,000,000, hence the <em>curse of dimensionality</em>. Some further illustrations of methods that break down or become impractical in high dimensional spaces are
-given in Chapter 2 of <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-Hastieetal:09" role="doc-biblioref">2009</a>)</span>, among others.</p>
-<div id="the-empty-space-phenomenon" class="section level3 unnumbered" number="">
-<h3>The Empty Space Phenomenon</h3>
-<p>A related and strange property of high-dimensional analysis is the so-called
-<em>empty space phenomenon</em>. In essence, the same number of data points are much further apart in higher dimensional spaces than
-in lower dimensional ones. This means that we need (very) large data sets to do effective analysis in high dimensions.</p>
-<p>To illustrate this point, consider three variables, say <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, each generated as 10 uniform random variates in the unit interval (0-1). In one dimension, the observations on these variables are fairly close together. For example, in Figure
-<a href="#fig:onedimrandom">4</a>, the one-dimensional spread for each of the variables is shown on the horizontal axes of a parallel coordinate
-plot (PCP). Clearly, the points on each of the lines that correspond to the dimensions are spaced fairly closely together.</p>
-<div class="figure" style="text-align: center"><span id="fig:onedimrandom"></span>
-<img src="pics7a/00_3d_random_linegraph.png" alt="Uniform random variables in one dimension" width="30%" />
-<p class="caption">
-Figure 4: Uniform random variables in one dimension
-</p>
-</div>
-<p>However, when represented in a two-dimensional scatter plot, we observe large empty spaces in the unit quadrant, as
-in Figure <a href="#fig:twodimrandom">5</a> for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> (similar graphs are obtained for the other pairs). The sparsity of the attribute space gets even more pronounced in three dimensions, as in Figure <a href="#fig:threedimrandom">6</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:twodimrandom"></span>
-<img src="pics7a/00_random_2d_scatter.png" alt="Uniform random variables in two dimensions" width="45%" />
-<p class="caption">
-Figure 5: Uniform random variables in two dimensions
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:threedimrandom"></span>
-<img src="pics7a/00_3d_randompng.png" alt="Uniform random variables in three dimensions" width="35%" />
-<p class="caption">
-Figure 6: Uniform random variables in three dimensions
-</p>
-</div>
-<p>To quantify this somewhat, we can compute the nearest neighbor distances between the observation points in each of
-the dimensions.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> In our example (the results will depend on the actual random numbers generated), the smallest nearest neighbor distance in the <span class="math inline">\(x\)</span> dimension is between observations 5 and 8 at 0.009. In two dimensions, the smallest distance is between observations 1 and 4 at 0.094, and in three dimensions, it is also between 1 and 4, but now at 0.146. All distances are in the same units, since we are working with a unit interval for each variable.</p>
-<p>Two observations follow from this small experiment. One is that the nearest neighbors in a lower dimension are not necessarily also nearest neighbors in higher dimensions. The other is that the nearest neighbor distance increases with the dimensionality. In other words, more of the attribute space needs to be searched before neighbors are found (this is in general a problem with k-nearest neighbor searches in high dimensions).</p>
-<p>Further examples of some strange aspects of data in higher dimensional spaces can be found in Chapter 1 of <span class="citation">Lee and Verleysen (<a href="#ref-LeeVerleysen:07" role="doc-biblioref">2007</a>)</span>.</p>
-</div>
-</div>
-<div id="principal-component-analysis-pca" class="section level2 unnumbered" number="">
-<h2>Principal Component Analysis (PCA)</h2>
-<div id="principles" class="section level3 unnumbered" number="">
-<h3>Principles</h3>
-<p>Principal components analysis has an eminent historical pedigree, going back to pioneering work in the early twentieth century by the statistician Karl Pearson <span class="citation">(Pearson <a href="#ref-Pearson:01" role="doc-biblioref">1901</a>)</span> and the economist Harold Hotelling <span class="citation">(Hotelling <a href="#ref-Hotelling:33" role="doc-biblioref">1933</a>)</span>. The technique is also known as the
-Karhunen-Loève transform in probability theory and as empirical orthogonal functions or EOF in meteorology <span class="citation">(see, for example, in applications of space-time statistics in Cressie and Wikle <a href="#ref-CressieWikle:11" role="doc-biblioref">2011</a>; Wikle, Zammit-Mangion, and Cressie <a href="#ref-Wikleetal:19" role="doc-biblioref">2019</a>)</span>.</p>
-<p>The derivation of principal components can be approached from a number of different perspectives, all leading to the same solution. Perhaps the most common treatment considers the components as the solution of a problem of finding
-new variables that are constructed as a linear combination of the
-original variables, such that they maximize the explained variance.
-In a sense, the
-principal components can be interpreted as the best linear approximation to the multivariate point cloud of the data.</p>
-<p>More formally, consider <span class="math inline">\(n\)</span> observations on <span class="math inline">\(k\)</span> variables <span class="math inline">\(x_h\)</span>,
-with <span class="math inline">\(h = 1, \dots, k\)</span>, organized
-as a <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span> (each variable is a column in the matrix). In practice, each of the variables is typically standardized, such that its mean is zero and variance equals one. This avoids problems with (large) scale differences between the variables (i.e., some are very small numbers and others very large). For such standardized variables, the <span class="math inline">\(k \times k\)</span> cross product matrix <span class="math inline">\(X&#39;X\)</span> corresponds to the correlation matrix (without standardization, this would be the variance-covariance matrix).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
-<p>The goal is to find a small number of new variables, the so-called <em>principal components</em>, that explain the bulk of the variance (or, in practice, the correlation) in the original variables. If this can be accomplished with a much smaller number of variables than in the original set, the objective of <em>dimension reduction</em> will have been achieved.</p>
-<p>We can think of each principal component <span class="math inline">\(z_u\)</span> as a linear combination of the original variables <span class="math inline">\(x_h\)</span>, with <span class="math inline">\(h\)</span> going from <span class="math inline">\(1\)</span> to <span class="math inline">\(k\)</span> such that:
-<span class="math display">\[z_u = a_1 x_1 + a_2 x_2 + \dots + a_k x_k\]</span>
-The mathematical problem is to find the coefficients <span class="math inline">\(a_h\)</span> such that the new variables maximize the explained variance of the original variables. In addition, to avoid an indeterminate solution, the coefficients are scaled
-such that the sum of their squares equals <span class="math inline">\(1\)</span>.</p>
-<p>A full mathematical treatment of the derivation of the optimal solution to this problem is beyond our scope <span class="citation">(for details, see, e.g., Lee and Verleysen <a href="#ref-LeeVerleysen:07" role="doc-biblioref">2007</a>, Chapter 2)</span>. Suffice it to say that the principal components are based on the eigenvalues and eigenvectors of
-the cross-product matrix <span class="math inline">\(X&#39;X\)</span>.</p>
-<p>The coefficients by which the original variables need to be
-multiplied to obtain each principal component can be shown to correspond to
-the elements of the eigenvectors
-of <span class="math inline">\(X&#39;X\)</span>, with the associated eigenvalue giving the explained variance. Note that while the matrix <span class="math inline">\(X\)</span> is not square, the cross-product matrix <span class="math inline">\(X&#39;X\)</span> is of dimension <span class="math inline">\(k \times k\)</span>, so it is square. See the <a href="#appendix">Appendix</a> for a quick overview of the concept of eigenvalue and eigenvector.</p>
-<p>Operationally, the principal component coefficients are obtained by means of a
-matrix decomposition. One option is to compute the <em>eigenvalue decomposition</em> of the
-<span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(X&#39;X\)</span>, i.e., the correlation matrix, as
-<span class="math display">\[X&#39;X = VGV&#39;,\]</span>
-where <span class="math inline">\(V\)</span> is a <span class="math inline">\(k \times k\)</span> matrix with the eigenvectors as columns (the coefficients needed
-to construct the principal components), and <span class="math inline">\(G\)</span> a <span class="math inline">\(k \times k\)</span> diagonal matrix of the
-associated eigenvalues (the explained variance). For further details, see the <a href="#appendix">Appendix</a>.</p>
-<p>A second, and computationally preferred way to approach this is as a <em>singular value decomposition</em> (SVD)
-of the <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span>, i.e., the matrix of (standardized) observations, as
-<span class="math display">\[X = UDV&#39;,\]</span>
-where again <span class="math inline">\(V\)</span> (the transpose of the <span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(V&#39;\)</span>) is the matrix with the eigenvectors of <span class="math inline">\(X&#39;X\)</span> as columns, and <span class="math inline">\(D\)</span> is a <span class="math inline">\(k \times k\)</span>
-diagonal matrix such that <span class="math inline">\(D^2\)</span> is the matrix of eigenvalues of
-<span class="math inline">\(X&#39;X\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> A brief discussion of singular value decomposition is given in the <a href="#appendix">Appendix</a>.</p>
-<p>It turns out that this second approach is the solution to viewing the principal components explicity as a dimension reduction problem, originally considered by Karl Pearson. More formally, consider the observed vector on the <span class="math inline">\(k\)</span> variables <span class="math inline">\(x\)</span> as a function of a number of unknown <em>latent variables</em> <span class="math inline">\(z\)</span>, such that there is a linear relationship between them:
-<span class="math display">\[ x = Az, \]</span>
-where <span class="math inline">\(x\)</span> is a <span class="math inline">\(k \times 1\)</span> vector of the observed variables, and <span class="math inline">\(z\)</span> is a <span class="math inline">\(p \times 1\)</span> vector of the (unobserved) latent variables, ideally with <span class="math inline">\(p\)</span> much smaller than <span class="math inline">\(k\)</span>. The matrix <span class="math inline">\(A\)</span> is of dimension <span class="math inline">\(k \times p\)</span> and contains the coefficients of the transformation. Again, in order to avoid indeterminate solutions, the coefficients are scaled such that <span class="math inline">\(A&#39;A = I\)</span>, which
-ensures that the sum of squares of the coefficients associated with a given component equals one.
-Instead of maximizing explained variance, the objective is now to find <span class="math inline">\(A\)</span> and <span class="math inline">\(z\)</span> such that the so-called reconstruction error is minimized.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
-<p>Note that different computational approaches to obtain the eigenvalues and eigenvectors (there is no analytical solution) may yield opposite signs for the elements of the eigenvectors (but not for the eigenvalues). This will affect the sign of the resulting component (i.e., positives become negatives). This is the case in <code>GeoDa</code> for the <strong>eigen</strong> and <strong>SVD</strong> options, as illustrated below.</p>
-<p>In a principal component analysis, we are typically interested in three main results. First, we need the principal component scores as a replacement for the original variables. This is particularly relevant when a small number of components explain a substantial share of the original variance. Second,
-the
-relative contribution of each of the original variables to each principal component is of interest. Finally, the
-variance proportion explained by each component in and of itself is also important.</p>
-<p>In addition to these traditional interpretations, we will be particularly
-interested in <em>spatializing</em> the principal components, i.e., analyzing
-and visualizing their spatial patterns.</p>
-</div>
-<div id="implementation" class="section level3 unnumbered" number="">
-<h3>Implementation</h3>
-<p>We invoke the principal components functionality from the <strong>Clusters</strong> toolbar icon,
-shown in Figure <a href="#fig:clustertoolbar">7</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:clustertoolbar"></span>
-<img src="pics7a/1_683_cluster_toolbaricon.png" alt="Clusters toolbar icon" width="10%" />
-<p class="caption">
-Figure 7: Clusters toolbar icon
-</p>
-</div>
-<p>From the main menu, we can select <strong>Clusters &gt; PCA</strong>. The full list of options is shown in Figure <a href="#fig:pcaoption">8</a>. The dimension reduction methods are included in the top
-part (separated from the others by a thin line). <strong>PCA</strong> is the first item on the list of options.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcaoption"></span>
-<img src="pics7a/1_684_pca_option.png" alt="PCA Option" width="10%" />
-<p class="caption">
-Figure 8: PCA Option
-</p>
-</div>
-<p>This brings up the <strong>PCA Settings</strong> dialog, the main interface through which variables
-are chosen, options selected, and summary results are provided.</p>
-<div id="variable-settings-panel" class="section level4 unnumbered" number="">
-<h4>Variable Settings Panel</h4>
-<p>We select the variables and set the parameters for the principal components analysis
-through the options in the left hand panel of the interface. We choose the six
-same variables as in the multivariate analysis presented in <span class="citation">Dray and Jombart (<a href="#ref-DrayJombart:11" role="doc-biblioref">2011</a>)</span>: <strong>Crm_prs</strong> (crimes against persons),
-<strong>Crm_prp</strong> (crimes against property), <strong>Litercy</strong> (literacy), <strong>Donatns</strong> (donations), <strong>Infants</strong> (births out of wedlock), and <strong>Suicids</strong> (suicides)
-<span class="citation">(see also Anselin <a href="#ref-Anselin:18" role="doc-biblioref">2019</a>, for an extensive discussion of the variables)</span>. Note that, as in the original Guerry data set, the scale of each variable is such that larger is better. Specifically, the rates are not the usual events/population (like a crime rate, number of crimes over population), but the reverse, population over events. For example, a large value for <strong>Crm_prs</strong> actually denotes a low crime rate, since it corresponds with more people per crime committed. The chosen variables
-appear highlighted in the <strong>Select Variables</strong> panel, Figure <a href="#fig:pcavariables">9</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcavariables"></span>
-<img src="pics7a/1_685_variableselection.png" alt="PCA Settings panel" width="80%" />
-<p class="caption">
-Figure 9: PCA Settings panel
-</p>
-</div>
-<p>The default settings for the <strong>Parameters</strong> are likely fine in most practical situations.
-The <strong>Method</strong> is set to <strong>SVD</strong>, i.e., singular value decomposition. The alternative
-<strong>Eigen</strong> carries out an explicit eigenvalue decomposition of the correlation matrix. In our example, the two approaches yield opposite signs for the loadings of three of the components. We return to this below.
-For larger data sets, the singular value decomposition approach is faster and is the preferred option.</p>
-<p>The <strong>Transformation</strong> option is set to <strong>Standardize (Z)</strong> by default, which converts all variables
-such that their mean is zero and variance one, i.e., it creates a z-value as
-<span class="math display">\[z = \frac{(x - \bar{x})}{\sigma(x)},\]</span>
-with <span class="math inline">\(\bar{x}\)</span> as the mean of the original variable <span class="math inline">\(x\)</span>, and <span class="math inline">\(\sigma(x)\)</span> as its standard deviation.</p>
-<p>An alternative standardization is <strong>Standardize (MAD)</strong>, which uses the <em>mean absolute deviation</em> (MAD) as the denominator in the standardization. This is preferred in some of the clustering literature, since it diminishes the effect of outliers on the standard deviation
-<span class="citation">(see, for example, the illustration in Kaufman and Rousseeuw <a href="#ref-KaufmanRousseeuw:05" role="doc-biblioref">2005</a>, 8–9)</span>. The mean absolute deviation for a variable <span class="math inline">\(x\)</span> is computed as:
-<span class="math display">\[\mbox{mad} = (1/n) \sum_i |x_i - \bar{x}|,\]</span>
-i.e., the average of the absolute deviations between an observation and the mean for that variable. The estimate for <span class="math inline">\(\mbox{mad}\)</span> takes the place of <span class="math inline">\(\sigma(x)\)</span> in the denominator of the standardization expression.</p>
-<p>Two additional transformations that are based on the range of the observations, i.e., the difference between the maximum and minimum, are the
-<strong>Range Adjust</strong> and the <strong>Range Standardize</strong> options. <strong>Range Adjust</strong> divides each value by the range of observations:
-<span class="math display">\[r_a = \frac{x_i}{x_{max} - x_{min}}.\]</span>
-While <strong>Range Adjust</strong> simply rescales observations in function of their range, <strong>Range Standardize</strong> turns them into a value
-between zero (for the minimum) and one (for the maximum):
-<span class="math display">\[r_s = \frac{x_i - x_{min}}{x_{max} - x_{min}}.\]</span>
-Whereas these transformations are used less commonly in the context of PCA, they are quite useful in cluster analysis (in <code>GeoDa</code>, all
-multivariate methods share the same standardization options).</p>
-<p>The remaining options are
-to use the variables in their
-original scale (<strong>Raw</strong>), or as deviations from the mean (<strong>Demean</strong>).</p>
-<p>After clicking on the <strong>Run</strong> button, the summary statistics appear in the right hand panel, as shown in Figure <a href="#fig:pcaresults">10</a>.
-We return for a more detailed interpretation below.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcaresults"></span>
-<img src="pics7a/1_686_pca_results.png" alt="PCA results" width="100%" />
-<p class="caption">
-Figure 10: PCA results
-</p>
-</div>
-</div>
-<div id="saving-the-results" class="section level4 unnumbered" number="">
-<h4>Saving the Results</h4>
-<p>Once the results have been computed, a value appears next to the <strong>Output</strong> <strong>Components</strong> item
-in the left panel, shown in Figure <a href="#fig:numbercomponents">11</a>. This value corresponds to the number of components that explain 95% of the
-variance, as indicated in the results panel. This determines the default number of components that
-will be added to the data table upon selecting <strong>Save</strong>. The value can be changed in the drop-down
-list. For now, we keep the number of components as <strong>5</strong>, even though that is not a very
-good result (given that we started with only six variables).</p>
-<div class="figure" style="text-align: center"><span id="fig:numbercomponents"></span>
-<img src="pics7a/1_687_save_output.png" alt="Save output dialog" width="20%" />
-<p class="caption">
-Figure 11: Save output dialog
-</p>
-</div>
-<p>The <strong>Save</strong> button brings up
-a dialog to select variable names for the principal components,
-shown in Figure <a href="#fig:pcaresultsvars">12</a>. The default is generic and
-not suitable for a situation where a large number of analyses will be carried out. In practice, one would customize the components names to keep the results from different computations distinct.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcaresultsvars"></span>
-<img src="pics7a/1_688_saveresults_dialog.png" alt="Principal Component variable names" width="20%" />
-<p class="caption">
-Figure 12: Principal Component variable names
-</p>
-</div>
-<p>Clicking on <strong>OK</strong> adds the principal components to the data table, as in Figure <a href="#fig:pcatable">13</a>, shown for the first
-five observations. The principal components now become
-available for all types of analysis and visualization. As always, the addition is only made permanent after
-saving the table.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcatable"></span>
-<img src="pics7a/22_pca_values.png" alt="Principal Components in the table" width="50%" />
-<p class="caption">
-Figure 13: Principal Components in the table
-</p>
-</div>
-</div>
-</div>
-<div id="interpretation" class="section level3 unnumbered" number="">
-<h3>Interpretation</h3>
-<p>The panel with summary results provides several statistics pertaining to the variance decomposition, the eigenvalues,
-the variable loadings and the contribution of each of the original variables to the
-respective components.</p>
-<div id="explained-variance" class="section level4 unnumbered" number="">
-<h4>Explained variance</h4>
-<p>The first item lists the <strong>Standard deviation</strong> explained by each of the components. This corresponds to the
-square root of the <strong>Eigenvalues</strong> (each eigenvalue equals the variance explained
-by the corresponding principal component), which are listed as well. In our example, the first eigenvalue is 2.14047, which is thus the variance of the first component. Consequently, the standard deviation is the square root of this value, i.e., 1.463034, given as the first item in the list.</p>
-<p>The sum of all the eigenvalues is 6, which equals the number of variables, or, more precisely, the rank of the matrix <span class="math inline">\(X&#39;X\)</span>. Therefore, the proportion of variance explained by the first component is 2.14047/6 = 0.356745, as reported in the list. Similarly, the proportion explained by the second component is 0.200137, so that the cumulative proportion of the first and second component amounts to 0.356745 + 0.200137 = 0.556882. In other words, the first two components explain a little over half of the total variance.</p>
-<p>The fraction of the total variance explained is listed both as a separate
-<strong>Proportion</strong> and as a <strong>Cumulative proportion</strong>. The latter is typically used to choose a
-cut-off for the number of components. A common convention is to take a threshold of 95%,
-which would suggest 5 components in our
-example. Note that this is not a good result, given that we started with 6 variables, so there is not much of a dimension reduction.</p>
-<p>An alternative criterion to select the number of components is the so-called
-<strong>Kaiser</strong> criterion <span class="citation">(Kaiser <a href="#ref-Kaiser:60" role="doc-biblioref">1960</a>)</span>, which suggests to take the components for which the eigenvalue
-exceeds <strong>1</strong>. In our example, this would yield 3 components (they explain about 74% of the total variance).</p>
-<p>The bottom part of the results panel is occupied by two tables that have the
-original variables as rows and the components as columns.</p>
-</div>
-<div id="variable-loadings" class="section level4 unnumbered" number="">
-<h4>Variable loadings</h4>
-<p>The first table shows the
-<strong>Variable Loadings</strong>. For each component (column), this lists the elements
-of the corresponding eigenvector. The eigenvectors are standardized such that the sum
-of the squared coefficients equals one. The elements of the eigenvector are the coefficients by which the (standardized) original
-variables need to be multiplied to construct each component. We illustrate this below.</p>
-<p>It is important to keep in mind that the signs of the loadings may change, depending on the algorithm that is used in their computation, but the absolute value of the coefficients
-will be the same. In our example, setting <strong>Method</strong> to <strong>Eigen</strong> yields the loadings shown in Figure <a href="#fig:pcaeigen">14</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcaeigen"></span>
-<img src="pics7a/1_eigen_loadings.png" alt="Variable Loadings - Eigen algorithm" width="80%" />
-<p class="caption">
-Figure 14: Variable Loadings - Eigen algorithm
-</p>
-</div>
-<p>For PC1, PC4, and PC6, the signs for the loadings are the opposite of those reported in Figure <a href="#fig:pcaresults">10</a>.
-This needs to be kept in mind when interpreting the actual value (and sign) of the components.</p>
-<p>When the original variables are all standardized, each eigenvector coefficient
-gives a measure of the relative contribution of a variable to the component in question.
-These loadings are also the vectors employed in a principal component <em>biplot</em>,
-a common graph produced in a
-principal component analysis (but not currently available in <code>GeoDa</code>).</p>
-</div>
-<div id="variable-loadings-and-principal-components" class="section level4 unnumbered" number="">
-<h4>Variable loadings and principal components</h4>
-<p>To further illustrate how the principal components are obtained, consider the standardized values for the six
-variables, listed in Figure <a href="#fig:pcastandvars">15</a> for the first five observations.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcastandvars"></span>
-<img src="pics7a/22_standardized.png" alt="Standardized variables" width="60%" />
-<p class="caption">
-Figure 15: Standardized variables
-</p>
-</div>
-<p>Each principal component is obtained by multiplying the values in the columns for each observation
-by the corresponding element of the eigenvector, listed as <strong>Variable Loadings</strong> in Figure <a href="#fig:pcaresults">10</a>
-(using the results from the default option <strong>SVD</strong>). For the first principal component, the eigenvector is listed
-under <strong>PC1</strong>: -0.0659, -0.5123, 0.5118, -0.1062, -0.4513, -0.5063. For example, the value of the first principal
-component for the first observation is found as the product of the first row in Figure <a href="#fig:pcastandvars">15</a> with
-this eigenvector. Specifically, the result is
-1.2205 <span class="math inline">\(\times\)</span> -0.0659 + 2.6270 <span class="math inline">\(\times\)</span> -0.5123 - 0.1228 <span class="math inline">\(\times\)</span> 0.5118 - 0.3342 <span class="math inline">\(\times\)</span> -0.1062 + 1.5973 <span class="math inline">\(\times\)</span> -0.4513
-- 0.0469 <span class="math inline">\(\times\)</span> -0.5063 = - 2.1508, the value in the first row/column in Figure <a href="#fig:pcatable">13</a>.</p>
-<p>Similar calculations can be carried out to verify the other values.</p>
-</div>
-<div id="substantive-interpretation-of-principal-components" class="section level4 unnumbered" number="">
-<h4>Substantive interpretation of principal components</h4>
-<p>The interpretation and substantive meaning of the principal components can
-be a challenge. In <em>factor analysis</em>, a number of rotations are applied to clarify the contribution of each variable to the different components. The latter are then imbued with meaning such as “social deprivation”, “religious climate”, etc. Principal component analysis tends to stay away from this, but nevertheless, it is useful to consider the relative contribution of each variable to the respective components.</p>
-<p>The table labeled as <strong>Squared correlations</strong> lists those statistics between each of the original
-variables in a row and the principal component listed in the column. Each row of the table shows how much of the variance
-in the original variable is explained by each of the components. As a result, the values
-in each row sum to one.</p>
-<p>More insightful is the analysis of each column, which indicates
-which variables are important in the computation of the matching component. In our example,
-we see that <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Infants</strong> and <strong>Suicids</strong> are the most important
-for the first component, whereas for the second component this is <strong>Crm_prs</strong> and <strong>Donatns</strong>.
-As we can see from the cumulative proportion listing, these two components explain
-about 56% of the variance in the original variables.</p>
-<p>Since the correlations are squared, they do not depend on the sign of the eigenvector elements, unlike the loadings.</p>
-</div>
-<div id="visualizing-principal-components" class="section level4 unnumbered" number="">
-<h4>Visualizing principal components</h4>
-<p>Once the principal components are added to the data table, they are available
-for use in any graph (or map).</p>
-<p>A useful graph is a scatter plot of any pair of principal components. For example, such a graph is shown for the first two components (based on the <strong>SVD</strong> method) in Figure <a href="#fig:pcascatplot">16</a>.
-By construction, the principal component variables are uncorrelated,
-which yields the characteristic circular cloud plot. A regression line fit to this scatter
-plot yields a horizontal line (with slope zero). Through linking and brushing, we can
-identify the locations on the map for any point in the scatter plot.</p>
-<p>In addition, this type of bivariate plot is sometimes employed to visually identify <em>clusters</em> in the data.
-Such clusters would be suggested by distinct high density clumps of points in the graph. Such points are close in a multivariate sense,
-since they correspond to a linear combination of the original variables that maximizes explained
-variance.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
-<div class="figure" style="text-align: center"><span id="fig:pcascatplot"></span>
-<img src="pics7a/1_693_pc12_scatter.png" alt="First two principal components scatter plot - SVD method" width="40%" />
-<p class="caption">
-Figure 16: First two principal components scatter plot - SVD method
-</p>
-</div>
-<p>To illustrate the effect of the choice of eigenvalue computation, the scatter plot in Figure <a href="#fig:eigenscatplot">17</a> again plots the values for the first and second component, but now using the loadings from the <strong>Eigen</strong> method. Note how the scatter has been flipped around the vertical axis, since what used to be positive for PC1, is now negative, and vice versa.</p>
-<div class="figure" style="text-align: center"><span id="fig:eigenscatplot"></span>
-<img src="pics7a/1_eigen_scatplot.png" alt="First two principal components scatter plot - Eigen method" width="40%" />
-<p class="caption">
-Figure 17: First two principal components scatter plot - Eigen method
-</p>
-</div>
-<p>An even more graphic illustration of the difference between the principal components obtained through the <strong>SVD</strong> method (PC1) and
-the <strong>Eigen</strong> method (PC1e) can be seen by the perfect negative correlation in the scatter plot in Figure <a href="#fig:pcascatplot">16</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcanegcorr"></span>
-<img src="pics7a/0_negcorr_pcsvd1_pceigen2.png" alt="First principal component for SVD and Eigen" width="40%" />
-<p class="caption">
-Figure 18: First principal component for SVD and Eigen
-</p>
-</div>
-<p>In order to gain further insight into the composition of a principal component, we
-combine a box plot of the values for the component with a parallel coordinate plot of its main contributing variables. For example, in the box plot in Figure <a href="#fig:pcpboxplot">19</a>, we select the
-observations in the top quartile of PC1 (using SVD).<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
-<p>We link the box plot to a parallel coordinate plot for the
-four variables that contribute most to this component. From the analysis above, we know that
-these are <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Infants</strong> and <strong>Suicids</strong>. The corresponding linked selection
-in the PCP shows <em>low</em> values for all but <strong>Litercy</strong>, but the lines in the plot are all close together. This nicely illustrates how the
-first component captures a <em>clustering</em> in multivariate attribute space among these four
-variables.</p>
-<p>Since the variables are used in standardized form, low values will tend to have a negative sign, and high values a positive sign. The loadings for PC1 are negative for <strong>Crm_prp</strong>, <strong>Infants</strong> and <strong>Suicids</strong>, which, combined with negative standardized values, will make a (large) positive contribution to the component. The loadings for <strong>Litercy</strong> are positive and they multiply a (large) postive value, also making a positive contribution. As a result, the values for the principal component end up in the top quartile.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcpboxplot"></span>
-<img src="pics7a/1_692_pc1_box_pcp.png" alt="PC1 composition using PCP" width="60%" />
-<p class="caption">
-Figure 19: PC1 composition using PCP
-</p>
-</div>
-<p>The substantive interpretation is a bit of a challenge, since it suggests that high property crime, out of wedlock births and suicide rates (recall that low values for the variables are <em>bad</em>, so actually high rates) coincide with high literacy rates (although the latter are limited to military conscripts, so they may be a biased reflection of the whole population).</p>
-</div>
-</div>
-</div>
-<div id="spatializing-principal-components" class="section level2 unnumbered" number="">
-<h2>Spatializing Principal Components</h2>
-<p>We can further <em>spatialize</em> the visualization of principal components by explicitly
-considering their spatial distribution in a map. In addition, we can explore spatial patterns more formally through a local spatial autocorrelation analysis.</p>
-<div id="principal-component-maps" class="section level3 unnumbered" number="">
-<h3>Principal component maps</h3>
-<p>The visualization of the spatial distribution of the value of a principal component by means of a choropleth map is mostly useful to suggest certain patterns. Caution needs to be used to interpret these in terms of <em>high</em> or <em>low</em>, since the latter depends on the sign of the component loadings (and thus on the method used to compute the eigenvectors).</p>
-<p>For example, using the results from <strong>SVD</strong> for the first principal component, a quartile map shows a distinct pattern, with higher values above a diagonal
-line going from the north west to the middle of the
-south east border, as shown in Figure <a href="#fig:pc1quartile">20</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pc1quartile"></span>
-<img src="pics7a/1_pc1_quartile.png" alt="PC1 quartile map" width="50%" />
-<p class="caption">
-Figure 20: PC1 quartile map
-</p>
-</div>
-<p>A quartile map for the first component computed using the <strong>Eigen</strong> method shows the same overall spatial pattern, but the roles of high and low are reversed,
-as in Figure <a href="#fig:pc1equartile">21</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pc1equartile"></span>
-<img src="pics7a/1_pc1e_quartile.png" alt="PC1 quartile map" width="50%" />
-<p class="caption">
-Figure 21: PC1 quartile map
-</p>
-</div>
-<p>Even clearer evidence of the need for care in the interpretation of the components is seen in Figures
-<a href="#fig:pcsvdbox">22</a> and <a href="#fig:pceigenbox">23</a> that show a box map for the first principal component,
-respectively for <strong>SVD</strong> and for <strong>Eigen</strong>. What is shown as a lower outlier in for <strong>SVD</strong> is an upper
-outlier in the box map for <strong>Eigen</strong>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcsvdbox"></span>
-<img src="pics7a/0_pcasvd_boxmap.png" alt="PC1-SVD box map" width="50%" />
-<p class="caption">
-Figure 22: PC1-SVD box map
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:pceigenbox"></span>
-<img src="pics7a/0_pca_eigen_boxmap.png" alt="PC1-Eigen box map" width="50%" />
-<p class="caption">
-Figure 23: PC1-Eigen box map
-</p>
-</div>
-</div>
-<div id="cluster-maps" class="section level3 unnumbered" number="">
-<h3>Cluster maps</h3>
-<p>We pursue the nature of this pattern more formally through a local Moran cluster map. Again, using the first component from the <strong>SVD</strong> method, we find a strong high-high cluster in the northern part of the country, ranging
-from east to west (with p=0.01 and 99999 permutations, using queen contiguity). In addition, there is a pronounced Low-Low cluster in the center of
-the country. With the component based on the <strong>Eigen</strong> method, the locations of the clusters would be the same, but their labels would be opposite, i.e., what was high-high becomes low-low and vice versa. In other words, the location of the clusters is not affected by the method used, but their interpretation is.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="pics7a/1_690_pc1localmoran.png" alt="PC1 Local Moran cluster map" width="50%" />
-<p class="caption">
-Figure 24: PC1 Local Moran cluster map
-</p>
-</div>
-</div>
-<div id="principal-components-as-multivariate-cluster-maps" class="section level3 unnumbered" number="">
-<h3>Principal components as multivariate cluster maps</h3>
-<p>Since the principal components combine the original variables, their patterns of spatial clustering could be viewed as an alternative to a full multivariate spatial clustering. The main difference is that in the latter each variable is given equal weight, whereas in the principal component some variables are more important than others. In our example, we saw that the first component is a reasonable summary of the pattern among four variables, <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Infants</strong> and <strong>Suicids</strong>.</p>
-<p>First, we can check on the makeup of the component in the identified cluster. For example, we select the high-high values in the cluster map and find the matching lines in a parallel coordinate plot for the four variables, shown in Figure <a href="#fig:clusterbox">25</a>. The lines track closely (but not perfectly), suggesting some clustering of the data points in the four-dimensional attribute space. In other words, the high-high spatial cluster of the first principal component seems to match attribute similarity among the four variables.</p>
-<div class="figure" style="text-align: center"><span id="fig:clusterbox"></span>
-<img src="pics7a/1_cluster_box.png" alt="Linked PCA cluster map and PCP" width="80%" />
-<p class="caption">
-Figure 25: Linked PCA cluster map and PCP
-</p>
-</div>
-<p>In addition, we can now compare these results to a cluster or significance map from a multivariate local Geary analysis for the four variables. In Figure <a href="#fig:multigeary">26</a>, we show the significance map rather than a cluster map, since all significant locations are for positive spatial autocorrelation (p &lt; 0.01, 99999 permutations, queen contiguity). While the patterns are not identical to those in the principal component cluster map, they are quite similar and pick up the same general spatial trends.</p>
-<div class="figure" style="text-align: center"><span id="fig:multigeary"></span>
-<img src="pics7a/1_multigeary.png" alt="Multivariate local Geary significance map" width="50%" />
-<p class="caption">
-Figure 26: Multivariate local Geary significance map
-</p>
-</div>
-<p>This suggests that in some instances, a univariate local spatial autocorrelation analysis for one or a few dominant principal components may provide a viable alternative to a full-fledged multivariate analysis.</p>
-</div>
-</div>
-<div id="appendix" class="section level2 unnumbered" number="">
-<h2>Appendix</h2>
-<div id="basics---eigenvalues-and-eigenvectors" class="section level3 unnumbered" number="">
-<h3>Basics - eigenvalues and eigenvectors</h3>
-<p>Consider a square symmetric matrix:<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
-<span class="math display">\[
-A = \begin{bmatrix}
-1 &amp; 3\\ 3 &amp; 2
-\end{bmatrix}
-\]</span>
-and a column vector, say:
-<span class="math display">\[
-v = \begin{bmatrix}
-1\\
-2
-\end{bmatrix}
-\]</span>
-As illustrated in Figure <a href="#fig:vectorgraph">27</a>, we can visualize the vector as an <em>arrow</em> from the origin of a <span class="math inline">\(x-y\)</span> scatter plot
-going to the point (<span class="math inline">\(x = 1\)</span>, <span class="math inline">\(y = 2\)</span>).</p>
-<div class="figure" style="text-align: center"><span id="fig:vectorgraph"></span>
-<img src="pics7a/33_vectors.png" alt="Vectors in two-dimensional space" width="40%" />
-<p class="caption">
-Figure 27: Vectors in two-dimensional space
-</p>
-</div>
-<p>Pre-multiplying this vector by a scalar just moves the point further on
-the same slope. For example,
-<span class="math display">\[2 \times
-\begin{bmatrix}
-1\\
-2
-\end{bmatrix}
-=
-\begin{bmatrix}
-2\\
-4
-\end{bmatrix}
-\]</span>
-This is equivalent to moving the arrow over on the
-same slope from (1,2) to the point (2,4) further from the origin, as shown by the dashed line
-in Figure <a href="#fig:vectorgraph">27</a>.</p>
-<p>In contrast, pre-multiplying the vector by the matrix does both rescaling and rotation of the vector.
-In our example,
-<span class="math display">\[
-Av = \begin{bmatrix}
-(1 \times 1) + (3 \times 2)\\
-(3 \times 1) + (2 \times 2)
-\end{bmatrix}
-=
-\begin{bmatrix}
-7 \\
-5
-\end{bmatrix}.
-\]</span>
-In Figure <a href="#fig:vectorgraph">27</a>, the arrow is both moved further away from the origin and also rotated down to the point (7,5) (now the x-value is larger than the y-value, so
-the slope of the arrow is less steep).</p>
-<p>The eigenvectors and eigenvalues of a square symmetric matrix are a special
-pair of scalar-vector, such that <span class="math inline">\(Av = \lambda v\)</span>, where <span class="math inline">\(\lambda\)</span> is the <em>eigenvalue</em> and <span class="math inline">\(v\)</span> is the <em>eigenvector</em>.
-In addition, the eigenvectors are orthogonal to each other, i.e., <span class="math inline">\(v_u&#39;v_k = 0\)</span> (for different eigenvectors),
-and <span class="math inline">\(v_u&#39;v_u = 1\)</span> (the sum of the squares of the eigenvector elements sum to one).</p>
-<p>What does this mean? For this particular vector (i.e., arrow from the origin), the transformation by <span class="math inline">\(A\)</span> does not
-rotate the vector, but simply rescales it (i.e., moves it further or closer to the origin), by exactly the factor <span class="math inline">\(\lambda\)</span>. In our example, the two eigenvectors turn
-out to be [0.6464 0.7630] and [-0.7630 0.6464], with associated eigenvalues 4.541 and -1.541. Each square matrix has
-as many eigenvectors and matching eigenvalues as its rank, in this case 2 – for a 2 by 2 nonsingular matrix.
-The actual computation of eigenvalues and eigenvectors is rather complicated, so let’s just assume we have the result.</p>
-<p>Consider post-multiplying the matrix <span class="math inline">\(A\)</span> with the eigenvector [0.6464 0.7630]:
-<span class="math display">\[\begin{bmatrix}
-(1 \times 0.6464) + (3 \times 0.7630)\\
-(3 \times 0.6464) + (2 \times 0.7630)
-\end{bmatrix}
-=
-\begin{bmatrix}
-2.935\\
-3.465
-\end{bmatrix}
-\]</span>
-Now, for comparison purposes, we rescale the eigenvector with the matching eigenvalue:
-<span class="math display">\[4.541 \times
-\begin{bmatrix}
-0.6464\\
-0.7630
-\end{bmatrix}
-=
-\begin{bmatrix}
-2.935\\
-3.465
-\end{bmatrix}
-\]</span>
-This yields the same result as the matrix multiplication.</p>
-<p>Furthermore, if we stack the eigenvectors in a matrix <span class="math inline">\(V\)</span>, we can verify that they are orthogonal
-and the sum of squares of the coefficients sum to one, i.e., <span class="math inline">\(V&#39;V = I\)</span>:
-<span class="math display">\[\begin{bmatrix}
-0.6464 &amp; -0.7630\\
-0.7630 &amp; 0.6464
-\end{bmatrix}&#39;
-\begin{bmatrix}
-0.6464 &amp; -0.7630\\
-0.7630 &amp; 0.6464
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 &amp; 0\\
-0 &amp; 1
-\end{bmatrix}
-\]</span>
-In addition, it is easily verified that <span class="math inline">\(VV&#39; = I\)</span> as well. This means that the transpose of <span class="math inline">\(V\)</span> is also its inverse (per the definition of an inverse matrix, i.e., a matrix for which the product with the original matrix yields the identity matrix), or <span class="math inline">\(V^{-1} = V&#39;\)</span>.</p>
-<p>As a result, we have found a particular vector (and associated scalar) so that multiplying this vector by <span class="math inline">\(A\)</span> does not
-result in any rotation, but only in a rescaling.</p>
-<p>Eigenvectors and eigenvalues are central in many statistical analyses, but it is important to realize they
-are not as complicated as they may seem at first sight. On the other hand, computing them efficiently <em>is</em> complicated, and best left
-to specialized programs (<code>GeoDa</code> uses the <code>Eigen</code> C++ library for these computations, <a href="http://eigen.tuxfamily.org/" class="uri">http://eigen.tuxfamily.org/</a>).</p>
-<p>Finally, a couple of useful properties of eigenvalues are worth mentioning.</p>
-<p>The sum of the eigenvalues equals the <em>trace</em> of the matrix. The trace is the sum of the diagonal elements, in our example, the trace is <span class="math inline">\(1 + 2 = 3\)</span>. The sum of the two eigenvalues is <span class="math inline">\(4.541 -1.541 = 3\)</span>. Also, the product of the eigenvalues equals the <em>determinant</em> of the matrix. For a <span class="math inline">\(2 \times 2\)</span> matrix, the determinant is <span class="math inline">\(ab - cd\)</span>, or the product of the diagonal elements minus the product of the off-diagonal elements. In our example, that is <span class="math inline">\((1 \times 2) - (3 \times 3) = -7\)</span>. The product of the two eigenvalues is <span class="math inline">\(4.541 \times -1.541 = -7.0\)</span>.</p>
-</div>
-<div id="eigenvector-decomposition-of-a-square-matrix" class="section level3 unnumbered" number="">
-<h3>Eigenvector decomposition of a square matrix</h3>
-<p>For each eigenvector <span class="math inline">\(v\)</span> of a square symmetric matrix <span class="math inline">\(A\)</span>, we have <span class="math inline">\(Av = \lambda v\)</span>. We can write this compactly for all the eigenvectors and
-eigenvalues by organizing the individual eigenvectors as columns in a
-<span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(V\)</span>, as we have seen above. Similarly, we can organize
-the matching eigenvalues as the diagonal elements of a diagonal matrix,
-say <span class="math inline">\(G\)</span>. The basic eigenvalue expression can then be written
-as <span class="math inline">\(AV = VG\)</span>. Note that <span class="math inline">\(V\)</span> goes first in the matrix multiplication on the right hand side to ensure that each column of
-<span class="math inline">\(V\)</span> is multiplied by the corresponding eigenvalue on the diagonal of <span class="math inline">\(G\)</span> to yield <span class="math inline">\(\lambda v\)</span>. Now, we take advantage of the fact that the eigenvectors are orthogonal, namely that <span class="math inline">\(VV&#39; = I\)</span>. Post-multiplying each side of the equation by <span class="math inline">\(V&#39;\)</span> gives
-<span class="math inline">\(AVV&#39; = VGV&#39;\)</span>, or <span class="math inline">\(A = VGV&#39;\)</span>, the so-called <em>eigenvalue decomposition</em>
-or <em>spectral decomposition</em> of a square symmetric matrix.</p>
-<p>Since the correlation matrix <span class="math inline">\(X&#39;X\)</span> is square and symmetric, its spectral decomposition has the same structure:
-<span class="math display">\[X&#39;X = VGV&#39;,\]</span>
-with <span class="math inline">\(V\)</span> and <span class="math inline">\(G\)</span> have the same meaning as before. In the context of principal component analysis, the coefficients <span class="math inline">\(a_h\)</span> needed to construct the component from the original variables are the elements of the eigenvector column, with the row matching the column of the original variable. For example, the coefficients <span class="math inline">\(a_2\)</span> needed to multiply the variable <span class="math inline">\(x_2\)</span> would be in the second row of the matrix <span class="math inline">\(V\)</span>.</p>
-<p>The variance associated with the h-th principal component is the h-th element on the diagonal of <span class="math inline">\(G\)</span>. With these values in hand, we have all the information to construct and interpret the principal components.</p>
-<p>In <code>GeoDa</code>, these computations are carried out by means of the <code>EigenSolver</code> routine from the <code>Eigen</code> C++ library (<a href="https://eigen.tuxfamily.org/dox/classEigen_1_1EigenSolver.html" class="uri">https://eigen.tuxfamily.org/dox/classEigen_1_1EigenSolver.html</a>).</p>
-</div>
-<div id="singular-value-decomposition-svd" class="section level3 unnumbered" number="">
-<h3>Singular Value Decomposition (SVD)</h3>
-<p>The eigenvalue decomposition described above only applies to square matrices. A more general decomposition is the so-called
-<em>singular value decomposition</em>, which applies to any rectangular matrix, such as the <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span> with (standardized)
-observations.</p>
-<p>For a full-rank <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span> (there are many more general cases where SVD can be applied), the decomposition takes the following form:
-<span class="math display">\[X = UDV&#39;,\]</span>
-where <span class="math inline">\(U\)</span> is a <span class="math inline">\(n \times k\)</span> orthonormal matrix (i.e., <span class="math inline">\(U&#39;U = I\)</span>), <span class="math inline">\(D\)</span> is a <span class="math inline">\(k \times k\)</span> diagonal matrix, and <span class="math inline">\(V\)</span> is a <span class="math inline">\(k \times k\)</span>
-orthonormal matrix (i.e., <span class="math inline">\(V&#39;V = I\)</span>). In essence, the decomposition shows how a transformation <span class="math inline">\(X\)</span> applied to a vector <span class="math inline">\(y\)</span> (through a matrix multiplication of <span class="math inline">\(X\)</span> with a <span class="math inline">\(k\)</span>-dimensional vector <span class="math inline">\(y\)</span>) can be viewed to consist of a series of rotations and rescalings. Note that in the general rectangular case, the transformation <span class="math inline">\(Xy\)</span> not only involves rotation and rescaling (as in the square case), but also a change in dimensionality from a <span class="math inline">\(k\)</span>-dimensional space (the length of <span class="math inline">\(y\)</span>) to an <span class="math inline">\(n\)</span>-dimensional space (the length of <span class="math inline">\(Xy\)</span>, i.e., an n-dimensional vector). An intuitive visualization of the operations involved in such a transformation that are reflected in the elements of the SVD can be found at
-<a href="https://en.wikipedia.org/wiki/File:Singular_value_decomposition.gif" class="uri">https://en.wikipedia.org/wiki/File:Singular_value_decomposition.gif</a>.</p>
-<p>While SVD is very general, we don’t need that full generality for the PCA case. It turns out that there is a direct connection between the eigenvalues and eigenvectors of the (square) matrix <span class="math inline">\(X&#39;X\)</span> and the SVD of <span class="math inline">\(X\)</span>. Using the expression above, we can write <span class="math inline">\(X&#39;X\)</span> as:
-<span class="math display">\[X&#39;X = (UDV&#39;)&#39;(UDV&#39;) = VDU&#39;UDV&#39; = VD^2V&#39;,\]</span>
-since <span class="math inline">\(U&#39;U = I\)</span>.</p>
-<p>It thus turns out that the columns of <span class="math inline">\(V\)</span> from the SVD contain the eigenvectors of <span class="math inline">\(X&#39;X\)</span> and the square of the diagonal elements
-of <span class="math inline">\(D\)</span> in the SVD are the eigenvalues associated with the corresponding principal component.</p>
-<p>The concept of singular value decomposition is very broad and a detailed discussion is beyond our scope. A number of computational approaches are available. In <code>GeoDa</code>, the <code>JacobiSVD</code> routine is used from the <code>Eigen</code> C++ library (<a href="https://eigen.tuxfamily.org/dox/classEigen_1_1JacobiSVD.html" class="uri">https://eigen.tuxfamily.org/dox/classEigen_1_1JacobiSVD.html</a>). Note that other software (such as <code>R</code>’s <code>pca</code>) uses an algorithm based on the Householder transformation (from the <code>lapack</code> library). This yields the opposite signs for the eigenvector elements.</p>
-<p><br></p>
-</div>
-</div>
-<div id="references" class="section level2 unnumbered" number="">
-<h2>References</h2>
-<div id="refs" class="references hanging-indent">
-<div id="ref-Anselin:18">
-<p>Anselin, Luc. 2019. “A Local Indicator of Multivariate Spatial Association, Extending Geary’s c.” <em>Geographical Analysis</em> 51 (2): 133–50.</p>
-</div>
-<div id="ref-Bellman:61">
-<p>Bellman, R. E. 1961. <em>Adaptive Control Processes</em>. Princeton, N.J.: Princeton University Press.</p>
-</div>
-<div id="ref-CressieWikle:11">
-<p>Cressie, Noel, and Christopher K. Wikle. 2011. <em>Statistics for Spatio-Temporal Data</em>. Hoboken, NJ: John Wiley; Sons.</p>
-</div>
-<div id="ref-DrayJombart:11">
-<p>Dray, Stéphane, and Thibaut Jombart. 2011. “Revisiting Guerry’s Data: Introducing Spatial Constraints in Multivariate Analysis.” <em>The Annals of Applied Statistics</em> 5 (4): 2278–99.</p>
-</div>
-<div id="ref-Everittetal:11">
-<p>Everitt, Brian S., Sabine Landau, Morven Leese, and Daniel Stahl. 2011. <em>Cluster Analysis, 5th Edition</em>. New York, NY: John Wiley.</p>
-</div>
-<div id="ref-Hastieetal:09">
-<p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The Elements of Statistical Learning (2nd Edition)</em>. New York, NY: Springer.</p>
-</div>
-<div id="ref-Hotelling:33">
-<p>Hotelling, Harold. 1933. “Analysis of a Complex of Statistical Variables into Principal Components.” <em>Journal of Educational Psychology</em> 24: 417–41.</p>
-</div>
-<div id="ref-Kaiser:60">
-<p>Kaiser, H. F. 1960. “The Application of Electronic Computers to Factor Analysis.” <em>Educational and Psychological Measurement</em> 20: 141–51.</p>
-</div>
-<div id="ref-KaufmanRousseeuw:05">
-<p>Kaufman, L., and P. Rousseeuw. 2005. <em>Finding Groups in Data: An Introduction to Cluster Analysis</em>. New York, NY: John Wiley.</p>
-</div>
-<div id="ref-LeeVerleysen:07">
-<p>Lee, John A., and Michel Verleysen. 2007. <em>Nonlinear Dimensionality Reduction</em>. New York, NY: Springer-Verlag.</p>
-</div>
-<div id="ref-Pearson:01">
-<p>Pearson, Karl. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical Magazine</em> 2: 559–72.</p>
-</div>
-<div id="ref-Wikleetal:19">
-<p>Wikle, Christopher K., Andrew Zammit-Mangion, and Noel Cressie. 2019. <em>Spatio-Temporal Statistics with R</em>. Boca Raton, FL: CRC Press.</p>
-</div>
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu" class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>In <code>GeoDa</code>, this can be accomplished in the weights manager, using the <strong>variables</strong> option for distance weights, and making sure the transformation is set to <strong>raw</strong>. The nearest neighbor distances are the third column in a weights file created for <span class="math inline">\(k = 1\)</span>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>The standardization should not be done mechanically, since there are instances where the variance differences between the variables are actually meaningful, e.g., when the scales on which they are measured have a strong substantive meaning (e.g., in psychology).<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>Since the eigenvalues equal the variance explained by the corresponding component, the diagonal elements of <span class="math inline">\(D\)</span> are thus the standard deviation explained by the component.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>The concept of reconstruction error is somewhat technical. If <span class="math inline">\(A\)</span> were a square matrix, we could solve for <span class="math inline">\(z\)</span> as
-<span class="math inline">\(z = A^{-1}x\)</span>, where <span class="math inline">\(A^{-1}\)</span> is the inverse of the matrix <span class="math inline">\(A\)</span>. However, due to the dimension reduction, <span class="math inline">\(A\)</span> is not square, so we have to use something called a pseudo-inverse or Moore-Penrose inverse. This is the <span class="math inline">\(p \times k\)</span> matrix
-<span class="math inline">\((A&#39;A)^{-1}A&#39;\)</span>, such that <span class="math inline">\(z = (A&#39;A)^{-1}A&#39;x\)</span>. Furthermore, because <span class="math inline">\(A&#39;A = I\)</span>, this simplifies to <span class="math inline">\(z = A&#39;x\)</span> (of course, so far the elements of <span class="math inline">\(A\)</span> are unknown). Since <span class="math inline">\(x = Az\)</span>, if we knew what <span class="math inline">\(A\)</span> was, we could find <span class="math inline">\(x\)</span> as <span class="math inline">\(Az\)</span>, or, with our solution in hand, as <span class="math inline">\(AA&#39;x\)</span>. The reconstruction error is then the squared difference between <span class="math inline">\(x\)</span> and <span class="math inline">\(AA&#39;x\)</span>. We have to find the coeffients for <span class="math inline">\(A\)</span> that minimize this expression. For an extensive technical discussion, see <span class="citation">Lee and Verleysen (<a href="#ref-LeeVerleysen:07" role="doc-biblioref">2007</a>)</span>, Chapter 2.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>For an example, see, e.g., Chapter 2 of <span class="citation">Everitt et al. (<a href="#ref-Everittetal:11" role="doc-biblioref">2011</a>)</span>.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>Note that, when using the <strong>Eigen</strong> method, these would be the bottom quartile of the first component.<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>Not all the results for symmetric matrices hold for asymmetric matrices. However, since we only deal with symmetric matrices in the applications covered here, we just stick to the simpler case.<a href="#fnref8" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-
-<footer class="site-footer">
-  <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a href="#">lixun910</a>.</span>
-  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-</footer>
-
-</section>
+    <h1 class="title toc-ignore">Dimension Reduction Methods (1)</h1>
+    <h3 class="subtitle">Principal Component Annalysis (PCA)</h3>
+    <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+    <h4 class="date">07/29/2020 (latest update)</h4>
 
 
-<!-- code folding -->
+    <div id="TOC">
+      <ul>
+        <li><a href="#introduction">Introduction</a>
+          <ul>
+            <li><a href="#objectives">Objectives</a>
+              <ul>
+                <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#the-curse-of-dimensionality">The Curse of Dimensionality</a>
+          <ul>
+            <li><a href="#the-empty-space-phenomenon">The Empty Space Phenomenon</a></li>
+          </ul>
+        </li>
+        <li><a href="#principal-component-analysis-pca">Principal Component Analysis (PCA)</a>
+          <ul>
+            <li><a href="#principles">Principles</a></li>
+            <li><a href="#implementation">Implementation</a>
+              <ul>
+                <li><a href="#variable-settings-panel">Variable Settings Panel</a></li>
+                <li><a href="#saving-the-results">Saving the Results</a></li>
+              </ul>
+            </li>
+            <li><a href="#interpretation">Interpretation</a>
+              <ul>
+                <li><a href="#explained-variance">Explained variance</a></li>
+                <li><a href="#variable-loadings">Variable loadings</a></li>
+                <li><a href="#variable-loadings-and-principal-components">Variable loadings and principal components</a>
+                </li>
+                <li><a href="#substantive-interpretation-of-principal-components">Substantive interpretation of
+                    principal components</a></li>
+                <li><a href="#visualizing-principal-components">Visualizing principal components</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#spatializing-principal-components">Spatializing Principal Components</a>
+          <ul>
+            <li><a href="#principal-component-maps">Principal component maps</a></li>
+            <li><a href="#cluster-maps">Cluster maps</a></li>
+            <li><a href="#principal-components-as-multivariate-cluster-maps">Principal components as multivariate
+                cluster maps</a></li>
+          </ul>
+        </li>
+        <li><a href="#appendix">Appendix</a>
+          <ul>
+            <li><a href="#basics---eigenvalues-and-eigenvectors">Basics - eigenvalues and eigenvectors</a></li>
+            <li><a href="#eigenvector-decomposition-of-a-square-matrix">Eigenvector decomposition of a square matrix</a>
+            </li>
+            <li><a href="#singular-value-decomposition-svd">Singular Value Decomposition (SVD)</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </div>
+
+    <p><br></p>
+    <div id="introduction" class="section level2 unnumbered" number="">
+      <h2>Introduction</h2>
+      <p>In this chapter, we move fully into multivariate analysis and begin by addressing some approaches to reduce the
+        dimensionality of the variable space. These are methods that help to address the so-called <em>curse of
+          dimensionality</em>, a concept originally formulated by <span class="citation">Bellman (<a
+            href="#ref-Bellman:61" role="doc-biblioref">1961</a>)</span>. In a nutshell, the curse of dimensionality
+        means that techniques that work well in small dimensions (e.g., k-nearest neighbor searches), either break down
+        or become unmanageably complex (i.e., computationally impractical) in higher dimensions.</p>
+      <p>After a brief example to illustrate the curse of dimensionality in concrete terms, we move on to
+        <strong>principal components analysis</strong> (PCA), a core method of both multivariate statistics and machine
+        learning. Dimension reduction is particularly relevant in situations where many
+        variables are available that are highly intercorrelated. In essence, the original variables are replaced by a
+        smaller number of proxies that represent them well.</p>
+      <p>In addition to a standard description of PCA and its implementation in <code>GeoDa</code>, we also introduce a
+        <em>spatialized</em> approach, where we exploit geovisualization, linking and brushing to illustrate how the
+        dimension reduction is represented in geographic space.
+      </p>
+      <p>To illustrate these techniques, we will again use the Guerry data set on
+        moral statistics in 1830 France, which comes pre-installed with <code>GeoDa</code>.
+        Before proceeding with a discussion of the PCA functionality, we briefly illustrate some aspects of the curse of
+        dimensionality.</p>
+      <div id="objectives" class="section level3 unnumbered" number="">
+        <h3>Objectives</h3>
+        <ul>
+          <li>
+            <p>Illustrate the curse of dimensionality</p>
+          </li>
+          <li>
+            <p>Illustrate the mathematics behind principal component analysis</p>
+          </li>
+          <li>
+            <p>Compute principal components for a set of variables</p>
+          </li>
+          <li>
+            <p>Interpret the characteristics of a principal component analysis</p>
+          </li>
+          <li>
+            <p>Spatialize the principal components</p>
+          </li>
+        </ul>
+        <div id="geoda-functions-covered" class="section level4 unnumbered" number="">
+          <h4>GeoDa functions covered</h4>
+          <ul>
+            <li>Clusters &gt; PCA
+              <ul>
+                <li>select variables</li>
+                <li>PCA parameters</li>
+                <li>PCA summary statistics</li>
+                <li>saving PCA results</li>
+              </ul>
+            </li>
+          </ul>
+          <p><br></p>
+        </div>
+      </div>
+    </div>
+    <div id="the-curse-of-dimensionality" class="section level2 unnumbered" number="">
+      <h2>The Curse of Dimensionality</h2>
+      <p>The curse of dimensionality was originally described by <span class="citation">Bellman (<a
+            href="#ref-Bellman:61" role="doc-biblioref">1961</a>)</span> in the context of optimization problems.
+        Consider the following simple example where we look for the maximum of a function in one variable dimension, as
+        in Figure <a href="#fig:onedimopt">1</a>.</p>
+      <div class="figure" style="text-align: center"><span id="fig:onedimopt"></span>
+        <img src="pics7a/00_one_dim_maximum.png" alt="Discrete optimization in one variable dimension" width="25%" />
+        <p class="caption">
+          Figure 1: Discrete optimization in one variable dimension
+        </p>
+      </div>
+      <p>One simple way to try to find the maximum is to evaluate the function at a number of discrete values for <span
+          class="math inline">\(x\)</span> and find the point(s) where the function value is highest. For example, in
+        Figure <a href="#fig:onedimopt">1</a>, we have 10 evaluation points, equally dividing the x-range of <span
+          class="math inline">\(0-10\)</span>. In our example, the maximum is between 5 and 6. In a naive
+        one-dimensional numerical optimization routine, we could then divide the interval between 5 and 6 into ten more
+        subintervals and proceed. However, let’s consider the problem from a different perspective. What if the
+        optimization was with respect to two variables? Now, we are in a two-dimensional attribute domain and using 10
+        discrete points for each variable actually results in 100 evaluation points, as shown in Figure <a
+          href="#fig:twodimopt">2</a>.</p>
+      <div class="figure" style="text-align: center"><span id="fig:twodimopt"></span>
+        <img src="pics7a/00_twodim.png" alt="Discrete evaluation points in two variable dimensions" width="25%" />
+        <p class="caption">
+          Figure 2: Discrete evaluation points in two variable dimensions
+        </p>
+      </div>
+      <p>Similarly, for three dimensions, there would be <span class="math inline">\(10^3\)</span> or 1,000 evaluation
+        points, as in Figure <a href="#fig:threedimopt">3</a>.</p>
+      <div class="figure" style="text-align: center"><span id="fig:threedimopt"></span>
+        <img src="pics7a/00_threed2.png" alt="Discrete evaluation points in three variable dimensions" width="25%" />
+        <p class="caption">
+          Figure 3: Discrete evaluation points in three variable dimensions
+        </p>
+      </div>
+      <p>In general, if we keep the principle of 10 evaluation points per dimension, the required number of evaluation
+        points is <span class="math inline">\(10^k\)</span>, with <span class="math inline">\(k\)</span> as the number
+        of variables. This very quickly becomes unwieldy, e.g., for 10 dimensions, there would need to be <span
+          class="math inline">\(10^{10}\)</span>, or 10 billion evaluation points, and for 20 dimensions <span
+          class="math inline">\(10^{20}\)</span> or 100,000,000,000,000,000,000, hence the <em>curse of
+          dimensionality</em>. Some further illustrations of methods that break down or become impractical in high
+        dimensional spaces are
+        given in Chapter 2 of <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-Hastieetal:09"
+            role="doc-biblioref">2009</a>)</span>, among others.</p>
+      <div id="the-empty-space-phenomenon" class="section level3 unnumbered" number="">
+        <h3>The Empty Space Phenomenon</h3>
+        <p>A related and strange property of high-dimensional analysis is the so-called
+          <em>empty space phenomenon</em>. In essence, the same number of data points are much further apart in higher
+          dimensional spaces than
+          in lower dimensional ones. This means that we need (very) large data sets to do effective analysis in high
+          dimensions.
+        </p>
+        <p>To illustrate this point, consider three variables, say <span class="math inline">\(x\)</span>, <span
+            class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, each generated as 10 uniform
+          random variates in the unit interval (0-1). In one dimension, the observations on these variables are fairly
+          close together. For example, in Figure
+          <a href="#fig:onedimrandom">4</a>, the one-dimensional spread for each of the variables is shown on the
+          horizontal axes of a parallel coordinate
+          plot (PCP). Clearly, the points on each of the lines that correspond to the dimensions are spaced fairly
+          closely together.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:onedimrandom"></span>
+          <img src="pics7a/00_3d_random_linegraph.png" alt="Uniform random variables in one dimension" width="30%" />
+          <p class="caption">
+            Figure 4: Uniform random variables in one dimension
+          </p>
+        </div>
+        <p>However, when represented in a two-dimensional scatter plot, we observe large empty spaces in the unit
+          quadrant, as
+          in Figure <a href="#fig:twodimrandom">5</a> for <span class="math inline">\(x\)</span> and <span
+            class="math inline">\(y\)</span> (similar graphs are obtained for the other pairs). The sparsity of the
+          attribute space gets even more pronounced in three dimensions, as in Figure <a
+            href="#fig:threedimrandom">6</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:twodimrandom"></span>
+          <img src="pics7a/00_random_2d_scatter.png" alt="Uniform random variables in two dimensions" width="45%" />
+          <p class="caption">
+            Figure 5: Uniform random variables in two dimensions
+          </p>
+        </div>
+        <div class="figure" style="text-align: center"><span id="fig:threedimrandom"></span>
+          <img src="pics7a/00_3d_randompng.png" alt="Uniform random variables in three dimensions" width="35%" />
+          <p class="caption">
+            Figure 6: Uniform random variables in three dimensions
+          </p>
+        </div>
+        <p>To quantify this somewhat, we can compute the nearest neighbor distances between the observation points in
+          each of
+          the dimensions.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> In our example (the results
+          will depend on the actual random numbers generated), the smallest nearest neighbor distance in the <span
+            class="math inline">\(x\)</span> dimension is between observations 5 and 8 at 0.009. In two dimensions, the
+          smallest distance is between observations 1 and 4 at 0.094, and in three dimensions, it is also between 1 and
+          4, but now at 0.146. All distances are in the same units, since we are working with a unit interval for each
+          variable.</p>
+        <p>Two observations follow from this small experiment. One is that the nearest neighbors in a lower dimension
+          are not necessarily also nearest neighbors in higher dimensions. The other is that the nearest neighbor
+          distance increases with the dimensionality. In other words, more of the attribute space needs to be searched
+          before neighbors are found (this is in general a problem with k-nearest neighbor searches in high dimensions).
+        </p>
+        <p>Further examples of some strange aspects of data in higher dimensional spaces can be found in Chapter 1 of
+          <span class="citation">Lee and Verleysen (<a href="#ref-LeeVerleysen:07"
+              role="doc-biblioref">2007</a>)</span>.</p>
+      </div>
+    </div>
+    <div id="principal-component-analysis-pca" class="section level2 unnumbered" number="">
+      <h2>Principal Component Analysis (PCA)</h2>
+      <div id="principles" class="section level3 unnumbered" number="">
+        <h3>Principles</h3>
+        <p>Principal components analysis has an eminent historical pedigree, going back to pioneering work in the early
+          twentieth century by the statistician Karl Pearson <span class="citation">(Pearson <a href="#ref-Pearson:01"
+              role="doc-biblioref">1901</a>)</span> and the economist Harold Hotelling <span class="citation">(Hotelling
+            <a href="#ref-Hotelling:33" role="doc-biblioref">1933</a>)</span>. The technique is also known as the
+          Karhunen-Loève transform in probability theory and as empirical orthogonal functions or EOF in meteorology
+          <span class="citation">(see, for example, in applications of space-time statistics in Cressie and Wikle <a
+              href="#ref-CressieWikle:11" role="doc-biblioref">2011</a>; Wikle, Zammit-Mangion, and Cressie <a
+              href="#ref-Wikleetal:19" role="doc-biblioref">2019</a>)</span>.</p>
+        <p>The derivation of principal components can be approached from a number of different perspectives, all leading
+          to the same solution. Perhaps the most common treatment considers the components as the solution of a problem
+          of finding
+          new variables that are constructed as a linear combination of the
+          original variables, such that they maximize the explained variance.
+          In a sense, the
+          principal components can be interpreted as the best linear approximation to the multivariate point cloud of
+          the data.</p>
+        <p>More formally, consider <span class="math inline">\(n\)</span> observations on <span
+            class="math inline">\(k\)</span> variables <span class="math inline">\(x_h\)</span>,
+          with <span class="math inline">\(h = 1, \dots, k\)</span>, organized
+          as a <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span> (each
+          variable is a column in the matrix). In practice, each of the variables is typically standardized, such that
+          its mean is zero and variance equals one. This avoids problems with (large) scale differences between the
+          variables (i.e., some are very small numbers and others very large). For such standardized variables, the
+          <span class="math inline">\(k \times k\)</span> cross product matrix <span
+            class="math inline">\(X&#39;X\)</span> corresponds to the correlation matrix (without standardization, this
+          would be the variance-covariance matrix).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+        <p>The goal is to find a small number of new variables, the so-called <em>principal components</em>, that
+          explain the bulk of the variance (or, in practice, the correlation) in the original variables. If this can be
+          accomplished with a much smaller number of variables than in the original set, the objective of <em>dimension
+            reduction</em> will have been achieved.</p>
+        <p>We can think of each principal component <span class="math inline">\(z_u\)</span> as a linear combination of
+          the original variables <span class="math inline">\(x_h\)</span>, with <span class="math inline">\(h\)</span>
+          going from <span class="math inline">\(1\)</span> to <span class="math inline">\(k\)</span> such that:
+          <span class="math display">\[z_u = a_1 x_1 + a_2 x_2 + \dots + a_k x_k\]</span>
+          The mathematical problem is to find the coefficients <span class="math inline">\(a_h\)</span> such that the
+          new variables maximize the explained variance of the original variables. In addition, to avoid an
+          indeterminate solution, the coefficients are scaled
+          such that the sum of their squares equals <span class="math inline">\(1\)</span>.
+        </p>
+        <p>A full mathematical treatment of the derivation of the optimal solution to this problem is beyond our scope
+          <span class="citation">(for details, see, e.g., Lee and Verleysen <a href="#ref-LeeVerleysen:07"
+              role="doc-biblioref">2007</a>, Chapter 2)</span>. Suffice it to say that the principal components are
+          based on the eigenvalues and eigenvectors of
+          the cross-product matrix <span class="math inline">\(X&#39;X\)</span>.</p>
+        <p>The coefficients by which the original variables need to be
+          multiplied to obtain each principal component can be shown to correspond to
+          the elements of the eigenvectors
+          of <span class="math inline">\(X&#39;X\)</span>, with the associated eigenvalue giving the explained variance.
+          Note that while the matrix <span class="math inline">\(X\)</span> is not square, the cross-product matrix
+          <span class="math inline">\(X&#39;X\)</span> is of dimension <span class="math inline">\(k \times k\)</span>,
+          so it is square. See the <a href="#appendix">Appendix</a> for a quick overview of the concept of eigenvalue
+          and eigenvector.</p>
+        <p>Operationally, the principal component coefficients are obtained by means of a
+          matrix decomposition. One option is to compute the <em>eigenvalue decomposition</em> of the
+          <span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(X&#39;X\)</span>, i.e., the
+          correlation matrix, as
+          <span class="math display">\[X&#39;X = VGV&#39;,\]</span>
+          where <span class="math inline">\(V\)</span> is a <span class="math inline">\(k \times k\)</span> matrix with
+          the eigenvectors as columns (the coefficients needed
+          to construct the principal components), and <span class="math inline">\(G\)</span> a <span
+            class="math inline">\(k \times k\)</span> diagonal matrix of the
+          associated eigenvalues (the explained variance). For further details, see the <a
+            href="#appendix">Appendix</a>.
+        </p>
+        <p>A second, and computationally preferred way to approach this is as a <em>singular value decomposition</em>
+          (SVD)
+          of the <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span>, i.e.,
+          the matrix of (standardized) observations, as
+          <span class="math display">\[X = UDV&#39;,\]</span>
+          where again <span class="math inline">\(V\)</span> (the transpose of the <span class="math inline">\(k \times
+            k\)</span> matrix <span class="math inline">\(V&#39;\)</span>) is the matrix with the eigenvectors of <span
+            class="math inline">\(X&#39;X\)</span> as columns, and <span class="math inline">\(D\)</span> is a <span
+            class="math inline">\(k \times k\)</span>
+          diagonal matrix such that <span class="math inline">\(D^2\)</span> is the matrix of eigenvalues of
+          <span class="math inline">\(X&#39;X\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>
+          A brief discussion of singular value decomposition is given in the <a href="#appendix">Appendix</a>.
+        </p>
+        <p>It turns out that this second approach is the solution to viewing the principal components explicity as a
+          dimension reduction problem, originally considered by Karl Pearson. More formally, consider the observed
+          vector on the <span class="math inline">\(k\)</span> variables <span class="math inline">\(x\)</span> as a
+          function of a number of unknown <em>latent variables</em> <span class="math inline">\(z\)</span>, such that
+          there is a linear relationship between them:
+          <span class="math display">\[ x = Az, \]</span>
+          where <span class="math inline">\(x\)</span> is a <span class="math inline">\(k \times 1\)</span> vector of
+          the observed variables, and <span class="math inline">\(z\)</span> is a <span class="math inline">\(p \times
+            1\)</span> vector of the (unobserved) latent variables, ideally with <span class="math inline">\(p\)</span>
+          much smaller than <span class="math inline">\(k\)</span>. The matrix <span class="math inline">\(A\)</span> is
+          of dimension <span class="math inline">\(k \times p\)</span> and contains the coefficients of the
+          transformation. Again, in order to avoid indeterminate solutions, the coefficients are scaled such that <span
+            class="math inline">\(A&#39;A = I\)</span>, which
+          ensures that the sum of squares of the coefficients associated with a given component equals one.
+          Instead of maximizing explained variance, the objective is now to find <span class="math inline">\(A\)</span>
+          and <span class="math inline">\(z\)</span> such that the so-called reconstruction error is minimized.<a
+            href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
+        </p>
+        <p>Note that different computational approaches to obtain the eigenvalues and eigenvectors (there is no
+          analytical solution) may yield opposite signs for the elements of the eigenvectors (but not for the
+          eigenvalues). This will affect the sign of the resulting component (i.e., positives become negatives). This is
+          the case in <code>GeoDa</code> for the <strong>eigen</strong> and <strong>SVD</strong> options, as illustrated
+          below.</p>
+        <p>In a principal component analysis, we are typically interested in three main results. First, we need the
+          principal component scores as a replacement for the original variables. This is particularly relevant when a
+          small number of components explain a substantial share of the original variance. Second,
+          the
+          relative contribution of each of the original variables to each principal component is of interest. Finally,
+          the
+          variance proportion explained by each component in and of itself is also important.</p>
+        <p>In addition to these traditional interpretations, we will be particularly
+          interested in <em>spatializing</em> the principal components, i.e., analyzing
+          and visualizing their spatial patterns.</p>
+      </div>
+      <div id="implementation" class="section level3 unnumbered" number="">
+        <h3>Implementation</h3>
+        <p>We invoke the principal components functionality from the <strong>Clusters</strong> toolbar icon,
+          shown in Figure <a href="#fig:clustertoolbar">7</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:clustertoolbar"></span>
+          <img src="pics7a/1_683_cluster_toolbaricon.png" alt="Clusters toolbar icon" width="10%" />
+          <p class="caption">
+            Figure 7: Clusters toolbar icon
+          </p>
+        </div>
+        <p>From the main menu, we can select <strong>Clusters &gt; PCA</strong>. The full list of options is shown in
+          Figure <a href="#fig:pcaoption">8</a>. The dimension reduction methods are included in the top
+          part (separated from the others by a thin line). <strong>PCA</strong> is the first item on the list of
+          options.</p>
+        <div class="figure" style="text-align: center"><span id="fig:pcaoption"></span>
+          <img src="pics7a/1_684_pca_option.png" alt="PCA Option" width="10%" />
+          <p class="caption">
+            Figure 8: PCA Option
+          </p>
+        </div>
+        <p>This brings up the <strong>PCA Settings</strong> dialog, the main interface through which variables
+          are chosen, options selected, and summary results are provided.</p>
+        <div id="variable-settings-panel" class="section level4 unnumbered" number="">
+          <h4>Variable Settings Panel</h4>
+          <p>We select the variables and set the parameters for the principal components analysis
+            through the options in the left hand panel of the interface. We choose the six
+            same variables as in the multivariate analysis presented in <span class="citation">Dray and Jombart (<a
+                href="#ref-DrayJombart:11" role="doc-biblioref">2011</a>)</span>: <strong>Crm_prs</strong> (crimes
+            against persons),
+            <strong>Crm_prp</strong> (crimes against property), <strong>Litercy</strong> (literacy),
+            <strong>Donatns</strong> (donations), <strong>Infants</strong> (births out of wedlock), and
+            <strong>Suicids</strong> (suicides)
+            <span class="citation">(see also Anselin <a href="#ref-Anselin:18" role="doc-biblioref">2019</a>, for an
+              extensive discussion of the variables)</span>. Note that, as in the original Guerry data set, the scale of
+            each variable is such that larger is better. Specifically, the rates are not the usual events/population
+            (like a crime rate, number of crimes over population), but the reverse, population over events. For example,
+            a large value for <strong>Crm_prs</strong> actually denotes a low crime rate, since it corresponds with more
+            people per crime committed. The chosen variables
+            appear highlighted in the <strong>Select Variables</strong> panel, Figure <a href="#fig:pcavariables">9</a>.
+          </p>
+          <div class="figure" style="text-align: center"><span id="fig:pcavariables"></span>
+            <img src="pics7a/1_685_variableselection.png" alt="PCA Settings panel" width="80%" />
+            <p class="caption">
+              Figure 9: PCA Settings panel
+            </p>
+          </div>
+          <p>The default settings for the <strong>Parameters</strong> are likely fine in most practical situations.
+            The <strong>Method</strong> is set to <strong>SVD</strong>, i.e., singular value decomposition. The
+            alternative
+            <strong>Eigen</strong> carries out an explicit eigenvalue decomposition of the correlation matrix. In our
+            example, the two approaches yield opposite signs for the loadings of three of the components. We return to
+            this below.
+            For larger data sets, the singular value decomposition approach is faster and is the preferred option.
+          </p>
+          <p>The <strong>Transformation</strong> option is set to <strong>Standardize (Z)</strong> by default, which
+            converts all variables
+            such that their mean is zero and variance one, i.e., it creates a z-value as
+            <span class="math display">\[z = \frac{(x - \bar{x})}{\sigma(x)},\]</span>
+            with <span class="math inline">\(\bar{x}\)</span> as the mean of the original variable <span
+              class="math inline">\(x\)</span>, and <span class="math inline">\(\sigma(x)\)</span> as its standard
+            deviation.
+          </p>
+          <p>An alternative standardization is <strong>Standardize (MAD)</strong>, which uses the <em>mean absolute
+              deviation</em> (MAD) as the denominator in the standardization. This is preferred in some of the
+            clustering literature, since it diminishes the effect of outliers on the standard deviation
+            <span class="citation">(see, for example, the illustration in Kaufman and Rousseeuw <a
+                href="#ref-KaufmanRousseeuw:05" role="doc-biblioref">2005</a>, 8–9)</span>. The mean absolute deviation
+            for a variable <span class="math inline">\(x\)</span> is computed as:
+            <span class="math display">\[\mbox{mad} = (1/n) \sum_i |x_i - \bar{x}|,\]</span>
+            i.e., the average of the absolute deviations between an observation and the mean for that variable. The
+            estimate for <span class="math inline">\(\mbox{mad}\)</span> takes the place of <span
+              class="math inline">\(\sigma(x)\)</span> in the denominator of the standardization expression.
+          </p>
+          <p>Two additional transformations that are based on the range of the observations, i.e., the difference
+            between the maximum and minimum, are the
+            <strong>Range Adjust</strong> and the <strong>Range Standardize</strong> options. <strong>Range
+              Adjust</strong> divides each value by the range of observations:
+            <span class="math display">\[r_a = \frac{x_i}{x_{max} - x_{min}}.\]</span>
+            While <strong>Range Adjust</strong> simply rescales observations in function of their range, <strong>Range
+              Standardize</strong> turns them into a value
+            between zero (for the minimum) and one (for the maximum):
+            <span class="math display">\[r_s = \frac{x_i - x_{min}}{x_{max} - x_{min}}.\]</span>
+            Whereas these transformations are used less commonly in the context of PCA, they are quite useful in cluster
+            analysis (in <code>GeoDa</code>, all
+            multivariate methods share the same standardization options).
+          </p>
+          <p>The remaining options are
+            to use the variables in their
+            original scale (<strong>Raw</strong>), or as deviations from the mean (<strong>Demean</strong>).</p>
+          <p>After clicking on the <strong>Run</strong> button, the summary statistics appear in the right hand panel,
+            as shown in Figure <a href="#fig:pcaresults">10</a>.
+            We return for a more detailed interpretation below.</p>
+          <div class="figure" style="text-align: center"><span id="fig:pcaresults"></span>
+            <img src="pics7a/1_686_pca_results.png" alt="PCA results" width="100%" />
+            <p class="caption">
+              Figure 10: PCA results
+            </p>
+          </div>
+        </div>
+        <div id="saving-the-results" class="section level4 unnumbered" number="">
+          <h4>Saving the Results</h4>
+          <p>Once the results have been computed, a value appears next to the <strong>Output</strong>
+            <strong>Components</strong> item
+            in the left panel, shown in Figure <a href="#fig:numbercomponents">11</a>. This value corresponds to the
+            number of components that explain 95% of the
+            variance, as indicated in the results panel. This determines the default number of components that
+            will be added to the data table upon selecting <strong>Save</strong>. The value can be changed in the
+            drop-down
+            list. For now, we keep the number of components as <strong>5</strong>, even though that is not a very
+            good result (given that we started with only six variables).</p>
+          <div class="figure" style="text-align: center"><span id="fig:numbercomponents"></span>
+            <img src="pics7a/1_687_save_output.png" alt="Save output dialog" width="20%" />
+            <p class="caption">
+              Figure 11: Save output dialog
+            </p>
+          </div>
+          <p>The <strong>Save</strong> button brings up
+            a dialog to select variable names for the principal components,
+            shown in Figure <a href="#fig:pcaresultsvars">12</a>. The default is generic and
+            not suitable for a situation where a large number of analyses will be carried out. In practice, one would
+            customize the components names to keep the results from different computations distinct.</p>
+          <div class="figure" style="text-align: center"><span id="fig:pcaresultsvars"></span>
+            <img src="pics7a/1_688_saveresults_dialog.png" alt="Principal Component variable names" width="20%" />
+            <p class="caption">
+              Figure 12: Principal Component variable names
+            </p>
+          </div>
+          <p>Clicking on <strong>OK</strong> adds the principal components to the data table, as in Figure <a
+              href="#fig:pcatable">13</a>, shown for the first
+            five observations. The principal components now become
+            available for all types of analysis and visualization. As always, the addition is only made permanent after
+            saving the table.</p>
+          <div class="figure" style="text-align: center"><span id="fig:pcatable"></span>
+            <img src="pics7a/22_pca_values.png" alt="Principal Components in the table" width="50%" />
+            <p class="caption">
+              Figure 13: Principal Components in the table
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="interpretation" class="section level3 unnumbered" number="">
+        <h3>Interpretation</h3>
+        <p>The panel with summary results provides several statistics pertaining to the variance decomposition, the
+          eigenvalues,
+          the variable loadings and the contribution of each of the original variables to the
+          respective components.</p>
+        <div id="explained-variance" class="section level4 unnumbered" number="">
+          <h4>Explained variance</h4>
+          <p>The first item lists the <strong>Standard deviation</strong> explained by each of the components. This
+            corresponds to the
+            square root of the <strong>Eigenvalues</strong> (each eigenvalue equals the variance explained
+            by the corresponding principal component), which are listed as well. In our example, the first eigenvalue is
+            2.14047, which is thus the variance of the first component. Consequently, the standard deviation is the
+            square root of this value, i.e., 1.463034, given as the first item in the list.</p>
+          <p>The sum of all the eigenvalues is 6, which equals the number of variables, or, more precisely, the rank of
+            the matrix <span class="math inline">\(X&#39;X\)</span>. Therefore, the proportion of variance explained by
+            the first component is 2.14047/6 = 0.356745, as reported in the list. Similarly, the proportion explained by
+            the second component is 0.200137, so that the cumulative proportion of the first and second component
+            amounts to 0.356745 + 0.200137 = 0.556882. In other words, the first two components explain a little over
+            half of the total variance.</p>
+          <p>The fraction of the total variance explained is listed both as a separate
+            <strong>Proportion</strong> and as a <strong>Cumulative proportion</strong>. The latter is typically used to
+            choose a
+            cut-off for the number of components. A common convention is to take a threshold of 95%,
+            which would suggest 5 components in our
+            example. Note that this is not a good result, given that we started with 6 variables, so there is not much
+            of a dimension reduction.
+          </p>
+          <p>An alternative criterion to select the number of components is the so-called
+            <strong>Kaiser</strong> criterion <span class="citation">(Kaiser <a href="#ref-Kaiser:60"
+                role="doc-biblioref">1960</a>)</span>, which suggests to take the components for which the eigenvalue
+            exceeds <strong>1</strong>. In our example, this would yield 3 components (they explain about 74% of the
+            total variance).
+          </p>
+          <p>The bottom part of the results panel is occupied by two tables that have the
+            original variables as rows and the components as columns.</p>
+        </div>
+        <div id="variable-loadings" class="section level4 unnumbered" number="">
+          <h4>Variable loadings</h4>
+          <p>The first table shows the
+            <strong>Variable Loadings</strong>. For each component (column), this lists the elements
+            of the corresponding eigenvector. The eigenvectors are standardized such that the sum
+            of the squared coefficients equals one. The elements of the eigenvector are the coefficients by which the
+            (standardized) original
+            variables need to be multiplied to construct each component. We illustrate this below.
+          </p>
+          <p>It is important to keep in mind that the signs of the loadings may change, depending on the algorithm that
+            is used in their computation, but the absolute value of the coefficients
+            will be the same. In our example, setting <strong>Method</strong> to <strong>Eigen</strong> yields the
+            loadings shown in Figure <a href="#fig:pcaeigen">14</a>.</p>
+          <div class="figure" style="text-align: center"><span id="fig:pcaeigen"></span>
+            <img src="pics7a/1_eigen_loadings.png" alt="Variable Loadings - Eigen algorithm" width="80%" />
+            <p class="caption">
+              Figure 14: Variable Loadings - Eigen algorithm
+            </p>
+          </div>
+          <p>For PC1, PC4, and PC6, the signs for the loadings are the opposite of those reported in Figure <a
+              href="#fig:pcaresults">10</a>.
+            This needs to be kept in mind when interpreting the actual value (and sign) of the components.</p>
+          <p>When the original variables are all standardized, each eigenvector coefficient
+            gives a measure of the relative contribution of a variable to the component in question.
+            These loadings are also the vectors employed in a principal component <em>biplot</em>,
+            a common graph produced in a
+            principal component analysis (but not currently available in <code>GeoDa</code>).</p>
+        </div>
+        <div id="variable-loadings-and-principal-components" class="section level4 unnumbered" number="">
+          <h4>Variable loadings and principal components</h4>
+          <p>To further illustrate how the principal components are obtained, consider the standardized values for the
+            six
+            variables, listed in Figure <a href="#fig:pcastandvars">15</a> for the first five observations.</p>
+          <div class="figure" style="text-align: center"><span id="fig:pcastandvars"></span>
+            <img src="pics7a/22_standardized.png" alt="Standardized variables" width="60%" />
+            <p class="caption">
+              Figure 15: Standardized variables
+            </p>
+          </div>
+          <p>Each principal component is obtained by multiplying the values in the columns for each observation
+            by the corresponding element of the eigenvector, listed as <strong>Variable Loadings</strong> in Figure <a
+              href="#fig:pcaresults">10</a>
+            (using the results from the default option <strong>SVD</strong>). For the first principal component, the
+            eigenvector is listed
+            under <strong>PC1</strong>: -0.0659, -0.5123, 0.5118, -0.1062, -0.4513, -0.5063. For example, the value of
+            the first principal
+            component for the first observation is found as the product of the first row in Figure <a
+              href="#fig:pcastandvars">15</a> with
+            this eigenvector. Specifically, the result is
+            1.2205 <span class="math inline">\(\times\)</span> -0.0659 + 2.6270 <span
+              class="math inline">\(\times\)</span> -0.5123 - 0.1228 <span class="math inline">\(\times\)</span> 0.5118
+            - 0.3342 <span class="math inline">\(\times\)</span> -0.1062 + 1.5973 <span
+              class="math inline">\(\times\)</span> -0.4513
+            - 0.0469 <span class="math inline">\(\times\)</span> -0.5063 = - 2.1508, the value in the first row/column
+            in Figure <a href="#fig:pcatable">13</a>.</p>
+          <p>Similar calculations can be carried out to verify the other values.</p>
+        </div>
+        <div id="substantive-interpretation-of-principal-components" class="section level4 unnumbered" number="">
+          <h4>Substantive interpretation of principal components</h4>
+          <p>The interpretation and substantive meaning of the principal components can
+            be a challenge. In <em>factor analysis</em>, a number of rotations are applied to clarify the contribution
+            of each variable to the different components. The latter are then imbued with meaning such as “social
+            deprivation”, “religious climate”, etc. Principal component analysis tends to stay away from this, but
+            nevertheless, it is useful to consider the relative contribution of each variable to the respective
+            components.</p>
+          <p>The table labeled as <strong>Squared correlations</strong> lists those statistics between each of the
+            original
+            variables in a row and the principal component listed in the column. Each row of the table shows how much of
+            the variance
+            in the original variable is explained by each of the components. As a result, the values
+            in each row sum to one.</p>
+          <p>More insightful is the analysis of each column, which indicates
+            which variables are important in the computation of the matching component. In our example,
+            we see that <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Infants</strong> and
+            <strong>Suicids</strong> are the most important
+            for the first component, whereas for the second component this is <strong>Crm_prs</strong> and
+            <strong>Donatns</strong>.
+            As we can see from the cumulative proportion listing, these two components explain
+            about 56% of the variance in the original variables.</p>
+          <p>Since the correlations are squared, they do not depend on the sign of the eigenvector elements, unlike the
+            loadings.</p>
+        </div>
+        <div id="visualizing-principal-components" class="section level4 unnumbered" number="">
+          <h4>Visualizing principal components</h4>
+          <p>Once the principal components are added to the data table, they are available
+            for use in any graph (or map).</p>
+          <p>A useful graph is a scatter plot of any pair of principal components. For example, such a graph is shown
+            for the first two components (based on the <strong>SVD</strong> method) in Figure <a
+              href="#fig:pcascatplot">16</a>.
+            By construction, the principal component variables are uncorrelated,
+            which yields the characteristic circular cloud plot. A regression line fit to this scatter
+            plot yields a horizontal line (with slope zero). Through linking and brushing, we can
+            identify the locations on the map for any point in the scatter plot.</p>
+          <p>In addition, this type of bivariate plot is sometimes employed to visually identify <em>clusters</em> in
+            the data.
+            Such clusters would be suggested by distinct high density clumps of points in the graph. Such points are
+            close in a multivariate sense,
+            since they correspond to a linear combination of the original variables that maximizes explained
+            variance.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+          <div class="figure" style="text-align: center"><span id="fig:pcascatplot"></span>
+            <img src="pics7a/1_693_pc12_scatter.png" alt="First two principal components scatter plot - SVD method"
+              width="40%" />
+            <p class="caption">
+              Figure 16: First two principal components scatter plot - SVD method
+            </p>
+          </div>
+          <p>To illustrate the effect of the choice of eigenvalue computation, the scatter plot in Figure <a
+              href="#fig:eigenscatplot">17</a> again plots the values for the first and second component, but now using
+            the loadings from the <strong>Eigen</strong> method. Note how the scatter has been flipped around the
+            vertical axis, since what used to be positive for PC1, is now negative, and vice versa.</p>
+          <div class="figure" style="text-align: center"><span id="fig:eigenscatplot"></span>
+            <img src="pics7a/1_eigen_scatplot.png" alt="First two principal components scatter plot - Eigen method"
+              width="40%" />
+            <p class="caption">
+              Figure 17: First two principal components scatter plot - Eigen method
+            </p>
+          </div>
+          <p>An even more graphic illustration of the difference between the principal components obtained through the
+            <strong>SVD</strong> method (PC1) and
+            the <strong>Eigen</strong> method (PC1e) can be seen by the perfect negative correlation in the scatter plot
+            in Figure <a href="#fig:pcascatplot">16</a>.</p>
+          <div class="figure" style="text-align: center"><span id="fig:pcanegcorr"></span>
+            <img src="pics7a/0_negcorr_pcsvd1_pceigen2.png" alt="First principal component for SVD and Eigen"
+              width="40%" />
+            <p class="caption">
+              Figure 18: First principal component for SVD and Eigen
+            </p>
+          </div>
+          <p>In order to gain further insight into the composition of a principal component, we
+            combine a box plot of the values for the component with a parallel coordinate plot of its main contributing
+            variables. For example, in the box plot in Figure <a href="#fig:pcpboxplot">19</a>, we select the
+            observations in the top quartile of PC1 (using SVD).<a href="#fn7" class="footnote-ref"
+              id="fnref7"><sup>7</sup></a></p>
+          <p>We link the box plot to a parallel coordinate plot for the
+            four variables that contribute most to this component. From the analysis above, we know that
+            these are <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Infants</strong> and
+            <strong>Suicids</strong>. The corresponding linked selection
+            in the PCP shows <em>low</em> values for all but <strong>Litercy</strong>, but the lines in the plot are all
+            close together. This nicely illustrates how the
+            first component captures a <em>clustering</em> in multivariate attribute space among these four
+            variables.</p>
+          <p>Since the variables are used in standardized form, low values will tend to have a negative sign, and high
+            values a positive sign. The loadings for PC1 are negative for <strong>Crm_prp</strong>,
+            <strong>Infants</strong> and <strong>Suicids</strong>, which, combined with negative standardized values,
+            will make a (large) positive contribution to the component. The loadings for <strong>Litercy</strong> are
+            positive and they multiply a (large) postive value, also making a positive contribution. As a result, the
+            values for the principal component end up in the top quartile.</p>
+          <div class="figure" style="text-align: center"><span id="fig:pcpboxplot"></span>
+            <img src="pics7a/1_692_pc1_box_pcp.png" alt="PC1 composition using PCP" width="60%" />
+            <p class="caption">
+              Figure 19: PC1 composition using PCP
+            </p>
+          </div>
+          <p>The substantive interpretation is a bit of a challenge, since it suggests that high property crime, out of
+            wedlock births and suicide rates (recall that low values for the variables are <em>bad</em>, so actually
+            high rates) coincide with high literacy rates (although the latter are limited to military conscripts, so
+            they may be a biased reflection of the whole population).</p>
+        </div>
+      </div>
+    </div>
+    <div id="spatializing-principal-components" class="section level2 unnumbered" number="">
+      <h2>Spatializing Principal Components</h2>
+      <p>We can further <em>spatialize</em> the visualization of principal components by explicitly
+        considering their spatial distribution in a map. In addition, we can explore spatial patterns more formally
+        through a local spatial autocorrelation analysis.</p>
+      <div id="principal-component-maps" class="section level3 unnumbered" number="">
+        <h3>Principal component maps</h3>
+        <p>The visualization of the spatial distribution of the value of a principal component by means of a choropleth
+          map is mostly useful to suggest certain patterns. Caution needs to be used to interpret these in terms of
+          <em>high</em> or <em>low</em>, since the latter depends on the sign of the component loadings (and thus on the
+          method used to compute the eigenvectors).</p>
+        <p>For example, using the results from <strong>SVD</strong> for the first principal component, a quartile map
+          shows a distinct pattern, with higher values above a diagonal
+          line going from the north west to the middle of the
+          south east border, as shown in Figure <a href="#fig:pc1quartile">20</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:pc1quartile"></span>
+          <img src="pics7a/1_pc1_quartile.png" alt="PC1 quartile map" width="50%" />
+          <p class="caption">
+            Figure 20: PC1 quartile map
+          </p>
+        </div>
+        <p>A quartile map for the first component computed using the <strong>Eigen</strong> method shows the same
+          overall spatial pattern, but the roles of high and low are reversed,
+          as in Figure <a href="#fig:pc1equartile">21</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:pc1equartile"></span>
+          <img src="pics7a/1_pc1e_quartile.png" alt="PC1 quartile map" width="50%" />
+          <p class="caption">
+            Figure 21: PC1 quartile map
+          </p>
+        </div>
+        <p>Even clearer evidence of the need for care in the interpretation of the components is seen in Figures
+          <a href="#fig:pcsvdbox">22</a> and <a href="#fig:pceigenbox">23</a> that show a box map for the first
+          principal component,
+          respectively for <strong>SVD</strong> and for <strong>Eigen</strong>. What is shown as a lower outlier in for
+          <strong>SVD</strong> is an upper
+          outlier in the box map for <strong>Eigen</strong>.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:pcsvdbox"></span>
+          <img src="pics7a/0_pcasvd_boxmap.png" alt="PC1-SVD box map" width="50%" />
+          <p class="caption">
+            Figure 22: PC1-SVD box map
+          </p>
+        </div>
+        <div class="figure" style="text-align: center"><span id="fig:pceigenbox"></span>
+          <img src="pics7a/0_pca_eigen_boxmap.png" alt="PC1-Eigen box map" width="50%" />
+          <p class="caption">
+            Figure 23: PC1-Eigen box map
+          </p>
+        </div>
+      </div>
+      <div id="cluster-maps" class="section level3 unnumbered" number="">
+        <h3>Cluster maps</h3>
+        <p>We pursue the nature of this pattern more formally through a local Moran cluster map. Again, using the first
+          component from the <strong>SVD</strong> method, we find a strong high-high cluster in the northern part of the
+          country, ranging
+          from east to west (with p=0.01 and 99999 permutations, using queen contiguity). In addition, there is a
+          pronounced Low-Low cluster in the center of
+          the country. With the component based on the <strong>Eigen</strong> method, the locations of the clusters
+          would be the same, but their labels would be opposite, i.e., what was high-high becomes low-low and vice
+          versa. In other words, the location of the clusters is not affected by the method used, but their
+          interpretation is.</p>
+        <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+          <img src="pics7a/1_690_pc1localmoran.png" alt="PC1 Local Moran cluster map" width="50%" />
+          <p class="caption">
+            Figure 24: PC1 Local Moran cluster map
+          </p>
+        </div>
+      </div>
+      <div id="principal-components-as-multivariate-cluster-maps" class="section level3 unnumbered" number="">
+        <h3>Principal components as multivariate cluster maps</h3>
+        <p>Since the principal components combine the original variables, their patterns of spatial clustering could be
+          viewed as an alternative to a full multivariate spatial clustering. The main difference is that in the latter
+          each variable is given equal weight, whereas in the principal component some variables are more important than
+          others. In our example, we saw that the first component is a reasonable summary of the pattern among four
+          variables, <strong>Crm_prp</strong>, <strong>Litercy</strong>, <strong>Infants</strong> and
+          <strong>Suicids</strong>.</p>
+        <p>First, we can check on the makeup of the component in the identified cluster. For example, we select the
+          high-high values in the cluster map and find the matching lines in a parallel coordinate plot for the four
+          variables, shown in Figure <a href="#fig:clusterbox">25</a>. The lines track closely (but not perfectly),
+          suggesting some clustering of the data points in the four-dimensional attribute space. In other words, the
+          high-high spatial cluster of the first principal component seems to match attribute similarity among the four
+          variables.</p>
+        <div class="figure" style="text-align: center"><span id="fig:clusterbox"></span>
+          <img src="pics7a/1_cluster_box.png" alt="Linked PCA cluster map and PCP" width="80%" />
+          <p class="caption">
+            Figure 25: Linked PCA cluster map and PCP
+          </p>
+        </div>
+        <p>In addition, we can now compare these results to a cluster or significance map from a multivariate local
+          Geary analysis for the four variables. In Figure <a href="#fig:multigeary">26</a>, we show the significance
+          map rather than a cluster map, since all significant locations are for positive spatial autocorrelation (p
+          &lt; 0.01, 99999 permutations, queen contiguity). While the patterns are not identical to those in the
+          principal component cluster map, they are quite similar and pick up the same general spatial trends.</p>
+        <div class="figure" style="text-align: center"><span id="fig:multigeary"></span>
+          <img src="pics7a/1_multigeary.png" alt="Multivariate local Geary significance map" width="50%" />
+          <p class="caption">
+            Figure 26: Multivariate local Geary significance map
+          </p>
+        </div>
+        <p>This suggests that in some instances, a univariate local spatial autocorrelation analysis for one or a few
+          dominant principal components may provide a viable alternative to a full-fledged multivariate analysis.</p>
+      </div>
+    </div>
+    <div id="appendix" class="section level2 unnumbered" number="">
+      <h2>Appendix</h2>
+      <div id="basics---eigenvalues-and-eigenvectors" class="section level3 unnumbered" number="">
+        <h3>Basics - eigenvalues and eigenvectors</h3>
+        <p>Consider a square symmetric matrix:<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
+          <span class="math display">\[
+            A = \begin{bmatrix}
+            1 &amp; 3\\ 3 &amp; 2
+            \end{bmatrix}
+            \]</span>
+          and a column vector, say:
+          <span class="math display">\[
+            v = \begin{bmatrix}
+            1\\
+            2
+            \end{bmatrix}
+            \]</span>
+          As illustrated in Figure <a href="#fig:vectorgraph">27</a>, we can visualize the vector as an <em>arrow</em>
+          from the origin of a <span class="math inline">\(x-y\)</span> scatter plot
+          going to the point (<span class="math inline">\(x = 1\)</span>, <span class="math inline">\(y = 2\)</span>).
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:vectorgraph"></span>
+          <img src="pics7a/33_vectors.png" alt="Vectors in two-dimensional space" width="40%" />
+          <p class="caption">
+            Figure 27: Vectors in two-dimensional space
+          </p>
+        </div>
+        <p>Pre-multiplying this vector by a scalar just moves the point further on
+          the same slope. For example,
+          <span class="math display">\[2 \times
+            \begin{bmatrix}
+            1\\
+            2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            2\\
+            4
+            \end{bmatrix}
+            \]</span>
+          This is equivalent to moving the arrow over on the
+          same slope from (1,2) to the point (2,4) further from the origin, as shown by the dashed line
+          in Figure <a href="#fig:vectorgraph">27</a>.
+        </p>
+        <p>In contrast, pre-multiplying the vector by the matrix does both rescaling and rotation of the vector.
+          In our example,
+          <span class="math display">\[
+            Av = \begin{bmatrix}
+            (1 \times 1) + (3 \times 2)\\
+            (3 \times 1) + (2 \times 2)
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            7 \\
+            5
+            \end{bmatrix}.
+            \]</span>
+          In Figure <a href="#fig:vectorgraph">27</a>, the arrow is both moved further away from the origin and also
+          rotated down to the point (7,5) (now the x-value is larger than the y-value, so
+          the slope of the arrow is less steep).
+        </p>
+        <p>The eigenvectors and eigenvalues of a square symmetric matrix are a special
+          pair of scalar-vector, such that <span class="math inline">\(Av = \lambda v\)</span>, where <span
+            class="math inline">\(\lambda\)</span> is the <em>eigenvalue</em> and <span class="math inline">\(v\)</span>
+          is the <em>eigenvector</em>.
+          In addition, the eigenvectors are orthogonal to each other, i.e., <span class="math inline">\(v_u&#39;v_k =
+            0\)</span> (for different eigenvectors),
+          and <span class="math inline">\(v_u&#39;v_u = 1\)</span> (the sum of the squares of the eigenvector elements
+          sum to one).</p>
+        <p>What does this mean? For this particular vector (i.e., arrow from the origin), the transformation by <span
+            class="math inline">\(A\)</span> does not
+          rotate the vector, but simply rescales it (i.e., moves it further or closer to the origin), by exactly the
+          factor <span class="math inline">\(\lambda\)</span>. In our example, the two eigenvectors turn
+          out to be [0.6464 0.7630] and [-0.7630 0.6464], with associated eigenvalues 4.541 and -1.541. Each square
+          matrix has
+          as many eigenvectors and matching eigenvalues as its rank, in this case 2 – for a 2 by 2 nonsingular matrix.
+          The actual computation of eigenvalues and eigenvectors is rather complicated, so let’s just assume we have the
+          result.</p>
+        <p>Consider post-multiplying the matrix <span class="math inline">\(A\)</span> with the eigenvector [0.6464
+          0.7630]:
+          <span class="math display">\[\begin{bmatrix}
+            (1 \times 0.6464) + (3 \times 0.7630)\\
+            (3 \times 0.6464) + (2 \times 0.7630)
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            2.935\\
+            3.465
+            \end{bmatrix}
+            \]</span>
+          Now, for comparison purposes, we rescale the eigenvector with the matching eigenvalue:
+          <span class="math display">\[4.541 \times
+            \begin{bmatrix}
+            0.6464\\
+            0.7630
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            2.935\\
+            3.465
+            \end{bmatrix}
+            \]</span>
+          This yields the same result as the matrix multiplication.
+        </p>
+        <p>Furthermore, if we stack the eigenvectors in a matrix <span class="math inline">\(V\)</span>, we can verify
+          that they are orthogonal
+          and the sum of squares of the coefficients sum to one, i.e., <span class="math inline">\(V&#39;V = I\)</span>:
+          <span class="math display">\[\begin{bmatrix}
+            0.6464 &amp; -0.7630\\
+            0.7630 &amp; 0.6464
+            \end{bmatrix}&#39;
+            \begin{bmatrix}
+            0.6464 &amp; -0.7630\\
+            0.7630 &amp; 0.6464
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            1 &amp; 0\\
+            0 &amp; 1
+            \end{bmatrix}
+            \]</span>
+          In addition, it is easily verified that <span class="math inline">\(VV&#39; = I\)</span> as well. This means
+          that the transpose of <span class="math inline">\(V\)</span> is also its inverse (per the definition of an
+          inverse matrix, i.e., a matrix for which the product with the original matrix yields the identity matrix), or
+          <span class="math inline">\(V^{-1} = V&#39;\)</span>.
+        </p>
+        <p>As a result, we have found a particular vector (and associated scalar) so that multiplying this vector by
+          <span class="math inline">\(A\)</span> does not
+          result in any rotation, but only in a rescaling.</p>
+        <p>Eigenvectors and eigenvalues are central in many statistical analyses, but it is important to realize they
+          are not as complicated as they may seem at first sight. On the other hand, computing them efficiently
+          <em>is</em> complicated, and best left
+          to specialized programs (<code>GeoDa</code> uses the <code>Eigen</code> C++ library for these computations, <a
+            href="http://eigen.tuxfamily.org/" class="uri">http://eigen.tuxfamily.org/</a>).</p>
+        <p>Finally, a couple of useful properties of eigenvalues are worth mentioning.</p>
+        <p>The sum of the eigenvalues equals the <em>trace</em> of the matrix. The trace is the sum of the diagonal
+          elements, in our example, the trace is <span class="math inline">\(1 + 2 = 3\)</span>. The sum of the two
+          eigenvalues is <span class="math inline">\(4.541 -1.541 = 3\)</span>. Also, the product of the eigenvalues
+          equals the <em>determinant</em> of the matrix. For a <span class="math inline">\(2 \times 2\)</span> matrix,
+          the determinant is <span class="math inline">\(ab - cd\)</span>, or the product of the diagonal elements minus
+          the product of the off-diagonal elements. In our example, that is <span class="math inline">\((1 \times 2) -
+            (3 \times 3) = -7\)</span>. The product of the two eigenvalues is <span class="math inline">\(4.541 \times
+            -1.541 = -7.0\)</span>.</p>
+      </div>
+      <div id="eigenvector-decomposition-of-a-square-matrix" class="section level3 unnumbered" number="">
+        <h3>Eigenvector decomposition of a square matrix</h3>
+        <p>For each eigenvector <span class="math inline">\(v\)</span> of a square symmetric matrix <span
+            class="math inline">\(A\)</span>, we have <span class="math inline">\(Av = \lambda v\)</span>. We can write
+          this compactly for all the eigenvectors and
+          eigenvalues by organizing the individual eigenvectors as columns in a
+          <span class="math inline">\(k \times k\)</span> matrix <span class="math inline">\(V\)</span>, as we have seen
+          above. Similarly, we can organize
+          the matching eigenvalues as the diagonal elements of a diagonal matrix,
+          say <span class="math inline">\(G\)</span>. The basic eigenvalue expression can then be written
+          as <span class="math inline">\(AV = VG\)</span>. Note that <span class="math inline">\(V\)</span> goes first
+          in the matrix multiplication on the right hand side to ensure that each column of
+          <span class="math inline">\(V\)</span> is multiplied by the corresponding eigenvalue on the diagonal of <span
+            class="math inline">\(G\)</span> to yield <span class="math inline">\(\lambda v\)</span>. Now, we take
+          advantage of the fact that the eigenvectors are orthogonal, namely that <span class="math inline">\(VV&#39; =
+            I\)</span>. Post-multiplying each side of the equation by <span class="math inline">\(V&#39;\)</span> gives
+          <span class="math inline">\(AVV&#39; = VGV&#39;\)</span>, or <span class="math inline">\(A =
+            VGV&#39;\)</span>, the so-called <em>eigenvalue decomposition</em>
+          or <em>spectral decomposition</em> of a square symmetric matrix.
+        </p>
+        <p>Since the correlation matrix <span class="math inline">\(X&#39;X\)</span> is square and symmetric, its
+          spectral decomposition has the same structure:
+          <span class="math display">\[X&#39;X = VGV&#39;,\]</span>
+          with <span class="math inline">\(V\)</span> and <span class="math inline">\(G\)</span> have the same meaning
+          as before. In the context of principal component analysis, the coefficients <span
+            class="math inline">\(a_h\)</span> needed to construct the component from the original variables are the
+          elements of the eigenvector column, with the row matching the column of the original variable. For example,
+          the coefficients <span class="math inline">\(a_2\)</span> needed to multiply the variable <span
+            class="math inline">\(x_2\)</span> would be in the second row of the matrix <span
+            class="math inline">\(V\)</span>.
+        </p>
+        <p>The variance associated with the h-th principal component is the h-th element on the diagonal of <span
+            class="math inline">\(G\)</span>. With these values in hand, we have all the information to construct and
+          interpret the principal components.</p>
+        <p>In <code>GeoDa</code>, these computations are carried out by means of the <code>EigenSolver</code> routine
+          from the <code>Eigen</code> C++ library (<a
+            href="https://eigen.tuxfamily.org/dox/classEigen_1_1EigenSolver.html"
+            class="uri">https://eigen.tuxfamily.org/dox/classEigen_1_1EigenSolver.html</a>).</p>
+      </div>
+      <div id="singular-value-decomposition-svd" class="section level3 unnumbered" number="">
+        <h3>Singular Value Decomposition (SVD)</h3>
+        <p>The eigenvalue decomposition described above only applies to square matrices. A more general decomposition is
+          the so-called
+          <em>singular value decomposition</em>, which applies to any rectangular matrix, such as the <span
+            class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span> with (standardized)
+          observations.
+        </p>
+        <p>For a full-rank <span class="math inline">\(n \times k\)</span> matrix <span class="math inline">\(X\)</span>
+          (there are many more general cases where SVD can be applied), the decomposition takes the following form:
+          <span class="math display">\[X = UDV&#39;,\]</span>
+          where <span class="math inline">\(U\)</span> is a <span class="math inline">\(n \times k\)</span> orthonormal
+          matrix (i.e., <span class="math inline">\(U&#39;U = I\)</span>), <span class="math inline">\(D\)</span> is a
+          <span class="math inline">\(k \times k\)</span> diagonal matrix, and <span class="math inline">\(V\)</span> is
+          a <span class="math inline">\(k \times k\)</span>
+          orthonormal matrix (i.e., <span class="math inline">\(V&#39;V = I\)</span>). In essence, the decomposition
+          shows how a transformation <span class="math inline">\(X\)</span> applied to a vector <span
+            class="math inline">\(y\)</span> (through a matrix multiplication of <span class="math inline">\(X\)</span>
+          with a <span class="math inline">\(k\)</span>-dimensional vector <span class="math inline">\(y\)</span>) can
+          be viewed to consist of a series of rotations and rescalings. Note that in the general rectangular case, the
+          transformation <span class="math inline">\(Xy\)</span> not only involves rotation and rescaling (as in the
+          square case), but also a change in dimensionality from a <span class="math inline">\(k\)</span>-dimensional
+          space (the length of <span class="math inline">\(y\)</span>) to an <span
+            class="math inline">\(n\)</span>-dimensional space (the length of <span class="math inline">\(Xy\)</span>,
+          i.e., an n-dimensional vector). An intuitive visualization of the operations involved in such a transformation
+          that are reflected in the elements of the SVD can be found at
+          <a href="https://en.wikipedia.org/wiki/File:Singular_value_decomposition.gif"
+            class="uri">https://en.wikipedia.org/wiki/File:Singular_value_decomposition.gif</a>.
+        </p>
+        <p>While SVD is very general, we don’t need that full generality for the PCA case. It turns out that there is a
+          direct connection between the eigenvalues and eigenvectors of the (square) matrix <span
+            class="math inline">\(X&#39;X\)</span> and the SVD of <span class="math inline">\(X\)</span>. Using the
+          expression above, we can write <span class="math inline">\(X&#39;X\)</span> as:
+          <span class="math display">\[X&#39;X = (UDV&#39;)&#39;(UDV&#39;) = VDU&#39;UDV&#39; = VD^2V&#39;,\]</span>
+          since <span class="math inline">\(U&#39;U = I\)</span>.
+        </p>
+        <p>It thus turns out that the columns of <span class="math inline">\(V\)</span> from the SVD contain the
+          eigenvectors of <span class="math inline">\(X&#39;X\)</span> and the square of the diagonal elements
+          of <span class="math inline">\(D\)</span> in the SVD are the eigenvalues associated with the corresponding
+          principal component.</p>
+        <p>The concept of singular value decomposition is very broad and a detailed discussion is beyond our scope. A
+          number of computational approaches are available. In <code>GeoDa</code>, the <code>JacobiSVD</code> routine is
+          used from the <code>Eigen</code> C++ library (<a
+            href="https://eigen.tuxfamily.org/dox/classEigen_1_1JacobiSVD.html"
+            class="uri">https://eigen.tuxfamily.org/dox/classEigen_1_1JacobiSVD.html</a>). Note that other software
+          (such as <code>R</code>’s <code>pca</code>) uses an algorithm based on the Householder transformation (from
+          the <code>lapack</code> library). This yields the opposite signs for the eigenvector elements.</p>
+        <p><br></p>
+      </div>
+    </div>
+    <div id="references" class="section level2 unnumbered" number="">
+      <h2>References</h2>
+      <div id="refs" class="references hanging-indent">
+        <div id="ref-Anselin:18">
+          <p>Anselin, Luc. 2019. “A Local Indicator of Multivariate Spatial Association, Extending Geary’s c.”
+            <em>Geographical Analysis</em> 51 (2): 133–50.</p>
+        </div>
+        <div id="ref-Bellman:61">
+          <p>Bellman, R. E. 1961. <em>Adaptive Control Processes</em>. Princeton, N.J.: Princeton University Press.</p>
+        </div>
+        <div id="ref-CressieWikle:11">
+          <p>Cressie, Noel, and Christopher K. Wikle. 2011. <em>Statistics for Spatio-Temporal Data</em>. Hoboken, NJ:
+            John Wiley; Sons.</p>
+        </div>
+        <div id="ref-DrayJombart:11">
+          <p>Dray, Stéphane, and Thibaut Jombart. 2011. “Revisiting Guerry’s Data: Introducing Spatial Constraints in
+            Multivariate Analysis.” <em>The Annals of Applied Statistics</em> 5 (4): 2278–99.</p>
+        </div>
+        <div id="ref-Everittetal:11">
+          <p>Everitt, Brian S., Sabine Landau, Morven Leese, and Daniel Stahl. 2011. <em>Cluster Analysis, 5th
+              Edition</em>. New York, NY: John Wiley.</p>
+        </div>
+        <div id="ref-Hastieetal:09">
+          <p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The Elements of Statistical Learning (2nd
+              Edition)</em>. New York, NY: Springer.</p>
+        </div>
+        <div id="ref-Hotelling:33">
+          <p>Hotelling, Harold. 1933. “Analysis of a Complex of Statistical Variables into Principal Components.”
+            <em>Journal of Educational Psychology</em> 24: 417–41.</p>
+        </div>
+        <div id="ref-Kaiser:60">
+          <p>Kaiser, H. F. 1960. “The Application of Electronic Computers to Factor Analysis.” <em>Educational and
+              Psychological Measurement</em> 20: 141–51.</p>
+        </div>
+        <div id="ref-KaufmanRousseeuw:05">
+          <p>Kaufman, L., and P. Rousseeuw. 2005. <em>Finding Groups in Data: An Introduction to Cluster Analysis</em>.
+            New York, NY: John Wiley.</p>
+        </div>
+        <div id="ref-LeeVerleysen:07">
+          <p>Lee, John A., and Michel Verleysen. 2007. <em>Nonlinear Dimensionality Reduction</em>. New York, NY:
+            Springer-Verlag.</p>
+        </div>
+        <div id="ref-Pearson:01">
+          <p>Pearson, Karl. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical
+              Magazine</em> 2: 559–72.</p>
+        </div>
+        <div id="ref-Wikleetal:19">
+          <p>Wikle, Christopher K., Andrew Zammit-Mangion, and Noel Cressie. 2019. <em>Spatio-Temporal Statistics with
+              R</em>. Boca Raton, FL: CRC Press.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footnotes">
+      <hr />
+      <ol>
+        <li id="fn1">
+          <p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu"
+              class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn2">
+          <p>In <code>GeoDa</code>, this can be accomplished in the weights manager, using the
+            <strong>variables</strong> option for distance weights, and making sure the transformation is set to
+            <strong>raw</strong>. The nearest neighbor distances are the third column in a weights file created for
+            <span class="math inline">\(k = 1\)</span>.<a href="#fnref2" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn3">
+          <p>The standardization should not be done mechanically, since there are instances where the variance
+            differences between the variables are actually meaningful, e.g., when the scales on which they are measured
+            have a strong substantive meaning (e.g., in psychology).<a href="#fnref3" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn4">
+          <p>Since the eigenvalues equal the variance explained by the corresponding component, the diagonal elements of
+            <span class="math inline">\(D\)</span> are thus the standard deviation explained by the component.<a
+              href="#fnref4" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn5">
+          <p>The concept of reconstruction error is somewhat technical. If <span class="math inline">\(A\)</span> were a
+            square matrix, we could solve for <span class="math inline">\(z\)</span> as
+            <span class="math inline">\(z = A^{-1}x\)</span>, where <span class="math inline">\(A^{-1}\)</span> is the
+            inverse of the matrix <span class="math inline">\(A\)</span>. However, due to the dimension reduction, <span
+              class="math inline">\(A\)</span> is not square, so we have to use something called a pseudo-inverse or
+            Moore-Penrose inverse. This is the <span class="math inline">\(p \times k\)</span> matrix
+            <span class="math inline">\((A&#39;A)^{-1}A&#39;\)</span>, such that <span class="math inline">\(z =
+              (A&#39;A)^{-1}A&#39;x\)</span>. Furthermore, because <span class="math inline">\(A&#39;A = I\)</span>,
+            this simplifies to <span class="math inline">\(z = A&#39;x\)</span> (of course, so far the elements of <span
+              class="math inline">\(A\)</span> are unknown). Since <span class="math inline">\(x = Az\)</span>, if we
+            knew what <span class="math inline">\(A\)</span> was, we could find <span class="math inline">\(x\)</span>
+            as <span class="math inline">\(Az\)</span>, or, with our solution in hand, as <span
+              class="math inline">\(AA&#39;x\)</span>. The reconstruction error is then the squared difference between
+            <span class="math inline">\(x\)</span> and <span class="math inline">\(AA&#39;x\)</span>. We have to find
+            the coeffients for <span class="math inline">\(A\)</span> that minimize this expression. For an extensive
+            technical discussion, see <span class="citation">Lee and Verleysen (<a href="#ref-LeeVerleysen:07"
+                role="doc-biblioref">2007</a>)</span>, Chapter 2.<a href="#fnref5" class="footnote-back">↩︎</a>
+          </p>
+        </li>
+        <li id="fn6">
+          <p>For an example, see, e.g., Chapter 2 of <span class="citation">Everitt et al. (<a
+                href="#ref-Everittetal:11" role="doc-biblioref">2011</a>)</span>.<a href="#fnref6"
+              class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn7">
+          <p>Note that, when using the <strong>Eigen</strong> method, these would be the bottom quartile of the first
+            component.<a href="#fnref7" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn8">
+          <p>Not all the results for symmetric matrices hold for asymmetric matrices. However, since we only deal with
+            symmetric matrices in the applications covered here, we just stick to the simpler case.<a href="#fnref8"
+              class="footnote-back">↩︎</a></p>
+        </li>
+      </ol>
+    </div>
+
+    <footer class="site-footer">
+      <span class="site-footer-owner"><a href="https://github.com/lixun910/geoda">GeoDa</a> is maintained by <a
+          href="#">lixun910</a>.</span>
+      <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>
+        using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a
+          href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+    </footer>
+
+  </section>
 
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
+  <!-- code folding -->
+
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
 
 </body>
+
 </html>

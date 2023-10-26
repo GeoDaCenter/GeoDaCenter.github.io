@@ -682,7 +682,7 @@
           The simplest case boils down to applying the idea of a <em>spatial window sum</em> to the
           numerator and denominator (i.e., with binary spatial weights in both, and including the
           diagonal term):
-          <span class="math display">\[ \pi_i = \frac{O_i + \sum_{j=1}^{J_i} O_j}{O_i + \sum_{j=1}^{J_i} P_j},\]</span>
+          <span class="math display">\[ \pi_i = \frac{O_i + \sum_{j=1}^{J_i} O_j}{P_i + \sum_{j=1}^{J_i} P_j},\]</span>
           where <span class="math inline">\(J_i\)</span> is a reference set (neighbors) for observation <span
             class="math inline">\(i\)</span>. In practice,
           this is achieved by using binary spatial weights for both numerator and denominator, and

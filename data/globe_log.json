@@ -1,8 +1,8 @@
 {
     "__comment": "Log starts from Jul2019. logged_downloads are the country downloads not included in the globe.",
-    "last_update": "Jan2024",
+    "last_update": "Feb2024",
     "logged_downloads": {
-        "GD": "24",
+        "GD": "25",
         "MH": "1",
         "VC": "2",
         "AG": "2",
@@ -13,7 +13,7 @@
         "GM": "3",
         "VG": "1",
         "BQ": "1",
-        "(not set)": "9",
-        "PW": 1
+        "(not set)": "10",
+        "PW": "10"
     }
 }

@@ -1,0 +1,1238 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 GeoDa Toolbar Icons\
+Professor Luc Anselin\
+October 3, 2024\
+\
+1\
+00:00:02.530 --> 00:00:03.996\
+CSDS UChicago: Okay. So\
+\
+2\
+00:00:05.290 --> 00:00:09.190\
+CSDS UChicago: what I wanted to do today is kind of\
+\
+3\
+00:00:09.510 --> 00:00:12.139\
+CSDS UChicago: give you a broad introduction\
+\
+4\
+00:00:12.160 --> 00:00:13.489\
+CSDS UChicago: to geoda.\
+\
+5\
+00:00:13.800 --> 00:00:16.250\
+CSDS UChicago: I'm assuming you have\
+\
+6\
+00:00:16.670 --> 00:00:19.245\
+CSDS UChicago: downloaded it and installed it.\
+\
+7\
+00:00:19.820 --> 00:00:22.749\
+CSDS UChicago: If not, you should do that as soon as possible.\
+\
+8\
+00:00:23.310 --> 00:00:26.719\
+CSDS UChicago: And I realized, sorry. This is all very last minute.\
+\
+9\
+00:00:27.920 --> 00:00:30.770\
+CSDS UChicago: I realize that there's actually very few\
+\
+10\
+00:00:30.850 --> 00:00:35.290\
+CSDS UChicago: videos out there with actual geoda demonstrations. There's\
+\
+11\
+00:00:36.350 --> 00:00:42.290\
+CSDS UChicago: lots of notebooks, lots of web pages. There's documentation on the Geoda site. But\
+\
+12\
+00:00:42.300 --> 00:00:49.269\
+CSDS UChicago: actual videos live things. There's only there's the video that I gave you the link to on Monday.\
+\
+13\
+00:00:49.350 --> 00:00:52.119\
+CSDS UChicago: which is kind of an a sales pitch.\
+\
+14\
+00:00:52.140 --> 00:00:56.990\
+CSDS UChicago: But there's not actual lab materials. So\
+\
+15\
+00:00:57.230 --> 00:00:59.809\
+CSDS UChicago: I figured I might as well record this.\
+\
+16\
+00:00:59.920 --> 00:01:06.698\
+CSDS UChicago: So then, you can look it over at your leisure or not, you know\
+\
+17\
+00:01:07.210 --> 00:01:11.310\
+CSDS UChicago: but I don't know. I forgot if I mentioned this or not. But\
+\
+18\
+00:01:11.410 --> 00:01:14.169\
+CSDS UChicago: there is a whole collection of\
+\
+19\
+00:01:15.750 --> 00:01:20.240\
+CSDS UChicago: materials under the Channel Geoda Center on Youtube.\
+\
+20\
+00:01:20.680 --> 00:01:22.610\
+CSDS UChicago: you know where.\
+\
+21\
+00:01:22.710 --> 00:01:25.910\
+CSDS UChicago: having hundreds of thousands of views. These are\
+\
+22\
+00:01:26.250 --> 00:01:31.550\
+CSDS UChicago: old lectures of mine in my introduction to spatial data science.\
+\
+23\
+00:01:31.880 --> 00:01:35.880\
+CSDS UChicago: But it doesn't have the labs. It's just the lectures.\
+\
+24\
+00:01:35.970 --> 00:01:42.589\
+CSDS UChicago: And then also my more advanced spatial regression class and the spatial, clustering class.\
+\
+25\
+00:01:42.880 --> 00:01:46.640\
+CSDS UChicago: and then all kinds of different talks. It's all up there, you know.\
+\
+26\
+00:01:46.670 --> 00:01:49.612\
+CSDS UChicago: if you ever get bored, you can take a look. And\
+\
+27\
+00:01:50.460 --> 00:01:54.980\
+CSDS UChicago: so that's what I'm gonna do with these. I have. I think 6\
+\
+28\
+00:01:55.190 --> 00:01:57.155\
+CSDS UChicago: sets of lab\
+\
+29\
+00:01:58.200 --> 00:02:02.600\
+CSDS UChicago: really demonstrations, and then give you a chance to practice and\
+\
+30\
+00:02:02.760 --> 00:02:06.399\
+CSDS UChicago: see if you get it to work. The idea is to\
+\
+31\
+00:02:06.760 --> 00:02:09.089\
+CSDS UChicago: Not dwell on the mechanics too much.\
+\
+32\
+00:02:09.699 --> 00:02:12.369\
+CSDS UChicago: just a little bit, so you can get going. But\
+\
+33\
+00:02:12.440 --> 00:02:15.493\
+CSDS UChicago: the main idea is to give you\
+\
+34\
+00:02:16.630 --> 00:02:17.760\
+CSDS UChicago: a tool\
+\
+35\
+00:02:18.000 --> 00:02:21.279\
+CSDS UChicago: that you can use to explore spatial data.\
+\
+36\
+00:02:22.180 --> 00:02:26.079\
+CSDS UChicago: And I'm assuming, and I know that\
+\
+37\
+00:02:26.470 --> 00:02:30.339\
+CSDS UChicago: many, most of you have never done this.\
+\
+38\
+00:02:30.540 --> 00:02:35.919\
+CSDS UChicago: And so this is part of the reason why we have this spatial track\
+\
+39\
+00:02:36.090 --> 00:02:38.950\
+CSDS UChicago: in the core to kinda\
+\
+40\
+00:02:39.320 --> 00:02:41.489\
+CSDS UChicago: get you going. And so\
+\
+41\
+00:02:41.810 --> 00:02:45.589\
+CSDS UChicago: this I I wanna emphasize this. The goal here\
+\
+42\
+00:02:45.980 --> 00:02:56.639\
+CSDS UChicago: is not you know, kind of a a hazing routine which I know some of the core classes are kind of like that or feel that way.\
+\
+43\
+00:02:57.480 --> 00:03:01.398\
+CSDS UChicago: I want you to start thinking about the world a little bit different.\
+\
+44\
+00:03:02.140 --> 00:03:06.770\
+CSDS UChicago: you know the as there's a commercial slogan, though\
+\
+45\
+00:03:06.850 --> 00:03:13.539\
+CSDS UChicago: the why of where? Right? So you start thinking about phenomena, where they are located.\
+\
+46\
+00:03:13.700 --> 00:03:19.800\
+CSDS UChicago: and why things are where they are or why they're not where you thought they should be.\
+\
+47\
+00:03:20.010 --> 00:03:23.420\
+CSDS UChicago: And that perspective is what I call spatial thinking.\
+\
+48\
+00:03:23.490 --> 00:03:29.479\
+CSDS UChicago: And so we'll get there by doing different readings and see how other people think about it.\
+\
+49\
+00:03:29.680 --> 00:03:33.179\
+CSDS UChicago: But also, I think, very important. Get your hands dirty.\
+\
+50\
+00:03:33.613 --> 00:03:36.609\
+CSDS UChicago: Look at some actual spatial data, make some maps.\
+\
+51\
+00:03:36.650 --> 00:03:42.066\
+CSDS UChicago: do some fairly, you know, straightforward analyses.\
+\
+52\
+00:03:42.870 --> 00:03:49.839\
+CSDS UChicago: this is not rocket science. There is complicated math behind it, but we won't go there. I will\
+\
+53\
+00:03:50.060 --> 00:03:55.770\
+CSDS UChicago: focus on the concepts and on the kind of insights that you can gain\
+\
+54\
+00:03:55.810 --> 00:03:59.079\
+CSDS UChicago: by doing. That's that's the main goal. Okay?\
+\
+55\
+00:03:59.330 --> 00:04:00.145\
+CSDS UChicago: So\
+\
+56\
+00:04:02.180 --> 00:04:02.985\
+CSDS UChicago: the\
+\
+57\
+00:04:04.590 --> 00:04:05.800\
+CSDS UChicago: geoda.\
+\
+58\
+00:04:05.820 --> 00:04:08.708\
+CSDS UChicago: If you have installed it, you just very\
+\
+59\
+00:04:09.090 --> 00:04:13.230\
+CSDS UChicago: make sure it's the latest version you open it, which, whatever\
+\
+60\
+00:04:13.410 --> 00:04:16.350\
+CSDS UChicago: your operating system does.\
+\
+61\
+00:04:17.579 --> 00:04:20.310\
+CSDS UChicago: I know it's not playing nice. Why not?\
+\
+62\
+00:04:31.480 --> 00:04:32.600\
+CSDS UChicago: I don't know.\
+\
+63\
+00:04:32.630 --> 00:04:33.740\
+CSDS UChicago: This is\
+\
+64\
+00:04:34.020 --> 00:04:36.678\
+CSDS UChicago: there we go. Okay, so\
+\
+65\
+00:04:37.490 --> 00:04:39.200\
+CSDS UChicago: can everybody see this\
+\
+66\
+00:04:39.570 --> 00:04:43.700\
+CSDS UChicago: so ideally? You know, you're in your own operating system.\
+\
+67\
+00:04:44.195 --> 00:04:50.584\
+CSDS UChicago: I honestly don't. Can't remember how it's done in windows. But I'm sure it's just a simple\
+\
+68\
+00:04:50.970 --> 00:04:51.640\
+CSDS UChicago: and\
+\
+69\
+00:04:53.160 --> 00:04:55.089\
+CSDS UChicago: This is the toolbar.\
+\
+70\
+00:04:55.910 --> 00:05:01.430\
+CSDS UChicago: Every icon on the toolbar corresponds to a subset of functionality.\
+\
+71\
+00:05:01.760 --> 00:05:04.439\
+CSDS UChicago: You have the same subset here\
+\
+72\
+00:05:04.520 --> 00:05:05.960\
+CSDS UChicago: in the file menu.\
+\
+73\
+00:05:06.480 --> 00:05:08.230\
+CSDS UChicago: So you\
+\
+74\
+00:05:08.490 --> 00:05:11.910\
+CSDS UChicago: have an icon to open a data set.\
+\
+75\
+00:05:12.270 --> 00:05:14.530\
+CSDS UChicago: You have file\
+\
+76\
+00:05:15.380 --> 00:05:20.259\
+CSDS UChicago: and new data set or open project the same way. Right?\
+\
+77\
+00:05:20.400 --> 00:05:23.400\
+CSDS UChicago: So what I want to show you 1st\
+\
+78\
+00:05:23.430 --> 00:05:25.060\
+CSDS UChicago: is I'm going to open\
+\
+79\
+00:05:25.630 --> 00:05:28.289\
+CSDS UChicago: the file. Let me. So\
+\
+80\
+00:05:28.300 --> 00:05:30.030\
+CSDS UChicago: you see here, recent.\
+\
+81\
+00:05:30.140 --> 00:05:34.259\
+CSDS UChicago: those are the files I recently opened.\
+\
+82\
+00:05:34.560 --> 00:05:36.300\
+CSDS UChicago: and I'm going to close them.\
+\
+83\
+00:05:36.850 --> 00:05:39.430\
+CSDS UChicago: And then, you see sample data.\
+\
+84\
+00:05:39.580 --> 00:05:40.800\
+CSDS UChicago: These are\
+\
+85\
+00:05:41.090 --> 00:05:45.379\
+CSDS UChicago: baked into geoda. So they are already there.\
+\
+86\
+00:05:45.710 --> 00:05:47.880\
+CSDS UChicago: If you select one of these\
+\
+87\
+00:05:49.130 --> 00:05:52.289\
+CSDS UChicago: double click on it and it opens up.\
+\
+88\
+00:05:53.880 --> 00:05:55.286\
+CSDS UChicago: So anytime\
+\
+89\
+00:05:56.830 --> 00:05:59.400\
+CSDS UChicago: you open a geographic file.\
+\
+90\
+00:06:00.080 --> 00:06:07.370\
+CSDS UChicago: All these are geographic files. It opens a a green base map\
+\
+91\
+00:06:07.590 --> 00:06:10.509\
+CSDS UChicago: what I call a themeless base map.\
+\
+92\
+00:06:10.750 --> 00:06:17.689\
+CSDS UChicago: So this example is the 77 community areas of Chicago.\
+\
+93\
+00:06:17.990 --> 00:06:21.579\
+CSDS UChicago: These go back. In fact, you'll have a reading about this\
+\
+94\
+00:06:21.640 --> 00:06:30.899\
+CSDS UChicago: when we read about neighborhoods. This goes back to the Chicago School of Sociology in the 19 thirties. They delineated these.\
+\
+95\
+00:06:31.080 --> 00:06:32.590\
+CSDS UChicago: They haven't changed.\
+\
+96\
+00:06:33.060 --> 00:06:39.349\
+CSDS UChicago: Now this is almost a hundred years ago. They haven't changed. Is that appropriate? That's a different question.\
+\
+97\
+00:06:39.480 --> 00:06:43.240\
+CSDS UChicago: But there's 77 of them. It says it's right there right?\
+\
+98\
+00:06:43.250 --> 00:06:45.969\
+CSDS UChicago: And it also says it here at the bottom.\
+\
+99\
+00:06:47.260 --> 00:06:53.460\
+CSDS UChicago: So this is a map. I'll talk a little bit about maps today, not too much. We'll have a whole\
+\
+100\
+00:06:53.530 --> 00:06:57.089\
+CSDS UChicago: lab devoted to maps in its own right.\
+\
+101\
+00:06:57.610 --> 00:07:05.100\
+CSDS UChicago: I just wanna kinda walk around and show you the different functionality very high\
+\
+102\
+00:07:05.940 --> 00:07:12.599\
+CSDS UChicago: and view. And then I want to show you a few things that you do. In terms of\
+\
+103\
+00:07:12.710 --> 00:07:20.250\
+CSDS UChicago: non spatial data. Wrangling. So manipulating data in a table is very simple stuff\
+\
+104\
+00:07:20.340 --> 00:07:32.799\
+CSDS UChicago: is the kind of things you do in excel, or another spreadsheet, you know, selecting observations, selecting variables, changing variable names, changing the format of variables.\
+\
+105\
+00:07:32.890 --> 00:07:39.730\
+CSDS UChicago: This is as I said, this is not rocket science, but there's a certain way in which it's done in geoda.\
+\
+106\
+00:07:39.910 --> 00:07:45.059\
+CSDS UChicago: and the more that is familiar, the faster. You're gonna work right? The 1st time.\
+\
+107\
+00:07:45.560 --> 00:07:48.559\
+CSDS UChicago: you know. And I always have to catch myself.\
+\
+108\
+00:07:48.720 --> 00:07:57.699\
+CSDS UChicago: Because if I go through this I go click, click, click, click, click, click, click! And I'm done right. If you've never seen this before, you have no idea what I did.\
+\
+109\
+00:07:58.460 --> 00:08:04.850\
+CSDS UChicago: So I'm gonna try to pace myself and show the different icons and what they do.\
+\
+110\
+00:08:04.980 --> 00:08:11.369\
+CSDS UChicago: And then, as you get more familiar with this, you'll be in the click, click, click, world as well, and then you'll find.\
+\
+111\
+00:08:11.550 --> 00:08:13.840\
+CSDS UChicago: and I know this is advertising.\
+\
+112\
+00:08:14.590 --> 00:08:19.689\
+CSDS UChicago: Geoda is a very efficient tool to explore spatial data.\
+\
+113\
+00:08:19.870 --> 00:08:22.390\
+CSDS UChicago: I use it myself all the time.\
+\
+114\
+00:08:22.550 --> 00:08:26.209\
+CSDS UChicago: Everything I've ever needed for my research is in geoda.\
+\
+115\
+00:08:27.760 --> 00:08:29.420\
+CSDS UChicago: It's now been around\
+\
+116\
+00:08:29.800 --> 00:08:35.180\
+CSDS UChicago: almost 20 years, but it's completely changed. It's cross platform. It runs on everything.\
+\
+117\
+00:08:35.830 --> 00:08:39.939\
+CSDS UChicago: It's open source. You can look at the source code.\
+\
+118\
+00:08:40.620 --> 00:08:45.469\
+CSDS UChicago: if you're a computer science major you want might want to take a look. It's c plus plus.\
+\
+119\
+00:08:45.680 --> 00:08:50.830\
+CSDS UChicago: This is not for the faint of heart, but it's very fast and very efficient.\
+\
+120\
+00:08:51.910 --> 00:08:57.520\
+CSDS UChicago: The new version, which, if I have extra time, I'll run a little. Demo\
+\
+121\
+00:08:57.680 --> 00:09:00.710\
+CSDS UChicago: is written in Javascript\
+\
+122\
+00:09:01.080 --> 00:09:05.219\
+CSDS UChicago: calling C plus plus. And so we're in the process\
+\
+123\
+00:09:05.340 --> 00:09:11.399\
+CSDS UChicago: of moving everything over to a Javascript interface.\
+\
+124\
+00:09:11.560 --> 00:09:16.930\
+CSDS UChicago: This interface for those of you techies is Wx widgets.\
+\
+125\
+00:09:17.390 --> 00:09:20.100\
+CSDS UChicago: Wx widgets was one of the 1st\
+\
+126\
+00:09:20.780 --> 00:09:22.530\
+CSDS UChicago: cross platform.\
+\
+127\
+00:09:22.560 --> 00:09:29.030\
+CSDS UChicago: Gui engine. I mean. Now you have several. Qt. Is a popular one that you may be familiar with\
+\
+128\
+00:09:29.050 --> 00:09:31.990\
+CSDS UChicago: Wx widgets is still being developed.\
+\
+129\
+00:09:32.060 --> 00:09:37.729\
+CSDS UChicago: But when we started porting things it was originally a windows only program.\
+\
+130\
+00:09:37.890 --> 00:09:42.889\
+CSDS UChicago: and then I I started the whole open sourcing of it.\
+\
+131\
+00:09:43.020 --> 00:09:51.680\
+CSDS UChicago: And then we found Ws widgets at the time had the best support in that 98% of the code is exactly the same\
+\
+132\
+00:09:52.010 --> 00:09:55.209\
+CSDS UChicago: on windows, on Mac, on Linux.\
+\
+133\
+00:09:55.470 --> 00:10:05.691\
+CSDS UChicago: So that's hugely efficient, which typically if you get into the C and the C plus plus world is not necessarily the case. Okay, so\
+\
+134\
+00:10:06.310 --> 00:10:10.810\
+CSDS UChicago: that's a little bit of history. Now, the design\
+\
+135\
+00:10:10.840 --> 00:10:13.340\
+CSDS UChicago: of geoda is on purpose.\
+\
+136\
+00:10:13.630 --> 00:10:19.529\
+CSDS UChicago: It's, you know, kind of follows the way I think about data exploration.\
+\
+137\
+00:10:20.420 --> 00:10:24.920\
+CSDS UChicago: And it starts with very simple stuff data manipulation.\
+\
+138\
+00:10:25.190 --> 00:10:28.049\
+CSDS UChicago: simple straightforward visualization\
+\
+139\
+00:10:28.250 --> 00:10:34.610\
+CSDS UChicago: of spatial data in terms of maps, different kinds of maps, some maps you won't find anywhere else.\
+\
+140\
+00:10:34.850 --> 00:10:46.540\
+CSDS UChicago: And then statistical graphs. And these are pretty standard nothing that we invented. It's all pretty standard stuff which you may already. If you took a visualization class\
+\
+141\
+00:10:46.600 --> 00:10:58.290\
+CSDS UChicago: or a statistical graphics class, you're probably familiar with that and then we get in more of the technical part. We go from the simple exploration, and we get into\
+\
+142\
+00:10:59.460 --> 00:11:03.637\
+CSDS UChicago: the notion of spatial autocorrelation, which is quite\
+\
+143\
+00:11:04.260 --> 00:11:05.440\
+CSDS UChicago: complex.\
+\
+144\
+00:11:05.730 --> 00:11:12.169\
+CSDS UChicago: but I'll deal with it. I'll try to deal with it at a fairly intuitive level. Give you skip the math.\
+\
+145\
+00:11:12.840 --> 00:11:19.420\
+CSDS UChicago: give you a sense of what it is, and some of the visualization devices that were\
+\
+146\
+00:11:19.490 --> 00:11:24.490\
+CSDS UChicago: original to geota, that some other software has it, too. Now\
+\
+147\
+00:11:24.650 --> 00:11:28.110\
+CSDS UChicago: that allow you to visualize spatial autocorrelation.\
+\
+148\
+00:11:28.250 --> 00:11:32.499\
+CSDS UChicago: And it's local version of it which allows you to detect clusters.\
+\
+149\
+00:11:32.760 --> 00:11:41.179\
+CSDS UChicago: And that's probably the most powerful aspect in an exploratory sense of geoda is the exploration of clusters.\
+\
+150\
+00:11:41.300 --> 00:11:48.029\
+CSDS UChicago: And there's 2 types of clusters. One is statistical clusters. That's where we're gonna stick to\
+\
+151\
+00:11:48.140 --> 00:12:07.069\
+CSDS UChicago: for this class. Another one is clustering more in a data science kind of concept, you know. You may be familiar with K-means or hierarchical clustering, or things of that we have all that, but also spatially constrained clustering which not too many people have, where we impose\
+\
+152\
+00:12:07.380 --> 00:12:11.579\
+CSDS UChicago: the grouping together of observations that are not only similar\
+\
+153\
+00:12:11.870 --> 00:12:18.810\
+CSDS UChicago: in a multivariate sense in terms of the multiple variables, but also connect to each other our neighbors.\
+\
+154\
+00:12:18.870 --> 00:12:22.959\
+CSDS UChicago: And that's a very complex optimization problem.\
+\
+155\
+00:12:23.340 --> 00:12:31.959\
+CSDS UChicago: And so that's in here as well. And then there's a little bit of spatial regression analysis, but it's a subset\
+\
+156\
+00:12:32.290 --> 00:12:37.960\
+CSDS UChicago: of the real deal, so to speak, which is in the the Py cell python library\
+\
+157\
+00:12:38.561 --> 00:12:46.320\
+CSDS UChicago: module Sp, rec, which I'm still working on actively. So that's kind of the progression you start by\
+\
+158\
+00:12:46.810 --> 00:13:05.349\
+CSDS UChicago: getting the data in front of you thinking, what is my research question, how can I actually visualize this? How can I find interesting patterns or patterns that I think might be interesting? And then gradually you get more and more refined\
+\
+159\
+00:13:05.390 --> 00:13:13.539\
+CSDS UChicago: into formalizing? Are these patterns for real, or are these just figments of my imagination? Because\
+\
+160\
+00:13:13.570 --> 00:13:18.059\
+CSDS UChicago: the human brain is wired to recognize patterns?\
+\
+161\
+00:13:18.720 --> 00:13:22.660\
+CSDS UChicago: So you see patterns whether they're there or not.\
+\
+162\
+00:13:23.020 --> 00:13:26.660\
+CSDS UChicago: Okay. So one thing I never want you to do\
+\
+163\
+00:13:26.920 --> 00:13:28.609\
+CSDS UChicago: is you make a map\
+\
+164\
+00:13:28.800 --> 00:13:33.590\
+CSDS UChicago: and you stand there and you say I see a cluster here\
+\
+165\
+00:13:34.300 --> 00:13:38.109\
+CSDS UChicago: you may see a cluster that doesn't mean there is a cluster.\
+\
+166\
+00:13:38.250 --> 00:13:41.059\
+CSDS UChicago: And so one of the things we're going to accomplish\
+\
+167\
+00:13:41.070 --> 00:13:47.960\
+CSDS UChicago: is get to techniques where you can actually establish. Is this something that has structure\
+\
+168\
+00:13:48.090 --> 00:13:51.740\
+CSDS UChicago: beyond what I could expect by accident.\
+\
+169\
+00:13:52.420 --> 00:13:55.730\
+CSDS UChicago: Accident will be called spatial randomness.\
+\
+170\
+00:13:56.230 --> 00:14:01.920\
+CSDS UChicago: Spatial randomness means it doesn't matter where things occur.\
+\
+171\
+00:14:02.740 --> 00:14:05.940\
+CSDS UChicago: We don't care about that. We're not interested in that.\
+\
+172\
+00:14:06.130 --> 00:14:10.090\
+CSDS UChicago: We're interested in spatial structure and spatial patterns.\
+\
+173\
+00:14:10.170 --> 00:14:15.859\
+CSDS UChicago: So it's actually a two-step process. The 1st step is identifying the patterns.\
+\
+174\
+00:14:15.880 --> 00:14:23.440\
+CSDS UChicago: which is what we're going to do in this class. The next step, which is much more complicated is explaining the patterns.\
+\
+175\
+00:14:23.550 --> 00:14:29.839\
+CSDS UChicago: Why are things where they are? So that's kind of the progression. So each of these kind of\
+\
+176\
+00:14:30.710 --> 00:14:36.320\
+CSDS UChicago: large conceptual areas corresponds to an icon on the bar.\
+\
+177\
+00:14:36.540 --> 00:14:38.790\
+CSDS UChicago: and you can. If you\
+\
+178\
+00:14:38.880 --> 00:14:40.720\
+CSDS UChicago: just wait a little second.\
+\
+179\
+00:14:40.910 --> 00:14:48.139\
+CSDS UChicago: it will pop up a little window below it, which will tell you what this particular functionality is.\
+\
+180\
+00:14:48.270 --> 00:14:51.520\
+CSDS UChicago: So this is to open files. We just did this.\
+\
+181\
+00:14:51.710 --> 00:14:53.669\
+CSDS UChicago: This is to close files.\
+\
+182\
+00:14:53.990 --> 00:14:55.969\
+CSDS UChicago: This is to save files.\
+\
+183\
+00:14:57.230 --> 00:15:02.369\
+CSDS UChicago: This is a table functionality, and we'll spend a little bit of time on that today.\
+\
+184\
+00:15:02.390 --> 00:15:06.060\
+CSDS UChicago: So every spatial data set\
+\
+185\
+00:15:06.210 --> 00:15:08.420\
+CSDS UChicago: consists of 2 things.\
+\
+186\
+00:15:09.010 --> 00:15:10.539\
+CSDS UChicago: One is the data.\
+\
+187\
+00:15:11.030 --> 00:15:17.199\
+CSDS UChicago: You know that? you know already know how to do that. You know, a spreadsheet has the data\
+\
+188\
+00:15:17.310 --> 00:15:24.859\
+CSDS UChicago: rows or observations, columns or variables? Right? What spatial data have that a spreadsheet doesn't have\
+\
+189\
+00:15:25.060 --> 00:15:27.830\
+CSDS UChicago: is the information about the location.\
+\
+190\
+00:15:28.590 --> 00:15:39.830\
+CSDS UChicago: So you have a spreadsheet with community areas. You don't know whether that community area is in the north, the South, or the West, or in the loop. Right? That information\
+\
+191\
+00:15:40.580 --> 00:15:42.669\
+CSDS UChicago: is this information.\
+\
+192\
+00:15:42.690 --> 00:15:47.249\
+CSDS UChicago: So that's a second characteristic of spatial data.\
+\
+193\
+00:15:47.710 --> 00:15:52.820\
+CSDS UChicago: Now, how do we get this? Right? So think about this for a second.\
+\
+194\
+00:15:53.410 --> 00:15:56.589\
+CSDS UChicago: How do you know where something is?\
+\
+195\
+00:15:58.380 --> 00:15:59.920\
+CSDS UChicago: Any suggestions.\
+\
+196\
+00:16:00.510 --> 00:16:02.240\
+CSDS UChicago: new measures.\
+\
+197\
+00:16:02.640 --> 00:16:07.880\
+CSDS UChicago: distance or Euclidean distance from a certain origin that you think\
+\
+198\
+00:16:09.080 --> 00:16:10.170\
+CSDS UChicago: that is\
+\
+199\
+00:16:10.320 --> 00:16:12.179\
+CSDS UChicago: excellent for a point.\
+\
+200\
+00:16:12.620 --> 00:16:17.290\
+CSDS UChicago: But how about a community area is is this kind of zone?\
+\
+201\
+00:16:22.100 --> 00:16:24.360\
+CSDS UChicago: Anybody has done\
+\
+202\
+00:16:24.370 --> 00:16:27.069\
+CSDS UChicago: analytical geometry in high school.\
+\
+203\
+00:16:29.360 --> 00:16:30.180\
+CSDS UChicago: Nope.\
+\
+204\
+00:16:31.300 --> 00:16:32.350\
+CSDS UChicago: so\
+\
+205\
+00:16:32.430 --> 00:16:39.149\
+CSDS UChicago: it's not rocket science. It's it's actually fun, you know, that's what is happening in computer graphics\
+\
+206\
+00:16:39.760 --> 00:16:45.540\
+CSDS UChicago: under the hood, you know. How do you know whether 2 lines intersect? Where do they intersect?\
+\
+207\
+00:16:46.150 --> 00:16:48.519\
+CSDS UChicago: You solve a system of equations.\
+\
+208\
+00:16:48.560 --> 00:16:51.940\
+CSDS UChicago: and that gives you the coordinates as the result.\
+\
+209\
+00:16:52.270 --> 00:17:00.550\
+CSDS UChicago: so you can pinpoint every location in 2 dimensions by the X coordinate and the Y coordinate.\
+\
+210\
+00:17:00.790 --> 00:17:06.349\
+CSDS UChicago: So those are the coordinates. So every point can be located on the map\
+\
+211\
+00:17:06.420 --> 00:17:09.130\
+CSDS UChicago: with just X and Y, that's all you need.\
+\
+212\
+00:17:09.640 --> 00:17:11.299\
+CSDS UChicago: Now, what about an area?\
+\
+213\
+00:17:11.520 --> 00:17:12.910\
+CSDS UChicago: How would you do that?\
+\
+214\
+00:17:17.109 --> 00:17:22.220\
+CSDS UChicago: Corners of a region by like line segments, and then the area would be\
+\
+215\
+00:17:22.300 --> 00:17:23.709\
+CSDS UChicago: the region within them.\
+\
+216\
+00:17:23.970 --> 00:17:30.139\
+CSDS UChicago: So I think you have 90 plus percent of the answer. So line segments is the key.\
+\
+217\
+00:17:30.620 --> 00:17:34.380\
+CSDS UChicago: So these are not actually lines.\
+\
+218\
+00:17:34.740 --> 00:17:37.879\
+CSDS UChicago: but they're approximated by lines.\
+\
+219\
+00:17:38.030 --> 00:17:40.630\
+CSDS UChicago: So you simplify\
+\
+220\
+00:17:41.150 --> 00:17:43.650\
+CSDS UChicago: the actual outline of the border\
+\
+221\
+00:17:43.880 --> 00:17:46.950\
+CSDS UChicago: by a series of line segments.\
+\
+222\
+00:17:47.340 --> 00:17:52.349\
+CSDS UChicago: and every line segment can be defined by its begin point and end point.\
+\
+223\
+00:17:53.200 --> 00:18:00.710\
+CSDS UChicago: It's a line you don't need to know. I mean, begin point and slope will get you there too. But then you don't know how far it goes.\
+\
+224\
+00:18:00.780 --> 00:18:04.539\
+CSDS UChicago: Begin point and endpoint gives you all the information you need\
+\
+225\
+00:18:04.750 --> 00:18:07.970\
+CSDS UChicago: to locate the line in 2 dimensions.\
+\
+226\
+00:18:08.210 --> 00:18:12.329\
+CSDS UChicago: So each of these areas we call them polygons\
+\
+227\
+00:18:12.480 --> 00:18:17.699\
+CSDS UChicago: are stored as sequences of coordinates of line segments.\
+\
+228\
+00:18:18.060 --> 00:18:20.479\
+CSDS UChicago: That is the spatial information.\
+\
+229\
+00:18:20.710 --> 00:18:23.779\
+CSDS UChicago: That's how we know where things are.\
+\
+230\
+00:18:24.080 --> 00:18:26.010\
+CSDS UChicago: and a spreadsheet can't do that.\
+\
+231\
+00:18:26.780 --> 00:18:30.000\
+CSDS UChicago: A spreadsheet can store X and Y.\
+\
+232\
+00:18:30.860 --> 00:18:36.869\
+CSDS UChicago: But once you get to irregular units, they don't all have the same number of segments.\
+\
+233\
+00:18:37.540 --> 00:18:39.430\
+CSDS UChicago: so it doesn't fit\
+\
+234\
+00:18:39.760 --> 00:18:42.559\
+CSDS UChicago: in the rectangular table format.\
+\
+235\
+00:18:42.670 --> 00:18:49.050\
+CSDS UChicago: It's a separate kind of data format and database speak. It's called a blob\
+\
+236\
+00:18:49.830 --> 00:18:58.749\
+CSDS UChicago: because it it has a structure. But the structure is not the same for each observation. And so the\
+\
+237\
+00:18:59.390 --> 00:19:03.670\
+CSDS UChicago: the difference between non-spatial data and spatial data\
+\
+238\
+00:19:03.690 --> 00:19:10.320\
+CSDS UChicago: is that in spatial data every observation is tied to a specific location.\
+\
+239\
+00:19:10.830 --> 00:19:17.429\
+CSDS UChicago: and that location could be a point, or in most of our examples, that location will be an area.\
+\
+240\
+00:19:18.340 --> 00:19:22.500\
+CSDS UChicago: And so then, if you manipulate the data in the table.\
+\
+241\
+00:19:22.510 --> 00:19:28.890\
+CSDS UChicago: you always know where this observation is in this case on the map.\
+\
+242\
+00:19:28.960 --> 00:19:31.199\
+CSDS UChicago: and I'll show you that in a few minutes.\
+\
+243\
+00:19:31.340 --> 00:19:39.090\
+CSDS UChicago: So the table has the actual data. If I click on. This, you see, is just like a spreadsheet.\
+\
+244\
+00:19:39.670 --> 00:19:41.599\
+CSDS UChicago: you know, variables\
+\
+245\
+00:19:41.790 --> 00:19:43.840\
+CSDS UChicago: and observations.\
+\
+246\
+00:19:44.060 --> 00:19:44.840\
+CSDS UChicago: Okay.\
+\
+247\
+00:19:45.976 --> 00:19:48.809\
+CSDS UChicago: this next group is tools.\
+\
+248\
+00:19:49.020 --> 00:19:49.909\
+CSDS UChicago: That's\
+\
+249\
+00:19:51.670 --> 00:19:57.310\
+CSDS UChicago: these are practical data wrangling tools to create spatial data.\
+\
+250\
+00:19:57.400 --> 00:20:03.160\
+CSDS UChicago: For example, if you have a table with X and Y coordinates, it will turn it into a point map.\
+\
+251\
+00:20:03.980 --> 00:20:06.150\
+CSDS UChicago: If you want a regular grid\
+\
+252\
+00:20:06.350 --> 00:20:11.129\
+CSDS UChicago: squares or rectangles, you specify the\
+\
+253\
+00:20:11.420 --> 00:20:21.600\
+CSDS UChicago: corners, how many grids you want, and it will create it for you. So those are very practical tools that you may or may not end up using.\
+\
+254\
+00:20:21.880 --> 00:20:30.280\
+CSDS UChicago: This is the Weights manager which pertains to spatial weights. Spatial weights are something very complicated. I mean, they're actually not. But\
+\
+255\
+00:20:30.300 --> 00:20:33.379\
+CSDS UChicago: it's a complex concept\
+\
+256\
+00:20:33.420 --> 00:20:37.620\
+CSDS UChicago: is the way you define the connectedness between the observations.\
+\
+257\
+00:20:38.390 --> 00:20:43.579\
+CSDS UChicago: So we'll be talking about that when we talk about spatial autocorrelation.\
+\
+258\
+00:20:43.770 --> 00:20:46.440\
+CSDS UChicago: How do you find a neighbor relation.\
+\
+259\
+00:20:46.910 --> 00:20:54.079\
+CSDS UChicago: One way in which you can define a neighbor relation is, say, 2 areas have a common boundary.\
+\
+260\
+00:20:54.250 --> 00:21:00.589\
+CSDS UChicago: or they are within a given distance of each other. You know those kinds of things define.\
+\
+261\
+00:21:00.820 --> 00:21:03.309\
+CSDS UChicago: If you wish a network structure\
+\
+262\
+00:21:03.480 --> 00:21:10.419\
+CSDS UChicago: where observations are the nodes and the connections between the nodes are the neighbor relation.\
+\
+263\
+00:21:10.570 --> 00:21:13.950\
+CSDS UChicago: and that is stored in a spatial weights. Matrix.\
+\
+264\
+00:21:14.140 --> 00:21:21.930\
+CSDS UChicago: This is the mapping functionality. We will see this in a couple of weeks. All kinds of different maps that we can make.\
+\
+265\
+00:21:22.100 --> 00:21:25.690\
+CSDS UChicago: A special map is called a cartogram.\
+\
+266\
+00:21:26.090 --> 00:21:28.890\
+CSDS UChicago: This is a way of animating\
+\
+267\
+00:21:28.900 --> 00:21:33.119\
+CSDS UChicago: the map, and this is a way of customizing the legend for a map.\
+\
+268\
+00:21:33.290 --> 00:21:36.389\
+CSDS UChicago: I don't know how much time I'm gonna have to talk about this, but\
+\
+269\
+00:21:37.040 --> 00:21:45.830\
+CSDS UChicago: I do want you to have just the basic skill set to make some decent looking maps. And then some of these maps\
+\
+270\
+00:21:45.970 --> 00:21:48.780\
+CSDS UChicago: are really what I call statistical maps.\
+\
+271\
+00:21:48.840 --> 00:21:52.579\
+CSDS UChicago: and that they are not just giving you a pretty picture.\
+\
+272\
+00:21:52.640 --> 00:21:58.550\
+CSDS UChicago: But they also are providing statistical information on the distribution of the data. So that's\
+\
+273\
+00:21:58.580 --> 00:22:00.949\
+CSDS UChicago: something that Geoda has\
+\
+274\
+00:22:01.100 --> 00:22:07.210\
+CSDS UChicago: and much other. I'm I'm standard mapping software typically doesn't have this.\
+\
+275\
+00:22:07.540 --> 00:22:14.540\
+CSDS UChicago: Then we go into what is called Eda or exploratory data analysis, which is visualization.\
+\
+276\
+00:22:14.580 --> 00:22:22.609\
+CSDS UChicago: That's a big part of data science. We see all the classic graphs, histograms, box plots\
+\
+277\
+00:22:23.398 --> 00:22:27.229\
+CSDS UChicago: scatter, plot with regression, line, scatter, plot, matrix.\
+\
+278\
+00:22:27.270 --> 00:22:31.020\
+CSDS UChicago: bubble chart, 3D scatter plot.\
+\
+279\
+00:22:31.932 --> 00:22:34.010\
+CSDS UChicago: parallel, coordinate plot.\
+\
+280\
+00:22:34.040 --> 00:22:35.580\
+CSDS UChicago: conditional plot.\
+\
+281\
+00:22:36.250 --> 00:22:42.770\
+CSDS UChicago: You know all these things that allow you to visualize multivariate data more than one variable\
+\
+282\
+00:22:43.180 --> 00:22:46.089\
+CSDS UChicago: who's familiar with parallel coordinate plots.\
+\
+283\
+00:22:48.260 --> 00:22:50.340\
+CSDS UChicago: So that's the usual.\
+\
+284\
+00:22:50.937 --> 00:22:55.980\
+CSDS UChicago: So I I will talk about it because it's a very powerful tool.\
+\
+285\
+00:22:56.812 --> 00:23:01.059\
+CSDS UChicago: This is the cluster analysis I told you about\
+\
+286\
+00:23:01.130 --> 00:23:05.660\
+CSDS UChicago: K-means. Hierarchical, clustering, spatially constrained clustering.\
+\
+287\
+00:23:05.870 --> 00:23:07.579\
+CSDS UChicago: This is a\
+\
+288\
+00:23:07.730 --> 00:23:10.349\
+CSDS UChicago: global spatial autocorrelation.\
+\
+289\
+00:23:10.370 --> 00:23:14.429\
+CSDS UChicago: characterizing a whole map with one coefficient.\
+\
+290\
+00:23:14.600 --> 00:23:16.624\
+CSDS UChicago: And this is\
+\
+291\
+00:23:19.230 --> 00:23:24.600\
+CSDS UChicago: another form of global spatial autocorrelation. The corelogram. This is local\
+\
+292\
+00:23:24.980 --> 00:23:38.070\
+CSDS UChicago: spatial correlation or cluster maps. This will be the main focus of our analysis is how to create these maps, how to interpret them, how to identify spatial clusters in variables.\
+\
+293\
+00:23:38.090 --> 00:23:40.260\
+CSDS UChicago: And of course, then the next step is.\
+\
+294\
+00:23:41.160 --> 00:23:43.860\
+CSDS UChicago: if there are clusters, why are they there?\
+\
+295\
+00:23:44.140 --> 00:23:46.090\
+CSDS UChicago: Why are they where they are\
+\
+296\
+00:23:46.260 --> 00:23:50.600\
+CSDS UChicago: and we won't go there. That's what you do. In spatial modeling.\
+\
+297\
+00:23:50.660 --> 00:23:52.580\
+CSDS UChicago: for example, you find\
+\
+298\
+00:23:52.850 --> 00:23:58.470\
+CSDS UChicago: that all the high poverty areas are in the same part of the city\
+\
+299\
+00:23:59.000 --> 00:24:03.069\
+CSDS UChicago: in a spatially random world. That should not be the case.\
+\
+300\
+00:24:03.640 --> 00:24:13.430\
+CSDS UChicago: You know all the people who vote for a particular candidate live in the same part of the country in a spatially random world. That should not be the case.\
+\
+301\
+00:24:13.450 --> 00:24:17.350\
+CSDS UChicago: It shouldn't matter where you are how you vote.\
+\
+302\
+00:24:17.830 --> 00:24:20.100\
+CSDS UChicago: In reality it does\
+\
+303\
+00:24:20.280 --> 00:24:21.660\
+CSDS UChicago: very much so.\
+\
+304\
+00:24:21.790 --> 00:24:29.390\
+CSDS UChicago: So the 1st step is 1st identifying those clusters, and then the next step is, why are they there?\
+\
+305\
+00:24:29.430 --> 00:24:31.860\
+CSDS UChicago: Why isn't that the same everywhere?\
+\
+306\
+00:24:32.380 --> 00:24:37.310\
+CSDS UChicago: And then we have some time things and the regression. We won't really talk about that.\
+\
+307\
+00:24:37.480 --> 00:24:39.889\
+CSDS UChicago: So any questions at this point.}

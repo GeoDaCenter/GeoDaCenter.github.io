@@ -1,0 +1,2144 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Spatial Analysis with GeoDa \'97 Intro Demo\
+Prof. Luc Anselin\
+Oct 2, 2024\
+\
+517\
+00:41:43.630 --> 00:41:48.300\
+CSDS UChicago: Okay? So I'm gonna run a little demo here\
+\
+518\
+00:41:48.630 --> 00:41:53.019\
+CSDS UChicago: and show you some basic. We'll see how far I get. And\
+\
+519\
+00:41:53.370 --> 00:41:55.349\
+CSDS UChicago: when I run out of steam.\
+\
+520\
+00:41:55.690 --> 00:42:00.440\
+CSDS UChicago: But so what I'm gonna do is basically open a data set.\
+\
+521\
+00:42:00.670 --> 00:42:01.990\
+CSDS UChicago: save it\
+\
+522\
+00:42:02.440 --> 00:42:06.830\
+CSDS UChicago: to my working directory, which I have set up\
+\
+523\
+00:42:06.930 --> 00:42:09.500\
+CSDS UChicago: and then open it again\
+\
+524\
+00:42:10.020 --> 00:42:11.550\
+CSDS UChicago: and do some things with it.\
+\
+525\
+00:42:12.350 --> 00:42:16.370\
+CSDS UChicago: and mostly non spatial things. So we're gonna\
+\
+526\
+00:42:17.200 --> 00:42:23.279\
+CSDS UChicago: load the community area data set. So again, I have to.\
+\
+527\
+00:42:23.980 --> 00:42:26.649\
+CSDS UChicago: I I did. I know I did this too fast.\
+\
+528\
+00:42:26.740 --> 00:42:28.520\
+CSDS UChicago: You click on this one\
+\
+529\
+00:42:28.620 --> 00:42:30.290\
+CSDS UChicago: to open the file.\
+\
+530\
+00:42:30.540 --> 00:42:32.879\
+CSDS UChicago: and then you go to sample data\
+\
+531\
+00:42:33.020 --> 00:42:34.370\
+CSDS UChicago: and select\
+\
+532\
+00:42:34.560 --> 00:42:35.540\
+CSDS UChicago: the one.\
+\
+533\
+00:42:35.660 --> 00:42:36.860\
+CSDS UChicago: the top one.\
+\
+534\
+00:42:37.060 --> 00:42:38.650\
+CSDS UChicago: And it's here. Right?\
+\
+535\
+00:42:43.810 --> 00:42:46.484\
+CSDS UChicago: So now we're going to\
+\
+536\
+00:42:47.590 --> 00:42:49.680\
+CSDS UChicago: Go to the file menu\
+\
+537\
+00:42:49.830 --> 00:42:50.930\
+CSDS UChicago: up here\
+\
+538\
+00:42:51.700 --> 00:42:55.309\
+CSDS UChicago: in windows. It's a little bit different, but it's basically the same idea.\
+\
+539\
+00:42:55.680 --> 00:42:57.750\
+CSDS UChicago: And we go to save as\
+\
+540\
+00:42:59.750 --> 00:43:05.329\
+CSDS UChicago: so you go file, save as so, in other words, we're going to save\
+\
+541\
+00:43:05.500 --> 00:43:06.640\
+CSDS UChicago: this\
+\
+542\
+00:43:06.770 --> 00:43:10.590\
+CSDS UChicago: data set that is baked into geoda.\
+\
+543\
+00:43:10.870 --> 00:43:14.949\
+CSDS UChicago: which you can play with as much as you want. But you can't save anything.\
+\
+544\
+00:43:14.990 --> 00:43:25.239\
+CSDS UChicago: So we're gonna make a copy, basically and put it on our own working directory. So then, whatever we change, we can save.\
+\
+545\
+00:43:25.310 --> 00:43:28.079\
+CSDS UChicago: and it will be kept for later analysis. Right?\
+\
+546\
+00:43:28.530 --> 00:43:32.150\
+CSDS UChicago: So I'm going to save this as and you get a dialog.\
+\
+547\
+00:43:33.460 --> 00:43:38.859\
+CSDS UChicago: and the dialog gives you the different types of formats that you can use.\
+\
+548\
+00:43:39.360 --> 00:43:40.330\
+CSDS UChicago: So\
+\
+549\
+00:43:41.500 --> 00:43:43.840\
+CSDS UChicago: I know this can be a little overwhelming.\
+\
+550\
+00:43:43.940 --> 00:43:47.590\
+CSDS UChicago: but these are all the formats that geoda supports.\
+\
+551\
+00:43:47.870 --> 00:43:49.660\
+CSDS UChicago: Some of these are\
+\
+552\
+00:43:49.860 --> 00:43:53.520\
+CSDS UChicago: what I call modern, like geoparquet.\
+\
+553\
+00:43:53.670 --> 00:43:59.900\
+CSDS UChicago: It's very efficient. Specifically for larger data sets. It's overkill for this stuff.\
+\
+554\
+00:44:00.070 --> 00:44:04.520\
+CSDS UChicago: What we will be using is Esri shapefile.\
+\
+555\
+00:44:05.070 --> 00:44:12.929\
+CSDS UChicago: And then, as we Shapefile is a standard used by the biggest commercial Gis Company.\
+\
+556\
+00:44:13.160 --> 00:44:14.309\
+CSDS UChicago: which is\
+\
+557\
+00:44:15.160 --> 00:44:16.720\
+CSDS UChicago: Esri.\
+\
+558\
+00:44:16.730 --> 00:44:20.320\
+CSDS UChicago: you know. I mean, some people would say, Google is bigger. Well.\
+\
+559\
+00:44:20.430 --> 00:44:25.329\
+CSDS UChicago: Google is not really a Gis company. But part of Google is. And\
+\
+560\
+00:44:25.430 --> 00:44:31.349\
+CSDS UChicago: you know, Microsoft, part of Microsoft is and and apple same thing. But\
+\
+561\
+00:44:31.420 --> 00:44:34.094\
+CSDS UChicago: Esri's been around the longest and\
+\
+562\
+00:44:34.660 --> 00:44:42.370\
+CSDS UChicago: their format is not the greatest, but it's very common. So we're gonna save this.\
+\
+563\
+00:44:43.000 --> 00:44:45.309\
+CSDS UChicago: So this is the format we pick.\
+\
+564\
+00:44:45.480 --> 00:44:48.799\
+CSDS UChicago: And then we pick a destination.\
+\
+565\
+00:44:49.190 --> 00:44:51.102\
+CSDS UChicago: and I'm gonna pick\
+\
+566\
+00:44:52.700 --> 00:44:56.080\
+CSDS UChicago: I set this up ahead of time on my desktop.\
+\
+567\
+00:44:56.180 --> 00:44:59.090\
+CSDS UChicago: I have this folder here, called Lab.\
+\
+568\
+00:45:00.050 --> 00:45:02.930\
+CSDS UChicago: and I'm gonna give it a name, you know.\
+\
+569\
+00:45:03.020 --> 00:45:08.560\
+CSDS UChicago: and I'm just gonna call call it Chicago one, because I already have Chicago in there.\
+\
+570\
+00:45:08.930 --> 00:45:14.319\
+CSDS UChicago: So you see this Chicago one does dot shp.\
+\
+571\
+00:45:14.980 --> 00:45:17.159\
+CSDS UChicago: and then you click on, save.\
+\
+572\
+00:45:17.290 --> 00:45:18.560\
+CSDS UChicago: And then\
+\
+573\
+00:45:18.630 --> 00:45:20.490\
+CSDS UChicago: you have something.\
+\
+574\
+00:45:20.650 --> 00:45:23.280\
+CSDS UChicago: There's gonna be a mystery to most of you.\
+\
+575\
+00:45:23.390 --> 00:45:25.560\
+CSDS UChicago: But it's very important.\
+\
+576\
+00:45:25.720 --> 00:45:27.559\
+CSDS UChicago: and it's this thing here.\
+\
+577\
+00:45:28.080 --> 00:45:29.300\
+CSDS UChicago: Anybody\
+\
+578\
+00:45:30.040 --> 00:45:33.860\
+CSDS UChicago: knows know what Crs stands for.\
+\
+579\
+00:45:38.140 --> 00:45:40.160\
+CSDS UChicago: I mean, there was somebody who had done\
+\
+580\
+00:45:40.420 --> 00:45:42.399\
+CSDS UChicago: human geography. Ap.\
+\
+581\
+00:45:43.150 --> 00:45:44.340\
+CSDS UChicago: No idea.\
+\
+582\
+00:45:46.540 --> 00:45:48.649\
+CSDS UChicago: Okay, let me ask another question.\
+\
+583\
+00:45:49.190 --> 00:45:50.860\
+CSDS UChicago: is the earth flat?\
+\
+584\
+00:45:52.150 --> 00:45:52.930\
+CSDS UChicago: No.\
+\
+585\
+00:45:53.220 --> 00:45:54.830\
+CSDS UChicago: Is a map flat?\
+\
+586\
+00:45:55.570 --> 00:45:56.360\
+CSDS UChicago: Yes.\
+\
+587\
+00:45:57.030 --> 00:46:00.259\
+CSDS UChicago: How do you get to earth? From non-flat to flat?\
+\
+588\
+00:46:01.560 --> 00:46:03.379\
+CSDS UChicago: A projection? Yeah.\
+\
+589\
+00:46:04.250 --> 00:46:07.649\
+CSDS UChicago: Crs stands for coordinate reference system.\
+\
+590\
+00:46:08.170 --> 00:46:11.129\
+CSDS UChicago: It has all the information that you need\
+\
+591\
+00:46:11.160 --> 00:46:14.569\
+CSDS UChicago: to go from the non-flat earth to the flat earth.\
+\
+592\
+00:46:15.080 --> 00:46:17.640\
+CSDS UChicago: And there's 2 components to this.\
+\
+593\
+00:46:17.780 --> 00:46:21.599\
+CSDS UChicago: One is a model for the earth, which is called a datum.\
+\
+594\
+00:46:21.800 --> 00:46:27.430\
+CSDS UChicago: and the other one is the actual projection which is the mathematical transformation\
+\
+595\
+00:46:27.630 --> 00:46:30.670\
+CSDS UChicago: that gets you from degrees.\
+\
+596\
+00:46:31.100 --> 00:46:35.520\
+CSDS UChicago: which is in reference in a 3D. System to the origin\
+\
+597\
+00:46:35.760 --> 00:46:40.059\
+CSDS UChicago: degrees East, and you know, east and west and north and south\
+\
+598\
+00:46:40.470 --> 00:46:41.570\
+CSDS UChicago: to\
+\
+599\
+00:46:41.700 --> 00:46:43.969\
+CSDS UChicago: XY. Coordinates in a plane\
+\
+600\
+00:46:44.870 --> 00:46:47.649\
+CSDS UChicago: because your screen is a plane.\
+\
+601\
+00:46:47.710 --> 00:46:50.100\
+CSDS UChicago: A paper map is a plane.\
+\
+602\
+00:46:50.110 --> 00:46:51.880\
+CSDS UChicago: so I won't\
+\
+603\
+00:46:52.340 --> 00:46:55.190\
+CSDS UChicago: talk about it much. I'll talk about it a little bit.\
+\
+604\
+00:46:55.370 --> 00:47:02.890\
+CSDS UChicago: If you want to know about it, it's a fascinating topic. It's a mathematically very challenging topic.\
+\
+605\
+00:47:03.220 --> 00:47:04.430\
+CSDS UChicago: because\
+\
+606\
+00:47:04.740 --> 00:47:07.419\
+CSDS UChicago: there's no way to do it correctly.\
+\
+607\
+00:47:08.000 --> 00:47:10.789\
+CSDS UChicago: There's many ways to do it. But\
+\
+608\
+00:47:11.403 --> 00:47:15.839\
+CSDS UChicago: the example I give is, think about a much simpler case\
+\
+609\
+00:47:15.870 --> 00:47:21.630\
+CSDS UChicago: where you go from 2D. To one d. So let's say you have a scatter. Plot points\
+\
+610\
+00:47:21.680 --> 00:47:23.930\
+CSDS UChicago: X-axis, y-axis.\
+\
+611\
+00:47:24.110 --> 00:47:26.169\
+CSDS UChicago: the x-axis is one d.\
+\
+612\
+00:47:27.300 --> 00:47:32.650\
+CSDS UChicago: How do you go from 2D. To one d. You drop the points, you project them right.\
+\
+613\
+00:47:33.040 --> 00:47:33.970\
+CSDS UChicago: but\
+\
+614\
+00:47:34.140 --> 00:47:37.829\
+CSDS UChicago: on the one d. You have no idea what height they were.\
+\
+615\
+00:47:38.390 --> 00:47:40.909\
+CSDS UChicago: You only know one dimension.\
+\
+616\
+00:47:41.070 --> 00:47:43.039\
+CSDS UChicago: so you lose information\
+\
+617\
+00:47:43.320 --> 00:47:44.660\
+CSDS UChicago: the same way.\
+\
+618\
+00:47:44.910 --> 00:47:50.950\
+CSDS UChicago: If you go from a near sphere, it's not a it's more like a pair the earth\
+\
+619\
+00:47:51.230 --> 00:47:55.310\
+CSDS UChicago: to a flat. 2D. You lose information.\
+\
+620\
+00:47:55.640 --> 00:48:03.940\
+CSDS UChicago: And so there are multiple characteristics of spatial objects like distance, area, direction, shape.\
+\
+621\
+00:48:04.390 --> 00:48:06.090\
+CSDS UChicago: and one of those\
+\
+622\
+00:48:06.400 --> 00:48:07.640\
+CSDS UChicago: has to go.\
+\
+623\
+00:48:08.140 --> 00:48:10.880\
+CSDS UChicago: And so some maps respect\
+\
+624\
+00:48:11.020 --> 00:48:13.230\
+CSDS UChicago: area, some don't.\
+\
+625\
+00:48:13.510 --> 00:48:15.760\
+CSDS UChicago: Some of the most common maps.\
+\
+626\
+00:48:16.318 --> 00:48:18.110\
+CSDS UChicago: You must have seen. This\
+\
+627\
+00:48:19.250 --> 00:48:22.720\
+CSDS UChicago: Greenland is about the size of Africa.\
+\
+628\
+00:48:23.520 --> 00:48:25.939\
+CSDS UChicago: Is Greenland the size of Africa.\
+\
+629\
+00:48:26.500 --> 00:48:35.220\
+CSDS UChicago: No right? How come it looks that way because of the projection. That's a projection that does not respect area.\
+\
+630\
+00:48:35.780 --> 00:48:38.260\
+CSDS UChicago: Other projections do not respect\
+\
+631\
+00:48:38.560 --> 00:48:39.610\
+CSDS UChicago: direction.\
+\
+632\
+00:48:40.220 --> 00:48:46.619\
+CSDS UChicago: A lot of the older maps were designed to find your way, so they're very careful about direction.\
+\
+633\
+00:48:46.630 --> 00:48:50.950\
+CSDS UChicago: but distance may not be so precise, and and so on. So\
+\
+634\
+00:48:51.070 --> 00:48:53.520\
+CSDS UChicago: there's more than a thousand projections.\
+\
+635\
+00:48:54.300 --> 00:48:56.470\
+CSDS UChicago: different ways of doing this. So\
+\
+636\
+00:48:56.490 --> 00:49:00.060\
+CSDS UChicago: I could spend a whole class just talking about projections, you know.\
+\
+637\
+00:49:00.330 --> 00:49:02.370\
+CSDS UChicago: But the one thing to know\
+\
+638\
+00:49:02.800 --> 00:49:06.890\
+CSDS UChicago: is, whenever you see this long left.\
+\
+639\
+00:49:08.270 --> 00:49:09.430\
+CSDS UChicago: you have\
+\
+640\
+00:49:09.630 --> 00:49:11.210\
+CSDS UChicago: not a projection.\
+\
+641\
+00:49:11.280 --> 00:49:13.469\
+CSDS UChicago: you have decimal degrees.\
+\
+642\
+00:49:14.170 --> 00:49:16.139\
+CSDS UChicago: Decimal degrees\
+\
+643\
+00:49:16.220 --> 00:49:19.559\
+CSDS UChicago: are coordinates in 3D. Not in 2D.\
+\
+644\
+00:49:20.100 --> 00:49:23.779\
+CSDS UChicago: Decimal degrees. Are not distance units.\
+\
+645\
+00:49:24.410 --> 00:49:27.889\
+CSDS UChicago: So keep that in mind. We'll talk about this later.\
+\
+646\
+00:49:28.250 --> 00:49:46.020\
+CSDS UChicago: If it's projected, it's not going to be decimal degrees. It's going to be feet or meters, or kilometers, or something like that, and if I have time I'll I'll show you an example. I don't know if I'm going to get to it. But let's let's just leave things as they are. We say, okay.\
+\
+647\
+00:49:46.220 --> 00:49:48.040\
+CSDS UChicago: it's saved.\
+\
+648\
+00:49:48.140 --> 00:49:49.670\
+CSDS UChicago: I'm going to get rid of it\
+\
+649\
+00:49:50.040 --> 00:49:54.049\
+CSDS UChicago: with the little cross, and I'm gonna look in my lab directory\
+\
+650\
+00:49:54.820 --> 00:49:56.710\
+CSDS UChicago: and in my lab directory.\
+\
+651\
+00:49:57.200 --> 00:49:59.270\
+CSDS UChicago: Remember Chicago one\
+\
+652\
+00:49:59.470 --> 00:50:03.010\
+CSDS UChicago: and you saw I don't. This is not very large.\
+\
+653\
+00:50:03.920 --> 00:50:05.740\
+CSDS UChicago: Here's Chicago, one\
+\
+654\
+00:50:06.010 --> 00:50:07.230\
+CSDS UChicago: Shp.\
+\
+655\
+00:50:09.490 --> 00:50:11.780\
+CSDS UChicago: but there's 4 Chicago ones.\
+\
+656\
+00:50:13.160 --> 00:50:14.300\
+CSDS UChicago: and this\
+\
+657\
+00:50:14.310 --> 00:50:18.080\
+CSDS UChicago: for Newbies is always a huge point of confusion.\
+\
+658\
+00:50:18.780 --> 00:50:24.109\
+CSDS UChicago: It's referred to as a shapefile, but it's actually 4 files.\
+\
+659\
+00:50:24.450 --> 00:50:27.990\
+CSDS UChicago: And those 4 files always have to be together.\
+\
+660\
+00:50:28.160 --> 00:50:31.009\
+CSDS UChicago: They all have the same name, Chicago. One\
+\
+661\
+00:50:31.190 --> 00:50:36.809\
+CSDS UChicago: one is Shp, one is Shx, one is dbf, one is Prj.\
+\
+662\
+00:50:37.630 --> 00:50:42.529\
+CSDS UChicago: just for our purposes. Remember, always keep those 4 together.\
+\
+663\
+00:50:43.050 --> 00:50:48.289\
+CSDS UChicago: Okay, some of the more modern file formats are just one file.\
+\
+664\
+00:50:48.440 --> 00:50:52.759\
+CSDS UChicago: But for legacy reasons, we use shapefiles\
+\
+665\
+00:50:53.180 --> 00:51:01.540\
+CSDS UChicago: because they're so common. So now I'm going to show you how to load a file from your local directory.\
+\
+666\
+00:51:02.010 --> 00:51:04.629\
+CSDS UChicago: Same thing. We open the file.\
+\
+667\
+00:51:04.800 --> 00:51:07.030\
+CSDS UChicago: This is the little folder icon.\
+\
+668\
+00:51:09.000 --> 00:51:11.519\
+CSDS UChicago: and then I'm gonna grab\
+\
+669\
+00:51:11.760 --> 00:51:14.260\
+CSDS UChicago: this Chicago one shapefile\
+\
+670\
+00:51:15.930 --> 00:51:17.930\
+CSDS UChicago: and drop\
+\
+671\
+00:51:18.150 --> 00:51:21.150\
+CSDS UChicago: it in the drop files here box.\
+\
+672\
+00:51:22.300 --> 00:51:26.170\
+CSDS UChicago: and the moment I drop it. I get my green map again.\
+\
+673\
+00:51:27.710 --> 00:51:34.069\
+CSDS UChicago: So now we're working with the shapefile that is on our local directory.\
+\
+674\
+00:51:34.200 --> 00:51:37.646\
+CSDS UChicago: So now, if we do something with it. We\
+\
+675\
+00:51:44.290 --> 00:51:45.439\
+CSDS UChicago: we can save it.\
+\
+676\
+00:51:47.970 --> 00:51:49.003\
+CSDS UChicago: Okay. Now,\
+\
+677\
+00:51:50.060 --> 00:51:52.380\
+CSDS UChicago: going to show you something else.\
+\
+678\
+00:51:52.480 --> 00:51:56.279\
+CSDS UChicago: Let's go to this file\
+\
+679\
+00:51:56.650 --> 00:51:59.790\
+CSDS UChicago: and make it a little bigger.\
+\
+680\
+00:52:00.250 --> 00:52:02.930\
+CSDS UChicago: and then you right click on the map.\
+\
+681\
+00:52:03.340 --> 00:52:05.489\
+CSDS UChicago: That gives you the options\
+\
+682\
+00:52:05.720 --> 00:52:07.090\
+CSDS UChicago: with a map menu.\
+\
+683\
+00:52:07.390 --> 00:52:09.779\
+CSDS UChicago: So it's a list of different options\
+\
+684\
+00:52:10.310 --> 00:52:11.360\
+CSDS UChicago: and\
+\
+685\
+00:52:11.420 --> 00:52:13.659\
+CSDS UChicago: we go to shape centers.\
+\
+686\
+00:52:14.430 --> 00:52:15.890\
+CSDS UChicago: It's kind of in the middle.\
+\
+687\
+00:52:16.570 --> 00:52:18.490\
+CSDS UChicago: And then we're gonna do\
+\
+688\
+00:52:18.530 --> 00:52:21.000\
+CSDS UChicago: add mean centers to table.\
+\
+689\
+00:52:21.840 --> 00:52:26.979\
+CSDS UChicago: So what are the mean centers? That kind of the center point of each polygon.\
+\
+690\
+00:52:27.090 --> 00:52:30.580\
+CSDS UChicago: And we're going to add these as new variables to our table.\
+\
+691\
+00:52:31.820 --> 00:52:36.790\
+CSDS UChicago: So if you select this, it's gonna ask you, what do you want to call it.\
+\
+692\
+00:52:37.150 --> 00:52:41.649\
+CSDS UChicago: and we're gonna say, leave it as is coordinate X and coordinate. Y,\
+\
+693\
+00:52:42.100 --> 00:52:43.220\
+CSDS UChicago: okay.\
+\
+694\
+00:52:44.220 --> 00:52:49.569\
+CSDS UChicago: now, we're going to open the table, just click on the little table, icon.\
+\
+695\
+00:52:50.800 --> 00:52:53.400\
+CSDS UChicago: and if you move all the way to the right.\
+\
+696\
+00:52:53.900 --> 00:52:55.020\
+CSDS UChicago: you see\
+\
+697\
+00:52:55.190 --> 00:52:57.600\
+CSDS UChicago: coordinate X and coordinate Y,\
+\
+698\
+00:52:58.060 --> 00:53:00.209\
+CSDS UChicago: and this is very telling.\
+\
+699\
+00:53:03.310 --> 00:53:05.249\
+CSDS UChicago: you could tell right away.\
+\
+700\
+00:53:05.570 --> 00:53:11.989\
+CSDS UChicago: I mean, I can tell right away. But you will be soon, too, that these are decimal degrees\
+\
+701\
+00:53:12.860 --> 00:53:14.550\
+CSDS UChicago: in the Us.\
+\
+702\
+00:53:14.640 --> 00:53:15.650\
+CSDS UChicago: The\
+\
+703\
+00:53:16.130 --> 00:53:18.590\
+CSDS UChicago: longitude is negative.\
+\
+704\
+00:53:18.990 --> 00:53:22.169\
+CSDS UChicago: because it's west of the Greenwich meringue.\
+\
+705\
+00:53:22.590 --> 00:53:27.920\
+CSDS UChicago: For historical reasons. 0 runs smack through London\
+\
+706\
+00:53:28.070 --> 00:53:31.610\
+CSDS UChicago: in Greenwich. There is actually a post there. I've seen it.\
+\
+707\
+00:53:32.050 --> 00:53:43.840\
+CSDS UChicago: That's the start of everything. So everything to the east of that has positive numbers. Everything to the west of that has negative numbers, and of course, halfway they meet.\
+\
+708\
+00:53:44.090 --> 00:53:48.130\
+CSDS UChicago: and then the last one is 1 80. That's it, right.\
+\
+709\
+00:53:48.250 --> 00:53:52.830\
+CSDS UChicago: and then the other ones. It's a positive number, because the Us.\
+\
+710\
+00:53:52.850 --> 00:53:56.610\
+CSDS UChicago: And Chicago is north of the equator.\
+\
+711\
+00:53:56.620 --> 00:54:01.750\
+CSDS UChicago: The ones south of the Equator, like New Zealand or Australia, are negative.\
+\
+712\
+00:54:03.030 --> 00:54:07.190\
+CSDS UChicago: And then, if you're a country that straddles the equator, you have both\
+\
+713\
+00:54:08.150 --> 00:54:15.960\
+CSDS UChicago: the. So we have this. Now I'm gonna show you a form of format conversion.\
+\
+714\
+00:54:16.300 --> 00:54:21.910\
+CSDS UChicago: and I use this one on purpose. So we go back to our file.\
+\
+715\
+00:54:22.160 --> 00:54:24.329\
+CSDS UChicago: and we're going to do save S.\
+\
+716\
+00:54:25.580 --> 00:54:26.950\
+CSDS UChicago: But no.\
+\
+717\
+00:54:27.140 --> 00:54:30.879\
+CSDS UChicago: in the formats. We go all the way down here\
+\
+718\
+00:54:30.890 --> 00:54:35.180\
+CSDS UChicago: and go to comma separated value. Csv.\
+\
+719\
+00:54:36.150 --> 00:54:38.360\
+CSDS UChicago: Now, what's wrong with that?\
+\
+720\
+00:54:41.510 --> 00:54:44.280\
+CSDS UChicago: In a way, I'm making a huge mistake.\
+\
+721\
+00:54:44.690 --> 00:54:46.580\
+CSDS UChicago: What mistake am I making?\
+\
+722\
+00:54:47.550 --> 00:54:49.999\
+CSDS UChicago: Csv is just a table\
+\
+723\
+00:54:51.150 --> 00:54:52.820\
+CSDS UChicago: is just a spreadsheet.\
+\
+724\
+00:54:53.150 --> 00:54:56.030\
+CSDS UChicago: How am I getting my polygons in a spreadsheet?\
+\
+725\
+00:54:57.590 --> 00:54:58.700\
+CSDS UChicago: I'm not.\
+\
+726\
+00:54:58.960 --> 00:55:00.000\
+CSDS UChicago: They're gone.\
+\
+727\
+00:55:01.130 --> 00:55:02.899\
+CSDS UChicago: But what I do have\
+\
+728\
+00:55:03.130 --> 00:55:06.829\
+CSDS UChicago: is what I just created X and y coordinates.\
+\
+729\
+00:55:06.870 --> 00:55:08.689\
+CSDS UChicago: So we're gonna just\
+\
+730\
+00:55:08.900 --> 00:55:11.480\
+CSDS UChicago: say, Okay, oops. Sorry.\
+\
+731\
+00:55:12.310 --> 00:55:13.470\
+CSDS UChicago: So I pick\
+\
+732\
+00:55:13.500 --> 00:55:15.130\
+CSDS UChicago: a file name.\
+\
+733\
+00:55:15.390 --> 00:55:17.799\
+CSDS UChicago: I'm gonna call this Chicago\
+\
+734\
+00:55:18.330 --> 00:55:19.210\
+CSDS UChicago: of\
+\
+735\
+00:55:20.600 --> 00:55:21.520\
+CSDS UChicago: 2,\
+\
+736\
+00:55:22.130 --> 00:55:23.799\
+CSDS UChicago: you call it whatever you want\
+\
+737\
+00:55:24.510 --> 00:55:25.850\
+CSDS UChicago: and save it.\
+\
+738\
+00:55:26.100 --> 00:55:31.999\
+CSDS UChicago: Then. Okay, it's gonna tell me, oh, you're in trouble. Don't do this. I'm gonna do it, anyway.\
+\
+739\
+00:55:32.330 --> 00:55:34.520\
+CSDS UChicago: And here we go right.\
+\
+740\
+00:55:34.810 --> 00:55:37.229\
+CSDS UChicago: So now I'm going to close this.\
+\
+741\
+00:55:38.650 --> 00:55:40.879\
+CSDS UChicago: and I don't want to save my data.\
+\
+742\
+00:55:41.040 --> 00:55:44.469\
+CSDS UChicago: You can save it if you want to. I don't. I don't want to.\
+\
+743\
+00:55:45.250 --> 00:55:47.889\
+CSDS UChicago: And now we do the same thing again.\
+\
+744\
+00:55:48.100 --> 00:55:50.339\
+CSDS UChicago: Open our little file folder.\
+\
+745\
+00:55:50.520 --> 00:55:52.939\
+CSDS UChicago: And now the file that we grab\
+\
+746\
+00:55:53.260 --> 00:55:55.779\
+CSDS UChicago: is not the shape one\
+\
+747\
+00:55:56.130 --> 00:55:59.499\
+CSDS UChicago: but Chicago to Csv.\
+\
+748\
+00:56:00.160 --> 00:56:03.600\
+CSDS UChicago: so that's just a table as you as somebody mentioned.\
+\
+749\
+00:56:03.610 --> 00:56:05.350\
+CSDS UChicago: So I'm pulling that in.\
+\
+750\
+00:56:05.980 --> 00:56:07.000\
+CSDS UChicago: and\
+\
+751\
+00:56:07.200 --> 00:56:10.130\
+CSDS UChicago: it's possible to load it just as a table.\
+\
+752\
+00:56:10.350 --> 00:56:15.629\
+CSDS UChicago: But because we have X and Y coordinates. We can load it as a point map.\
+\
+753\
+00:56:16.190 --> 00:56:19.550\
+CSDS UChicago: And you see here it says, optional\
+\
+754\
+00:56:19.750 --> 00:56:26.129\
+CSDS UChicago: longitude. Yes, what is longitude? Longitude is way down here\
+\
+755\
+00:56:26.180 --> 00:56:27.730\
+CSDS UChicago: coordinate X.\
+\
+756\
+00:56:29.100 --> 00:56:31.370\
+CSDS UChicago: So you pick coordinate X,\
+\
+757\
+00:56:31.990 --> 00:56:34.260\
+CSDS UChicago: you pick coordinate Y,\
+\
+758\
+00:56:38.730 --> 00:56:40.440\
+CSDS UChicago: and then we say, Okay.\
+\
+759\
+00:56:40.510 --> 00:56:41.879\
+CSDS UChicago: and what's going to happen?\
+\
+760\
+00:56:43.950 --> 00:56:45.099\
+CSDS UChicago: You get a map.\
+\
+761\
+00:56:47.600 --> 00:56:48.919\
+CSDS UChicago: This is a map\
+\
+762\
+00:56:48.970 --> 00:56:50.529\
+CSDS UChicago: of the points\
+\
+763\
+00:56:52.150 --> 00:56:53.909\
+CSDS UChicago: that are in the middle\
+\
+764\
+00:56:54.450 --> 00:56:58.609\
+CSDS UChicago: of the Polygons. Now this is not perfect.\
+\
+765\
+00:56:58.710 --> 00:57:05.370\
+CSDS UChicago: If you have a nice rectangular or convex polygon, the point will be in the middle.\
+\
+766\
+00:57:05.900 --> 00:57:08.119\
+CSDS UChicago: If you have a weird polygon\
+\
+767\
+00:57:08.250 --> 00:57:09.200\
+CSDS UChicago: like\
+\
+768\
+00:57:09.530 --> 00:57:13.619\
+CSDS UChicago: those of you who don't know Chicago O'hare, it's the airport.\
+\
+769\
+00:57:13.900 --> 00:57:16.489\
+CSDS UChicago: Is that weird strip at the top.\
+\
+770\
+00:57:18.500 --> 00:57:20.900\
+CSDS UChicago: I'm not a hundred percent sure. But\
+\
+771\
+00:57:20.990 --> 00:57:23.839\
+CSDS UChicago: it doesn't look like the center at all. Right\
+\
+772\
+00:57:24.070 --> 00:57:29.309\
+CSDS UChicago: now, I'm gonna show you something that we're gonna use later, but not right now.\
+\
+773\
+00:57:29.400 --> 00:57:31.759\
+CSDS UChicago: You see this little plus sign here.\
+\
+774\
+00:57:32.260 --> 00:57:36.559\
+CSDS UChicago: you can add a layer to this, and what I'm gonna do\
+\
+775\
+00:57:36.820 --> 00:57:40.640\
+CSDS UChicago: is add my Chicago layer. And it's here\
+\
+776\
+00:57:41.540 --> 00:57:44.529\
+CSDS UChicago: in my list of recent. So I'm just gonna click on it.\
+\
+777\
+00:57:45.730 --> 00:57:46.990\
+CSDS UChicago: And there it is.\
+\
+778\
+00:57:47.580 --> 00:57:57.429\
+CSDS UChicago: So now you see, both the polygons and the points, and you see that for some like this one here, it's nice in the middle.\
+\
+779\
+00:57:57.560 --> 00:57:58.350\
+CSDS UChicago: right\
+\
+780\
+00:57:58.740 --> 00:58:03.710\
+CSDS UChicago: for others like O'hare, which is this one? It's in a very strange spot.\
+\
+781\
+00:58:04.200 --> 00:58:09.200\
+CSDS UChicago: So if you have highly irregular and non-convex polygons.\
+\
+782\
+00:58:09.420 --> 00:58:14.649\
+CSDS UChicago: it is possible that the mean center is actually not in the polygon\
+\
+783\
+00:58:18.600 --> 00:58:22.279\
+CSDS UChicago: The population, weighted center of Canada\
+\
+784\
+00:58:22.480 --> 00:58:25.410\
+CSDS UChicago: has been in Lake Ontario for some time now.\
+\
+785\
+00:58:25.810 --> 00:58:29.450\
+CSDS UChicago: Okay, so these kinds of things happen.\
+\
+786\
+00:58:30.380 --> 00:58:31.889\
+CSDS UChicago: If that happens.\
+\
+787\
+00:58:32.100 --> 00:58:34.910\
+CSDS UChicago: you have to think about it. Is this what I want.\
+\
+788\
+00:58:35.210 --> 00:58:36.840\
+CSDS UChicago: or is this\
+\
+789\
+00:58:36.920 --> 00:58:41.829\
+CSDS UChicago: an artifact that is not useful for me? And then I have to change it.\
+\
+790\
+00:58:41.910 --> 00:58:43.950\
+CSDS UChicago: Look at this one, for example.\
+\
+791\
+00:58:44.160 --> 00:58:47.610\
+CSDS UChicago: the center point is all the way on the border\
+\
+792\
+00:58:47.840 --> 00:58:53.029\
+CSDS UChicago: of the Polygon. And why is that? Because of this little\
+\
+793\
+00:58:53.180 --> 00:58:58.599\
+CSDS UChicago: piece here that pulls it away from what you would think is the center right?\
+\
+794\
+00:58:59.190 --> 00:59:00.629\
+CSDS UChicago: So this\
+\
+795\
+00:59:06.110 --> 00:59:06.780\
+CSDS UChicago: you know.\
+\
+796\
+00:59:07.950 --> 00:59:12.070\
+CSDS UChicago: I'm not going to talk about projections. I'm going to skip that for next time.\
+\
+797\
+00:59:12.400 --> 00:59:18.390\
+CSDS UChicago: I'm gonna just show you some very simple maps and some basic\
+\
+798\
+00:59:18.990 --> 00:59:22.890\
+CSDS UChicago: selection in the table, which is called a query.\
+\
+799\
+00:59:23.440 --> 00:59:26.990\
+CSDS UChicago: Some of you may have had some database exposure\
+\
+800\
+00:59:27.040 --> 00:59:34.089\
+CSDS UChicago: queries is how you search a database. You know, you find interesting observations. So I'm closing this\
+\
+801\
+00:59:34.450 --> 00:59:36.442\
+CSDS UChicago: and I'm gonna open.\
+\
+802\
+00:59:37.390 --> 00:59:38.480\
+CSDS UChicago: the\
+\
+803\
+00:59:38.540 --> 00:59:42.300\
+CSDS UChicago: well, I'm gonna pull it in here, Chicago, one shape.\
+\
+804\
+00:59:49.960 --> 00:59:53.050\
+CSDS UChicago: So this is the community areas one again.\
+\
+805\
+00:59:53.260 --> 00:59:54.250\
+CSDS UChicago: And\
+\
+806\
+00:59:54.470 --> 00:59:58.180\
+CSDS UChicago: I'm gonna start with something very simple.\
+\
+807\
+00:59:59.340 --> 01:00:03.339\
+CSDS UChicago: I'm gonna make a map for categories.\
+\
+808\
+01:00:04.010 --> 01:00:08.400\
+CSDS UChicago: Now, categories get labels, but the labels don't matter.\
+\
+809\
+01:00:08.620 --> 01:00:11.059\
+CSDS UChicago: So you call it 1, 2, 3, 4,\
+\
+810\
+01:00:11.090 --> 01:00:12.919\
+CSDS UChicago: 4 is not more than 3\
+\
+811\
+01:00:13.280 --> 01:00:16.950\
+CSDS UChicago: 4 is just a name you could call it Abcd. As well.\
+\
+812\
+01:00:16.960 --> 01:00:23.069\
+CSDS UChicago: or Joe, Sarah, Linda and George, it doesn't matter right. It's a category.\
+\
+813\
+01:00:23.450 --> 01:00:26.659\
+CSDS UChicago: And so Geoda has a feature to make\
+\
+814\
+01:00:26.670 --> 01:00:29.550\
+CSDS UChicago: what we call unique values map.\
+\
+815\
+01:00:30.040 --> 01:00:34.109\
+CSDS UChicago: And what I'm gonna do is select maps\
+\
+816\
+01:00:34.410 --> 01:00:35.750\
+CSDS UChicago: and rates\
+\
+817\
+01:00:37.080 --> 01:00:39.030\
+CSDS UChicago: and go all the way down there\
+\
+818\
+01:00:39.070 --> 01:00:41.830\
+CSDS UChicago: here to unique values map.\
+\
+819\
+01:00:43.880 --> 01:00:45.630\
+CSDS UChicago: And I select that.\
+\
+820\
+01:00:46.220 --> 01:00:51.959\
+CSDS UChicago: And then I select a variable and the variable I'm going to select is district number.\
+\
+821\
+01:00:52.890 --> 01:00:55.019\
+CSDS UChicago: and that is going to\
+\
+822\
+01:00:56.710 --> 01:01:02.000\
+CSDS UChicago: color all the community areas that are in the same district by the same color.\
+\
+823\
+01:01:02.690 --> 01:01:08.459\
+CSDS UChicago: There's I forgot 7 or 9 9 districts\
+\
+824\
+01:01:08.510 --> 01:01:09.990\
+CSDS UChicago: in Chicago.\
+\
+825\
+01:01:10.480 --> 01:01:14.430\
+CSDS UChicago: And then there's 77 community areas. So if you\
+\
+826\
+01:01:14.650 --> 01:01:17.530\
+CSDS UChicago: select this variable and you say, Okay.\
+\
+827\
+01:01:18.410 --> 01:01:20.710\
+CSDS UChicago: this is your 1st map.\
+\
+828\
+01:01:22.390 --> 01:01:27.169\
+CSDS UChicago: and it's kind of, you know, stupid map, but you know it's it's a map.\
+\
+829\
+01:01:27.250 --> 01:01:32.289\
+CSDS UChicago: It gives you a color for each different district.\
+\
+830\
+01:01:34.040 --> 01:01:37.260\
+CSDS UChicago: So associated with this map\
+\
+831\
+01:01:37.340 --> 01:01:38.740\
+CSDS UChicago: is the table.\
+\
+832\
+01:01:38.980 --> 01:01:40.459\
+CSDS UChicago: If we go here.\
+\
+833\
+01:01:40.630 --> 01:01:43.720\
+CSDS UChicago: we click on the table, icon to open the table.\
+\
+834\
+01:01:46.750 --> 01:01:47.770\
+CSDS UChicago: and\
+\
+835\
+01:01:47.990 --> 01:01:50.310\
+CSDS UChicago: we right click on the table\
+\
+836\
+01:01:50.350 --> 01:01:52.870\
+CSDS UChicago: to get all the table options.\
+\
+837\
+01:01:53.320 --> 01:01:59.119\
+CSDS UChicago: So you see all the different table options aggregate, merge, selection tool.\
+\
+838\
+01:01:59.340 --> 01:02:01.880\
+CSDS UChicago: a calculator, and\
+\
+839\
+01:02:02.090 --> 01:02:04.619\
+CSDS UChicago: so the 1st one I want to talk about\
+\
+840\
+01:02:05.570 --> 01:02:06.830\
+CSDS UChicago: very quickly.\
+\
+841\
+01:02:07.130 --> 01:02:12.040\
+CSDS UChicago: because if you use your own data, that's gonna come really handy\
+\
+842\
+01:02:12.370 --> 01:02:15.820\
+CSDS UChicago: is the one called edit variable properties.\
+\
+843\
+01:02:16.270 --> 01:02:17.970\
+CSDS UChicago: So if you do\
+\
+844\
+01:02:18.340 --> 01:02:23.760\
+CSDS UChicago: edit variable properties, you get a list of the variables in the data set.\
+\
+845\
+01:02:24.090 --> 01:02:28.819\
+CSDS UChicago: Now, look here, on the 1st one area number\
+\
+846\
+01:02:28.940 --> 01:02:30.269\
+CSDS UChicago: is a code.\
+\
+847\
+01:02:30.550 --> 01:02:33.189\
+CSDS UChicago: It's right aligned right?\
+\
+848\
+01:02:33.670 --> 01:02:36.169\
+CSDS UChicago: Because it says, here it's an integer\
+\
+849\
+01:02:36.620 --> 01:02:38.350\
+CSDS UChicago: if I click on this\
+\
+850\
+01:02:38.750 --> 01:02:41.369\
+CSDS UChicago: and I change it to a string.\
+\
+851\
+01:02:42.660 --> 01:02:44.120\
+CSDS UChicago: Look what happens?\
+\
+852\
+01:02:45.660 --> 01:02:47.219\
+CSDS UChicago: It jumps to the left.\
+\
+853\
+01:02:47.270 --> 01:02:48.760\
+CSDS UChicago: Now it's text.\
+\
+854\
+01:02:49.940 --> 01:02:54.619\
+CSDS UChicago: So if you want to add 2 together, it's not gonna work because it's text.\
+\
+855\
+01:02:55.250 --> 01:02:56.700\
+CSDS UChicago: Okay. So\
+\
+856\
+01:02:57.010 --> 01:02:58.580\
+CSDS UChicago: most often.\
+\
+857\
+01:02:58.930 --> 01:03:01.170\
+CSDS UChicago: it's the other way around. So\
+\
+858\
+01:03:01.210 --> 01:03:06.010\
+CSDS UChicago: in many public data sets that cities put on there and states\
+\
+859\
+01:03:06.746 --> 01:03:09.660\
+CSDS UChicago: they have an identifier for each area\
+\
+860\
+01:03:10.100 --> 01:03:13.460\
+CSDS UChicago: in in the Us. This is called a Fips code.\
+\
+861\
+01:03:13.950 --> 01:03:18.930\
+CSDS UChicago: Federal identification, something or other, you know. FIPS.\
+\
+862\
+01:03:18.980 --> 01:03:21.159\
+CSDS UChicago: So every everything.\
+\
+863\
+01:03:21.200 --> 01:03:28.969\
+CSDS UChicago: every census tract, every block group, every county, every state, has a Fips code in the Us.\
+\
+864\
+01:03:29.940 --> 01:03:34.390\
+CSDS UChicago: In many data sets that fips code is a string.\
+\
+865\
+01:03:34.960 --> 01:03:36.269\
+CSDS UChicago: It's text.\
+\
+866\
+01:03:37.110 --> 01:03:39.570\
+CSDS UChicago: You can't do any math with text.\
+\
+867\
+01:03:40.100 --> 01:03:41.370\
+CSDS UChicago: So then\
+\
+868\
+01:03:41.420 --> 01:03:47.439\
+CSDS UChicago: the tool you use is edit variable properties. You go to that variable. It says, string.\
+\
+869\
+01:03:47.590 --> 01:03:51.379\
+CSDS UChicago: You click on it, you click integer and it's an integer\
+\
+870\
+01:03:52.720 --> 01:03:53.940\
+CSDS UChicago: and then\
+\
+871\
+01:03:54.000 --> 01:03:55.810\
+CSDS UChicago: save your data.\
+\
+872\
+01:03:55.890 --> 01:03:57.799\
+CSDS UChicago: So close this 1st\
+\
+873\
+01:03:58.130 --> 01:04:00.650\
+CSDS UChicago: and just click on the little save icon.\
+\
+874\
+01:04:01.060 --> 01:04:04.329\
+CSDS UChicago: and whenever the icon is lit up.\
+\
+875\
+01:04:04.450 --> 01:04:06.869\
+CSDS UChicago: that means you made some changes.\
+\
+876\
+01:04:07.130 --> 01:04:10.400\
+CSDS UChicago: and you might want to save this, so if you click on it.\
+\
+877\
+01:04:10.580 --> 01:04:12.270\
+CSDS UChicago: see, it becomes black.\
+\
+878\
+01:04:12.620 --> 01:04:15.880\
+CSDS UChicago: Now there's no changes. There's nothing to save.\
+\
+879\
+01:04:16.870 --> 01:04:21.480\
+CSDS UChicago: So we haven't really saved anything, because I reverted what I did.\
+\
+880\
+01:04:21.510 --> 01:04:24.289\
+CSDS UChicago: But this is this is the step. Okay?\
+\
+881\
+01:04:24.310 --> 01:04:28.040\
+CSDS UChicago: So now we're gonna go through the selection tool just\
+\
+882\
+01:04:29.950 --> 01:04:32.238\
+CSDS UChicago: a little bit, and we're gonna\
+\
+883\
+01:04:32.770 --> 01:04:35.050\
+CSDS UChicago: again right click on the table\
+\
+884\
+01:04:36.990 --> 01:04:39.049\
+CSDS UChicago: and fire up the selection tool.\
+\
+885\
+01:04:39.480 --> 01:04:44.969\
+CSDS UChicago: So if you're used to modern databases, this looks super archaic.\
+\
+886\
+01:04:45.100 --> 01:04:48.039\
+CSDS UChicago: Admittedly, I it's 20 years old.\
+\
+887\
+01:04:48.170 --> 01:04:49.870\
+CSDS UChicago: Right? But it works.\
+\
+888\
+01:04:50.510 --> 01:04:52.550\
+CSDS UChicago: And once you get the logic.\
+\
+889\
+01:04:52.610 --> 01:04:54.050\
+CSDS UChicago: it's actually\
+\
+890\
+01:04:54.080 --> 01:04:55.479\
+CSDS UChicago: quite powerful\
+\
+891\
+01:04:55.840 --> 01:05:00.399\
+CSDS UChicago: to select subsets of observations.\
+\
+892\
+01:05:00.750 --> 01:05:06.203\
+CSDS UChicago: So not subsets of variables, subsets of observations. So\
+\
+893\
+01:05:09.900 --> 01:05:11.010\
+CSDS UChicago: let's\
+\
+894\
+01:05:11.950 --> 01:05:13.810\
+CSDS UChicago: start a new selection.\
+\
+895\
+01:05:14.950 --> 01:05:17.350\
+CSDS UChicago: and we have to pick a variable.\
+\
+896\
+01:05:18.220 --> 01:05:22.680\
+CSDS UChicago: And we're going to pick the same variable that we use in this map here.\
+\
+897\
+01:05:22.940 --> 01:05:24.499\
+CSDS UChicago: It's an easy one.\
+\
+898\
+01:05:24.570 --> 01:05:25.970\
+CSDS UChicago: district number.\
+\
+899\
+01:05:27.200 --> 01:05:30.229\
+CSDS UChicago: and we're going to select all in range\
+\
+900\
+01:05:30.370 --> 01:05:33.540\
+CSDS UChicago: from 0 to 5.\
+\
+901\
+01:05:36.350 --> 01:05:40.329\
+CSDS UChicago: There's a logic to my madness, and you'll see in a second what this is.\
+\
+902\
+01:05:40.630 --> 01:05:43.390\
+CSDS UChicago: So you specify 0 to 5.\
+\
+903\
+01:05:43.460 --> 01:05:46.889\
+CSDS UChicago: Select all in range. 2 things happen.\
+\
+904\
+01:05:47.180 --> 01:05:49.280\
+CSDS UChicago: One, you see all this yellow here\
+\
+905\
+01:05:49.430 --> 01:05:50.760\
+CSDS UChicago: in the table.\
+\
+906\
+01:05:50.870 --> 01:05:55.540\
+CSDS UChicago: And the other one is, you see, that the northern community areas\
+\
+907\
+01:05:56.050 --> 01:05:58.040\
+CSDS UChicago: are stronger.\
+\
+908\
+01:05:58.400 --> 01:06:01.919\
+CSDS UChicago: caller on and and some screens. It doesn't show\
+\
+909\
+01:06:02.140 --> 01:06:04.529\
+CSDS UChicago: that. Well. But there is a difference.\
+\
+910\
+01:06:06.390 --> 01:06:08.600\
+CSDS UChicago: So these have been selected.\
+\
+911\
+01:06:09.770 --> 01:06:11.739\
+CSDS UChicago: They've also been selected\
+\
+912\
+01:06:12.120 --> 01:06:13.510\
+CSDS UChicago: in the table.\
+\
+913\
+01:06:14.220 --> 01:06:16.100\
+CSDS UChicago: This is called linking\
+\
+914\
+01:06:16.830 --> 01:06:19.550\
+CSDS UChicago: anytime. You select something\
+\
+915\
+01:06:19.650 --> 01:06:23.110\
+CSDS UChicago: right now. We only have 2 windows open, a table and a map.\
+\
+916\
+01:06:23.270 --> 01:06:32.060\
+CSDS UChicago: but anytime you select something in any of the open windows. It's instantaneously selected in all the other windows\
+\
+917\
+01:06:32.140 --> 01:06:35.539\
+CSDS UChicago: that's called linking. Later we'll see\
+\
+918\
+01:06:35.630 --> 01:06:38.709\
+CSDS UChicago: a dynamic version of this which is called brushing\
+\
+919\
+01:06:39.230 --> 01:06:47.259\
+CSDS UChicago: brushing means. If you change the selection in any window, that selection is immediately updated in all the other windows.\
+\
+920\
+01:06:47.620 --> 01:06:49.960\
+CSDS UChicago: So very powerful thing.\
+\
+921\
+01:06:50.903 --> 01:06:53.589\
+CSDS UChicago: You see them selected in the table.\
+\
+922\
+01:06:53.920 --> 01:06:57.040\
+CSDS UChicago: Maybe what you want to do is group them all together.\
+\
+923\
+01:06:57.570 --> 01:07:02.309\
+CSDS UChicago: You see, there's the one here. Then there's a bunch of sevens. There's another one.\
+\
+924\
+01:07:02.380 --> 01:07:04.589\
+CSDS UChicago: If you want to group them all together\
+\
+925\
+01:07:04.620 --> 01:07:06.540\
+CSDS UChicago: right, click on the table\
+\
+926\
+01:07:07.840 --> 01:07:11.200\
+CSDS UChicago: and pick, move selector to top.\
+\
+927\
+01:07:12.410 --> 01:07:14.829\
+CSDS UChicago: So then all the selected ones\
+\
+928\
+01:07:14.950 --> 01:07:26.259\
+CSDS UChicago: will be on the top of the table. If you scroll down, you see the the line right? So all of these are 5 or less. All of these are more than 5.\
+\
+929\
+01:07:28.370 --> 01:07:30.770\
+CSDS UChicago: So this is a simple selection\
+\
+930\
+01:07:30.790 --> 01:07:36.330\
+CSDS UChicago: to make it a little more powerful. We're going to append to the current selection.\
+\
+931\
+01:07:37.060 --> 01:07:40.900\
+CSDS UChicago: So we're going to add a subset to the current selection.\
+\
+932\
+01:07:41.140 --> 01:07:42.720\
+CSDS UChicago: And what we're going to do\
+\
+933\
+01:07:42.810 --> 01:07:47.109\
+CSDS UChicago: is append 6. So put 6 in both of these.\
+\
+934\
+01:07:49.340 --> 01:07:51.080\
+CSDS UChicago: And what's gonna happen\
+\
+935\
+01:07:53.900 --> 01:08:00.769\
+CSDS UChicago: if you look at the map and the map latent, you see 1, 2, 3, 4, 5, 6 is the red one.\
+\
+936\
+01:08:01.640 --> 01:08:04.910\
+CSDS UChicago: You can't see that it's red because it's made lighter.\
+\
+937\
+01:08:04.940 --> 01:08:10.779\
+CSDS UChicago: But once you say, select all in range, the red one is added to the selection.\
+\
+938\
+01:08:13.470 --> 01:08:19.259\
+CSDS UChicago: and then you can do the reverse, too, which is called drilling down. You may have heard this term\
+\
+939\
+01:08:19.270 --> 01:08:25.269\
+CSDS UChicago: drilling down a database. So we're going to select from the current selection.\
+\
+940\
+01:08:27.000 --> 01:08:30.039\
+CSDS UChicago: And basically, what we're gonna do\
+\
+941\
+01:08:30.370 --> 01:08:33.689\
+CSDS UChicago: is reversing everything, kicking 6 out.\
+\
+942\
+01:08:33.790 --> 01:08:36.519\
+CSDS UChicago: We're going select 0 to 5\
+\
+943\
+01:08:36.540 --> 01:08:38.319\
+CSDS UChicago: from the current selection.\
+\
+944\
+01:08:38.620 --> 01:08:44.060\
+CSDS UChicago: And the moment you click this, you see down here in the table those yellow ones\
+\
+945\
+01:08:44.120 --> 01:08:48.630\
+CSDS UChicago: those are from 6. Once you click on this. They're gonna be gone\
+\
+946\
+01:08:48.760 --> 01:08:50.539\
+CSDS UChicago: and we won't see the red again.\
+\
+947\
+01:09:00.069 --> 01:09:00.859\
+CSDS UChicago: Okay.\
+\
+948\
+01:09:01.100 --> 01:09:03.500\
+CSDS UChicago: so with the selection.\
+\
+949\
+01:09:04.370 --> 01:09:07.069\
+CSDS UChicago: you want to keep this for future reference.\
+\
+950\
+01:09:07.180 --> 01:09:08.650\
+CSDS UChicago: how are we going to do that?\
+\
+951\
+01:09:09.069 --> 01:09:11.390\
+CSDS UChicago: We're going to create a new variable.\
+\
+952\
+01:09:11.649 --> 01:09:17.989\
+CSDS UChicago: and that variable is going to be one for the selected and 0 for the unselected.\
+\
+953\
+01:09:18.210 --> 01:09:23.420\
+CSDS UChicago: This is called an indicator, variable sometimes also called a dummy variable\
+\
+954\
+01:09:24.149 --> 01:09:28.040\
+CSDS UChicago: dummy variable because it's very stupid. It's just 2 categories.\
+\
+955\
+01:09:28.149 --> 01:09:29.790\
+CSDS UChicago: right? That's all it knows.\
+\
+956\
+01:09:29.870 --> 01:09:32.880\
+CSDS UChicago: So we're going to add a variable\
+\
+957\
+01:09:32.990 --> 01:09:33.979\
+CSDS UChicago: here.\
+\
+958\
+01:09:36.670 --> 01:09:38.729\
+CSDS UChicago: and we're going to call it north.\
+\
+959\
+01:09:40.609 --> 01:09:42.450\
+CSDS UChicago: And it's an integer.\
+\
+960\
+01:09:42.810 --> 01:09:52.670\
+CSDS UChicago: And you can change this. But the default is, it's gonna put it to the left of our 1st call. But you can put it anywhere in the table. I'm just gonna keep it like this.\
+\
+961\
+01:09:52.750 --> 01:09:54.259\
+CSDS UChicago: We say, add\
+\
+962\
+01:09:54.300 --> 01:09:58.749\
+CSDS UChicago: the moment you click on, add, there's going to be an empty column in the table.\
+\
+963\
+01:10:00.180 --> 01:10:02.260\
+CSDS UChicago: The 1st column is empty.\
+\
+964\
+01:10:03.220 --> 01:10:04.400\
+CSDS UChicago: and then.\
+\
+965\
+01:10:04.990 --> 01:10:09.550\
+CSDS UChicago: if the selected, the option, the default, and it's a good default\
+\
+966\
+01:10:09.610 --> 01:10:13.640\
+CSDS UChicago: is, have one for the selected 0 for the unselected.\
+\
+967\
+01:10:13.770 --> 01:10:16.039\
+CSDS UChicago: The moment you click, apply\
+\
+968\
+01:10:16.440 --> 01:10:18.979\
+CSDS UChicago: that 1st column will be populated\
+\
+969\
+01:10:19.330 --> 01:10:21.260\
+CSDS UChicago: with ones in the yellow\
+\
+970\
+01:10:21.430 --> 01:10:23.870\
+CSDS UChicago: and 0 in the other ones.\
+\
+971\
+01:10:23.910 --> 01:10:25.940\
+CSDS UChicago: So if you go down the table\
+\
+972\
+01:10:26.710 --> 01:10:27.710\
+CSDS UChicago: once.\
+\
+973\
+01:10:28.540 --> 01:10:31.809\
+CSDS UChicago: the moment you're out of the selection you have a 0.\
+\
+974\
+01:10:34.000 --> 01:10:34.690\
+CSDS UChicago: Okay?\
+\
+975\
+01:10:35.200 --> 01:10:37.950\
+CSDS UChicago: So now we're going to\
+\
+976\
+01:10:41.110 --> 01:10:43.809\
+CSDS UChicago: make a map just for the north.\
+\
+977\
+01:10:45.370 --> 01:10:50.159\
+CSDS UChicago: And how we do that is we go to file. We? Let's close this\
+\
+978\
+01:10:50.980 --> 01:10:52.000\
+CSDS UChicago: file\
+\
+979\
+01:10:53.480 --> 01:10:55.790\
+CSDS UChicago: save selected as\
+\
+980\
+01:10:57.160 --> 01:10:59.160\
+CSDS UChicago: so. What this is going to do\
+\
+981\
+01:10:59.200 --> 01:11:05.570\
+CSDS UChicago: is save a new foursome of shapefiles just for the north.\
+\
+982\
+01:11:06.090 --> 01:11:07.959\
+CSDS UChicago: It will cut out the cell.\
+\
+983\
+01:11:08.170 --> 01:11:10.659\
+CSDS UChicago: So we save selected as\
+\
+984\
+01:11:10.720 --> 01:11:12.130\
+CSDS UChicago: is the same\
+\
+985\
+01:11:12.160 --> 01:11:15.529\
+CSDS UChicago: bing. We specify shapefile.\
+\
+986\
+01:11:17.260 --> 01:11:18.699\
+CSDS UChicago: Give it a name.\
+\
+987\
+01:11:18.900 --> 01:11:20.129\
+CSDS UChicago: the North.\
+\
+988\
+01:11:21.110 --> 01:11:25.680\
+CSDS UChicago: When I do this it's gonna complain. It's gonna say, there already is a north.\
+\
+989\
+01:11:25.790 --> 01:11:27.600\
+CSDS UChicago: But I replace it.\
+\
+990\
+01:11:27.830 --> 01:11:31.650\
+CSDS UChicago: And then you see the Crs at the bottom.\
+\
+991\
+01:11:32.430 --> 01:11:33.800\
+CSDS UChicago: We say, Okay.\
+\
+992\
+01:11:36.320 --> 01:11:37.640\
+CSDS UChicago: success.\
+\
+993\
+01:11:39.850 --> 01:11:43.110\
+CSDS UChicago: Close the current data set the little cross.\
+\
+994\
+01:11:47.740 --> 01:11:49.699\
+CSDS UChicago: I don't want to save my data.\
+\
+995\
+01:11:51.450 --> 01:11:52.380\
+CSDS UChicago: Then\
+\
+996\
+01:11:53.060 --> 01:11:59.549\
+CSDS UChicago: we open it, and you should know this routine by now. We grab north, shp.\
+\
+997\
+01:11:59.990 --> 01:12:03.250\
+CSDS UChicago: pop it in here, and there's a map for the north.\
+\
+998\
+01:12:04.300 --> 01:12:06.280\
+CSDS UChicago: So it's recentered\
+\
+999\
+01:12:06.710 --> 01:12:11.370\
+CSDS UChicago: in the map window. You know the sudden part. It's like it doesn't exist.\
+\
+1000\
+01:12:15.530 --> 01:12:19.200\
+CSDS UChicago: One extremely useful aspect of this\
+\
+1001\
+01:12:19.850 --> 01:12:24.049\
+CSDS UChicago: is to kick out observations you don't want\
+\
+1002\
+01:12:25.800 --> 01:12:27.800\
+CSDS UChicago: and think about this for a second.\
+\
+1003\
+01:12:27.830 --> 01:12:29.660\
+CSDS UChicago: How would you do that?\
+\
+1004\
+01:12:30.390 --> 01:12:34.710\
+CSDS UChicago: There is no save unselected, as\
+\
+1005\
+01:12:36.070 --> 01:12:39.359\
+CSDS UChicago: there is only save selected as\
+\
+1006\
+01:12:40.040 --> 01:12:41.680\
+CSDS UChicago: but there is\
+\
+1007\
+01:12:42.170 --> 01:12:44.160\
+CSDS UChicago: switch selection.\
+\
+1008\
+01:12:44.410 --> 01:12:46.520\
+CSDS UChicago: so let me pull up\
+\
+1009\
+01:12:46.820 --> 01:12:49.569\
+CSDS UChicago: our 1st one again the full one.\
+\
+1010\
+01:12:49.910 --> 01:12:58.170\
+CSDS UChicago: and again for those of you who are not familiar with Chicago. You probably flew in here, and most likely you flew into O'hare.\
+\
+1011\
+01:12:58.830 --> 01:13:00.850\
+CSDS UChicago: and this is O'hare.\
+\
+1012\
+01:13:01.390 --> 01:13:04.349\
+CSDS UChicago: Now O'hare is very weird.\
+\
+1013\
+01:13:04.600 --> 01:13:06.379\
+CSDS UChicago: It's connected\
+\
+1014\
+01:13:06.630 --> 01:13:11.980\
+CSDS UChicago: to the main Chicago. This is a park, by the way. So that's why it's empty.\
+\
+1015\
+01:13:12.380 --> 01:13:14.330\
+CSDS UChicago: There's this little corridor.\
+\
+1016\
+01:13:15.110 --> 01:13:16.356\
+CSDS UChicago: This is\
+\
+1017\
+01:13:17.740 --> 01:13:19.120\
+CSDS UChicago: political thing.\
+\
+1018\
+01:13:19.330 --> 01:13:24.140\
+CSDS UChicago: The city of Chicago wanted to tax revenues from the airport.\
+\
+1019\
+01:13:24.570 --> 01:13:28.540\
+CSDS UChicago: The airport is not, was not in the city of Chicago\
+\
+1020\
+01:13:28.550 --> 01:13:32.570\
+CSDS UChicago: when the airport was construction, I believe, in the 19 fifties.\
+\
+1021\
+01:13:32.780 --> 01:13:36.949\
+CSDS UChicago: Chicago quickly annexed this little thing, and made.\
+\
+1022\
+01:13:37.320 --> 01:13:43.339\
+CSDS UChicago: in a sense, a little land bridge connecting O'hare to the rest of the city.\
+\
+1023\
+01:13:43.580 --> 01:13:47.410\
+CSDS UChicago: If you do historical work, this messes everything up.\
+\
+1024\
+01:13:47.730 --> 01:13:51.500\
+CSDS UChicago: because before 1950 there was no O'hare.\
+\
+1025\
+01:13:51.870 --> 01:13:58.050\
+CSDS UChicago: So if you want to do maps that show the change in Chicago, let's say, from the 19 twenties on.\
+\
+1026\
+01:13:58.310 --> 01:14:03.269\
+CSDS UChicago: there's no O'hare, and all of a sudden it pops up. So let's get rid of O'hare.\
+\
+1027\
+01:14:04.080 --> 01:14:06.530\
+CSDS UChicago: Now we selected O'hare\
+\
+1028\
+01:14:06.630 --> 01:14:08.839\
+CSDS UChicago: in the map by just clicking on it.\
+\
+1029\
+01:14:09.860 --> 01:14:12.509\
+CSDS UChicago: If we do save selected as\
+\
+1030\
+01:14:12.690 --> 01:14:15.149\
+CSDS UChicago: what we will get, what will we get?\
+\
+1031\
+01:14:15.960 --> 01:14:17.270\
+CSDS UChicago: Just O'hare.\
+\
+1032\
+01:14:17.380 --> 01:14:21.710\
+CSDS UChicago: It doesn't help us. So what we do instead. And there's 2 ways of doing it.\
+\
+1033\
+01:14:23.290 --> 01:14:25.989\
+CSDS UChicago: one is here in the map itself.\
+\
+1034\
+01:14:27.280 --> 01:14:31.700\
+CSDS UChicago: You see, the second icon, it says Invert select.\
+\
+1035\
+01:14:31.830 --> 01:14:33.520\
+CSDS UChicago: So if you click on, that\
+\
+1036\
+01:14:35.250 --> 01:14:38.219\
+CSDS UChicago: dark becomes light and light becomes dark.\
+\
+1037\
+01:14:38.700 --> 01:14:43.389\
+CSDS UChicago: And now, if you do save selected, as there's no O here.\
+\
+1038\
+01:14:44.550 --> 01:14:46.650\
+CSDS UChicago: Okay, you can also do it\
+\
+1039\
+01:14:46.900 --> 01:14:48.209\
+CSDS UChicago: in the table\
+\
+1040\
+01:14:48.580 --> 01:14:49.673\
+CSDS UChicago: in the\
+\
+1041\
+01:14:50.900 --> 01:14:52.320\
+CSDS UChicago: selection\
+\
+1042\
+01:14:52.440 --> 01:14:56.499\
+CSDS UChicago: under the selection tool. It says invert selection.\
+\
+1043\
+01:14:57.140 --> 01:14:59.000\
+CSDS UChicago: So if you pick that.\
+\
+1044\
+01:15:00.180 --> 01:15:02.490\
+CSDS UChicago: Then we're back with Jeff still here.\
+\
+1045\
+01:15:04.960 --> 01:15:05.880\
+CSDS UChicago: Okay.\
+\
+1046\
+01:15:06.950 --> 01:15:08.420\
+CSDS UChicago: any questions.\
+\
+1047\
+01:15:08.920 --> 01:15:12.439\
+CSDS UChicago: I'm just gonna leave you with that. It should give you plenty\
+\
+1048\
+01:15:12.830 --> 01:15:15.263\
+CSDS UChicago: to start playing around with\
+\
+1049\
+01:15:16.647 --> 01:15:24.292\
+CSDS UChicago: I'll put. If if it works, I'll put this on Youtube, and then you can watch it again later. Let me just\
+\
+}

@@ -1,0 +1,846 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 GeoDa Sample Datasets\
+Prof. Luc Anselin\
+Oct 2, 2024\
+\
+308\
+00:24:42.370 --> 00:24:46.439\
+CSDS UChicago: So let me quickly go over the sample data sets.\
+\
+309\
+00:24:46.540 --> 00:24:49.209\
+CSDS UChicago: So you have a sense of what is there.\
+\
+310\
+00:24:49.270 --> 00:24:54.059\
+CSDS UChicago: And you see, I opened the community errors, and it's there in my recent\
+\
+311\
+00:24:54.520 --> 00:24:58.719\
+CSDS UChicago: columns. So the next time you just click on that and it opens up\
+\
+312\
+00:24:59.110 --> 00:25:01.329\
+CSDS UChicago: no one thing and I'll go over it.\
+\
+313\
+00:25:02.700 --> 00:25:05.660\
+CSDS UChicago: One thing I once you\
+\
+314\
+00:25:05.720 --> 00:25:08.599\
+CSDS UChicago: pick a sample data set that you like.\
+\
+315\
+00:25:09.900 --> 00:25:12.549\
+CSDS UChicago: You should save it to a working directory.\
+\
+316\
+00:25:13.190 --> 00:25:14.710\
+CSDS UChicago: because then you can\
+\
+317\
+00:25:14.760 --> 00:25:19.560\
+CSDS UChicago: manipulate it. You know, these are sample data sets. We protect them.\
+\
+318\
+00:25:19.910 --> 00:25:23.150\
+CSDS UChicago: We don't want you to start messing with them. Right?\
+\
+319\
+00:25:23.160 --> 00:25:27.159\
+CSDS UChicago: So if you do things to these data sets.\
+\
+320\
+00:25:27.574 --> 00:25:29.190\
+CSDS UChicago: you can't save it\
+\
+321\
+00:25:29.490 --> 00:25:33.849\
+CSDS UChicago: so you can, you can do it. But then it's just in memory.\
+\
+322\
+00:25:33.970 --> 00:25:37.799\
+CSDS UChicago: And once you close the program, it's gone. So that's not\
+\
+323\
+00:25:37.810 --> 00:25:50.630\
+CSDS UChicago: a good result. If you want to work with this later. So I will show you how you save one of these sample data sets into a working directory that you can use for your own work.\
+\
+324\
+00:25:50.750 --> 00:26:02.900\
+CSDS UChicago: and then, because it will be in here. From then on, you don't actually have to find, go and find the file anymore. You just click on the recent one, and it pops up and you can work with it.\
+\
+325\
+00:26:03.850 --> 00:26:08.749\
+CSDS UChicago: So what are these sample data sets? So all of these are\
+\
+326\
+00:26:10.120 --> 00:26:14.600\
+CSDS UChicago: also used in the textbook and described in the textbook\
+\
+327\
+00:26:14.620 --> 00:26:16.909\
+CSDS UChicago: Mo. Many of these\
+\
+328\
+00:26:17.270 --> 00:26:19.720\
+CSDS UChicago: have actually been used in\
+\
+329\
+00:26:20.090 --> 00:26:26.300\
+CSDS UChicago: actual empirical work that has been published in journal journal articles, and so on.\
+\
+330\
+00:26:26.460 --> 00:26:32.506\
+CSDS UChicago: So oops this. This is the one we just saw. This is a bunch of\
+\
+331\
+00:26:33.340 --> 00:26:43.719\
+CSDS UChicago: socioeconomic, correct characteristics, such as age, distribution, poverty, crime, things like that for community areas in Chicago.\
+\
+332\
+00:26:45.750 --> 00:26:48.010\
+CSDS UChicago: the next one.\
+\
+333\
+00:26:48.710 --> 00:26:50.150\
+CSDS UChicago: There's 11 of them.\
+\
+334\
+00:26:50.500 --> 00:26:53.029\
+CSDS UChicago: this, these are the\
+\
+335\
+00:26:53.460 --> 00:26:55.080\
+CSDS UChicago: locations\
+\
+336\
+00:26:55.650 --> 00:26:58.460\
+CSDS UChicago: of carjackings\
+\
+337\
+00:26:58.760 --> 00:26:59.595\
+CSDS UChicago: over.\
+\
+338\
+00:27:00.990 --> 00:27:04.440\
+CSDS UChicago: I think. Let me see, let me make sure what I did here.\
+\
+339\
+00:27:08.890 --> 00:27:10.459\
+CSDS UChicago: Yeah, in 2020.\
+\
+340\
+00:27:11.110 --> 00:27:14.479\
+CSDS UChicago: So this is 1,412,\
+\
+341\
+00:27:14.850 --> 00:27:18.169\
+CSDS UChicago: reported carjackings in Chicago\
+\
+342\
+00:27:18.200 --> 00:27:20.200\
+CSDS UChicago: in 2020\
+\
+343\
+00:27:20.270 --> 00:27:21.014\
+CSDS UChicago: now.\
+\
+344\
+00:27:24.370 --> 00:27:27.480\
+CSDS UChicago: There's something not quite right about this map.\
+\
+345\
+00:27:27.860 --> 00:27:31.229\
+CSDS UChicago: and I don't know if you already had the chance\
+\
+346\
+00:27:31.420 --> 00:27:34.200\
+CSDS UChicago: to look at the how to lie with maps. Book\
+\
+347\
+00:27:35.770 --> 00:27:38.759\
+CSDS UChicago: but this is in there. So just\
+\
+348\
+00:27:39.180 --> 00:27:40.970\
+CSDS UChicago: take a look at this map\
+\
+349\
+00:27:41.370 --> 00:27:42.840\
+CSDS UChicago: and think about\
+\
+350\
+00:27:43.540 --> 00:27:45.690\
+CSDS UChicago: what might be wrong with it.\
+\
+351\
+00:27:47.660 --> 00:27:49.540\
+CSDS UChicago: The data are correct.\
+\
+352\
+00:27:50.000 --> 00:27:51.300\
+CSDS UChicago: the data\
+\
+353\
+00:27:51.310 --> 00:27:53.039\
+CSDS UChicago: or the location.\
+\
+354\
+00:27:53.210 --> 00:27:55.750\
+CSDS UChicago: as recorded by the police department.\
+\
+355\
+00:27:55.790 --> 00:27:59.390\
+CSDS UChicago: where the carjacking happened, like, you know.\
+\
+356\
+00:27:59.970 --> 00:28:02.549\
+CSDS UChicago: 405 Hyde Park Avenue\
+\
+357\
+00:28:03.360 --> 00:28:09.930\
+CSDS UChicago: that then gets translated into a specific set of coordinates that's called geocoding.\
+\
+358\
+00:28:10.230 --> 00:28:16.620\
+CSDS UChicago: And those points I told you once you have X and Y. We're in business. Those points are shown here.\
+\
+359\
+00:28:22.770 --> 00:28:24.140\
+CSDS UChicago: There's no contact\
+\
+360\
+00:28:25.350 --> 00:28:28.659\
+CSDS UChicago: correct. There's no context. But there's a more\
+\
+361\
+00:28:28.750 --> 00:28:30.880\
+CSDS UChicago: narrow technical issue.\
+\
+362\
+00:28:31.230 --> 00:28:33.870\
+CSDS UChicago: There's no scale. There's no scale.\
+\
+363\
+00:28:34.250 --> 00:28:35.580\
+CSDS UChicago: And also\
+\
+364\
+00:28:37.820 --> 00:28:41.649\
+CSDS UChicago: these carjackings are very small locations.\
+\
+365\
+00:28:42.650 --> 00:28:44.219\
+CSDS UChicago: These points.\
+\
+366\
+00:28:44.830 --> 00:28:47.420\
+CSDS UChicago: If you have, once you have the scale.\
+\
+367\
+00:28:47.920 --> 00:28:50.030\
+CSDS UChicago: they actually correspond\
+\
+368\
+00:28:50.040 --> 00:28:53.959\
+CSDS UChicago: to have a city block or 2 city blocks.\
+\
+369\
+00:28:53.990 --> 00:28:55.679\
+CSDS UChicago: so they show\
+\
+370\
+00:28:56.130 --> 00:29:00.550\
+CSDS UChicago: way more density than there actually is.\
+\
+371\
+00:29:01.120 --> 00:29:05.170\
+CSDS UChicago: And in fact, let me see if I can do this.\
+\
+372\
+00:29:07.000 --> 00:29:08.920\
+CSDS UChicago: Yeah. So\
+\
+373\
+00:29:09.480 --> 00:29:15.349\
+CSDS UChicago: this I right clicked on the little icon, and I'm going to change the point radius.\
+\
+374\
+00:29:16.050 --> 00:29:18.060\
+CSDS UChicago: and I'm going to make it smaller.\
+\
+375\
+00:29:19.970 --> 00:29:23.050\
+CSDS UChicago: And now it looks much less dense.\
+\
+376\
+00:29:23.400 --> 00:29:24.780\
+CSDS UChicago: It is not.\
+\
+377\
+00:29:24.820 --> 00:29:29.290\
+CSDS UChicago: It isn't much less that it looks much less that\
+\
+378\
+00:29:29.960 --> 00:29:32.380\
+CSDS UChicago: because the size of the point\
+\
+379\
+00:29:32.420 --> 00:29:34.010\
+CSDS UChicago: is much smaller.\
+\
+380\
+00:29:35.180 --> 00:29:39.299\
+CSDS UChicago: And one of my other classes, I show an example\
+\
+381\
+00:29:39.330 --> 00:29:44.099\
+CSDS UChicago: of foreclosures in Chicago and foreclosure. That's a house.\
+\
+382\
+00:29:44.290 --> 00:29:46.289\
+CSDS UChicago: It's not bigger than a house.\
+\
+383\
+00:29:46.470 --> 00:29:49.160\
+CSDS UChicago: and it is a map that is all red.\
+\
+384\
+00:29:49.600 --> 00:29:57.630\
+CSDS UChicago: It's like all of Chicago has been foreclosed on, which is simply not true. It's because the size of the little square\
+\
+385\
+00:29:57.730 --> 00:30:00.949\
+CSDS UChicago: used to denote a house is too big.\
+\
+386\
+00:30:01.480 --> 00:30:05.710\
+CSDS UChicago: And so this is one of the principles in good mapmaking\
+\
+387\
+00:30:05.750 --> 00:30:08.700\
+CSDS UChicago: is that you don't want to create the wrong impression.\
+\
+388\
+00:30:08.990 --> 00:30:13.809\
+CSDS UChicago: You know it's not like there's carjackings all over the place in Chicago.\
+\
+389\
+00:30:13.950 --> 00:30:18.919\
+CSDS UChicago: in fact, is very concentrated in specific areas.\
+\
+390\
+00:30:18.950 --> 00:30:27.609\
+CSDS UChicago: But you can't tell, because one you don't have a scale. And also you don't, because you don't have a scale. You don't know how big these points are.\
+\
+391\
+00:30:29.180 --> 00:30:31.146\
+CSDS UChicago: And so this is something.\
+\
+392\
+00:30:31.660 --> 00:30:34.160\
+CSDS UChicago: that's an aside, but something to keep in mind.\
+\
+393\
+00:30:35.040 --> 00:30:35.870\
+CSDS UChicago: So\
+\
+394\
+00:30:36.410 --> 00:30:41.599\
+CSDS UChicago: this is the only point data set I have, and we won't actually be using it.\
+\
+395\
+00:30:41.680 --> 00:30:42.746\
+CSDS UChicago: This is\
+\
+396\
+00:30:44.600 --> 00:30:48.980\
+CSDS UChicago: Chicago. Again, socioeconomic determinants of health.\
+\
+397\
+00:30:49.370 --> 00:30:54.850\
+CSDS UChicago: The this is as the census tract level. The data are for 2014\
+\
+398\
+00:30:54.980 --> 00:31:01.580\
+CSDS UChicago: 791 census tracts. So it has thing like things like\
+\
+399\
+00:31:02.150 --> 00:31:05.750\
+CSDS UChicago: different disease predominances, and then\
+\
+400\
+00:31:06.758 --> 00:31:09.032\
+CSDS UChicago: income per capita\
+\
+401\
+00:31:09.900 --> 00:31:15.336\
+CSDS UChicago: high education level proficiency of English things like that.\
+\
+402\
+00:31:16.000 --> 00:31:19.609\
+CSDS UChicago: typical socioeconomic characteristics that you can then\
+\
+403\
+00:31:20.584 --> 00:31:25.899\
+CSDS UChicago: relate to specific health outcomes. This was part\
+\
+404\
+00:31:26.120 --> 00:31:28.679\
+CSDS UChicago: of an actual study that was looking at\
+\
+405\
+00:31:28.730 --> 00:31:35.060\
+CSDS UChicago: spatial discrepancies in health outcomes, and what might be the drivers of that.\
+\
+406\
+00:31:35.320 --> 00:31:36.139\
+CSDS UChicago: So\
+\
+407\
+00:31:37.750 --> 00:31:39.420\
+CSDS UChicago: oops! What am I doing here.\
+\
+408\
+00:31:49.810 --> 00:31:50.590\
+CSDS UChicago: then?\
+\
+409\
+00:31:54.360 --> 00:31:56.768\
+CSDS UChicago: the next data set is\
+\
+410\
+00:31:58.190 --> 00:32:01.829\
+CSDS UChicago: for Brazil, the state of Sierra.\
+\
+411\
+00:32:02.120 --> 00:32:20.480\
+CSDS UChicago: I know I'm not pronouncing this right. But my Portuguese isn't that great? And it's socioeconomic data from the Brazilian urban census and also prevalence of Zika\
+\
+412\
+00:32:20.540 --> 00:32:24.130\
+CSDS UChicago: and microcephaly. Those are 2 diseases\
+\
+413\
+00:32:24.210 --> 00:32:27.380\
+CSDS UChicago: that are spread by mosquitoes.\
+\
+414\
+00:32:27.680 --> 00:32:33.340\
+CSDS UChicago: and again, spatial randomness. Every area should have its same share.\
+\
+415\
+00:32:33.350 --> 00:32:36.539\
+CSDS UChicago: And it's not so. Why is it not so? Right?\
+\
+416\
+00:32:36.660 --> 00:32:45.509\
+CSDS UChicago: And of course your immediate answer is because there's more mosquitoes in some places than other places. And that would be one answer. There's other answers as well.\
+\
+417\
+00:32:45.540 --> 00:32:50.020\
+CSDS UChicago: So this has all these variables.\
+\
+418\
+00:32:50.440 --> 00:32:52.315\
+CSDS UChicago: The we have.\
+\
+419\
+00:32:55.430 --> 00:32:58.050\
+CSDS UChicago: This is Mexico, Oaxaca.\
+\
+420\
+00:32:58.500 --> 00:33:02.790\
+CSDS UChicago: This is state in the south of Mexico, and these are\
+\
+421\
+00:33:03.760 --> 00:33:08.730\
+CSDS UChicago: 570 municipals. They're like county type size.\
+\
+422\
+00:33:08.820 --> 00:33:16.923\
+CSDS UChicago: And these are different indicators of economic development. So all kinds of things for different years.\
+\
+423\
+00:33:17.580 --> 00:33:23.700\
+CSDS UChicago: things like schooling employment income levels. Population change.\
+\
+424\
+00:33:24.489 --> 00:33:29.789\
+CSDS UChicago: The interesting thing about this particular state or Hakka\
+\
+425\
+00:33:29.850 --> 00:33:31.799\
+CSDS UChicago: is, it's very mountainous.\
+\
+426\
+00:33:32.050 --> 00:33:33.939\
+CSDS UChicago: And there is a clear\
+\
+427\
+00:33:33.950 --> 00:33:39.299\
+CSDS UChicago: differentiation. I mean, the the villages in the mountains are very remote.\
+\
+428\
+00:33:39.710 --> 00:33:44.780\
+CSDS UChicago: And so this data set spans a number of years.\
+\
+429\
+00:33:45.360 --> 00:34:02.360\
+CSDS UChicago: and you can see the evolution over the years, both in the valley as well as in the mountain ranges. There's even data on the use of personal computers and things like that in there. So it's it's real Brazilian census data.\
+\
+430\
+00:34:02.600 --> 00:34:07.240\
+CSDS UChicago: And one of my students used this in her thesis in her master's thesis.\
+\
+431\
+00:34:10.080 --> 00:34:15.870\
+CSDS UChicago: then this is another one. I I know some of you are interested in banking.\
+\
+432\
+00:34:16.500 --> 00:34:20.038\
+CSDS UChicago: or maybe it was in the other class. I can't remember.\
+\
+433\
+00:34:20.420 --> 00:34:23.429\
+CSDS UChicago: these are actual community banks.\
+\
+434\
+00:34:23.500 --> 00:34:26.869\
+CSDS UChicago: So these are not the big commercial banks. These are the\
+\
+435\
+00:34:27.020 --> 00:34:32.329\
+CSDS UChicago: local banks in the Italian bank system. There's different kinds of banks, and they're regulated\
+\
+436\
+00:34:32.500 --> 00:34:39.110\
+CSDS UChicago: slightly differently. And these are actual financial characteristics. For each of these banks.\
+\
+437\
+00:34:39.520 --> 00:34:42.000\
+CSDS UChicago: And the research question there is.\
+\
+438\
+00:34:42.420 --> 00:34:48.729\
+CSDS UChicago: is there some clustering going on? Are banks that are closer together, more competitive.\
+\
+439\
+00:34:48.739 --> 00:34:59.980\
+CSDS UChicago: and therefore better performing than those who are pseudo monopolies, and are further removed from the others. And this, again, is a real paper that was published.\
+\
+440\
+00:35:00.260 --> 00:35:02.940\
+CSDS UChicago: That I did with some colleagues from Italy.\
+\
+441\
+00:35:04.920 --> 00:35:09.759\
+CSDS UChicago: and let's see, spirals we won't use. That is\
+\
+442\
+00:35:09.920 --> 00:35:11.979\
+CSDS UChicago: a classic\
+\
+443\
+00:35:12.220 --> 00:35:19.600\
+CSDS UChicago: example. There's another one called Swiss cake. These are classic examples from data science\
+\
+444\
+00:35:19.790 --> 00:35:27.419\
+CSDS UChicago: that don't follow a linear pattern. I mean, these spirals are clustered by the spirals\
+\
+445\
+00:35:27.968 --> 00:35:31.950\
+CSDS UChicago: most clustering techniques don't know how to deal with this.\
+\
+446\
+00:35:32.120 --> 00:35:35.180\
+CSDS UChicago: because these are nonlinear patterns in the data.\
+\
+447\
+00:35:35.320 --> 00:35:40.627\
+CSDS UChicago: Spectral clustering, which is a specialized method, can deal with this. So\
+\
+448\
+00:35:41.620 --> 00:35:45.820\
+CSDS UChicago: I have this in here to illustrate techniques in my.\
+\
+449\
+00:35:46.210 --> 00:35:48.229\
+CSDS UChicago: a clustering book.\
+\
+450\
+00:35:48.360 --> 00:35:52.580\
+CSDS UChicago: This is, an old favorite of mine. This is a\
+\
+451\
+00:35:52.800 --> 00:35:57.259\
+CSDS UChicago: historic data set from the mid 18 hundreds\
+\
+452\
+00:35:57.510 --> 00:35:59.377\
+CSDS UChicago: in France. It's\
+\
+453\
+00:36:00.030 --> 00:36:03.390\
+CSDS UChicago: was put together by a sociologist called Gary.\
+\
+454\
+00:36:03.770 --> 00:36:13.429\
+CSDS UChicago: and it is one of the 1st examples of using a map. I mean, of course, not the geoda map, but his map in his book\
+\
+455\
+00:36:13.952 --> 00:36:16.910\
+CSDS UChicago: To depict the spatial distribution of\
+\
+456\
+00:36:16.970 --> 00:36:20.590\
+CSDS UChicago: economic socioeconomic data demographic data.\
+\
+457\
+00:36:21.930 --> 00:36:27.860\
+CSDS UChicago: So it has data on literacy, on age, on crime, different kind of crime\
+\
+458\
+00:36:27.960 --> 00:36:29.970\
+CSDS UChicago: and and stuff like that.\
+\
+459\
+00:36:31.360 --> 00:36:38.920\
+CSDS UChicago: It's a nice data set, because it's just big enough 85 departments to do some interesting analysis.\
+\
+460\
+00:36:38.950 --> 00:36:42.150\
+CSDS UChicago: But it's also not too big. I mean, once you get.\
+\
+461\
+00:36:42.260 --> 00:36:49.999\
+CSDS UChicago: you know, 500 or 600 observations like the Oaxaca, one maps become a little challenging to interpret.\
+\
+462\
+00:36:50.050 --> 00:36:55.800\
+CSDS UChicago: You need a big screen, you know. On a laptop. It could be quite challenging.\
+\
+463\
+00:36:56.440 --> 00:36:57.140\
+CSDS UChicago: Then.\
+\
+464\
+00:36:59.670 --> 00:37:02.819\
+CSDS UChicago: we have us homicides, which is a\
+\
+465\
+00:37:04.550 --> 00:37:10.480\
+CSDS UChicago: in there for legacy purposes. It's used. It's county data for the Us.\
+\
+466\
+00:37:10.490 --> 00:37:18.029\
+CSDS UChicago: With homicide information and brace yourself for 1960, 1970, 1980\
+\
+467\
+00:37:18.060 --> 00:37:22.489\
+CSDS UChicago: and 1990. So this is all well before your time.\
+\
+468\
+00:37:22.800 --> 00:37:25.269\
+CSDS UChicago: Just think of it as historical data.\
+\
+469\
+00:37:26.044 --> 00:37:30.385\
+CSDS UChicago: When we actually used it. It was not historical, but\
+\
+470\
+00:37:31.110 --> 00:37:34.798\
+CSDS UChicago: it's a good data set to illustrate\
+\
+471\
+00:37:35.320 --> 00:37:41.630\
+CSDS UChicago: clustering and specifically differentiation between, say, the Midwest and the South\
+\
+472\
+00:37:41.720 --> 00:37:47.169\
+CSDS UChicago: east than the coasts in the city in the Us. I mean, if you're not familiar with us geography.\
+\
+473\
+00:37:47.280 --> 00:37:49.715\
+CSDS UChicago: you know, don't worry about it. It's just\
+\
+474\
+00:37:50.930 --> 00:37:55.869\
+CSDS UChicago: The fact. If I mean what I like to say is, if you're from Mars.\
+\
+475\
+00:37:56.430 --> 00:38:01.350\
+CSDS UChicago: Geoda will help you learn the geography of a place that you're studying\
+\
+476\
+00:38:01.660 --> 00:38:08.450\
+CSDS UChicago: because it brings out. If you start mapping some of these things and using some of these cluster techniques\
+\
+477\
+00:38:08.610 --> 00:38:11.480\
+CSDS UChicago: right away. The coasts pop out\
+\
+478\
+00:38:11.640 --> 00:38:13.919\
+CSDS UChicago: the coasts are different from the middle.\
+\
+479\
+00:38:14.550 --> 00:38:34.600\
+CSDS UChicago: and in the middle the upper Midwest is different from the southeast, and so these kind of broad patterns, even if you know nothing about the geography of the country they pop out, and that is the power of exploratory spatial data analysis that these patterns come out\
+\
+480\
+00:38:35.170 --> 00:38:36.210\
+CSDS UChicago: even\
+\
+481\
+00:38:36.968 --> 00:38:41.790\
+CSDS UChicago: when you know nothing about the the topic that you're studying.\
+\
+482\
+00:38:42.310 --> 00:38:44.639\
+CSDS UChicago: Then just a couple more.\
+\
+483\
+00:38:44.770 --> 00:38:49.439\
+CSDS UChicago: And I I'm doing this to give you a sense. Of course you can use your own data\
+\
+484\
+00:38:49.920 --> 00:39:02.260\
+CSDS UChicago: if you have them. Don't start collecting data at this point, but if you have something ready to go, by all means, but otherwise pick one of these. These are some classic data.\
+\
+485\
+00:39:02.330 --> 00:39:07.390\
+CSDS UChicago: They're not that good for the stuff we will be doing because they're points.\
+\
+486\
+00:39:07.740 --> 00:39:13.120\
+CSDS UChicago: This is a very old data set with house sale prices in Baltimore.\
+\
+487\
+00:39:13.250 --> 00:39:17.259\
+CSDS UChicago: It's used in several papers in the literature. That's why we have it.\
+\
+488\
+00:39:18.210 --> 00:39:20.370\
+CSDS UChicago: It's totally dated.\
+\
+489\
+00:39:20.730 --> 00:39:23.629\
+CSDS UChicago: The other one is even more dated.\
+\
+490\
+00:39:23.680 --> 00:39:25.896\
+CSDS UChicago: It's house prices in\
+\
+491\
+00:39:26.660 --> 00:39:29.340\
+CSDS UChicago: keeps doing this in Boston.\
+\
+492\
+00:39:30.440 --> 00:39:33.799\
+CSDS UChicago: also used in some classic papers.\
+\
+493\
+00:39:33.810 --> 00:39:36.295\
+CSDS UChicago: and then the last one is\
+\
+494\
+00:39:36.880 --> 00:39:39.499\
+CSDS UChicago: and these are all still in there because\
+\
+495\
+00:39:39.640 --> 00:39:42.670\
+CSDS UChicago: they used to be part of\
+\
+496\
+00:39:43.260 --> 00:39:46.679\
+CSDS UChicago: the sample data sets. This is New York.\
+\
+497\
+00:39:49.620 --> 00:39:54.710\
+CSDS UChicago: subsets of boroughs. There's 54 of them, 55 of them.\
+\
+498\
+00:39:54.800 --> 00:39:58.600\
+CSDS UChicago: And these are a bunch of socioeconomic data that were\
+\
+499\
+00:39:58.620 --> 00:40:07.069\
+CSDS UChicago: collected by a center at Nyu. So this again is a little bit dated. Now. I think it's from the early 2 thousands, but\
+\
+500\
+00:40:07.220 --> 00:40:10.330\
+CSDS UChicago: it's it's an interesting data set. Because, again.\
+\
+501\
+00:40:10.810 --> 00:40:14.199\
+CSDS UChicago: if you're from New York. I don't have to tell you this.\
+\
+502\
+00:40:14.320 --> 00:40:15.110\
+CSDS UChicago: but\
+\
+503\
+00:40:15.890 --> 00:40:20.379\
+CSDS UChicago: New York is very stratified. It's very structured spatially.\
+\
+504\
+00:40:20.540 --> 00:40:24.320\
+CSDS UChicago: You know, Manhattan is very different from the rest of New York.\
+\
+505\
+00:40:24.500 --> 00:40:27.440\
+CSDS UChicago: If you don't know this, this will show you.\
+\
+506\
+00:40:27.750 --> 00:40:29.960\
+CSDS UChicago: it will pop out. And you\
+\
+507\
+00:40:30.090 --> 00:40:39.669\
+CSDS UChicago: the question you ask, well, why is this the case? Why isn't Manhattan just like everything else? It's not. There's structure there. There's a reason for it.\
+\
+508\
+00:40:40.300 --> 00:40:43.989\
+CSDS UChicago: So these are the different data sets.\
+\
+509\
+00:40:44.140 --> 00:40:46.573\
+CSDS UChicago: By all means explore them.\
+\
+510\
+00:40:48.410 --> 00:40:52.009\
+CSDS UChicago: see what strikes you? What? What kind of\
+\
+511\
+00:40:52.602 --> 00:41:00.759\
+CSDS UChicago: subject is more interesting to you, or pick your own data. If you're gonna pick your own data. Run it by me. Okay, I wanna make sure\
+\
+512\
+00:41:01.430 --> 00:41:04.190\
+CSDS UChicago: that you can do what you want to do.\
+\
+513\
+00:41:04.310 --> 00:41:07.470\
+CSDS UChicago: Okay, so let me any questions at this point.\
+\
+514\
+00:41:09.040 --> 00:41:24.509\
+CSDS UChicago: So you can, you have these built in data sets. Then you can also go to the geoda center. I showed you the link on Monday. There's a whole data set subset where you can again browse it.\
+\
+515\
+00:41:24.560 --> 00:41:36.010\
+CSDS UChicago: and there's some descriptions, and you can pick one of those as well. So you know. The sky is the limit. And I mean, there's, I think there's close to a hundred different data sets. So\
+\
+516\
+00:41:36.180 --> 00:41:42.760\
+CSDS UChicago: you really can all kinds of different topics, housing, environment, politics, you know different things.}

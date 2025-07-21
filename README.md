@@ -2,7 +2,18 @@
 
 This is the new Docusaurus-based website for GeoDa, migrated from the original static HTML site. The site maintains the same visual design and content while providing a modern, maintainable codebase with full internationalization support.
 
-## 🚀 Quick Start
+## 🚀 Shortcuts
+
+### Adding a new blog post
+
+See [ADD_BLOG.md](ADD_BLOG.md) for details.
+
+### Adding an announcement
+
+See [ADD_ANNOUNCEMENT.md](ADD_ANNOUNCEMENT.md) for details.
+
+
+## 📋 Quick Start
 
 ### Prerequisites
 
@@ -87,22 +98,11 @@ The site supports multiple languages with an enhanced fallback system:
 - **Spanish** (es) - Español  
 - **German** (de) - Deutsch
 
-### Features
-
-1. **Language Switcher**: Global language switcher in the navigation bar
-2. **Enhanced Fallback System**: Three-level fallback for missing translations
-3. **Content Management**: JSON-based content files for easy translation
-4. **URL-based Routing**: Language-specific URLs (e.g., `/zh-Hans/`, `/es/`)
-
-### Fallback System
-
-The enhanced fallback system provides three levels of fallback:
-
-1. **File-level fallback**: If a localized file doesn't exist, use the English version
-2. **Deep merge fallback**: Merge localized content with English content, ensuring all properties exist
-3. **Property-level fallback**: Access specific properties with automatic fallback to English
-
 ### Content Structure
+
+If you want to edit the content for different pages, you can edit the content in the `src/data/` folder.
+
+For example, if you want to edit the content for the homepage, you can edit the `indexContent.json` file.
 
 ```
 src/data/

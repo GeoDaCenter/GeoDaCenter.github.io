@@ -12,7 +12,6 @@ s3/logs/*
 s3/logs/
 
 !download_update.py
-*.json
 
 node_modules
 build

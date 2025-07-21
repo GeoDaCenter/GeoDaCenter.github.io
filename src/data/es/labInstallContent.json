@@ -1,0 +1,40 @@
+{
+  "title": "Guía de Instalación de Laboratorio",
+  "notes": {
+    "title": "Notas:",
+    "content": "GeoDa requiere permisos de escritura en varios directorios/archivos. Al instalar GeoDa en un entorno de laboratorio, asegúrese de que los siguientes directorios y archivos tengan permisos de escritura:",
+    "items": [
+      "/basemap_cache/ (directorio para descargar mosaicos de mapa base)",
+      "cache.sqlite (archivo para configuraciones de GeoDa)"
+    ]
+  },
+  "windows": {
+    "title": "Windows",
+    "content": "Con el instalador más reciente de GeoDa en Windows (1.10+), puede intentar instalarlo en modo silencioso usando el comando:",
+    "command": "GeoDa-1.10-Windows-64bit.exe /VERYSILENT /SUPPRESSMSGBOXES",
+    "additionalInfo": "(otros interruptores están aquí: http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline)",
+    "prerequisites": {
+      "content": "Sin embargo, GeoDa verificará si se ha instalado visual c++ 2010 redistributable, por lo que debe instalar el paquete visual c++ 2010 redistributable en línea de comandos en modo silencioso primero. Por ejemplo:",
+      "command": "vc++2010.res.exe /quiet",
+      "note": "Uno puede buscar \"Mictosoft Visual C++ 2010 Redistributable Package X86/X64\" para descargar. Además, GeoDa verificará si se ha instalado una versión anterior de GeoDa, por lo que este comando de modo silencioso solo funcionará con una instalación limpia."
+    },
+    "links": [
+      {
+        "text": "http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline",
+        "href": "http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline",
+        "external": true
+      }
+    ]
+  },
+  "centos": {
+    "title": "CentOS",
+    "content": "Para instalar GeoDa en CentOS en un entorno de laboratorio, puede usar el paquete GeoDa sin permisos de root. Puede descargar",
+    "links": [
+      {
+        "text": "aquí",
+        "href": "./download-linux",
+        "external": false
+      }
+    ]
+  }
+} 

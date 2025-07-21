@@ -1,0 +1,29 @@
+{
+  "tagline": "Plugins | ESRI Personal Geodatabase Plugin Setup",
+  "mainContent": {
+    "title": "Plugins | ESRI Personal Geodatabase Plugin Setup",
+    "description": [
+      "In 32-bit Windows sollten Sie ESRI Personal Geodatabase (*.mdb) Dateien direkt öffnen können.",
+      "Aber in 64-bit Windows akzeptiert GeoDa nur den DSN-Namen einer ESRI Personal Geodatabase (*.mdb) Datei, die im ODBC Data Source Administrator Dialogfeld erstellt wurde.",
+      "Um Ihre ESRI Personal Geodatabase (.mdb Datei) in GeoDa zugänglich zu machen, müssen Sie einen DSN-Namen dafür erstellen (Microsoft Access Driver (*.mdb, *.accdb) im ODBC Data Source Administrator (Systemsteuerung).",
+      "Als nächstes können Sie den Namen dieses DSN eingeben, um diese ESRI Personal Database zu öffnen."
+    ],
+    "images": [
+      {
+        "src": "./img/pgeo_1.png",
+        "alt": "ODBC Data Source Administrator"
+      },
+      {
+        "src": "./img/pgeo_2.png",
+        "alt": "Microsoft Access Driver Setup"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Kontakt",
+    "content": "Fragen? Kontaktieren Sie uns.",
+    "links": [
+      { "text": "uns", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  }
+} 

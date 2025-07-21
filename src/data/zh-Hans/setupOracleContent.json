@@ -1,0 +1,119 @@
+{
+  "tagline": "插件 | 设置 Oracle 空间数据库插件",
+  "mainContent": {
+    "title": "插件 | 设置 Oracle 空间数据库插件",
+    "navigation": [
+      { "text": "Windows (32位)", "href": "#win32" },
+      { "text": "Windows (64位)", "href": "#win64" },
+      { "text": "Mac OSX (64位)", "href": "#osx64" },
+      { "text": "Ubuntu (32位)", "href": "#ubu32" },
+      { "text": "Ubuntu (64位)", "href": "#ubu64" }
+    ],
+    "sections": [
+      {
+        "id": "win32",
+        "title": "Windows (32位)",
+        "steps": [
+          "从 http://www.oracle.com/technetwork/topics/winsoft-085727.html 下载Windows 32位Oracle Instant Client（版本≤11.2.x）",
+          "（注意：您必须注册才能获得Oracle Instant Client）",
+          "版本 11.2.0.3.0 (32位)",
+          "Instant Client Package - Basic：运行OCI、OCCI和JDBC-OIC应用程序所需的所有文件",
+          "instantclient-basic-windows.x86-11.2.0.3.0.zip",
+          "将下载的ZIP包解压到本地硬盘。例如：C:\\instantclient_11_2",
+          "为Oracle Instant Client设置Windows系统环境",
+          "在\"系统属性\"对话框中，将Oracle Instant Client的路径添加到PATH系统变量中（见以下示例）",
+          "（注意：您需要在Oracle路径前添加;）",
+          "重启GeoDa程序，然后您应该能够使用GeoDa-Oracle-Plugin连接到Oracle空间数据库"
+        ],
+        "image": "./img/ev-oracle.png",
+        "imageAlt": "Oracle环境变量设置",
+        "commandBlock": false
+      },
+      {
+        "id": "win64",
+        "title": "Windows (64位)",
+        "steps": [
+          "从 http://www.oracle.com/technetwork/topics/winx64soft-089540.html 下载Windows 64位Oracle Instant Client（版本≤11.2.x）",
+          "（注意：您必须注册才能获得Oracle Instant Client）",
+          "版本 11.2.0.3.0 (64位)",
+          "Instant Client Package - Basic：运行OCI、OCCI和JDBC-OIC应用程序所需的所有文件",
+          "instantclient-basic-windows.x64-11.2.0.3.0.zip",
+          "将下载的ZIP包解压到本地硬盘。例如：C:\\instantclient_11_2",
+          "为Oracle Instant Client设置Windows系统环境",
+          "在\"系统属性\"对话框中，将Oracle Instant Client的路径添加到PATH系统变量中（见以下示例）",
+          "（注意：您需要在Oracle路径前添加;）",
+          "重启GeoDa程序，然后您应该能够使用GeoDa-Oracle-Plugin连接到Oracle空间数据库"
+        ],
+        "image": "./img/ev-oracle.png",
+        "imageAlt": "Oracle环境变量设置",
+        "commandBlock": false
+      },
+      {
+        "id": "osx64",
+        "title": "Mac OSX ≥10.6 (64位)",
+        "steps": [
+          "从 http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html 下载Oracle Instant Client Package - Basic，64位（版本≤11.2.x）",
+          "（注意：您必须注册才能获得Oracle Instant Client）",
+          "版本 11.2.0.3.0 (64位)",
+          "Instant Client Package - Basic：运行OCI、OCCI和JDBC-OIC应用程序所需的所有文件",
+          "instantclient-basic-macosx.x64-11.2.0.3.0.zip",
+          "将下载的ZIP包解压到本地硬盘。例如：/Users/yourname/Downloads/instantclient_11_2",
+          "打开新终端，运行以下2个命令来为GeoDa配置Oracle客户端",
+          "export ORACLE_HOME=/Users/yourname/Downloads/instantclient_11_2",
+          "./install_plugins.sh /path/to/downloaded_GeoDa.app/",
+          "第一行命令将Oracle Instant Client位置存储到变量ORACLE_HOME中。",
+          "第二行命令更新GeoDa的Oracle插件配置。",
+          "重启GeoDa程序，然后您应该能够使用GeoDa-Oracle-Plugin连接到Oracle空间数据库"
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      },
+      {
+        "id": "ubu32",
+        "title": "Ubuntu ≥12 (32位)",
+        "steps": [
+          "从 http://www.oracle.com/technetwork/topics/linuxsoft-082809.html 下载Oracle Instant Client 32位（版本≤11.2.x）",
+          "（注意：您必须注册才能获得Oracle Instant Client）",
+          "版本 11.2.0.3.0 (32位)",
+          "Instant Client Package - Basic：运行OCI、OCCI和JDBC-OIC应用程序所需的所有文件",
+          "instantclient-basic-linux-11.2.0.3.0.zip",
+          "将下载的ZIP包解压到本地硬盘。例如：/home/yourname/Downloads/instantclient_11_2",
+          "为Oracle Instant Client设置Ubuntu系统环境",
+          "在终端中运行以下命令（注意：记住替换\"yourname\"）",
+          "echo \"export ORACLE_HOME=/home/yourname/Downloads/instantclient_11_2\" >> ~/.bashrc",
+          "重启GeoDa程序，然后您应该能够使用GeoDa-Oracle-Plugin连接到Oracle空间数据库"
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      },
+      {
+        "id": "ubu64",
+        "title": "Ubuntu ≥12 (64位)",
+        "steps": [
+          "从 http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html 下载Oracle Instant Client 64位（版本≤11.2.x）",
+          "（注意：您必须注册才能获得Oracle Instant Client）",
+          "版本 11.2.0.3.0 (64位)",
+          "Instant Client Package - Basic：运行OCI、OCCI和JDBC-OIC应用程序所需的所有文件",
+          "instantclient-basic-linux.x64-11.2.0.3.0.zip",
+          "将下载的ZIP包解压到本地硬盘。例如：/home/yourname/Downloads/instantclient_11_2",
+          "为Oracle Instant Client设置Ubuntu系统环境",
+          "在终端中运行以下命令（注意：记住替换\"yourname\"）",
+          "echo \"export ORACLE_HOME=/home/yourname/Downloads/instantclient_11_2\" >> ~/.bashrc",
+          "重启GeoDa程序，然后您应该能够使用GeoDa-Oracle-Plugin连接到Oracle空间数据库"
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      }
+    ]
+  },
+  "contact": {
+    "title": "联系我们",
+    "content": "有问题？请联系我们。",
+    "links": [
+      { "text": "我们", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  }
+} 

@@ -1,0 +1,40 @@
+{
+  "title": "实验室安装指南",
+  "notes": {
+    "title": "注意事项：",
+    "content": "GeoDa 需要对多个目录/文件具有写入权限。在实验室环境中安装 GeoDa 时，请确保以下目录和文件具有写入权限：",
+    "items": [
+      "/basemap_cache/ （下载底图瓦片的目录）",
+      "cache.sqlite （GeoDa 配置文件）"
+    ]
+  },
+  "windows": {
+    "title": "Windows",
+    "content": "使用 Windows 上的最新 GeoDa 安装程序（1.10+），您可以尝试使用以下命令以静默模式安装：",
+    "command": "GeoDa-1.10-Windows-64bit.exe /VERYSILENT /SUPPRESSMSGBOXES",
+    "additionalInfo": "（其他开关在此处：http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline）",
+    "prerequisites": {
+      "content": "但是，GeoDa 会检查是否已安装 visual c++ 2010 redistributable，因此您必须先以静默模式在命令行中安装 visual c++ 2010 redistributable 包。例如：",
+      "command": "vc++2010.res.exe /quiet",
+      "note": "可以搜索 \"Mictosoft Visual C++ 2010 Redistributable Package X86/X64\" 下载。此外，GeoDa 会检查是否已安装旧版本的 GeoDa，因此此静默模式命令仅适用于全新安装。"
+    },
+    "links": [
+      {
+        "text": "http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline",
+        "href": "http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline",
+        "external": true
+      }
+    ]
+  },
+  "centos": {
+    "title": "CentOS",
+    "content": "要在实验室环境的 CentOS 上安装 GeoDa，您可以使用无需 root 权限的 GeoDa 包。您可以在此处下载",
+    "links": [
+      {
+        "text": "此处",
+        "href": "./download-linux",
+        "external": false
+      }
+    ]
+  }
+} 

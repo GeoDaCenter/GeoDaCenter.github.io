@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "title": "GeoDa",
+    "tagline": "An Introduction to Spatial Data Science",
+    "buttons": [
+      { "text": "Home", "href": "/" },
+      { "text": "Download", "href": "/download" },
+      {
+        "text": "Data",
+        "href": "https://geodacenter.github.io/data-and-lab/",
+        "external": true
+      },
+      { "text": "Cheat Sheet", "href": "/cheatsheet" },
+      { "text": "Documentation", "href": "/documentation" },
+      { "text": "Support", "href": "/support" }
+    ]
+  },
+  "footer": {
+    "sections": [],
+    "credits": {
+      "owner": "GeoDa is maintained by lixun910.",
+      "generated": "This page was generated using Docusaurus.",
+      "links": []
+    }
+  }
+}

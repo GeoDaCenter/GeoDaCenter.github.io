@@ -1,0 +1,351 @@
+{
+  "title": "Respuestas a Preguntas Técnicas de GeoDa",
+  "navigation": [
+    {
+      "id": "data",
+      "text": "¿Qué características debe tener mis datos?"
+    },
+    {
+      "id": "datasize",
+      "text": "¿Cuáles son los límites de tamaño de datos en GeoDa?"
+    },
+    {
+      "id": "specs",
+      "text": "¿En qué plataformas funciona GeoDa?"
+    },
+    {
+      "id": "layer",
+      "text": "¿Puedo cargar más de una capa en GeoDa?"
+    },
+    {
+      "id": "miss",
+      "text": "¿Qué hacer con valores faltantes?"
+    },
+    {
+      "id": "choice",
+      "text": "¿Qué matriz de pesos debo elegir?"
+    },
+    {
+      "id": "dist",
+      "text": "¿Qué pasa cuando establezco la distancia umbral más baja que el predeterminado?"
+    },
+    {
+      "id": "invdist",
+      "text": "¿GeoDa incluye ponderación de distancia inversa?"
+    },
+    {
+      "id": "unit",
+      "text": "¿Cómo obtengo las unidades de distancia que quiero?"
+    },
+    {
+      "id": "isle",
+      "text": "¿Qué hacer con islas?"
+    },
+    {
+      "id": "projection",
+      "text": "¿Cómo asigno proyecciones y sistemas de coordenadas a mi archivo espacial?"
+    },
+    {
+      "id": "lisactr",
+      "text": "Los mapas LISA solo muestran el centro del clúster"
+    },
+    {
+      "id": "lisasig",
+      "text": "¿Cómo evaluar la sensibilidad de los resultados LISA?"
+    },
+    {
+      "id": "lisabox",
+      "text": "Mi mapa de caja no refleja mi mapa LISA - ¿por qué?"
+    },
+    {
+      "id": "robust",
+      "text": "¿Qué tan robusto es el valor p pseudo?"
+    },
+    {
+      "id": "smooth",
+      "text": "¿Cómo evaluar la sensibilidad de diferentes suavizadores?"
+    },
+    {
+      "id": "regout",
+      "text": "Ejecutar regresión sin abrir proyecto"
+    },
+    {
+      "id": "output",
+      "text": "¿Dónde puedo obtener ayuda para interpretar la salida de regresión?"
+    }
+  ],
+  "questions": [
+    {
+      "id": "data",
+      "question": "¿Qué características debe tener mis datos?",
+      "answer": "GeoDa está diseñado para datos con las siguientes características:",
+      "list": [
+        "Distribuidos continuamente (no categóricamente)",
+        "Se refiere a unidades areales discretas (a diferencia de puntos de muestra)",
+        "No tiene valores faltantes."
+      ]
+    },
+    {
+      "id": "datasize",
+      "question": "¿Cuáles son los límites de tamaño de datos en GeoDa?",
+      "answer": "Para el análisis ESDA en GeoDa, puede ser difícil detectar patrones a través de múltiples vistas para datos más grandes que 5,000-10,000 observaciones, aunque algunas aplicaciones lo han usado para más de 170,000 áreas. Sin embargo, el rendimiento tiende a ralentizarse en estos casos. GeoDa-Web está siendo diseñado para conjuntos de datos más grandes. Para el análisis de regresión espacial, el umbral para reducciones de rendimiento dependerá de la elección de pesos espaciales pero a menudo se encuentra entre 50,000-100,000 observaciones. GeoDaSpace (especialmente los estimadores GMM) son más adecuados para conjuntos de datos más grandes."
+    },
+    {
+      "id": "specs",
+      "question": "¿En qué plataformas funciona GeoDa?",
+      "answer": "GeoDa funciona en Windows, Mac OSX y Linux. No accede a carpetas del sistema restringidas en Windows."
+    },
+    {
+      "id": "layer",
+      "question": "¿Puedo cargar más de una capa en GeoDa?",
+      "answer": "No. Puedes agregar una capa de mapa base a un mapa de área o punto existente pero no otra capa adicional (como puntos y áreas). Esta opción está disponible en CAST y estará disponible en GeoDa-Web, que será lanzado en el futuro cercano.",
+      "links": [
+        {
+          "text": "CAST",
+          "href": "/CAST"
+        }
+      ]
+    },
+    {
+      "id": "miss",
+      "question": "¿Qué hacer con valores faltantes?",
+      "answer": "GeoDa no maneja valores faltantes - llenará campos en blanco con ceros o tratará valores como 99, -1, etc. como observados. No hay una solución fácil a este problema. Algunas opciones incluyen excluir observaciones faltantes, guardar nuevamente tu archivo shape solo para aquellas áreas sin valores faltantes o interpolar valores faltantes (se debe tener cuidado de que esta interpolación no se base en los valores de vecinos inmediatos, de lo contrario se introduce autocorrelación espacial por diseño).",
+      "links": [
+        {
+          "text": "autocorrelación espacial",
+          "href": "./glossary#sa"
+        }
+      ]
+    },
+    {
+      "id": "choice",
+      "question": "¿Qué matriz de pesos debo elegir?",
+      "answer": "La elección de pesos debe estar impulsada en última instancia por una justificación para incluir aquellas áreas como vecinos que tienen un efecto espacial en una ubicación dada. Esta justificación puede derivarse de la teoría o ser el resultado de usar ESDA para experimentar con diferentes pesos y órdenes de conectividad. Dado que las matrices de pesos se usan para crear rezagos espaciales que promedian valores vecinos, la elección de una matriz de pesos determinará qué valores vecinos serán promediados. Por ejemplo, dado que los pesos rook generalmente tendrán menos vecinos que los pesos queen, en promedio, cada observación vecina tiene más influencia.",
+      "links": [
+        {
+          "text": "pesos",
+          "href": "./glossary#wghts"
+        },
+        {
+          "text": "ESDA",
+          "href": "./glossary#esda"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "La pregunta de qué pesos elegir es más pertinente en el contexto del modelado que ESDA ya que el modelado se basa en nociones sustantivas de efectos espaciales mientras que ESDA prioriza el rechazo de la aleatoriedad espacial. Por lo tanto, si no hay razones sustantivas para guiar la elección de pesos en ESDA, usar un archivo de pesos con tan pocos vecinos como sea posible (como rook) tiene sentido. Especialmente con unidades areales irregulares (a diferencia de cuadrículas), la diferencia entre pesos rook y queen a menudo es mínima. Sin embargo, es aconsejable probar qué tan sensibles son tus resultados a tus especificaciones de pesos comparando múltiples matrices de pesos.",
+          "links": [
+            {
+              "text": "rook",
+              "href": "/node/390#rook"
+            },
+            {
+              "text": "queen",
+              "href": "/node/390#queen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "question": "¿Qué pasa cuando establezco la distancia umbral más baja que el predeterminado?",
+      "answer": "La distancia umbral predeterminada asegura que cada observación tenga al menos un vecino. Si estableces la distancia umbral como más pequeña que el mínimo predeterminado, GeoDa creará una matriz de pesos basada en tu umbral, no el predeterminado, es decir, contendrá observaciones \"isla\" sin vecinos. Puedes verificar esto fácilmente mirando las características de pesos en GeoDa y abriendo la matriz de pesos en un editor de texto.",
+      "links": [
+        {
+          "text": "matriz de pesos",
+          "href": "./glossary#wghts"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "Si tienes curiosidad sobre la diferencia entre la matriz con el umbral mínimo predeterminado y la tuya, crea ambas matrices y compáralas mirando sus características de pesos (que es un histograma del número de vecinos para todas las observaciones). Verás que la matriz de umbral mínimo no tiene observaciones con cero vecinos mientras que la tuya tendrá observaciones con cero vecinos.",
+          "links": [
+            {
+              "text": "características de pesos",
+              "href": "./glossary#hist"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invdist",
+      "question": "¿GeoDa incluye ponderación de distancia inversa?",
+      "answer": "Sí. Puedes crear diferentes tipos de pesos basados en distancia (con extensiones de archivo .gwt y .kwt) en GeoDa:",
+      "additionalParagraphs": [
+        {
+          "content": "GeoDa implementa pesos basados en bandas de distancia, ponderación de distancia inversa y ponderación de kernel. Para bandas de distancia, la tercera columna con distancias en el archivo .gwt solo se usa para determinar si un punto está dentro de una banda de distancia o no. La extensión de la banda de distancia se especifica por tu distancia umbral (el valor predeterminado asegura que no tengas islas). GeoDa estandariza por filas los pesos, es decir, las filas suman 1. Puedes encontrar más información sobre pesos espaciales basados en distancia aquí y sobre pesos de distancia inversa y pesos de kernel aquí.",
+          "links": [
+            {
+              "text": "aquí",
+              "href": "https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html",
+              "external": true
+            },
+            {
+              "text": "aquí",
+              "href": "https://geodacenter.github.io/workbook/4c_distance_functions/lab4c.html",
+              "external": true
+            }
+          ]
+        },
+        {
+          "content": "Si el tamaño de tus áreas varía considerablemente, podrías estar interesado en usar K-vecinos más cercanos, que asegura que cada punto tenga el mismo número de vecinos. Ten en cuenta, sin embargo, que estos pesos no se pueden usar para estimar modelos de regresión espacial con Máxima Verosimilitud ya que estos pesos son asimétricos."
+        }
+      ]
+    },
+    {
+      "id": "unit",
+      "question": "¿Cómo obtengo las unidades de distancia que quiero?",
+      "answer": "Si necesitas que la métrica mostrada en el cuadro de umbral de pesos de distancia refleje una unidad particular (por ejemplo, pies o millas), proyecta tu archivo shape u otro archivo espacial primero y establece las unidades deseadas en otro programa como un GIS. Luego crea los pesos basados en este archivo.",
+      "links": [
+        {
+          "text": "archivo shape",
+          "href": "./glossary#shape"
+        },
+        {
+          "text": "GIS",
+          "href": "./glossary#gis"
+        }
+      ]
+    },
+    {
+      "id": "isle",
+      "question": "¿Qué hacer con islas?",
+      "answer": "Las islas no deben usarse para mapas LISA y pueden ser problemáticas para los modelos de regresión de GeoDa. Una opción para asegurar que no hay islas es usar pesos de distancia (bandas de distancia o k-vecinos más cercanos). También puedes eliminar islas en GeoDa exportando un nuevo archivo espacial sin islas o asignándolas a otras áreas que sean similares editando la matriz de pesos en un editor de texto (para detalles sobre los formatos de pesos, ver la Guía del Usuario de GeoDa 0.9.3, pp. 80-81). Necesitarás asignar un ID de área continental al ID de isla, y viceversa, asignar el ID de isla al ID continental.",
+      "links": [
+        {
+          "text": "Guía del Usuario de GeoDa 0.9.3",
+          "href": "/docs/geoda093.pdf",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "projection",
+      "question": "¿Cómo asigno proyecciones y sistemas de coordenadas a mi archivo espacial?",
+      "answer": "GeoDa no contiene ninguna herramienta para establecer o cambiar proyecciones de mapa o sistemas de coordenadas geográficas. Los sistemas de coordenadas geográficas son relevantes para agregar un mapa base a tu mapa (necesitas WGS84). Pueden ser relevantes cuando usas los pesos de distancia de GeoDa, que se basan en las distancias entre puntos. Puedes establecer las unidades de distancia mostradas en el diálogo de distancia de pesos (por ejemplo, pies, metros o millas) proyectando primero el archivo espacial en un GIS fuera de GeoDa.",
+      "links": [
+        {
+          "text": "GIS",
+          "href": "./glossary#gis"
+        }
+      ]
+    },
+    {
+      "id": "lisactr",
+      "question": "Los mapas LISA solo muestran el centro del clúster",
+      "answer": "Ten en cuenta que el mapa de clúster LISA solo muestra el centro del clúster en color (por ejemplo, rojo para un clúster alto-alto). La extensión real del clúster incluye el centro y los vecinos circundantes como se define por la matriz de pesos. Si no estás seguro de qué unidades son vecinos, usa el mapa de conectividad en el Editor de Pesos.",
+      "links": [
+        {
+          "text": "matriz de pesos",
+          "href": "./glossary#wghts"
+        }
+      ]
+    },
+    {
+      "id": "lisasig",
+      "question": "¿Cómo evaluar la sensibilidad de los resultados LISA?",
+      "answer": "Para evaluar la sensibilidad de tus resultados, compara varias permutaciones y aplica varios filtros de significancia. De esta manera puedes explorar qué clústeres y valores atípicos espaciales permanecen estables a lo largo del proceso.",
+      "links": [
+        {
+          "text": "permutaciones",
+          "href": "./glossary#perm"
+        }
+      ]
+    },
+    {
+      "id": "lisabox",
+      "question": "Mi mapa de caja no refleja mi mapa LISA - ¿por qué?",
+      "answer": "Las categorías de cuantiles del mapa de caja, como las del diagrama de caja, se basan en la mediana. Con distribuciones altamente sesgadas (por ejemplo, cuando la media es mucho más baja que la mediana), las categorías del mapa de caja podrían no reflejar el mismo patrón que el mapa LISA. Cuando la distribución es simétrica, los resultados del mapa de caja y el mapa LISA son muy similares."
+    },
+    {
+      "id": "robust",
+      "question": "¿Qué tan robusto es el valor p pseudo?",
+      "answer": "Explora qué tan robusto es tu valor observado de Moran's I comparado con la distribución de referencia aleatorizada. En el diagrama de dispersión de Moran, aumenta el número de permutaciones desde 99 hacia arriba y prueba si la relación entre el Moran's I observado y aleatorizado cambia. En los mapas LISA, aumenta el número de aleatorizaciones desde 99 permutaciones hacia arriba para ver si los clústeres cambian.",
+      "links": [
+        {
+          "text": "aleatorizada",
+          "href": "./glossary#random"
+        },
+        {
+          "text": "diagrama de dispersión de Moran",
+          "href": "./glossary#gmoran"
+        },
+        {
+          "text": "LISA",
+          "href": "./glossary#lisa2"
+        }
+      ]
+    },
+    {
+      "id": "smooth",
+      "question": "¿Cómo evaluar la sensibilidad de diferentes suavizadores?",
+      "answer": "Para evaluar qué tan sensible es la identificación de valores atípicos a una técnica de suavizado específica, puedes comparar visualmente los diferentes suavizadores en GeoDa. Crea cuatro mapas (tasa cruda, suavizada EB, tasa espacial y suavizada EBS) y elige la opción de mapa de caja bajo temas de mapa cuando elijas tus variables base y de evento.",
+      "links": [
+        {
+          "text": "suavizado",
+          "href": "./glossary#smooth"
+        },
+        {
+          "text": "mapa de caja",
+          "href": "./glossary#boxmap"
+        },
+        {
+          "text": "variables base y de evento",
+          "href": "./glossary#event"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "Una de las consideraciones al elegir entre suavizadores es que el área de donde se toma la fuerza para corregir la inestabilidad de varianza local debe ser representativa del riesgo subyacente en un área local."
+        },
+        {
+          "content": "También puedes abrir uno o más diagrama(s) de caja de la tasa cruda y/o las tasas suavizadas para explorar las diferencias en valores atípicos a través de enlazado y cepillado.",
+          "links": [
+            {
+              "text": "diagrama(s) de caja",
+              "href": "./glossary#boxplot"
+            },
+            {
+              "text": "valores atípicos",
+              "href": "./glossary#outliers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regout",
+      "question": "Ejecutar regresión sin abrir proyecto",
+      "answer": "Puedes acceder a la funcionalidad de regresión de GeoDa sin abrir un archivo espacial yendo directamente a Regress después de abrir GeoDa. Esta opción es particularmente útil si estás trabajando con conjuntos de datos grandes (por ejemplo, varios cientos de miles de observaciones), para evitar tiempos de carga del archivo de mapa."
+    },
+    {
+      "id": "output",
+      "question": "¿Dónde puedo obtener ayuda para interpretar la salida de regresión?",
+      "answer": "El libro de trabajo de GeoDa contiene varios capítulos de regresión con más detalle sobre interpretación de salida. Para lectura de fondo adicional, ver las referencias de regresión y, en particular, Anselin (1988).",
+      "links": [
+        {
+          "text": "libro de trabajo de GeoDa",
+          "href": "/docs/geodaworkbook.pdf",
+          "external": true
+        },
+        {
+          "text": "referencias de regresión",
+          "href": "https://spatial.uchicago.edu/spatial-analysis-references",
+          "external": true
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "title": "Contacto",
+    "content": "¿Preguntas? Contáctanos.",
+    "links": [
+      {
+        "text": "nosotros",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
+  }
+} 

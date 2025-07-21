@@ -1,0 +1,208 @@
+{
+  "tagline": "Dokumentation",
+  "mainContent": {
+    "intro": {
+      "title": "GeoDa Arbeitsbuch",
+      "content": [
+        "Luc Anselin arbeitet derzeit an einer Buchversion dieses Arbeitsbuchs für GeoDa. Die unten stehende Dokumentation wird nicht mehr gepflegt. Die relevanten alternativen Referenzen sind diese beiden Bände des Buches:",
+        "L. Anselin (2024a). An Introduction to Spatial Data Science with GeoDa. Volume 1: Exploring Spatial Data. CRC/Chapman&Hall, Boca Raton, FL. Online-Version.",
+        "L. Anselin (2024b). An Introduction to Spatial Data Science with GeoDa. Volume 2: Clustering Spatial Data. CRC/Chapman&Hall, Boca Raton, FL. Online-Version."
+      ],
+      "links": [
+        { "text": "NONE", "href": "https://lanselin.github.io/introbook_vol1/", "external": true },
+        { "text": "Online-Version.", "href": "https://lanselin.github.io/introbook_vol1/", "external": true },
+        { "text": "Online-Version.", "href": "https://lanselin.github.io/introbook_vol2/", "external": true }
+      ]
+    },
+    "workbook": {
+      "title": "GeoDa Arbeitsbuch",
+      "items": [
+        {
+          "title": "Räumliche Datenaufbereitung (1) - Grundlegende Operationen",
+          "href": "./workbook/01_datawrangling_1/lab1a.html"
+        },
+        {
+          "title": "Räumliche Datenaufbereitung (2) - GIS-Operationen",
+          "href": "./workbook/01_datawrangling_2/lab1b.html"
+        },
+        {
+          "title": "Räumliche Datenaufbereitung (3) - Praxis",
+          "href": "./workbook/01_datawrangling_3/lab1.html"
+        },
+        {
+          "title": "Grundlegendes Mapping",
+          "href": "./workbook/3a_mapping/lab3a.html"
+        },
+        {
+          "title": "Raten-Mapping",
+          "href": "./workbook/3b_rates/lab3b.html"
+        },
+        {
+          "title": "Explorative Datenanalyse (1) - Univariaten und bivariaten Analyse",
+          "href": "./workbook/2a_eda/lab2a.html"
+        },
+        {
+          "title": "Explorative Datenanalyse (2) - Multivariate Exploration",
+          "href": "./workbook/2b_eda_multi/lab2b.html"
+        },
+        {
+          "title": "Raum-Zeit-Exploration",
+          "href": "./workbook/3c_spacetime/lab3c.html"
+        },
+        {
+          "title": "Nachbarschaftsbasierte räumliche Gewichte",
+          "href": "./workbook/4a_contig_weights/lab4a.html"
+        },
+        {
+          "title": "Distanzbasierte räumliche Gewichte",
+          "href": "./workbook/4b_dist_weights/lab4b.html"
+        },
+        {
+          "title": "Räumliche Gewichte als Distanzfunktionen",
+          "href": "./workbook/4c_distance_functions/lab4c.html"
+        },
+        {
+          "title": "Anwendungen räumlicher Gewichte",
+          "href": "./workbook/4d_weights_applications/lab4d.html"
+        },
+        {
+          "title": "Globale räumliche Autokorrelation (1) - Moran Streudiagramm und Korrelogramm",
+          "href": "./workbook/5a_global_auto/lab5a.html"
+        },
+        {
+          "title": "Globale räumliche Autokorrelation (2) - Bivariat, Differential und EB",
+          "href": "./workbook/5b_global_adv/lab5b.html"
+        },
+        {
+          "title": "Lokale räumliche Autokorrelation (1) - LISA und lokaler Moran",
+          "href": "./workbook/6a_local_auto/lab6a.html"
+        },
+        {
+          "title": "Lokale räumliche Autokorrelation (2) - Andere lokale räumliche Autokorrelationsstatistiken",
+          "href": "./workbook/6b_local_adv/lab6b.html"
+        },
+        {
+          "title": "Lokale räumliche Autokorrelation (3) - Multivariate lokale räumliche Autokorrelation",
+          "href": "./workbook/6c_local_multi/lab6c.html"
+        },
+        {
+          "title": "Lokale räumliche Autokorrelation (4) - LISA für diskrete Variablen",
+          "href": "./workbook/6d_local_discrete/lab6d.html"
+        },
+        {
+          "title": "Dichte-basierte Clustering-Methoden",
+          "href": "./workbook/99_density/lab9b.html"
+        },
+        {
+          "title": "Dimensionsreduktionsmethoden (1) - Hauptkomponentenanalyse (PCA)",
+          "href": "./workbook/7aa_dimensionreduction/lab7aa.html"
+        },
+        {
+          "title": "Dimensionsreduktionsmethoden (2) - Distanz-erhaltende Methoden",
+          "href": "./workbook/7ab_mds/lab7ab.html"
+        },
+        {
+          "title": "Cluster-Analyse (1) - K-Means Clustering",
+          "href": "./workbook/7bk_clusters_1a/lab7b.html"
+        },
+        {
+          "title": "Cluster-Analyse (2) - Hierarchische Clustering-Methoden",
+          "href": "./workbook/7bh_clusters_2a/lab7bh.html"
+        },
+        {
+          "title": "Cluster-Analyse (3) - Erweiterte Clustering-Methoden",
+          "href": "./workbook/7c_clusters_3/lab7c.html"
+        },
+        {
+          "title": "Räumliches Clustering (1) - Räumliche Umsetzung klassischer Clustering-Methoden",
+          "href": "./workbook/9a_spatial1/lab9a.html"
+        },
+        {
+          "title": "Räumliches Clustering (2) - Räumlich eingeschränktes Clustering, hierarchische Methoden",
+          "href": "./workbook/9c_spatial3/lab9c.html"
+        },
+        {
+          "title": "Räumliches Clustering (3) - Räumlich eingeschränktes Clustering, Partitionierungsmethoden",
+          "href": "./workbook/9d_spatial4/lab9d.html"
+        }
+      ]
+    },
+    "overview": {
+      "title": "Übersicht der Funktionalität - Neueste Version von GeoDa (1.22)",
+      "description": "Zusätzlich geben diese Ressourcen einen Überblick über einige der neuen Funktionen in GeoDa 1.10+:",
+      "items": [
+        {
+          "title": "Installation von GeoDa und eine kurze Tour durch GeoDas Funktionalität",
+          "href": "docs/Geoda_tour.pdf"
+        },
+        {
+          "title": "Übersicht, Erste Schritte, Geovisualisierung, Multivariate explorative Datenanalyse",
+          "href": "docs/geoda_1.8_1.pdf"
+        },
+        {
+          "title": "Räumliche Gewichte, Räumliche Autokorrelation, Raum-Zeit-Exploration, Durchschnitts-Tool, Räumliche Regression",
+          "href": "docs/geoda_1.8_2.pdf"
+        },
+        {
+          "title": "Über lokale multivariate Cluster-Funktionalität (neu ab GeoDa 1.10). Luc Anselin. (2017). A Local Indicator of Multivariate Spatial Association: Extending Geary's c. Working Paper: Center for Spatial Data Science, University of Chicago.(forthcoming, Geographical Analysis)",
+          "href": "docs/LA_multivariateGeary1.pdf"
+        },
+        {
+          "title": "Nicht-räumliche Cluster-Funktionalität (neu ab GeoDa 1.10). Hoon, Michiel de, Seiya Imoto, Satoru Miyano. (2013). The C Clustering Library. The University of Tokyo, Institute of Medical Science, Human Genome Center.",
+          "href": "http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf",
+          "external": true
+        }
+      ]
+    },
+    "formats": {
+      "title": "Von GeoDa unterstützte räumliche Datenformate",
+      "content": "GeoDa unterstützt jetzt nicht nur Shapefiles, sondern viele andere räumliche Datenformate. Finden Sie hier weitere Informationen, einschließlich Setup-Anweisungen zu diesen Datenformaten.",
+      "links": [
+        { "text": "hier", "href": "formats.html" }
+      ]
+    },
+    "regression": {
+      "title": "Räumliche Regression Benutzerhandbuch (Buch)",
+      "content": "Das Benutzerhandbuch zur räumlichen Regressionsfunktionalität in GeoDa kann hier gekauft werden:",
+      "items": [
+        {
+          "title": "Luc Anselin and Sergio J. Rey. (2014). Modern Spatial Econometrics in Practice: A Guide to GeoDa, GeoDaSpace and PySAL.",
+          "href": "https://www.amazon.com/Modern-Spatial-Econometrics-Practice-GeoDaSpace/dp/0986342106?ie=UTF8&keywords=anselin%20spatial%20econometrics&qid=1421531753&ref_=sr_1_1&sr=8-1",
+          "external": true
+        }
+      ]
+    },
+    "legacy": {
+      "title": "Ältere Ressourcen (2003-05) - Legacy GeoDa 0.95i",
+      "content": "Dieses Arbeitsbuch (2005) und die beiden Dokumentationsberichte (2003) wurden für die Legacy-Version von GeoDa (0.9.5i) entwickelt und sind immer noch nützlich für das Verständnis der Hauptfunktionalität. Viele der Screenshots und Menüoptionen wurden jedoch seitdem aktualisiert. Hier ist eine 1-seitige Übersicht über GeoDa 1.8s Funktionalität mit Referenzen zu den Arbeitsbuchkapiteln.",
+      "links": [
+        { "text": "1-seitige Übersicht", "href": "docs/GeoDa1.8_toolbar.pdf" }
+      ],
+      "items": [
+        {
+          "title": "Exploring Spatial Data with GeoDa: A Workbook",
+          "href": "docs/geodaworkbook.pdf",
+          "description": "(2005; 244 S., 5,1Mb)"
+        },
+        {
+          "title": "GeoDa 0.9.3 Benutzerhandbuch mit Übersicht der Funktionen",
+          "href": "docs/geoda093.pdf",
+          "description": "(2003; 125 S., 2,4Mb)"
+        },
+        {
+          "title": "GeoDa 0.9.5-i Release Notes mit Übersicht über 3D-Streudiagramm, bedingte Plots und räumliche Regression",
+          "href": "docs/geoda095i.pdf",
+          "description": "(2003; 64 S., 1,5Mb)"
+        }
+      ]
+    }
+  },
+  "footer": {
+    "sections": [],
+    "credits": {
+      "owner": "GeoDa wird von lixun910 gepflegt.",
+      "generated": "Diese Seite wurde mit Docusaurus erstellt.",
+      "links": []
+    }
+  }
+} 

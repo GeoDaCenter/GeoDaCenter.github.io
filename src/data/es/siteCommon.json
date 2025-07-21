@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "title": "GeoDa",
+    "tagline": "Una Introducción a la Ciencia de Datos Espaciales",
+    "buttons": [
+      { "text": "Inicio", "href": "/" },
+      { "text": "Descargar", "href": "/download" },
+      {
+        "text": "Datos",
+        "href": "https://geodacenter.github.io/data-and-lab/",
+        "external": true
+      },
+      { "text": "Hoja de Referencia", "href": "/cheatsheet" },
+      { "text": "Documentación", "href": "/documentation" },
+      { "text": "Soporte", "href": "/support" }
+    ]
+  },
+  "footer": {
+    "sections": [],
+    "credits": {
+      "owner": "GeoDa es mantenido por lixun910.",
+      "generated": "Esta página fue generada usando Docusaurus.",
+      "links": []
+    }
+  }
+}

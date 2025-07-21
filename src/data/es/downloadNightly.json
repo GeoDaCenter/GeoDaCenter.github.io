@@ -1,0 +1,361 @@
+{
+  "title": "Descargar GeoDa Build Nocturno",
+  "releases": [
+    {
+      "date": "30/1/2025",
+      "version": "GeoDa 1.22.0.14",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.14"
+    },
+    {
+      "date": "17/1/2025",
+      "version": "GeoDa 1.22.0.12",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.12"
+    },
+    {
+      "date": "8/10/2024",
+      "version": "GeoDa 1.22.0.10",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.10"
+    },
+    {
+      "date": "27/8/2024",
+      "version": "GeoDa 1.22.0.8",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.8"
+    },
+    {
+      "date": "7/3/2024",
+      "version": "GeoDa 1.22.0.6",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.6"
+    },
+    {
+      "date": "11/10/2023",
+      "version": "GeoDa 1.22.0.2",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.4"
+    },
+    {
+      "date": "30/8/2023",
+      "version": "GeoDa 1.22.0.2",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.2"
+    },
+    {
+      "date": "14/7/2023",
+      "version": "GeoDa 1.22",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.0.alpha"
+    },
+    {
+      "date": "12/3/2023",
+      "version": "GeoDa 1.20.0.36",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.20.0.36"
+    },
+    {
+      "date": "16/10/2022",
+      "version": "GeoDa 1.20.0.22",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.20.0.22"
+    },
+    {
+      "date": "12/4/2022",
+      "version": "GeoDa 1.20.0.12",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.20.0.12"
+    },
+    {
+      "date": "24/9/2021",
+      "version": "GeoDa 1.20.0.0",
+      "releaseNotes": "https://github.com/geodacenter/geoda/releases/tag/v1.20"
+    },
+    {
+      "date": "10/12/2020",
+      "version": "GeoDa 1.18.0.0",
+      "releaseNotes": "https://github.com/geodacenter/geoda/releases/tag/v1.18"
+    },
+    {
+      "date": "20/10/2020",
+      "version": "GeoDa 1.16.0.16",
+      "releaseNotes": "https://github.com/geodacenter/geoda/releases/tag/v1.16.0.16"
+    },
+    {
+      "date": "15/10/2020",
+      "version": "GeoDa 1.16.0.12",
+      "releaseNotes": "https://github.com/geodacenter/geoda/releases/tag/v1.16",
+      "downloads": [
+        {
+          "text": "Descargar Mac OSX",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa1.16-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (64-bit)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa-1.16.0.0-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (32-bit)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa-1.16.0.0-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 19.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1disco1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 18.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 16.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "16/12/2019",
+      "version": "GeoDa 1.14.0.10",
+      "releaseNotes": "https://github.com/lixun910/geoda/releases/tag/1.14.0.10",
+      "downloads": [
+        {
+          "text": "Descargar Mac OSX",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/GeoDa1.14.0.10-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (64-bit)",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/GeoDa-1.14.0.10-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (32-bit)",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/GeoDa-1.14.0.10-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 18.04",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/geoda_1.14.0.10-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 16.04",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/geoda_1.14.0.10-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 19.04",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/geoda_1.14.0.10-1disco1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "16/11/2019",
+      "version": "GeoDa 1.14.0.8",
+      "releaseNotes": "https://github.com/lixun910/geoda/releases/tag/1.14.0.8",
+      "downloads": [
+        {
+          "text": "Descargar Mac OSX",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/GeoDa1.14.0.8-Installer.dmgg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (64-bit)",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/GeoDa-1.14.0.8-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (32-bit)",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/GeoDa-1.14.0.8-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 18.04",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/geoda_1.14.0.8-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 16.04",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/geoda_1.14.0.8-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 19.04",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/geoda_1.14.0.8-1disco1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "15/10/2019",
+      "version": "GeoDa 1.14.0.2",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/1.14.0.2",
+      "downloads": [
+        {
+          "text": "Descargar Mac OSX",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/GeoDa1.14.0.2-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (64-bit)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/GeoDa-1.14.0.2-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (32-bit)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/GeoDa-1.14.0.2-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 18.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/geoda_1.14.0.2-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 16.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/geoda_1.14.0.2-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 19.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/geoda_1.14.0.2-1disco1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "16/5/2019",
+      "version": "GeoDa 1.12.1.241",
+      "downloads": [
+        {
+          "text": "Descargar Mac OSX",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.241/GeoDa1.12.1.241-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (64-bit)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.241/GeoDa-1.12.1.241-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "16/5/2019",
+      "version": "GeoDa 1.12.1.237",
+      "downloads": [
+        {
+          "text": "Descargar Mac OSX",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.237/GeoDa1.12.1.237-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Windows (64-bit)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.237/GeoDa-1.12.1.237-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Descargar Ubuntu 18.04 (64-bit)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.237/geoda_1.12.1.237-1bionic1.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "20/2/2019",
+      "version": "GeoDa 1.12.1.201",
+      "downloads": [
+        {
+          "text": "Descargar Mac OSX",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.201/GeoDa1.12.1.201-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    }
+  ]
+} 

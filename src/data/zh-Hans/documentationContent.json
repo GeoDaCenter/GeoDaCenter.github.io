@@ -1,0 +1,232 @@
+{
+  "tagline": "文档",
+  "mainContent": {
+    "intro": {
+      "title": "GeoDa 工作簿",
+      "content": [
+        "Luc Anselin 目前正在为 GeoDa 编写此工作簿的书籍版本。以下文档将不再维护。相关的替代参考资料是这两卷书：",
+        "L. Anselin (2024a). 空间数据科学入门与 GeoDa。第1卷：探索空间数据。CRC/Chapman&Hall，博卡拉顿，佛罗里达州。在线版本。",
+        "L. Anselin (2024b). 空间数据科学入门与 GeoDa。第2卷：空间数据聚类。CRC/Chapman&Hall，博卡拉顿，佛罗里达州。在线版本。"
+      ],
+      "links": [
+        { "text": "NONE", "href": "https://lanselin.github.io/introbook_vol1/", "external": true },
+        { "text": "在线版本。", "href": "https://lanselin.github.io/introbook_vol1/", "external": true },
+        { "text": "在线版本。", "href": "https://lanselin.github.io/introbook_vol2/", "external": true }
+      ]
+    },
+    "workbook": {
+      "title": "GeoDa 工作簿",
+      "items": [
+        {
+          "title": "空间数据整理 (1) - 基本操作",
+          "href": "./workbook/01_datawrangling_1/lab1a.html"
+        },
+        {
+          "title": "空间数据整理 (2) - GIS 操作",
+          "href": "./workbook/01_datawrangling_2/lab1b.html"
+        },
+        {
+          "title": "空间数据整理 (3) - 实践",
+          "href": "./workbook/01_datawrangling_3/lab1.html"
+        },
+        {
+          "title": "基本制图",
+          "href": "./workbook/3a_mapping/lab3a.html"
+        },
+        {
+          "title": "比率制图",
+          "href": "./workbook/3b_rates/lab3b.html"
+        },
+        {
+          "title": "探索性数据分析 (1) - 单变量和双变量分析",
+          "href": "./workbook/2a_eda/lab2a.html"
+        },
+        {
+          "title": "探索性数据分析 (2) - 多变量探索",
+          "href": "./workbook/2b_eda_multi/lab2b.html"
+        },
+        {
+          "title": "时空探索",
+          "href": "./workbook/3c_spacetime/lab3c.html"
+        },
+        {
+          "title": "基于邻接的空间权重",
+          "href": "./workbook/4a_contig_weights/lab4a.html"
+        },
+        {
+          "title": "基于距离的空间权重",
+          "href": "./workbook/4b_dist_weights/lab4b.html"
+        },
+        {
+          "title": "作为距离函数的空间权重",
+          "href": "./workbook/4c_distance_functions/lab4c.html"
+        },
+        {
+          "title": "空间权重的应用",
+          "href": "./workbook/4d_weights_applications/lab4d.html"
+        },
+        {
+          "title": "全局空间自相关 (1) - Moran 散点图和相关图",
+          "href": "./workbook/5a_global_auto/lab5a.html"
+        },
+        {
+          "title": "全局空间自相关 (2) - 双变量、差分和 EB",
+          "href": "./workbook/5b_global_adv/lab5b.html"
+        },
+        {
+          "title": "局部空间自相关 (1) - LISA 和局部 Moran",
+          "href": "./workbook/6a_local_auto/lab6a.html"
+        },
+        {
+          "title": "局部空间自相关 (2) - 其他局部空间自相关统计",
+          "href": "./workbook/6b_local_adv/lab6b.html"
+        },
+        {
+          "title": "局部空间自相关 (3) - 多变量局部空间自相关",
+          "href": "./workbook/6c_local_multi/lab6c.html"
+        },
+        {
+          "title": "局部空间自相关 (4) - 离散变量的 LISA",
+          "href": "./workbook/6d_local_discrete/lab6d.html"
+        },
+        {
+          "title": "基于密度的聚类方法",
+          "href": "./workbook/99_density/lab9b.html"
+        },
+        {
+          "title": "降维方法 (1) - 主成分分析 (PCA)",
+          "href": "./workbook/7aa_dimensionreduction/lab7aa.html"
+        },
+        {
+          "title": "降维方法 (2) - 距离保持方法",
+          "href": "./workbook/7ab_mds/lab7ab.html"
+        },
+        {
+          "title": "聚类分析 (1) - K-均值聚类",
+          "href": "./workbook/7bk_clusters_1a/lab7b.html"
+        },
+        {
+          "title": "聚类分析 (2) - 层次聚类方法",
+          "href": "./workbook/7bh_clusters_2a/lab7bh.html"
+        },
+        {
+          "title": "聚类分析 (3) - 高级聚类方法",
+          "href": "./workbook/7c_clusters_3/lab7c.html"
+        },
+        {
+          "title": "空间聚类 (1) - 空间化经典聚类方法",
+          "href": "./workbook/9a_spatial1/lab9a.html"
+        },
+        {
+          "title": "空间聚类 (2) - 空间约束聚类，层次方法",
+          "href": "./workbook/9c_spatial3/lab9c.html"
+        },
+        {
+          "title": "空间聚类 (3) - 空间约束聚类，分区方法",
+          "href": "./workbook/9d_spatial4/lab9d.html"
+        }
+      ]
+    },
+    "overview": {
+      "title": "功能概述 - GeoDa 最新版本 (1.22)",
+      "description": "此外，这些资源概述了 GeoDa 1.10+ 中的一些新功能：",
+      "items": [
+        {
+          "title": "安装 GeoDa 和 GeoDa 功能快速导览",
+          "href": "docs/Geoda_tour.pdf"
+        },
+        {
+          "title": "概述、入门、地理可视化、多变量探索性数据分析",
+          "href": "docs/geoda_1.8_1.pdf"
+        },
+        {
+          "title": "空间权重、空间自相关、时空探索、平均值工具、空间回归",
+          "href": "docs/geoda_1.8_2.pdf"
+        },
+        {
+          "title": "关于局部多变量聚类功能（GeoDa 1.10 新增）。Luc Anselin. (2017). 多变量空间关联的局部指标：扩展 Geary's c。工作论文：芝加哥大学空间数据科学中心。（即将发表，地理分析）",
+          "href": "docs/LA_multivariateGeary1.pdf"
+        },
+        {
+          "title": "非空间聚类功能（GeoDa 1.10 新增）。Hoon, Michiel de, Seiya Imoto, Satoru Miyano. (2013). C 聚类库。东京大学医学科学研究所人类基因组中心。",
+          "href": "http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf",
+          "external": true
+        }
+      ]
+    },
+    "formats": {
+      "title": "GeoDa 支持的空间数据格式",
+      "content": "GeoDa 现在不仅支持 shapefile，还支持许多其他空间数据格式。在此处查找有关这些数据格式的更多信息，包括设置说明。",
+      "links": [
+        { "text": "此处", "href": "formats.html" }
+      ]
+    },
+    "regression": {
+      "title": "空间回归用户指南（书籍）",
+      "content": "GeoDa 中空间回归功能的用户指南可以在此处购买：",
+      "items": [
+        {
+          "title": "Luc Anselin 和 Sergio J. Rey. (2014). 现代空间计量经济学实践：GeoDa、GeoDaSpace 和 PySAL 指南。",
+          "href": "https://www.amazon.com/Modern-Spatial-Econometrics-Practice-GeoDaSpace/dp/0986342106?ie=UTF8&keywords=anselin%20spatial%20econometrics&qid=1421531753&ref_=sr_1_1&sr=8-1",
+          "external": true
+        }
+      ]
+    },
+    "legacy": {
+      "title": "较旧的资源 (2003-05) - 传统 GeoDa 0.95i",
+      "content": "此工作簿（2005年）和两份文档报告（2003年）是为传统版本的 GeoDa（0.9.5i）开发的，对于理解主要功能仍然有用。但是，许多截图和菜单选项已经更新。这是 GeoDa 1.8 功能的单页概述，包含对工作簿章节的引用。",
+      "links": [
+        { "text": "单页概述", "href": "docs/GeoDa1.8_toolbar.pdf" }
+      ],
+      "items": [
+        {
+          "title": "使用 GeoDa 探索空间数据：工作簿",
+          "href": "docs/geodaworkbook.pdf",
+          "description": "(2005; 244 页, 5.1Mb)"
+        },
+        {
+          "title": "GeoDa 0.9.3 用户指南，包含功能概述",
+          "href": "docs/geoda093.pdf",
+          "description": "(2003; 125 页, 2.4Mb)"
+        },
+        {
+          "title": "GeoDa 0.9.5-i 发布说明，包含 3D 散点图、条件图和空间回归概述",
+          "href": "docs/geoda095i.pdf",
+          "description": "(2003; 64 页, 1.5Mb)"
+        }
+      ]
+    }
+  },
+  "footer": {
+    "sections": [
+      {
+        "id": "sample-data",
+        "title": "教程的示例数据和背景视频",
+        "content": "在此处访问文档中引用的示例数据并查找有关空间分析的免费在线视频。",
+        "links": [
+          { "text": "示例数据", "href": "https://spatial.uchicago.edu/sample-data", "external": true },
+          { "text": "此处", "href": "https://www.youtube.com/user/GeoDaCenter", "external": true }
+        ]
+      },
+      {
+        "id": "algorithms",
+        "title": "GeoDa 中实现的算法",
+        "content": "这是 GeoDa 中实现的算法参考列表。",
+        "links": [
+          { "text": "此处", "href": "/refs.html" }
+        ]
+      }
+    ],
+    "credits": {
+      "owner": "GeoDa 由 lixun910 维护。",
+      "generated": "此页面由 GitHub Pages 使用 Jason Long 的 Cayman 主题生成。",
+      "links": [
+        { "text": "GeoDa", "href": "https://github.com/lixun910/geoda", "external": true },
+        { "text": "lixun910", "href": "https://github.com/lixun910", "external": true },
+        { "text": "GitHub Pages", "href": "https://pages.github.com", "external": true },
+        { "text": "Cayman 主题", "href": "https://github.com/jasonlong/cayman-theme", "external": true },
+        { "text": "Jason Long", "href": "https://twitter.com/jasonlong", "external": true }
+      ]
+    }
+  }
+} 

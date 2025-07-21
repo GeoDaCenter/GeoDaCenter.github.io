@@ -1,0 +1,71 @@
+{
+  "tagline": "支持",
+  "mainContent": {
+    "sections": [
+      {
+        "title": "常见问题：常见问题解答",
+        "content": "查找常见问题 (FAQ) 的答案",
+        "links": [
+          {
+            "text": "这里",
+            "href": "./faq"
+          }
+        ]
+      },
+      {
+        "title": "常见技术问题解答",
+        "content": "查找关于 GeoDa 的常见技术问题答案",
+        "links": [
+          {
+            "text": "这里",
+            "href": "./questions"
+          }
+        ]
+      },
+      {
+        "title": "通过 Openspace 邮件列表获得社区支持",
+        "description": "Openspace 邮件列表是一个讨论空间数据分析方法和开源软件工具各个方面的列表。特别强调 GeoDa、GeoDaSpace、PySAL 和 CAST 软件程序。",
+        "note": "该列表不用于讨论商业空间分析软件，但欢迎方法论辩论。仅供非商业使用。",
+        "links": [
+          {
+            "text": "Openspace 邮件列表",
+            "href": "http://groups.google.com/group/openspace-list?lnk=",
+            "external": true
+          },
+          {
+            "text": "当前 Openspace 邮件列表（可搜索）",
+            "href": "http://groups.google.com/group/openspace-list?lnk=srg",
+            "external": true
+          },
+          {
+            "text": "退订",
+            "href": "http://groups.google.com/support/bin/answer.py?hl=en&answer=46608",
+            "external": true
+          }
+        ],
+        "listItems": [
+          "订阅 Openspace 邮件列表：openspace-list+subscribe@googlegroups.com",
+          "向 Openspace 邮件列表发帖：openspace-list@googlegroups.com"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "联系",
+    "content": "有问题？联系我们。",
+    "links": [
+      {
+        "text": "我们",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
+  },
+  "footer": {
+    "sections": [],
+    "credits": {
+      "owner": "GeoDa 由 lixun910 维护。",
+      "generated": "此页面使用 Docusaurus 生成。",
+      "links": []
+    }
+  }
+} 

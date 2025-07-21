@@ -1,0 +1,40 @@
+{
+  "title": "Labor-Installationsanleitung",
+  "notes": {
+    "title": "Hinweise:",
+    "content": "GeoDa benötigt Schreibberechtigung für mehrere Verzeichnisse/Dateien. Wenn Sie GeoDa in einer Laborumgebung installieren, stellen Sie bitte sicher, dass die folgenden Verzeichnisse und Dateien Schreibberechtigung haben:",
+    "items": [
+      "/basemap_cache/ (Verzeichnis zum Herunterladen von Basiskarten-Kacheln)",
+      "cache.sqlite (Datei für GeoDa-Konfigurationen)"
+    ]
+  },
+  "windows": {
+    "title": "Windows",
+    "content": "Mit dem neuesten GeoDa-Installer für Windows (1.10+) können Sie versuchen, ihn im Silent-Modus mit dem Befehl zu installieren:",
+    "command": "GeoDa-1.10-Windows-64bit.exe /VERYSILENT /SUPPRESSMSGBOXES",
+    "additionalInfo": "(andere Schalter sind hier: http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline)",
+    "prerequisites": {
+      "content": "GeoDa wird jedoch prüfen, ob Visual C++ 2010 Redistributable installiert wurde, daher müssen Sie zuerst das Visual C++ 2010 Redistributable-Paket in der Kommandozeile im Silent-Modus installieren. z.B.",
+      "command": "vc++2010.res.exe /quiet",
+      "note": "Man kann nach \"Microsoft Visual C++ 2010 Redistributable Package X86/X64\" suchen, um es herunterzuladen. Außerdem wird GeoDa prüfen, ob eine ältere Version von GeoDa installiert wurde, daher funktioniert dieser Silent-Modus-Befehl nur bei einer sauberen Installation."
+    },
+    "links": [
+      {
+        "text": "http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline",
+        "href": "http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline",
+        "external": true
+      }
+    ]
+  },
+  "centos": {
+    "title": "CentOS",
+    "content": "Um GeoDa auf CentOS in einer Laborumgebung zu installieren, können Sie das GeoDa-Paket ohne Root-Berechtigung verwenden. Sie können es herunterladen",
+    "links": [
+      {
+        "text": "hier",
+        "href": "./download-linux",
+        "external": false
+      }
+    ]
+  }
+} 

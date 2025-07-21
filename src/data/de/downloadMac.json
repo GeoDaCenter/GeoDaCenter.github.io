@@ -1,0 +1,357 @@
+{
+  "title": "Download GeoDa for Mac OSX",
+  "description": "The download will begin immediately after clicking the link.",
+  "currentVersion": {
+    "version": "GeoDa 1.22",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22.0.14 (1/30/2025) for Mac OS X (Ventura+) [Apple Silicon Arm64]",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa1.22.0-arm64-Installer.dmg",
+        "tracking": {
+          "category": "GeoDaOSXDownloads122",
+          "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+        }
+      },
+      {
+        "text": "GeoDa 1.22.0.14 (1/30/2025) for Mac OS X (Big Sur+) [Apple Intel X86_64]",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa1.22.0-x86_64-Installer.dmg",
+        "tracking": {
+          "category": "GeoDaOSXDownloads122",
+          "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+        }
+      }
+    ]
+  },
+  "alternativeDownloads": {
+    "title": "Alternative download links for users in China（中国)：",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22 for Mac OS X (Big Sur+)",
+        "href": "https://gitee.com/geoda/geoda_mirror/releases/v1.18",
+        "tracking": {
+          "category": "GeoDaOSXDownloads118",
+          "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+        }
+      }
+    ]
+  },
+  "notes": [
+    {
+      "title": "Security Warning",
+      "content": "Please note that you may get a warning message about this program coming from an unknown developer the first time you try to open it.",
+      "instructions": "Use control-click and select open to open the program (instead of double click) and accept at the prompt. You will not be asked this again. However, in order for this to work, you need to set your Security & Privacy preferences to Mac App Store and identified developers; the default is Mac App store only, which will NOT WORK for GeoDa."
+    }
+  ],
+  "previousVersions": [
+    {
+      "version": "GeoDa 1.22.0.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.12 (1/17/2025) for Mac OS X (Ventura+) [Apple Silicon Arm64]",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa1.22.0-arm64-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.12 (1/17/2025) for Mac OS X (Big Sur+) [Apple Intel X86_64]",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa1.22.0-x86_64-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.10 (10/8/2024) for Mac OS X (Ventura+) [Apple Silicon Arm64]",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa1.22.0-arm64-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.10 (10/8/2024) for Mac OS X (Big Sur+) [Apple Intel X86_64]",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa1.22.0-x86_64-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.8 (08/27/2024) for Mac OS X (Ventura+) [Apple Silicon Arm64]",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa1.22.0.8-arm64-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.8 (08/27/2024) for Mac OS X (Big Sur+) [Apple Intel X86_64]",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa1.22.0.8-x86_64-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.4",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.4 (10/11/2023) for Mac OS X (Big Sur+)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.4/GeoDa1.22.0.4-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.2",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.2 (8/30/2023) for Mac OS X (Big Sur+)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa1.22.0-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.36",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20.0.36 (8/7/2022) for Mac OS X (Big Sur+)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa1.20.0.36-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads120",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.20"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.0",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20.0.8 (10/14/2021) for Mac OS X Intel x86_64 (Big Sur+)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa1.20.0-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads120",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.20"
+          }
+        },
+        {
+          "text": "GeoDa 1.20.0.8 (10/14/2021) for Mac OS X Apple Silicon M1 (Big Sur only)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa1.20.0-M1-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads120",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.20"
+          }
+        },
+        {
+          "text": "GeoDa 1.20.0.8 (11/21/2021) for Mac OS X Apple Silicon M1 (Monterey+)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa1.20.0.8-M1-Monterey-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads120",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.20"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.18",
+      "downloads": [
+        {
+          "text": "GeoDa 1.18 (6/16/2021) for Mac OS X 11 (Big Sur)",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/GeoDa1.18.0.16-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads118",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.18"
+          }
+        },
+        {
+          "text": "GeoDa 1.18 (6/16/2021) for Mac OS X Apple Silicon M1",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/GeoDa1.18.0.16-M1-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads118",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.18"
+          }
+        },
+        {
+          "text": "GeoDa 1.18 (12/10/2020) for Mac OS X 10.7+",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/GeoDa1.18.0.0-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads118",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.18"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.16",
+      "downloads": [
+        {
+          "text": "GeoDa 1.16 (10/20/2020) for Mac OS X 10.7+",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa1.16-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads116",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.16"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.14",
+      "downloads": [
+        {
+          "text": "GeoDa 1.14.0.4 (11/1/2019) for Mac OS X 10.15 Catalina",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/GeoDa1.14.0.4-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads114",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.14"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.12.1.161 nightly build (9/26/2018) for Mac OS X 10.7+",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.12.1.161-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads112",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.12"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.139 nightly build with Chinese language support(6/9/2018) for Mac OS X 10.7+",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.12.1.139-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads112",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.12"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.129 (4/26/2018) for Mac OS X 10.7+",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.12.1.129-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads112",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.12"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.59 (11/28/2017) for Mac OS X 10.7+",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.12.1.59-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads112",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.12"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.10 for Mac OS X 10.7+ with Retina Support and better performance",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.10-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads110",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.10"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 for Mac OS X 10.6 ONLY",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.10-Installer.10.6.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads110",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.10"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.16 for Mac OS X 10.7+ with Retina Support and better performance",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.8.16-OSX10.7-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads18162",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.8.16.2"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 for Mac OS X 10.6 ONLY",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.8.16-OSX10.6-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads1816",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.8.16"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.14 for Mac OS X (10.6.8 or later required)",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.8.14-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads1814",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.8.14"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.12 for Mac OS X (10.6.8 or later required)",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.8.12-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads1812",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.8.12"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.10 for Mac OS X (10.6.8 or later required)",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.8.10-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads1810",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.8.10"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.8 for Mac OS X (10.6.8 or later required)",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa1.8.8-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads188",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.8.8"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.6",
+      "downloads": [
+        {
+          "text": "GeoDa 1.6.7 for Mac OS X (10.6.8 or later required)",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.6.7-Mac.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads167",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.6.7"
+          }
+        }
+      ]
+    }
+  ]
+} 

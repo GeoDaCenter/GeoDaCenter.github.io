@@ -1,0 +1,70 @@
+{
+  "tagline": "Formatos de Datos Soportados en GeoDa",
+  "mainContent": {
+    "title": "Formato de Datos Espaciales Soportado por GeoDa 1.8",
+    "sections": [
+      {
+        "title": "Formatos de Archivo (compilados en GeoDa)",
+        "type": "table",
+        "headers": ["Nombre del Formato de Archivo", "Extensiones de Nombre de Archivo", "Escribible"],
+        "rows": [
+          ["Valores Separados por Comas (CSV)", ".csv", "Sí"],
+          ["ESRI Shapefile", ".shp; .dbf", "Sí"],
+          ["GeoJSON", ".json; .geojson", "Sí"],
+          ["GeoPackage", ".gpkg", "Sí"],
+          ["GML", ".kml; .xml", "Sí"],
+          ["KML", ".kml; .xml", "Sí"],
+          ["Archivo Mapinfo", ".MIF; .MID", "Sí"],
+          ["Formato MS Excel", ".xls", "No"],
+          ["Hoja de Cálculo de Documento Abierto", ".ods", "No"]
+        ]
+      },
+      {
+        "title": "Fuente de Datos en la Nube",
+        "type": "table",
+        "headers": ["Servicio", "Descripción", "Escribible"],
+        "rows": [
+          ["CartoDB", "Necesita su cuenta de usuario de CartoDB y clave API", "No"]
+        ]
+      },
+      {
+        "title": "Bases de Datos",
+        "type": "table",
+        "headers": ["Nombre de la Base de Datos", "Versiones Soportadas", "Escribible", "¿Necesita configuración adicional?"],
+        "rows": [
+          ["ESRI ArcSDE (64-bit)", "10.x (sugerido)", "No", {"text": "Sí, vea instrucciones de configuración", "href": "./setup-arcsde"}],
+          ["ESRI ArcSDE (32-bit)", "9.x (sugerido)", "No", {"text": "Sí, vea instrucciones de configuración", "href": "./setup-arcsde"}],
+          ["Oracle Spatial", "11g (sugerido)", "Sí", {"text": "Sí, vea instrucciones de configuración", "href": "./setup-oracle"}],
+          ["PostgreSQL con PostGIS", "9.3.1 (sugerido)", "Sí", "No"],
+          ["MySQL con Extensión Espacial", "5.6.14 (sugerido)", "Sí", "No"]
+        ]
+      },
+      {
+        "title": "Bases de Datos de Archivo",
+        "type": "table",
+        "headers": ["Nombre de la Base de Datos de Archivo", "Versiones Soportadas", "Escribible", "¿Necesita configuración adicional?"],
+        "rows": [
+          ["SQLite", "3.0 (sugerido)", "Sí", "No"],
+          ["Spatialite", "3.0 (sugerido)", "Sí", "No"],
+          ["ESRI File Geodatabase", "", "Sí", {"text": "Sí, vea instrucciones de configuración", "href": "./setup-esri-fgdb"}],
+          ["ESRI Personal Geodatabase", "", "No", {"text": "Sí, vea instrucciones de configuración", "href": "./setup-pgeo"}]
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contacto",
+    "content": "¿Preguntas? Contáctenos.",
+    "links": [
+      { "text": "nosotros", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  },
+  "footer": {
+    "sections": [],
+    "credits": {
+      "owner": "GeoDa es mantenido por lixun910.",
+      "generated": "Esta página fue generada usando Docusaurus.",
+      "links": []
+    }
+  }
+} 

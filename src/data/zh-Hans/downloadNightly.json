@@ -1,0 +1,361 @@
+{
+  "title": "下载 GeoDa 夜间构建版本",
+  "releases": [
+    {
+      "date": "2025/1/30",
+      "version": "GeoDa 1.22.0.14",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.14"
+    },
+    {
+      "date": "2025/1/17",
+      "version": "GeoDa 1.22.0.12",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.12"
+    },
+    {
+      "date": "2024/10/8",
+      "version": "GeoDa 1.22.0.10",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.10"
+    },
+    {
+      "date": "2024/8/27",
+      "version": "GeoDa 1.22.0.8",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.8"
+    },
+    {
+      "date": "2024/3/7",
+      "version": "GeoDa 1.22.0.6",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.6"
+    },
+    {
+      "date": "2023/10/11",
+      "version": "GeoDa 1.22.0.2",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.4"
+    },
+    {
+      "date": "2023/8/30",
+      "version": "GeoDa 1.22.0.2",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.2"
+    },
+    {
+      "date": "2023/7/14",
+      "version": "GeoDa 1.22",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.0.alpha"
+    },
+    {
+      "date": "2023/3/12",
+      "version": "GeoDa 1.20.0.36",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.20.0.36"
+    },
+    {
+      "date": "2022/10/16",
+      "version": "GeoDa 1.20.0.22",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.20.0.22"
+    },
+    {
+      "date": "2022/4/12",
+      "version": "GeoDa 1.20.0.12",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.20.0.12"
+    },
+    {
+      "date": "2021/9/24",
+      "version": "GeoDa 1.20.0.0",
+      "releaseNotes": "https://github.com/geodacenter/geoda/releases/tag/v1.20"
+    },
+    {
+      "date": "2020/12/10",
+      "version": "GeoDa 1.18.0.0",
+      "releaseNotes": "https://github.com/geodacenter/geoda/releases/tag/v1.18"
+    },
+    {
+      "date": "2020/10/20",
+      "version": "GeoDa 1.16.0.16",
+      "releaseNotes": "https://github.com/geodacenter/geoda/releases/tag/v1.16.0.16"
+    },
+    {
+      "date": "2020/10/15",
+      "version": "GeoDa 1.16.0.12",
+      "releaseNotes": "https://github.com/geodacenter/geoda/releases/tag/v1.16",
+      "downloads": [
+        {
+          "text": "Mac OSX 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa1.16-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (64位) 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa-1.16.0.0-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (32位) 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa-1.16.0.0-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 19.04 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1disco1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 18.04 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 16.04 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "2019/12/16",
+      "version": "GeoDa 1.14.0.10",
+      "releaseNotes": "https://github.com/lixun910/geoda/releases/tag/1.14.0.10",
+      "downloads": [
+        {
+          "text": "Mac OSX 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/GeoDa1.14.0.10-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (64位) 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/GeoDa-1.14.0.10-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (32位) 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/GeoDa-1.14.0.10-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 18.04 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/geoda_1.14.0.10-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 16.04 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/geoda_1.14.0.10-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 19.04 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.10/geoda_1.14.0.10-1disco1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "2019/11/16",
+      "version": "GeoDa 1.14.0.8",
+      "releaseNotes": "https://github.com/lixun910/geoda/releases/tag/1.14.0.8",
+      "downloads": [
+        {
+          "text": "Mac OSX 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/GeoDa1.14.0.8-Installer.dmgg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (64位) 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/GeoDa-1.14.0.8-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (32位) 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/GeoDa-1.14.0.8-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 18.04 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/geoda_1.14.0.8-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 16.04 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/geoda_1.14.0.8-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 19.04 下载",
+          "href": "https://github.com/lixun910/geoda/releases/download/1.14.0.8/geoda_1.14.0.8-1disco1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "2019/10/15",
+      "version": "GeoDa 1.14.0.2",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/1.14.0.2",
+      "downloads": [
+        {
+          "text": "Mac OSX 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/GeoDa1.14.0.2-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (64位) 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/GeoDa-1.14.0.2-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (32位) 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/GeoDa-1.14.0.2-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 18.04 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/geoda_1.14.0.2-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 16.04 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/geoda_1.14.0.2-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 19.04 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.14.0.2/geoda_1.14.0.2-1disco1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "2019/5/16",
+      "version": "GeoDa 1.12.1.241",
+      "downloads": [
+        {
+          "text": "Mac OSX 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.241/GeoDa1.12.1.241-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (64位) 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.241/GeoDa-1.12.1.241-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "2019/5/16",
+      "version": "GeoDa 1.12.1.237",
+      "downloads": [
+        {
+          "text": "Mac OSX 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.237/GeoDa1.12.1.237-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Windows (64位) 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.237/GeoDa-1.12.1.237-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        },
+        {
+          "text": "Ubuntu 18.04 (64位) 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.237/geoda_1.12.1.237-1bionic1.deb",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    },
+    {
+      "date": "2019/2/20",
+      "version": "GeoDa 1.12.1.201",
+      "downloads": [
+        {
+          "text": "Mac OSX 下载",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/1.12.1.201/GeoDa1.12.1.201-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXNighlty",
+            "label": "GeoDa Software Downloads Count"
+          }
+        }
+      ]
+    }
+  ]
+} 

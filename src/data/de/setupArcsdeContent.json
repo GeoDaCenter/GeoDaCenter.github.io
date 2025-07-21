@@ -1,0 +1,73 @@
+{
+  "tagline": "Plugins | Setup ESRI ArcSDE Plugin",
+  "mainContent": {
+    "title": "Plugins | Setup ESRI ArcSDE Plugin",
+    "navigation": [
+      { "text": "Windows (32-bit)", "href": "#win32" },
+      { "text": "Windows (64-bit)", "href": "#win64" },
+      { "text": "Ubuntu (32-bit)", "href": "#ubu32" },
+      { "text": "Ubuntu (64-bit)", "href": "#ubu64" }
+    ],
+    "sections": [
+      {
+        "id": "win32",
+        "title": "For Windows (32-bit, only available for ArcSDE 9.3):",
+        "steps": [
+          "Download ESRI ArcSDE Client 9.3 for Windows from ESRI CD-ROM",
+          "Double click the setup executable file. The ESRI ArcSDE client will be installed to your local hard disk. For example: C:\\Program Files\\ArcGIS\\ArcSDE",
+          "Setup your Windows system environment for ESRI ArcSDE Client",
+          "Add the path of ESRI ArcSDE Client to PATH system variable in \"System Properties\" dialog (see following example)"
+        ],
+        "image": "./img/ev.png",
+        "imageAlt": "Windows Environment Variables Setup",
+        "commandBlock": false
+      },
+      {
+        "id": "win64",
+        "title": "For Windows (64-bit, only available for Esri ArcSDE 10.x):",
+        "steps": [
+          "Download ESRI ArcSDE Client 10.x for Windows from ESRI CD-ROM",
+          "Double click the setup executable file. The ESRI ArcSDE client will be installed to your local hard disk. For example: C:\\Program Files\\ArcGIS\\ArcSDE",
+          "Setup your Windows system environment for ESRI ArcSDE Client",
+          "Add the path of ESRI ArcSDE Client to PATH system variable in \"System Properties\" dialog (see following example)"
+        ],
+        "image": "./img/ev.png",
+        "imageAlt": "Windows Environment Variables Setup",
+        "commandBlock": false
+      },
+      {
+        "id": "ubu32",
+        "title": "For Ubuntu ≥12 (32-bit):",
+        "steps": [
+          "Download ESRI ArcSDE Client 10.x for Linux from ESRI CD-ROM",
+          "Unzip the downloaded ZIP package to local hard drive.",
+          "Setup your Ubuntu system environment for ESRI ArcSDE Client",
+          "Use your editor to open ~/.bash_profile",
+          "Add the following line at the end of the file: \"export SDE_HOME=/Users/test/\"",
+          "Restart GeoDa, then you should be able to connect to the Oracle Spatial database using the GeoDa-Oracle-Plugin"
+        ],
+        "commandBlock": false
+      },
+      {
+        "id": "ubu64",
+        "title": "For Ubuntu ≥12 (64-bit):",
+        "steps": [
+          "Download ESRI ArcSDE Client 10.x for Linux from ESRI CD-ROM",
+          "Unzip the downloaded ZIP package to local hard drive.",
+          "Setup your Ubuntu system environment for ESRI ArcSDE Client",
+          "Use your editor to open ~/.bash_profile",
+          "Add the following line at the end of the file: \"export SDE_HOME=/Users/test/\"",
+          "Restart GeoDa, then you should be able to connect to the Oracle Spatial database using the GeoDa-Oracle-Plugin"
+        ],
+        "commandBlock": false
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "content": "Questions? Contact us.",
+    "links": [
+      { "text": "us", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  }
+} 

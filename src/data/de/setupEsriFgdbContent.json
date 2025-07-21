@@ -1,0 +1,104 @@
+{
+  "tagline": "Plugins | Setup ESRI File Geodatabase Plugin",
+  "mainContent": {
+    "title": "Plugins | Setup ESRI File Geodatabase Plugin",
+    "navigation": [
+      { "text": "Windows (32-bit)", "href": "#win32" },
+      { "text": "Windows (64-bit)", "href": "#win64" },
+      { "text": "Mac OSX (64-bit)", "href": "#osx64" },
+      { "text": "Ubuntu (32-bit)", "href": "#ubu32" },
+      { "text": "Ubuntu (64-bit)", "href": "#ubu64" }
+    ],
+    "sections": [
+      {
+        "id": "win32",
+        "title": "For Windows (32-bit):",
+        "steps": [
+          "Download ESRI File Geodatabase API 1.3 for Windows 32-bit from http://www.esri.com/apps/products/download/",
+          "(Note: You have to register to get ESRI File Geodatabase API)",
+          "Unzip the downloaded ZIP package to your local hard drive. For example: C:\\FileGDB_API",
+          "Setup your Windows system environment for File Geodatabase",
+          "Add the path of ESRI File Geodatabase (e.g. C:\\FileGDB_API\\bin) to PATH system variable in \"System Properties\" dialog (see following example)",
+          "(Note: you need to add ; before the File Geodatabase Path)",
+          "Restart GeoDa, then you should be able to open a .gdb dataset."
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": false
+      },
+      {
+        "id": "win64",
+        "title": "For Windows (64-bit):",
+        "steps": [
+          "Download ESRI File Geodatabase API 1.3 for Windows 64-bit from http://www.esri.com/apps/products/download/",
+          "(Note: You have to register to get ESRI File Geodatabase API)",
+          "Unzip the downloaded ZIP package to local hard drive. For example: C:\\FileGDB_API",
+          "Setup your Windows system environment for File Geodatabase",
+          "Add the path of ESRI File Geodatabase (e.g. C:\\FileGDB_API\\bin64) to PATH system variable in \"System Properties\" dialog (see following example)",
+          "(Note: you need to add ; before the File Geodatabase Path)",
+          "Restart GeoDa, then you should be able to open a .gdb dataset."
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": false
+      },
+      {
+        "id": "osx64",
+        "title": "For Mac OSX ≥10.6 (64-bit):",
+        "steps": [
+          "Download ESRI File Geodatabase API 1.3 for Mac 64-bit from ESRI Downloads http://www.esri.com/apps/products/download/",
+          "(Note: You have to register to get ESRI File Geodatabase)",
+          "Unzip the downloaded ZIP package to your local hard drive. For example: /Users/yourname/Downloads/FileGDB_API",
+          "Click here to download install_plugins.sh script. Unzip it.",
+          "Open a new terminal, run the following 3 commands to configure the ESRI File Geodatabase library for GeoDa.",
+          "cd /path/to/install_plugins.sh",
+          "export FileGDB_HOME=/Users/yourname/Downloads/FileGDB_API/lib",
+          "./install_plugins.sh /path/to/downloaded_GeoDa.app/",
+          "Restart GeoDa, then you should be able to open a .gdb dataset."
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      },
+      {
+        "id": "ubu32",
+        "title": "For Ubuntu ≥14.04 (32-bit):",
+        "steps": [
+          "Download ESRI File Geodatabase API 1.3 for Linux 32-bit from http://www.esri.com/apps/products/download/",
+          "(Note: You have to register to get ESRI File Geodatabase API)",
+          "Unzip the downloaded ZIP package to your local hard drive. For example: /home/yourname/Downloads/FileGDB_API",
+          "Setup your Ubuntu system environment for ESRI File Geodatabase API",
+          "Run the following command in a terminal (Note: remember to replace \"yourname\" )",
+          "echo \"export FileGDB_HOME=/home/yourname/Downloads/FileGDB_API\" >> ~/.bashrc",
+          "Restart GeoDa, then you should be able to open a .gdb dataset."
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      },
+      {
+        "id": "ubu64",
+        "title": "For Ubuntu ≥14.04 (64-bit):",
+        "steps": [
+          "Download ESRI File Geodatabase API 1.3 for Linux 64-bit from http://www.esri.com/apps/products/download/",
+          "(Note: You have to register to get ESRI File Geodatabase API)",
+          "Unzip the downloaded ZIP package to local hard drive. For example: /home/yourname/Downloads/FileGDB_API",
+          "Setup your Ubuntu system environment for ESRI File Geodatabase API",
+          "Run the following command in a terminal (Note: remember to replace \"yourname\" )",
+          "echo \"export FileGDB_HOME=/home/yourname/Downloads/FileGDB_API\" >> ~/.bashrc",
+          "Restart GeoDa, then you should be able to open a .gdb dataset."
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "content": "Questions? Contact us.",
+    "links": [
+      { "text": "us", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  }
+} 

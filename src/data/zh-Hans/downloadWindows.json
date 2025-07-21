@@ -1,0 +1,580 @@
+{
+  "title": "下载 Windows 版 GeoDa",
+  "description": "点击此链接后将立即开始下载：",
+  "currentVersion": {
+    "version": "GeoDa 1.22",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Windows",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x64-installer.zip",
+        "tracking": {
+          "category": "GeoDaWin64Downloads122",
+          "label": "GeoDa Software Downloads Count for Win64"
+        }
+      },
+      {
+        "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 32位 Windows",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x86-installer.zip",
+        "tracking": {
+          "category": "GeoDaWin32Downloads122",
+          "label": "GeoDa Software Downloads Count for Win32"
+        }
+      }
+    ]
+  },
+  "alternativeDownloads": {
+    "title": "中国用户的替代下载链接：",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22 适用于 Windows",
+        "href": "https://gitee.com/geoda/geoda_mirror/releases/v1.18",
+        "tracking": {
+          "category": "GeoDaWin64Downloads120",
+          "label": "GeoDa Software Downloads Count for Win64"
+        }
+      }
+    ]
+  },
+  "notes": [
+    {
+      "title": "高 DPI 显示问题",
+      "content": "注意：当您在 Windows 10 上使用高 DPI 设备时，可能会遇到一些 UI 问题（例如，Windows 界面中的元素过大或过小）。要解决此问题：",
+      "steps": [
+        "1) 右键点击 GeoDa 图标，然后点击\"属性\"。然后，选择\"兼容性\"选项卡并点击\"更改高 DPI 设置\"。请确保所有选项都未勾选。",
+        "2) 在 GeoDa 中，请确保在偏好设置对话框（GeoDa 菜单->偏好设置）中未勾选\"启用高 DPI/Retina 支持（仅限 Mac）\"选项。",
+        "3) 重启 GeoDa 并检查 UI 问题是否已解决。"
+      ]
+    },
+    {
+      "title": "自动升级问题",
+      "content": "注意：对于 Windows 用户，从 1.8.6 自动升级可能会遇到 UAC 问题或拖放文件到 GeoDa 功能失败的问题。要解决此问题，需要先卸载 GeoDa（也请手动删除目录\"c:\\\\program files\\\\GeoDa Software\"），然后下载并安装 GeoDa。"
+    }
+  ],
+  "previousVersions": [
+    {
+      "version": "GeoDa 1.22.0.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.12 (2025年1月17日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.12 (2025年1月17日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.10 (2024年10月8日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.10 (2024年10月8日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.8 (2024年8月27日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.8 (2024年8月27日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.4",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.4 (2023年10月11日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.4/GeoDa-1.22.0.4-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.4 (2023年10月11日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.4/GeoDa-1.22.0.4-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.2",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.2 (2023年8月30日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.2 (2023年8月30日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.36",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20.0.36 (2022年10月16日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads120",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20.0.36 (2022年10月16日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads120",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.20",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20 (2022年8月7日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.20_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads120",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20 (2022年8月7日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.20_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads120",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20.0.8 (2021年11月7日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.8_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads120",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20.0.8 (2021年11月7日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.8_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads120",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.0",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20.0.0 (2021年9月24日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.0_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads120",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20.0.0 (2021年9月24日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.0_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads120",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.18.0.0",
+      "downloads": [
+        {
+          "text": "GeoDa 1.18.0.0 (2020年12月10日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/GeoDa_1.18.0.0_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads118",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.18.0.0 (2020年12月10日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/GeoDa_1.18.0.0_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads118",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.16.0.16",
+      "downloads": [
+        {
+          "text": "GeoDa 1.16.0.16 (2020年10月20日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16.0.16/GeoDa_1.16.0.16_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads116",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.16.0.16 (2020年10月20日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16.0.16/GeoDa_1.16.0.16_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads116",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.16.0.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.16.0.12 (2020年10月15日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16.0.12/GeoDa_1.16.0.12_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads116",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.16.0.12 (2020年10月15日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16.0.12/GeoDa_1.16.0.12_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads116",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.16.0",
+      "downloads": [
+        {
+          "text": "GeoDa 1.16.0 (2020年9月24日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa_1.16.0_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads116",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.16.0 (2020年9月24日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa_1.16.0_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads116",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.14.0",
+      "downloads": [
+        {
+          "text": "GeoDa 1.14.0 (2019年8月24日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.14/GeoDa_1.14.0_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads114",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.14.0 (2019年8月24日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.14/GeoDa_1.14.0_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads114",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.12.1.161",
+      "downloads": [
+        {
+          "text": "GeoDa 1.12.1.161 (2018年9月26日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.12.1.161/GeoDa_1.12.1.161_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads112",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.161 (2018年9月26日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.12.1.161/GeoDa_1.12.1.161_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads112",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.12.1.129",
+      "downloads": [
+        {
+          "text": "GeoDa 1.12.1.129 (2018年4月26日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.12.1.129/GeoDa_1.12.1.129_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads112",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.129 (2018年4月26日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.12.1.129/GeoDa_1.12.1.129_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads112",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.12.1.47",
+      "downloads": [
+        {
+          "text": "GeoDa 1.12.1.47 (2017年11月13日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.12.1.47/GeoDa_1.12.1.47_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads112",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.47 (2017年11月13日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.12.1.47/GeoDa_1.12.1.47_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads112",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.12 (2017年10月1日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.12/GeoDa_1.12_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads112",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12 (2017年10月1日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.12/GeoDa_1.12_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads112",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.10 (2017年6月1日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.10/GeoDa_1.10_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads110",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 (2017年6月1日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.10/GeoDa_1.10_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads110",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8.16.4",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.16.4 (2017年3月7日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.16.4/GeoDa_1.8.16.4_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads18",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16.4 (2017年3月7日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.16.4/GeoDa_1.8.16.4_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads18",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8.16",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.16 (2017年3月5日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.16/GeoDa_1.8.16_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads18",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 (2017年3月5日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.16/GeoDa_1.8.16_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads18",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8.14",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.14 (2016年11月8日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.14/GeoDa_1.8.14_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads18",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.14 (2016年11月8日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.14/GeoDa_1.8.14_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads18",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.12 (2016年9月1日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.12/GeoDa_1.8.12_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads18",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.12 (2016年9月1日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.12/GeoDa_1.8.12_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads18",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.10 (2016年7月14日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.10/GeoDa_1.8.10_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads18",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.10 (2016年7月14日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.10/GeoDa_1.8.10_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads18",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.8 (2016年6月11日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.8/GeoDa_1.8.8_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads18",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.8 (2016年6月11日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.8.8/GeoDa_1.8.8_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads18",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    }
+  ]
+} 

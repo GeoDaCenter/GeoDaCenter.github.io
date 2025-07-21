@@ -1,0 +1,580 @@
+{
+  "title": "Descargar GeoDa para Windows",
+  "description": "La descarga comenzará inmediatamente después de hacer clic en este enlace:",
+  "currentVersion": {
+    "version": "GeoDa 1.22",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22.0.14 (30/1/2025) para Windows de 64 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x64-installer.zip",
+        "tracking": {
+          "category": "GeoDaWin64Downloads122",
+          "label": "GeoDa Software Downloads Count for Win64"
+        }
+      },
+      {
+        "text": "GeoDa 1.22.0.14 (30/1/2025) para Windows de 32 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x86-installer.zip",
+        "tracking": {
+          "category": "GeoDaWin32Downloads122",
+          "label": "GeoDa Software Downloads Count for Win32"
+        }
+      }
+    ]
+  },
+  "alternativeDownloads": {
+    "title": "Enlaces de descarga alternativos para usuarios en China（中国)：",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22 para Windows",
+        "href": "https://gitee.com/geoda/geoda_mirror/releases/v1.18",
+        "tracking": {
+          "category": "GeoDaWin64Downloads120",
+          "label": "GeoDa Software Downloads Count for Win64"
+        }
+      }
+    ]
+  },
+  "notes": [
+    {
+      "title": "Problemas de Pantalla de Alta DPI",
+      "content": "Nota: cuando use dispositivos de alta DPI en Windows 10, puede experimentar algunos problemas de UI (por ejemplo, los elementos son demasiado grandes o demasiado pequeños en la interfaz de Windows). Para solucionar este problema:",
+      "steps": [
+        "1) Haga clic derecho en el icono de GeoDa y haga clic en \"Propiedades\". Luego, seleccione la pestaña \"Compatibilidad\" y haga clic en \"Cambiar configuración de DPI alta\". Asegúrese de que todas las opciones NO estén marcadas.",
+        "2) En GeoDa, asegúrese de que la opción \"Habilitar soporte High DPI/Retina (solo Mac)\" NO esté marcada en el Diálogo de Preferencias (Menú GeoDa->Preferencias).",
+        "3) Reinicie GeoDa y verifique si el problema de UI se ha resuelto."
+      ]
+    },
+    {
+      "title": "Problemas de Actualización Automática",
+      "content": "Nota: para usuarios de Windows, la actualización automática desde 1.8.6 puede encontrar un problema de UAC o un fallo en la función de arrastrar y soltar archivos a GeoDa. Para resolver este problema, uno necesita desinstalar GeoDa primero (también elimine manualmente el directorio \"c:\\program files\\GeoDa Software\") y luego descargar e instalar GeoDa."
+    }
+  ],
+  "previousVersions": [
+    {
+      "version": "GeoDa 1.22.0.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.12 (17/1/2025) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.12 (17/1/2025) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.10 (8/10/2024) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.10 (8/10/2024) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.8 (27/8/2024) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.8 (27/8/2024) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.4",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.4 (11/10/2023) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.4/GeoDa-1.22.0.4-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.4 (11/10/2023) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.4/GeoDa-1.22.0.4-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.2",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.2 (30/8/2023) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.2 (30/8/2023) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.36",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20.0.36 (16/10/2022) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads120",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20.0.36 (16/10/2022) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads120",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.20",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20 (7/8/2022) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.20_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads120",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20 (7/8/2022) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.20_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads120",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20.0.8 (7/11/2021) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.8_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads120",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20.0.8 (7/11/2021) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.8_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads120",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.0",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20.0.0 (24/9/2021) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.0_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads120",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20.0.0 (24/9/2021) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20/GeoDa_1.20.0.0_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads120",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.18",
+      "downloads": [
+        {
+          "text": "GeoDa 1.18 (10/12/2020) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/GeoDa_1.18.0.0_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads118",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.18 (10/12/2020) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/GeoDa_1.18.0.0_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads118",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.16",
+      "downloads": [
+        {
+          "text": "GeoDa 1.16 (20/10/2020) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa_1.16.0.0_win7+x64_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads116",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.16 (20/10/2020) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/GeoDa_1.16.0.0_win7+x86_Setup.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads116",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.14",
+      "downloads": [
+        {
+          "text": "GeoDa 1.14 (24/8/2019) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.14-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads114",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.14 (24/8/2019) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.14-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads114",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.12.1.161 (26/9/2018) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.12.1.161-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads112",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.161 (26/9/2018) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.12.1.161-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads112",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.129 (26/4/2018) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.12.1.129-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads112",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.129 (26/4/2018) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.12.1.129-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads112",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.59 (28/11/2017) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.12.1.59-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads112",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.59 (28/11/2017) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.12.1.59-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads112",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.10 para Windows Vista, 7, 8 y 10 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads110",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 para Windows XP, Vista, 7, 8 y 10 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads110",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.16 para Windows Vista, 7, 8 y 10 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 para Windows XP, Vista, 7, 8 y 10 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads1816",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.14 para Windows Vista, 7, 8 y 10 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.14-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads1814",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.14 para Windows XP, Vista, 7, 8 y 10 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.14-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads1814",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.12 para Windows Vista, 7, 8 y 10 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.12-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads1812",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.12 para Windows XP, Vista, 7, 8 y 10 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.12-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads1812",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.10 para Windows Vista, 7, 8 y 10 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.10-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads1810",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.10 para Windows XP, Vista, 7, 8 y 10 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.10-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads1810",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.8 para Windows Vista, 7, 8 y 10 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.8-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads188",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.8 para Windows XP, Vista, 7, 8 y 10 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.8-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads188",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.6.7",
+      "downloads": [
+        {
+          "text": "para Windows Vista, 7, 8 y 10 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.6.7-Windows-64bit.exe",
+          "tracking": {
+            "category": "GeoDaWin64Downloads167",
+            "label": "GeoDa Software Downloads Count for Win64 version 1.6.7"
+          }
+        },
+        {
+          "text": "para Windows XP, Vista, 7, 8 y 10 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.6.7-Windows-32bit.exe",
+          "tracking": {
+            "category": "GeoDaWin32Downloads167",
+            "label": "GeoDa Software Downloads Count for Win64 version 1.6.7"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa Legacy",
+      "content": "Si desea usar el binario GeoDa 0.95i de 2004 para Windows XP, seleccione el enlace \"Geoda 0.9.5-i Windows XP Installer\" a continuación. La descarga comenzará inmediatamente después de iniciar sesión.",
+      "notes": ["Tenga en cuenta que GeoDa 0.9.5-i se ejecuta solo en Windows XP."],
+      "downloads": [
+        {
+          "text": "GeoDa 0.9.5-i Windows XP Installer",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/setup_0.exe",
+          "tracking": {
+            "category": "GeoDaLegecy095",
+            "label": "GeoDa Software Downloads Count for Legacy 0.9.5i"
+          }
+        }
+      ]
+    }
+  ],
+  "installation": {
+    "title": "Instrucciones de Instalación",
+    "sections": [
+      {
+        "title": "Instalar GeoDa",
+        "steps": [
+          {
+            "step": "Paso 1:",
+            "image": "img/win_setup_1.png"
+          },
+          {
+            "step": "Paso 2:",
+            "image": "img/win_setup_2.png"
+          },
+          {
+            "step": "Paso 3:",
+            "image": "img/win_setup_3.png"
+          },
+          {
+            "step": "Paso 4:",
+            "image": "img/win_setup_4.png"
+          },
+          {
+            "step": "Paso 5:",
+            "image": "img/win_setup_4_1.png"
+          },
+          {
+            "step": "Paso 6:",
+            "image": "img/win_setup_5.png"
+          }
+        ]
+      },
+      {
+        "title": "Ejecutar GeoDa",
+        "images": [
+          "img/win_setup_result_3.png",
+          "img/win_setup_result_2.png"
+        ]
+      },
+      {
+        "title": "Desinstalar GeoDa",
+        "content": "Para desinstalar GeoDa, seleccione el programa \"Desinstalar\" bajo el grupo de programas \"GeoDa Software\" desde el menú de inicio de programas como se muestra a continuación:",
+        "steps": [
+          {
+            "step": "Paso 1:",
+            "image": "img/win_uninstall_1.png"
+          },
+          {
+            "step": "Paso 2:",
+            "image": "img/win_uninstall_2.png"
+          },
+          {
+            "step": "Paso 3:",
+            "image": "img/win_uninstall_3.png"
+          }
+        ],
+        "alternative": {
+          "content": "Alternativamente, para desinstalar GeoDa, vaya a Panel de Control > Programas > Programas y características y seleccione el programa GeoDa de la lista y seleccione Desinstalar como se muestra a continuación:",
+          "image": "img/windows_geoda_uninstall.png"
+        }
+      },
+      {
+        "title": "Crear un USB ejecutando GeoDa",
+        "content": "Para ejecutar GeoDa en máquinas Windows sin permisos de administrador (por ejemplo, esto es normal en un entorno de laboratorio), hay un truco para crear un USB ejecutando GeoDa sin instalación:",
+        "steps": [
+          "Paso 1: Encuentre una máquina Windows con permisos de administrador, instale GeoDa. (Nota: asegúrese de que se haya instalado el visual c++ 2010 redistributable)",
+          "Paso 2: Copie dos archivos al directorio de instalación de GeoDa \"C:\\Program Files\\GeoDa Software\": C:\\Windows\\System32\\MSVCP100.dll C:\\Windows\\System32\\MSVCR100.dll",
+          "Paso 3: Comprima el directorio de instalación de GeoDa \"C:\\Program Files\\GeoDa Software\", y distribuya el archivo zip como programa GeoDa a estudiantes/usuarios."
+        ]
+      }
+    ]
+  },
+  "systemInfo": {
+    "title": "¿No sabe qué versión de Windows tiene?",
+    "content": "Para determinar si su Windows es de 32 bits o 64 bits, abra Panel de Control > Sistema y Seguridad > Sistema. En el panel de información, busque \"Tipo de sistema\" que dirá \"Sistema operativo de 32 bits\" o \"Sistema operativo de 64 bits\". Vea la captura de pantalla a continuación como ejemplo:",
+    "image": "img/windows_32_or_64_bit_system_info.png"
+  },
+  "footerNote": "Nota: el programa GeoDa de 32 bits funciona en Windows XP y Vista, pero solo proporcionamos soporte limitado para versiones anteriores a Windows 7."
+} 

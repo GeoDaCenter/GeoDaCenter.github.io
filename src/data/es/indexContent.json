@@ -1,0 +1,297 @@
+{
+  "mainContent": {
+    "announce": {
+      "text": "🚀 ¡NUEVA FUNCIÓN! Soporte Mejorado de Múltiples Capas con Agrupación Avanzada ¡Disponible Ahora! ¡Haz Clic para Saber Más! 🎯",
+      "url": "/documentation"
+    },
+    "intro": {
+      "title": "Presentando GeoDa 1.22",
+      "content": [
+        "GeoDa es una herramienta de software gratuita y de código abierto que sirve como introducción a la ciencia de datos espaciales. Está diseñada para facilitar nuevas perspectivas del análisis de datos mediante la exploración y modelado de patrones espaciales.",
+        "GeoDa fue desarrollado por el Dr. Luc Anselin y su equipo. El programa proporciona una interfaz gráfica y fácil de usar para métodos de análisis exploratorio de datos espaciales (ESDA), como estadísticas de autocorrelación espacial para datos agregados (varios miles de registros), y análisis básico de regresión espacial para datos de puntos y polígonos (decenas de miles de registros). Para trabajar con big data en GeoDa, primero debe agregarse a unidades areales.",
+        "Desde su lanzamiento inicial en febrero de 2003, el número de usuarios de GeoDa ha aumentado exponencialmente a más de 520,000 (junio de 2022). Esto incluye usuarios de laboratorio en universidades como Harvard, MIT y Cornell. La comunidad de usuarios y la prensa abrazaron el programa con entusiasmo, llamándolo una 'herramienta analítica enormemente importante', un 'software muy fino' y un 'desarrollo emocionante'.",
+        "La última versión 1.22 contiene soporte multi-capa, varias nuevas características de clúster local, incluyendo mapas de clúster local Geary univariados y multivariados, redcap, skater, clustering espectral y max-p, y mapas de conteo de unión local para datos categóricos. También implementa varias técnicas clásicas de clúster no espacial (análisis de componentes principales, k-means, y clustering jerárquico) implementadas en la Biblioteca C Clustering de Hoon et al. (2013), así como HDBScan.",
+        "Un nuevo libro de trabajo está en desarrollo. Mientras tanto, aquí hay recursos interinos, incluyendo una descripción general de las características en 1.22."
+      ],
+      "links": [
+        {
+          "text": "Dr. Luc Anselin",
+          "href": "https://en.wikipedia.org/wiki/Luc_Anselin"
+        },
+        {
+          "text": "equipo",
+          "href": "https://spatial.uchicago.edu/directories/full/team"
+        },
+        {
+          "text": "mapas de clúster local Geary univariados y multivariados",
+          "href": "/docs/LA_multivariateGeary1.pdf",
+          "external": true
+        },
+        {
+          "text": "Biblioteca C Clustering de Hoon et al. (2013)",
+          "href": "https://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf",
+          "external": true
+        },
+        {
+          "text": "aquí hay recursos interinos",
+          "href": "./documentation"
+        }
+      ],
+      "youtubeVideo": {
+        "src": "https://www.youtube.com/embed/--8vhhmpgdM",
+        "width": "360",
+        "height": "215"
+      }
+    },
+    "slideshow": {
+      "title": "GeoDa 1.22",
+      "description": "GeoDa funciona en Windows, MacOSX y Linux (Ubuntu)",
+      "slides": [
+        {
+          "image": "img/intro1.png",
+          "alt": "Mac OSX El Capitan",
+          "caption": "Mac OSX El Capitan"
+        },
+        {
+          "image": "img/intro2.png",
+          "alt": "Windows 7/8/10",
+          "caption": "Windows 7/8/10"
+        },
+        {
+          "image": "img/intro3.png",
+          "alt": "Ubuntu 14.04",
+          "caption": "Ubuntu 14.04"
+        }
+      ]
+    },
+    "sections": [
+      {
+        "id": "intro-data-formats",
+        "title": "GeoDa Ahora Soporta Más Formatos de Datos Espaciales",
+        "content": "GeoDa ahora soporta una mayor variedad de datos vectoriales en diferentes formatos (haz clic aquí para ver los detalles): Puedes trabajar con shapefiles, geodatabases, GeoJSON, MapInfo, GML, KML, y otros formatos de datos vectoriales soportados por la biblioteca GDAL. El programa también convierte coordenadas en formato de tabla (.csv, .dbf, .xls, .ods) a uno de estos formatos de datos espaciales y convierte datos entre diferentes formatos de archivo (como .csv a .dbf o shapefile a GeoJSON). Seleccionar un subconjunto y exportarlo como un nuevo archivo ahora también es posible.",
+        "image": "img/dataformats.png",
+        "imageAlt": "Formatos de Datos",
+        "links": [
+          {
+            "text": "aquí",
+            "href": "./formats"
+          }
+        ]
+      },
+      {
+        "id": "intro-multi-layer",
+        "title": "¡Ahora Con Soporte Multi-capa!",
+        "content": "Por primera vez, ahora puedes cargar capas adicionales en GeoDa para propósitos de visualización. El análisis seguirá realizándose en la capa que cargues primero. En este ejemplo, el mapa muestra el acceso al transporte desde bloques de viviendas, con las ubicaciones de las estaciones de transporte como una capa adicional.",
+        "image": "img/multi-layer.png",
+        "imageAlt": "Soporte Multi-capa"
+      },
+      {
+        "id": "intro-esda",
+        "title": "Explora Resultados Estadísticos a Través de Mapas y Gráficos Vinculados",
+        "content": "A diferencia de los programas que visualizan datos crudos en mapas, GeoDa se enfoca en explorar los resultados de pruebas estadísticas y modelos a través de mapas y gráficos vinculados.",
+        "image": "img/esda.png",
+        "imageAlt": "ESDA"
+      },
+      {
+        "id": "intro-time",
+        "title": "Analiza Patrones Espaciales y Temporales a Través de Vistas Vinculadas",
+        "content": "Ahora puedes agrupar la misma variable a través de períodos de tiempo en el nuevo Editor de Tiempo para explorar patrones estadísticos a través del espacio y tiempo. Luego explora los resultados a medida que las vistas cambian con el tiempo usando el Reproductor de Tiempo.",
+        "image": "img/time.png",
+        "imageAlt": "Análisis de Tiempo"
+      },
+      {
+        "id": "intro-ui",
+        "title": "Verifica Resultados de Mapas con Mapas Base",
+        "content": "Si tus datos espaciales están proyectados (archivo .prj), ahora puedes agregar un mapa base a cualquier vista de mapa, incluyendo mapas de clúster, para mejor orientación y para verificar resultados.",
+        "image": "img/intro4.png",
+        "imageAlt": "Mapa Base",
+        "imageWidth": "832"
+      },
+      {
+        "id": "intro-avg",
+        "title": "Compara Promedios a Través del Tiempo y Espacio",
+        "content": "Un nuevo Gráfico de Promedios compara valores que se promedian a lo largo del tiempo y/o espacio y prueba si las diferencias en estas medias son significativas. Por ejemplo, primero selecciona si quieres comparar medias de observaciones seleccionadas vs. no seleccionadas en el mismo período de tiempo o comparar todas las observaciones para diferentes períodos de tiempo. Una prueba básica pre-post/impacto-control luego indica si tus resultados cambiaron a lo largo del tiempo y espacio (usando una prueba F y prueba de diferencia en diferencias).",
+        "image": "img/avgchart.png",
+        "imageAlt": "Gráfico de Promedios"
+      },
+      {
+        "id": "intro-sp-matrix",
+        "title": "Detecta Relaciones en Espacio Multivariado",
+        "content": "Una matriz de gráficos de dispersión te permite explorar múltiples correlaciones bivariadas a la vez. En este ejemplo, las pendientes de regresión para precintos policiales seleccionados, no seleccionados y todos en San Francisco se muestran para explorar relaciones entre cuatro tipos de crimen.",
+        "image": "img/scatter_matrix.png",
+        "imageAlt": "Matriz de Dispersión"
+      },
+      {
+        "id": "intro-diff-mi",
+        "title": "Encuentra Clústeres Espaciales Estadísticamente Significativos",
+        "content": "GeoDa ha soportado durante mucho tiempo pruebas locales uni y bivariadas de autocorrelación espacial como Moran local. Ahora el programa también incluye G/G* local, y una variedad de estadísticas de conteo de unión local para datos categóricos. En este ejemplo, mapas de clúster Moran local identifican mayor % de votos GOP en áreas centrales de EE.UU. tanto en las elecciones presidenciales de 2012 como 2016 (izquierda). El mapa de conteo de colocalización (arriba derecha) muestra cuáles de los valores de clúster alto-alto en ambos años se superpusieron en el espacio mientras que el mapa Moran local diferencial revela clústeres en diferencias de % de puntos entre 2016 y 2012 (abajo derecha).",
+        "image": "img/Lisa.png",
+        "imageAlt": "LISA"
+      },
+      {
+        "id": "intro-clusters",
+        "title": "Compara un Conjunto de Técnicas de Clúster Espacialmente Restringidas",
+        "content": "GeoDa ahora tiene muchas técnicas nuevas para identificar clústeres con restricciones espaciales, incluyendo skater, redcap, max-p, k-means, k-medians, k-medoids, y clustering espectral. Aquí hay algunos ejemplos de cómo se agrupan los residentes blancos nacidos en el extranjero, residentes hispanos nacidos en el extranjero y rentas mensuales medianas en 2008-2009 en Nueva York.",
+        "image": "img/sc_clusters.png",
+        "imageAlt": "Clústeres Espaciales"
+      },
+      {
+        "id": "intro-diff-mi-2",
+        "title": "Determina si los Cambios a lo Largo del Tiempo Están Espacialmente Agrupados",
+        "content": "Usa una prueba global o local de Moran's I Diferencial para averiguar si el cambio de una variable a lo largo del tiempo en una ubicación dada está estadísticamente relacionado con el de sus vecinos. Por ejemplo, este mapa de clúster local (LISA) muestra puntos calientes en Nueva York con cambios más grandes en la proporción de niños entre 2002 y 2008 (y puntos fríos con cambios más pequeños).",
+        "image": "img/DiffMI.png",
+        "imageAlt": "Moran's I Diferencial"
+      },
+      {
+        "id": "intro-multivariate",
+        "title": "Prueba si Múltiples Variables Están Agrupadas en el Espacio",
+        "content": "Luc Anselin (2017) recientemente extendió la c de Geary con un nuevo indicador local de asociación espacial. Esto se aplica al conjunto de datos clásico de 'estadísticas morales' de Francia (Guerry, 1833) para mostrar concentraciones espaciales significativas altas y bajas de alfabetización (mapa izquierdo) y asociaciones significativas de crimen de propiedad y alfabetización (mapa derecho).",
+        "image": "img/localGeary.png",
+        "imageAlt": "Geary Local",
+        "links": [
+          {
+            "text": "Luc Anselin (2017)",
+            "href": "/docs/LA_multivariateGeary1.pdf",
+            "external": true
+          }
+        ]
+      },
+      {
+        "id": "intro-nonspatial",
+        "title": "Mapea Patrones de Estadísticas de Clúster No Espaciales",
+        "content": "Ahora puedes mapear patrones de varias técnicas clásicas de clúster no espaciales, incluyendo análisis de componentes principales (mapas izquierdos), k-means (arriba derecha), y clustering jerárquico (abajo derecha) y escalado multidimensional. Usando los mismos datos que en el ejemplo anterior, los mapas de abajo muestran clústeres locales de crimen de propiedad, alfabetización y suicidio.",
+        "image": "img/nonspatial_clusters.png",
+        "imageAlt": "Clústeres No Espaciales"
+      },
+      {
+        "id": "intro-corr",
+        "title": "Encuentra el Umbral Donde Termina la Correlación Espacial",
+        "content": "Una prueba no paramétrica de autocorrelación espacial (correlograma) ahora está disponible para determinar umbrales de distancia cuando los valores de pares vecinos ya no están correlacionados.",
+        "image": "img/corr.png",
+        "imageAlt": "Correlograma"
+      },
+      {
+        "id": "intro-cat",
+        "title": "Explora el Impacto de la Categorización Flexible de Datos",
+        "content": "Con el nuevo editor de categorías, puedes explorar qué tan sensibles son tus resultados a cambios en los umbrales que categorizan tus datos. En este ejemplo los umbrales en el mapa condicional (derecha) se basan en las categorías que se pueden ajustar en el editor de categorías (izquierda).",
+        "image": "img/cat_editor.png",
+        "imageAlt": "Editor de Categorías"
+      }
+    ]
+  },
+  "dependencies": {
+    "title": "Dependencias",
+    "description": "GeoDa se lanza bajo una licencia GPL. Se basa en varias bibliotecas de código abierto y archivos de código fuente. A continuación se muestra la lista de los proyectos clave que nos gustaría agradecer.",
+    "items": [
+      {
+        "name": "Bibliotecas GDAL, versión 1.10",
+        "license": "Licencia de código abierto estilo X/MIT",
+        "authors": "Muchos",
+        "link": "https://www.gdal.org/"
+      },
+      {
+        "name": "Bibliotecas Boost, versión 1.53",
+        "license": "Licencia de Software Boost - Versión 1.0",
+        "authors": "Muchos",
+        "link": "https://www.boost.org/"
+      },
+      {
+        "name": "Biblioteca GUI Multiplataforma wxWidgets, versión 2.9.4",
+        "license": "La Licencia de Biblioteca wxWindows",
+        "authors": "Julian Smart, Robert Roebling, y otros",
+        "link": "https://www.wxwidgets.org/"
+      },
+      {
+        "name": "Bibliotecas de Álgebra Lineal CLAPACK, versión 3.2.1",
+        "license": "Personalizada por la Universidad de Tennessee",
+        "authors": "Muchos",
+        "link": "https://www.netlib.org/clapack/"
+      },
+      {
+        "name": "Biblioteca de Vecinos Más Cercanos Aproximados, versión 0.1",
+        "license": "Ver kNN/AHH.h en archivos de código fuente incluidos",
+        "authors": "Sunil Arya y David Mount",
+        "link": "https://www.cs.umd.edu/~mount/ANN/",
+        "note": "Código fuente completo de la versión 0.1 incluido en el directorio kNN"
+      },
+      {
+        "name": "Código fuente FastArea.c++",
+        "license": "Desconocida",
+        "authors": "Daniel Sunday",
+        "link": "https://jgt.akpeters.com/papers/Sunday02/FastArea.html",
+        "note": "El código fuente para las funciones findArea y ComputeArea2D están en el archivo GenGeomAlgs.h de FastArea.c++ en Journal of Graphics Tools, 7(2):9-13, 2002"
+      },
+      {
+        "name": "Código fuente logger.h",
+        "license": "Licencia de Software Boost - Versión 1.0",
+        "authors": "Seweryn Habdank-Wojewodzki",
+        "link": "https://accu.org/index.php/journals/1304",
+        "note": "Hemos copiado el código fuente para logger.h y lo hemos modificado ligeramente para trabajar con wxString"
+      },
+      {
+        "name": "Código fuente nullstream.h",
+        "license": "Ver logger.h en archivos de código fuente incluidos",
+        "authors": "Maciej Sobczak",
+        "link": "https://www.msobczak.com/"
+      },
+      {
+        "name": "La Biblioteca C Clustering",
+        "license": "Licencia Python",
+        "authors": "Hoon, Michiel de, Seiya Imoto, Satoru Miyano. (2013). The University of Tokyo, Institute of Medical Science, Human Genome Center",
+        "link": "https://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf"
+      }
+    ]
+  },
+  "acknowledgments": {
+    "title": "Agradecimientos",
+    "content": "El desarrollo de GeoDa ha sido apoyado más recientemente por la National Science Foundation, los National Institutes of Health, el National Institute of Justice, y la Agency for Healthcare Research and Quality."
+  },
+  "support": {
+    "title": "Soporte",
+    "content": "Actualmente estamos actualizando la documentación para reflejar las nuevas características en GeoDa 1.22. La lista de correo Openspace soporta preguntas técnicas sobre GeoDa.",
+    "links": [
+      {
+        "text": "documentación",
+        "href": "./documentation"
+      },
+      {
+        "text": "Lista de correo Openspace",
+        "href": "./support"
+      }
+    ]
+  },
+  "license": {
+    "title": "Licencia",
+    "content": "GeoDa usa una Licencia GPL (Licencia Pública General).",
+    "links": [
+      {
+        "text": "Licencia GPL (Licencia Pública General)",
+        "href": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+        "external": true
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contacto",
+    "content": "¿Preguntas? Contáctanos.",
+    "links": [
+      {
+        "text": "nosotros",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
+  },
+  "donate": {
+    "title": "Donar",
+    "content": "Ayúdanos a mantener GeoDa gratuito contribuyendo aquí. ¡Gracias por apoyar el software espacial gratuito y de código abierto!",
+    "links": [
+      {
+        "text": "aquí",
+        "href": "https://giving.uchicago.edu/site/Donation2?1838.donation=form1&df_id=1838&mfc_pref=T&set.Designee=1901",
+        "external": true
+      }
+    ],
+    "image": "img/donate.png",
+    "imageAlt": "Donar a GeoDa"
+  }
+} 

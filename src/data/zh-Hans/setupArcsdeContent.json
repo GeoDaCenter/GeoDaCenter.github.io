@@ -1,0 +1,73 @@
+{
+  "tagline": "插件 | 设置 ESRI ArcSDE 插件",
+  "mainContent": {
+    "title": "插件 | 设置 ESRI ArcSDE 插件",
+    "navigation": [
+      { "text": "Windows (32位)", "href": "#win32" },
+      { "text": "Windows (64位)", "href": "#win64" },
+      { "text": "Ubuntu (32位)", "href": "#ubu32" },
+      { "text": "Ubuntu (64位)", "href": "#ubu64" }
+    ],
+    "sections": [
+      {
+        "id": "win32",
+        "title": "Windows (32位，仅适用于ArcSDE 9.3)：",
+        "steps": [
+          "从ESRI CD-ROM下载Windows版ESRI ArcSDE客户端9.3",
+          "双击安装可执行文件。ESRI ArcSDE客户端将安装到您的本地硬盘。例如：C:\\Program Files\\ArcGIS\\ArcSDE",
+          "为ESRI ArcSDE客户端设置Windows系统环境",
+          "在\"系统属性\"对话框中，将ESRI ArcSDE客户端的路径添加到PATH系统变量中（见以下示例）"
+        ],
+        "image": "./img/ev.png",
+        "imageAlt": "Windows环境变量设置",
+        "commandBlock": false
+      },
+      {
+        "id": "win64",
+        "title": "Windows (64位，仅适用于Esri ArcSDE 10.x)：",
+        "steps": [
+          "从ESRI CD-ROM下载Windows版ESRI ArcSDE客户端10.x",
+          "双击安装可执行文件。ESRI ArcSDE客户端将安装到您的本地硬盘。例如：C:\\Program Files\\ArcGIS\\ArcSDE",
+          "为ESRI ArcSDE客户端设置Windows系统环境",
+          "在\"系统属性\"对话框中，将ESRI ArcSDE客户端的路径添加到PATH系统变量中（见以下示例）"
+        ],
+        "image": "./img/ev.png",
+        "imageAlt": "Windows环境变量设置",
+        "commandBlock": false
+      },
+      {
+        "id": "ubu32",
+        "title": "Ubuntu ≥12 (32位)：",
+        "steps": [
+          "从ESRI CD-ROM下载Linux版ESRI ArcSDE客户端10.x",
+          "将下载的ZIP包解压到本地硬盘。",
+          "为ESRI ArcSDE客户端设置Ubuntu系统环境",
+          "使用您的编辑器打开~/.bash_profile",
+          "在文件末尾添加以下行：\"export SDE_HOME=/Users/test/\"",
+          "重启GeoDa，然后您应该能够使用GeoDa-Oracle-Plugin连接到Oracle空间数据库"
+        ],
+        "commandBlock": false
+      },
+      {
+        "id": "ubu64",
+        "title": "Ubuntu ≥12 (64位)：",
+        "steps": [
+          "从ESRI CD-ROM下载Linux版ESRI ArcSDE客户端10.x",
+          "将下载的ZIP包解压到本地硬盘。",
+          "为ESRI ArcSDE客户端设置Ubuntu系统环境",
+          "使用您的编辑器打开~/.bash_profile",
+          "在文件末尾添加以下行：\"export SDE_HOME=/Users/test/\"",
+          "重启GeoDa，然后您应该能够使用GeoDa-Oracle-Plugin连接到Oracle空间数据库"
+        ],
+        "commandBlock": false
+      }
+    ]
+  },
+  "contact": {
+    "title": "联系我们",
+    "content": "有问题？请联系我们。",
+    "links": [
+      { "text": "我们", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  }
+} 

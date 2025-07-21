@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "title": "GeoDa",
+    "tagline": "Eine Einführung in die räumliche Datenwissenschaft",
+    "buttons": [
+      { "text": "Startseite", "href": "/" },
+      { "text": "Herunterladen", "href": "/download" },
+      {
+        "text": "Daten",
+        "href": "https://geodacenter.github.io/data-and-lab/",
+        "external": true
+      },
+      { "text": "Spickzettel", "href": "/cheatsheet" },
+      { "text": "Dokumentation", "href": "/documentation" },
+      { "text": "Support", "href": "/support" }
+    ]
+  },
+  "footer": {
+    "sections": [],
+    "credits": {
+      "owner": "GeoDa wird von lixun910 gepflegt.",
+      "generated": "Diese Seite wurde mit Docusaurus erstellt.",
+      "links": []
+    }
+  }
+} 

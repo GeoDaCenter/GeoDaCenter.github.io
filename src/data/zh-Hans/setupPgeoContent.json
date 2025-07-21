@@ -1,0 +1,29 @@
+{
+  "tagline": "插件 | 设置 ESRI 个人地理数据库插件",
+  "mainContent": {
+    "title": "插件 | 设置 ESRI 个人地理数据库插件",
+    "description": [
+      "在32位Windows系统中，您应该能够直接打开ESRI个人地理数据库（*.mdb）文件。",
+      "但在64位Windows系统中，GeoDa只接受在ODBC数据源管理员对话框中创建的ESRI个人地理数据库（*.mdb）文件的DSN名称。",
+      "要使您的ESRI个人地理数据库（.mdb文件）在GeoDa中可访问，您需要为其创建一个DSN名称（Microsoft Access驱动程序（*.mdb，*.accdb）在ODBC数据源管理员（控制面板）中）。",
+      "接下来您可以输入此DSN的名称来打开此ESRI个人数据库。"
+    ],
+    "images": [
+      {
+        "src": "./img/pgeo_1.png",
+        "alt": "ODBC数据源管理员"
+      },
+      {
+        "src": "./img/pgeo_2.png",
+        "alt": "Microsoft Access驱动程序设置"
+      }
+    ]
+  },
+  "contact": {
+    "title": "联系我们",
+    "content": "有问题？请联系我们。",
+    "links": [
+      { "text": "我们", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  }
+} 

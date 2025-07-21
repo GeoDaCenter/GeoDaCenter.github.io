@@ -1,0 +1,444 @@
+{
+  "title": "Descargar GeoDa para Linux",
+  "description": "La descarga comenzará inmediatamente después de hacer clic en los enlaces a continuación:",
+  "currentVersion": {
+    "version": "GeoDa 1.22",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22.0.14 (30/1/2025) para Ubuntu Noble 24.04 de 64 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-noble.zip",
+        "tracking": {
+          "category": "GeoDaUbuntu64Downloads122",
+          "label": "GeoDa Software Downloads Count for Ubuntu 64"
+        }
+      },
+      {
+        "text": "GeoDa 1.22.0.14 (30/1/2025) para Ubuntu Jammy 22.04 de 64 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-jammy.zip",
+        "tracking": {
+          "category": "GeoDaUbuntu64Downloads122",
+          "label": "GeoDa Software Downloads Count for Ubuntu 64"
+        }
+      },
+      {
+        "text": "GeoDa 1.22.0.14 (30/1/2025) para Ubuntu Focal 20.04 de 64 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-focal.zip",
+        "tracking": {
+          "category": "GeoDaUbuntu64Downloads122",
+          "label": "GeoDa Software Downloads Count for Ubuntu 64"
+        }
+      }
+    ]
+  },
+  "alternativeDownloads": {
+    "title": "Enlaces de descarga alternativos para usuarios en China（中国)：",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22 (27/8/2024) para Ubuntu de 64 bits",
+        "href": "https://gitee.com/geoda/geoda_mirror/releases/v1.18",
+        "tracking": {
+          "category": "GeoDaUbuntu64Downloads122",
+          "label": "GeoDa Software Downloads Count for Ubuntu 64"
+        }
+      }
+    ]
+  },
+  "notes": [
+    {
+      "title": "Instrucciones de Instalación",
+      "content": "Nota: Si hacer clic para instalar no funciona, intente instalar usando la terminal",
+      "commands": [
+        "sudo dpkg -i /path/to/geoda_deb_file",
+        "sudo apt install -f"
+      ],
+      "buildInfo": "Puede construir GeoDa en Linux siguiendo las instrucciones: https://github.com/GeoDaCenter/geoda/tree/master/BuildTools/ubuntu"
+    }
+  ],
+  "previousVersions": [
+    {
+      "version": "GeoDa 1.22.0.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.12 (17/1/2025) para Ubuntu Noble 24.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-1.22.0-noble.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.12 (17/1/2025) para Ubuntu Jammy 22.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.12 (17/1/2025) para Ubuntu Focal 20.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22 (8/10/2024) para Ubuntu Noble 24.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-1.22.0-noble.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (8/10/2024) para Ubuntu Jammy 22.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (8/10/2024) para Ubuntu Focal 20.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22 (27/8/2024) para Ubuntu Noble 24.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-1.22.0-noble.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (27/8/2024) para Ubuntu Jammy 22.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (27/8/2024) para Ubuntu Focal 20.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.6",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22 (14/8/2024) para Ubuntu Focal 20.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.6/GeoDa-1.22.0.8-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (14/8/2024) para Ubuntu Jammy 22.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.6/GeoDa-1.22.0.8-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.2",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20 (16/10/2022) para Ubuntu Focal 20.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20 (16/10/2022) para Ubuntu Jammy 22.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.36",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20 (16/10/2022) para Ubuntu Focal Fossa 20.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa-1.20.0.36-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads120",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20 (16/10/2022) para Ubuntu Bionic Beaver 18.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa-1.20.0.36-bionic.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads120",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.18",
+      "downloads": [
+        {
+          "text": "GeoDa 1.18 (10/12/2020) para Ubuntu Focal Fossa 20.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/geoda_1.18-1focal1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads118",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.18 (10/12/2020) para Ubuntu Bionic Beaver 18.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/geoda_1.18-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads118",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.16",
+      "downloads": [
+        {
+          "text": "GeoDa 1.16 (20/10/2020) para Ubuntu Focal Fossa 20.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1focal1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads116",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.16 (20/10/2020) para Ubuntu Bionic Beaver 18.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads116",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.16 (20/10/2020) para Ubuntu Xenial Xerus 16.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads116",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.14",
+      "downloads": [
+        {
+          "text": "GeoDa 1.14.0 (7/8/2019) para Ubuntu Linux 18.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.14-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads114",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.14.0 (7/8/2019) para Ubuntu Linux 16.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.14-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads114",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.12.1.161 (26/9/2018) para Ubuntu Linux 16.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12.1.161-1xenial1.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads112",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.147 (26/7/2018) para Ubuntu Linux 18.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12-ubuntu1804.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads112",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.129 (26/4/2018) para Ubuntu Linux 16.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12.1.129-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads112",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.59 (28/11/2017) para Ubuntu Linux 16.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads112",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.59 (28/11/2017) para CentOS 7 o Redhat 7 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12-1.el7.amd64.rpm",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads112",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.10 para Ubuntu Linux 16.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10-Ubuntu-16.04-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads110",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 para Ubuntu Linux 14.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10-Ubuntu-14.04-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads110",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 para CentOS 7 o Redhat 7 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10.el7.centos.x86_64.rpm",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads110",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 para CentOS 7 o Redhat 7 de 64 bits (Comprimido para instalación sin root)",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10.el7.centos-nonroot.tar.gz",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads110",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.16 para Ubuntu Linux 16.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16-Ubuntu-16.04-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 para Ubuntu Linux 14.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16-Ubuntu-14.04-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 para CentOS 7 o Redhat 7 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16.el7.centos.x86_64.rpm",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 para CentOS 7 o Redhat 7 de 64 bits (Comprimido para instalación sin root)",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16.el7.centos-noroot.tar.gz",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.12 para Ubuntu Linux 16.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.12-Ubuntu-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads1812",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.6 Beta para Ubuntu Linux 14.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.6-Ubuntu-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads186",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.6 Beta para Ubuntu Linux 14.04 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.6-Ubuntu-32bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu32Downloads186",
+            "label": "GeoDa Software Downloads Count for Ubuntu 32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.6",
+      "downloads": [
+        {
+          "text": "GeoDa 1.6.7 para Ubuntu Linux 12.x, 13.x y 14.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.6.7-Ubuntu-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbunt64uDownloads167",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.6.7 para Ubuntu Linux 12.x, 13.x y 14.04 de 32 bits",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.6.7-Ubuntu-32bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu32Downloads167",
+            "label": "GeoDa Software Downloads Count for Ubuntu 32"
+          }
+        }
+      ]
+    }
+  ]
+} 

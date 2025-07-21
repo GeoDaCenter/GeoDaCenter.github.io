@@ -1,0 +1,232 @@
+{
+  "tagline": "Documentación",
+  "mainContent": {
+    "intro": {
+      "title": "Cuaderno de Trabajo GeoDa",
+      "content": [
+        "Luc Anselin está trabajando actualmente en una versión en libro de este cuaderno de trabajo para GeoDa. La documentación a continuación ya no se mantendrá. Las referencias alternativas relevantes son estos dos volúmenes del libro:",
+        "L. Anselin (2024a). Una Introducción a la Ciencia de Datos Espaciales con GeoDa. Volumen 1: Explorando Datos Espaciales. CRC/Chapman&Hall, Boca Raton, FL. Versión en línea.",
+        "L. Anselin (2024b). Una Introducción a la Ciencia de Datos Espaciales con GeoDa. Volumen 2: Agrupación de Datos Espaciales. CRC/Chapman&Hall, Boca Raton, FL. Versión en línea."
+      ],
+      "links": [
+        { "text": "NONE", "href": "https://lanselin.github.io/introbook_vol1/", "external": true },
+        { "text": "Versión en línea.", "href": "https://lanselin.github.io/introbook_vol1/", "external": true },
+        { "text": "Versión en línea.", "href": "https://lanselin.github.io/introbook_vol2/", "external": true }
+      ]
+    },
+    "workbook": {
+      "title": "Cuaderno de Trabajo GeoDa",
+      "items": [
+        {
+          "title": "Manipulación de Datos Espaciales (1) - Operaciones Básicas",
+          "href": "./workbook/01_datawrangling_1/lab1a.html"
+        },
+        {
+          "title": "Manipulación de Datos Espaciales (2) - Operaciones GIS",
+          "href": "./workbook/01_datawrangling_2/lab1b.html"
+        },
+        {
+          "title": "Manipulación de Datos Espaciales (3) - Práctica",
+          "href": "./workbook/01_datawrangling_3/lab1.html"
+        },
+        {
+          "title": "Mapeo Básico",
+          "href": "./workbook/3a_mapping/lab3a.html"
+        },
+        {
+          "title": "Mapeo de Tasas",
+          "href": "./workbook/3b_rates/lab3b.html"
+        },
+        {
+          "title": "Análisis Exploratorio de Datos (1) - Análisis Univariado y Bivariado",
+          "href": "./workbook/2a_eda/lab2a.html"
+        },
+        {
+          "title": "Análisis Exploratorio de Datos (2) - Exploración Multivariada",
+          "href": "./workbook/2b_eda_multi/lab2b.html"
+        },
+        {
+          "title": "Exploración Espacio-Temporal",
+          "href": "./workbook/3c_spacetime/lab3c.html"
+        },
+        {
+          "title": "Pesos Espaciales Basados en Contigüidad",
+          "href": "./workbook/4a_contig_weights/lab4a.html"
+        },
+        {
+          "title": "Pesos Espaciales Basados en Distancia",
+          "href": "./workbook/4b_dist_weights/lab4b.html"
+        },
+        {
+          "title": "Pesos Espaciales como Funciones de Distancia",
+          "href": "./workbook/4c_distance_functions/lab4c.html"
+        },
+        {
+          "title": "Aplicaciones de Pesos Espaciales",
+          "href": "./workbook/4d_weights_applications/lab4d.html"
+        },
+        {
+          "title": "Autocorrelación Espacial Global (1) - Gráfico de Dispersión de Moran y Correlograma",
+          "href": "./workbook/5a_global_auto/lab5a.html"
+        },
+        {
+          "title": "Autocorrelación Espacial Global (2) - Bivariada, Diferencial y EB",
+          "href": "./workbook/5b_global_adv/lab5b.html"
+        },
+        {
+          "title": "Autocorrelación Espacial Local (1) - LISA y Moran Local",
+          "href": "./workbook/6a_local_auto/lab6a.html"
+        },
+        {
+          "title": "Autocorrelación Espacial Local (2) - Otras Estadísticas de Autocorrelación Espacial Local",
+          "href": "./workbook/6b_local_adv/lab6b.html"
+        },
+        {
+          "title": "Autocorrelación Espacial Local (3) - Autocorrelación Espacial Local Multivariada",
+          "href": "./workbook/6c_local_multi/lab6c.html"
+        },
+        {
+          "title": "Autocorrelación Espacial Local (4) - LISA para Variables Discretas",
+          "href": "./workbook/6d_local_discrete/lab6d.html"
+        },
+        {
+          "title": "Métodos de Agrupación Basados en Densidad",
+          "href": "./workbook/99_density/lab9b.html"
+        },
+        {
+          "title": "Métodos de Reducción de Dimensión (1) - Análisis de Componentes Principales (PCA)",
+          "href": "./workbook/7aa_dimensionreduction/lab7aa.html"
+        },
+        {
+          "title": "Métodos de Reducción de Dimensión (2) - Métodos de Preservación de Distancia",
+          "href": "./workbook/7ab_mds/lab7ab.html"
+        },
+        {
+          "title": "Análisis de Agrupación (1) - Agrupación K-Means",
+          "href": "./workbook/7bk_clusters_1a/lab7b.html"
+        },
+        {
+          "title": "Análisis de Agrupación (2) - Métodos de Agrupación Jerárquica",
+          "href": "./workbook/7bh_clusters_2a/lab7bh.html"
+        },
+        {
+          "title": "Análisis de Agrupación (3) - Métodos de Agrupación Avanzados",
+          "href": "./workbook/7c_clusters_3/lab7c.html"
+        },
+        {
+          "title": "Agrupación Espacial (1) - Espacialización de Métodos de Agrupación Clásicos",
+          "href": "./workbook/9a_spatial1/lab9a.html"
+        },
+        {
+          "title": "Agrupación Espacial (2) - Agrupación Espacialmente Restringida, Métodos Jerárquicos",
+          "href": "./workbook/9c_spatial3/lab9c.html"
+        },
+        {
+          "title": "Agrupación Espacial (3) - Agrupación Espacialmente Restringida, Métodos de Partición",
+          "href": "./workbook/9d_spatial4/lab9d.html"
+        }
+      ]
+    },
+    "overview": {
+      "title": "Resumen de Funcionalidad - Última Versión de GeoDa (1.22)",
+      "description": "Además, estos recursos dan una visión general de algunas de las nuevas funcionalidades en GeoDa 1.10+:",
+      "items": [
+        {
+          "title": "Instalación de GeoDa y un Recorrido Rápido de la Funcionalidad de GeoDa",
+          "href": "docs/Geoda_tour.pdf"
+        },
+        {
+          "title": "Resumen, Primeros Pasos, Geovisualización, Análisis Exploratorio de Datos Multivariado",
+          "href": "docs/geoda_1.8_1.pdf"
+        },
+        {
+          "title": "Pesos Espaciales, Autocorrelación Espacial, Exploración Espacio-Temporal, Herramienta de Promedios, Regresión Espacial",
+          "href": "docs/geoda_1.8_2.pdf"
+        },
+        {
+          "title": "Sobre la funcionalidad de agrupación multivariada local (nueva desde GeoDa 1.10). Luc Anselin. (2017). Un Indicador Local de Asociación Espacial Multivariada: Extendiendo la c de Geary. Documento de Trabajo: Centro de Ciencia de Datos Espaciales, Universidad de Chicago. (próximamente, Análisis Geográfico)",
+          "href": "docs/LA_multivariateGeary1.pdf"
+        },
+        {
+          "title": "Funcionalidad de agrupación no espacial (nueva desde GeoDa 1.10). Hoon, Michiel de, Seiya Imoto, Satoru Miyano. (2013). La Biblioteca de Agrupación C. Universidad de Tokio, Instituto de Ciencias Médicas, Centro del Genoma Humano.",
+          "href": "http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster.pdf",
+          "external": true
+        }
+      ]
+    },
+    "formats": {
+      "title": "Formatos de Datos Espaciales Soportados en GeoDa",
+      "content": "GeoDa ahora soporta no solo shapefiles sino muchos otros formatos de datos espaciales. Encuentre más información, incluyendo instrucciones de configuración sobre estos formatos de datos aquí.",
+      "links": [
+        { "text": "aquí", "href": "formats.html" }
+      ]
+    },
+    "regression": {
+      "title": "Guía del Usuario de Regresión Espacial (Libro)",
+      "content": "La guía del usuario para la funcionalidad de regresión espacial en GeoDa se puede comprar aquí:",
+      "items": [
+        {
+          "title": "Luc Anselin y Sergio J. Rey. (2014). Econometría Espacial Moderna en la Práctica: Una Guía para GeoDa, GeoDaSpace y PySAL.",
+          "href": "https://www.amazon.com/Modern-Spatial-Econometrics-Practice-GeoDaSpace/dp/0986342106?ie=UTF8&keywords=anselin%20spatial%20econometrics&qid=1421531753&ref_=sr_1_1&sr=8-1",
+          "external": true
+        }
+      ]
+    },
+    "legacy": {
+      "title": "Recursos Más Antiguos (2003-05) - GeoDa Legacy 0.95i",
+      "content": "Este cuaderno de trabajo (2005) y los dos informes de documentación (2003) fueron desarrollados para la versión Legacy de GeoDa (0.9.5i) y aún son útiles para entender la funcionalidad principal. Sin embargo, muchas de las capturas de pantalla y opciones de menú han sido actualizadas desde entonces. Aquí hay una visión general de 1 página de la funcionalidad de GeoDa 1.8 con referencias a los capítulos del cuaderno de trabajo.",
+      "links": [
+        { "text": "visión general de 1 página", "href": "docs/GeoDa1.8_toolbar.pdf" }
+      ],
+      "items": [
+        {
+          "title": "Explorando Datos Espaciales con GeoDa: Un Cuaderno de Trabajo",
+          "href": "docs/geodaworkbook.pdf",
+          "description": "(2005; 244 pp., 5.1Mb)"
+        },
+        {
+          "title": "Guía del Usuario de GeoDa 0.9.3 con resumen de características",
+          "href": "docs/geoda093.pdf",
+          "description": "(2003; 125 pp., 2.4Mb)"
+        },
+        {
+          "title": "Notas de Lanzamiento de GeoDa 0.9.5-i con resumen de gráfico de dispersión 3D, gráficos condicionales y regresión espacial",
+          "href": "docs/geoda095i.pdf",
+          "description": "(2003; 64 pp., 1.5Mb)"
+        }
+      ]
+    }
+  },
+  "footer": {
+    "sections": [
+      {
+        "id": "sample-data",
+        "title": "Datos de Muestra y Videos de Fondo para Tutoriales",
+        "content": "Acceda a los datos de muestra referenciados en la documentación y encuentre videos gratuitos en línea sobre análisis espacial aquí.",
+        "links": [
+          { "text": "datos de muestra", "href": "https://spatial.uchicago.edu/sample-data", "external": true },
+          { "text": "aquí", "href": "https://www.youtube.com/user/GeoDaCenter", "external": true }
+        ]
+      },
+      {
+        "id": "algorithms",
+        "title": "Algoritmos Implementados en GeoDa",
+        "content": "Aquí hay una lista de referencias de algoritmos implementados en GeoDa.",
+        "links": [
+          { "text": "Aquí", "href": "/refs.html" }
+        ]
+      }
+    ],
+    "credits": {
+      "owner": "GeoDa es mantenido por lixun910.",
+      "generated": "Esta página fue generada por GitHub Pages usando el tema Cayman de Jason Long.",
+      "links": [
+        { "text": "GeoDa", "href": "https://github.com/lixun910/geoda", "external": true },
+        { "text": "lixun910", "href": "https://github.com/lixun910", "external": true },
+        { "text": "GitHub Pages", "href": "https://pages.github.com", "external": true },
+        { "text": "tema Cayman", "href": "https://github.com/jasonlong/cayman-theme", "external": true },
+        { "text": "Jason Long", "href": "https://twitter.com/jasonlong", "external": true }
+      ]
+    }
+  }
+} 

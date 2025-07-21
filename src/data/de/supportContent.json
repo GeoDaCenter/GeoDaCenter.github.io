@@ -1,0 +1,71 @@
+{
+  "tagline": "Support",
+  "mainContent": {
+    "sections": [
+      {
+        "title": "FAQs: Häufig gestellte Fragen",
+        "content": "Finden Sie Antworten auf häufig gestellte Fragen (FAQs)",
+        "links": [
+          {
+            "text": "hier",
+            "href": "./faq"
+          }
+        ]
+      },
+      {
+        "title": "Antworten auf häufige technische Fragen",
+        "content": "Finden Sie Antworten auf häufige technische Fragen zu GeoDa",
+        "links": [
+          {
+            "text": "hier",
+            "href": "./questions"
+          }
+        ]
+      },
+      {
+        "title": "Community-Support über die Openspace-Mailingliste",
+        "description": "Die Openspace-Mailingliste ist eine Liste zur Diskussion aller Aspekte von Methoden und Open-Source-Softwaretools zur Durchführung räumlicher Datenanalyse. Ein besonderer Schwerpunkt liegt auf den GeoDa-, GeoDaSpace-, PySAL- und CAST-Softwareprogrammen.",
+        "note": "Die Liste ist nicht für die Diskussion kommerzieller räumlicher Analysesoftware gedacht, aber methodische Debatten sind willkommen. Sie ist nur für nicht-kommerzielle Nutzung bestimmt.",
+        "links": [
+          {
+            "text": "Openspace-Mailingliste",
+            "href": "http://groups.google.com/group/openspace-list?lnk=",
+            "external": true
+          },
+          {
+            "text": "Aktuelle Openspace-Mailingliste (durchsuchbar)",
+            "href": "http://groups.google.com/group/openspace-list?lnk=srg",
+            "external": true
+          },
+          {
+            "text": "Abbestellen",
+            "href": "http://groups.google.com/support/bin/answer.py?hl=en&answer=46608",
+            "external": true
+          }
+        ],
+        "listItems": [
+          "Abonnieren Sie die Openspace-Mailingliste: openspace-list+subscribe@googlegroups.com",
+          "Beitrag zur Openspace-Mailingliste: openspace-list@googlegroups.com"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Kontakt",
+    "content": "Fragen? Kontaktieren Sie uns.",
+    "links": [
+      {
+        "text": "uns",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
+  },
+  "footer": {
+    "sections": [],
+    "credits": {
+      "owner": "GeoDa wird von lixun910 gepflegt.",
+      "generated": "Diese Seite wurde mit Docusaurus erstellt.",
+      "links": []
+    }
+  }
+} 

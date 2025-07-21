@@ -1,0 +1,203 @@
+{
+  "title": "Antworten auf technische GeoDa-Fragen",
+  "navigation": [
+    {
+      "id": "data",
+      "text": "Welche Eigenschaften sollten meine Daten haben?"
+    },
+    {
+      "id": "datasize",
+      "text": "Was sind die Datenmengenlimits in GeoDa?"
+    },
+    {
+      "id": "specs",
+      "text": "Auf welchen Plattformen läuft GeoDa?"
+    },
+    {
+      "id": "layer",
+      "text": "Kann ich mehr als eine Ebene in GeoDa laden?"
+    },
+    {
+      "id": "miss",
+      "text": "Was tun mit fehlenden Werten?"
+    },
+    {
+      "id": "choice",
+      "text": "Welche Gewichtsmatrix sollte ich wählen?"
+    },
+    {
+      "id": "dist",
+      "text": "Was passiert, wenn ich den Schwellenwert für die Distanz niedriger als den Standard setze?"
+    },
+    {
+      "id": "invdist",
+      "text": "Enthält GeoDa inverse Distanzgewichtung?"
+    },
+    {
+      "id": "unit",
+      "text": "Wie bekomme ich die gewünschten Distanzeinheiten?"
+    },
+    {
+      "id": "isle",
+      "text": "Was tun mit Inseln?"
+    },
+    {
+      "id": "projection",
+      "text": "Wie weise ich Projektionen und Koordinatensysteme meiner räumlichen Datei zu?"
+    },
+    {
+      "id": "lisactr",
+      "text": "LISA-Karten zeigen nur Cluster-Zentren"
+    },
+    {
+      "id": "lisasig",
+      "text": "Wie bewerte ich die Sensitivität von LISA-Ergebnissen?"
+    },
+    {
+      "id": "lisabox",
+      "text": "Meine Box-Karte spiegelt meine LISA-Karte nicht wider - warum?"
+    },
+    {
+      "id": "robust",
+      "text": "Wie robust ist der Pseudo-p-Wert?"
+    },
+    {
+      "id": "smooth",
+      "text": "Wie bewerte ich die Sensitivität verschiedener Glättungsverfahren?"
+    },
+    {
+      "id": "regout",
+      "text": "Regression ausführen ohne Projekt zu öffnen"
+    },
+    {
+      "id": "output",
+      "text": "Wo bekomme ich Hilfe bei der Interpretation der Regressionsausgabe?"
+    }
+  ],
+  "questions": [
+    {
+      "id": "data",
+      "question": "Welche Eigenschaften sollten meine Daten haben?",
+      "answer": "GeoDa ist für Daten mit den folgenden Eigenschaften konzipiert:",
+      "list": [
+        "Kontinuierlich verteilt (nicht kategorisch)",
+        "Bezieht sich auf diskrete räumliche Einheiten (im Gegensatz zu Stichprobenpunkten)",
+        "Hat keine fehlenden Werte."
+      ]
+    },
+    {
+      "id": "datasize",
+      "question": "Was sind die Datenmengenlimits in GeoDa?",
+      "answer": "Für die ESDA-Analyse in GeoDa kann es schwierig sein, Muster über mehrere Ansichten für Daten größer als 5.000-10.000 Beobachtungen zu erkennen, obwohl einige Anwendungen es für über 170.000 Gebiete verwendet haben. Die Leistung neigt jedoch dazu, in diesen Fällen zu verlangsamen. GeoDa-Web wird für größere Datensätze entwickelt. Für die räumliche Regressionsanalyse hängt der Schwellenwert für Leistungsreduktionen von der Wahl der räumlichen Gewichte ab, liegt aber oft zwischen 50.000-100.000 Beobachtungen. GeoDaSpace (besonders die GMM-Schätzer) sind besser für größere Datensätze geeignet."
+    },
+    {
+      "id": "specs",
+      "question": "Auf welchen Plattformen läuft GeoDa?",
+      "answer": "GeoDa läuft auf Windows, Mac OSX und Linux. Es greift nicht auf eingeschränkte Systemordner in Windows zu."
+    },
+    {
+      "id": "layer",
+      "question": "Kann ich mehr als eine Ebene in GeoDa laden?",
+      "answer": "Nein. Sie können eine Basiskartenebene zu einer bestehenden Flächen- oder Punktkarte hinzufügen, aber keine andere zusätzliche Ebene (wie Punkte und Flächen). Diese Option ist in CAST verfügbar und wird in GeoDa-Web verfügbar sein, das in naher Zukunft veröffentlicht wird.",
+      "links": [
+        {
+          "text": "CAST",
+          "href": "/CAST"
+        }
+      ]
+    },
+    {
+      "id": "miss",
+      "question": "Was tun mit fehlenden Werten?",
+      "answer": "GeoDa behandelt fehlende Werte nicht - es füllt leere Felder mit Nullen oder behandelt Werte wie 99, -1, etc. als beobachtet. Es gibt keine einfache Lösung für dieses Problem. Einige Optionen umfassen das Ausschließen fehlender Beobachtungen, das erneute Speichern Ihrer Shape-Datei nur für die Gebiete ohne fehlende Werte oder das Interpolieren fehlender Werte (es muss darauf geachtet werden, dass diese Interpolation nicht auf den Werten unmittelbarer Nachbarn basiert, da sonst räumliche Autokorrelation durch Design eingeführt wird).",
+      "links": [
+        {
+          "text": "räumliche Autokorrelation",
+          "href": "./glossary#sa"
+        }
+      ]
+    },
+    {
+      "id": "choice",
+      "question": "Welche Gewichtsmatrix sollte ich wählen?",
+      "answer": "Die Wahl der Gewichte sollte letztendlich von einer Begründung für die Aufnahme dieser Gebiete als Nachbarn geleitet werden, die einen räumlichen Effekt auf einen bestimmten Ort haben. Diese Begründung kann aus der Theorie abgeleitet werden oder das Ergebnis der Verwendung von ESDA sein, um mit verschiedenen Gewichten und Konnektivitätsordnungen zu experimentieren. Da Gewichtsmatrizen verwendet werden, um räumliche Lags zu erstellen, die benachbarte Werte mitteln, wird die Wahl einer Gewichtsmatrix bestimmen, welche benachbarten Werte gemittelt werden. Zum Beispiel hat, da Rook-Gewichte normalerweise weniger Nachbarn als Queen-Gewichte haben, im Durchschnitt jede benachbarte Beobachtung mehr Einfluss.",
+      "links": [
+        {
+          "text": "Gewichte",
+          "href": "./glossary#wghts"
+        },
+        {
+          "text": "ESDA",
+          "href": "./glossary#esda"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "Die Frage, welche Gewichte zu wählen sind, ist im Kontext der Modellierung relevanter als ESDA, da Modellierung auf substantiellen Vorstellungen von räumlichen Effekten basiert, während ESDA die Ablehnung räumlicher Zufälligkeit priorisiert. Daher macht es Sinn, wenn es keine substantiellen Gründe gibt, die Wahl der Gewichte in ESDA zu leiten, eine Gewichtsdatei mit so wenigen Nachbarn wie möglich zu verwenden (wie Rook). Besonders bei unregelmäßigen räumlichen Einheiten (im Gegensatz zu Gittern) ist der Unterschied zwischen Rook- und Queen-Gewichten oft minimal. Es ist jedoch ratsam, zu testen, wie empfindlich Ihre Ergebnisse auf Ihre Gewichtsspezifikationen reagieren, indem Sie mehrere Gewichtsmatrizen vergleichen.",
+          "links": [
+            {
+              "text": "Rook",
+              "href": "/node/390#rook"
+            },
+            {
+              "text": "Queen",
+              "href": "/node/390#queen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "question": "Was passiert, wenn ich den Schwellenwert für die Distanz niedriger als den Standard setze?",
+      "answer": "Der Standard-Distanzschwellenwert stellt sicher, dass jede Beobachtung mindestens einen Nachbarn hat. Wenn Sie den Schwellenwert für die Distanz kleiner als das Standard-Minimum setzen, erstellt GeoDa eine Gewichtsmatrix basierend auf Ihrem Schwellenwert, nicht dem Standard, d.h. sie wird \"Insel\"-Beobachtungen ohne Nachbarn enthalten. Sie können dies leicht überprüfen, indem Sie sich die Gewichtseigenschaften in GeoDa ansehen und die Gewichtsmatrix in einem Texteditor öffnen.",
+      "links": [
+        {
+          "text": "Gewichtsmatrix",
+          "href": "./glossary#wghts"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "Wenn Sie neugierig auf den Unterschied zwischen der Matrix mit dem Standard-Minimum-Schwellenwert und Ihrer sind, erstellen Sie beide Matrizen und vergleichen Sie sie, indem Sie sich ihre Gewichtseigenschaften ansehen (was ein Histogramm der Anzahl der Nachbarn für alle Beobachtungen ist). Sie werden sehen, dass die Minimum-Schwellenwert-Matrix keine Beobachtungen mit null Nachbarn hat, während Ihre Beobachtungen mit null Nachbarn haben wird.",
+          "links": [
+            {
+              "text": "Gewichtseigenschaften",
+              "href": "./glossary#hist"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invdist",
+      "question": "Enthält GeoDa inverse Distanzgewichtung?",
+      "answer": "Ja. Sie können verschiedene Arten von distanzbasierten Gewichten (mit .gwt und .kwt Dateierweiterungen) in GeoDa erstellen:",
+      "additionalParagraphs": [
+        {
+          "content": "GeoDa implementiert Gewichte basierend auf Distanzbändern, inverse Distanzgewichtung und Kernel-Gewichtung. Für Distanzbänder wird die dritte Spalte mit Distanzen in der .gwt-Datei nur verwendet, um zu bestimmen, ob ein Punkt innerhalb eines Distanzbands liegt oder nicht. Das Ausmaß des Distanzbands wird durch Ihren Schwellenwert für die Distanz angegeben (der Standardwert stellt sicher, dass Sie keine Inseln haben). GeoDa zeilenstandardisiert Gewichte, d.h. die Zeilen summieren sich zu 1. Sie finden mehr Informationen über distanzbasierte räumliche Gewichte hier und über inverse Distanzgewichte und Kernel-Gewichte hier.",
+          "links": [
+            {
+              "text": "hier",
+              "href": "https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html",
+              "external": true
+            },
+            {
+              "text": "hier",
+              "href": "https://geodacenter.github.io/workbook/4c_distance_functions/lab4c.html",
+              "external": true
+            }
+          ]
+        },
+        {
+          "content": "Wenn die Größe Ihrer Gebiete erheblich variiert, könnten Sie daran interessiert sein, K-nächste Nachbarn zu verwenden, was sicherstellt, dass jeder Punkt die gleiche Anzahl von Nachbarn hat. Beachten Sie jedoch, dass diese Gewichte nicht verwendet werden können, um räumliche Regressionsmodelle mit Maximum Likelihood zu schätzen, da diese Gewichte asymmetrisch sind."
+        }
+      ]
+    },
+    {
+      "id": "unit",
+      "question": "Wie bekomme ich die gewünschten Distanzeinheiten?",
+      "answer": "Wenn Sie möchten, dass die Metrik, die im Distanzgewichte-Schwellenwert-Feld angezeigt wird, eine bestimmte Einheit widerspiegelt (z.B. Fuß oder Meilen), projizieren Sie zuerst Ihre Shape-Datei oder andere räumliche Datei und setzen Sie die gewünschten Einheiten in einem anderen Programm wie einem GIS. Erstellen Sie dann die Gewichte basierend auf dieser Datei."
+    }
+  ]
+} 

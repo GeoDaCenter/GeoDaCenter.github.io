@@ -1,0 +1,444 @@
+{
+  "title": "下载 Linux 版 GeoDa",
+  "description": "点击下方链接后将立即开始下载：",
+  "currentVersion": {
+    "version": "GeoDa 1.22",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Noble 24.04",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-noble.zip",
+        "tracking": {
+          "category": "GeoDaUbuntu64Downloads122",
+          "label": "GeoDa Software Downloads Count for Ubuntu 64"
+        }
+      },
+      {
+        "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Jammy 22.04",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-jammy.zip",
+        "tracking": {
+          "category": "GeoDaUbuntu64Downloads122",
+          "label": "GeoDa Software Downloads Count for Ubuntu 64"
+        }
+      },
+      {
+        "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Focal 20.04",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-focal.zip",
+        "tracking": {
+          "category": "GeoDaUbuntu64Downloads122",
+          "label": "GeoDa Software Downloads Count for Ubuntu 64"
+        }
+      }
+    ]
+  },
+  "alternativeDownloads": {
+    "title": "中国用户的替代下载链接：",
+    "downloads": [
+      {
+        "text": "GeoDa 1.22 (2024年8月27日) 适用于 64位 Ubuntu",
+        "href": "https://gitee.com/geoda/geoda_mirror/releases/v1.18",
+        "tracking": {
+          "category": "GeoDaUbuntu64Downloads122",
+          "label": "GeoDa Software Downloads Count for Ubuntu 64"
+        }
+      }
+    ]
+  },
+  "notes": [
+    {
+      "title": "安装说明",
+      "content": "注意：如果点击安装不起作用，请尝试使用终端安装",
+      "commands": [
+        "sudo dpkg -i /path/to/geoda_deb_file",
+        "sudo apt install -f"
+      ],
+      "buildInfo": "您可以按照以下说明在 Linux 上构建 GeoDa：https://github.com/GeoDaCenter/geoda/tree/master/BuildTools/ubuntu"
+    }
+  ],
+  "previousVersions": [
+    {
+      "version": "GeoDa 1.22.0.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.12 (2025年1月17日) 适用于 64位 Ubuntu Noble 24.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-1.22.0-noble.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.12 (2025年1月17日) 适用于 64位 Ubuntu Jammy 22.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.12 (2025年1月17日) 适用于 64位 Ubuntu Focal 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.12/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22 (2024年10月8日) 适用于 64位 Ubuntu Noble 24.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-1.22.0-noble.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (2024年10月8日) 适用于 64位 Ubuntu Jammy 22.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (2024年10月8日) 适用于 64位 Ubuntu Focal 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.10/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22 (2024年8月27日) 适用于 64位 Ubuntu Noble 24.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-1.22.0-noble.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (2024年8月27日) 适用于 64位 Ubuntu Jammy 22.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (2024年8月27日) 适用于 64位 Ubuntu Focal 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.8/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.6",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22 (2024年8月14日) 适用于 64位 Ubuntu Focal 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.6/GeoDa-1.22.0.8-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22 (2024年8月14日) 适用于 64位 Ubuntu Jammy 22.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.6/GeoDa-1.22.0.8-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.22.0.2",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20 (2022年10月16日) 适用于 64位 Ubuntu Focal 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20 (2022年10月16日) 适用于 64位 Ubuntu Jammy 22.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.2/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.20.0.36",
+      "downloads": [
+        {
+          "text": "GeoDa 1.20 (2022年10月16日) 适用于 64位 Ubuntu Focal Fossa 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa-1.20.0.36-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads120",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.20 (2022年10月16日) 适用于 64位 Ubuntu Bionic Beaver 18.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.20.0.36/GeoDa-1.20.0.36-bionic.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads120",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.18",
+      "downloads": [
+        {
+          "text": "GeoDa 1.18 (2020年12月10日) 适用于 64位 Ubuntu Focal Fossa 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/geoda_1.18-1focal1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads118",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.18 (2020年12月10日) 适用于 64位 Ubuntu Bionic Beaver 18.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.18/geoda_1.18-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads118",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.16",
+      "downloads": [
+        {
+          "text": "GeoDa 1.16 (2020年10月20日) 适用于 64位 Ubuntu Focal Fossa 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1focal1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads116",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.16 (2020年10月20日) 适用于 64位 Ubuntu Bionic Beaver 18.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads116",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.16 (2020年10月20日) 适用于 64位 Ubuntu Xenial Xerus 16.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.16/geoda_1.16-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads116",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.14",
+      "downloads": [
+        {
+          "text": "GeoDa 1.14.0 (2019年8月7日) 适用于 64位 Ubuntu Linux 18.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.14-1bionic1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads114",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.14.0 (2019年8月7日) 适用于 64位 Ubuntu Linux 16.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.14-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads114",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.12",
+      "downloads": [
+        {
+          "text": "GeoDa 1.12.1.161 (2018年9月26日) 适用于 64位 Ubuntu Linux 16.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12.1.161-1xenial1.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads112",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.147 (2018年7月26日) 适用于 64位 Ubuntu Linux 18.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12-ubuntu1804.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads112",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.129 (2018年4月26日) 适用于 64位 Ubuntu Linux 16.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12.1.129-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads112",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.59 (2017年11月28日) 适用于 64位 Ubuntu Linux 16.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12-1xenial1_amd64.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads112",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.12.1.59 (2017年11月28日) 适用于 64位 CentOS 7 或 Redhat 7",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/geoda_1.12-1.el7.amd64.rpm",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads112",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.10",
+      "downloads": [
+        {
+          "text": "GeoDa 1.10 适用于 64位 Ubuntu Linux 16.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10-Ubuntu-16.04-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads110",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 适用于 64位 Ubuntu Linux 14.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10-Ubuntu-14.04-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads110",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 适用于 64位 CentOS 7 或 Redhat 7",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10.el7.centos.x86_64.rpm",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads110",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.10 适用于 64位 CentOS 7 或 Redhat 7（压缩包，适用于非 root 安装）",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.10.el7.centos-nonroot.tar.gz",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads110",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.8",
+      "downloads": [
+        {
+          "text": "GeoDa 1.8.16 适用于 64位 Ubuntu Linux 16.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16-Ubuntu-16.04-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 适用于 64位 Ubuntu Linux 14.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16-Ubuntu-14.04-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 适用于 64位 CentOS 7 或 Redhat 7",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16.el7.centos.x86_64.rpm",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.16 适用于 64位 CentOS 7 或 Redhat 7（压缩包，适用于非 root 安装）",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.16.el7.centos-noroot.tar.gz",
+          "tracking": {
+            "category": "GeoDaCentos64Downloads1816",
+            "label": "GeoDa Software Downloads Count for Centos 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.12 适用于 64位 Ubuntu Linux 16.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.12-Ubuntu-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads1812",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.6 Beta 适用于 64位 Ubuntu Linux 14.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.6-Ubuntu-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads186",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.8.6 Beta 适用于 32位 Ubuntu Linux 14.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.8.6-Ubuntu-32bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu32Downloads186",
+            "label": "GeoDa Software Downloads Count for Ubuntu 32"
+          }
+        }
+      ]
+    },
+    {
+      "version": "GeoDa 1.6",
+      "downloads": [
+        {
+          "text": "GeoDa 1.6.7 适用于 64位 Ubuntu Linux 12.x、13.x 和 14.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.6.7-Ubuntu-64bit.deb",
+          "tracking": {
+            "category": "GeoDaUbunt64uDownloads167",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.6.7 适用于 32位 Ubuntu Linux 12.x、13.x 和 14.04",
+          "href": "https://github.com/GeoDaCenter/software/releases/download/v2020/GeoDa-1.6.7-Ubuntu-32bit.deb",
+          "tracking": {
+            "category": "GeoDaUbuntu32Downloads167",
+            "label": "GeoDa Software Downloads Count for Ubuntu 32"
+          }
+        }
+      ]
+    }
+  ]
+} 

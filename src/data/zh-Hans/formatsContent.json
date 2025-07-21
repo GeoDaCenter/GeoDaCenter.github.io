@@ -1,0 +1,70 @@
+{
+  "tagline": "GeoDa 支持的数据格式",
+  "mainContent": {
+    "title": "GeoDa 1.8 支持的空间数据格式",
+    "sections": [
+      {
+        "title": "文件格式（编译到 GeoDa 中）",
+        "type": "table",
+        "headers": ["文件格式名称", "文件扩展名", "可写"],
+        "rows": [
+          ["逗号分隔值 (CSV)", ".csv", "是"],
+          ["ESRI Shapefile", ".shp; .dbf", "是"],
+          ["GeoJSON", ".json; .geojson", "是"],
+          ["GeoPackage", ".gpkg", "是"],
+          ["GML", ".kml; .xml", "是"],
+          ["KML", ".kml; .xml", "是"],
+          ["Mapinfo 文件", ".MIF; .MID", "是"],
+          ["MS Excel 格式", ".xls", "否"],
+          ["开放文档电子表格", ".ods", "否"]
+        ]
+      },
+      {
+        "title": "云数据源",
+        "type": "table",
+        "headers": ["服务", "描述", "可写"],
+        "rows": [
+          ["CartoDB", "您需要您的 CartoDB 用户账户和 API 密钥", "否"]
+        ]
+      },
+      {
+        "title": "数据库",
+        "type": "table",
+        "headers": ["数据库名称", "支持版本", "可写", "需要额外设置？"],
+        "rows": [
+          ["ESRI ArcSDE (64位)", "10.x (建议)", "否", {"text": "是，请参阅设置说明", "href": "./setup-arcsde"}],
+          ["ESRI ArcSDE (32位)", "9.x (建议)", "否", {"text": "是，请参阅设置说明", "href": "./setup-arcsde"}],
+          ["Oracle Spatial", "11g (建议)", "是", {"text": "是，请参阅设置说明", "href": "./setup-oracle"}],
+          ["PostgreSQL with PostGIS", "9.3.1 (建议)", "是", "否"],
+          ["MySQL with Spatial Extension", "5.6.14 (建议)", "是", "否"]
+        ]
+      },
+      {
+        "title": "文件数据库",
+        "type": "table",
+        "headers": ["文件数据库名称", "支持版本", "可写", "需要额外设置？"],
+        "rows": [
+          ["SQLite", "3.0 (建议)", "是", "否"],
+          ["Spatialite", "3.0 (建议)", "是", "否"],
+          ["ESRI File Geodatabase", "", "是", {"text": "是，请参阅设置说明", "href": "./setup-esri-fgdb"}],
+          ["ESRI Personal Geodatabase", "", "否", {"text": "是，请参阅设置说明", "href": "./setup-pgeo"}]
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "联系",
+    "content": "有问题？联系我们。",
+    "links": [
+      { "text": "我们", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  },
+  "footer": {
+    "sections": [],
+    "credits": {
+      "owner": "GeoDa 由 lixun910 维护。",
+      "generated": "此页面使用 Docusaurus 生成。",
+      "links": []
+    }
+  }
+} 

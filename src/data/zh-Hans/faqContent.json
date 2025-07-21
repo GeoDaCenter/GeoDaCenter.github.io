@@ -1,0 +1,242 @@
+{
+  "title": "常见问题",
+  "navigation": [
+    {
+      "id": "geoda",
+      "text": "什么是GeoDa？"
+    },
+    {
+      "id": "url",
+      "text": "哪些网站与GeoDa相关？"
+    },
+    {
+      "id": "name",
+      "text": "GeoDa代表什么？"
+    },
+    {
+      "id": "phil",
+      "text": "GeoDa背后的理念是什么？"
+    },
+    {
+      "id": "dev",
+      "text": "目前有哪些与GeoDa相关的开发？"
+    },
+    {
+      "id": "not",
+      "text": "GeoDa不设计用来做什么？"
+    },
+    {
+      "id": "team",
+      "text": "谁开发GeoDa？"
+    },
+    {
+      "id": "users",
+      "text": "有多少人使用GeoDa？"
+    },
+    {
+      "id": "fund",
+      "text": "谁资助GeoDa？"
+    },
+    {
+      "id": "cite",
+      "text": "GeoDa引用：如何引用GeoDa的使用？"
+    },
+    {
+      "id": "support",
+      "text": "在哪里获得GeoDa相关支持？"
+    },
+    {
+      "id": "bugs",
+      "text": "我认为我发现了错误 - 在哪里报告？"
+    },
+    {
+      "id": "training",
+      "text": "在哪里了解GeoDa相关培训？"
+    }
+  ],
+  "questions": [
+    {
+      "id": "geoda",
+      "question": "什么是GeoDa？",
+      "answer": "GeoDa是一个免费软件程序，作为空间分析的入门，旨在为格网数据（点和多边形）实现ESDA技术。它旨在为描述性空间数据分析方法提供用户友好和图形界面，如空间自相关统计，以及基本的空间回归功能。",
+      "links": [
+        {
+          "text": "ESDA",
+          "href": "./glossary#esda"
+        }
+      ]
+    },
+    {
+      "id": "url",
+      "question": "哪些网站与GeoDa相关？",
+      "answer": "GeoDa在Github上的主页是http://geodacenter.github.io/。其姊妹程序GeoDaSpace和CAST的Github页面可以在https://github.com/GeoDaCenter访问。更多信息可在其所属机构芝加哥大学的空间数据科学中心获得。",
+      "links": [
+        {
+          "text": "http://geodacenter.github.io/",
+          "href": "//geodacenter.github.io/",
+          "external": true
+        },
+        {
+          "text": "https://github.com/GeoDaCenter",
+          "href": "https://github.com/GeoDaCenter",
+          "external": true
+        },
+        {
+          "text": "空间数据科学中心",
+          "href": "https://spatial.uchicago.edu",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "name",
+      "question": "GeoDa代表什么？",
+      "answer": "GeoDa代表地理数据分析（发音为geo-dah）。"
+    },
+    {
+      "id": "phil",
+      "question": "GeoDa背后的理念是什么？",
+      "answer": "GeoDa旨在实现专门的空间分析功能，如空间自相关测试和空间回归建模。它被开发为现有地理信息系统（GIS）和统计程序的补充，而不是替代品。因此，它只实现基本的GIS功能。如果需要，用户可以保存结果以在统计包或CartoDB中进一步分析。",
+      "links": [
+        {
+          "text": "地理信息系统（GIS）",
+          "href": "./glossary#gis"
+        }
+      ]
+    },
+    {
+      "id": "dev",
+      "question": "目前有哪些与GeoDa相关的开发？",
+      "answer": "我们目前正在开发GeoDa-Web，这是GeoDa的网络GIS扩展",
+      "links": [
+        {
+          "text": "GeoDa-Web",
+          "href": "https://spatial.uchicago.edu/geoda-web",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "not",
+      "question": "GeoDa不设计用来做什么？",
+      "answer": "GeoDa不设计用于连续表面数据的空间统计分析或分类数据分析。"
+    },
+    {
+      "id": "team",
+      "question": "谁开发GeoDa？",
+      "answer": "GeoDa由Dr. Luc Anselin及其团队成员Dr. Xun Li和Dr. Julia Koschinsky开发。截至2016年7月，GeoDa开发从亚利桑那州立大学的GeoDa地理空间分析和计算中心转移到芝加哥大学的空间数据科学中心。",
+      "links": [
+        {
+          "text": "Dr. Luc Anselin",
+          "href": "https://spatial.uchicago.edu/directory/luc-anselin-phd",
+          "external": true
+        },
+        {
+          "text": "Dr. Xun Li和Dr. Julia Koschinsky",
+          "href": "https://spatial.uchicago.edu/directories/full/all",
+          "external": true
+        },
+        {
+          "text": "空间数据科学中心",
+          "href": "https://spatial.uchicago.edu",
+          "external": true
+        },
+        {
+          "text": "芝加哥大学",
+          "href": "http://www.uchicago.edu/",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "users",
+      "question": "有多少人使用GeoDa？",
+      "answer": "GeoDa的用户数量呈指数增长，从2003年的3个用户增加到2009年的40,000个用户，再到2016年6月的超过160,000个用户。"
+    },
+    {
+      "id": "fund",
+      "question": "谁资助GeoDa？",
+      "answer": "GeoDa由多个联邦研究资助，包括国家科学基金会的初始空间分析基础设施资助，以及国家卫生研究院、国家司法研究所和医疗保健研究与质量机构的奖项。"
+    },
+    {
+      "id": "copyr",
+      "question": "GeoDa许可协议的关键组成部分是什么？",
+      "answer": "GeoDa使用GPL许可证，确保软件的自由和开源访问。它限制代码修改为非商业用途。",
+      "links": [
+        {
+          "text": "GPL许可证",
+          "href": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "cite",
+      "question": "GeoDa引用：如何引用GeoDa的使用？",
+      "answer": "您可以这样引用GeoDa：Anselin, Luc, Ibnu Syabri and Youngihn Kho (2006). GeoDa: An Introduction to Spatial Data Analysis. Geographical Analysis 38 (1), 5-22."
+    },
+    {
+      "id": "support",
+      "question": "在哪里获得GeoDa相关支持？",
+      "answer": "GeoDa不附带任何支持。但是，Openspace邮件列表提供了一个论坛，用户可以在这里发布问题和答案。邮件列表由GeoDa开发团队监控。可以搜索存档消息。",
+      "links": [
+        {
+          "text": "Openspace邮件列表",
+          "href": "/support"
+        }
+      ]
+    },
+    {
+      "id": "bugs",
+      "question": "我认为我发现了错误 - 在哪里报告？",
+      "answer": "请通过电子邮件联系我们，提供GeoDa版本号和您在错误发生前采取的步骤。如果我们能够重现错误，我们会尝试在软件更新中立即解决，可以通过GeoDa中的帮助-检查更新来安装。",
+      "links": [
+        {
+          "text": "电子邮件",
+          "href": "mailto:spatial@uchicago.edu"
+        }
+      ]
+    },
+    {
+      "id": "training",
+      "question": "在哪里了解GeoDa相关培训？",
+      "answer": "目前还没有安排培训，但我们会在Openspace列表、空间数据科学中心网站以及我们的Twitter和Facebook页面上宣布即将到来的培训。您也可以在这里注册更新。",
+      "links": [
+        {
+          "text": "Openspace列表",
+          "href": "./support"
+        },
+        {
+          "text": "空间数据科学中心",
+          "href": "https://spatial.uchicago.edu",
+          "external": true
+        },
+        {
+          "text": "Twitter",
+          "href": "https://twitter.com/GeodaCenter",
+          "external": true
+        },
+        {
+          "text": "Facebook",
+          "href": "https://www.facebook.com/geodacenter/",
+          "external": true
+        },
+        {
+          "text": "这里",
+          "href": "https://spatial.uchicago.edu/get-updates-training-tutorials",
+          "external": true
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "title": "联系",
+    "content": "有问题？联系我们。",
+    "links": [
+      {
+        "text": "我们",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
+  }
+} 

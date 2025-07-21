@@ -1,0 +1,351 @@
+{
+  "title": "Answers to Technical GeoDa Questions",
+  "navigation": [
+    {
+      "id": "data",
+      "text": "What characteristics should my data have?"
+    },
+    {
+      "id": "datasize",
+      "text": "What are data size limits in GeoDa?"
+    },
+    {
+      "id": "specs",
+      "text": "What platforms does GeoDa run on?"
+    },
+    {
+      "id": "layer",
+      "text": "Can I load more than one layer in GeoDa?"
+    },
+    {
+      "id": "miss",
+      "text": "What to do with missing values?"
+    },
+    {
+      "id": "choice",
+      "text": "Which weights matrix should I choose?"
+    },
+    {
+      "id": "dist",
+      "text": "What happens when I set the threshold distance lower than the default?"
+    },
+    {
+      "id": "invdist",
+      "text": "Does GeoDa include inverse distance weighting?"
+    },
+    {
+      "id": "unit",
+      "text": "How do I get the distance units I want?"
+    },
+    {
+      "id": "isle",
+      "text": "What to do with islands?"
+    },
+    {
+      "id": "projection",
+      "text": "How do I assign projections and coordinate systems to my spatial file?"
+    },
+    {
+      "id": "lisactr",
+      "text": "LISA maps only show cluster center"
+    },
+    {
+      "id": "lisasig",
+      "text": "How to assess the sensitivity of LISA results?"
+    },
+    {
+      "id": "lisabox",
+      "text": "My box map does not reflect my LISA map - why?"
+    },
+    {
+      "id": "robust",
+      "text": "How robust is the pseudo p-value?"
+    },
+    {
+      "id": "smooth",
+      "text": "How to assess the sensitivity of different smoothers?"
+    },
+    {
+      "id": "regout",
+      "text": "Run a regression without opening a project"
+    },
+    {
+      "id": "output",
+      "text": "Where can I get help interpreting the regression output?"
+    }
+  ],
+  "questions": [
+    {
+      "id": "data",
+      "question": "What characteristics should my data have?",
+      "answer": "GeoDa is designed for data with the following characteristics:",
+      "list": [
+        "Continuously distributed (not categorically)",
+        "Refers to discrete areal units (as opposed to sample points)",
+        "Has no missing values."
+      ]
+    },
+    {
+      "id": "datasize",
+      "question": "What are data size limits in GeoDa?",
+      "answer": "For the ESDA analysis in GeoDa, it can be hard to detect patterns across multiple views for data larger than 5,000-10,000 observations although some applications have used it for over 170,000 areas. However, performance tends to slow down in these cases. GeoDa-Web is being designed for larger datasets. For the spatial regression analysis, the threshold for performance reductions will depend on the choice of spatial weights but often lies between 50,000-100,000 observations. GeoDaSpace (especially the GMM estimators) are more suited for larger datasets."
+    },
+    {
+      "id": "specs",
+      "question": "What platforms does GeoDa run on?",
+      "answer": "GeoDa runs on Windows, Mac OSX and Linux. It does not access restricted system folders in Windows."
+    },
+    {
+      "id": "layer",
+      "question": "Can I load more than one layer in GeoDa?",
+      "answer": "No. You can add a basemap layer to an existing area or point map but no other additional layer (such as points and areas). This option is available in CAST and will be available in GeoDa-Web, which will be released in the near future.",
+      "links": [
+        {
+          "text": "CAST",
+          "href": "/CAST"
+        }
+      ]
+    },
+    {
+      "id": "miss",
+      "question": "What to do with missing values?",
+      "answer": "GeoDa does not handle missing values - it will fill blank fields with zeros or treat values such as 99, -1, etc. as observed. There is no easy solution to this problem. Some options include excluding missing observations, resaving your shape file for only those areas without missing values or interpolating missing values (care needs to be taken that this interpolation is not based on the values of immediate neighbors, otherwise spatial autocorrelation is introduced by design).",
+      "links": [
+        {
+          "text": "spatial autocorrelation",
+          "href": "./glossary#sa"
+        }
+      ]
+    },
+    {
+      "id": "choice",
+      "question": "Which weights matrix should I choose?",
+      "answer": "The choice of weights should ultimately be driven by a rationale for including those areas as neighbors that have a spatial effect on a given location. This rationale can be derived from theory or be the result of using ESDA to experiment with different weights and connectivity orders. Since weights matrices are used to create spatial lags that average neighboring values, the choice of a weights matrix will determine which neighboring values will be averaged. For instance, since rook weights will usually have fewer neighbors than queen weights, on average, each neighboring observation has more influence.",
+      "links": [
+        {
+          "text": "weights",
+          "href": "./glossary#wghts"
+        },
+        {
+          "text": "ESDA",
+          "href": "./glossary#esda"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "The question of which weights to choose is more pertinent in the context of modeling than ESDA since modeling is based on substantive notions of spatial effects while ESDA prioritizes the rejection of spatial randomness. Therefore, if there are no substantive reasons to guide the choice of weights in ESDA, using a weights file with as few neighbors as possible (such as rook) makes sense. Especially with irregular areal units (as opposed to grids), the difference between rook and queen weights is often minimal. However, it is advisable to test how sensitive your results are to your weights specifications by comparing multiple weights matrices.",
+          "links": [
+            {
+              "text": "rook",
+              "href": "/node/390#rook"
+            },
+            {
+              "text": "queen",
+              "href": "/node/390#queen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "question": "What happens when I set the threshold distance lower than the default?",
+      "answer": "The default distance threshold ensures that every observation has at least one neighbor. If you set the threshold distance as smaller than the default minimum, GeoDa will create a weights matrix based on your threshold, not the default, i.e., it will contain \"island\" observations without neighbors. You can easily check this by looking at the weights characteristics in GeoDa and by opening the weights matrix in a text editor.",
+      "links": [
+        {
+          "text": "weights matrix",
+          "href": "./glossary#wghts"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "If you are curious about the difference between the matrix with the default minimum threshold and yours, create both matrices and compare them by looking at their weights characteristics (which is a histogram of the number of neighbors for all observations). You will see that the minimum threshold matrix has no observations with zero neighbors while yours will have observations with zero neighbors.",
+          "links": [
+            {
+              "text": "weights characteristics",
+              "href": "./glossary#hist"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invdist",
+      "question": "Does GeoDa include inverse distance weighting?",
+      "answer": "Yes. You can create different types of distance-based weights (with .gwt and .kwt file extensions) in GeoDa:",
+      "additionalParagraphs": [
+        {
+          "content": "GeoDa implements weights based on distance bands, inverse distance weighting and kernel weighting. For distance bands, the third column with distances in the .gwt file is only used to determine whether a point is within a distance band or not. The extent of the distance band is specified by your threshold distance (the default value ensures that you have no islands). GeoDa row-standardizes weights, i.e., the rows sum to 1. You can find more information about distance-based spatial weights here and about inverse distance weights and kernel weights here.",
+          "links": [
+            {
+              "text": "here",
+              "href": "https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html",
+              "external": true
+            },
+            {
+              "text": "here",
+              "href": "https://geodacenter.github.io/workbook/4c_distance_functions/lab4c.html",
+              "external": true
+            }
+          ]
+        },
+        {
+          "content": "If the size of your areas varies considerably, you might be interested in using K-nearest neighbors, which ensures that every point has the same number of neighbors. Note, however, that these weights cannot be used to estimate spatial regression models with Maximum Likelihood since these weights are asymmetric."
+        }
+      ]
+    },
+    {
+      "id": "unit",
+      "question": "How do I get the distance units I want?",
+      "answer": "If you need the metric displayed in the distance weights threshold box to reflect a particular unit (e.g., feet or miles), project your shape file or other spatial file first and set the desired units in another program such as a GIS. Then create the weights based on this file.",
+      "links": [
+        {
+          "text": "shape file",
+          "href": "./glossary#shape"
+        },
+        {
+          "text": "GIS",
+          "href": "./glossary#gis"
+        }
+      ]
+    },
+    {
+      "id": "isle",
+      "question": "What to do with islands?",
+      "answer": "Islands should not be used for LISA maps and can be problematic for GeoDa's regression models. One option to ensure no islands is to use distance weights (distance bands or k-nearest neighbors). You can also remove islands in GeoDa by exporting a new spatial file without islands or by assigning them to other areas that are similar by editing the weights matrix in a text editor (for details on the weights formats, see the GeoDa 0.9.3 User's Guide, pp. 80-81). You will need to assign a mainland area ID to the island ID, and vice versa, assign the island ID to the mainland ID.",
+      "links": [
+        {
+          "text": "GeoDa 0.9.3 User's Guide",
+          "href": "/docs/geoda093.pdf",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "projection",
+      "question": "How do I assign projections and coordinate systems to my spatial file?",
+      "answer": "GeoDa does not contain any tools to set or change map projections or geographic coordinate systems. Geographic coordinate systems are relevant for adding a basemap to your map (you need WGS84). They can be relevant when using GeoDa's distance weights, which are based on the distances between points. You can set the distance units displayed in the weights distance dialog (e.g., feet, meters, or miles) by first projecting the spatial file in a GIS outside of GeoDa.",
+      "links": [
+        {
+          "text": "GIS",
+          "href": "./glossary#gis"
+        }
+      ]
+    },
+    {
+      "id": "lisactr",
+      "question": "LISA maps only show cluster center",
+      "answer": "Note that the LISA cluster map only shows the center of the cluster in color (e.g., red for a high-high cluster). The actual extend of the cluster includes the center and the surrounding neighbors as defined by the weights matrix. If you are not sure which units are neighbors, use the connectivity map in the Weights Editor.",
+      "links": [
+        {
+          "text": "weights matrix",
+          "href": "./glossary#wghts"
+        }
+      ]
+    },
+    {
+      "id": "lisasig",
+      "question": "How to assess the sensitivity of LISA results?",
+      "answer": "To assess the sensitivity of your results, compare several permutations and apply several significance filters. This way you can explore which clusters and spatial outliers remain stable throughout.",
+      "links": [
+        {
+          "text": "permutations",
+          "href": "./glossary#perm"
+        }
+      ]
+    },
+    {
+      "id": "lisabox",
+      "question": "My box map does not reflect my LISA map - why?",
+      "answer": "The box map's quantile categories, like the box plot's, are based on the median. With highly skewed distributions (e.g., when the mean is much lower than the median), the box map's categories might not reflect the same pattern as the LISA map. When the distribution is symmetric, the box map and LISA map results are very similar."
+    },
+    {
+      "id": "robust",
+      "question": "How robust is the pseudo p-value?",
+      "answer": "Explore how robust your observed Moran's I value is compared to the randomized reference distribution. In the Moran scatter plot, increase the number of permutations from 99 up and test if the relationship between the observed and randomized Moran's I changes. In the LISA maps, increase the number of randomizations from 99 permutations up to see if the clusters change.",
+      "links": [
+        {
+          "text": "randomized",
+          "href": "./glossary#random"
+        },
+        {
+          "text": "Moran scatter plot",
+          "href": "./glossary#gmoran"
+        },
+        {
+          "text": "LISA",
+          "href": "./glossary#lisa2"
+        }
+      ]
+    },
+    {
+      "id": "smooth",
+      "question": "How to assess the sensitivity of different smoothers?",
+      "answer": "To assess how sensitive the identification of outliers is to a specific smoothing technique, you can visually compare the different smoothers in GeoDa. Create four maps (raw rate, EB-smoothed, spatial rate, and EBS-smoothed) and choose the box map option under map themes when you choose your base and event variables.",
+      "links": [
+        {
+          "text": "smoothing",
+          "href": "./glossary#smooth"
+        },
+        {
+          "text": "box map",
+          "href": "./glossary#boxmap"
+        },
+        {
+          "text": "base and event variables",
+          "href": "./glossary#event"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "One of the considerations in choosing between smoothers is that the area where strength is borrowed from to correct for local variance instability should be representative of the underlying risk in a local area."
+        },
+        {
+          "content": "You can also open one or more box plot(s) of the raw rate and/or the smoothed rates to explore the differences in outliers through linking and brushing.",
+          "links": [
+            {
+              "text": "box plot(s)",
+              "href": "./glossary#boxplot"
+            },
+            {
+              "text": "outliers",
+              "href": "./glossary#outliers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regout",
+      "question": "Run regression without opening project",
+      "answer": "You can access GeoDa's regression functionality without opening a spatial file by going directly to Regress after opening GeoDa. This option is particularly useful if you are working with large datasets (e.g., several hundred thousand observations), to avoid loading times of the map file."
+    },
+    {
+      "id": "output",
+      "question": "Where can I get help interpreting the regression output?",
+      "answer": "The GeoDa workbook contains several regression chapters with more detail on interpretation of output. For further background reading, see the regression references and, in particular, Anselin (1988).",
+      "links": [
+        {
+          "text": "GeoDa workbook",
+          "href": "/docs/geodaworkbook.pdf",
+          "external": true
+        },
+        {
+          "text": "regression references",
+          "href": "https://spatial.uchicago.edu/spatial-analysis-references",
+          "external": true
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "title": "Contact",
+    "content": "Questions? Contact us.",
+    "links": [
+      {
+        "text": "us",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
+  }
+} 

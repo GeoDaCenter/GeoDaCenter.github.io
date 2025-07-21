@@ -1,0 +1,351 @@
+{
+  "title": "GeoDa技术问题解答",
+  "navigation": [
+    {
+      "id": "data",
+      "text": "我的数据应该具有什么特征？"
+    },
+    {
+      "id": "datasize",
+      "text": "GeoDa中的数据大小限制是什么？"
+    },
+    {
+      "id": "specs",
+      "text": "GeoDa在哪些平台上运行？"
+    },
+    {
+      "id": "layer",
+      "text": "我可以在GeoDa中加载多个图层吗？"
+    },
+    {
+      "id": "miss",
+      "text": "如何处理缺失值？"
+    },
+    {
+      "id": "choice",
+      "text": "我应该选择哪个权重矩阵？"
+    },
+    {
+      "id": "dist",
+      "text": "当我将阈值距离设置得低于默认值时会发生什么？"
+    },
+    {
+      "id": "invdist",
+      "text": "GeoDa是否包含反距离加权？"
+    },
+    {
+      "id": "unit",
+      "text": "如何获得我想要的距离单位？"
+    },
+    {
+      "id": "isle",
+      "text": "如何处理岛屿？"
+    },
+    {
+      "id": "projection",
+      "text": "如何为我的空间文件分配投影和坐标系统？"
+    },
+    {
+      "id": "lisactr",
+      "text": "LISA地图只显示聚类中心"
+    },
+    {
+      "id": "lisasig",
+      "text": "如何评估LISA结果的敏感性？"
+    },
+    {
+      "id": "lisabox",
+      "text": "我的箱线图地图不反映我的LISA地图 - 为什么？"
+    },
+    {
+      "id": "robust",
+      "text": "伪p值的稳健性如何？"
+    },
+    {
+      "id": "smooth",
+      "text": "如何评估不同平滑器的敏感性？"
+    },
+    {
+      "id": "regout",
+      "text": "不打开项目运行回归"
+    },
+    {
+      "id": "output",
+      "text": "在哪里可以获得解释回归输出的帮助？"
+    }
+  ],
+  "questions": [
+    {
+      "id": "data",
+      "question": "我的数据应该具有什么特征？",
+      "answer": "GeoDa设计用于具有以下特征的数据：",
+      "list": [
+        "连续分布（非分类）",
+        "指离散区域单元（而非样本点）",
+        "没有缺失值。"
+      ]
+    },
+    {
+      "id": "datasize",
+      "question": "GeoDa中的数据大小限制是什么？",
+      "answer": "对于GeoDa中的ESDA分析，对于超过5,000-10,000个观测值的数据，在多个视图中检测模式可能很困难，尽管某些应用程序已将其用于超过170,000个区域。但是，在这些情况下性能往往会变慢。GeoDa-Web正在为更大的数据集设计。对于空间回归分析，性能降低的阈值将取决于空间权重的选择，但通常在50,000-100,000个观测值之间。GeoDaSpace（特别是GMM估计器）更适合大型数据集。"
+    },
+    {
+      "id": "specs",
+      "question": "GeoDa在哪些平台上运行？",
+      "answer": "GeoDa在Windows、Mac OSX和Linux上运行。它不访问Windows中的受限系统文件夹。"
+    },
+    {
+      "id": "layer",
+      "question": "我可以在GeoDa中加载多个图层吗？",
+      "answer": "不可以。您可以为现有的区域或点地图添加底图图层，但不能添加其他额外图层（如点和区域）。此选项在CAST中可用，并将在不久的将来在GeoDa-Web中可用。",
+      "links": [
+        {
+          "text": "CAST",
+          "href": "/CAST"
+        }
+      ]
+    },
+    {
+      "id": "miss",
+      "question": "如何处理缺失值？",
+      "answer": "GeoDa不处理缺失值 - 它会用零填充空白字段或将99、-1等值视为观测值。这个问题没有简单的解决方案。一些选项包括排除缺失观测值、重新保存仅包含没有缺失值的区域的shape文件，或插值缺失值（需要注意这种插值不基于直接邻居的值，否则会通过设计引入空间自相关）。",
+      "links": [
+        {
+          "text": "空间自相关",
+          "href": "./glossary#sa"
+        }
+      ]
+    },
+    {
+      "id": "choice",
+      "question": "我应该选择哪个权重矩阵？",
+      "answer": "权重的选择最终应该由包含那些对给定位置有空间影响的区域作为邻居的理由驱动。这个理由可以从理论中得出，或者是使用ESDA实验不同权重和连接顺序的结果。由于权重矩阵用于创建平均邻居值的空间滞后，权重矩阵的选择将决定哪些邻居值将被平均。例如，由于车权重通常比后权重有更少的邻居，平均而言，每个邻居观测值有更大的影响。",
+      "links": [
+        {
+          "text": "权重",
+          "href": "./glossary#wghts"
+        },
+        {
+          "text": "ESDA",
+          "href": "./glossary#esda"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "选择哪个权重的问题在建模环境中比ESDA更相关，因为建模基于空间效应的实质性概念，而ESDA优先考虑空间随机性的拒绝。因此，如果在ESDA中没有实质性原因来指导权重的选择，使用尽可能少邻居的权重文件（如车权重）是有意义的。特别是对于不规则区域单元（与网格相对），车权重和后权重之间的差异通常很小。但是，建议通过比较多个权重矩阵来测试您的结果对权重规范的敏感性。",
+          "links": [
+            {
+              "text": "车权重",
+              "href": "/node/390#rook"
+            },
+            {
+              "text": "后权重",
+              "href": "/node/390#queen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "question": "当我将阈值距离设置得低于默认值时会发生什么？",
+      "answer": "默认距离阈值确保每个观测值至少有一个邻居。如果您将阈值距离设置得小于默认最小值，GeoDa将基于您的阈值而不是默认值创建权重矩阵，即它将包含没有邻居的\"岛屿\"观测值。您可以通过查看GeoDa中的权重特征并在文本编辑器中打开权重矩阵来轻松检查这一点。",
+      "links": [
+        {
+          "text": "权重矩阵",
+          "href": "./glossary#wghts"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "如果您对具有默认最小阈值的矩阵与您的矩阵之间的差异感到好奇，请创建两个矩阵并通过查看它们的权重特征（这是所有观测值的邻居数量直方图）来比较它们。您将看到最小阈值矩阵没有零邻居的观测值，而您的矩阵将有零邻居的观测值。",
+          "links": [
+            {
+              "text": "权重特征",
+              "href": "./glossary#hist"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invdist",
+      "question": "GeoDa是否包含反距离加权？",
+      "answer": "是的。您可以在GeoDa中创建不同类型的基于距离的权重（具有.gwt和.kwt文件扩展名）：",
+      "additionalParagraphs": [
+        {
+          "content": "GeoDa实现基于距离带、反距离加权和核加权的权重。对于距离带，.gwt文件中带有距离的第三列仅用于确定点是否在距离带内。距离带的范围由您的阈值距离指定（默认值确保您没有岛屿）。GeoDa行标准化权重，即行总和为1。您可以在这里找到关于基于距离的空间权重的更多信息，以及关于反距离权重和核权重的信息。",
+          "links": [
+            {
+              "text": "这里",
+              "href": "https://geodacenter.github.io/workbook/4b_dist_weights/lab4b.html",
+              "external": true
+            },
+            {
+              "text": "这里",
+              "href": "https://geodacenter.github.io/workbook/4c_distance_functions/lab4c.html",
+              "external": true
+            }
+          ]
+        },
+        {
+          "content": "如果您的区域大小差异很大，您可能对使用K最近邻感兴趣，这确保每个点具有相同数量的邻居。但是请注意，这些权重不能用于使用最大似然估计空间回归模型，因为这些权重是不对称的。"
+        }
+      ]
+    },
+    {
+      "id": "unit",
+      "question": "如何获得我想要的距离单位？",
+      "answer": "如果您需要距离权重阈值框中显示的度量反映特定单位（例如英尺或英里），请首先投影您的shape文件或其他空间文件，并在另一个程序（如GIS）中设置所需的单位。然后基于此文件创建权重。",
+      "links": [
+        {
+          "text": "shape文件",
+          "href": "./glossary#shape"
+        },
+        {
+          "text": "GIS",
+          "href": "./glossary#gis"
+        }
+      ]
+    },
+    {
+      "id": "isle",
+      "question": "如何处理岛屿？",
+      "answer": "岛屿不应用于LISA地图，可能对GeoDa的回归模型有问题。确保没有岛屿的一个选项是使用距离权重（距离带或k最近邻）。您还可以通过导出没有岛屿的新空间文件或在文本编辑器中编辑权重矩阵将它们分配给其他相似区域来在GeoDa中移除岛屿（有关权重格式的详细信息，请参阅GeoDa 0.9.3用户指南，第80-81页）。您需要将大陆区域ID分配给岛屿ID，反之亦然，将岛屿ID分配给大陆ID。",
+      "links": [
+        {
+          "text": "GeoDa 0.9.3用户指南",
+          "href": "/docs/geoda093.pdf",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "projection",
+      "question": "如何为我的空间文件分配投影和坐标系统？",
+      "answer": "GeoDa不包含任何设置或更改地图投影或地理坐标系统的工具。地理坐标系统与为地图添加底图相关（您需要WGS84）。它们在使用基于点之间距离的GeoDa距离权重时可能相关。您可以通过首先在GeoDa外部的GIS中投影空间文件来设置权重距离对话框中显示的距离单位（例如英尺、米或英里）。",
+      "links": [
+        {
+          "text": "GIS",
+          "href": "./glossary#gis"
+        }
+      ]
+    },
+    {
+      "id": "lisactr",
+      "question": "LISA地图只显示聚类中心",
+      "answer": "请注意，LISA聚类地图只显示聚类中心（例如，高-高聚类的红色）。聚类的实际范围包括中心和由权重矩阵定义的周围邻居。如果您不确定哪些单元是邻居，请在权重编辑器中使用连接性地图。",
+      "links": [
+        {
+          "text": "权重矩阵",
+          "href": "./glossary#wghts"
+        }
+      ]
+    },
+    {
+      "id": "lisasig",
+      "question": "如何评估LISA结果的敏感性？",
+      "answer": "要评估结果的敏感性，请比较几个排列并应用几个显著性过滤器。这样您可以探索哪些聚类和空间异常值在整个过程中保持稳定。",
+      "links": [
+        {
+          "text": "排列",
+          "href": "./glossary#perm"
+        }
+      ]
+    },
+    {
+      "id": "lisabox",
+      "question": "我的箱线图地图不反映我的LISA地图 - 为什么？",
+      "answer": "箱线图地图的分位数类别，如箱线图的，基于中位数。对于高度偏斜的分布（例如，当均值远低于中位数时），箱线图地图的类别可能不反映与LISA地图相同的模式。当分布对称时，箱线图地图和LISA地图结果非常相似。"
+    },
+    {
+      "id": "robust",
+      "question": "伪p值的稳健性如何？",
+      "answer": "探索您观察到的Moran's I值与随机化参考分布相比的稳健性。在Moran散点图中，将排列数从99增加并测试观察到的和随机化的Moran's I之间的关系是否改变。在LISA地图中，将随机化数从99个排列增加到99个以上，看看聚类是否改变。",
+      "links": [
+        {
+          "text": "随机化",
+          "href": "./glossary#random"
+        },
+        {
+          "text": "Moran散点图",
+          "href": "./glossary#gmoran"
+        },
+        {
+          "text": "LISA",
+          "href": "./glossary#lisa2"
+        }
+      ]
+    },
+    {
+      "id": "smooth",
+      "question": "如何评估不同平滑器的敏感性？",
+      "answer": "要评估异常值识别对特定平滑技术的敏感性，您可以在GeoDa中视觉比较不同的平滑器。创建四个地图（原始率、EB平滑、空间率和EBS平滑），并在选择基变量和事件变量时在地图主题下选择箱线图地图选项。",
+      "links": [
+        {
+          "text": "平滑",
+          "href": "./glossary#smooth"
+        },
+        {
+          "text": "箱线图地图",
+          "href": "./glossary#boxmap"
+        },
+        {
+          "text": "基变量和事件变量",
+          "href": "./glossary#event"
+        }
+      ],
+      "additionalParagraphs": [
+        {
+          "content": "选择平滑器时的一个考虑因素是，用于纠正局部方差不稳定性的区域应该代表局部区域的基础风险。"
+        },
+        {
+          "content": "您还可以打开一个或多个原始率和/或平滑率的箱线图，通过链接和刷选来探索异常值的差异。",
+          "links": [
+            {
+              "text": "箱线图",
+              "href": "./glossary#boxplot"
+            },
+            {
+              "text": "异常值",
+              "href": "./glossary#outliers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regout",
+      "question": "不打开项目运行回归",
+      "answer": "您可以通过在打开GeoDa后直接转到回归来访问GeoDa的回归功能，而无需打开空间文件。如果您正在处理大型数据集（例如，数十万个观测值），此选项特别有用，可以避免地图文件的加载时间。"
+    },
+    {
+      "id": "output",
+      "question": "在哪里可以获得解释回归输出的帮助？",
+      "answer": "GeoDa工作簿包含几个回归章节，对输出解释有更详细的说明。如需进一步背景阅读，请参阅回归参考文献，特别是Anselin (1988)。",
+      "links": [
+        {
+          "text": "GeoDa工作簿",
+          "href": "/docs/geodaworkbook.pdf",
+          "external": true
+        },
+        {
+          "text": "回归参考文献",
+          "href": "https://spatial.uchicago.edu/spatial-analysis-references",
+          "external": true
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "title": "联系",
+    "content": "有问题？联系我们。",
+    "links": [
+      {
+        "text": "我们",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
+  }
+} 

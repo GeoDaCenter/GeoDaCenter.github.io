@@ -1,0 +1,119 @@
+{
+  "tagline": "Plugins | Setup Oracle Spatial Database Plugin",
+  "mainContent": {
+    "title": "Plugins | Setup Oracle Spatial Database Plugin",
+    "navigation": [
+      { "text": "Windows (32-bit)", "href": "#win32" },
+      { "text": "Windows (64-bit)", "href": "#win64" },
+      { "text": "Mac OSX (64-bit)", "href": "#osx64" },
+      { "text": "Ubuntu (32-bit)", "href": "#ubu32" },
+      { "text": "Ubuntu (64-bit)", "href": "#ubu64" }
+    ],
+    "sections": [
+      {
+        "id": "win32",
+        "title": "Windows (32-bit)",
+        "steps": [
+          "Download Oracle Instant Client 32-bit for Windows (version ≤11.2.x) from http://www.oracle.com/technetwork/topics/winsoft-085727.html",
+          "(Note: You have to register to get Oracle Instant Client)",
+          "Version 11.2.0.3.0 (32-bit)",
+          "Instant Client Package - Basic: All files required to run OCI, OCCI, and JDBC-OIC applications",
+          "instantclient-basic-windows.x86-11.2.0.3.0.zip",
+          "Unzip the downloaded ZIP package to your local hard drive. For example: C:\\instantclient_11_2",
+          "Setup your Windows system environment for Oracle Instant Client",
+          "Add the path of Oracle Instant Client to PATH system variable in \"System Properties\" dialog (see following example)",
+          "(Note: you need to add ; before the Oracle Path)",
+          "Restart GeoDa program, then you should be able to connect to the Oracle Spatial database by using GeoDa-Oracle-Plugin"
+        ],
+        "image": "./img/ev-oracle.png",
+        "imageAlt": "Oracle Environment Variables Setup",
+        "commandBlock": false
+      },
+      {
+        "id": "win64",
+        "title": "Windows (64-bit)",
+        "steps": [
+          "Download Oracle Instant Client 64-bit for Windows (version ≤11.2.x) from http://www.oracle.com/technetwork/topics/winx64soft-089540.html",
+          "(Note: You have to register to get Oracle Instant Client)",
+          "Version 11.2.0.3.0 (64-bit)",
+          "Instant Client Package - Basic: All files required to run OCI, OCCI, and JDBC-OIC applications",
+          "instantclient-basic-windows.x64-11.2.0.3.0.zip",
+          "Unzip the downloaded ZIP package to your local hard drive. For example: C:\\instantclient_11_2",
+          "Setup your Windows system environment for Oracle Instant Client",
+          "Add the path of Oracle Instant Client to PATH system variable in \"System Properties\" dialog (see following example)",
+          "(Note: you need to add ; before the Oracle Path)",
+          "Restart the GeoDa program, then you should be able to connect to the Oracle Spatial database by using the GeoDa-Oracle-Plugin"
+        ],
+        "image": "./img/ev-oracle.png",
+        "imageAlt": "Oracle Environment Variables Setup",
+        "commandBlock": false
+      },
+      {
+        "id": "osx64",
+        "title": "Mac OSX ≥10.6 (64-bit)",
+        "steps": [
+          "Download Oracle Instant Client Package - Basic, 64-bit (version ≤11.2.x) from http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html",
+          "(Note: You have to register to get Oracle Instant Client)",
+          "Version 11.2.0.3.0 (64-bit)",
+          "Instant Client Package - Basic: All files required to run OCI, OCCI, and JDBC-OIC applications",
+          "instantclient-basic-macosx.x64-11.2.0.3.0.zip",
+          "Unzip the downloaded ZIP package to your local hard drive. For example: /Users/yourname/Downloads/instantclient_11_2",
+          "Open a new terminal, run the following 2 commands to configure Oracle client for GeoDa",
+          "export ORACLE_HOME=/Users/yourname/Downloads/instantclient_11_2",
+          "./install_plugins.sh /path/to/downloaded_GeoDa.app/",
+          "The command in the first line stores the Oracle Instant Client location to a variable ORACLE_HOME.",
+          "The command in the second line updates the configuration of the Oracle Plugin for GeoDa.",
+          "Restart the GeoDa program, then you should be able to connect to the Oracle Spatial database using the GeoDa-Oracle-Plugin"
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      },
+      {
+        "id": "ubu32",
+        "title": "Ubuntu ≥12 (32-bit)",
+        "steps": [
+          "Download Oracle Instant Client 32-bit (version ≤11.2.x) from http://www.oracle.com/technetwork/topics/linuxsoft-082809.html",
+          "(Note: You have to register to get Oracle Instant Client)",
+          "Version 11.2.0.3.0 (32-bit)",
+          "Instant Client Package - Basic: All files required to run OCI, OCCI, and JDBC-OIC applications",
+          "instantclient-basic-linux-11.2.0.3.0.zip",
+          "Unzip the downloaded ZIP package to your local hard drive. For example: /home/yourname/Downloads/instantclient_11_2",
+          "Setup your Ubuntu system environment for Oracle Instant Client",
+          "Run the following command in a terminal (Note: remember to replace \"yourname\" )",
+          "echo \"export ORACLE_HOME=/home/yourname/Downloads/instantclient_11_2\" >> ~/.bashrc",
+          "Restart the GeoDa program, then you should be able to connect to the Oracle Spatial database using the GeoDa-Oracle-Plugin"
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      },
+      {
+        "id": "ubu64",
+        "title": "Ubuntu ≥12 (64-bit)",
+        "steps": [
+          "Download Oracle Instant Client 64-bit (version ≤11.2.x) from http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html",
+          "(Note: You have to register to get Oracle Instant Client)",
+          "Version 11.2.0.3.0 (64-bit)",
+          "Instant Client Package - Basic: All files required to run OCI, OCCI, and JDBC-OIC applications",
+          "instantclient-basic-linux.x64-11.2.0.3.0.zip",
+          "Unzip the downloaded ZIP package to your local hard drive. For example: /home/yourname/Downloads/instantclient_11_2",
+          "Setup your Ubuntu system environment for Oracle Instant Client",
+          "Run the following command in a terminal (Note: remember to replace \"yourname\" )",
+          "echo \"export ORACLE_HOME=/home/yourname/Downloads/instantclient_11_2\" >> ~/.bashrc",
+          "Restart the GeoDa program, then you should be able to connect to the Oracle Spatial database using the GeoDa-Oracle-Plugin"
+        ],
+        "image": null,
+        "imageAlt": null,
+        "commandBlock": true
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "content": "Questions? Contact us.",
+    "links": [
+      { "text": "us", "href": "mailto:spatial@uchicago.edu" }
+    ]
+  }
+} 

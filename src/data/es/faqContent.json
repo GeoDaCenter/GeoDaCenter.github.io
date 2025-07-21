@@ -1,0 +1,242 @@
+{
+  "title": "Preguntas Frecuentes",
+  "navigation": [
+    {
+      "id": "geoda",
+      "text": "¿Qué es GeoDa?"
+    },
+    {
+      "id": "url",
+      "text": "¿Qué sitios web están relacionados con GeoDa?"
+    },
+    {
+      "id": "name",
+      "text": "¿Qué significa GeoDa?"
+    },
+    {
+      "id": "phil",
+      "text": "¿Cuál es la filosofía detrás de GeoDa?"
+    },
+    {
+      "id": "dev",
+      "text": "¿Cuáles son los desarrollos actuales relacionados con GeoDa?"
+    },
+    {
+      "id": "not",
+      "text": "¿Para qué NO está diseñado GeoDa?"
+    },
+    {
+      "id": "team",
+      "text": "¿Quién desarrolla GeoDa?"
+    },
+    {
+      "id": "users",
+      "text": "¿Cuántas personas usan GeoDa?"
+    },
+    {
+      "id": "fund",
+      "text": "¿Quién financia GeoDa?"
+    },
+    {
+      "id": "cite",
+      "text": "Citas de GeoDa: ¿Cómo cito el uso de GeoDa?"
+    },
+    {
+      "id": "support",
+      "text": "¿Dónde ir para obtener soporte relacionado con GeoDa?"
+    },
+    {
+      "id": "bugs",
+      "text": "Creo que encontré un error - ¿Dónde lo reporto?"
+    },
+    {
+      "id": "training",
+      "text": "¿Dónde encuentro información sobre capacitación relacionada con GeoDa?"
+    }
+  ],
+  "questions": [
+    {
+      "id": "geoda",
+      "question": "¿Qué es GeoDa?",
+      "answer": "GeoDa es un programa de software gratuito que actúa como una introducción al análisis espacial, diseñado para implementar técnicas de ESDA en datos de red (puntos y polígonos). Está destinado a proporcionar una interfaz gráfica y fácil de usar para métodos de análisis descriptivo de datos espaciales, como estadísticas de autocorrelación espacial, así como funcionalidad básica de regresión espacial.",
+      "links": [
+        {
+          "text": "ESDA",
+          "href": "./glossary#esda"
+        }
+      ]
+    },
+    {
+      "id": "url",
+      "question": "¿Qué sitios web están relacionados con GeoDa?",
+      "answer": "El hogar de GeoDa en Github es http://geodacenter.github.io/. Las páginas de Github para sus programas hermanos GeoDaSpace y CAST se pueden acceder en https://github.com/GeoDaCenter. Información adicional está disponible en su institución de origen, el Centro de Ciencia de Datos Espaciales de la Universidad de Chicago.",
+      "links": [
+        {
+          "text": "http://geodacenter.github.io/",
+          "href": "//geodacenter.github.io/",
+          "external": true
+        },
+        {
+          "text": "https://github.com/GeoDaCenter",
+          "href": "https://github.com/GeoDaCenter",
+          "external": true
+        },
+        {
+          "text": "Centro de Ciencia de Datos Espaciales",
+          "href": "https://spatial.uchicago.edu",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "name",
+      "question": "¿Qué significa GeoDa?",
+      "answer": "GeoDa significa Análisis de Datos Geográficos (pronunciado geo-dah)."
+    },
+    {
+      "id": "phil",
+      "question": "¿Cuál es la filosofía detrás de GeoDa?",
+      "answer": "GeoDa está diseñado para implementar funcionalidad analítica espacial especializada como pruebas de autocorrelación espacial y modelado de regresión espacial. Se desarrolla como un suplemento en lugar de un sustituto de los programas existentes de sistemas de información geográfica (GIS) y estadísticas. Como resultado, solo implementa funciones básicas de GIS. Si es necesario, los usuarios pueden guardar resultados para analizarlos más a fondo en paquetes estadísticos o en CartoDB.",
+      "links": [
+        {
+          "text": "sistemas de información geográfica (GIS)",
+          "href": "./glossary#gis"
+        }
+      ]
+    },
+    {
+      "id": "dev",
+      "question": "¿Cuáles son los desarrollos actuales relacionados con GeoDa?",
+      "answer": "Actualmente estamos trabajando en GeoDa-Web, una extensión cyberGIS de GeoDa",
+      "links": [
+        {
+          "text": "GeoDa-Web",
+          "href": "https://spatial.uchicago.edu/geoda-web",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "not",
+      "question": "¿Para qué NO está diseñado GeoDa?",
+      "answer": "GeoDa no está diseñado para análisis geoestadístico con datos de una superficie continua o para análisis de datos categóricos."
+    },
+    {
+      "id": "team",
+      "question": "¿Quién desarrolla GeoDa?",
+      "answer": "GeoDa es desarrollado por Dr. Luc Anselin y miembros de su equipo, Dr. Xun Li y Dr. Julia Koschinsky. A partir de julio de 2016, el desarrollo de GeoDa se trasladó del Centro GeoDa para Análisis y Computación Geoespacial en la Universidad Estatal de Arizona al Centro de Ciencia de Datos Espaciales en la Universidad de Chicago.",
+      "links": [
+        {
+          "text": "Dr. Luc Anselin",
+          "href": "https://spatial.uchicago.edu/directory/luc-anselin-phd",
+          "external": true
+        },
+        {
+          "text": "Dr. Xun Li y Dr. Julia Koschinsky",
+          "href": "https://spatial.uchicago.edu/directories/full/all",
+          "external": true
+        },
+        {
+          "text": "Centro de Ciencia de Datos Espaciales",
+          "href": "https://spatial.uchicago.edu",
+          "external": true
+        },
+        {
+          "text": "Universidad de Chicago",
+          "href": "http://www.uchicago.edu/",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "users",
+      "question": "¿Cuántas personas usan GeoDa?",
+      "answer": "Los números de usuarios de GeoDa han aumentado exponencialmente de 3 usuarios en 2003 a 40,000 en 2009 a más de 160,000 en junio de 2016."
+    },
+    {
+      "id": "fund",
+      "question": "¿Quién financia GeoDa?",
+      "answer": "GeoDa ha sido financiado por varias subvenciones de investigación federal, incluyendo una subvención inicial de infraestructura de análisis espacial por la Fundación Nacional de Ciencias y premios de los Institutos Nacionales de Salud, el Instituto Nacional de Justicia, y la Agencia para la Investigación y Calidad de la Atención Médica."
+    },
+    {
+      "id": "copyr",
+      "question": "¿Cuáles son los componentes clave del acuerdo de licencia de GeoDa?",
+      "answer": "GeoDa usa una licencia GPL, que asegura acceso libre y de código abierto al software. Restringe las modificaciones de código para uso no comercial.",
+      "links": [
+        {
+          "text": "licencia GPL",
+          "href": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+          "external": true
+        }
+      ]
+    },
+    {
+      "id": "cite",
+      "question": "Citas de GeoDa: ¿Cómo cito el uso de GeoDa?",
+      "answer": "Puedes citar GeoDa como: Anselin, Luc, Ibnu Syabri and Youngihn Kho (2006). GeoDa: An Introduction to Spatial Data Analysis. Geographical Analysis 38 (1), 5-22."
+    },
+    {
+      "id": "support",
+      "question": "¿Dónde ir para obtener soporte relacionado con GeoDa?",
+      "answer": "GeoDa no viene con ningún soporte. Sin embargo, la lista de correo Openspace proporciona un foro donde los usuarios pueden publicar preguntas y respuestas. La lista de correo es monitoreada por el equipo de desarrollo de GeoDa. Los mensajes archivados se pueden buscar.",
+      "links": [
+        {
+          "text": "lista de correo Openspace",
+          "href": "/support"
+        }
+      ]
+    },
+    {
+      "id": "bugs",
+      "question": "Creo que encontré un error - ¿Dónde lo reporto?",
+      "answer": "Por favor envíanos un correo electrónico con el número de versión de GeoDa y los pasos que tomaste que precedieron al error. Si podemos replicar el error, intentamos abordarlo de inmediato en una actualización de software que se puede instalar en GeoDa a través de Ayuda-Verificar Actualizaciones.",
+      "links": [
+        {
+          "text": "correo electrónico",
+          "href": "mailto:spatial@uchicago.edu"
+        }
+      ]
+    },
+    {
+      "id": "training",
+      "question": "¿Dónde encuentro información sobre capacitación relacionada con GeoDa?",
+      "answer": "Aún no se han programado capacitaciones pero anunciaremos las próximas capacitaciones en la lista Openspace, el sitio web del Centro de Ciencia de Datos Espaciales, y nuestras páginas de Twitter y Facebook. También puedes registrarte para actualizaciones aquí.",
+      "links": [
+        {
+          "text": "lista Openspace",
+          "href": "./support"
+        },
+        {
+          "text": "Centro de Ciencia de Datos Espaciales",
+          "href": "https://spatial.uchicago.edu",
+          "external": true
+        },
+        {
+          "text": "Twitter",
+          "href": "https://twitter.com/GeodaCenter",
+          "external": true
+        },
+        {
+          "text": "Facebook",
+          "href": "https://www.facebook.com/geodacenter/",
+          "external": true
+        },
+        {
+          "text": "aquí",
+          "href": "https://spatial.uchicago.edu/get-updates-training-tutorials",
+          "external": true
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "title": "Contacto",
+    "content": "¿Preguntas? Contáctanos.",
+    "links": [
+      {
+        "text": "nosotros",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
+  }
+} 

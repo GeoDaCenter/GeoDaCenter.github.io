@@ -1,0 +1,40 @@
+{
+  "title": "Lab Installation Guide",
+  "notes": {
+    "title": "Notes:",
+    "content": "GeoDa requires write permission on serveral directories/files. When install GeoDa in a Lab environment, please make sure the following directories and files have write permission:",
+    "items": [
+      "/basemap_cache/ (directory for downloading basemap tiles)",
+      "cache.sqlite (file for GeoDa configurations)"
+    ]
+  },
+  "windows": {
+    "title": "Windows",
+    "content": "With latest GeoDa installer on windows (1.10+), you can try to install it in silent mode using the command:",
+    "command": "GeoDa-1.10-Windows-64bit.exe /VERYSILENT /SUPPRESSMSGBOXES",
+    "additionalInfo": "(other switchers are here: http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline)",
+    "prerequisites": {
+      "content": "However, GeoDa will check if visual c++ 2010 redistributable has been installed, so you have to install the visual c++ 2010 redistributable package in command line in silent mode first. e.g.",
+      "command": "vc++2010.res.exe /quiet",
+      "note": "One can search \"Mictosoft Visual C++ 2010 Redistributable Package X86/X64\" to download. Also, GeoDa will check if older version GeoDa has been installed, so this silent mode command will only work with clean installation."
+    },
+    "links": [
+      {
+        "text": "http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline",
+        "href": "http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline",
+        "external": true
+      }
+    ]
+  },
+  "centos": {
+    "title": "CentOS",
+    "content": "To install GeoDa on CentOS in a Lab Environment, you can use the GeoDa package without root permission. You can download",
+    "links": [
+      {
+        "text": "here",
+        "href": "./download-linux",
+        "external": false
+      }
+    ]
+  }
+} 

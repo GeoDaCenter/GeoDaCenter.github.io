@@ -115,7 +115,7 @@ function LabPageContent(): React.JSX.Element {
     
     setLabInfo({
       title: labTitle,
-      url: `${baseUrl}/${finalLabPath}`
+      url: `${baseUrl}${finalLabPath}`
     });
   }, []);
 

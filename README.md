@@ -26,7 +26,7 @@ This is the new Docusaurus-based website for GeoDa, migrated from the original s
 ## 📁 Project Structure
 
 ```
-newsite/
+geodacenter.github.io/
 ├── src/
 │   ├── components/          # React components
 │   │   ├── Hero.tsx        # Main hero section
@@ -271,15 +271,7 @@ The site is configured for GitHub Pages deployment:
    pnpm deploy
    ```
 
-The site will be available at: `https://geodacenter.github.io/newsite/`
-
-### Multi-language Deployment
-
-The site supports multi-language deployment with language-specific URLs:
-- English: `https://geodacenter.github.io/newsite/`
-- Chinese: `https://geodacenter.github.io/newsite/zh-Hans/`
-- Spanish: `https://geodacenter.github.io/newsite/es/`
-- German: `https://geodacenter.github.io/newsite/de/`
+The site will be available at: `https://geodacenter.github.io/`
 
 ## 🤝 Contributing
 

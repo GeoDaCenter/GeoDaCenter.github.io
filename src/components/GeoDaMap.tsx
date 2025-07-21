@@ -42,7 +42,7 @@ const loadScripts = (): Promise<void> => {
       '//d3js.org/d3.v3.min.js',
       '//d3js.org/topojson.v1.min.js',
       '//d3js.org/queue.v1.min.js',
-      '/newsite/simple_statistics.js'
+      '/simple_statistics.js'
     ];
     
     let loadedCount = 0;

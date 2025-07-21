@@ -4,7 +4,7 @@ This guide provides detailed steps for adding new blog posts to the GeoDa Docusa
 
 ## 📋 Prerequisites
 
-- Git access to the `GeoDaCenter/newsite` repository
+- Git access to the `GeoDaCenter.github.io` repository
 - Basic knowledge of Markdown syntax
 - Image files ready (if needed)
 
@@ -43,7 +43,7 @@ If you have write access to the main branch and want to add a simple blog post q
 
 4. **Automatic deployment**:
    - GitHub Actions will automatically build and deploy
-   - Your post will be live at `https://geodacenter.github.io/newsite/blog/` within minutes
+   - Your post will be live at `https://geodacenter.github.io/blog/` within minutes
 
 **Note**: This shortcut is for simple posts using existing authors and tags. For new authors, tags, or complex posts with images, follow the full guide below.
 
@@ -52,8 +52,8 @@ If you have write access to the main branch and want to add a simple blog post q
 
 1. **Clone the repository** (if not already done):
    ```bash
-   git clone https://github.com/GeoDaCenter/newsite.git
-   cd newsite
+   git clone https://github.com/GeoDaCenter.github.io.git
+   cd geodacenter.github.io
    ```
 
 2. **Create a new branch**:
@@ -219,7 +219,7 @@ your-tag:
 ### Step 6: Create Pull Request
 
 1. **Go to GitHub**:
-   - Navigate to `https://github.com/GeoDaCenter/newsite`
+   - Navigate to `https://github.com/GeoDaCenter/geodacenter.github.io`
    - You should see a prompt to create a pull request from your branch
 
 2. **Create the pull request**:
@@ -237,8 +237,8 @@ your-tag:
 Once merged to the main branch, GitHub Actions will automatically:
 
 1. **Build the site** with your new blog post
-2. **Deploy to GitHub Pages** at `https://geodacenter.github.io/newsite/`
-3. **Make your post live** at `https://geodacenter.github.io/newsite/blog/`
+2. **Deploy to GitHub Pages** at `https://geodacenter.github.io/`
+3. **Make your post live** at `https://geodacenter.github.io/blog/`
 
 ## 📋 Blog Post Best Practices
 
@@ -327,7 +327,7 @@ If you encounter issues:
 - **Development**: Test locally with `pnpm start`
 - **Review**: Pull request review process
 - **Merge**: Automatic deployment via GitHub Actions
-- **Live**: Available at `https://geodacenter.github.io/newsite/blog/` within minutes
+- **Live**: Available at `https://geodacenter.github.io/blog/` within minutes
 
 ## 🎯 Quick Reference
 

@@ -23,12 +23,12 @@ const config: Config = {
   url: 'https://geodacenter.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/newsite/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'GeoDaCenter', // Usually your GitHub org/user name.
-  projectName: 'newsite', // Usually your repo name.
+  projectName: 'geoda', // Usually your repo name.
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -80,7 +80,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/GeoDaCenter/newsite/tree/main/',
+          editUrl: 'https://github.com/GeoDaCenter/geodacenter.github.io/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -90,7 +90,7 @@ const config: Config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/GeoDaCenter/newsite/tree/main/',
+          editUrl: 'https://github.com/GeoDaCenter/geodacenter.github.io/tree/main/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',

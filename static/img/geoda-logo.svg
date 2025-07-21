@@ -1,0 +1,20 @@
+<svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="geodaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#155799;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#159957;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="20" cy="20" r="18" fill="url(#geodaGradient)" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- GeoDa text -->
+  <text x="45" y="26" font-family="'Open Sans', Arial, sans-serif" font-size="18" font-weight="bold" fill="#159957">
+    GeoDa
+  </text>
+  
+  <!-- Small decorative elements -->
+  <circle cx="15" cy="15" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="25" cy="25" r="1.5" fill="#ffffff" opacity="0.6"/>
+</svg> 

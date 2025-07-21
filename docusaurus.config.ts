@@ -2,7 +2,6 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import dotenv from 'dotenv';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -51,26 +50,6 @@ const config: Config = {
       },
     },
   },
-
-  plugins: [
-    function copyDataPlugin() {
-      return {
-        name: 'copy-data-plugin',
-        configureWebpack(config) {
-          config.plugins.push(
-            new CopyWebpackPlugin({
-              patterns: [
-                {
-                  from: 'data',
-                  to: 'data',
-                },
-              ],
-            })
-          );
-        },
-      };
-    },
-  ],
 
   presets: [
     [

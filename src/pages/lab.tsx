@@ -107,7 +107,7 @@ function LabPageContent(): React.JSX.Element {
     // Construct the correct path for both development and production
     // In production, we need to use absolute path from the site root
     const baseUrl = process.env.NODE_ENV === 'production' 
-      ? '/' 
+      ? '.' 
       : '.';
     
     // Use provided lab path or default to the first lab

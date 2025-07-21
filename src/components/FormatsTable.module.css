@@ -1,0 +1,53 @@
+/* ===== FORMATS TABLE SPECIFIC STYLES ===== */
+
+.tableSection {
+  margin-bottom: 2rem;
+}
+
+.tableSection h4 {
+  margin-bottom: 1rem;
+  color: #333333;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.formatsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.formatsTable th,
+.formatsTable td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.formatsTable th {
+  background-color: #f6f8fa;
+  font-weight: 600;
+  color: #333333;
+}
+
+.formatsTable tr:hover {
+  background-color: #f6f8fa;
+}
+
+.formatsTable td:first-child {
+  font-weight: 500;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .formatsTable {
+    font-size: 0.8rem;
+  }
+  
+  .formatsTable th,
+  .formatsTable td {
+    padding: 0.5rem;
+  }
+} 

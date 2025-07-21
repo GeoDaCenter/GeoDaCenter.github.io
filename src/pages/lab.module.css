@@ -1,0 +1,132 @@
+/* ===== LAB PAGE SPECIFIC STYLES ===== */
+
+.labContainer {
+  background: white;
+  overflow: hidden;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.labHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.labTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #159957;
+}
+
+.labActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.externalButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #159957;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.externalButton:hover {
+  background: #155799;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.iframeContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: 400px; /* Fallback minimum height */
+}
+
+.labIframe {
+  width: 100%;
+  border: none;
+  background: white;
+  display: block;
+  min-height: 400px; /* Fallback minimum height */
+  transition: height 0.3s ease; /* Smooth height transitions */
+}
+
+/* Alternative CSS-only approach using viewport height */
+.labIframe.viewportHeight {
+  height: 80vh; /* Use 80% of viewport height */
+  min-height: 400px;
+}
+
+/* Alternative using aspect ratio (if content has consistent aspect ratio) */
+.labIframe.aspectRatio {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .labHeader {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+  }
+  
+  .labTitle {
+    font-size: 1.25rem;
+  }
+  
+  .iframeContainer {
+    min-height: 300px; /* Smaller minimum on mobile */
+  }
+  
+  .labIframe {
+    min-height: 300px; /* Smaller minimum on mobile */
+  }
+  
+  .labIframe.viewportHeight {
+    height: 70vh; /* Smaller viewport height on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .labHeader {
+    padding: 1rem;
+  }
+  
+  .labTitle {
+    font-size: 1.1rem;
+  }
+  
+  .externalButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .iframeContainer {
+    min-height: 250px; /* Even smaller minimum on very small screens */
+  }
+  
+  .labIframe {
+    min-height: 250px; /* Even smaller minimum on very small screens */
+  }
+  
+  .labIframe.viewportHeight {
+    height: 60vh; /* Even smaller viewport height on very small screens */
+  }
+} 

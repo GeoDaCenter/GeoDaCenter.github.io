@@ -1,0 +1,19 @@
+/* ===== CHEATSHEET PAGE SPECIFIC STYLES ===== */
+
+.cheatsheetContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cheatsheetIframe {
+  max-width: 100%;
+  height: auto;
+  min-height: 600px;
+}
+
+.cheatsheetDescription {
+  text-align: center;
+  margin-bottom: 2rem;
+} 

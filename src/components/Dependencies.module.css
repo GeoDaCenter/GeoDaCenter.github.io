@@ -1,0 +1,48 @@
+/* ===== DEPENDENCIES SPECIFIC STYLES ===== */
+
+.mainContent {
+  max-width: 64rem;
+  padding: 2rem 6rem;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.mainContent h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  color: #159957;
+}
+
+.mainContent p {
+  margin-bottom: 1rem;
+}
+
+.dependenciesList {
+  font-size: 0.9rem;
+}
+
+.dependencyItem {
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+}
+
+.dependencyItem p {
+  margin-bottom: 0.5rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.dependencyItem strong {
+  color: #333;
+}
+
+.dependencyItem a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.dependencyItem a:hover {
+  text-decoration: underline;
+} 

@@ -1,0 +1,106 @@
+/* ===== DOCUMENTATION CONTENT SPECIFIC STYLES ===== */
+
+.mainContent {
+  max-width: 64rem;
+  padding: 2rem 6rem;
+  margin: 0 auto;
+}
+
+.mainContent h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  color: #159957;
+}
+
+.mainContent p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+.mainContent ul {
+  margin-left: 20px;
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-left: 30px;
+}
+
+.mainContent li {
+  margin-bottom: 0.5em;
+}
+
+.mainContent a {
+  color: #1e6bb8;
+  text-decoration: none;
+}
+
+.mainContent a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.workbookLink {
+  background: none;
+  border: none;
+  color: #1e6bb8;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+}
+
+.workbookLink:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.modalIcon {
+  margin-left: 8px;
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.anchor {
+  color: #159957;
+  text-decoration: none;
+}
+
+.anchor:hover {
+  text-decoration: none;
+}
+
+.octicon {
+  display: inline-block;
+  vertical-align: middle;
+  overflow: visible;
+}
+
+.octicon-link {
+  position: relative;
+  top: -1px;
+  width: 16px;
+  height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3.02 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media screen and (min-width: 42em) and (max-width: 64em) {
+  .mainContent {
+    padding: 2rem 4rem;
+  }
+}
+
+@media screen and (max-width: 42em) {
+  .mainContent {
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .mainContent ul {
+    padding-left: 20px;
+  }
+} 

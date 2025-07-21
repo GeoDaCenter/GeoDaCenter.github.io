@@ -1,0 +1,364 @@
+/* ===== DOWNLOAD PAGE SPECIFIC STYLES ===== */
+
+.downloadContainer, 
+.mainContent, 
+.content, 
+.container {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #606c71;
+}
+
+.mainContent h1, 
+.mainContent h2, 
+.mainContent h3, 
+.mainContent h4, 
+.mainContent h5, 
+.mainContent h6 {
+  color: #159957;
+  font-weight: normal;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.downloadLink, 
+.mainContent a, 
+a {
+  color: #1e6bb8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.downloadLink:hover, 
+.mainContent a:hover, 
+a:hover {
+  color: #1e6bb8;
+  text-decoration: underline;
+}
+
+.downloadList, 
+.mainContent ul, 
+.mainContent ol {
+  margin-left: 20px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.versionSection, 
+.noteSection, 
+.alternativeDownloads, 
+.legacySection, 
+.systemInfo, 
+.installationSection {
+  margin-bottom: 2rem;
+}
+
+.mainContent p, 
+.mainContent .text, 
+.mainContent li {
+  font-size: 16px;
+  color: #606c71;
+}
+
+/* Remove background, border, and border-radius from sections for a flat look */
+.versionSection, 
+.noteSection, 
+.alternativeDownloads, 
+.legacySection, 
+.systemInfo, 
+.installationSection {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* Remove box-shadow and border from images */
+.installationImage, 
+.installationImageNoScale, 
+.systemInfoImage {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.donationBox {
+  flex-shrink: 0;
+}
+
+.donationBox img {
+  max-width: 200px;
+  height: auto;
+}
+
+.releaseItem {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f1f3f4;
+  font-family: 'Courier New', monospace;
+  color: #666;
+}
+
+.releaseItem:last-child {
+  border-bottom: none;
+}
+
+.mapControls {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.mapToggle {
+  padding: 0.5rem 1rem;
+  background: #1e6bb8;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.mapToggle:hover {
+  background: #0056b3;
+}
+
+.mapContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.map.active {
+  opacity: 1;
+}
+
+/* Theme-aware CSS variables for map text */
+:root {
+  --map-text-color: #333333;
+}
+
+[data-theme='dark'] {
+  --map-text-color: #ffffff;
+}
+
+/* Map styles */
+.water {
+  fill: #deebf7;
+}
+
+.land {
+  fill: #A98B6F;
+  stroke: #FFF;
+  stroke-width: 0.7px;
+  transition: all 0.3s ease;
+}
+
+.land:hover {
+  stroke: #FFF;
+  stroke-width: 2.5px;
+  cursor: pointer;
+}
+
+.focused {
+  fill: #33CC33;
+}
+
+/* Choropleth colors */
+.q0-11 { fill: rgb(255, 255, 255); }
+.q1-11 { fill: rgb(240, 240, 240); }
+.q2-11 { fill: rgb(255, 247, 236); }
+.q3-11 { fill: rgb(254, 232, 200); }
+.q4-11 { fill: rgb(253, 212, 158); }
+.q5-11 { fill: rgb(253, 187, 132); }
+.q6-11 { fill: rgb(252, 141, 89); }
+.q7-11 { fill: rgb(239, 101, 72); }
+.q8-11 { fill: rgb(215, 48, 31); }
+.q9-11 { fill: rgb(179, 0, 0); }
+.q10-11 { fill: rgb(127, 0, 0); }
+
+.legend {
+  font-size: 12px;
+}
+
+.legendText {
+  fill: var(--map-text-color);
+  transition: fill 0.3s ease;
+}
+
+.countryTooltip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  background: #fff;
+  padding: 8px;
+  text-align: left;
+  border: solid #ccc 1px;
+  color: #666;
+  font-size: 14px;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Download page specific styles */
+.alternativeDownloads {
+  margin: 2rem 0;
+}
+
+.noteSection {
+  margin: 2rem 0;
+}
+
+.noteList {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.installationContainer {
+  margin: 2rem 0;
+}
+
+.installationMenu {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.installationMenu li a {
+  color: #1e6bb8;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #1e6bb8;
+  border-radius: 0.3rem;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.installationMenu li a:hover {
+  background: #1e6bb8;
+  color: white;
+  text-decoration: none;
+}
+
+.systemInfo {
+  margin: 2rem 0;
+}
+
+.systemInfoImage {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.legacySection {
+  margin: 2rem 0;
+}
+
+.legacyNotes {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.commandBlock {
+  background: #000;
+  color: #00cc00;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  font-family: 'Courier New', monospace;
+  margin: 1rem 0;
+}
+
+.commandLine {
+  font-family: 'Courier New', monospace;
+  color: #606c71;
+}
+
+.releaseSection {
+  margin: 2rem 0;
+}
+
+.releaseNotesLink {
+  color: #1e6bb8;
+  text-decoration: none;
+}
+
+.releaseNotesLink:hover {
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .downloadContainer {
+    padding: 1rem;
+  }
+  
+  .donationSection {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .downloadButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .downloadBtn,
+  .nightlyBtn,
+  .labBtn {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .mapContainer {
+    height: 300px;
+  }
+  
+  .installationMenu {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .mapContainer {
+    height: 250px;
+  }
+  
+  .statsChart {
+    height: 200px;
+  }
+}
+
+.projectName_fzVm {
+  margin-top: 0;
+  margin-bottom: 0.1rem;
+  font-size: 3.25rem;
+} 

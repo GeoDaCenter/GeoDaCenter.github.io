@@ -1,0 +1,98 @@
+/* ===== SETUP INSTRUCTION PAGE SPECIFIC STYLES ===== */
+
+.mainTitle {
+  color: #159957;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.mainTitle .anchor {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.mainTitle .anchor:hover {
+  text-decoration: underline;
+}
+
+.mainTitle .octicon {
+  margin-right: 0.5rem;
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.navLink {
+  color: #1e6bb8;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #1e6bb8;
+  border-radius: 0.3rem;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  font-size: 0.9rem;
+}
+
+.navLink:hover {
+  background: #1e6bb8;
+  color: white;
+  text-decoration: none;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e1e4e8;
+  margin: 2rem 0;
+}
+
+.description {
+  margin-bottom: 2rem;
+}
+
+.descriptionText {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: #606c71;
+}
+
+.imageGallery {
+  margin: 2rem 0;
+}
+
+.imageContainer {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.instructionImage {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #e1e4e8;
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 1.3rem;
+  }
+  
+  .navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .navLink {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+} 

@@ -1,0 +1,444 @@
+/* ===== MAIN CONTENT SPECIFIC STYLES ===== */
+
+.mainContent {
+  word-wrap: break-word;
+  padding: 2rem;
+}
+
+.mainContent :first-child {
+  margin-top: 0;
+}
+
+.mainContent h1, 
+.mainContent h2, 
+.mainContent h3, 
+.mainContent h4, 
+.mainContent h5, 
+.mainContent h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  color: #159957;
+  scroll-margin-top: 80px;
+}
+
+.mainContent p {
+  margin-bottom: 1em;
+}
+
+.mainContent code {
+  padding: 2px 4px;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 0.9rem;
+  color: #333333;
+  background-color: #f8f9fa;
+  border-radius: 0.3rem;
+}
+
+.mainContent pre {
+  padding: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  color: #606c71;
+  word-wrap: normal;
+  background-color: #f8f9fa;
+  border: solid 1px #dce6f0;
+  border-radius: 0.3rem;
+  overflow: auto;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.mainContent pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #606c71;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.mainContent .highlight {
+  margin-bottom: 1rem;
+}
+
+.mainContent .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.mainContent .highlight pre, 
+.mainContent pre {
+  padding: 0.8rem;
+  overflow: auto;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  border-radius: 0.3rem;
+}
+
+.mainContent pre code, 
+.mainContent pre tt {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.mainContent pre code:before, 
+.mainContent pre code:after, 
+.mainContent pre tt:before, 
+.mainContent pre tt:after {
+  content: normal;
+}
+
+.mainContent blockquote {
+  padding: 0 1rem;
+  margin-left: 0;
+  color: #819198;
+  border-left: 0.3rem solid #dce6f0;
+}
+
+.mainContent blockquote > :first-child {
+  margin-top: 0;
+}
+
+.mainContent blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.mainContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+  border-spacing: 0;
+}
+
+.mainContent table th {
+  font-weight: bold;
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e1e4e8;
+  background-color: #f8f9fa;
+  color: #333333;
+}
+
+.mainContent table th, 
+.mainContent table td {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e9e9e9;
+}
+
+.mainContent table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.mainContent table td:first-child {
+  font-weight: 500;
+}
+
+.mainContent dl {
+  padding: 0;
+}
+
+.mainContent dl dt {
+  padding: 0;
+  margin-top: 1rem;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.mainContent dl dd {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+.mainContent hr {
+  height: 2px;
+  padding: 0;
+  margin: 1rem 0;
+  background-color: #eff0f1;
+  border: 0;
+}
+
+/* ===== COMPONENT SPECIFIC STYLES ===== */
+
+.shadowfilter {
+  -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+}
+
+.intro1 {
+  margin-left: -45px;
+}
+
+.fiximage {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modern Slideshow Styles */
+.modernSlideshow {
+  position: relative;
+  margin: 2rem 0;
+  height: 490px;
+}
+
+.slideshowContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0.8rem;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  border-radius: 0.8rem;
+}
+
+.caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 0.3rem;
+  font-size: 14px;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+}
+
+.slideshowControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+  padding: 0 20px;
+  height: 60px;
+}
+
+.navButton {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.navButton:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.navButton:active {
+  transform: scale(0.95);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dot:hover {
+  background: rgba(0, 0, 0, 0.4);
+  transform: scale(1.2);
+}
+
+.dot.activeDot {
+  background: #159957;
+  transform: scale(1.3);
+}
+
+.playPauseButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.playPauseButton:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.05);
+}
+
+/* Download components styles */
+.downloadLink {
+  color: #1e6bb8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.downloadLink:hover {
+  color: #1e6bb8;
+  text-decoration: underline;
+}
+
+.downloadList {
+  list-style: disc;
+  padding-left: 40px;
+  margin: 1rem 0;
+}
+
+.downloadList li {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eff0f1;
+}
+
+.downloadList li:last-child {
+  border-bottom: none;
+}
+
+.versionSection {
+  margin: 2rem 0;
+}
+
+.installationSection {
+  margin: 2rem 0;
+}
+
+.installationSteps {
+  margin: 1rem 0;
+}
+
+.installationStep {
+  margin: 1rem 0;
+}
+
+.installationImage {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.installationImageNoScale {
+  max-width: none;
+  width: auto;
+  height: auto;
+  margin: 1rem 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
+.installationImages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.installationImagesNoFlex {
+  display: block;
+  margin: 1rem 0;
+}
+
+.alternativeMethod {
+  margin: 1rem 0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media screen and (min-width: 64em) {
+  .mainContent {
+    max-width: 64rem;
+    padding: 2rem 6rem;
+  }
+}
+
+@media screen and (min-width: 42em) and (max-width: 64em) {
+  .mainContent {
+    padding: 2rem 4rem;
+  }
+}
+
+@media screen and (max-width: 42em) {
+  .mainContent {
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .modernSlideshow {
+    height: 300px;
+  }
+  
+  .slideshowControls {
+    gap: 15px;
+  }
+  
+  .navButton {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .caption {
+    bottom: 15px;
+    left: 15px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+} 

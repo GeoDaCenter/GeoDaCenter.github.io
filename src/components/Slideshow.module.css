@@ -1,0 +1,15 @@
+/* ===== SLIDESHOW SPECIFIC STYLES ===== */
+
+.slideshowContainer {
+  margin: 2rem 0;
+  height: 400px; /* Set fixed height for the container */
+}
+
+.shadowfilter {
+  -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+}
+
+.intro1 {
+  margin-left: -45px;
+} 

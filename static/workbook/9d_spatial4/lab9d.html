@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="author" content="Luc Anselin" />
+
+
+  <title>Spatial Clustering (3)</title>
+
+  <script src="lab9d_files/header-attrs-2.3/header-attrs.js"></script>
+  <link href="lab9d_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+  <script src="lab9d_files/highlightjs-9.12.0/highlight.js"></script>
+  <title>GeoDa on Github</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .shadowfilter {
+      -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      filter: url(shadow.svg#drop-shadow);
+    }
+
+    .intro1 {
+      margin-left: -45px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css"
+    media="screen">
+  <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+  <style>
+    ul {
+      padding-left: 30px;
+    }
+
+    figcaption {
+      top: .70em;
+      left: .35em;
+      bottom: auto !important;
+      right: auto !important;
+    }
+  </style>
+
+  <style>
+    h1 {
+      text-align: center;
+    }
+
+    h3.subtitle {
+      text-align: center;
+    }
+
+    h4.author {
+      text-align: center;
+    }
+
+    h4.date {
+      text-align: center;
+    }
+
+    p.caption {
+      font-size: 12px;
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-LC0QJ53WFS');
+  </script>
+  <!-- End Google tag -->
+
+  <style type="text/css">
+    code {
+      white-space: pre;
+    }
+  </style>
+  <script type="text/javascript">
+    if (window.hljs) {
+      hljs.configure({ languages: [] });
+      hljs.initHighlightingOnLoad();
+      if (document.readyState && document.readyState === "complete") {
+        window.setTimeout(function () { hljs.initHighlighting(); }, 0);
+      }
+    }
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <section class="main-content">
+
+
+    <h1 class="title toc-ignore">Spatial Clustering (3)</h1>
+    <h3 class="subtitle">Spatially Constrained Clustering - Partitioning Methods</h3>
+    <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+    <h4 class="date">12/07/2020 (latest update)</h4>
+
+
+    <div id="TOC">
+      <ul>
+        <li><a href="#introduction">Introduction</a>
+          <ul>
+            <li><a href="#objectives">Objectives</a>
+              <ul>
+                <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+              </ul>
+            </li>
+            <li><a href="#preliminaries">Preliminaries</a></li>
+          </ul>
+        </li>
+        <li><a href="#automatic-zoning-procedure-azp">Automatic Zoning Procedure (AZP)</a>
+          <ul>
+            <li><a href="#principle">Principle</a>
+              <ul>
+                <li><a href="#azp-heuristic">AZP heuristic</a></li>
+                <li><a href="#simulated-annealing">Simulated annealing</a></li>
+                <li><a href="#tabu-search">Tabu search</a></li>
+                <li><a href="#arisel">ARiSeL</a></li>
+              </ul>
+            </li>
+            <li><a href="#implementation">Implementation</a>
+              <ul>
+                <li><a href="#local-search">Local search</a></li>
+                <li><a href="#simulated-annealing-1">Simulated annealing</a></li>
+                <li><a href="#tabu-search-1">Tabu search</a></li>
+                <li><a href="#arisel-1">ARiSeL</a></li>
+                <li><a href="#changing-the-random-seed">Changing the random seed</a></li>
+                <li><a href="#initial-regions">Initial regions</a></li>
+                <li><a href="#minimum-bound">Minimum bound</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#max-p-region-problem">Max-P Region Problem</a>
+          <ul>
+            <li><a href="#principle-1">Principle</a>
+              <ul>
+                <li><a href="#max-p-heuristic-steps">Max-p heuristic steps</a></li>
+              </ul>
+            </li>
+            <li><a href="#implementation-1">Implementation</a>
+              <ul>
+                <li><a href="#greedy">Greedy</a></li>
+                <li><a href="#simulated-annealing-2">Simulated annealing</a></li>
+                <li><a href="#tabu-search-2">Tabu search</a></li>
+              </ul>
+            </li>
+            <li><a href="#sensitivity-analysis">Sensitivity analysis</a>
+              <ul>
+                <li><a href="#optimizing-parallel-processing">Optimizing parallel processing</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#appendix">Appendix</a>
+          <ul>
+            <li><a href="#illustration-of-the-azp-heuristic">Illustration of the AZP heuristic</a></li>
+            <li><a href="#illustration-of-the-max-p-heuristic">Illustration of the max-p heuristic</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </div>
+
+    <p><br></p>
+    <div id="introduction" class="section level2 unnumbered" number="">
+      <h2>Introduction</h2>
+      <p>In this chapter, we continue the treatment of clustering methods where the spatial constraint is imposed
+        explicitly. However, in contrast to the previous chapter, where hierarchical approaches were covered, we now
+        consider partitioning methods. In the
+        literature, this is often referred to as the <em>p-regions problem</em>, i.e., a problem of combining n spatial
+        units into p larger regions that are made up of contiguous entities and maximize internal homogeneity.</p>
+      <p>A discussion of the general issues and extensive literature reviews can be found in
+        <span class="citation">Duque, Ramos, and Suriñach (<a href="#ref-Duqueetal:07"
+            role="doc-biblioref">2007</a>)</span>, <span class="citation">Duque, Church, and Middleton (<a
+            href="#ref-Duqueatal:11a" role="doc-biblioref">2011</a>)</span>, and <span class="citation">Li, Church, and
+          Goodchild (<a href="#ref-Lietal:14" role="doc-biblioref">2014</a>)</span>, among others. Here, we focus our
+        attention on two
+        approaches. One is the <em>automatic zoning problem</em> or <em>AZP</em>, originally considered by <span
+          class="citation">Openshaw (<a href="#ref-Openshaw:77" role="doc-biblioref">1977</a>)</span>
+        (later, AZP is also referred to as the automatic zoning <em>procedure</em>). As in the methods discussed
+        previously, this requires a prior specification of the number of zones or regions (p).<a href="#fn2"
+          class="footnote-ref" id="fnref2"><sup>2</sup></a>
+      </p>
+      <p>In contrast, in the so-called <em>max-p regions</em> model,
+        proposed in <span class="citation">Duque, Anselin, and Rey (<a href="#ref-Duqueetal:12"
+            role="doc-biblioref">2012</a>)</span>, the number of regions becomes endogenous, and heuristics are
+        developed to find the allocation of spatial units into the largest number of regions (max-p),
+        such that a spatially extensive minimum threshold condition is met.</p>
+      <p>We continue to use the Guerry sample data set to illustrate these approaches and the small
+        Arizona county example to show the detailed steps in the algorithms.</p>
+      <div id="objectives" class="section level3 unnumbered" number="">
+        <h3>Objectives</h3>
+        <ul>
+          <li>
+            <p>Understand the logic behind the automatic zoning procedure (AZP)</p>
+          </li>
+          <li>
+            <p>Appreciate the differences between greedy, simulated annealing and tabu searches</p>
+          </li>
+          <li>
+            <p>Gain insight into the different ways to fine tune AZP using ARiSeL</p>
+          </li>
+          <li>
+            <p>Identify contiguous clusters with the number of clusters as endogenous with max-p</p>
+          </li>
+          <li>
+            <p>Understand the different stages of the max-p algorithm</p>
+          </li>
+          <li>
+            <p>Appreciate the sensitivity of the AZP and max-p heuristics to various tuning parameters</p>
+          </li>
+        </ul>
+        <div id="geoda-functions-covered" class="section level4 unnumbered" number="">
+          <h4>GeoDa functions covered</h4>
+          <ul>
+            <li>Clusters &gt; AZP
+              <ul>
+                <li>select AZP method</li>
+                <li>ARiSeL option</li>
+                <li>set initial regions</li>
+              </ul>
+            </li>
+            <li>Clusters &gt; Max-p</li>
+          </ul>
+          <p><br></p>
+        </div>
+      </div>
+      <div id="preliminaries" class="section level3 unnumbered" number="">
+        <h3>Preliminaries</h3>
+        <p>We continue to use the Guerry data set and also need a spatial weights matrix in the form
+          of queen contiguity.</p>
+      </div>
+    </div>
+    <div id="automatic-zoning-procedure-azp" class="section level2 unnumbered" number="">
+      <h2>Automatic Zoning Procedure (AZP)</h2>
+      <div id="principle" class="section level3 unnumbered" number="">
+        <h3>Principle</h3>
+        <p>The automatic zoning procedure (AZP) was initially outlined in <span class="citation">Openshaw (<a
+              href="#ref-Openshaw:77" role="doc-biblioref">1977</a>)</span> as a way to address
+          some of the consequences of the modifiable areal unit problem (MAUP). In essence, it consists of
+          a heuristic to find the best set of combinations of contiguous spatial units into p regions,
+          minimizing the within sum of squares as a criterion of homogeneity. The number of regions needs
+          to be specified beforehand, as in most other clustering methods considered so far.</p>
+        <p>The problem is NP-hard, so that it is impossible to find an analytical solution. Also, in all but toy
+          problems, a full enumeration of all possible layouts is impractical. In <span class="citation">Openshaw and
+            Rao (<a href="#ref-OpenshawRao:95" role="doc-biblioref">1995</a>)</span>, the original
+          slow hill-climbing heuristic is augmented with a number of other approaches, such as simulated annealing
+          and tabu search, to avoid the problem
+          of being trapped in a local solution. None of the heuristics guarantee that a global solution is found,
+          so sensitivity analysis and some experimentation with different starting points remains important.</p>
+        <p>Addressing the sensitivity of the solution to starting points is the motivation behind the
+          <em>automatic regionalization with initial seed location</em> (ARiSeL) procedure, proposed by Duque and Church
+          in
+          2004.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
+        </p>
+        <p>It is important to keep in mind that just running AZP with the default settings is <em>not sufficient</em>.
+          Several
+          parameters need to be manipulated to get a good sense of what the best (or, a better) solution might be. This
+          may seem a
+          bit disconcerting at first, but it is intrinsic to the use of a <em>heuristic</em> that does not guarantee
+          <em>global</em>
+          optimality.</p>
+        <p>We now consider each of the heuristics in turn.</p>
+        <div id="azp-heuristic" class="section level4 unnumbered" number="">
+          <h4>AZP heuristic</h4>
+          <p>The original AZP heuristic is a local optimization procedure that cycles through a series of possible
+            swaps between spatial units at the boundary of a set of regions. The process starts with an initial feasible
+            solution, i.e., a grouping of n spatial units into p contiguous regions. This initial solution can be
+            constructed in a number of different ways. It is critical that the initial solution
+            satisfies the contiguity constraints. For example, this can be accomplished by <em>growing</em> a set of
+            contiguous regions from p
+            randomly selected <em>seed</em> units by adding neighboring locations until the contiguity constraint can no
+            longer
+            be met.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+          <p>This process yields an initial list of regions and an allocation of each spatial unit to one and only one
+            of the regions. At this point, a random region from the list is selected and its set of neighboring spatial
+            units considered one at a time for a move from their original region to the region under consideration. Such
+            a
+            move is only allowed if it does not break the contiguity constraint in the origin region. If it improves on
+            the overall objective function, i.e., the total within sum of squares, then the move is carried out.</p>
+          <p>With a new unit added to the region under consideration, its neighbor structure (spatial weights) needs to
+            be
+            updated to include new neighbors from the spatial unit that was moved and that were not part of the original
+            neighbor list.</p>
+          <p>The evaluation is continued and moves implemented until the (updated) neighbor list is exhausted.</p>
+          <p>Now, the process moves to the next randomly picked region from the region list and repeats the evaluation
+            of all the neighbors. When the region list is empty (i.e., all initial regions have been evaluated), the
+            whole operation is repeated with the current region list until the improvement in the objective function
+            falls below a critical convergence criterion.</p>
+          <p>Note that the heuristic is local in that it does not try to find the globally best move. It considers
+            only one neighbor of one region at a time, without checking on the potential swaps for the other neighbors
+            or regions. As a result,
+            the process can easily get trapped in a <em>local</em> optimum.</p>
+          <p>A detailed illustration of these steps is given in the <a href="#appendix">Appendix</a>.</p>
+        </div>
+        <div id="simulated-annealing" class="section level4 unnumbered" number="">
+          <h4>Simulated annealing</h4>
+          <p>The major idea behind methods to avoid being trapped in a local optimum amounts to allowing
+            non-improving moves at one or more stages in the optimization process. This purposeful moving in the
+            <em>wrong</em> direction
+            provides a way to escape from potentially inferior local optima.</p>
+          <p>One method to accomplish this is so-called <em>simulated annealing</em>. This approach originated in
+            physics , and is
+            also known as the
+            Metropolis algorithm, commonly used in Markov Chain Monte Carlo simulation <span
+              class="citation">(Metropolis et al. <a href="#ref-Metropolisetal:53"
+                role="doc-biblioref">1953</a>)</span>. The
+            idea is to introduce some randomness into the decision to accept a non-improving move, but to make
+            such moves less and less likely as the heuristic proceeds.</p>
+          <p>If a move (i.e., a move of a spatial unit into a new region) does not improve the objective function,
+            it can still be accepted with a probability based on the so-called <em>Boltzmann equation</em>. This
+            compares the
+            (negative) exponential of the relative change in the objective function to a 0-1 uniform random number.
+            The exponent is divided by a factor, called the <em>temperature</em>, which is decreased (lowered) as the
+            process goes on.</p>
+          <p>Formally, with <span class="math inline">\(\Delta O/O\)</span> as the relative change in the objective
+            function and <span class="math inline">\(r\)</span> as a draw from a
+            uniform 0-1 random distribution, the condition of acceptance of a non-improving move is:
+            <span class="math display">\[ r &lt; e^\frac{-\Delta O/O}{T(k)},\]</span>
+            where <span class="math inline">\(T(k)\)</span> is the <em>temperature</em> at annealing step k.<a
+              href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
+            Typically <span class="math inline">\(k\)</span> is constrained so that only a limited number of such
+            annealing moves are allowed per iteration. In
+            addition, only a limited number of iterations are allowed (in <code>GeoDa</code>, this is controlled by the
+            <strong>maxit</strong> parameter).
+          </p>
+          <p>The starting temperature is typically taken as <span class="math inline">\(T = 1\)</span> and gradually
+            reduced at each annealing step <span class="math inline">\(k\)</span>
+            by means of a <strong>cooling rate</strong> <span class="math inline">\(c\)</span>, such that:
+            <span class="math display">\[T(k) = c.T(k-1).\]</span>
+            In <code>GeoDa</code>, the default cooling rate is set to 0.85, but typically some experimentation may be
+            needed.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>
+          </p>
+          <p>The effect of the cooling rate is that <span class="math inline">\(T(k)\)</span> becomes smaller, so that
+            the value in the negative
+            exponent becomes larger, which yields a smaller value of the result to compare to <span
+              class="math inline">\(r\)</span>.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> Since
+            the mean
+            of the uniform 0-1 random draw <span class="math inline">\(r\)</span> is 0.5, smaller and smaller values on
+            the right-hand side of the Boltzmann equation will
+            result is less and less likely acceptance of non-improving moves.</p>
+          <p>In AZP, the simulated annealing approach is applied to the evaluation step of the neighboring
+            units, i.e., whether or not the move of a spatial unit from its origin region to the region
+            under consideration will improve the objective.</p>
+          <p>In all other respects, simulated annealing AZP uses the same steps as outlined above for the
+            original AZP heuristic.</p>
+        </div>
+        <div id="tabu-search" class="section level4 unnumbered" number="">
+          <h4>Tabu search</h4>
+          <p>The tabu search is yet another method designed to avoid getting trapped in a local optimum. It was
+            originally suggested
+            in the context of mixed integer programming by <span class="citation">Glover (<a href="#ref-Glover:77"
+                role="doc-biblioref">1977</a>)</span>, but has found wide applicability in a range of
+            combinatorial problems, including AZP <span class="citation">(originally introduced in this context by
+              Openshaw and Rao <a href="#ref-OpenshawRao:95" role="doc-biblioref">1995</a>)</span>.</p>
+          <p>One aspect of the local search in AZP is that there may be a lot of cycling, in the sense that spatial
+            units are moved from one region to another and at a later step moved back to the original region.
+            In order to avoid this, a tabu search maintains a so-called tabu list that contains a number of (return)
+            steps that are prohibited.</p>
+          <p>With a given regional layout, all possible swaps are considered from a list of candidates
+            from the adjoining neighbors. Each of these neighbors that is not in the current tabu list is considered
+            for a possible swap, and the best swap is selected. If the best swap improves the overall objective
+            function (the total within sum of squares), then it is implemented and the reverse move is added to the
+            tabu list. In practice, this means that this move cannot be considered for <span
+              class="math inline">\(R\)</span> iterations, where <span class="math inline">\(R\)</span> is the length
+            of the tabu list, or the <strong>Tabu Length</strong> parameter in <code>GeoDa</code>.</p>
+          <p>If the best swap does not improve the overall objective then the next available tabu move is considered (a
+            so-called
+            aspirational move). If the latter improves on the overall objective, it is carried out and the reverse
+            move is added to the tabu list. If the aspirational move does not improve the objective, then the best swap
+            is implemented anyway and its reverse move is also added to the tabu list. In a sense, rather than making
+            no move, a move is made that makes the overall objective (slightly) worse. The number of such non-improving
+            moves is limited by the <strong>ConvTabu</strong> parameter.</p>
+          <p>The tabu approach can dramatically improve the quality of the end result of the search. However, a critical
+            parameter is the length of the tabu list, or, equivalently, the number of iterations that a tabu move
+            cannot be considered. The results can be highly sensitive to the selection of this parameter, so that
+            some experimentation is recommended <span class="citation">(for examples, see the detailed experiments in
+              Duque, Anselin, and Rey <a href="#ref-Duqueetal:12" role="doc-biblioref">2012</a>)</span>.</p>
+        </div>
+        <div id="arisel" class="section level4 unnumbered" number="">
+          <h4>ARiSeL</h4>
+          <p>The ARiSeL approach, which stands for <em>automatic regionalization with initial seed location</em>, is an
+            alternative
+            way to select the initial feasible solution. In the original AZP formulation, this initial solution is
+            based on a random choice of p seeds, and the initial feasible regions are grown around these seeds by adding
+            the nearest
+            neighbors. It turns out that the result of AZP is highly sensitive to this starting point.</p>
+          <p>Duque and Church proposed the ARiSeL alternative, based on seeds obtained from a Kmeans++ procedure.<a
+              href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> This yields better starting points for
+            growing a
+            whole collection of initial feasible regions. Then the best such solution is chosen as the basis
+            for a tabu search. In <code>GeoDa</code>, the ARiSeL approach is available as an option for all three search
+            heuristics.</p>
+        </div>
+      </div>
+      <div id="implementation" class="section level3 unnumbered" number="">
+        <h3>Implementation</h3>
+        <p>The AZP option is available from the cluster toolbar icon as the first item in the last group, as
+          shown in Figure <a href="#fig:AZPoption">1</a>, or from the menu, as <strong>Clusters &gt; AZP</strong>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:AZPoption"></span>
+          <img src="pics9d/11_azp_menu.png" alt="AZP cluster option" width="10%" />
+          <p class="caption">
+            Figure 1: AZP cluster option
+          </p>
+        </div>
+        <p>The AZP Settings interface takes the familiar form, shown in
+          Figure <a href="#fig:AZPsettings">2</a>. In addition to the variables, the number of clusters needs to be
+          specified,
+          and the method of interest selected: <strong>AZP</strong> (the default local search), <strong>AZP-Simulated
+            Annealing</strong>, or <strong>AZP-Tabu Search</strong>. Other options are discussed below.</p>
+        <div class="figure" style="text-align: center"><span id="fig:AZPsettings"></span>
+          <img src="pics9d/33_azp_interface.png" alt="AZP Settings interface" width="35%" />
+          <p class="caption">
+            Figure 2: AZP Settings interface
+          </p>
+        </div>
+        <p>We continue with the same example as before, using the Guerry sample data with queen contiguity spatial
+          weights.
+          The variables are again <strong>Crm_prs</strong>, <strong>Crm_prp</strong>, <strong>Litercy</strong>,
+          <strong>Donatns</strong>, <strong>Infants</strong>, <strong>Suicids</strong>, used in
+          standardized form. We set the number of regions to <strong>6</strong> and leave all the other defaults as
+          specified.</p>
+        <p>As a frame of reference, we note that the unconstrained k-means results yielded a between to total sum of
+          squares ratio of 0.552. From the previous chapter, we recall that the unconstrained hierarchical clusters best
+          result for p=6 was 0.532. Among the spatially constrained techniques, we found the ratio to range from
+          0.420 for Skater to 0.462 for SCHC with Ward’s linkage, with Redcap Full-Order-Ward close at 0.460.</p>
+        <div id="local-search" class="section level4 unnumbered" number="">
+          <h4>Local search</h4>
+          <p>The default result is shown in Figure <a href="#fig:AZPlocal">3</a>, with the <strong>Method</strong>
+            option set to <strong>AZP</strong>. We have three fairly equally balanced regions (27, 25 and 18), and three
+            smaller ones (7, 4, 4). The regions are less compact than in the last chapter, with some string-like chains,
+            as in region 6. The between to total sum of
+            squares ratio is 0.431, better than skater, but not as good as SCHC or Redcap with Ward’s linkage.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPlocal"></span>
+            <img src="pics9d/11_azp_map_local.png" alt="AZP local search clusters" width="80%" />
+            <p class="caption">
+              Figure 3: AZP local search clusters
+            </p>
+          </div>
+        </div>
+        <div id="simulated-annealing-1" class="section level4 unnumbered" number="">
+          <h4>Simulated annealing</h4>
+          <p>When the simulated annealing option is selected from the <strong>Method</strong> drop-down list, with the
+            default cooling rate of 0.85, the result is improved, but only slightly. As shown in
+            Figure <a href="#fig:AZPsa85">4</a>, the resulting clusters take on a very different shape compared to the
+            local search result.
+            The between to total sum of squares ratio is now 0.433.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPsa85"></span>
+            <img src="pics9d/33_azp_sa085.png" alt="AZP simulated annealing clusters - cooling rate=0.85" width="80%" />
+            <p class="caption">
+              Figure 4: AZP simulated annealing clusters - cooling rate=0.85
+            </p>
+          </div>
+          <p>As mentioned, some experimentation with the cooling rate is important. In our example, setting the cooling
+            rate to
+            0.9 yields a worse result (not shown), but a value of 0.80 gives the best result so far, shown in
+            Figure <a href="#fig:AZPsa80">5</a>. The between to total SS ratio is now 0.478, better than even the best
+            result obtained
+            with the hierarchical methods. Again, the clusters take on a totally different shape.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPsa80"></span>
+            <img src="pics9d/11_azp_sa080.png" alt="AZP simulated annealing clusters - cooling rate=0.80" width="80%" />
+            <p class="caption">
+              Figure 5: AZP simulated annealing clusters - cooling rate=0.80
+            </p>
+          </div>
+        </div>
+        <div id="tabu-search-1" class="section level4 unnumbered" number="">
+          <h4>Tabu search</h4>
+          <p>The third option in the <strong>Method</strong> list is Tabu search. It is driven by two important
+            parameters, the <strong>Tabu Length</strong> and <strong>ConvTabu</strong>, the number of non-improving
+            moves that is allowed at each iteration. The default <strong>Tabu Length</strong> is 10 and
+            <strong>ConvTabu</strong> is set to the maximum
+            of 10 and <span class="math inline">\(n/p\)</span>. In our Guerry example with 85 observations and 6
+            regions, the default value for <strong>ConvTabu</strong> is thus 14. This is typically
+            a good starting point, although it is by no means the only value that should be considered.</p>
+          <p>With the default settings, the results are as shown in Figure <a href="#fig:AZPtabu10">6</a>. This gives
+            three fairly well
+            balanced regions (27, 21 and 20), one roughly half this size (11), and two small ones (3 each). The between
+            to total
+            sum of squares ratio is 0.433, the same as the default result for simulated annealing.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPtabu10"></span>
+            <img src="pics9d/33_azp_tabu10.png" alt="AZP tabu search - Tabu Length 10" width="80%" />
+            <p class="caption">
+              Figure 6: AZP tabu search - Tabu Length 10
+            </p>
+          </div>
+          <p>Some experimentation with tabu length and convtabu can yield better results. For example, with the tabu
+            length
+            at 50 and convtabu at 25, we obtain a between to total ratio of 0.467, as in Figure <a
+              href="#fig:AZPtabu50">7</a>. This is quite an improvement, but not
+            as good as the best value for simulated annealing. Of course, it is possible that other combinations of
+            these
+            parameters give rise to even better results.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPtabu50"></span>
+            <img src="pics9d/33_azp_tabu50.png" alt="AZP tabu search - Tabu Length 50, ConvTabu 25" width="80%" />
+            <p class="caption">
+              Figure 7: AZP tabu search - Tabu Length 50, ConvTabu 25
+            </p>
+          </div>
+        </div>
+        <div id="arisel-1" class="section level4 unnumbered" number="">
+          <h4>ARiSeL</h4>
+          <p>The first stage in any of the AZP heuristics discussed so far is the construction of a feasible initial
+            solution.
+            In the classic approach, this is based on p random seeds from which feasible, i.e., contiguous, regions are
+            grown.
+            As the summary information on the results so far indicates, all solutions start with an
+            <strong>Initial value of objective function</strong> of 322.976. In the ARiSeL approach, a (large) number of
+            initial regions are
+            generated, using the same logic for seeds as the kmeans++ approach. The best solution is selected as the
+            new starting point. As long as the same random seed is used (see also below), the end point for an equal
+            number
+            of re-runs will be the same.
+          </p>
+          <p>The ARiSeL approach is selected by checking the associated box and specifying the number of
+            <strong>Construction Re-runs</strong>
+            (see Figure <a href="#fig:AZPsettings">2</a>).
+            The default is 10 runs, but other values should definitely be considered. ARiSeL initiation can be combined
+            with
+            any of the three methods.</p>
+          <p>For example, consider the results in Figure <a href="#fig:AZParisel">8</a>, where 150 runs were used with
+            the standard
+            AZP heuristic. The initial value of the objective function is now quite a bit lower, at 284.942. In other
+            words,
+            the ARiSeL repeated runs yielded a feasible initial solution with a better value for the overall objective.
+          </p>
+          <p>Once the new initial solution is determined, the heuristic works in exactly the same way as before. For
+            standard
+            AZP, this yields a between to total ratio of 0.436, only slightly better than the result based on a single
+            random run,
+            even though the starting point was much better.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZParisel"></span>
+            <img src="pics9d/33_azp_arisel.png" alt="AZP with ARiSeL - 150 runs" width="80%" />
+            <p class="caption">
+              Figure 8: AZP with ARiSeL - 150 runs
+            </p>
+          </div>
+          <p>Using 150 ARiSeL runs for the simulated annealing option (with a cooling rate of 0.8) does not improve on
+            the previous
+            result. As shown in Figure <a href="#fig:AZPariselsa">9</a>, the ultimate between to total ratio is 0.468,
+            not as good
+            as the 0.478 we obtained in Figure <a href="#fig:AZPsa80">5</a>.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPariselsa"></span>
+            <img src="pics9d/33_azp_arisel_sa.png"
+              alt="AZP Simulated Anealing with ARiSeL, cooling rate 0.80 - 150 runs" width="80%" />
+            <p class="caption">
+              Figure 9: AZP Simulated Anealing with ARiSeL, cooling rate 0.80 - 150 runs
+            </p>
+          </div>
+          <p>Finally, AZP-tabu with 150 ARiSeL runs also ends up with a worse result than before. As shown in Figure <a
+              href="#fig:AZPariseltabu">10</a>, the between to total ratio is 0.448, compared to 0.467 earlier.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPariseltabu"></span>
+            <img src="pics9d/33_azp_arisel_tabu.png" alt="AZP tabu with ARiSeL, Tabu Length 10 - 150 runs"
+              width="80%" />
+            <p class="caption">
+              Figure 10: AZP tabu with ARiSeL, Tabu Length 10 - 150 runs
+            </p>
+          </div>
+          <p>The main contribution of the ARiSeL approach is to yield better starting points for the respective
+            heuristics. However,
+            as we have seen in the illustrations given here, this does not always lead to better end results.
+            Experimentation with other combinations of the various tuning parameter is needed to obtain a more complete
+            picture of the various tradeoffs.</p>
+        </div>
+        <div id="changing-the-random-seed" class="section level4 unnumbered" number="">
+          <h4>Changing the random seed</h4>
+          <p>An alternative to the ARiSeL collection of starting runs is to change the random seed used to create the
+            single
+            feasible initial solution. In a sense, this changes the randomness of the starting seeds, but doesn’t
+            guarantee
+            any improvement. Also, once the <strong>Change Seed</strong> box is unchecked (see Figure <a
+              href="#fig:AZPsettings">2</a>), we lose the capacity to reproduce the various
+            analyses. Preferably, we can change the seed to a specific value.</p>
+          <p>For example, we can turn the initial
+            default seed of 123456789 to 12345678. This simple change has a major impact on the results, as shown in
+            Figure <a href="#fig:AZPseed">11</a>. Even though the initial value of the objective function is worse than
+            before, at
+            348.713, the ultimate result turns out to be better. In our example, for the standard AZP, this yields a
+            between
+            to total ratio of 0.450, much better than the result in Figure <a href="#fig:AZPlocal">3</a> for the
+            original random seed
+            (0.430), and even better than AZP-ARiSeL with the previous seed (0.436).</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPseed"></span>
+            <img src="pics9d/33_azp_seed.png" alt="AZP with different random seed" width="80%" />
+            <p class="caption">
+              Figure 11: AZP with different random seed
+            </p>
+          </div>
+          <p>In general, it is a good idea to include experiments with different random seeds in the range of
+            sensitivity analyses.</p>
+          <p>To proceed, we return the initial seed to its default value of 123456789.</p>
+        </div>
+        <div id="initial-regions" class="section level4 unnumbered" number="">
+          <h4>Initial regions</h4>
+          <p>A different use of the various AZP heuristics is to potentially improve on solutions found by other
+            methods.
+            As we saw in the previous chapter, the hierarchical methods can be trapped into sub-optima, in that once a
+            cut is made in the relevant spanning tree, it is impossible to move a spatial unit to a different branch.
+          </p>
+          <p>Swapping units between regions is the essence of the heuristics behind the partitioning methods. An attempt
+            to improve
+            on one of the hierarchical solutions can be made by checking the <strong>Initial Regions</strong> box in the
+            dialog shown in Figure <a href="#fig:AZPsettings">2</a>. Next, a cluster classification variable must be
+            selected from the drop-down list in order
+            to initialize the process. This cluster variable was created in the <strong>Save Cluster in Field</strong>
+            option during the
+            relevant reference cluster exercise.</p>
+          <p>Here, we illustrate this by taking the final result from the skater algorithm with p=6. From the summary of
+            this
+            analysis (not shown here), we know that the final within sum of squares was 292.551 with a between to total
+            ratio of
+            0.420. We use this as the initial feasible solution to the standard AZP heuristic, shown in Figure <a
+              href="#fig:AZPskater">12</a>.
+            The initial value of the objective function matches the end result of skater, as expected. The end result
+            yields a between to total ratio of 0.463, a considerable improvement on the original skater regions.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPskater"></span>
+            <img src="pics9d/33_azp_skater.png" alt="AZP Simulated Annealing with skater initial regions" width="80%" />
+            <p class="caption">
+              Figure 12: AZP Simulated Annealing with skater initial regions
+            </p>
+          </div>
+          <p>As long as they satisfy the contiguity constraint, the <strong>Initial Region</strong> option can be used
+            for other initial solutions as well, not just the results of previous clustering exercises.</p>
+        </div>
+        <div id="minimum-bound" class="section level4 unnumbered" number="">
+          <h4>Minimum bound</h4>
+          <p>A final option is to set a <strong>Minimum Bound</strong> for each region in terms of a spatially extensive
+            variable
+            (such as population), or, alternatively, a <strong>Min Region Size</strong> (see Figure <a
+              href="#fig:AZPsettings">2</a>). This works
+            in the same way as before, except that the contiguity constraint needs to be satisfied.</p>
+          <p>The initial feasible region must meet both the minimum bound as well as contiguity. After this, the same
+            heuristics are applied. For example, in Figure <a href="#fig:AZPminbound">13</a>, the results are shown for
+            the default
+            10 % bound on <strong>Pop1831</strong> (3236.67), using simulated annealing with a cooling rate of 0.80.</p>
+          <p>The smallest region contains 7 spatial units, which is more than for any of the unconstrained solutions.
+            However,
+            the other regions tend to be smaller, without a dominating entity as was often the case before. The
+            initial value of the objective function (i.e., the starting point) is 359.154, larger than for any of the
+            previous solutions. The between to total sum of squares ratio is 0.442, not as good as the unconstrained
+            simulated annealing result (0.478). The decrease in
+            internal homogeneity is the price to pay for imposing the minimum bound constraint.</p>
+          <div class="figure" style="text-align: center"><span id="fig:AZPminbound"></span>
+            <img src="pics9d/33_azp_minbound.png" alt="AZP Simulated Annealing with minimum bounds" width="80%" />
+            <p class="caption">
+              Figure 13: AZP Simulated Annealing with minimum bounds
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="max-p-region-problem" class="section level2 unnumbered" number="">
+      <h2>Max-P Region Problem</h2>
+      <div id="principle-1" class="section level3 unnumbered" number="">
+        <h3>Principle</h3>
+        <p>The max-p region problem, outlined in <span class="citation">Duque, Anselin, and Rey (<a
+              href="#ref-Duqueetal:12" role="doc-biblioref">2012</a>)</span>, makes the number of regions (p) part of
+          the
+          solution process. This is accomplished by introducing a minimum size constraint for each cluster.
+          In contrast to the use of such a constraint in earlier methods, where this was optional,
+          for max-p the <em>constraint is required</em>. The size constraint is either a minimum value for a
+          spatially extensive variable (such as population size, number of housing units), or a minimum
+          number of spatial units that need to be contained in each region. Initially formulated as a
+          standard regionalization problem, the method was extended to take into account a network
+          structure in <span class="citation">She, Duque, and Ye (<a href="#ref-Sheetal:17"
+              role="doc-biblioref">2017</a>)</span>.</p>
+        <p>In <span class="citation">Duque, Anselin, and Rey (<a href="#ref-Duqueetal:12"
+              role="doc-biblioref">2012</a>)</span>, the solution to the max-p region problem was presented as a special
+          case of
+          mixed integer programming (MIP), building on earlier approaches to incorporate contiguity
+          constraints in site design problems given by <span class="citation">Cova and Church (<a
+              href="#ref-CovaChurch:00" role="doc-biblioref">2000</a>)</span>. Two key aspects are the formal
+          incorporation of the contiguity constraint and the use of an objective function that combines
+          the number of regions (p) and the overall homogeneity (minimizing the total with sum of squares).
+          However, within this objective function, priority is given to finding a larger p rather than the
+          maximum homogeneity. In contrast to an unconstrained problem, where a larger p will always yield
+          a better measure of homogeneity (see the discussion of the elbow graph for k-means clustering),
+          this is not the case when both a minimum size constraint <em>and</em> contiguity are imposed. In other
+          words, simple minimization of the total within sum of squares may not necessarily yield the
+          maximum p. Also, the maximum p solution may not give the best total within sum of squares.
+          The tradeoff between the two sub-objectives is made explicit.</p>
+        <p>In a nutshell, the max-p algorithm will find the largest p that accommodates both the minimum
+          size and contiguity constraints and then finds the regionalization for that value of p that yields the
+          smallest total within sum of squares.</p>
+        <p>As it turns out, the formal MIP strategy becomes
+          impractical for any but small size problems. Instead, a <em>heuristic</em> was
+          proposed that consists of three important steps.<a href="#fn9" class="footnote-ref"
+            id="fnref9"><sup>9</sup></a>
+          As was the case for previous heuristics, this does not guarantee that a global optimum is found.
+          Therefore, some experimentation with the various solution parameters is recommended. Even more than in the
+          case of AZP, sensitivity analysis and the tuning of parameters is critical to find better solutions. Simply
+          running the default will not be sufficient. The tradeoffs involved are complex and not always intuitive.</p>
+        <p>The specific steps in the max-p heuristic
+          are considered next.</p>
+        <div id="max-p-heuristic-steps" class="section level4 unnumbered" number="">
+          <h4>Max-p heuristic steps</h4>
+          <p>The max-p heuristic outlined in <span class="citation">Duque, Anselin, and Rey (<a href="#ref-Duqueetal:12"
+                role="doc-biblioref">2012</a>)</span> consists of three important phases: growth, assignment of
+            enclaves, and spatial search.</p>
+          <p>The objective of the first phase is to find the largest possible value of p that accommodates both the
+            minimum bounds and the contiguity constraints. In order to accomplish this, many different spatial layouts
+            are <em>grown</em> by taking a random starting point and adding neighbors (and neighbors of neighbors) until
+            the
+            minimum bound is met. While it is practically impossible to consider all potential layouts, repeating
+            this process for a large number of tries with different starting points will tend to yield a high value
+            for p (if not the highest), given the constraints.</p>
+          <p>In the process of growing the layout, some spatial units will not be allocated to a region, when they
+            and/or
+            their neighbors do not meet the minimum bounds constraint or break the contiguity requirement. Such spatial
+            units are stored in an <em>enclave</em>.</p>
+          <p>At the end of the growth process, we have one or more spatial layouts with p regions, where p is the
+            largest value that could be obtained. Before we can proceed with the optimization process, we need to assign
+            any spatial units
+            contained in the enclave to an existing region, such that the overall within sum of squares is minimized.
+            We illustrate this in our simple Arizona counties example in the <a href="#appendix">Appendix</a>.</p>
+          <p>Once that is accomplished, we take all
+            feasible initial solutions for the given p and run them through the optimization process (in parallel). At
+            this point, we proceed
+            in exactly the same way as for AZP, using either greedy search, simulated annealing, or tabu search to
+            find a (local) optimum. The best overall solution is chosen at the end.</p>
+        </div>
+      </div>
+      <div id="implementation-1" class="section level3 unnumbered" number="">
+        <h3>Implementation</h3>
+        <p>The max-p option is available from the main menu as <strong>Clusters &gt; max-p</strong>, or as the
+          last option
+          from the <strong>Clusters</strong> toolbar icon, see Figure <a href="#fig:AZPoption">1</a>.</p>
+        <p>The variable settings dialog is again largely the same as for the other cluster algorithms. We select the
+          same six variables as before, with the spatial weights as
+          queen contiguity. In addition, we have to set the <strong>Mininum Bound</strong>
+          variable and threshold. In our example, we again select <strong>Pop1831</strong> and take the
+          <strong>10%</strong>
+          default. Finally, we keep the number of <strong>Iterations</strong> at the default value of
+          <strong>99</strong>, as shown
+          in Figure <a href="#fig:maxpsettings">14</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:maxpsettings"></span>
+          <img src="pics9d/44_maxp_interface.png" alt="Max-p variables and parameter settings" width="35%" />
+          <p class="caption">
+            Figure 14: Max-p variables and parameter settings
+          </p>
+        </div>
+        <div id="greedy" class="section level4 unnumbered" number="">
+          <h4>Greedy</h4>
+          <p>With all the settings to their default values, including 99 iterations, and with the original default
+            random seed, the growth phase yields a maximum p value of 8.</p>
+          <p>The <strong>Greedy</strong> heuristic working from the collection of feasible initial solutions yields the
+            regionalization shown in Figure <a href="#fig:maxpgreedy">15</a>. The clusters are
+            well balanced and range in size from 8 to 17 spatial units. The between to total sum of squares ratio is
+            0.423. As a point of reference, we can compare this to the minimum bounds solution obtained by AZP for p=8
+            with
+            the greedy algorithm, which
+            yielded a ratio of 0.457 (not shown). At first sight, this result may be disappointing, but, as mentioned,
+            further
+            sensitivity analysis is in order.</p>
+          <div class="figure" style="text-align: center"><span id="fig:maxpgreedy"></span>
+            <img src="pics9d/44_maxp_default.png" alt="Max-p greedy heuristic - default settings" width="80%" />
+            <p class="caption">
+              Figure 15: Max-p greedy heuristic - default settings
+            </p>
+          </div>
+        </div>
+        <div id="simulated-annealing-2" class="section level4 unnumbered" number="">
+          <h4>Simulated annealing</h4>
+          <p>Again with the default settings, the <strong>Simulated Annealing</strong> method yields the results shown
+            in Figure <a href="#fig:maxpsa">16</a>.
+            Since the maximum value of p obtained is a function of the growth phase, this heuristic will start with the
+            same
+            set of feasible initial solutions as in the previous case. Only the final search phase is different.</p>
+          <p>The resulting layout shows some similarity in the northern and western regions with the regions in Figure
+            <a href="#fig:maxpgreedy">15</a>, but the southern arrangement is quite different. The between to total
+            ratio is 0.468, which
+            again is worse than the outcome for AZP with p=8 and minimum bounds (0.480, not shown).</p>
+          <div class="figure" style="text-align: center"><span id="fig:maxpsa"></span>
+            <img src="pics9d/44_maxp_sa99.png" alt="Max-p simulated annealing heuristic - default settings"
+              width="80%" />
+            <p class="caption">
+              Figure 16: Max-p simulated annealing heuristic - default settings
+            </p>
+          </div>
+        </div>
+        <div id="tabu-search-2" class="section level4 unnumbered" number="">
+          <h4>Tabu search</h4>
+          <p>Finally, <strong>Tabu Search</strong> starting from the same p=8 initial solutions yields the result shown
+            in Figure <a href="#fig:maxptabu">17</a>.
+            The layout is similar to the result for simulated annealing, with some re-arrangements among the northern
+            clusters.
+            In this instance, the between to total sum of squares ratio of 0.489 is actually better than the AZP minimum
+            bound tabu search with
+            p = 8 (0.476, not shown).</p>
+          <div class="figure" style="text-align: center"><span id="fig:maxptabu"></span>
+            <img src="pics9d/44_maxp_tabu99.png" alt="Max-p tabu heuristic - default settings" width="80%" />
+            <p class="caption">
+              Figure 17: Max-p tabu heuristic - default settings
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="sensitivity-analysis" class="section level3 unnumbered" number="">
+        <h3>Sensitivity analysis</h3>
+        <p>The max-p optimization algorithm is an iterative process, that moves from an initial
+          feasible solution to a superior solution. However, this process may be slow and can get
+          trapped in local optima. Hence, it behooves us to carry out an extensive sensitivity
+          analysis.</p>
+        <p>There are two main aspects to this. One is to experiment with different
+          parameters for the local search phase, which works in the same fashion as for AZP.
+          The other is to increase the number of iterations for the growth phase, which can be critical in
+          finding the highest value for p.</p>
+        <p>For example, increasing the number of iterations for the tabu search to 1000, with the same parameters as in
+          Figure <a href="#fig:maxptabu">17</a> yields a between to total ratio of 0.519, a considerable improvement
+          from 0.489.
+          The main reason for this is that the larger number of iterations provides a broader set of feasible initial
+          solutions for p=8, from which the tabu heuristic can
+          obtain a better final result.</p>
+        <div class="figure" style="text-align: center"><span id="fig:maxpiterations1"></span>
+          <img src="pics9d/44_maxp_tabu_1000a.png" alt="Max-p simulated annealing - 9999 iterations" width="80%" />
+          <p class="caption">
+            Figure 18: Max-p simulated annealing - 9999 iterations
+          </p>
+        </div>
+        <p>A more dramatic illustration of the effect of the number of iterations is shown in Figure <a
+            href="#fig:maxpiterations2">19</a>.
+          With 9999 iterations to grow a feasible initial solution, the maximum p value obtained is now 9. Note that it
+          turns
+          out to be very difficult for
+          the AZP routines to achieve a solution with p=9 that meets the minimum bound condition. Most attempts fail
+          this criterion.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
+        <p>Using a simulated annealing local search yields a between to total sum of squares ratio of 0.460.</p>
+        <div class="figure" style="text-align: center"><span id="fig:maxpiterations2"></span>
+          <img src="pics9d/44_sa_9999.png" alt="Max-p simulated annealing - 9999 iterations" width="80%" />
+          <p class="caption">
+            Figure 19: Max-p simulated annealing - 9999 iterations
+          </p>
+        </div>
+        <p>Increasing the number of iterations somewhat obviates the need to fine tune the random number seed.
+          Even though that is still possible, the effect of the initial seed diminishes as the number of iterations
+          increases.</p>
+        <div id="optimizing-parallel-processing" class="section level4 unnumbered" number="">
+          <h4>Optimizing parallel processing</h4>
+          <p>A final optimization strategy consists of maximizing the number of cores utilized in parallel processing.
+            This is important in the growth phase and the local search, both of which take advantage of parallel
+            computing.</p>
+          <p>In machines with multiple cores, the number utlized by <code>GeoDa</code> can be set in the
+            <strong>Preferences</strong> panel, as shown
+            in Figure <a href="#fig:processors">20</a>. The default is to manually specify a given number of cores.
+            However, by
+            unchecking the box, the program will determine internally the maximum available cores. With current
+            architectures
+            making 18 and more cores available, this has multiple advantages: it not only increases the speed of
+            computations,
+            but also allows larger problems to be solved and a wider range of initial feasible solutions to be
+            considered.
+            Specific results will depend on the available hardware.</p>
+          <div class="figure" style="text-align: center"><span id="fig:processors"></span>
+            <img src="pics9d/44_max_cores.png" alt="Maximizing the number of cores for parallel processing"
+              width="75%" />
+            <p class="caption">
+              Figure 20: Maximizing the number of cores for parallel processing
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="appendix" class="section level2 unnumbered" number="">
+      <h2>Appendix</h2>
+      <div id="illustration-of-the-azp-heuristic" class="section level3 unnumbered" number="">
+        <h3>Illustration of the AZP heuristic</h3>
+        <p>We illustrate the logic behind the AZP greedy heuristic using the same example of Arizona counties as in the
+          previous chapter. We again take the standardized value of the unemployment rate in 1990 as the single variable
+          (SUE). In Figure <a href="#fig:azsample">21</a>,
+          we show the data for each county and the associated squared value needed to compute the sum or squared
+          deviations (SSD) for
+          each cluster. As before, because the data are standardized, the starting total SSD is 13 (i.e., n - 1).</p>
+        <div class="figure" style="text-align: center"><span id="fig:azsample"></span>
+          <img src="pics9d/00_az_azp_example.png" alt="Arizona counties sample data" width="25%" />
+          <p class="caption">
+            Figure 21: Arizona counties sample data
+          </p>
+        </div>
+        <p>We start with a <em>random</em> initial feasible solution for k=4, depicted in Figure <a
+            href="#fig:azinitialmap">22</a>. We call the
+          clusters a (7-9-14), b (1-3-10), c (4-8-11-12), and d (2-5-6-13). Since each cluster consists of contiguous
+          units, it is a <em>feasible</em> solution.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azinitialmap"></span>
+          <img src="pics9d/00_azp_az_start.png" alt="Arizona AZP initial feasible solution" width="40%" />
+          <p class="caption">
+            Figure 22: Arizona AZP initial feasible solution
+          </p>
+        </div>
+        <p>The associated within sum of squares for each cluster is shown in Figure <a
+            href="#fig:azinitialsummary">23</a>.
+          The Total Within SSD for this layout is 6.2408.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azinitialsummary"></span>
+          <img src="pics9d/00_az_azp_example_initial.png" alt="Arizona AZP initial Total Within SSD" width="25%" />
+          <p class="caption">
+            Figure 23: Arizona AZP initial Total Within SSD
+          </p>
+        </div>
+        <p>Following the AZP logic, we construct a list of zones Z = [a, b, c, d]. We also make a list associating the
+          proper cluster to each observation. In our example, this list is W = [b, d, b, c, d, d, a, c, a, b, c, c, d,
+          a].</p>
+        <p>We <em>randomly</em> pick one of the zones, say c, and remove it from the list, so that now Z = [a, b, d]. We
+          will continue to do this until the list is empty. Associated with
+          cluster c is a list of its neighbors. These are highlighted in Figure <a href="#fig:azinitialnbrs">24</a>. The
+          list of neighbors
+          is B = [2, 3, 5, 7, 10, 13, 14].</p>
+        <div class="figure" style="text-align: center"><span id="fig:azinitialnbrs"></span>
+          <img src="pics9d/00_azp_az_neighborlist.png" alt="Arizona AZP initial neighbor list" width="40%" />
+          <p class="caption">
+            Figure 24: Arizona AZP initial neighbor list
+          </p>
+        </div>
+        <p>We next <em>randomly</em> remove one of the elements of the neighbor list, say 2, and consider moving it from
+          its current cluster (b) to cluster c.
+          However, as shown in Figure <a href="#fig:azstep1map">25</a>, swapping observation 2 between b and c
+          <em>breaks</em> the contiguity in cluster b (13 becomes an isolate), so this move is <em>not allowed</em>. As
+          a result, 2 stays in cluster b for now.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:azstep1map"></span>
+          <img src="pics9d/00_azp_az_step1.png" alt="Arizona AZP step 1 neighbor selection - 2" width="40%" />
+          <p class="caption">
+            Figure 25: Arizona AZP step 1 neighbor selection - 2
+          </p>
+        </div>
+        <p>We now randomly remove another element from the remaining list B = [3, 4, 5, 7, 10, 13, 14], say observation
+          14, and consider its
+          move from cluster a to cluster c,
+          as shown in Figure <a href="#fig:azstep2map">26</a>. This move does not break the contiguity between the
+          remaining
+          elements in cluster a (7 remains a neighbor of 9), so it is allowed.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azstep2map"></span>
+          <img src="pics9d/00_azp_az_step2.png" alt="Arizona AZP step 2 neighbor selection - 14" width="40%" />
+          <p class="caption">
+            Figure 26: Arizona AZP step 2 neighbor selection - 14
+          </p>
+        </div>
+        <p>As a result of this swap, cluster a now consists of 2 elements and cluster c of 5. The corresponding updated
+          sums of squared deviations are given in
+          Figure <a href="#fig:azstep2summary">27</a>. The Total Within SSD becomes 6.2492, which is <em>not</em> an
+          improvement over the current
+          objective function (6.2408). As a consequence, this swap is rejected and 14 stays in cluster a.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azstep2summary"></span>
+          <img src="pics9d/00_az_azp_example_step2.png" alt="Arizona AZP step 2 Total Within SSD" width="25%" />
+          <p class="caption">
+            Figure 27: Arizona AZP step 2 Total Within SSD
+          </p>
+        </div>
+        <p>The list of neighbors has now become B = [3, 4, 5, 7, 10, 13]. We randomly select 3 and consider its move
+          from
+          cluster b to cluster c, as in
+          Figure <a href="#fig:azstep3map">28</a>. This move does not break the contiguity of the remaining elements in
+          cluster b (10 and
+          1 remain neighbors), so it
+          is allowed.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azstep3map"></span>
+          <img src="pics9d/00_azp_az_step3.png" alt="Arizona AZP step 3 neighbor selection - 3" width="40%" />
+          <p class="caption">
+            Figure 28: Arizona AZP step 3 neighbor selection - 3
+          </p>
+        </div>
+        <p>At this point, cluster b has 2 elements and cluster c again 5. The associated SSD and Total Within SSD are
+          listed in
+          Figure <a href="#fig:azstep3summary">29</a>. The swap of 3 from b to c yields an improvement in the overall
+          objective from 6.2408
+          to 2.5213, so we keep the swap.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azstep3summary"></span>
+          <img src="pics9d/00_az_azp_example_step3.png" alt="Arizona AZP step 3 Total Within SSD" width="25%" />
+          <p class="caption">
+            Figure 29: Arizona AZP step 3 Total Within SSD
+          </p>
+        </div>
+        <p>We now need to re-evaluate the list of neighbors of the updated cluster c and add 9 as an additional neighbor
+          to the list. The neighbor list thus becomes B = [4, 5, 7, 9, 10, 13].</p>
+        <p>The process continues by evaluating potential neighbor swaps until the list B is empty. At that point, we
+          return to
+          Z = [a, b, d] and randomly select another unit. We find its neighbor set and repeat the procedure until list Z
+          is empty.
+          At that point, we repeat the whole process for the updated list Z = [a, b, c, d] and continue this until
+          convergence, i.e.,
+          until the improvement in the overall objective becomes less than a pre-specified threshold.</p>
+      </div>
+      <div id="illustration-of-the-max-p-heuristic" class="section level3 unnumbered" number="">
+        <h3>Illustration of the max-p heuristic</h3>
+        <p>We illustrate the max-p heuristic continuing with the Arizona county example, now adding the population in
+          1990, i.e., <strong>PO90</strong> as the minimum size constraint. Specifically, we impose a lower limit of a
+          population
+          size of 250,000. In Figure <a href="#fig:azpop">30</a>, the population counts for each of the counties is
+          shown. The information
+          relevant to assess the quality of the clusters was contained in Figure <a href="#fig:azsample">21</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azpop"></span>
+          <img src="pics9d/22_az_pop.png" alt="Arizona counties population" width="20%" />
+          <p class="caption">
+            Figure 30: Arizona counties population
+          </p>
+        </div>
+        <p>The heuristic consists of three phases. In the first, we <em>grow</em> feasible regions and establish the
+          largest p
+          that we can obtain. For those configurations that meet the max p, we assign the spatial units in the
+          <em>enclave</em> to
+          existing regions so as to minimize the total within sum of squares. Finally, we consider all those that meet
+          the
+          max p
+          as feasible initial solutions for the <em>optimization</em> process.</p>
+        <p>We start the <em>growth</em> process by randomly selecting a location and determining its neighbors. In
+          Figure <a href="#fig:azmxp6">31</a>, we chose 6 and find its three neighbors as 1, 5 and 2.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxp6"></span>
+          <img src="pics9d/22_az_6wneighbors.png" alt="Arizona max-p grow start with 6" width="40%" />
+          <p class="caption">
+            Figure 31: Arizona max-p grow start with 6
+          </p>
+        </div>
+        <p>County 6 has a population of 8,008. We take the neighbor with the largest population - 2, with 97,624 - and
+          join
+          it with 6 to form the core of the first region. Its total population is 105,632, which does not meet the
+          minimum threshold.
+          At this point, we add the neighbors of 2 that are not already neighbors of 6.</p>
+        <p>As shown in Figure <a href="#fig:azmxp62">32</a>, the neighbor set now also includes 11 and 13.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxp62"></span>
+          <img src="pics9d/22_az_6and2wneighbors.png" alt="Arizona max-p grow - 6 and 2" width="40%" />
+          <p class="caption">
+            Figure 32: Arizona max-p grow - 6 and 2
+          </p>
+        </div>
+        <p>Of the four neighbors, 11 has the largest population (666,880), which brings the total regional population
+          to 764,504, well above the minimum bound. At this point, we create out first region as 6-2-11, shown in
+          Figure <a href="#fig:azmxpr1">33</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxpr1"></span>
+          <img src="pics9d/22_az_mxp_region1.png" alt="Arizona max-p grow - region 1" width="40%" />
+          <p class="caption">
+            Figure 33: Arizona max-p grow - region 1
+          </p>
+        </div>
+        <p>The second random seed turns out to be region 8. Its population is 2,122,101, well above the minimum bound.
+          Therefore, it constitutes the second region in our growth process as a singleton, shown in
+          Figure <a href="#fig:azmxpr12">34</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxpr12"></span>
+          <img src="pics9d/22_az_mxp_region12.png" alt="Arizona max-p grow - regions 1 and 2" width="40%" />
+          <p class="caption">
+            Figure 34: Arizona max-p grow - regions 1 and 2
+          </p>
+        </div>
+        <p>The third random seed is 3, with neighbors 9, 14, 4 and 10, shown in
+          Figure <a href="#fig:azmxprpick3">35</a>. The population of 3 is 96,591 and the largest neighbor is 14,
+          with 107,714, for a total of 204,305, insufficient to meet the minimum bound.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxprpick3"></span>
+          <img src="pics9d/22_az_3wneighbors.png" alt="Arizona max-p grow - pick 3" width="40%" />
+          <p class="caption">
+            Figure 35: Arizona max-p grow - pick 3
+          </p>
+        </div>
+        <p>Therefore, we group 3 and 14 and update the list of neighbors, shown in
+          Figure <a href="#fig:azmxprpick314">36</a>. The only new neighbor is 7, since 8 is already part of a region.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxprpick314"></span>
+          <img src="pics9d/22_az_3and14wneighbors.png" alt="Arizona max-p grow - join 3 and 14" width="40%" />
+          <p class="caption">
+            Figure 36: Arizona max-p grow - join 3 and 14
+          </p>
+        </div>
+        <p>Since 7 has the largest population among the eligible neighbors (120,739) it is grouped with 3 and 14. This
+          region meets the minimum threshold, with a total population of 325,044.</p>
+        <p>At this point, we have three regions, shown in
+          Figure <a href="#fig:azmxpr123">37</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxpr123"></span>
+          <img src="pics9d/22_az_mxp_region123.png" alt="Arizona max-p grow - region 1, 2, 3" width="40%" />
+          <p class="caption">
+            Figure 37: Arizona max-p grow - region 1, 2, 3
+          </p>
+        </div>
+        <p>The next random seed is 9, with a population of 93,497. Its neighbors are already part of a previously
+          part region (see Figure <a href="#fig:azmxpr123">37</a>), so 9 cannot be turned into a region itself.
+          Therefore
+          it is relegated to the <em>enclave</em>.</p>
+        <p>The following random pick is 12, with a population of 116.379, and with neighbors 4, 8, 11 and 5
+          as shown in Figure <a href="#fig:azmxprpick12">38</a>. Of the neighbors,
+          8 and 11 are already part of other regions, so they cannot be considered.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxprpick12"></span>
+          <img src="pics9d/22_az_12wneighbors.png" alt="Arizona max-p grow - pick 12" width="40%" />
+          <p class="caption">
+            Figure 38: Arizona max-p grow - pick 12
+          </p>
+        </div>
+        <p>Of the two neighbors of 12, 4 has the largest population, at 40,216, so it is joined with 12. However, their
+          total population of 156,595 does not meet the threshold, so we need to consider the eligible neighbors
+          of 4 as well. Of the six neighbors, only 10 is an addition, shown in Figure <a
+            href="#fig:azmxprpick124">39</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxprpick124"></span>
+          <img src="pics9d/22_az_12and4wneighbors.png" alt="Arizona max-p grow - join 12 and 4" width="40%" />
+          <p class="caption">
+            Figure 39: Arizona max-p grow - join 12 and 4
+          </p>
+        </div>
+        <p>Between 5 and 10, the latter has the largest population (120,739), which brings the total for region 12-4-10
+          to
+          277,334. The new configuration with four regions is shown in
+          Figure <a href="#fig:azmxpr1234">40</a>.</p>
+        <p>There are four remaining counties. We already have 9 in the enclave. Clearly, 13 with a population of 29,676
+          is
+          not large enough to form a region by itself, so it is added to the enclave as well.</p>
+        <p>Similarly, the combination of 5 and 1 only yields a total of 88,145, which is insufficient to form a region,
+          so they are both included in the enclave.</p>
+        <p>At this point, we have completed the growth phase and obtained p=4, with four counties left in the enclave,
+          as in Figure <a href="#fig:azmxpr1234">40</a>. In a typical application, we would repeat this process many
+          times and
+          keep the solutions with the largest p. For those solutions, we need to establish the best feasible initial
+          solution.
+          To obtain this, we first
+          need to complete the allocation process by assigning the elements in the enclave to one of the existing
+          regions such as to minimize the total within sum of squares.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxpr1234"></span>
+          <img src="pics9d/22_az_4regionswenclaves.png" alt="Arizona max-p enclaves - region 1, 2, 3, 4" width="45%" />
+          <p class="caption">
+            Figure 40: Arizona max-p enclaves - region 1, 2, 3, 4
+          </p>
+        </div>
+        <p>In our example, for 9 and 13, the solution is straightforward: 9 is merged with 3-14-7, and 13 is merged with
+          11-2-6.
+          For 5 and 1, the situation is a bit more complicated, since we could assign both to either cluster 1
+          (2-6-11-13) or cluster 4 (4-10-12), or one to each, for a total of four combinations.</p>
+        <p>The calculations of the respective sum of squared deviations are listed in Figure <a
+            href="#fig:azmxpcalc">41</a>.
+          The starting point is a total SSD between cluster 1 and 4 of 1.7899, at the top of the Figure. Next, we
+          calculate the new SSD if 1 is added to the first cluster and 5 to the fourth, and vice versa. This increases
+          the total SSD between the two clusters to respectively 9.1762 and 6.5476. Finally, we consider the scenarios
+          where both 1 and 5 are added either to the first or to the fourth cluster. The results for the new SSD
+          are, respectively, 9.1840 and 6.2903.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxpcalc"></span>
+          <img src="pics9d/22_az_ssd_calc.png" alt="Arizona max-p assign enclaves" width="60%" />
+          <p class="caption">
+            Figure 41: Arizona max-p assign enclaves
+          </p>
+        </div>
+        <p>Consequently, the allocation that obtains the smallest within sum of squares is the regional configuration
+          that assigns both 1 and 5 to region 4, shown in Figure <a href="#fig:azmxprinitial">42</a>. The constituting
+          regions are 11-13-2-6, 8, 3-14-7-9, and 1-10-4-12-5.</p>
+        <p>At this point, we have a feasible initial solution that we can optimize by means of one of the three search
+          algorithms, in the same fashion as for AZP.</p>
+        <div class="figure" style="text-align: center"><span id="fig:azmxprinitial"></span>
+          <img src="pics9d/22_az_4regionsnoenclaves.png" alt="Arizona max-p - feasible initial regions" width="40%" />
+          <p class="caption">
+            Figure 42: Arizona max-p - feasible initial regions
+          </p>
+        </div>
+        <p><br></p>
+      </div>
+    </div>
+    <div id="references" class="section level2 unnumbered" number="">
+      <h2>References</h2>
+      <div id="refs" class="references hanging-indent">
+        <div id="ref-CovaChurch:00">
+          <p>Cova, Thomas J., and Richard L. Church. 2000. “Contiguity Constraints for Single-Region Site Search
+            Problems.” <em>Geographical Analysis</em> 32: 306–29.</p>
+        </div>
+        <div id="ref-Duqueetal:12">
+          <p>Duque, Juan, Luc Anselin, and Sergio J. Rey. 2012. “The Max-P-Regions Problem.” <em>Journal of Regional
+              Science</em> 52 (3): 397–419.</p>
+        </div>
+        <div id="ref-Duqueetal:07">
+          <p>Duque, Juan Carlos, Raúl Ramos, and Jordi Suriñach. 2007. “Supervised Regionalization Methods: A Survey.”
+            <em>International Regional Science Review</em> 30: 195–220.</p>
+        </div>
+        <div id="ref-Duqueatal:11a">
+          <p>Duque, Juan C., Richard L. Church, and Richard S. Middleton. 2011. “The P-Regions Problem.”
+            <em>Geographical Analysis</em> 43: 104–26.</p>
+        </div>
+        <div id="ref-Glover:77">
+          <p>Glover, Fred. 1977. “Heuristics for Integer Programming Using Surrogate Constraints.” <em>Decision
+              Science</em> 8: 156–66.</p>
+        </div>
+        <div id="ref-Lauraetal:15">
+          <p>Laura, Jason, Wenwen Li, Sergio J. Rey, and Luc Anselin. 2015. “Parallelization of a Regionalization
+            Heuristic in Distributed Computing Platforms - a Case Study of Parallel-P-Compact-Regions Problem.”
+            <em>International Journal of Geographical Information Science</em> 29: 536–55.</p>
+        </div>
+        <div id="ref-Lietal:14">
+          <p>Li, Wenwen, Richard Church, and Michael F. Goodchild. 2014. “The P-Compact-Regions Problem.”
+            <em>Geographical Analysis</em> 46: 250–73.</p>
+        </div>
+        <div id="ref-Metropolisetal:53">
+          <p>Metropolis, N., A. W. Rosenbluth, M. N. Rosenbluth, A. H. Teller, and E. Teller. 1953. “Equations for State
+            Calculations by Fast Computing Machines.” <em>Journal of Chemical Physics</em> 21: 1087–92.</p>
+        </div>
+        <div id="ref-Openshaw:77">
+          <p>Openshaw, Stan. 1977. “A Geographical Solution to Scale and Aggregation Problems in Region-Building,
+            Partitioning and Spatial Modeling.” <em>Transactions of the Institute of British Geographers</em> 2 (4):
+            459–72.</p>
+        </div>
+        <div id="ref-OpenshawRao:95">
+          <p>Openshaw, Stan, and L. Rao. 1995. “Algorithms for Reengineering the 1991 Census Geography.” <em>Environment
+              and Planning A</em> 27 (3): 425–46.</p>
+        </div>
+        <div id="ref-Sheetal:17">
+          <p>She, Bing, Juan C. Duque, and Xinyue Ye. 2017. “The Network-Max-P-Regions Model.” <em>International Journal
+              of Geographical Information Science</em> 31: 962–81.</p>
+        </div>
+        <div id="ref-Weietal:20">
+          <p>Wei, Ran, Sergio Rey, and Elijah Knaap. 2020. “Efficient Regionalization for Spatially Explicit
+            Neighborhood Delineation.” <em>International Journal of Geographical Information Science</em>. <a
+              href="https://doi.org/10.1080/13658816.2020.1759806">https://doi.org/10.1080/13658816.2020.1759806</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footnotes">
+      <hr />
+      <ol>
+        <li id="fn1">
+          <p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu"
+              class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn2">
+          <p>In previous
+            chapters, we referred to the number of regions as k, but for consistency with the max-p and
+            p-region terminology, we use p here.<a href="#fnref2" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn3">
+          <p>The origins of this method date back to a presentation at the North American Regional Science Conference
+            in Seattle, WA, November 2004. See the <a
+              href="http://www.rise.abetan16.webfactional.com/risem/clusterpy/clusterpy0_9_9/exogenous.html#arisel-description">description
+              in the clusterpy documentation</a>.<a href="#fnref3" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn4">
+          <p>The order in which neighbors are assigned to growing regions can be based on how <em>close</em> they are
+            in attribute space, or could be just random, which avoids some additional computations.<a href="#fnref4"
+              class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn5">
+          <p>Note that for a minimizing function as in the case
+            of the total within sum of squares, the exponent is negative the relative change in the objective function.
+            In the typical expression for simulated annealing, a maximum is assumed, so that the negative
+            sign is not present.<a href="#fnref5" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn6">
+          <p><span class="citation">Openshaw and Rao (<a href="#ref-OpenshawRao:95"
+                role="doc-biblioref">1995</a>)</span> suggest values between 0.8 and 0.95.<a href="#fnref6"
+              class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn7">
+          <p>Since the relevant
+            expression is <span class="math inline">\(e^{-a}\)</span>, the larger <span class="math inline">\(a\)</span>
+            is, the smaller will be the negative exponential.<a href="#fnref7" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn8">
+          <p>See the
+            discussion of k-means clustering for details.<a href="#fnref8" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn9">
+          <p>Further consideration of some computational aspects is given in <span class="citation">Laura et al. (<a
+                href="#ref-Lauraetal:15" role="doc-biblioref">2015</a>)</span> and <span class="citation">Wei, Rey, and
+              Knaap (<a href="#ref-Weietal:20" role="doc-biblioref">2020</a>)</span>.<a href="#fnref9"
+              class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn10">
+          <p>One feasible solution is for a random seed of 1979972659. The resulting AZP solution
+            achieves a between to total ratio of 0.421.<a href="#fnref10" class="footnote-back">↩︎</a></p>
+        </li>
+      </ol>
+    </div>
+
+
+  </section>
+
+
+  <!-- code folding -->
+
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+
+</html>

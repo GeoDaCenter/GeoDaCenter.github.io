@@ -13,3 +13,11 @@ s3/logs/
 
 !download_update.py
 *.json
+
+node_modules
+build
+.docusaurus/
+.DS_Store
+.env
+.env.local
+.env.*.local

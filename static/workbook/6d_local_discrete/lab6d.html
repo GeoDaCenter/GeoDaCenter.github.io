@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="author" content="Luc Anselin" />
+
+
+  <title>Local Spatial Autocorrelation (4)</title>
+
+  <script src="lab6d_files/header-attrs-2.3/header-attrs.js"></script>
+  <link href="lab6d_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+  <script src="lab6d_files/highlightjs-9.12.0/highlight.js"></script>
+  <title>GeoDa on Github</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .shadowfilter {
+      -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      filter: url(shadow.svg#drop-shadow);
+    }
+
+    .intro1 {
+      margin-left: -45px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css"
+    media="screen">
+  <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+  <style>
+    ul {
+      padding-left: 30px;
+    }
+
+    figcaption {
+      top: .70em;
+      left: .35em;
+      bottom: auto !important;
+      right: auto !important;
+    }
+  </style>
+
+  <style>
+    h1 {
+      text-align: center;
+    }
+
+    h3.subtitle {
+      text-align: center;
+    }
+
+    h4.author {
+      text-align: center;
+    }
+
+    h4.date {
+      text-align: center;
+    }
+
+    p.caption {
+      font-size: 12px;
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-LC0QJ53WFS');
+  </script>
+  <!-- End Google tag -->
+
+  <style type="text/css">
+    code {
+      white-space: pre;
+    }
+  </style>
+  <script type="text/javascript">
+    if (window.hljs) {
+      hljs.configure({ languages: [] });
+      hljs.initHighlightingOnLoad();
+      if (document.readyState && document.readyState === "complete") {
+        window.setTimeout(function () { hljs.initHighlighting(); }, 0);
+      }
+    }
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <section class="main-content">
+
+
+    <h1 class="title toc-ignore">Local Spatial Autocorrelation (4)</h1>
+    <h3 class="subtitle">LISA for Discrete Variables</h3>
+    <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+    <h4 class="date">10/19/2020 (updated)</h4>
+
+
+    <div id="TOC">
+      <ul>
+        <li><a href="#introduction">Introduction</a>
+          <ul>
+            <li><a href="#objectives">Objectives</a>
+              <ul>
+                <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+              </ul>
+            </li>
+            <li><a href="#preliminaries">Preliminaries</a></li>
+          </ul>
+        </li>
+        <li><a href="#univariate-local-join-count-statistic">Univariate Local Join Count Statistic</a>
+          <ul>
+            <li><a href="#principle">Principle</a></li>
+            <li><a href="#implementation">Implementation</a>
+              <ul>
+                <li><a href="#local-significance-map">Local significance map</a></li>
+                <li><a href="#cluster-identification">Cluster identification</a></li>
+                <li><a href="#saving-the-results">Saving the results</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#bivariate-local-join-count-statistic">Bivariate Local Join Count Statistic</a>
+          <ul>
+            <li><a href="#principle-1">Principle</a></li>
+            <li><a href="#implementation-1">Implementation</a></li>
+            <li><a href="#interpretation">Interpretation</a></li>
+          </ul>
+        </li>
+        <li><a href="#co-location-join-count-statistic">Co-Location Join Count Statistic</a>
+          <ul>
+            <li><a href="#principle-2">Principle</a></li>
+            <li><a href="#implementation-2">Implementation</a>
+              <ul>
+                <li><a href="#preliminaries-1">Preliminaries</a></li>
+                <li><a href="#significance">Significance</a></li>
+                <li><a href="#interpretation-1">Interpretation</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#quantile-lisa">Quantile LISA</a>
+          <ul>
+            <li><a href="#principle-3">Principle</a></li>
+            <li><a href="#implementation-3">Implementation</a>
+              <ul>
+                <li><a href="#univariate-quantile-lisa">Univariate Quantile LISA</a></li>
+                <li><a href="#multivariate-quantile-lisa">Multivariate Quantile LISA</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </div>
+
+    <p><br></p>
+    <div id="introduction" class="section level2 unnumbered" number="">
+      <h2>Introduction</h2>
+      <p>So far, we have considered the application of local spatial autocorrelation statistics to continuous variables.
+        In this Chapter, we move to discrete variables, and, more specifically, binary variables. We cover the
+        application of the LISA principle to this case in the form of a univariate <em>local join count</em> statistic
+        and extend
+        this to a multivariate setting as well. In the latter, we need to make a distinction between situations where
+        the
+        two discrete variables can co-occur (i.e., take the value of 1 for the same location), and where they cannot.
+      </p>
+      <p>We close with a discussion of the notion of a <em>Quantile LISA</em> as a special case of the local join count.
+      </p>
+      <p>To illustrate these statistics, we use two data sets that deal with the 77 community areas in Chicago, the
+        sample data sets <strong>Chicago commpop</strong> and <strong>Chicago Health</strong>.</p>
+      <div id="objectives" class="section level3 unnumbered" number="">
+        <h3>Objectives</h3>
+        <ul>
+          <li>
+            <p>Identify clusters in binary variables by means of the local join count statistic</p>
+          </li>
+          <li>
+            <p>Distinguish between co-location and no co-location in a bivariate binary variable case</p>
+          </li>
+          <li>
+            <p>Identify multivariate co-location clusters in binary variables with the local join count statistic</p>
+          </li>
+          <li>
+            <p>Apply the Quantile LISA concept to simplify the assessment of univariate and multivariate clusters</p>
+          </li>
+        </ul>
+        <div id="geoda-functions-covered" class="section level4 unnumbered" number="">
+          <h4>GeoDa functions covered</h4>
+          <ul>
+            <li>Space &gt; Univariate Local Join Count</li>
+            <li>Space &gt; Bivariate Local Join Count</li>
+            <li>Space &gt; Co-location Join Count</li>
+            <li>Space &gt; Univariate Quantile LISA</li>
+            <li>Space &gt; Multivariate Quantile LISA</li>
+          </ul>
+          <p><br></p>
+        </div>
+      </div>
+      <div id="preliminaries" class="section level3 unnumbered" number="">
+        <h3>Preliminaries</h3>
+        <p>We use two data sets from the <a href="https://geodacenter.github.io/data-and-lab/">GeoDa Center data set
+            collection</a> that
+          contain information on the 77 Community Areas in Chicago.</p>
+        <ul>
+          <li>
+            <p><a href="https://geodacenter.github.io/data-and-lab/commpop/">Chicago commpop</a>: Chicago community area
+              population and percent change for 2000 and 2010</p>
+          </li>
+          <li>
+            <p><a href="https://geodacenter.github.io/data-and-lab/comarea_vars/">Chicago Health</a>: Chicago community
+              area health and socio-economic indicators</p>
+          </li>
+        </ul>
+        <p><br>
+          After downloading these data sets, we will also need to construct a spatial weights matrix, such as queen
+          contiguity.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+      </div>
+    </div>
+    <div id="univariate-local-join-count-statistic" class="section level2 unnumbered" number="">
+      <h2>Univariate Local Join Count Statistic</h2>
+      <div id="principle" class="section level3 unnumbered" number="">
+        <h3>Principle</h3>
+        <p>For binary variables, coded as 0 and 1, the
+          global spatial autocorrelation statistic of choice is the <em>join-count</em> statistic <span
+            class="citation">(see Cliff and Ord <a href="#ref-CliffOrd:73" role="doc-biblioref">1973</a>)</span>. This
+          statistic consists of counting the <em>joins</em> that correspond to occurrences of value pairs at
+          neighboring locations. The three cases are joins of <span class="math inline">\(1-1\)</span>
+          (so-called BB joins, for <em>black-black</em>), <span class="math inline">\(0-0\)</span> (so-called WW joins,
+          for <em>white-white</em>), and <span class="math inline">\(0-1\)</span> (so-called BW joins). The former two
+          are indicators of positive spatial autocorrelation, the latter of negative spatial autocorrelation.</p>
+        <p>Our interest lies in identifying co-occurrences of uncommon events, i.e., situations where observations
+          that take on the value of 1 constitute much less than half
+          of the sample (the definition of what is 1 or 0 can easily be reversed to make sure this condition is met). We
+          therefore focus on the BB join counts. While this is not an absolute requirement, the way the inference is
+          obtained requires that
+          the probability of obtaining a large number of like neighbors is small, hence a basis for rejecting the
+          null hypothesis. When the proportion of observations with 1 is larger than half, then the probability of a
+          <em>small</em>
+          number of neighbors will be small, which is counter our logic.<a href="#fn3" class="footnote-ref"
+            id="fnref3"><sup>3</sup></a></p>
+        <p>With the variable <span class="math inline">\(x_i\)</span> at location <span class="math inline">\(i\)</span>
+          taking either the value of 1 or 0, a global BB join count statistic
+          can be written as:
+          <span class="math display">\[BB = \sum_i \sum_j w_{ij} x_i x_j,\]</span>
+          where <span class="math inline">\(w_{ij}\)</span> are the elements of a <em>binary</em> spatial weights
+          matrix. In other words, a <em>join</em> is <em>counted</em> when
+          <span class="math inline">\(w_{ij} = x_i = x_j = 1\)</span>. In all other instances, either when there is a
+          mismatch in <span class="math inline">\(x\)</span> between <span class="math inline">\(i\)</span> and <span
+            class="math inline">\(j\)</span>, or a lack of
+          a neighbor relation (<span class="math inline">\(w_{ij} = 0\)</span>), the term on the right-hand side does
+          not contribute to the double sum.
+        </p>
+        <p>Following the logic in <span class="citation">Anselin (<a href="#ref-Anselin:95"
+              role="doc-biblioref">1995</a>)</span>,
+          <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18" role="doc-biblioref">2019</a>)</span>
+          recently introduced a local version of the BB join count statistic as:
+          <span class="math display">\[BB_i = x_i \sum_j w_{ij}x_j,\]</span>
+          where <span class="math inline">\(x_{i,j}\)</span> can only take on the values of 1 and 0, and, again, <span
+            class="math inline">\(w_{ij}\)</span> are the elements of a <em>binary</em> spatial weights matrix (i.e.,
+          <em>not</em> row-standardized).
+        </p>
+        <p>The statistic is only meaningful for those observations where <span class="math inline">\(x_i = 1\)</span>,
+          since for <span class="math inline">\(x_i = 0\)</span> the result will always equal zero. When <span
+            class="math inline">\(x_i = 1\)</span>, it corresponds to the sum of neighbors for which the value <span
+            class="math inline">\(x_j = 1\)</span>. In this sense, it is similar in spirit to to the local second order
+          analysis for point patterns outlined in <span class="citation">Getis (<a href="#ref-Getis:84"
+              role="doc-biblioref">1984</a>)</span> and <span class="citation">Getis and Franklin (<a
+              href="#ref-GetisFranklin:87" role="doc-biblioref">1987</a>)</span>, where the number of
+          points are counted within a given distance <span class="math inline">\(d\)</span> of an observed point. The
+          distance cut-off <span class="math inline">\(d\)</span> could
+          readily form the basis for the construction of the spatial weights <span
+            class="math inline">\(w_{ij}\)</span>, which yields the join count
+          statistic as a count of events (points) within the critical distance from a given point (<span
+            class="math inline">\(x_i = 1\)</span>).</p>
+        <p>The main difference between the two concepts is the underlying
+          data structure: in the point pattern perspective, the locations themselves are considered to be random,
+          whereas the local join count statistic is based on a lattice perspective. The latter considers
+          a finite set of known locations,
+          for which both events (<span class="math inline">\(x_i = 1\)</span>) and non-events (<span
+            class="math inline">\(x_i = 0\)</span>) are observed. In point patterns analysis,
+          one does not know the locations where events <em>might</em> have happened, but did not.</p>
+        <p>In addition, the local join count statistic also has the same structure as the numerator in
+          local <span class="math inline">\(G_i\)</span> statistic of <span class="citation">Getis and Ord (<a
+              href="#ref-GetisOrd:92" role="doc-biblioref">1992</a>)</span>, when applied to binary observations
+          (and with a binary weights matrix). The numerator in this statistics is <span class="math inline">\(\sum_j
+            w_{ij} x_j\)</span>, which is
+          identical to the multiplier in the local join count statistic. However, the difference between the two
+          statistics
+          is that the local G counts the neighbors with <span class="math inline">\(x_j = 1\)</span> for all locations,
+          including the ones
+          where <span class="math inline">\(x_i = 0\)</span>. Such observations are ignored in the computation of the
+          local join count statistic
+          as outlined above.
+          In a sense, the local join count statistic could thus be considered a <em>constrained</em> form of the local G
+          statistic,
+          limited to observations where <span class="math inline">\(x_i = 1\)</span>.</p>
+        <p>Inference can be based on a hypergeometric distribution, or, as before, on a permutation approach.
+          Given a total number of events in the sample of <span class="math inline">\(n\)</span> observations as <span
+            class="math inline">\(P\)</span>, we consider the number of
+          neighbors of location <span class="math inline">\(i\)</span> for which <span class="math inline">\(x_i =
+            1\)</span>, i.e., conditional upon observing 1 at this location.
+          The number of neighbors with <span class="math inline">\(x_j = 1\)</span> is represented by <span
+            class="math inline">\(p_i\)</span>. The probability of observing exactly
+          <span class="math inline">\(p_i = p\)</span>, conditional upon <span class="math inline">\(x_i = 1\)</span>
+          follows the hypergeometric distribution for <span class="math inline">\(n - 1\)</span> data points and <span
+            class="math inline">\(P - 1\)</span>
+          events:
+          <span class="math display">\[\mbox{Prob}[p_i = p | x_i = 1] = \frac{ {{P-1} \choose {p}} { {N - P - 2} \choose
+            {k_i - p} }}{ { {N-1} \choose {k_i}} },\]</span>
+          where <span class="math inline">\(k_i\)</span> is the number of neighbors for observation <span
+            class="math inline">\(i\)</span>.
+        </p>
+        <p>Instead, a conditional permutation procedure can be followed to compute
+          a pseudo <span class="math inline">\(p\)</span>-value, in the usual fashion. It should be noted that this is
+          not equivalent
+          to the exact probability approach, which actually underestimates uncertainty, because it ignores
+          the uncertainty associated with observing <span class="math inline">\(x_i =1\)</span>.</p>
+        <p>In practice, the permutation approach
+          is to be preferred, since it does not require any parametric assumptions
+          and is formulated as a classical one-sided hypothesis test against the
+          null hypothesis of spatial randomness. In what follows, we only consider the conditional permutation approach.
+          Further technical
+          details are provided in <span class="citation">Anselin and Li (<a href="#ref-AnselinLi:18"
+              role="doc-biblioref">2019</a>)</span>.</p>
+      </div>
+      <div id="implementation" class="section level3 unnumbered" number="">
+        <h3>Implementation</h3>
+        <p>We will illustrate the local join count statistic for the <strong>popplus</strong> binary variable in the
+          <strong>commpop</strong> data set.
+          This is a binary variable corresponding to community areas that achieved positive population change between
+          the
+          census years of 2000 and 2010. The unique values map in Figure <a href="#fig:popplusunique">1</a> showns how
+          only 17 out of the
+          77 community areas show population increase.</p>
+        <div class="figure" style="text-align: center"><span id="fig:popplusunique"></span>
+          <img src="pics6d/11_popplus_map.png" alt="Unique values map for popplus" width="60%" />
+          <p class="caption">
+            Figure 1: Unique values map for popplus
+          </p>
+        </div>
+        <p>The univariate local join count statistic is invoked from the third group in the <strong>Cluster
+            Maps</strong> toolbar icon,
+          as in Figure <a href="#fig:localjcicon">2</a>, or,
+          from the menu, as <strong>Space &gt; Univariate Local Join Count</strong>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:localjcicon"></span>
+          <img src="pics6d/11_localjoincount_icon.png" alt="Univariate Local Join Count toolbar icon" width="25%" />
+          <p class="caption">
+            Figure 2: Univariate Local Join Count toolbar icon
+          </p>
+        </div>
+        <p>After activating this option, a variable selection dialog appears, from which we choose
+          <strong>popplus</strong>. In addition, we
+          make sure to have a spatial weights matrix listed, here <strong>chicago_commpop_q</strong> (these weights will
+          be used
+          in non-standardized binary form).</p>
+        <div class="figure" style="text-align: center"><span id="fig:localjcvars"></span>
+          <img src="pics6d/11_localjc_vars.png" alt="Univariate Local Join Count variable selection" width="25%" />
+          <p class="caption">
+            Figure 3: Univariate Local Join Count variable selection
+          </p>
+        </div>
+        <div id="local-significance-map" class="section level4 unnumbered" number="">
+          <h4>Local significance map</h4>
+          <p>In contrast to the other local statistics, there is only a significance map for the local join count
+            statistic, since all identified locations
+            refer to clusters of a 1, surrounded by more neighbors with 1 than would be the case under spatial
+            randomness.
+            In other words, there is no distinction between high-high and low-low, only the former is a valid concept
+            for a
+            cluster of binary variables.</p>
+          <p>The result for the default 999 permutations and p=0.05 is shown in Figure <a href="#fig:popplussig">4</a>.
+            As it turns out,
+            only 3 of the 17 locations can be considered the cores of actual clusters (recall that an actual
+            <em>cluster</em> consists
+            of both the observation <em>and</em> its neighbors). In addition, the associated p-values are fairly weak.
+          </p>
+          <div class="figure" style="text-align: center"><span id="fig:popplussig"></span>
+            <img src="pics6d/11_localjc_sigmap.png" alt="Local significance map for popplus" width="60%" />
+            <p class="caption">
+              Figure 4: Local significance map for popplus
+            </p>
+          </div>
+        </div>
+        <div id="cluster-identification" class="section level4 unnumbered" number="">
+          <h4>Cluster identification</h4>
+          <p>In order to assess the actual spatial reach of the <em>clusters</em>, we select the significant locations
+            in the significance
+            map and invoke <strong>Connectivity &gt; Show Selection and Neighbors</strong>. In Figure <a
+              href="#fig:popplusclus">5</a>, the significant
+            cores are shown with a red outline together with their queen contiguity neighbors.</p>
+          <div class="figure" style="text-align: center"><span id="fig:popplusclus"></span>
+            <img src="pics6d/11_ljc_clusters_selected.png" alt="Cluster identification for local join count"
+              width="60%" />
+            <p class="caption">
+              Figure 5: Cluster identification for local join count
+            </p>
+          </div>
+        </div>
+        <div id="saving-the-results" class="section level4 unnumbered" number="">
+          <h4>Saving the results</h4>
+          <p>An alternative way to check on the neighbor structure of the significant
+            locations is to use the <strong>Save Results</strong> option. Similar to its
+            operation for the other local spatial autocorrelation
+            statistics, this saves the statistic, i.e., the number of BB joins (default
+            variable name <strong>JC</strong>), the total number of neighbors (<strong>NN</strong>), and the pseudo
+            p-value (<strong>PP_VAL</strong>),
+            as in Figure <a href="#fig:localjcsave">6</a>. As usual, the new variables are only permanently added to the
+            Table after a <strong>Save</strong> command.</p>
+          <div class="figure" style="text-align: center"><span id="fig:localjcsave"></span>
+            <img src="pics6d/ljc_save_results.png" alt="Local Join Count Save Results options" width="25%" />
+            <p class="caption">
+              Figure 6: Local Join Count Save Results options
+            </p>
+          </div>
+          <p>In Figure <a href="#fig:localjctable">7</a>, we show the information for all 17 observations with a value
+            of 1.
+            The three significant locations are West Elsdon, with 5 neighbors out of 6 also taking a value of 1
+            (yielding a pseudo p-value of 0.001), the Loop, with 3 neighbors out of 3 taking a value of 1 (yielding a
+            pseudo p-value of 0.009), and West Lawn, with 4 neighbors out of 6 taking a value of 1 (yielding a
+            pseudo p-value of 0.013). Note that when none of the neighbors take a value of 1 (i.e., JC=0),
+            <code>GeoDa</code> does
+            not report a p-value. Since this p-value should be the complement of the probabilities associates with all
+            non-zero values for the number of neighbors, it is not meaningful for our inference. Also, observations
+            with a value of <span class="math inline">\(x_i = 0\)</span> are not considered (i.e., they have no JC
+            statistic or p-value, but the number
+            of neighbors is listed in the table, since that is based on the spatial weights).</p>
+          <div class="figure" style="text-align: center"><span id="fig:localjctable"></span>
+            <img src="pics6d/11_ljc_intable.png" alt="Local Join Count Results in Table" width="60%" />
+            <p class="caption">
+              Figure 7: Local Join Count Results in Table
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="bivariate-local-join-count-statistic" class="section level2 unnumbered" number="">
+      <h2>Bivariate Local Join Count Statistic</h2>
+      <div id="principle-1" class="section level3 unnumbered" number="">
+        <h3>Principle</h3>
+        <p>In a bivariate binary context, the two variables under consideration, say <span
+            class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span>, again only take on a value of 0
+          and 1.</p>
+        <p>We distinguish between two cases, referred to as <em>co-location</em> and <em>no co-location</em>.
+          In the first, it is possible for both variables to take the same value at a location. In other words, at
+          location <span class="math inline">\(i\)</span>, it is possible to have <span class="math inline">\(x_i = z_i
+            = 1\)</span>. For example, this would be the case when the variables pertain to two different types of
+          events that can occur in all locations, such as the presence of several non-exclusive characteristics (e.g., a
+          city block that is both low-density and commercial, or a parcel that can be single family/multifamily, or
+          owned/rented).</p>
+        <p>In the no co-location case, whenever <span class="math inline">\(x_i = 1\)</span>, then <span
+            class="math inline">\(z_i = 0\)</span> and vice versa. In other words, the two <em>events</em> cannot happen
+          in the same location. This would be case where the classification of a location is exclusive, i.e., if a
+          location is of one type, it cannot be of another type (e.g., a zoning classification, or a case-control
+          design). A special case of this design is to assess potential <em>negative</em> spatial autocorrelation, e.g.,
+          between the community areas that have positive and those that have
+          negative population change.</p>
+        <p>Here again, it is important to make sure that the <em>second</em> variable, <em>z</em>, is a rare occurrence,
+          appearing in less than
+          half of the sample.</p>
+        <p>We consider the no co-location situation first. In <code>GeoDa</code>, this is referred to as
+          <em>bivariate</em> local join count, since
+          this is the only setting in which it is operational (the no co-location setup does not work for more than two
+          variables).</p>
+        <p>In its general form, the expression for a bivariate local join count statistic given in <span
+            class="citation">Anselin and Li (<a href="#ref-AnselinLi:18" role="doc-biblioref">2019</a>)</span> is:
+          <span class="math display">\[BJC_i = x_i (1 - z_i) \sum_j w_{ij} z_j (1 - x_j),\]</span>
+          with <span class="math inline">\(w_{ij}\)</span> as unstandardized (binary) spatial weights.
+        </p>
+        <p>The roles of <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> may be
+          reversed, but the statistic is not symmetric, so that the results will tend to differ whether <span
+            class="math inline">\(x\)</span> or <span class="math inline">\(z\)</span> is the focus. In addition, it is
+          important to keep in mind that the statistic will only be meaningful when the proportion of the second
+          variable (for the neighbors) in the population is small.</p>
+        <p>Since the condition of no co-location ensures that <span class="math inline">\(1 - z_i = 0\)</span> whenever
+          <span class="math inline">\(x_i = 1\)</span>, and vice versa, the statistic simplifies to:
+          <span class="math display">\[BJC_i = x_i \sum_j w_{ij} z_j,\]</span>
+          whenever <span class="math inline">\(x_i = 1\)</span>, which are the only locations we are interested in.
+        </p>
+        <p>Inference can be based on a hypergeometric distribution, considering <span class="math inline">\(P\)</span>
+          observations with <span class="math inline">\(x_i = 1\)</span> and <span class="math inline">\(Q\)</span>
+          observations with <span class="math inline">\(z_j = 1\)</span>. Again, a more robust alternative is based on a
+          permutation approach.</p>
+        <p>A pseudo p-value can be obtained from a one-sided conditional permutation test. This is implemented by
+          carrying out a series of <span class="math inline">\(k_i\)</span> draws (with <span
+            class="math inline">\(k_i\)</span> as the number of neighbors for <span class="math inline">\(i\)</span>)
+          for each location <span class="math inline">\(i\)</span> where <span class="math inline">\(x_i = 1\)</span>
+          (and thus <span class="math inline">\(z_i = 0\)</span>). The draws are without replacement from n − 1 data
+          tuples <span class="math inline">\((x_j, z_j)\)</span> of which <span class="math inline">\(Q\)</span>
+          observations have <span class="math inline">\(z = 1\)</span> (since <span class="math inline">\(z_i =
+            0\)</span>) and <span class="math inline">\(P − 1\)</span> observations have <span class="math inline">\(x =
+            1\)</span>. In practice, we only need to draw the <span class="math inline">\(z_j\)</span>, since the
+          matching <span class="math inline">\(x_j\)</span> in the
+          tuple are zero by construction. The number of times the resulting local join count statistic equals or exceeds
+          the observed value yields a pseudo p-value, in the usual way.</p>
+      </div>
+      <div id="implementation-1" class="section level3 unnumbered" number="">
+        <h3>Implementation</h3>
+        <p>To illustrate this statistic, we continue with the <strong>commpop</strong> example. We are interested in
+          instances of <em>negative spatial autocorrelation</em>, where locations with <strong>popneg</strong> = 1 are
+          surrounded by more locations with <strong>popplus</strong> = 1 than would be expected under randomness.</p>
+        <p>Note that it is important to formulate the research question in this fashion. Since the majority of locations
+          has <strong>popneg</strong> = 1 (60/77, or 0.78), the phenomenon of a <strong>popplus</strong> = 1 to be
+          surrounded by locations with <strong>popneg</strong> = 1 is <em>not rare</em>. In such a situation, the
+          significance test is not meaningful.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> This will
+          generally be the case when a variable has more than 50% of the observations equal to 1.</p>
+        <p>Since only 0.22 of the observations have <strong>popplus</strong> = 1, we have already considered the extent
+          to which these cluster among themselves by means of a Univariate Local Join Count test. In addition, we could
+          assess the extent to which
+          they group around locations with negative population change. Those instances of <strong>popneg</strong> = 1
+          could then be characterized as <em>spatial outliers</em>, i.e., areas with population decline surrounded by
+          neighbors with population increase.</p>
+        <p>This example is primarily to illustrate the functionality of the bivariate test, and is less of substantive
+          interest.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+        <p>The Bivariate Local Join Count statistic is invoked from the third group in the <strong>Cluster Maps</strong>
+          toolbar icon, as
+          shown in Figure <a href="#fig:localjcicon">2</a>, or,
+          from the menu, as <strong>Space &gt; Bivariate Local Join Count</strong>. Next is a dialog from which we
+          select the two binary variables. The first one (<span class="math inline">\(x\)</span>) is selected from the
+          left-hand column in the dialog, the second (<span class="math inline">\(z\)</span>) from the right-hand
+          column. In our example, these are <strong>popneg</strong> and <strong>popplus</strong>, as shown in
+          Figure <a href="#fig:bivjcvars">8</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:bivjcvars"></span>
+          <img src="pics6d/11_bjc_vars.png" alt="Bivariate local Join Count variable selection" width="30%" />
+          <p class="caption">
+            Figure 8: Bivariate local Join Count variable selection
+          </p>
+        </div>
+        <p>As is the case for the Univariate Local Join Count statistic, only one map is created, i.e., a
+          <em>significance map</em> that highlights the significant locations. For the default settings with 999
+          permutation and p = 0.05, the result is as shown in Figure <a href="#fig:bivjcmap">9</a>, with two (weakly)
+          significant locations out of the 17 areas with positive population change.</p>
+        <div class="figure" style="text-align: center"><span id="fig:bivjcmap"></span>
+          <img src="pics6d/11_bivjc_sig.png" alt="Bivariate Local Join Count significance map" width="60%" />
+          <p class="caption">
+            Figure 9: Bivariate Local Join Count significance map
+          </p>
+        </div>
+      </div>
+      <div id="interpretation" class="section level3 unnumbered" number="">
+        <h3>Interpretation</h3>
+        <p>As mentioned earlier, in the current context, the result can be interpreted as evidence of <em>negative</em>
+          spatial autocorrelation, i.e., evidence of spatial outliers.
+          We can illustrate this in our unique values map in Figure <a href="#fig:popplusunique">1</a>.</p>
+        <p>As before, we invoke the option (right click) <strong>Connectivity &gt; Show Selection and
+            Neighbors</strong>, which outlines the neighbors of a selected observation. With the selection of the most
+          significant location in Figure <a href="#fig:bivjcmap">9</a> (the Garfield Ridge community area), its
+          neighbors are highlighted, as shown in Figure <a href="#fig:bivjneighbors">10</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:bivjneighbors"></span>
+          <img src="pics6d/11_spatial_outlier.png" alt="Spatial outlier" width="60%" />
+          <p class="caption">
+            Figure 10: Spatial outlier
+          </p>
+        </div>
+        <p>In our example, the selected significant area (with negative population change) has a red outline, and is
+          surrounded by one other neighbor with negative population change (light blue), but four neighbors with
+          positive population change (dark blue). Having four of the five neighbors with the opposite sign is sufficient
+          to identify this location as a <em>spatial outlier</em>.
+          However, this should be interpreted with some caution, since the Garfield Ridge community area is at the edge
+          of the
+          data set, and we do not have information (in this data set) on population change that occurred to its north
+          and west.</p>
+        <p>As is the case for the other local spatial autocorrelation coefficients, the results for each location can be
+          saved to the data table by means of the <strong>Save Results</strong> option. The same three items are
+          included as for the Univariate Local Join Count statistic: the join count statistic (i.e., the number of
+          neighbors with value <span class="math inline">\(z_j = 1\)</span>), the total number of neighbors, and the
+          pseudo p-value.</p>
+      </div>
+    </div>
+    <div id="co-location-join-count-statistic" class="section level2 unnumbered" number="">
+      <h2>Co-Location Join Count Statistic</h2>
+      <div id="principle-2" class="section level3 unnumbered" number="">
+        <h3>Principle</h3>
+        <p>With co-location, the observation at location <span class="math inline">\(i\)</span> has to have <span
+            class="math inline">\(x_i = z_i = 1\)</span>.</p>
+        <p>A bivariate co-location cluster requires that an observation for which <span class="math inline">\(x_i = z_i
+            = 1\)</span> coincides with neighbors for which <span class="math inline">\(x_j = z_j = 1\)</span> as well.
+          For the bivariate case, the corresponding Local Join Count statistic takes the form <span
+            class="citation">(Anselin and Li <a href="#ref-AnselinLi:18" role="doc-biblioref">2019</a>)</span>:
+          <span class="math display">\[CLC_i = x_iz_i \sum_j w_{ij}x_jz_j,\]</span>
+          with <span class="math inline">\(w_{ij}\)</span> as unstandardized (binary) spatial weights. As before, there
+          are <span class="math inline">\(P\)</span> observations with <span class="math inline">\(x_i = 1\)</span> and
+          <span class="math inline">\(Q\)</span> observations with <span class="math inline">\(z_i = 1\)</span> out of a
+          total of <span class="math inline">\(n\)</span>.
+        </p>
+        <p>A conditional permutation approach can be constructed for those locations with <span
+            class="math inline">\(x_i = z_i = 1\)</span>. We draw <span class="math inline">\(k_i\)</span> pairs of
+          observations <span class="math inline">\((x_j, z_j)\)</span> from the set of <span
+            class="math inline">\(n−1\)</span> (this contains <span class="math inline">\(P−1\)</span> observations with
+          <span class="math inline">\(x_j = 1\)</span> and <span class="math inline">\(Q−1\)</span> observations with
+          <span class="math inline">\(z_j = 1\)</span>). In a one-sided test, we again count the number of times the
+          statistic equals or exceeds the observed join count value at <span class="math inline">\(i\)</span>.</p>
+        <p>The extension to more than two variables is mathematically straightforward. We consider <span
+            class="math inline">\(k\)</span> variables at each location <span class="math inline">\(i\)</span>, i.e.,
+          <span class="math inline">\(x_{hi}\)</span>, for <span class="math inline">\(h = 1, \dots, k\)</span>, with
+          <span class="math inline">\(\Pi_{h=1}^k x_{hi} = 1\)</span>, which enforces the co-location requirement.</p>
+        <p>The corresponding statistic is then:
+          <span class="math display">\[CLC_i = \Pi_{h=1}^k x_{hi} \sum_j w_{ij} \Pi_{h=1}^k x_{hj}.\]</span>
+        </p>
+        <p>The implementation of a conditional permutation strategy follows as a direct generalization of the bivariate
+          co-location cluster. However, for a large number of variables, such co-locations become less and less likely,
+          and a different conceptual framework may be more appropriate.</p>
+      </div>
+      <div id="implementation-2" class="section level3 unnumbered" number="">
+        <h3>Implementation</h3>
+        <div id="preliminaries-1" class="section level4 unnumbered" number="">
+          <h4>Preliminaries</h4>
+          <p>To illustrate the co-location case, we will use the <strong>Chicago Health</strong> data set and the
+            associated
+            <strong>CommArea_ACS14_f.shp</strong> file. It is again for the 77 Chicago community areas, but contains
+            considerably
+            more socio-economic and health indicators. We will also need a spatial weighs file, such as queen contiguity
+            in <strong>CommArea_ACS14_f_q.gal</strong>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>
+          </p>
+          <p>We select two particular variables, the number of age-adjusted diabetes-related deaths per 100,000 persons,
+            <strong>DiabetM</strong>, and the proportion of people with income below 50% of the poverty line,
+            <strong>Pov50P</strong>.
+          </p>
+          <p>In Figure <a href="#fig:diabpovq">11</a>, we show a quartile map for each variable, suggesting quite
+            similar patterns.
+            Parenthetically, the correlation between the two variables is 0.632.</p>
+          <div class="figure" style="text-align: center"><span id="fig:diabpovq"></span>
+            <img src="pics6d/22_quart_diab_pov.png" alt="Quartile map - diabetes and poverty" width="90%" />
+            <p class="caption">
+              Figure 11: Quartile map - diabetes and poverty
+            </p>
+          </div>
+          <p>We now convert each continuous variable to an indicator for the upper quartile, with associated variables
+            <strong>s_diag</strong> and <strong>s_pov</strong>. These are the binary variables we will consider in our
+            illustration of the
+            co-location local join count test. The associated unique values maps are shown in Figure <a
+              href="#fig:diabpovu">12</a>.
+          </p>
+          <div class="figure" style="text-align: center"><span id="fig:diabpovu"></span>
+            <img src="pics6d/22_uniq_diab_pov.png" alt="Unique values map - diabetes and poverty upper quartiles"
+              width="90%" />
+            <p class="caption">
+              Figure 12: Unique values map - diabetes and poverty upper quartiles
+            </p>
+          </div>
+          <p>Finally, we assess the overlap between the two spatial patterns in Figure <a href="#fig:diabpovu">12</a> by
+            means of a co-location map,
+            shown in Figure <a href="#fig:diabpovco">13</a>. Of the 19 observations in the upper quartile, no less than
+            14 are shared between the two variables, as shown in Figure <a href="#fig:diabpovco">13</a>. Our research
+            question is to assess the extent to which these
+            locations are surrounded by similarly co-located locations, or, in other words, to find spatial clusters of
+            co-location.</p>
+          <div class="figure" style="text-align: center"><span id="fig:diabpovco"></span>
+            <img src="pics6d/22_coloc_diab_pov.png" alt="Colocation map - diabetes and poverty upper quartiles"
+              width="60%" />
+            <p class="caption">
+              Figure 13: Colocation map - diabetes and poverty upper quartiles
+            </p>
+          </div>
+        </div>
+        <div id="significance" class="section level4 unnumbered" number="">
+          <h4>Significance</h4>
+          <p>We invoke the Co-location Local Join Count statistic as the last item in the third group in the Cluster
+            Maps drop down
+            list from the toolbar, shown in Figure <a href="#fig:localjcicon">2</a>, or, from the menu, as <strong>Space
+              &gt; Co-location Join Count</strong>.</p>
+          <p>Next follows the usual dialog to
+            select the variables and specify the spatial weights, as in Figure <a href="#fig:colocvars">14</a>. We
+            select the just
+            created binary variables, <strong>s_diab</strong> and <strong>s_pov</strong>.</p>
+          <div class="figure" style="text-align: center"><span id="fig:colocvars"></span>
+            <img src="pics6d/22_coloc_vars.png" alt="Colocation Local Join Count - Variable selection" width="30%" />
+            <p class="caption">
+              Figure 14: Colocation Local Join Count - Variable selection
+            </p>
+          </div>
+          <p>This brings up the significance map shown in Figure <a href="#fig:colocsig">15</a>, using the default 999
+            permutations and p = 0.05.
+            Only three locations out of the 14 co-located observations are (weakly) significant. This suggests that
+            finding
+            actual clusters of co-located observations is much harder in this example than the univariate clusters we
+            encountered so far. In
+            part, this is due to the small number of candidate locations in this example. In larger data sets, this
+            situation
+            can be quite different, as illustrated by the empirical examples in <span class="citation">Anselin and Li
+              (<a href="#ref-AnselinLi:18" role="doc-biblioref">2019</a>)</span>.</p>
+          <div class="figure" style="text-align: center"><span id="fig:colocsig"></span>
+            <img src="pics6d/22_coloc_sig.png" alt="Colocation Local Join Count - significance map" width="60%" />
+            <p class="caption">
+              Figure 15: Colocation Local Join Count - significance map
+            </p>
+          </div>
+        </div>
+        <div id="interpretation-1" class="section level4 unnumbered" number="">
+          <h4>Interpretation</h4>
+          <p>We gain further insight into the actual makeup of the clusters by turning on the
+            <strong>Connectivity &gt; Show Selection and Neighbors</strong> option in the unique values map and
+            selecting the three
+            significant observations. The result is shown in Figure <a href="#fig:coloccluster">16</a>. The selected
+            observations
+            have a red outline and are shown together with their neighbors. Of the two observations that make up the
+            cluster in the western part of the map, one location has three out of its four neighbors as co-locations,
+            whereas the other one has three out of five neighbors. The not co-located observations, in grey color,
+            belong
+            to the upper quartile for one of the variables, but not for both.
+          </p>
+          <p>The situation is slightly different for the cluster in the south, where three neighbors out of six are also
+            co-located. Two of the other ones do not belong to a top quartile for either variable, whereas one is in the
+            upper quartile for diabetes.</p>
+          <div class="figure" style="text-align: center"><span id="fig:coloccluster"></span>
+            <img src="pics6d/22_coloc_clusters.png" alt="Colocation Local Join Count - clusters" width="60%" />
+            <p class="caption">
+              Figure 16: Colocation Local Join Count - clusters
+            </p>
+          </div>
+          <p>As before, we can <strong>Save</strong> the results to the table.</p>
+        </div>
+      </div>
+    </div>
+    <div id="quantile-lisa" class="section level2 unnumbered" number="">
+      <h2>Quantile LISA</h2>
+      <div id="principle-3" class="section level3 unnumbered" number="">
+        <h3>Principle</h3>
+        <p>The Local Join Count statistics are designed to deal with binary variables. However, as we illustrated with
+          our previous example, they can also be applied to assess the spatial autocorrelation between quantiles of a
+          continuous variable. In
+          <span class="citation">Anselin (<a href="#ref-Anselin:19b" role="doc-biblioref">2019</a>)</span>, this is
+          referred to as <em>Quantile LISA</em> or quantile local spatial autocorrelation.
+          In a bivariate or multivariate setting, the quantile LISA often serves as a viable alternative to a Bivariate
+          Local Moran or a
+          Multivariate Local Geary, especially when the focus is on <em>extremes</em> in the distribution.
+        </p>
+        <p>As we discussed, the continuous (linear) association between two variables that is measured by the Bivariate
+          Local Moran suffers from the problem of in-situ correlation. The quantile local spatial autocorrelation
+          sidesteps this problem by converting the continuous variable to a binary variable that takes the value of 1
+          for a specific quantile.</p>
+        <p>For example, as in our previous illustration, the spatial assocation between two continuous variables can be
+          simplified by focusing on the local autocorrelation between binary variables for the upper quartile. Since the
+          bivariate (or multivariate) Local Join Count statistic enforces co-location, the problem of in-situ
+          correlation is controlled for. This provides an alternative to other bivariate and multivariate local spatial
+          autocorrelation statistics, albeit with a loss of information (going from the continuous variable to a binary
+          category).</p>
+        <p>In addition, the quantile LISA approach can also be employed to assess negative spatial autocorrelation, such
+          as
+          between the upper and lower quantile of a variable. This would be a special case of a No-Colocation Bivariate
+          Local Join
+          Count statistic.</p>
+        <p>Again, the quantile approach focuses on the extremes of the distributions and thus
+          constitutes a loss of information. However, in practice, this loss of information is often compensated for
+          by superior insight and a focus on the most important <em>interesting</em> locations.</p>
+        <p>Formally, a continuous variable <span class="math inline">\(y\)</span> with a cumulative density function
+          <span class="math inline">\(F(y)\)</span> yields a sequence of ranked
+          observations as <span class="math inline">\(y_1, y_2, \dots, y_n\)</span>. A new binary variable <span
+            class="math inline">\(x\)</span> is created that takes on the value <span class="math inline">\(x_i =
+            1\)</span> for all <span class="math inline">\(y_i\)</span>
+          for which <span class="math inline">\(y_{ql} \leq y_i \lt y_{qu}\)</span>, with <span
+            class="math inline">\(y_{ql}\)</span> and <span class="math inline">\(y_{qu}\)</span> as lower and upper
+          bounds for a given
+          quantile.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> For all other observations,
+          <span class="math inline">\(x_i = 0\)</span>.
+        </p>
+        <p>The new <span class="math inline">\(x\)</span> variable (or set of such variables in a multivariate case)
+          then forms the basis for a Local Join Count
+          statistic, or one of its multivariate extensions.</p>
+      </div>
+      <div id="implementation-3" class="section level3 unnumbered" number="">
+        <h3>Implementation</h3>
+        <p>As we illustrated in the previous example, a quantile LISA can be implemented as a two-step process using the
+          current Local Join Count functionality, with the first step consisting of the creation of the binary variable.
+          The Quantile LISA functionality in <code>GeoDa</code> reduces this to a one step process by employing a
+          specialized
+          variable selection interface.</p>
+        <p>The functionality is invoked from the next to last group in the Cluster Maps toolbar icon drop down list, in
+          Figure <a href="#fig:localjcicon">2</a>, or, from the menu, as <strong>Space &gt; Univariate Quantile
+            LISA</strong> or
+          <strong>Space &gt; Multivariate Quantile LISA</strong>.
+        </p>
+        <div id="univariate-quantile-lisa" class="section level4 unnumbered" number="">
+          <h4>Univariate Quantile LISA</h4>
+          <p>We continue with the <strong>Chicago Health</strong> data set and
+            illustrate the univariate case with the example of the upper quartile of the poverty rate,
+            <strong>Pov50P</strong>.
+            A unique value map for this quartile was given in the left-hand panel of Figure <a
+              href="#fig:diabpovu">12</a>.</p>
+          <p>The variable selection dialog for the univariate case is shown in Figure <a href="#fig:qlisavars1">17</a>.
+            Beyond
+            specifying a variable name (<strong>Pov50P</strong>), we also need to set the <strong>Number of
+              Quantiles</strong>. The default is 5,
+            but in our example, we have set it to 4, for <em>quartiles</em>. In addition, we need to specify the
+            relevant quantile,
+            in <strong>Select a Quantile for LISA</strong>. The default is 1, but here we have set it to 4, for the
+            upper quartile.
+            Finally, we also need to select a name for the binary variable that will be created, in
+            <strong>Save Quantile Selection in Field</strong>. We leave the default to <strong>QT</strong>.
+          </p>
+          <div class="figure" style="text-align: center"><span id="fig:qlisavars1"></span>
+            <img src="pics6d/33_quantile_vars1.png" alt="Variable selection - univariate quantile LISA" width="35%" />
+            <p class="caption">
+              Figure 17: Variable selection - univariate quantile LISA
+            </p>
+          </div>
+          <p>Using the default settings of 999 permutations and p = 0.05 yields the significance map shown in
+            Figure <a href="#fig:qlisasig1">18</a>. This identifies 6 locations as significant cores of clusters, but
+            only for p=0.05.
+            The interpretation is the same as that for any other local join count statistic and we do not pursue it
+            further. Also,
+            as before, the results can be saved to the data table.</p>
+          <div class="figure" style="text-align: center"><span id="fig:qlisasig1"></span>
+            <img src="pics6d/33_quantilelisa_sig1.png" alt="Significance map for Univariate Quantile LISA, poverty rate"
+              width="60%" />
+            <p class="caption">
+              Figure 18: Significance map for Univariate Quantile LISA, poverty rate
+            </p>
+          </div>
+        </div>
+        <div id="multivariate-quantile-lisa" class="section level4 unnumbered" number="">
+          <h4>Multivariate Quantile LISA</h4>
+          <p>For the multivariate case, the variable selection interface is somewhat more complex, since several aspects
+            need to be specified.</p>
+          <p>Figure <a href="#fig:qlisavarsmulti1">19</a> illustrates the various options. First, for each variable, the
+            number of quantiles and the selected one need to be set,
+            as in the univariate case. We have selected
+            the first variable as <strong>Pov50P</strong>, with the <strong>Number of Quantiles</strong> set to 4 (the
+            default is 5), and the
+            <strong>Quantile for LISA</strong> as 4, for the top quartile (1 is the default). In addition, we need to
+            choose a variable
+            name, here <strong>QT2</strong>. Finally, the combination of options is moved to the right-hand panel by
+            means of the <strong>&gt;</strong> button.
+          </p>
+          <div class="figure" style="text-align: center"><span id="fig:qlisavarsmulti1"></span>
+            <img src="pics6d/33_qlisa_mutlivars1.png" alt="Variable selection - multivariate quantile LISA (1)"
+              width="60%" />
+            <p class="caption">
+              Figure 19: Variable selection - multivariate quantile LISA (1)
+            </p>
+          </div>
+          <p>With the same settings for the second variable, <strong>DiabetM</strong>, the right-hand panel is populated
+            as in
+            Figure <a href="#fig:qlisavarsmulti2">20</a>. This interface is completely flexible in the sense that not
+            all variables
+            have to be in the same quantile, but it should be kept in mind that not every combination is meaningful.</p>
+          <p>The default implementation of the Multivariate Quantile LISA is to compute a Co-Location Multivariate Local
+            Join
+            Count statistic, effectively searching for co-location clusters. Whereas in practice this is the most
+            likely application, the co-location assumption is inappropriate for the analysis of
+            negative spatial autocorrelation, such as between the upper and lower quantile of the same variable. In the
+            interface,
+            this is set by checking the box next to <strong>No co-location</strong>, as highlighted in Figure <a
+              href="#fig:qlisavarsmulti2">20</a>.</p>
+          <div class="figure" style="text-align: center"><span id="fig:qlisavarsmulti2"></span>
+            <img src="pics6d/33_qlisa_mutlivars2.png" alt="Variable selection - multivariate quantile LISA (2)"
+              width="60%" />
+            <p class="caption">
+              Figure 20: Variable selection - multivariate quantile LISA (2)
+            </p>
+          </div>
+          <p>With the variable selection as in Figure <a href="#fig:qlisavarsmulti2">20</a> and the default number of
+            permutations of
+            999, with p=0.05, the significance map shown in Figure <a href="#fig:qlisasig2">21</a> results. This map is
+            identical to
+            the findings shown in Figure <a href="#fig:colocsig">15</a> for the Co-Location Multivariate Local Join
+            Count computed for the
+            two discrete variables. The only difference is that here the discrete variables are created on the fly, and
+            the window header lists the actual variables with associated quantile information.</p>
+          <p>In all other respects, the functionality and interpretation are the same as in the multivariate co-location
+            case.</p>
+          <div class="figure" style="text-align: center"><span id="fig:qlisasig2"></span>
+            <img src="pics6d/33_qlisa_multi_sig.png"
+              alt="Significance map for Multivariate Quantile LISA, poverty rate and diabetes" width="60%" />
+            <p class="caption">
+              Figure 21: Significance map for Multivariate Quantile LISA, poverty rate and diabetes
+            </p>
+          </div>
+          <p><br></p>
+        </div>
+      </div>
+    </div>
+    <div id="references" class="section level2 unnumbered" number="">
+      <h2>References</h2>
+      <div id="refs" class="references hanging-indent">
+        <div id="ref-Anselin:95">
+          <p>Anselin, Luc. 1995. “Local Indicators of Spatial Association — LISA.” <em>Geographical Analysis</em> 27:
+            93–115.</p>
+        </div>
+        <div id="ref-Anselin:19b">
+          <p>———. 2019. “Quantile Local Spatial Autocorrelation.” <em>Letters in Spatial and Resource Sciences</em> 12
+            (2): 155–66.</p>
+        </div>
+        <div id="ref-AnselinLi:18">
+          <p>Anselin, Luc, and Xun Li. 2019. “Operational Local Join Count Statistics for Cluster Detection.”
+            <em>Journal of Geographical Systems</em> 21 (2): 189–210.</p>
+        </div>
+        <div id="ref-CliffOrd:73">
+          <p>Cliff, Andrew, and J. Keith Ord. 1973. <em>Spatial Autocorrelation</em>. London: Pion.</p>
+        </div>
+        <div id="ref-Getis:84">
+          <p>Getis, A. 1984. “Interaction Modeling Using Second-Order Analysis.” <em>Environment and Planning A</em> 16
+            (2): 173–83.</p>
+        </div>
+        <div id="ref-GetisFranklin:87">
+          <p>Getis, Arthur, and Janet Franklin. 1987. “Second-Order Neighborhood Analysis of Mapped Point Patterns.”
+            <em>Ecology</em> 68 (3): 473–77.</p>
+        </div>
+        <div id="ref-GetisOrd:92">
+          <p>Getis, Arthur, and J. Keith Ord. 1992. “The Analysis of Spatial Association by Use of Distance Statistics.”
+            <em>Geographical Analysis</em> 24: 189–206.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footnotes">
+      <hr />
+      <ol>
+        <li id="fn1">
+          <p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu"
+              class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn2">
+          <p>To create the weights matrix, use the variable <strong>NID</strong> as the ID variable.<a href="#fnref2"
+              class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn3">
+          <p>In practice, this can easily be detected when the
+            results show locations with 1 like neighbor to be significant, and locations with more like neighbors not
+            to be significant.<a href="#fnref3" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn4">
+          <p>Since the permutation test is designed to identify <em>rare</em> occurrences, it will mistakenly flag as
+            significant locations that have <em>fewer</em> neighbors of the predominant type than expected randomly.
+            This is because the proportion of such values in the population is larger than 0.5 so that it is likely to
+            have a large number of neighbors of the type.<a href="#fnref4" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn5">
+          <p>For a more meaningful example, see the empirical illustration in <span class="citation">Anselin and Li (<a
+                href="#ref-AnselinLi:18" role="doc-biblioref">2019</a>)</span>.<a href="#fnref5"
+              class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn6">
+          <p>The associated ID variable is <strong>ComAreaID</strong>.<a href="#fnref6" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn7">
+          <p>In general, this may be applied to any interval, not just a given quantile.<a href="#fnref7"
+              class="footnote-back">↩︎</a></p>
+        </li>
+      </ol>
+    </div>
+
+
+  </section>
+
+
+  <!-- code folding -->
+
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+
+</html>

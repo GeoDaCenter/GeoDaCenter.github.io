@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="author" content="Luc Anselin" />
+
+
+  <title>Cluster Analysis (2)</title>
+
+  <script src="lab7bh_files/header-attrs-2.3/header-attrs.js"></script>
+  <link href="lab7bh_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+  <script src="lab7bh_files/highlightjs-9.12.0/highlight.js"></script>
+  <title>GeoDa on Github</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .shadowfilter {
+      -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      filter: url(shadow.svg#drop-shadow);
+    }
+
+    .intro1 {
+      margin-left: -45px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://geodacenter.github.io/stylesheets/github-light.css"
+    media="screen">
+  <link rel="stylesheet" href="https://geodacenter.github.io/stylesheets/simple-slideshow-styles.css">
+  <style>
+    ul {
+      padding-left: 30px;
+    }
+
+    figcaption {
+      top: .70em;
+      left: .35em;
+      bottom: auto !important;
+      right: auto !important;
+    }
+  </style>
+
+  <style>
+    h1 {
+      text-align: center;
+    }
+
+    h3.subtitle {
+      text-align: center;
+    }
+
+    h4.author {
+      text-align: center;
+    }
+
+    h4.date {
+      text-align: center;
+    }
+
+    p.caption {
+      font-size: 12px;
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC0QJ53WFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-LC0QJ53WFS');
+  </script>
+  <!-- End Google tag -->
+
+  <style type="text/css">
+    code {
+      white-space: pre;
+    }
+  </style>
+  <script type="text/javascript">
+    if (window.hljs) {
+      hljs.configure({ languages: [] });
+      hljs.initHighlightingOnLoad();
+      if (document.readyState && document.readyState === "complete") {
+        window.setTimeout(function () { hljs.initHighlighting(); }, 0);
+      }
+    }
+  </script>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <section class="main-content">
+
+
+    <h1 class="title toc-ignore">Cluster Analysis (2)</h1>
+    <h3 class="subtitle">Hierarchical Clustering Methods</h3>
+    <h4 class="author">Luc Anselin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h4>
+    <h4 class="date">11/02/2020 (latest update)</h4>
+
+
+    <div id="TOC">
+      <ul>
+        <li><a href="#introduction">Introduction</a>
+          <ul>
+            <li><a href="#objectives">Objectives</a>
+              <ul>
+                <li><a href="#geoda-functions-covered">GeoDa functions covered</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#agglomerative-clustering">Agglomerative Clustering</a>
+          <ul>
+            <li><a href="#dissimilarity">Dissimilarity</a></li>
+            <li><a href="#illustration-single-linkage">Illustration: single linkage</a></li>
+            <li><a href="#dendrogram">Dendrogram</a></li>
+            <li><a href="#complete-linkage">Complete linkage</a></li>
+            <li><a href="#average-linkage">Average linkage</a></li>
+            <li><a href="#wards-method">Ward’s method</a></li>
+          </ul>
+        </li>
+        <li><a href="#implementation">Implementation</a>
+          <ul>
+            <li><a href="#variable-settings-panel">Variable Settings Panel</a></li>
+            <li><a href="#cluster-results">Cluster results</a>
+              <ul>
+                <li><a href="#dendrogram-1">Dendrogram</a></li>
+                <li><a href="#cluster-map">Cluster map</a></li>
+                <li><a href="#cluster-summary">Cluster summary</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#linkage-method">Linkage method</a>
+          <ul>
+            <li><a href="#single-linkage">Single linkage</a></li>
+            <li><a href="#complete-linkage-1">Complete linkage</a></li>
+            <li><a href="#average-linkage-1">Average linkage</a></li>
+          </ul>
+        </li>
+        <li><a href="#options-and-sensitivity-analysis">Options and sensitivity analysis</a>
+          <ul>
+            <li><a href="#distance-metric">Distance metric</a></li>
+          </ul>
+        </li>
+        <li><a href="#appendix">Appendix</a>
+          <ul>
+            <li><a href="#single-linkage-worked-example">Single linkage worked example</a></li>
+            <li><a href="#complete-linkage-worked-example">Complete linkage worked example</a></li>
+            <li><a href="#average-linkage-worked-example">Average linkage worked example</a></li>
+            <li><a href="#wards-method-worked-example">Ward’s method worked example</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </div>
+
+    <p><br></p>
+    <div id="introduction" class="section level2 unnumbered" number="">
+      <h2>Introduction</h2>
+      <p>In this second chapter on classical clustering methods, we cover hierarchical clustering. In contrast to
+        partioning methods,
+        where the number of clusters (k) needs to be specified a priori, hierarchical clustering methods build up the
+        clusters step by step.
+        The size of the cluster is determined from the results at each step that are visually represented in a tree
+        structure,
+        the so-called <em>dendrogram</em>.</p>
+      <p>The successive steps can be approached in a top-down fashion or in a bottom-up fashion. The latter is referred
+        to as <em>agglomerative</em> hierarchical
+        clustering, the former as <em>divisive</em> clustering. In this chapter, we will limit our attention to
+        <em>agglomerative</em> methods. A form of divisive
+        clustering is implemented in some of the spatially constrained clustering techniques, which are discussed in a
+        later chapter.</p>
+      <p>In agglomerative clustering, we start with each observation being assigned to its own cluster (i.e., <em>n</em>
+        clusters
+        of one observation each).
+        Next, the two observations are found that are <em>closest</em> using a specified distance criterion,
+        and they are combined into a cluster. This process repeats itself, by using a <em>representative distance</em>
+        for each grouping once multiple observations are combined. At the end of this process,
+        there is a single cluster that contains all the observations. The result of the successive groupings of the
+        observations is
+        visualized in a <em>dendrogram</em>. A <em>cut point</em> can be applied at any position in the tree to extract
+        the full description of a cluster for all values of <span class="math inline">\(k\)</span>
+        between <span class="math inline">\(n\)</span> and 1.</p>
+      <p>Agglomerative clustering methods differ with respect to the way in which distances between observations
+        and clusters are computed. There are at least seven different ways to implement
+        this. Here, we will focus on the four most commonly used methods: <em>single linkage</em>, <em>complete
+          linkage</em>,
+        <em>average linkage</em>, and <em>Ward’s method</em> (a special form of centroid linkage).
+      </p>
+      <p>Hierarchical clustering techniques are covered in detail in Chapter 4 of <span class="citation">Everitt et al.
+          (<a href="#ref-Everittetal:11" role="doc-biblioref">2011</a>)</span> and in
+        Chapter 5 of <span class="citation">Kaufman and Rousseeuw (<a href="#ref-KaufmanRousseeuw:05"
+            role="doc-biblioref">2005</a>)</span>. A discussion of fast modern algorithms is contained
+        in <span class="citation">Müllner (<a href="#ref-Mullner:11" role="doc-biblioref">2011</a>)</span> and <span
+          class="citation">Müllner (<a href="#ref-Mullner:13" role="doc-biblioref">2013</a>)</span>.</p>
+      <p>To illustrate these methods, we will continue to use the Guerry data set on
+        moral statistics in 1830 France, which comes pre-installed with GeoDa.</p>
+      <div id="objectives" class="section level3 unnumbered" number="">
+        <h3>Objectives</h3>
+        <ul>
+          <li>
+            <p>Understand the principles behind agglomerative clustering</p>
+          </li>
+          <li>
+            <p>Distinguish between different linkage functions</p>
+          </li>
+          <li>
+            <p>Understand the implications of using different linkage functions</p>
+          </li>
+          <li>
+            <p>Interpret a dendrogram for hierarchical clustering</p>
+          </li>
+          <li>
+            <p>Carry out sensitivity analysis</p>
+          </li>
+        </ul>
+        <div id="geoda-functions-covered" class="section level4 unnumbered" number="">
+          <h4>GeoDa functions covered</h4>
+          <ul>
+            <li>Clusters &gt; Hierarchical
+              <ul>
+                <li>select cut point</li>
+                <li>select linkage function</li>
+                <li>select standardization option</li>
+                <li>select distance metric</li>
+                <li>cluster characteristics</li>
+                <li>mapping the clusters</li>
+                <li>saving the cluster classification</li>
+              </ul>
+            </li>
+          </ul>
+          <p><br></p>
+        </div>
+      </div>
+    </div>
+    <div id="agglomerative-clustering" class="section level2 unnumbered" number="">
+      <h2>Agglomerative Clustering</h2>
+      <div id="dissimilarity" class="section level3 unnumbered" number="">
+        <h3>Dissimilarity</h3>
+        <p>An agglomerative clustering algorithm starts with each observation serving
+          as its own cluster, i.e., beginning with <span class="math inline">\(n\)</span> clusters of size 1. Next, the
+          algorithm moves through a sequence
+          of steps, where each time the number of clusters is decreased by one, either by creating
+          a new cluster from two observations, or by assigning an observation to an existing cluster, or
+          by merging two clusters. Such algorithms are sometimes referred to as SAHN, which stands
+          for sequential, agglomerative, hierarchic and non-overlapping <span class="citation">(Müllner <a
+              href="#ref-Mullner:11" role="doc-biblioref">2011</a>)</span>.</p>
+        <p>The smallest within-group sum of squares is obtained in the initial
+          stage, where each observation is its own cluster. As soon as two observations are grouped, the within sum of
+          squares increases. Hence, each time a new merger is carried out, the overall objective of minimizing
+          the within sum of squares deteriorates. At the final stage, when all observations are joined into a
+          single cluster, the total within sum of squares equals the total sum of squares. So, whereas partioning
+          cluster methods aim to improve the objective function at each step, agglomerative hierarchical
+          clustering moves in the opposite direction.</p>
+        <p>The key element in this process is how the dissimilarity (or distance) between two clusters is computed, the
+          so-called
+          <em>linkage</em>. In this chapter, we consider four common types. We discuss single linkage here to illustrate
+          the main concepts and cover the other
+          methods separately below.
+        </p>
+        <p>For <em>single linkage</em>, the relevant dissimilarity is between the two points in each cluster that are
+          closest together. More precisely, the dissimilarity between clusters <span class="math inline">\(A\)</span>
+          and <span class="math inline">\(B\)</span> is:
+          <span class="math display">\[d_{AB} = \mbox{min}_{i \in A,j \in B} d_{ij},\]</span>
+          i.e., the <em>nearest neighbor</em> distance between <span class="math inline">\(A\)</span> and <span
+            class="math inline">\(B\)</span>.
+        </p>
+        <p>A second important concept is how the distances between other points (or clusters) and a newly
+          merged cluster are computed, the so-called <em>updating formula</em>. With some clever algebra, it can
+          be shown that these calculations can be based on the dissimilarity matrix from the previous step and do not
+          require going back to the original <span class="math inline">\(n \times n\)</span> dissimilarity matrix.<a
+            href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Note that at each step, the
+          dimension of the relevant dissimilarity matrix decreases by one, which allows for very memory-efficient
+          algorithms.</p>
+        <p>In the single linkage case, the updating formula takes a simple form. The dissimilarity between a point (or
+          cluster) <span class="math inline">\(P\)</span>
+          and a cluster <span class="math inline">\(C\)</span> that was obtained by merging <span
+            class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is the smallest of the
+          dissimilarities
+          between <span class="math inline">\(P\)</span> and <span class="math inline">\(A\)</span> and <span
+            class="math inline">\(P\)</span> and <span class="math inline">\(B\)</span>:
+          <span class="math display">\[d_{PC} = \mbox{min}(d_{PA},d_{PB}),\]</span>
+          using the definition of dissimilarity between two objects (<span class="math inline">\(d_{AB}\)</span>) given
+          above.
+        </p>
+        <p>The minimum condition can also be obtained as the result of an algebraic
+          expression:
+          <span class="math display">\[d_{PC} = (1/2) (d_{PA} + d_{PB}) - (1/2)| d_{PA} - d_{PB} |,\]</span>
+          in the same notation as before.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
+        </p>
+        <p>The updating formula only affects the row/column in the dissimilarity matrix that pertains to
+          the newly merged cluster. The other elements of the dissimilarity matrix remain unchanged.</p>
+        <p>Single linkage clusters tend to result in a few clusters consisting of long drawn out chains of observations
+          as well as several singletons (observations
+          that form their own cluster).
+          This is due to the fact that sometimes disparate clusters are joined when they have two close points, but
+          otherwise
+          are far apart. Single linkage is sometimes used to detect outliers, i.e., observations that remain singletons
+          and
+          thus are far apart from all others.</p>
+      </div>
+      <div id="illustration-single-linkage" class="section level3 unnumbered" number="">
+        <h3>Illustration: single linkage</h3>
+        <p>To illustrate the logic of agglomerative hierarchical clustering algorithms, we use the example of
+          <em>single linkage</em> applied to the same seven points as we used for k-means. For ease of reference,
+          the points are shown in Figure <a href="#fig:slinkexample">1</a>.<a href="#fn4" class="footnote-ref"
+            id="fnref4"><sup>4</sup></a> As before, the point IDs are ordered with increasing values of X first, then Y,
+          starting
+          with observation 1 in the lower left corner. Full details are given in the <a href="#appendix">Appendix</a>.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkexample"></span>
+          <img src="pics7b/01_points.png" alt="Single link hierarchical clustering toy example" width="35%" />
+          <p class="caption">
+            Figure 1: Single link hierarchical clustering toy example
+          </p>
+        </div>
+        <p>The basis for any agglomerative clustering method is a <span class="math inline">\(n \times n\)</span>
+          symmetric dissimilarity matrix. Except for
+          Ward’s method,
+          this is the only information needed.
+          In our example, we use a dissimilarity matrix based on the Euclidean distances between the points, as shown in
+          Figure <a href="#fig:slinkdist">2</a></p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkdist"></span>
+          <img src="pics7b/01_distance_matrix.png" alt="Dissimilarity matrix" width="80%" />
+          <p class="caption">
+            Figure 2: Dissimilarity matrix
+          </p>
+        </div>
+        <p>The first step is to identify the pair of observations that have the smallest nearest neighbor distance.
+          From the distance matrix and also from Figure <a href="#fig:slinknn">3</a> this is the pair 4-5 (<span
+            class="math inline">\(d_{4,5}=1.0\)</span>). This forms the
+          first cluster, highlighted in dark blue in the figure. The five other observations remain in their own
+          cluster. In other words, at this stage, we still have six clusters.</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinknn"></span>
+          <img src="pics7b/02_points1.png" alt="Nearest neighbors" width="35%" />
+          <p class="caption">
+            Figure 3: Nearest neighbors
+          </p>
+        </div>
+        <p>The algorithm then moves sequentially to identify the nearest neighbor at each step, merge the
+          relevant observations/clusters and so decrease the number of clusters by one. The steps are illustrated in the
+          panels of Figure <a href="#fig:slinksteps">4</a>, going from left to right and starting at the top. In the
+          second step, another
+          observation (7) is added to the 4,5 cluster. Next, a new cluster emerges consisting of 1 and 2 (the two green
+          points in the lower left). Finally, first 3 and then
+          6 are added to the large blue cluster. Details are given in the <a href="#appendix">Appendix</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinksteps"></span>
+          <img src="pics7b/02_allsteps.png" alt="Single linkage iterations" width="70%" />
+          <p class="caption">
+            Figure 4: Single linkage iterations
+          </p>
+        </div>
+      </div>
+      <div id="dendrogram" class="section level3 unnumbered" number="">
+        <h3>Dendrogram</h3>
+        <p>The agglomerative <em>nesting</em> is visually represented in a tree structure, the so-called
+          <em>dendrogram</em>. For each step,
+          the graph shows which observations/clusters are combined. In addition, the different horizontal
+          extents (i.e., how far each cluster combination is from the right side of the graph) give
+          a sense of the degree of change in
+          the objective function achieved by each merger.</p>
+        <p>The implementation of the dendrogram in <code>GeoDa</code> is currently somewhat limited, but it accomplishes
+          the
+          main goal. In Figure <a href="#fig:slinkdendro">5</a>, the result is shown for single linkage in our
+          toy example. The graph shows how the cluster starts by combining two observations (4 and 5), to which then
+          a third (7) is added. These first two steps are highlighted in the dendrogram and the corresponding
+          observations are selected in the Table.</p>
+        <p>Next, following the tree structure reveals how two more observations (1 and 2) are combined into a separate
+          cluster, and two
+          observations (3 and 6) are added to the original cluster of 4,5 and 7. The fact that the last three operations
+          all
+          line up (same distance from the right side) follows from a three-way <em>tie</em> in the inter-group distances
+          (see the <a href="#appendix">Appendix</a>).
+          As a result, the change in the objective function (more precisely, a deterioration) that follows from adding
+          the points
+          to a cluster is the same in each case.</p>
+        <p>The dashed vertical line represents a <em>cut</em> line. It corresponds with a particular value of k for
+          which the
+          make up of the clusters and their characteristics can be further investigated
+          (see the section on <a href="#cluster-results">Cluster results</a> for details on the implementation in
+          <code>GeoDa</code>).</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkdendro"></span>
+          <img src="pics7b/01_dendrogram.png" alt="Single linkage dendrogram" width="60%" />
+          <p class="caption">
+            Figure 5: Single linkage dendrogram
+          </p>
+        </div>
+      </div>
+      <div id="complete-linkage" class="section level3 unnumbered" number="">
+        <h3>Complete linkage</h3>
+        <p><em>Complete linkage</em> is the opposite of single linkage in that the dissimilarity between two
+          clusters is defined as the furthest neighbors, i.e., the pair of points, one from
+          each cluster, that are separated by the greatest dissimilarity. For the dissimilarity
+          between clusters <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, this boils
+          down to:
+          <span class="math display">\[d_{AB} = \mbox{max}_{i \in A,j \in B} d_{ij}.\]</span>
+        </p>
+        <p>With this measure of dissimilarity in hand, we still continue to combine the two observations/clusters
+          that are closest at each step. The only difference with single linkage is how the respective
+          distances are calculated.</p>
+        <p>The updating formula similarly is the opposite of the one for single linkage.
+          The dissimilarity between a point (or cluster) <span class="math inline">\(P\)</span>
+          and a cluster <span class="math inline">\(C\)</span> that was obtained by merging <span
+            class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is the largest of the
+          dissimilarities
+          between <span class="math inline">\(P\)</span> and <span class="math inline">\(A\)</span> and <span
+            class="math inline">\(P\)</span> and <span class="math inline">\(B\)</span>:
+          <span class="math display">\[d_{PC} = \mbox{max}(d_{PA},d_{PB}).\]</span>
+        </p>
+        <p>The algebraic counterpart of the updating formula is:
+          <span class="math display">\[d_{PC} = (1/2) (d_{PA} + d_{PB}) + (1/2)| d_{PA} - d_{PB} |,\]</span>
+          using the same logic as in the single linkage case.
+        </p>
+        <p>A detailed worked example for complete linkage using our toy data is given in the <a
+            href="#appendix">Appendix</a>.
+          A summary is provided in the dendrogram in Figure <a href="#fig:compdendro">6</a>. This shows the first
+          cluster as observations 4,5. The next steps are to combine 1 and 2 (at the bottom) and 6 and 7
+          (at the top). In the last two steps, 3 is added to 1,2 and 4,5 and 6,7 are merged (see the
+          <a href="#appendix">Appendix</a> for details).
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:compdendro"></span>
+          <img src="pics7b/11_completelink_dendrogram.png" alt="Complete linkage dendrogram" width="60%" />
+          <p class="caption">
+            Figure 6: Complete linkage dendrogram
+          </p>
+        </div>
+        <p>In contrast to single linkage, complete linkage tends to result in a large number of well-balanced compact
+          clusters.
+          Instead of merging fairly disparate clusters that have (only) two close points, it can have the
+          opposite effect of keeping similar observations in separate clusters.</p>
+      </div>
+      <div id="average-linkage" class="section level3 unnumbered" number="">
+        <h3>Average linkage</h3>
+        <p>In <em>average linkage</em>, the dissimilarity between two clusters is the average of all pairwise
+          dissimilarities between observations <span class="math inline">\(i\)</span> in cluster <span
+            class="math inline">\(A\)</span> and <span class="math inline">\(j\)</span> in cluster <span
+            class="math inline">\(B\)</span>. There are
+          <span class="math inline">\(n_A.n_B\)</span> such pairs (only counting each pair once), with <span
+            class="math inline">\(n\)</span> as the number of observations
+          in each cluster. Consequently, the dissimilarity
+          between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is:
+          <span class="math display">\[d_{AB} = \frac{\sum_{i \in A} \sum_{j \in B} d_{ij}}{n_A.n_B}.\]</span>
+          Note that when merging two single observations, <span class="math inline">\(d_{AB}\)</span> is simply the
+          dissimilarity between the two,
+          since <span class="math inline">\(n_A = n_B = 1\)</span> and the denominator in the expression is 1.
+        </p>
+        <p>The updating formula to compute the dissimilarity between a point (or cluster) <span
+            class="math inline">\(P\)</span> and the new
+          cluster <span class="math inline">\(C\)</span> formed by merging <span class="math inline">\(A\)</span> and
+          <span class="math inline">\(B\)</span> is the weighted average of the dissimilarities
+          <span class="math inline">\(d_{PA}\)</span> and <span class="math inline">\(d_{PB}\)</span>:
+          <span class="math display">\[d_{PC} = \frac{n_A}{n_A + n_B} d_{PA} + \frac{n_B}{n_A + n_B} d_{PB}.\]</span>
+          As before, the other distances are not affected.<a href="#fn5" class="footnote-ref"
+            id="fnref5"><sup>5</sup></a>
+        </p>
+        <p>A detailed worked example for complete linkage using our toy data is given in the <a
+            href="#appendix">Appendix</a>.
+          A summary is provided in the dendrogram in Figure <a href="#fig:avgdendro">7</a>. This shows the first
+          cluster again as observations 4,5. As in the case of complete linkage, the next steps are to combine 1 and 2
+          (at the bottom) and 6 and 7
+          (at the top). In the last two steps, first 4,5 and 6,7 are merged and then 3 is added to 1,2, in the reverse
+          order of what happened for complete linkage (see the
+          <a href="#appendix">Appendix</a> for details).
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:avgdendro"></span>
+          <img src="pics7b/44_avg_dendrogram.png" alt="Average linkage dendrogram" width="60%" />
+          <p class="caption">
+            Figure 7: Average linkage dendrogram
+          </p>
+        </div>
+        <p>Average linkage can be viewed as a compromise between the nearest neighbor logic of single linkage
+          and the furthest neighbor logic of complete linkage. In our example, the end results are almost the same
+          as for complete linkage. However, in general, average linkage tends to produce a few large clusters
+          and many singletons, similar to the results for single linkage (see also the results for the
+          Guerry data shown below).</p>
+      </div>
+      <div id="wards-method" class="section level3 unnumbered" number="">
+        <h3>Ward’s method</h3>
+        <p>The three linkage methods discussed so far only make use of a dissimilarity matrix. How this matrix is
+          obtained does not matter. As a result, dissimilarity may be defined using Euclidean or Manhattan distance,
+          dissimilarity among categories, or even directly from interview or survey data.</p>
+        <p>In contrast, the method developed by <span class="citation">Ward (<a href="#ref-Ward:63"
+              role="doc-biblioref">1963</a>)</span> is based on
+          a sum of squared errors rationale that only works for Euclidean distance between observations. In addition,
+          the sum of squared errors requires the consideration of the so-called <em>centroid</em> of each cluster, i.e.,
+          the
+          mean vector of the observations belonging to the cluster. Therefore, the input into Ward’s method is a
+          <span class="math inline">\(n \times p\)</span> matrix <span class="math inline">\(X\)</span> of actual
+          observations on <span class="math inline">\(p\)</span> variables (as before, this is typically standardized
+          in some fashion).
+        </p>
+        <p>Ward’s method is based on the objective of minimizing the deterioration in the overall within sum of squares.
+          The latter is the sum of squared deviations between the observations in a cluster and the centroid (mean),
+          as we have seen before in k-means clustering:
+          <span class="math display">\[WSS = \sum_{i \in C} (x_i - \bar{x}_C)^2,\]</span>
+          with <span class="math inline">\(\bar{x}_C\)</span> as the centroid of cluster <span
+            class="math inline">\(C\)</span>.
+        </p>
+        <p>Since any merger of two existing clusters (including individual observations) results in a worsening of the
+          overall
+          WSS, Ward’s method is designed to minimize this deterioration. More specifically, it is designed to minimize
+          the
+          difference between the new (larger) WSS in the merged cluster and the sum of the WSS of the components that
+          were merged.
+          This turns out to boil down to minimizing the distance between cluster centers.<a href="#fn6"
+            class="footnote-ref" id="fnref6"><sup>6</sup></a> This is reminiscent of the equivalence between Euclidean
+          distances and sum of squared errors we saw in the
+          discussion of k-means. As in k-means, we work with the square of the Euclidean distance:
+          <span class="math display">\[d_{AB}^2 = \frac{2n_A n_B}{n_A + n_B} ||\bar{x}_A - \bar{x}_B ||^2,\]</span>
+          where <span class="math inline">\(||\bar{x}_A - \bar{x}_B ||\)</span> is the Euclidean distance between the
+          two cluster centers (squared in the distance
+          squared expression).<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>
+        </p>
+        <p>The hierarchical nesting steps proceed in the same way as for the other methods, by merging the two
+          observations/clusters that
+          are the closest, but now based on a more complex distance
+          metric.</p>
+        <p>The update equation to compute the (squared) distance from an observation (or cluster) <span
+            class="math inline">\(P\)</span> to a new cluster <span class="math inline">\(C\)</span> obtained
+          from the merger of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is more
+          complex than for the other linkage options:
+          <span class="math display">\[d^2_{PC} = \frac{n_A + n_P}{n_C + n_P} d^2_{PA} + \frac{n_B + n_P}{n_C + n_P}
+            d^2_{PB} - \frac{n_P}{n_C + n_P} d^2_{AB},\]</span>
+          in the same notation as before. However, it can still readily be obtained from the information contained
+          in the dissimilarity matrix from the previous step, and it does not involve the actual computation of
+          centroids.
+        </p>
+        <p>To see why this is the case, consider the usual first step when two single observations are merged.
+          The distance squared between them is simply the Euclidean distance squared between their values, not involving
+          any centroids. The updated squared distances between other points and the two merged points only involve the
+          point-to-point
+          squared distances <span class="math inline">\(d^2_{PA}\)</span>, <span class="math inline">\(d^2_{PB}\)</span>
+          and <span class="math inline">\(d^2_{AB}\)</span>, no centroids. From then on, any update uses the results
+          from the
+          previous distance matrix in the update equation.</p>
+        <p>A detailed worked example for Ward’s method using our toy data is given in the <a
+            href="#appendix">Appendix</a>.
+          A summary is provided in the dendrogram in Figure <a href="#fig:warddendro">8</a>. This shows the first
+          cluster again as observations 4,5. As in the case of complete linkage, the next steps are to combine 1 and 2
+          (at the bottom of the graph) and 6 and 7
+          (at the top of the graph). In the last two steps, as in complete linkage, 3 is first added to 1,2 and then 4,5
+          and 6,7 are merged (see the
+          <a href="#appendix">Appendix</a> for details).
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:warddendro"></span>
+          <img src="pics7b/55_ward_dendrogram.png" alt="Ward linkage dendrogram" width="60%" />
+          <p class="caption">
+            Figure 8: Ward linkage dendrogram
+          </p>
+        </div>
+        <p>Ward’s method tends to result in nicely balanced clusters. It is therefore set as the default
+          method in <code>GeoDa</code>.</p>
+      </div>
+    </div>
+    <div id="implementation" class="section level2 unnumbered" number="">
+      <h2>Implementation</h2>
+      <p>Hierarchical clustering is invoked in <code>GeoDa</code> from the same toolbar icon as the other clustering
+        methods. It is the last item in the
+        classic methods subset, as shown in Figure <a href="#fig:hierarchicalmenu">9</a>. It can also be selected from
+        the menu as <strong>Clusters &gt; Hierarchical</strong>.</p>
+      <div class="figure" style="text-align: center"><span id="fig:hierarchicalmenu"></span>
+        <img src="pics7b/4_035_hierarchical.png" alt="Hierarchical clustering option" width="10%" />
+        <p class="caption">
+          Figure 9: Hierarchical clustering option
+        </p>
+      </div>
+      <div id="variable-settings-panel" class="section level3 unnumbered" number="">
+        <h3>Variable Settings Panel</h3>
+        <p>As before, the variables to be clustered are selected in the <strong>Variables Settings</strong> panel. We
+          continue with the same six variables as for k-means, shown in Figure <a href="#fig:hiervars">10</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:hiervars"></span>
+          <img src="pics7b/5_048_hiervars.png" alt="Hierarchical clustering variable selection" width="35%" />
+          <p class="caption">
+            Figure 10: Hierarchical clustering variable selection
+          </p>
+        </div>
+        <p>The panel also allows one to set the usual options, such as the <strong>Transformation</strong> (default
+          value
+          is a standardized z-value), and the linkage <strong>Method</strong> (default is <strong>Ward’s
+            linkage</strong>). The
+          <strong>Distance Function</strong> option is not available for the default <strong>Ward’s linkage</strong>
+          shown here (only <strong>Euclidean</strong>
+          distance is allowed for this linkage), However, <strong>Manhattan</strong> distance is an option for
+          the other linkage methods. In the same way as for k-means, the cluster
+          classification is saved in the data table under the variable name specified in
+          <strong>Save Cluster in Field</strong>.
+        </p>
+      </div>
+      <div id="cluster-results" class="section level3 unnumbered" number="">
+        <h3>Cluster results</h3>
+        <p>The actual computation of the clusters proceeds in two steps. In the first step,
+          a click on <strong>Run</strong> yields a dendrogram in the panel on the right. A cut point can be selected
+          interactively, of by setting a value the number of clusters in the panel. After this,
+          <strong>Save/Show Map</strong> creates the cluster map, computes the summary characteristics, and saves the
+          cluster classification in the data table.
+        </p>
+        <div id="dendrogram-1" class="section level4 unnumbered" number="">
+          <h4>Dendrogram</h4>
+          <p>With all options set to the default, the resulting dendrogram is as in Figure <a
+              href="#fig:dendrogram5">11</a>.
+            The dashed red line corresponds to a cut point that yields five clusters, to keep the results comparable
+            with what we obtained for k-means. The
+            dendrogram shows how individual observations are combined into groups of two, and subsequently
+            into larger and larger groups, by merging pairs of clusters. The colors on the right hand
+            side match the colors of the observations in the cluster map (see next). A selection rectangle allows
+            one to select specific groups of observations in the dendrogram. Through linking, the matching
+            observations are identified in the cluster map (and in any graph or map currently open).</p>
+          <div class="figure" style="text-align: center"><span id="fig:dendrogram5"></span>
+            <img src="pics7b/5_049_dendrogram5.png" alt="Dendrogram (k=5)" width="40%" />
+            <p class="caption">
+              Figure 11: Dendrogram (k=5)
+            </p>
+          </div>
+          <p>The dashed line (cut point) can be moved interactively. For example, in Figure <a
+              href="#fig:dendrogram8">12</a>,
+            we <em>grabbed</em> the line at the top (it can equally be grabbed at the bottom), and moved
+            it to the right to yield eight clusters. The corresponding colors are shown on the
+            right hand bar.</p>
+          <div class="figure" style="text-align: center"><span id="fig:dendrogram8"></span>
+            <img src="pics7b/5_050_dendrogram8.png" alt="Dendrogram (k=8)" width="40%" />
+            <p class="caption">
+              Figure 12: Dendrogram (k=8)
+            </p>
+          </div>
+        </div>
+        <div id="cluster-map" class="section level4 unnumbered" number="">
+          <h4>Cluster map</h4>
+          <p>As mentioned before, once the dendrogram cut point is specified, clicking on <strong>Save/Show Map</strong>
+            will generate the cluster map, shown in Figure <a href="#fig:hiermapW5">13</a>. Note how the colors for
+            the map categories match the colors in the dendrogram. Also, the number of observations
+            in each class also are the same between the groupings in the dendrogram and the cluster map.</p>
+          <p>The default Ward’s method yields fairly balanced clusters with two groups with 13 observations, one
+            with 25, and two more with 17. The results show some similarity with the outcome of k-means for k=5,
+            although there are some important differences as well.</p>
+          <div class="figure" style="text-align: center"><span id="fig:hiermapW5"></span>
+            <img src="pics7b/5_051_hierclusmapW5.png" alt="Hierarchical cluster map (Ward, k=5)" width="60%" />
+            <p class="caption">
+              Figure 13: Hierarchical cluster map (Ward, k=5)
+            </p>
+          </div>
+        </div>
+        <div id="cluster-summary" class="section level4 unnumbered" number="">
+          <h4>Cluster summary</h4>
+          <p>Similarly, once <strong>Save/Show Map</strong> has been selected, the cluster descriptive statistics
+            become available from the <strong>Summary</strong> button in the dialog. The same characteristics are
+            reported
+            as for k-means. In comparison to our k-means solution, this set of clusters is slightly
+            inferior in terms of the ratio of between to total sum of squares, achieving 0.482044 (compared
+            to 0.497). Clusters 4 and 5 achieve much better (smaller) within sum of squares than in the
+            k-means solution, but the other values are worse.</p>
+          <p>Setting the number of clusters at five is by no means necessarily the best solution. In a
+            real application of hierarchical clustering, one would experiment with different cut points and evaluate the
+            solutions
+            relative to the k-means solution.</p>
+          <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+            <img src="pics7b/5_052_hierW5summary.png" alt="Hierarchical cluster characteristics (Ward, k=5"
+              width="45%" />
+            <p class="caption">
+              Figure 14: Hierarchical cluster characteristics (Ward, k=5
+            </p>
+          </div>
+          <p>The two clustering approaches can also be used in conjunction with each other. For example, one could
+            explore the dendrogram to find a good cut-point, and then use this value for k in a k-means
+            or other partitioning method.</p>
+        </div>
+      </div>
+    </div>
+    <div id="linkage-method" class="section level2 unnumbered" number="">
+      <h2>Linkage method</h2>
+      <p>The main option of interest in hierarchical clustering is the linkage <strong>Method</strong>.
+        So far, we have used the default setting for <strong>Ward’s-linkage</strong>. We now consider each of the other
+        linkage options in turn and illustrate the associated dendrogram, cluster map and cluster
+        characteristics.</p>
+      <div id="single-linkage" class="section level3 unnumbered" number="">
+        <h3>Single linkage</h3>
+        <p>The linkage options are chosen from the <strong>Method</strong> item in the dialog. For example,
+          in Figure <a href="#fig:singlelinkagemethod">15</a>, we select <strong>Single-linkage</strong>. The other
+          options are chosen in the same way.</p>
+        <div class="figure" style="text-align: center"><span id="fig:singlelinkagemethod"></span>
+          <img src="pics7b/5_053_single_linkage.png" alt="Single linkage" width="30%" />
+          <p class="caption">
+            Figure 15: Single linkage
+          </p>
+        </div>
+        <p>The cluster results for single linkage are typically characterized by one or a few very
+          large clusters and several singletons (one observation per cluster). This characteristic
+          is confirmed in our example,
+          with the dendrogram in Figure <a href="#fig:dendrosingle5">16</a>, and the
+          corresponding cluster map in Figure <a href="#fig:single5map">17</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:dendrosingle5"></span>
+          <img src="pics7b/5_054_dendrogram_single.png" alt="Dendrogram single linkage (k=5)" width="40%" />
+          <p class="caption">
+            Figure 16: Dendrogram single linkage (k=5)
+          </p>
+        </div>
+        <p>Four <em>clusters</em> consist of a
+          single observation, with the main cluster collecting the 81 other observations. This
+          situation is not remedied by moving the cut point such that more clusters result, since
+          almost all of the additional clusters are singletons as well.</p>
+        <div class="figure" style="text-align: center"><span id="fig:single5map"></span>
+          <img src="pics7b/5_055_single_map.png" alt="Hierarchical cluster map (single linkage, k=5)" width="60%" />
+          <p class="caption">
+            Figure 17: Hierarchical cluster map (single linkage, k=5)
+          </p>
+        </div>
+        <p>The characteristics of the single linkage hierarchical cluster are similarly dismal. Since
+          four <em>clusters</em> are singletons, their within cluster sum of squares is <strong>0</strong>. Hence,
+          the total within-cluster sum of squares equals the sum of squares for cluster 5.
+          The resulting ratio of between to total sum of squares is only 0.214771.</p>
+        <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+          <img src="pics7b/5_056_single_summary5.png" alt="Hierarchical cluster characteristics (single linkage, k=5)"
+            width="45%" />
+          <p class="caption">
+            Figure 18: Hierarchical cluster characteristics (single linkage, k=5)
+          </p>
+        </div>
+        <p>In practice, in most situations, single linkage will not be a good choice, unless the
+          objective is to identify a lot of singletons and characterize these as <em>outliers</em>.</p>
+      </div>
+      <div id="complete-linkage-1" class="section level3 unnumbered" number="">
+        <h3>Complete linkage</h3>
+        <p>The complete linkage method yields clusters that are similar in balance to Ward’s method.
+          For example, in Figure <a href="#fig:dendrocomplete5">19</a>, the dendrogram is shown for our example,
+          using a cut point with five clusters. The clusters are fairly balanced, unlike what we
+          just saw for single linkage.</p>
+        <div class="figure" style="text-align: center"><span id="fig:dendrocomplete5"></span>
+          <img src="pics7b/5_057_dendro_complete5.png" alt="Dendrogram complete linkage (k=5)" width="40%" />
+          <p class="caption">
+            Figure 19: Dendrogram complete linkage (k=5)
+          </p>
+        </div>
+        <p>The corresponding cluster map is given as
+          Figure <a href="#fig:completemap">20</a>. The map is similar in structure to that obtained with Ward’s
+          method (Figure <a href="#fig:hiermapW5">13</a>), but note that the largest category (at 39) is much larger
+          than the largest for Ward (25).</p>
+        <div class="figure" style="text-align: center"><span id="fig:completemap"></span>
+          <img src="pics7b/5_058_complete_map.png" alt="Hierarchical cluster map (complete linkage, k=5)" width="60%" />
+          <p class="caption">
+            Figure 20: Hierarchical cluster map (complete linkage, k=5)
+          </p>
+        </div>
+        <p>In terms of the cluster characteristics, shown in Figure <a href="#fig:completesummary">21</a>, we note
+          a slight deterioration relative to Ward’s results, with the ratio of between to total sum
+          of squares at 0.423101 (but much better than single linkage).</p>
+        <div class="figure" style="text-align: center"><span id="fig:completesummary"></span>
+          <img src="pics7b/5_059_complete_summary.png"
+            alt="Hierarchical cluster characteristics (complete linkage, k=5)" width="45%" />
+          <p class="caption">
+            Figure 21: Hierarchical cluster characteristics (complete linkage, k=5)
+          </p>
+        </div>
+      </div>
+      <div id="average-linkage-1" class="section level3 unnumbered" number="">
+        <h3>Average linkage</h3>
+        <p>Finally, the average linkage criterion suffers from some of the same problems as single
+          linkage, although it yields slightly better results. The dendrogram in Figures <a
+            href="#fig:dendroavg5">22</a>
+          indicates a similar unbalanced structure, although only with two singletons. The other small
+          clusters consist of two and five observations.</p>
+        <div class="figure" style="text-align: center"><span id="fig:dendroavg5"></span>
+          <img src="pics7b/5_060_dendro_average.png" alt="Dendrogram average linkage (k=5)" width="40%" />
+          <p class="caption">
+            Figure 22: Dendrogram average linkage (k=5)
+          </p>
+        </div>
+        <p>The cluster map
+          is given as Figure <a href="#fig:avgmap">23</a>. It reinforces that the average linkage criterion is not
+          conducive
+          to discovering compact clusters, but rather lumps most of the observations into one large cluster,
+          with a few outliers.</p>
+        <div class="figure" style="text-align: center"><span id="fig:avgmap"></span>
+          <img src="pics7b/5_061_average_map.png" alt="Hierarchical cluster map (average linkage, k=5)" width="60%" />
+          <p class="caption">
+            Figure 23: Hierarchical cluster map (average linkage, k=5)
+          </p>
+        </div>
+        <p>As given in Figure <a href="#fig:avgsummary">24</a>, the summary characteristics are slighly better
+          than in the single linkage case, with only two singletons. However, the overall ratio of
+          between to total sum of squares is still much worse than for the other two methods,
+          at 0.296838.</p>
+        <div class="figure" style="text-align: center"><span id="fig:avgsummary"></span>
+          <img src="pics7b/5_062_average_summary.png" alt="Hierarchical cluster characteristics (average linkage, k=5)"
+            width="45%" />
+          <p class="caption">
+            Figure 24: Hierarchical cluster characteristics (average linkage, k=5)
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="options-and-sensitivity-analysis" class="section level2 unnumbered" number="">
+      <h2>Options and sensitivity analysis</h2>
+      <p>The options are essentially the same for all clustering methods. We can
+        change the <strong>Transformation</strong> and select a different <strong>Distance Function</strong>. We briefly
+        consider
+        the latter. However, this option is not appropriate for Ward’s method, which only
+        applies to Euclidean distances.</p>
+      <p>The option to include a minimum bound is not appropriate for agglomerative clustering,
+        since it would preclude any individual observations to be merged. None would satisfy
+        the minimum bound, unless it was set at a level that was meaningless as a constraint.</p>
+      <p>Conditional plots, aggregation and dissolution of the cluster results operate in exactly the same way
+        as for k-means clustering and is not covered here.</p>
+      <div id="distance-metric" class="section level3 unnumbered" number="">
+        <h3>Distance metric</h3>
+        <p>The default metric behind the definition of dissimilarity is the
+          Euclidean distance between observations. In some contexts, it may be preferable to use absolute or Manhattan
+          block distance, which penalizes larger distances less. This option can be selected
+          through the <strong>Distance Function</strong> item in the dialog, as in Figure <a
+            href="#fig:kmeansdist">25</a>,
+          where we choose it for a <strong>Complete Linkage</strong> clustering (the next best method after
+          Ward’s).</p>
+        <div class="figure" style="text-align: center"><span id="fig:kmeansdist"></span>
+          <img src="pics7b/6_065_hier_manhattan.png" alt="Manhattan distance metric" width="30%" />
+          <p class="caption">
+            Figure 25: Manhattan distance metric
+          </p>
+        </div>
+        <p>The cluster map for a cut point of k=5 is shown in Figure <a href="#fig:mandistmap">26</a>. Compared to the
+          map for Euclidean distance in Figure <a href="#fig:completemap">20</a>, some of the configurations are
+          quite different. Two of the clusters are much smaller, but the largest ones are well balanced.</p>
+        <div class="figure" style="text-align: center"><span id="fig:mandistmap"></span>
+          <img src="pics7b/6_066_h_man_map.png" alt="Manhattan distance cluster map" width="60%" />
+          <p class="caption">
+            Figure 26: Manhattan distance cluster map
+          </p>
+        </div>
+        <p>The summary
+          characteristics given in Figure <a href="#fig:mandistsummary">27</a>. Relative to the Euclidean distance
+          results, some the within
+          sum or squares are much larger, although the largest is not as large as in the Euclidean case, and the
+          smallest is smaller.
+          Also, the ratio of between to total sum of squares
+          is somewhat worse for Manhattan distance, at 0.412 (compared to 0.423). However, this is not a totally fair
+          comparison, since the
+          criterion for grouping is not based on a sum of squared deviations.</p>
+        <div class="figure" style="text-align: center"><span id="fig:mandistsummary"></span>
+          <img src="pics7b/6_067_h_man_summary.png" alt="Manhattan distance cluster characteristics" width="45%" />
+          <p class="caption">
+            Figure 27: Manhattan distance cluster characteristics
+          </p>
+        </div>
+        <p>As in the discussion of k-means, it cannot be emphasized enough that the interpretation and choice of the
+          proper cluster is both an art and a
+          science. Considerable experimentation is needed to get good insight into the characteristics of the data and
+          what
+          groupings make the most sense.</p>
+      </div>
+    </div>
+    <div id="appendix" class="section level2 unnumbered" number="">
+      <h2>Appendix</h2>
+      <div id="single-linkage-worked-example" class="section level3 unnumbered" number="">
+        <h3>Single linkage worked example</h3>
+        <p>We now illustrate each step in detail as the <em>single linkage</em> hierarchical cluster algorithm processes
+          our toy example. For ease of reference, the point coordinates (the same as for the k-means example) are listed
+          again
+          in Figure <a href="#fig:slinkex1">28</a>. The associated dissimilarity matrix, based on the Euclidean distance
+          between the points (not the squared distance) is given in Figure <a href="#fig:slinkdist">2</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkex1"></span>
+          <img src="pics7b/01_coordinates.png" alt="Worked example - basic data" width="35%" />
+          <p class="caption">
+            Figure 28: Worked example - basic data
+          </p>
+        </div>
+        <p>The first step consists of identifying the two observations that are the <em>closest</em>. From the
+          dissimilarity
+          matrix, we find the shortest dissimilarity to be a value of 1.0 between 4 and 5, as highlighted in
+          Figure <a href="#fig:slinkstep1">29</a>. As a result, 4 and 5 form the first cluster.</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkstep1"></span>
+          <img src="pics7b/01_slink_1.png" alt="Single Linkage - Step 1" width="80%" />
+          <p class="caption">
+            Figure 29: Single Linkage - Step 1
+          </p>
+        </div>
+        <p>We update the dissimilarity matrix using the smallest dissimilarity between each observation and either 4 or
+          5 as
+          the entry for the combined unit 4,5. More precisely, the dissimilarity used between the cluster and the
+          other observations
+          varies depending on whether 4 or 5 is closest to the other observations. For example, in
+          Figure <a href="#fig:slinkstep2">30</a>, we list the dissimilarity between 4,5 and 1 as 5.0, wich is the
+          smallest
+          of 1-4 (5.0) and 1-5 (5.83). The dissimilarities between the pairs of observations that do not involve 4,5 are
+          not affected.</p>
+        <p>We update the other entries for 4,5 in the same way and again locate the smallest
+          dissimilarity in the matrix. This time, it is a dissimilarity of 2.0 between 4,5 and 7 (more precisely,
+          between
+          5 and 7). Consequently, observation 7 is added to the 4,5 cluster.</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkstep2"></span>
+          <img src="pics7b/99_sgllink_st2_fix.png" alt="Single Linkage - Step 2" width="72%" />
+          <p class="caption">
+            Figure 30: Single Linkage - Step 2
+          </p>
+        </div>
+        <p>The dissimilarities between 4,5,7 and the other points are updated in Figure <a
+            href="#fig:slinkstep3">31</a>.
+          But now we encounter a problem. There is a three-way tie in terms of the smallest value:
+          1-2, 4,5,7-3 and 4,5,7-6 all have a dissimilarity of 2.24, but only one can be picked to update
+          the clusters. Ties can be handled by choosing one grouping
+          at random. The algorithm behind the
+          <strong>fastcluster</strong> implementation that is used by <code>GeoDa</code> selects the pair 1-2.
+        </p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkstep3"></span>
+          <img src="pics7b/01_slink_3.png" alt="Single Linkage - Step 3" width="62%" />
+          <p class="caption">
+            Figure 31: Single Linkage - Step 3
+          </p>
+        </div>
+        <p>With the distances updated, we - not unsurprisingly - again find 2.24 as the shortest dissimilarity,
+          tied for two pairs (in Figure <a href="#fig:slinkstep4">32</a>). This time the algorithm adds 3 to the
+          existing cluster 4,5,7.</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkstep4"></span>
+          <img src="pics7b/01_slink_4.png" alt="Single Linkage - Step 4" width="52%" />
+          <p class="caption">
+            Figure 32: Single Linkage - Step 4
+          </p>
+        </div>
+        <p>Finally, observation 6 is added to cluster 4,5,7,3 again for a dissimilarity of 2.24
+          (in Figure <a href="#fig:slinkstep5">33</a>)</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkstep5"></span>
+          <img src="pics7b/01_slink_5.png" alt="Single Linkage - Step 5" width="42%" />
+          <p class="caption">
+            Figure 33: Single Linkage - Step 5
+          </p>
+        </div>
+        <p>The end result is to merge the two clusters 1-2 and 4,5,7,3,6 into a single one,
+          which ends the iterations (Figure <a href="#fig:slinkstep6">34</a>).</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkstep6"></span>
+          <img src="pics7b/01_slink_6.png" alt="Single Linkage - Step 6" width="32%" />
+          <p class="caption">
+            Figure 34: Single Linkage - Step 6
+          </p>
+        </div>
+        <p>In <code>GeoDa</code> the consecutive grouping can be found from the categories assigned
+          for each value of k and saved to the data table, as illustrated in
+          Figure <a href="#fig:slinkcats">35</a> (the cluster labels are arbitrary).<a href="#fn8" class="footnote-ref"
+            id="fnref8"><sup>8</sup></a> The
+          corresponding dendrogram is given in Figure <a href="#fig:slinkdendro">5</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:slinkcats"></span>
+          <img src="pics7b/01_stepsintable.png" alt="Single Linkage cluster categories saved in data table"
+            width="50%" />
+          <p class="caption">
+            Figure 35: Single Linkage cluster categories saved in data table
+          </p>
+        </div>
+      </div>
+      <div id="complete-linkage-worked-example" class="section level3 unnumbered" number="">
+        <h3>Complete linkage worked example</h3>
+        <p>The first step in the complete linkage algorithm is the same as in single linkage, since the dissimilarity
+          between two single observations is unaffected by the criterion (the simple dissimilarity is also the minimum
+          and the maximum). As before (Figure <a href="#fig:slinkstep1">29</a>), observations 4 and 5 form the first
+          cluster.</p>
+        <p>Next, we need to update the dissimilarities between the new cluster (4,5) and the other observations,
+          by taking the largest dissimilarity between each observation and either 4 or 5. For example, for observation
+          1,
+          we see from the dissimilarity matrix in Figure <a href="#fig:slinkdist">2</a> that the respective values are
+          5.00 (1-4) and 5.83 (1-5). In contrast to the single linkage updating formula, we now assign 5.83 as
+          the distance between 1 and the new cluster 4,5. We proceed in the same way for the other observations.
+          The result is the updated dissimilarity matrix given in Figure <a href="#fig:compstep2">36</a>. We encounter
+          a tie situation for the smallest value (2.24) and pick 1,2 as the new cluster.</p>
+        <div class="figure" style="text-align: center"><span id="fig:compstep2"></span>
+          <img src="pics7b/22_complete2.png" alt="Complete Linkage - Step 2" width="72%" />
+          <p class="caption">
+            Figure 36: Complete Linkage - Step 2
+          </p>
+        </div>
+        <p>The updated dissimilarity matrix is shown in Figure <a href="#fig:compstep3">37</a>. Again, we take the
+          largest dissimilarity
+          between an observation (or cluster) and either 1 or 2. The smallest overall dissimilarity is still 2.24, now
+          between
+          6 and 7, which form the next cluster.</p>
+        <div class="figure" style="text-align: center"><span id="fig:compstep3"></span>
+          <img src="pics7b/22_complete3.png" alt="Complete Linkage - Step 3" width="62%" />
+          <p class="caption">
+            Figure 37: Complete Linkage - Step 3
+          </p>
+        </div>
+        <p>The updated dissimilarity matrix is as in Figure <a href="#fig:compstep4">38</a>. Now, the smallest
+          dissimilarity is 3.00 (again a tie).
+          We add 3 to 1,2 as the new cluster.</p>
+        <div class="figure" style="text-align: center"><span id="fig:compstep4"></span>
+          <img src="pics7b/22_complete4.png" alt="Complete Linkage - Step 4" width="52%" />
+          <p class="caption">
+            Figure 38: Complete Linkage - Step 4
+          </p>
+        </div>
+        <p>This yields the updated dissimilarities as in Figure <a href="#fig:compstep5">39</a>. The smallest
+          dissimilarity
+          is still 3.0, between 4,5 and 6,7. Those two clusters are grouped to yield the final result.</p>
+        <div class="figure" style="text-align: center"><span id="fig:compstep5"></span>
+          <img src="pics7b/22_complete5.png" alt="Complete Linkage - Step 5" width="42%" />
+          <p class="caption">
+            Figure 39: Complete Linkage - Step 5
+          </p>
+        </div>
+        <p>In the end, we have two clusters, one consisting of 1,2,3, the other of 4,5,6,7, as shown
+          in Figure <a href="#fig:compstep6">40</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:compstep6"></span>
+          <img src="pics7b/22_complete6.png" alt="Complete Linkage - Step 6" width="32%" />
+          <p class="caption">
+            Figure 40: Complete Linkage - Step 6
+          </p>
+        </div>
+        <p>In the same way as for single linkage, the consecutive grouping can be found in <code>GeoDa</code> from the
+          categories assigned
+          for each value of k and saved to the data table, as illustrated in
+          Figure <a href="#fig:compcats">41</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:compcats"></span>
+          <img src="pics7b/33_complete_stepsintable.png" alt="Complete linkage cluster categories saved in data table"
+            width="50%" />
+          <p class="caption">
+            Figure 41: Complete linkage cluster categories saved in data table
+          </p>
+        </div>
+      </div>
+      <div id="average-linkage-worked-example" class="section level3 unnumbered" number="">
+        <h3>Average linkage worked example</h3>
+        <p>Average linkage begins like the other methods, by selecting 4,5 as the first cluster.
+          As it turns out, in our example the updating formula for new clusters boils down to a simple
+          average of the dissimilarities to both points/clusters, since all but the last merger is between
+          balanced entities (e.g., 1 with 1 or 2 with 2). As a result, the weights attached to the
+          respective distances, <span class="math inline">\(n_a / (n_a + n_b) = n_b / (n_a + n_b) = 1/2\)</span>.</p>
+        <p>For example, for observation 1, the new dissimilarity to 4,5 is (1/2) <span
+            class="math inline">\(\times\)</span> 5.00 + (1/2) <span class="math inline">\(\times\)</span> 5.83 = 5.42
+          (due to some
+          rounding) as shown in Figure <a href="#fig:avgstep2">42</a>. The other dissimilarities from/to 4,5 are updated
+          in the same way.
+          The smallest dissimilarity (a tie) in the updated table is 2.24 between 1 and 2, which are grouped into a new
+          cluster.</p>
+        <div class="figure" style="text-align: center"><span id="fig:avgstep2"></span>
+          <img src="pics7b/99_avglink_st2_fix.png" alt="Average Linkage - Step 2" width="72%" />
+          <p class="caption">
+            Figure 42: Average Linkage - Step 2
+          </p>
+        </div>
+        <p>The new dissimilarities are shown in Figure <a href="#fig:avgstep3">43</a>, obtained as the average of the
+          dissimilarities to 1 and 2
+          from the other points/clusters. In the new matrix, the smallest dissimilarity is again 2.24, between 6 and 7.
+          They form the next cluster.</p>
+        <div class="figure" style="text-align: center"><span id="fig:avgstep3"></span>
+          <img src="pics7b/99_avglink_st3_fix.png" alt="Average Linkage - Step 3" width="62%" />
+          <p class="caption">
+            Figure 43: Average Linkage - Step 3
+          </p>
+        </div>
+        <p>The updated dissimilarity matrix is given in Figure <a href="#fig:avgstep4">44</a>. The smallest
+          dissimilarity is between
+          clusters 4,5 and 6,7, which are combined in the next step.</p>
+        <div class="figure" style="text-align: center"><span id="fig:avgstep4"></span>
+          <img src="pics7b/99_avglink_st4_fix.png" alt="Average Linkage - Step 4" width="52%" />
+          <p class="caption">
+            Figure 44: Average Linkage - Step 4
+          </p>
+        </div>
+        <p>In the updated dissimilarity matrix of Figure <a href="#fig:avgstep5">45</a>, the minimum dissimilarity is
+          between 3 and cluster 1,2. This yields the next to final grouping of 1,2,3 and 4,5,6,7.</p>
+        <div class="figure" style="text-align: center"><span id="fig:avgstep5"></span>
+          <img src="pics7b/99_avglink_st5_fix.png" alt="Average Linkage - Step 5" width="42%" />
+          <p class="caption">
+            Figure 45: Average Linkage - Step 5
+          </p>
+        </div>
+        <p>Only at this final stage is the computation of the averages somewhat more complex. Since the
+          distance of 4,5,6,7 needs to be computed with respect to the merger of 1,2 and 3, the respective
+          weights are 2/3 and 1/3. This yields the distance given in Figure <a href="#fig:avgstep6">46</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:avgstep6"></span>
+          <img src="pics7b/99_avglink_st6_fix.png" alt="Average Linkage - Step 6" width="32%" />
+          <p class="caption">
+            Figure 46: Average Linkage - Step 6
+          </p>
+        </div>
+        <p>The consecutive steps in the nesting process can be found from the categories assigned
+          for each value of k and saved to the <code>GeoDa</code> data table, as illustrated in
+          Figure <a href="#fig:avgcats">47</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:avgcats"></span>
+          <img src="pics7b/44_avg_stepsintable.png" alt="Average linkage cluster categories saved in data table"
+            width="50%" />
+          <p class="caption">
+            Figure 47: Average linkage cluster categories saved in data table
+          </p>
+        </div>
+      </div>
+      <div id="wards-method-worked-example" class="section level3 unnumbered" number="">
+        <h3>Ward’s method worked example</h3>
+        <p>Ward’s method has the most complex updating formula of the four methods, involving not only the sum of the
+          squared dissimilarity
+          between every point and the components of the new cluster (<span class="math inline">\(d_{PA}^2\)</span> and
+          <span class="math inline">\(d_{PB}^2\)</span>), with weights <span class="math inline">\((n_a + n_p)/(n_c +
+            n_p)\)</span>
+          and <span class="math inline">\((n_b + n_p)/(n_c + n_p)\)</span>, but also subtracts the squared dissimilarity
+          between the merging elements
+          (<span class="math inline">\(d_{AB}^2\)</span>), with weight <span class="math inline">\(n_p / (n_c +
+            n_p)\)</span>. However, as is the case for the other methods, the updated dissimilarities can readily be
+          computed
+          from the matrix at the previous iteration.</p>
+        <p>The point of departure for Ward’s method is the matrix of <em>squared</em> Euclidian distances between the
+          observations,
+          as shown for our example in Figure <a href="#fig:wardstep1">48</a>. As before, the smallest value is between 4
+          and 5, with <span class="math inline">\(d_{4,5}^2 = 1.00\)</span>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:wardstep1"></span>
+          <img src="pics7b/55_ward1.png" alt="Ward Linkage - Step 1" width="80%" />
+          <p class="caption">
+            Figure 48: Ward Linkage - Step 1
+          </p>
+        </div>
+        <p>Figure <a href="#fig:wardstep2">49</a> shows the first updated squared distance matrix. Since the new squared
+          distances pertain
+          to single observations relative to a merged cluster of two single observations, <span
+            class="math inline">\(n_a = n_b = n_p = 1\)</span> and <span class="math inline">\(n_c = 2\)</span>.
+          Therefore, the weights are 2/3 for <span class="math inline">\(d^2_{PA}\)</span> and <span
+            class="math inline">\(d^2_{PB}\)</span> and 1/3 for <span class="math inline">\(d^2_{AB}\)</span>. For
+          example, for the squared distance
+          between 1 and 4,5, the updating formula becomes <span class="math inline">\((2/3) \times 25.00 + (2/3) \times
+            34.00 - (1/3) \times 1.0 = 39.00\)</span>.
+          The other distances are computed in the same way. The squared distances that do not involve 4 or 5 are left
+          unchanged.</p>
+        <p>The smallest squared distance in the matrix is between 1 and 2 with a value of 5.00. As before, there is a
+          tie with
+          6 and 7, but the algorithm randomly picks 1,2. Hence, 1 and 2 are merged in the next step.</p>
+        <div class="figure" style="text-align: center"><span id="fig:wardstep2"></span>
+          <img src="pics7b/55_ward2.png" alt="Ward Linkage - Step 2" width="72%" />
+          <p class="caption">
+            Figure 49: Ward Linkage - Step 2
+          </p>
+        </div>
+        <p>The updated squared distances are shown in Figure <a href="#fig:wardstep3">50</a>. The values for the squared
+          distances
+          between 1,2 and 3, 6 and 7 use the same weights as in the previous step. For the squared distance between
+          1,2 and 4,5, <span class="math inline">\(n_p = 2\)</span> and <span class="math inline">\(n_c = 2\)</span>, so
+          that the weights become 3/4, 3/4 and 1/2. The smallest squared distance
+          in the matrix is 5.00, between 6 and 7. Those two observations form the next cluster.</p>
+        <div class="figure" style="text-align: center"><span id="fig:wardstep3"></span>
+          <img src="pics7b/55_ward3.png" alt="Ward Linkage - Step 3" width="62%" />
+          <p class="caption">
+            Figure 50: Ward Linkage - Step 3
+          </p>
+        </div>
+        <p>The weights for the updating formula used in Figure <a href="#fig:wardstep4">51</a> are the same as in the
+          previous step.
+          Now, there are two distances involving pairs of observations and one between a point and a pair. The smallest
+          value in the updated matrix is 9.67, between 1,2 and 3. Subsequently, in the next step, 3 is added to the
+          cluster consisting
+          of 1 and 2.</p>
+        <div class="figure" style="text-align: center"><span id="fig:wardstep4"></span>
+          <img src="pics7b/55_ward4.png" alt="Ward Linkage - Step 4" width="52%" />
+          <p class="caption">
+            Figure 51: Ward Linkage - Step 4
+          </p>
+        </div>
+        <p>The updates in Figure <a href="#fig:wardstep5">52</a> involve squared distances between clusters of two
+          observations (<span class="math inline">\(n_p = 2\)</span>) and
+          the new merger of two (<span class="math inline">\(n_a = 2\)</span>) and one observation (<span
+            class="math inline">\(n_b = 1\)</span>), which gives <span class="math inline">\(n_c = 3\)</span>. The
+          weights used in the update
+          of 4,5 to 1,2,3 and 6,7 to 1,2,3 are therefore 4/5 for <span class="math inline">\(d^2_{PA}\)</span>, 3/5 for
+          <span class="math inline">\(d^2_{PB}\)</span> and 2/5 for <span class="math inline">\(d^2_{AB}\)</span>.</p>
+        <p>The smallest value in the matrix is 10.00 between 4,5, and 6,7, resulting in the merger of those two clusters
+          in the next to final step.</p>
+        <div class="figure" style="text-align: center"><span id="fig:wardstep5"></span>
+          <img src="pics7b/55_ward5.png" alt="Ward Linkage - Step 5" width="42%" />
+          <p class="caption">
+            Figure 52: Ward Linkage - Step 5
+          </p>
+        </div>
+        <p>In the final matrix, the weights are 5/7 for <span class="math inline">\(d^2_{PA}\)</span> and <span
+            class="math inline">\(d^2_{PB}\)</span>, and 3/7 for <span class="math inline">\(d^2_{AB}\)</span>, yielding
+          the squared distance of 93.90 between the two remaining clusters, as shown in Figure <a
+            href="#fig:wardstep6">53</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:wardstep6"></span>
+          <img src="pics7b/55_ward6.png" alt="Ward Linkage - Step 6" width="32%" />
+          <p class="caption">
+            Figure 53: Ward Linkage - Step 6
+          </p>
+        </div>
+        <p>As before, the consecutive steps in the nesting process are given in <code>GeoDa</code> by the categories
+          assigned
+          for each value of k and saved to the data table, as illustrated in
+          Figure <a href="#fig:wardcats">54</a>.</p>
+        <div class="figure" style="text-align: center"><span id="fig:wardcats"></span>
+          <img src="pics7b/55_ward_stepsintable.png" alt="Ward linkage cluster categories saved in data table"
+            width="50%" />
+          <p class="caption">
+            Figure 54: Ward linkage cluster categories saved in data table
+          </p>
+        </div>
+        <p><br></p>
+      </div>
+    </div>
+    <div id="references" class="section level2 unnumbered" number="">
+      <h2>References</h2>
+      <div id="refs" class="references hanging-indent">
+        <div id="ref-Everittetal:11">
+          <p>Everitt, Brian S., Sabine Landau, Morven Leese, and Daniel Stahl. 2011. <em>Cluster Analysis, 5th
+              Edition</em>. New York, NY: John Wiley.</p>
+        </div>
+        <div id="ref-KaufmanRousseeuw:05">
+          <p>Kaufman, L., and P. Rousseeuw. 2005. <em>Finding Groups in Data: An Introduction to Cluster Analysis</em>.
+            New York, NY: John Wiley.</p>
+        </div>
+        <div id="ref-Mullner:11">
+          <p>Müllner, Daniel. 2011. “Modern Hierarchical, Agglomerative Clustering Algorithms.”
+            <em>ArXiv:1109.2378[stat.ML]</em>. <a
+              href="http://arxiv.org/abs/1109.2378">http://arxiv.org/abs/1109.2378</a>.</p>
+        </div>
+        <div id="ref-Mullner:13">
+          <p>———. 2013. “fastcluster: Fast Hierarchical, Agglomerative Clustering Routines for R and Python.”
+            <em>Journal of Statistical Software</em> 53 (9).</p>
+        </div>
+        <div id="ref-Ward:63">
+          <p>Ward, Joe H. 1963. “Hierarchical Grouping to Optimize an Objective Function.” <em>Journal of the American
+              Statistical Association</em> 58: 236–44.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footnotes">
+      <hr />
+      <ol>
+        <li id="fn1">
+          <p>University of Chicago, Center for Spatial Data Science – <a href="mailto:anselin@uchicago.edu"
+              class="email">anselin@uchicago.edu</a><a href="#fnref1" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn2">
+          <p>Detailed proofs for all the properties
+            are contained in Chapter 5 of <span class="citation">Kaufman and Rousseeuw (<a
+                href="#ref-KaufmanRousseeuw:05" role="doc-biblioref">2005</a>)</span>.<a href="#fnref2"
+              class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn3">
+          <p>To see that this holds, consider the situation when <span class="math inline">\(d_{PA} &lt;
+              d_{PB}\)</span>, i.e., <span class="math inline">\(A\)</span> is the
+            nearest neighbor to <span class="math inline">\(P\)</span>. As a result, the absolute value of <span
+              class="math inline">\(d_{PA} - d_{PB}\)</span> is <span class="math inline">\(d_{PB} - d_{PA}\)</span>.
+            Then the expression becomes <span class="math inline">\((1/2) d_{PA} + (1/2) d_{PB} - (1/2) d_{PB} + (1/2)
+              d_{PA} = d_{PA}\)</span>, the desired result.<a href="#fnref3" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn4">
+          <p>Unlike what was the case for k-means, the center point
+            does not play a role in single linkage clustering. Therefore, it is not shown in the Figure.<a
+              href="#fnref4" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn5">
+          <p>By convention, the diagonal dissimilarity for the
+            newly merged cluster is set to zero.<a href="#fnref5" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn6">
+          <p>See <span class="citation">Kaufman and Rousseeuw (<a href="#ref-KaufmanRousseeuw:05"
+                role="doc-biblioref">2005</a>)</span>, Chapter 5, for detailed proofs.<a href="#fnref6"
+              class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn7">
+          <p>The factor 2 is included to make sure the expression works when two single observations are merged. In such
+            an
+            instance, their centroid is their actual value and <span class="math inline">\(n_A + n_B = 2\)</span>. It
+            does not matter in terms of the algorithm steps.<a href="#fnref7" class="footnote-back">↩︎</a></p>
+        </li>
+        <li id="fn8">
+          <p>The data input to <code>GeoDa</code> is a csv file with the point IDs and X, Y coordinates.<a
+              href="#fnref8" class="footnote-back">↩︎</a></p>
+        </li>
+      </ol>
+    </div>
+
+
+  </section>
+
+
+  <!-- code folding -->
+
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-focused websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-text-secondary: #AAAAAA;
+}
+
+/* Import original GeoDa styles */
+@import url('/normalize.css');
+@import url('/stylesheet.css');
+
+/* ===== GLOBAL STYLES ===== */
+
+/* Base typography */
+body {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px !important;
+  line-height: 1.5;
+  color: #606c71;
+}
+
+/* Global link styles */
+a {
+  color: #1e6bb8;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Global image styles */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Global iframe styles */
+iframe {
+  max-width: 100%;
+}
+
+/* Anchor link fixes */
+.anchor {
+  display: none;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+  display: inline-block;
+}
+
+/* ===== NAVBAR STYLES ===== */
+
+/* Override Docusaurus navbar to match GeoDa style */
+.navbar {
+  background-color: #159957;
+  background-image: linear-gradient(120deg, #155799, #159957);
+  font-size: 16px;
+}
+
+/* Fix navbar title color and spacing */
+.navbar__title {
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin-left: 12px !important;
+  font-weight: 500;
+  font-size: 18px !important;
+}
+
+/* Ensure language dropdown appears above other content but below sidebar */
+.navbar__items {
+  position: relative;
+}
+
+.navbar__toggle {
+  display: none;
+}
+
+.navbar__title:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: none;
+}
+
+.navbar__link {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px !important;
+  font-weight: 500;
+}
+
+.navbar__link:hover {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+
+/* Increase navbar item font sizes */
+.navbar__items {
+  font-size: 16px;
+}
+
+.navbar__item {
+  font-size: 16px !important;
+}
+
+/* GeoDa Logo Styling - Make it adaptive to header height */
+.navbar__logo {
+  height: 32px !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+.navbar__logo img {
+  height: 100% !important;
+  width: auto !important;
+  max-width: none !important;
+  object-fit: contain;
+}
+
+/* ===== RESPONSIVE NAVBAR ===== */
+
+@media screen and (max-width: 768px) {
+  .navbar__logo {
+    height: 28px !important;
+  }
+  
+  .navbar__title {
+    margin-left: 8px !important;
+    font-size: 16px !important;
+  }
+  
+  .navbar__link {
+    font-size: 14px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar__logo {
+    height: 24px !important;
+  }
+  
+  .navbar__title {
+    margin-left: 6px !important;
+    font-size: 14px !important;
+  }
+  
+  .navbar__link {
+    font-size: 13px !important;
+  }
+}
+
+/* ===== LAYOUT STYLES ===== */
+
+/* Ensure our custom components work well with Docusaurus */
+.main-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-wrapper main {
+  flex: 1;
+}
+
+/* Override Docusaurus main content font sizes to match original */
+.main-content {
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6 {
+  font-size: 1.5rem !important;
+  font-weight: normal !important;
+  color: #159957 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.main-content p {
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 1em !important;
+}
+
+/* ===== BLOG POST TITLE STYLES ===== */
+
+/* Blog post title styling - these are h2 elements with title class */
+article h2 {
+  font-size: 2.0rem !important;
+}
+
+
+/* ===== RESPONSIVE MAIN CONTENT ===== */
+
+@media screen and (min-width: 64em) {
+  .main-content h1,
+  .main-content h2,
+  .main-content h3,
+  .main-content h4,
+  .main-content h5,
+  .main-content h6 {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media screen and (min-width: 42em) and (max-width: 64em) {
+  .main-content h1,
+  .main-content h2,
+  .main-content h3,
+  .main-content h4,
+  .main-content h5,
+  .main-content h6 {
+    font-size: 1.4rem !important;
+  }
+}
+
+@media screen and (max-width: 42em) {
+  .main-content h1,
+  .main-content h2,
+  .main-content h3,
+  .main-content h4,
+  .main-content h5,
+  .main-content h6 {
+    font-size: 1.3rem !important;
+  }
+}

@@ -28,6 +28,7 @@ jobs:
         env:
           GA4_ACCOUNT_CRED: ${{ secrets.GA4_ACCOUNT_CRED }}
         run: |
+          cd static
           python data/google_analytics.py
       - name: Get current date
         id: date
@@ -37,6 +38,6 @@ jobs:
           git config --local user.email "lixun910@gmail.com"
           git config --local user.name "Xun Li"
           git pull
-          git add data/download_data.json data/globe_log.json data/down_by_country.csv
+          git add static/data/download_data.json static/data/globe_log.json static/data/down_by_country.csv
           git commit -m "Updated google analytics stats ${{ steps.date.outputs.date }}"
           git push origin master

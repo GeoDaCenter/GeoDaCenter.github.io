@@ -145,6 +145,30 @@ h6:hover .anchor {
 
 /* ===== RESPONSIVE NAVBAR ===== */
 
+/* Fix search and language switcher overlap */
+.navbar__items--right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Ensure proper spacing between search and language switcher */
+.navbar__item {
+  margin-left: 8px;
+}
+
+/* Language switcher specific styles */
+.global-language-switcher {
+  margin-left: 8px !important;
+  z-index: 1001;
+}
+
+/* DocSearch container styles */
+.DocSearch-Button {
+  margin-right: 8px;
+}
+
 @media screen and (max-width: 768px) {
   .navbar__logo {
     height: 28px !important;
@@ -157,6 +181,34 @@ h6:hover .anchor {
   
   .navbar__link {
     font-size: 14px !important;
+  }
+  
+  /* Adjust spacing on medium screens */
+  .navbar__items--right {
+    gap: 4px;
+  }
+  
+  .navbar__item {
+    margin-left: 4px;
+  }
+  
+  .global-language-switcher {
+    margin-left: 4px !important;
+  }
+  
+  /* Make language switcher more compact */
+  .language-switcher button {
+    padding: 6px 8px !important;
+    font-size: 14px !important;
+  }
+  
+  .language-switcher button span {
+    font-size: 16px !important;
+  }
+  
+  /* Show shorter text on medium screens */
+  .language-text {
+    display: inline;
   }
 }
 
@@ -172,6 +224,51 @@ h6:hover .anchor {
   
   .navbar__link {
     font-size: 13px !important;
+  }
+  
+  /* Stack items vertically on very small screens */
+  .navbar__items--right {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+  
+  .navbar__item {
+    margin-left: 0;
+    margin-bottom: 2px;
+  }
+  
+  .global-language-switcher {
+    margin-left: 0 !important;
+    order: 2;
+  }
+  
+  /* Make search button smaller */
+  .DocSearch-Button {
+    margin-right: 0;
+    padding: 6px 8px !important;
+  }
+  
+  /* Make language switcher even more compact */
+  .language-switcher button {
+    padding: 4px 6px !important;
+    font-size: 12px !important;
+  }
+  
+  .language-switcher button span {
+    font-size: 14px !important;
+  }
+  
+  /* Ensure dropdown doesn't get cut off */
+  .language-switcher > div[style*="position: absolute"] {
+    right: 0 !important;
+    left: auto !important;
+    min-width: 120px !important;
+  }
+  
+  /* Hide "Language" text on very small screens */
+  .language-text {
+    display: none;
   }
 }
 

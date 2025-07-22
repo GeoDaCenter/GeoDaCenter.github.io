@@ -132,7 +132,9 @@ const StandaloneLanguageSwitcher: React.FC<StandaloneLanguageSwitcherProps> = ({
           fontFamily: 'inherit',
           display: 'flex',
           alignItems: 'center',
-          gap: '6px'
+          gap: '6px',
+          whiteSpace: 'nowrap',
+          minWidth: 'fit-content'
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
@@ -142,7 +144,7 @@ const StandaloneLanguageSwitcher: React.FC<StandaloneLanguageSwitcherProps> = ({
         }}
       >
         <span style={{ fontSize: '18px', lineHeight: 1 }}>🌐</span>
-        Language
+        <span className="language-text">Language</span>
       </button>
 
       {isOpen && (

@@ -1,0 +1,87 @@
+{
+  "index_name": "geoda",
+  "start_urls": [
+    "https://geodacenter.github.io/",
+    "https://geodacenter.github.io/docs/",
+    "https://geodacenter.github.io/blog/"
+  ],
+  "stop_urls": [
+    "https://geodacenter.github.io/search",
+    "https://geodacenter.github.io/404.html"
+  ],
+  "selectors": {
+    "lvl0": {
+      "selector": "h1",
+      "global": true,
+      "default_value": "Documentation"
+    },
+    "lvl1": "h2",
+    "lvl2": "h3", 
+    "lvl3": "h4",
+    "lvl4": "h5",
+    "lvl5": "h6",
+    "text": "p, li, td, th, div, code, pre"
+  },
+  "strip_chars": " .,;:#",
+  "custom_settings": {
+    "separatorsToIndex": "_",
+    "attributesForFaceting": [
+      "type",
+      "lang",
+      "version",
+      "tags"
+    ],
+    "attributesToRetrieve": [
+      "hierarchy",
+      "content", 
+      "anchor",
+      "url",
+      "url_without_anchor",
+      "type",
+      "lang"
+    ],
+    "distinct": true,
+    "ranking": [
+      "words",
+      "filters",
+      "typo",
+      "geo",
+      "proximity",
+      "attribute",
+      "exact",
+      "custom"
+    ]
+  },
+  "conversation_id": ["geoda_docsearch"],
+  "nb_hits": 10000,
+  "sitemap_urls": [
+    "https://geodacenter.github.io/sitemap.xml"
+  ],
+  "sitemap_alternate_links": true,
+  "force_sitemap_urls_crawling": true,
+  "crawl_parameters": {
+    "maxDepth": 10,
+    "maxUrls": 10000,
+    "respectRobotsTxt": true,
+    "crawlRate": 1
+  },
+  "js_render": true,
+  "js_wait": 2,
+  "use_anchors": true,
+  "strict_redirects": true,
+  "ignore_canonical_to": false,
+  "ignore_canonical_keep": false,
+  "keep_tags": [
+    "code",
+    "pre"
+  ],
+  "selectors_exclude": [
+    ".docusaurus-highlight-code-line",
+    ".theme-code-block",
+    ".prism-code",
+    ".navbar",
+    ".footer",
+    ".sidebar",
+    ".table-of-contents"
+  ]
+} 

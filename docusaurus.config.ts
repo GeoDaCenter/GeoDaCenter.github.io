@@ -110,8 +110,8 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://github.com/GeoDaCenter/geoda',
-          label: 'GitHub',
+          href: 'https://GeoDaAI.github.io',
+          label: 'GeoDa AI',
           position: 'right',
         },
       ],

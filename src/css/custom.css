@@ -143,6 +143,55 @@ h6:hover .anchor {
   object-fit: contain;
 }
 
+/* GitHub Icon Styling */
+.global-github-icon {
+  display: flex !important;
+  align-items: center;
+}
+
+.global-github-icon a {
+  display: flex !important;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-decoration: none !important;
+  padding: 8px 12px !important;
+  transition: color 0.2s ease !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  font-family: inherit !important;
+}
+
+.global-github-icon a:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: none !important;
+}
+
+.global-github-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+  fill: currentColor !important;
+}
+
+/* Language Switcher Styling */
+.global-language-switcher {
+  display: flex !important;
+  align-items: center;
+  margin-left: 4px !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+}
+
+.global-language-switcher button {
+  padding: 8px 6px !important;
+  gap: 4px !important;
+  margin: 0 !important;
+}
+
+/* Override any default navbar item spacing */
+.navbar__items--right .navbar__item:not(:last-child) {
+  margin-right: 4px !important;
+}
+
 /* ===== RESPONSIVE NAVBAR ===== */
 
 @media screen and (max-width: 768px) {

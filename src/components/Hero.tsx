@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import GlobalLanguageSwitcher from './GlobalLanguageSwitcher';
+import GlobalGitHubIcon from './GlobalGitHubIcon';
 import styles from './Hero.module.css';
 
 interface HeroProps {
@@ -17,6 +18,7 @@ export default function Hero({ title, tagline, buttons }: HeroProps): React.JSX.
   return (
     <>
       <GlobalLanguageSwitcher />
+      <GlobalGitHubIcon />
       <section className={styles.pageHeader}>
         <h1 className={styles.projectName}>{title}</h1>
         <h2 className={styles.projectTagline}>{tagline}</h2>

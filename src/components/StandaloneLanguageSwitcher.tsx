@@ -122,7 +122,7 @@ const StandaloneLanguageSwitcher: React.FC<StandaloneLanguageSwitcherProps> = ({
         style={{
           background: 'none',
           border: 'none',
-          padding: '8px 12px',
+          padding: '8px 8px',
           cursor: 'pointer',
           fontSize: '16px',
           color: 'rgba(255, 255, 255, 0.7)',
@@ -132,7 +132,7 @@ const StandaloneLanguageSwitcher: React.FC<StandaloneLanguageSwitcherProps> = ({
           fontFamily: 'inherit',
           display: 'flex',
           alignItems: 'center',
-          gap: '6px'
+          gap: '4px'
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';

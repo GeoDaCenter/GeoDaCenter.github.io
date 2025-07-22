@@ -15,7 +15,7 @@ const GlobalLanguageSwitcher: React.FC = () => {
         const languageContainer = document.createElement('div');
         languageContainer.className = 'navbar__item global-language-switcher';
         languageContainer.style.display = 'inline-block';
-        languageContainer.style.marginLeft = '16px';
+        languageContainer.style.marginLeft = '4px';
         
         // Insert after the last navbar item
         navbarItems.appendChild(languageContainer);

@@ -144,7 +144,7 @@ const config: Config = {
               href: 'https://github.com/GeoDaCenter/geoda',
             },
             {
-              label: 'Data & Lab',
+              label: 'Data',
               href: 'https://geodacenter.github.io/data-and-lab/',
             },
             {

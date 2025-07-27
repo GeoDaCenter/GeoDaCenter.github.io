@@ -10,7 +10,7 @@
         "external": true
       }
     ],
-    "image": "img/donate.png",
+    "image": "/img/donate.png",
     "imageAlt": "Donate to GeoDa",
     "description": "GeoDa is continuously updated. The most current version is GeoDa 1.22.0.18 with new features. We found it to be stable but if you encounter a bug, please let us know. You can also report bugs and issues on our Github site. The source code for GeoDa is available here and is released under the GPL v3.0 license.",
     "descriptionLinks": [

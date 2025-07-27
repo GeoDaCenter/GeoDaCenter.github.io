@@ -39,10 +39,10 @@
   },
   "downloadButtons": {
     "buttons": [
-      { "text": "Download For Windows", "href": "./download-windows" },
-      { "text": "Download For Mac", "href": "./download-mac" },
-      { "text": "Download For Linux", "href": "./download-linux" },
-      { "text": "Nightly build", "href": "./download-nightly" }
+      { "text": "Download For Windows", "href": "/download-windows" },
+      { "text": "Download For Mac", "href": "/download-mac" },
+      { "text": "Download For Linux", "href": "/download-linux" },
+      { "text": "Nightly build", "href": "/download-nightly" }
     ]
   },
   "releaseList": {
@@ -87,7 +87,7 @@
     "title": "Lab Installation",
     "description": "GeoDa is available for lab use. Please use the following guide to install GeoDa on your lab computers. If you have any questions, please contact us.",
     "text": "Lab Installation Guide",
-    "href": "./lab_install"
+    "href": "/lab_install"
   },
   "map": {
     "title": "GeoDa Users Across the Globe"

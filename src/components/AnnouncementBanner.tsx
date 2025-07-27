@@ -35,6 +35,7 @@ export default function AnnouncementBanner({ text, url }: AnnouncementBannerProp
   if (!isVisible) {
     return null;
   }
+  
   return (
     <div className={styles.banner}>
       <div className={styles.bannerContent}>

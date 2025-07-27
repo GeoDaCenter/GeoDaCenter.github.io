@@ -15,7 +15,6 @@ export default function DownloadButtons({
 }: DownloadButtonsProps): React.JSX.Element {
   return (
     <section className={styles.mainContent}>
-      <br />
       <p style={{ textAlign: 'center' }}>
         {buttons.map((button, index) => (
           <a
@@ -27,7 +26,6 @@ export default function DownloadButtons({
           </a>
         ))}
       </p>
-      <br />
     </section>
   );
 }

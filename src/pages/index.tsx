@@ -35,10 +35,10 @@ function HomeContent(): React.JSX.Element {
 
   return (
     <>
-      {/* <AnnouncementBanner 
-        text="🚀 NEW FEATURE! Add your announcement here! 🎯"
-        url="/documentation"
-      /> */}
+      <AnnouncementBanner 
+        text="🚀 NEW RELEASE! GeoDa 1.22.0.18 is now available! 🎯"
+        url="/download"
+      />
       <Layout
         title="GeoDa - An Introduction to Spatial Data Science"
         description="GeoDa is a free and open source software tool that serves as an introduction to spatial data science."

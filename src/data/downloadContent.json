@@ -12,9 +12,13 @@
     ],
     "image": "img/donate.png",
     "imageAlt": "Donate to GeoDa",
-    "description": "GeoDa is continuously updated. The most current version is GeoDa 1.22 with new features. We found it to be stable but if you encounter a bug, please let us know. You can also report bugs and issues on our Github site. The source code for GeoDa is available here and is released under the GPL v3.0 license.",
+    "description": "GeoDa is continuously updated. The most current version is GeoDa 1.22.0.18 with new features. We found it to be stable but if you encounter a bug, please let us know. You can also report bugs and issues on our Github site. The source code for GeoDa is available here and is released under the GPL v3.0 license.",
     "descriptionLinks": [
-      { "text": "new features", "href": "/" },
+      {
+        "text": "new features",
+        "href": "https://github.com/GeoDaCenter/geoda/releases",
+        "external": true
+      },
       { "text": "please let us know", "href": "mailto:spatial@uchicago.edu" },
       {
         "text": "our Github site",
@@ -49,6 +53,7 @@
       "external": true
     },
     "releases": [
+      { "date": "7/25/2025", "version": "1.22.0.18" },
       { "date": "1/30/2025", "version": "1.22.0.14" },
       { "date": "1/17/2025", "version": "1.22.0.12" },
       { "date": "10/8/2024", "version": "1.22.0.10" },

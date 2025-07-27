@@ -32,7 +32,7 @@ export default function DonationSection({
     <section className={styles.mainContent}>
       <h3 className={commonStyles.heading}>{title}</h3>
       
-      <div style={{ float: 'right', marginLeft: '25px', height: '250px' }}>
+      <div style={{ float: 'right', marginLeft: '25px', height: '160px' }}>
         <a href={links[0].href}>
           <img src={image} alt={imageAlt} />
         </a>

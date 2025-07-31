@@ -2,11 +2,11 @@
   "title": "下载 Linux 版 GeoDa",
   "description": "点击下方链接后将立即开始下载：",
   "currentVersion": {
-    "version": "GeoDa 1.22",
+    "version": "GeoDa 1.22.0.18",
     "downloads": [
       {
         "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Noble 24.04",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-noble.zip",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-1.22.0-noble.zip",
         "tracking": {
           "category": "GeoDaUbuntu64Downloads122",
           "label": "GeoDa Software Downloads Count for Ubuntu 64"
@@ -14,7 +14,7 @@
       },
       {
         "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Jammy 22.04",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-jammy.zip",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-1.22.0-jammy.zip",
         "tracking": {
           "category": "GeoDaUbuntu64Downloads122",
           "label": "GeoDa Software Downloads Count for Ubuntu 64"
@@ -22,7 +22,7 @@
       },
       {
         "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Focal 20.04",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-focal.zip",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-1.22.0-focal.zip",
         "tracking": {
           "category": "GeoDaUbuntu64Downloads122",
           "label": "GeoDa Software Downloads Count for Ubuntu 64"
@@ -55,6 +55,35 @@
     }
   ],
   "previousVersions": [
+    {
+      "version": "GeoDa 1.22",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Noble 24.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-noble.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Jammy 22.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Ubuntu Focal 20.04",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-1.22.0-focal.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
     {
       "version": "GeoDa 1.22.0.12",
       "downloads": [
@@ -441,4 +470,4 @@
       ]
     }
   ]
-} 
+}

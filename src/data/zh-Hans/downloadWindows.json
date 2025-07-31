@@ -2,11 +2,11 @@
   "title": "下载 Windows 版 GeoDa",
   "description": "点击此链接后将立即开始下载：",
   "currentVersion": {
-    "version": "GeoDa 1.22",
+    "version": "GeoDa 1.22.0.18",
     "downloads": [
       {
         "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Windows",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x64-installer.zip",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-Windows7+-x64-installer.zip",
         "tracking": {
           "category": "GeoDaWin64Downloads122",
           "label": "GeoDa Software Downloads Count for Win64"
@@ -14,7 +14,7 @@
       },
       {
         "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 32位 Windows",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x86-installer.zip",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-Windows7+-x86-installer.zip",
         "tracking": {
           "category": "GeoDaWin32Downloads122",
           "label": "GeoDa Software Downloads Count for Win32"
@@ -51,6 +51,27 @@
     }
   ],
   "previousVersions": [
+    {
+      "version": "GeoDa 1.22",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 64位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 32位 Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
     {
       "version": "GeoDa 1.22.0.12",
       "downloads": [
@@ -577,4 +598,4 @@
       ]
     }
   ]
-} 
+}

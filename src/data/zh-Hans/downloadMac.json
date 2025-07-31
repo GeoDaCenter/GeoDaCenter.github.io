@@ -2,11 +2,11 @@
   "title": "下载 Mac OSX 版 GeoDa",
   "description": "点击链接后将立即开始下载。",
   "currentVersion": {
-    "version": "GeoDa 1.22",
+    "version": "GeoDa 1.22.0.18",
     "downloads": [
       {
         "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 Mac OS X (Ventura+) [Apple Silicon Arm64]",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa1.22.0-arm64-Installer.dmg",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa1.22.0-arm64-Installer.dmg",
         "tracking": {
           "category": "GeoDaOSXDownloads122",
           "label": "GeoDa Software Downloads Count for MacOSX 1.22"
@@ -14,7 +14,7 @@
       },
       {
         "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 Mac OS X (Big Sur+) [Apple Intel X86_64]",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa1.22.0-x86_64-Installer.dmg",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa1.22.0-x86_64-Installer.dmg",
         "tracking": {
           "category": "GeoDaOSXDownloads122",
           "label": "GeoDa Software Downloads Count for MacOSX 1.22"
@@ -43,6 +43,27 @@
     }
   ],
   "previousVersions": [
+    {
+      "version": "GeoDa 1.22",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 Mac OS X (Ventura+) [Apple Silicon Arm64]",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa1.22.0-arm64-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 Mac OS X (Big Sur+) [Apple Intel X86_64]",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa1.22.0-x86_64-Installer.dmg",
+          "tracking": {
+            "category": "GeoDaOSXDownloads122",
+            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
+          }
+        }
+      ]
+    },
     {
       "version": "GeoDa 1.22.0.12",
       "downloads": [
@@ -354,4 +375,4 @@
       ]
     }
   ]
-} 
+}

@@ -2,19 +2,19 @@
   "title": "Descargar GeoDa para Windows",
   "description": "La descarga comenzará inmediatamente después de hacer clic en este enlace:",
   "currentVersion": {
-    "version": "GeoDa 1.22",
+    "version": "GeoDa 1.22.0.18",
     "downloads": [
       {
-        "text": "GeoDa 1.22.0.14 (30/1/2025) para Windows de 64 bits",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x64-installer.zip",
+        "text": "GeoDa 1.22.0.18 (7/25/2025) para Windows de 64 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-Windows7+-x64-installer.zip",
         "tracking": {
           "category": "GeoDaWin64Downloads122",
           "label": "GeoDa Software Downloads Count for Win64"
         }
       },
       {
-        "text": "GeoDa 1.22.0.14 (30/1/2025) para Windows de 32 bits",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x86-installer.zip",
+        "text": "GeoDa 1.22.0.18 (7/25/2025) para Windows de 32 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-Windows7+-x86-installer.zip",
         "tracking": {
           "category": "GeoDaWin32Downloads122",
           "label": "GeoDa Software Downloads Count for Win32"
@@ -51,6 +51,27 @@
     }
   ],
   "previousVersions": [
+    {
+      "version": "GeoDa 1.22",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.14 (30/1/2025) para Windows de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.14 (30/1/2025) para Windows de 32 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.14/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
     {
       "version": "GeoDa 1.22.0.12",
       "downloads": [
@@ -486,7 +507,9 @@
     {
       "version": "GeoDa Legacy",
       "content": "Si desea usar el binario GeoDa 0.95i de 2004 para Windows XP, seleccione el enlace \"Geoda 0.9.5-i Windows XP Installer\" a continuación. La descarga comenzará inmediatamente después de iniciar sesión.",
-      "notes": ["Tenga en cuenta que GeoDa 0.9.5-i se ejecuta solo en Windows XP."],
+      "notes": [
+        "Tenga en cuenta que GeoDa 0.9.5-i se ejecuta solo en Windows XP."
+      ],
       "downloads": [
         {
           "text": "GeoDa 0.9.5-i Windows XP Installer",
@@ -577,4 +600,4 @@
     "image": "img/windows_32_or_64_bit_system_info.png"
   },
   "footerNote": "Nota: el programa GeoDa de 32 bits funciona en Windows XP y Vista, pero solo proporcionamos soporte limitado para versiones anteriores a Windows 7."
-} 
+}

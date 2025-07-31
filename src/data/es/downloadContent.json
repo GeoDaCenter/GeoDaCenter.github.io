@@ -14,8 +14,14 @@
     "imageAlt": "Donar a GeoDa",
     "description": "GeoDa se actualiza continuamente. La versión más reciente es GeoDa 1.22 con nuevas funciones. La encontramos estable pero si encuentras un error, por favor háznoslo saber. También puedes reportar errores y problemas en nuestro sitio de Github. El código fuente de GeoDa está disponible aquí y se publica bajo la licencia GPL v3.0.",
     "descriptionLinks": [
-      { "text": "nuevas funciones", "href": "/" },
-      { "text": "por favor háznoslo saber", "href": "mailto:spatial@uchicago.edu" },
+      {
+        "text": "nuevas funciones",
+        "href": "/"
+      },
+      {
+        "text": "por favor háznoslo saber",
+        "href": "mailto:spatial@uchicago.edu"
+      },
       {
         "text": "nuestro sitio de Github",
         "href": "https://github.com/GeoDaCenter/geoda/issues",
@@ -35,10 +41,22 @@
   },
   "downloadButtons": {
     "buttons": [
-      { "text": "Descargar para Windows", "href": "./download-windows" },
-      { "text": "Descargar para Mac", "href": "./download-mac" },
-      { "text": "Descargar para Linux", "href": "./download-linux" },
-      { "text": "Versión nocturna", "href": "./download-nightly" }
+      {
+        "text": "Descargar para Windows",
+        "href": "./download-windows"
+      },
+      {
+        "text": "Descargar para Mac",
+        "href": "./download-mac"
+      },
+      {
+        "text": "Descargar para Linux",
+        "href": "./download-linux"
+      },
+      {
+        "text": "Versión nocturna",
+        "href": "./download-nightly"
+      }
     ]
   },
   "releaseList": {
@@ -49,33 +67,118 @@
       "external": true
     },
     "releases": [
-      { "date": "1/30/2025", "version": "1.22.0.14" },
-      { "date": "1/17/2025", "version": "1.22.0.12" },
-      { "date": "10/8/2024", "version": "1.22.0.10" },
-      { "date": "8/27/2024", "version": "1.22.0.8" },
-      { "date": "3/07/2024", "version": "1.22.0.6" },
-      { "date": "10/12/2023", "version": "1.22.0.4" },
-      { "date": "8/30/2023", "version": "1.22" },
-      { "date": "2/12/2023", "version": "1.20.0.36" },
-      { "date": "8/07/2022", "version": "1.20.0.20" },
-      { "date": "11/07/2021", "version": "1.20.0.8" },
-      { "date": "9/24/2021", "version": "1.20.0.0" },
-      { "date": "12/10/2020", "version": "1.18.0.0" },
-      { "date": "10/20/2020", "version": "1.16.0.16" },
-      { "date": "10/15/2020", "version": "1.16.0.12" },
-      { "date": "9/24/2020", "version": "1.16.0" },
-      { "date": "8/24/2019", "version": "1.14.0" },
-      { "date": "9/26/2018", "version": "1.12.1.161" },
-      { "date": "4/26/2018", "version": "1.12.1.129" },
-      { "date": "11/13/2017", "version": "1.12.1.47" },
-      { "date": "10/01/2017", "version": "1.12" },
-      { "date": "06/01/2017", "version": "1.10" },
-      { "date": "03/07/2017", "version": "1.8.16.4" },
-      { "date": "03/05/2017", "version": "1.8.16" },
-      { "date": "11/08/2016", "version": "1.8.14" },
-      { "date": "09/01/2016", "version": "1.8.12" },
-      { "date": "07/14/2016", "version": "1.8.10" },
-      { "date": "06/11/2016", "version": "1.8.8" }
+      {
+        "date": "7/25/2025",
+        "version": "1.22.0.18"
+      },
+      {
+        "date": "1/30/2025",
+        "version": "1.22.0.14"
+      },
+      {
+        "date": "1/17/2025",
+        "version": "1.22.0.12"
+      },
+      {
+        "date": "10/8/2024",
+        "version": "1.22.0.10"
+      },
+      {
+        "date": "8/27/2024",
+        "version": "1.22.0.8"
+      },
+      {
+        "date": "3/07/2024",
+        "version": "1.22.0.6"
+      },
+      {
+        "date": "10/12/2023",
+        "version": "1.22.0.4"
+      },
+      {
+        "date": "8/30/2023",
+        "version": "1.22"
+      },
+      {
+        "date": "2/12/2023",
+        "version": "1.20.0.36"
+      },
+      {
+        "date": "8/07/2022",
+        "version": "1.20.0.20"
+      },
+      {
+        "date": "11/07/2021",
+        "version": "1.20.0.8"
+      },
+      {
+        "date": "9/24/2021",
+        "version": "1.20.0.0"
+      },
+      {
+        "date": "12/10/2020",
+        "version": "1.18.0.0"
+      },
+      {
+        "date": "10/20/2020",
+        "version": "1.16.0.16"
+      },
+      {
+        "date": "10/15/2020",
+        "version": "1.16.0.12"
+      },
+      {
+        "date": "9/24/2020",
+        "version": "1.16.0"
+      },
+      {
+        "date": "8/24/2019",
+        "version": "1.14.0"
+      },
+      {
+        "date": "9/26/2018",
+        "version": "1.12.1.161"
+      },
+      {
+        "date": "4/26/2018",
+        "version": "1.12.1.129"
+      },
+      {
+        "date": "11/13/2017",
+        "version": "1.12.1.47"
+      },
+      {
+        "date": "10/01/2017",
+        "version": "1.12"
+      },
+      {
+        "date": "06/01/2017",
+        "version": "1.10"
+      },
+      {
+        "date": "03/07/2017",
+        "version": "1.8.16.4"
+      },
+      {
+        "date": "03/05/2017",
+        "version": "1.8.16"
+      },
+      {
+        "date": "11/08/2016",
+        "version": "1.8.14"
+      },
+      {
+        "date": "09/01/2016",
+        "version": "1.8.12"
+      },
+      {
+        "date": "07/14/2016",
+        "version": "1.8.10"
+      },
+      {
+        "date": "06/11/2016",
+        "version": "1.8.8"
+      }
     ]
   },
   "labInstallation": {
@@ -90,6 +193,11 @@
   "contact": {
     "title": "Contacto",
     "content": "¿Preguntas? Contáctenos.",
-    "links": [{ "text": "nosotros", "href": "mailto:spatial@uchicago.edu" }]
+    "links": [
+      {
+        "text": "nosotros",
+        "href": "mailto:spatial@uchicago.edu"
+      }
+    ]
   }
-} 
+}

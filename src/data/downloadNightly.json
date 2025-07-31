@@ -7,6 +7,11 @@
       "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.18"
     },
     {
+      "date": "7/25/2025",
+      "version": "GeoDa 1.22.0.18",
+      "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.18"
+    },
+    {
       "date": "1/30/2025",
       "version": "GeoDa 1.22.0.14",
       "releaseNotes": "https://github.com/GeoDaCenter/geoda/releases/tag/v1.22.0.14"
@@ -363,4 +368,4 @@
       ]
     }
   ]
-} 
+}

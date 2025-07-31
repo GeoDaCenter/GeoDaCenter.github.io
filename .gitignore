@@ -20,3 +20,6 @@ build
 .env
 .env.local
 .env.*.local
+
+# Backup directories created by version update scripts
+backup-*/

@@ -5,7 +5,7 @@
     "version": "GeoDa 1.22.0.18",
     "downloads": [
       {
-        "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 Mac OS X (Ventura+) [Apple Silicon Arm64]",
+        "text": "GeoDa 1.22.0.18 (7/25/2025)  适用于 Mac OS X (Ventura+) [Apple Silicon Arm64]",
         "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa1.22.0-arm64-Installer.dmg",
         "tracking": {
           "category": "GeoDaOSXDownloads122",
@@ -13,7 +13,7 @@
         }
       },
       {
-        "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 Mac OS X (Big Sur+) [Apple Intel X86_64]",
+        "text": "GeoDa 1.22.0.18 (7/25/2025) 适用于 Mac OS X (Big Sur+) [Apple Intel X86_64]",
         "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa1.22.0-x86_64-Installer.dmg",
         "tracking": {
           "category": "GeoDaOSXDownloads122",
@@ -44,7 +44,7 @@
   ],
   "previousVersions": [
     {
-      "version": "GeoDa 1.22",
+      "version": "GeoDa 1.22.0.14",
       "downloads": [
         {
           "text": "GeoDa 1.22.0.14 (2025年1月30日) 适用于 Mac OS X (Ventura+) [Apple Silicon Arm64]",

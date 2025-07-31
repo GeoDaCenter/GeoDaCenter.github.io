@@ -52,27 +52,6 @@
   ],
   "previousVersions": [
     {
-      "version": "GeoDa 1.22",
-      "downloads": [
-        {
-          "text": "GeoDa 1.22.0.18 (7/25/2025) for 64-bit Windows",
-          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-Windows7+-x64-installer.zip",
-          "tracking": {
-            "category": "GeoDaWin64Downloads122",
-            "label": "GeoDa Software Downloads Count for Win64"
-          }
-        },
-        {
-          "text": "GeoDa 1.22.0.18 (7/25/2025) for 32-bit Windows",
-          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-Windows7+-x86-installer.zip",
-          "tracking": {
-            "category": "GeoDaWin32Downloads122",
-            "label": "GeoDa Software Downloads Count for Win32"
-          }
-        }
-      ]
-    },
-    {
       "version": "GeoDa 1.22.0.14",
       "downloads": [
         {

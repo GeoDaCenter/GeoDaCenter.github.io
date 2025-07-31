@@ -44,27 +44,6 @@
   ],
   "previousVersions": [
     {
-      "version": "GeoDa 1.22",
-      "downloads": [
-        {
-          "text": "GeoDa 1.22.0.18 (7/25/2025) for Mac OS X (Ventura+) [Apple Silicon Arm64]",
-          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa1.22.0-arm64-Installer.dmg",
-          "tracking": {
-            "category": "GeoDaOSXDownloads122",
-            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
-          }
-        },
-        {
-          "text": "GeoDa 1.22.0.18 (7/25/2025) for Mac OS X (Big Sur+) [Apple Intel X86_64]",
-          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa1.22.0-x86_64-Installer.dmg",
-          "tracking": {
-            "category": "GeoDaOSXDownloads122",
-            "label": "GeoDa Software Downloads Count for MacOSX 1.22"
-          }
-        }
-      ]
-    },
-    {
       "version": "GeoDa 1.22.0.14",
       "downloads": [
         {

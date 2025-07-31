@@ -12,11 +12,12 @@
     ],
     "image": "img/donate.png",
     "imageAlt": "捐赠给 GeoDa",
-    "description": "GeoDa 持续更新。最新版本是 GeoDa 1.22，具有新功能。我们发现它很稳定，但如果您遇到错误，请告诉我们。您也可以在我们的 Github 网站上报告错误和问题。GeoDa 的源代码在此处可用，并在 GPL v3.0 许可证下发布。",
+    "description": "GeoDa 持续更新。最新版本是 GeoDa 1.22.0.18，具有新功能。我们发现它很稳定，但如果您遇到错误，请告诉我们。您也可以在我们的 Github 网站上报告错误和问题。GeoDa 的源代码在此处可用，并在 GPL v3.0 许可证下发布。",
     "descriptionLinks": [
       {
         "text": "新功能",
-        "href": "/"
+        "href": "https://github.com/GeoDaCenter/geoda/releases",
+        "external": true
       },
       {
         "text": "请告诉我们",

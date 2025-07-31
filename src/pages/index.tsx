@@ -13,6 +13,7 @@ import DonateSection from '../components/DonateSection';
 
 import indexContent from '../data/indexContent.json';
 import siteCommon from '../data/siteCommon.json';
+import announcements from '../data/announcements.json';
 import {
   useLocalizedContent,
   useLocalizedContentFile,
@@ -35,10 +36,13 @@ function HomeContent(): React.JSX.Element {
 
   return (
     <>
-      <AnnouncementBanner 
-        text="🚀 GeoDa 1.22.0.20 (7/31/2025) is now available! 🎯"
-        url="/download"
-      />
+      {announcements.current.active && (
+        <AnnouncementBanner 
+          text={announcements.current.text}
+          url={announcements.current.url}
+          date={announcements.current.date}
+        />
+      )}
       <Layout
         title="GeoDa - An Introduction to Spatial Data Science"
         description="GeoDa is a free and open source software tool that serves as an introduction to spatial data science."

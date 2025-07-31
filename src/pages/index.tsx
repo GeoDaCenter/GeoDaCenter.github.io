@@ -36,7 +36,7 @@ function HomeContent(): React.JSX.Element {
   return (
     <>
       <AnnouncementBanner 
-        text="🚀 NEW RELEASE! GeoDa 1.22.0.18 is now available! 🎯"
+        text="🚀 GeoDa 1.22.0.20 (7/31/2025) is now available! 🎯"
         url="/download"
       />
       <Layout

@@ -2,19 +2,19 @@
   "title": "Descargar GeoDa para Linux",
   "description": "La descarga comenzará inmediatamente después de hacer clic en los enlaces a continuación:",
   "currentVersion": {
-    "version": "GeoDa 1.22.0.18",
+    "version": "GeoDa 1.22.0.20",
     "downloads": [
       {
-        "text": "GeoDa 1.22.0.18 (7/25/2025) para Ubuntu Noble 24.04 de 64 bits",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-1.22.0-noble.zip",
+        "text": "GeoDa 1.22.0.20 (7/31/2025) para Ubuntu Noble 24.04 de 64 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.20/GeoDa-1.22.0-noble.zip",
         "tracking": {
           "category": "GeoDaUbuntu64Downloads122",
           "label": "GeoDa Software Downloads Count for Ubuntu 64"
         }
       },
       {
-        "text": "GeoDa 1.22.0.18 (7/25/2025) para Ubuntu Jammy 22.04 de 64 bits",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-1.22.0-jammy.zip",
+        "text": "GeoDa 1.22.0.20 (7/31/2025) para Ubuntu Jammy 22.04 de 64 bits",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.20/GeoDa-1.22.0-jammy.zip",
         "tracking": {
           "category": "GeoDaUbuntu64Downloads122",
           "label": "GeoDa Software Downloads Count for Ubuntu 64"
@@ -47,6 +47,27 @@
     }
   ],
   "previousVersions": [
+    {
+      "version": "GeoDa 1.22.0.18",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.18 (7/25/2025) para Ubuntu Noble 24.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-1.22.0-noble.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.18 (7/25/2025) para Ubuntu Jammy 22.04 de 64 bits",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.18/GeoDa-1.22.0-jammy.zip",
+          "tracking": {
+            "category": "GeoDaUbuntu64Downloads122",
+            "label": "GeoDa Software Downloads Count for Ubuntu 64"
+          }
+        }
+      ]
+    },
     {
       "version": "GeoDa 1.22.0.14",
       "downloads": [

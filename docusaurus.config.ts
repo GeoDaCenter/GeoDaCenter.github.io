@@ -78,12 +78,14 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
-        googleAnalytics: {
-          trackingID: process.env.GOOGLE_ANALYTICS_ID || '',
-        },
-        gtag: {
-          trackingID: process.env.GOOGLE_ANALYTICS_ID || '',
-        },
+        ...(process.env.GOOGLE_ANALYTICS_ID && {
+          googleAnalytics: {
+            trackingID: process.env.GOOGLE_ANALYTICS_ID,
+          },
+          gtag: {
+            trackingID: process.env.GOOGLE_ANALYTICS_ID,
+          },
+        }),
       } satisfies Preset.Options,
     ],
   ],

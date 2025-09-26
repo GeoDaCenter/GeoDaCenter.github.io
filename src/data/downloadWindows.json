@@ -2,19 +2,19 @@
   "title": "Download GeoDa for Windows",
   "description": "The download will begin immediately after clicking on this link:",
   "currentVersion": {
-    "version": "GeoDa 1.22.0.20",
+    "version": "GeoDa 1.22.0.21",
     "downloads": [
       {
-        "text": "GeoDa 1.22.0.20 (7/31/2025) for 64-bit Windows",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.20/GeoDa-Windows7+-x64-installer.zip",
+        "text": "GeoDa 1.22.0.21 (9/26/2025) for 64-bit Windows",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.21/GeoDa-Windows7+-x64-installer.zip",
         "tracking": {
           "category": "GeoDaWin64Downloads122",
           "label": "GeoDa Software Downloads Count for Win64"
         }
       },
       {
-        "text": "GeoDa 1.22.0.20 (7/31/2025) for 32-bit Windows",
-        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.20/GeoDa-Windows7+-x86-installer.zip",
+        "text": "GeoDa 1.22.0.21 (9/26/2025) for 32-bit Windows",
+        "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.21/GeoDa-Windows7+-x86-installer.zip",
         "tracking": {
           "category": "GeoDaWin32Downloads122",
           "label": "GeoDa Software Downloads Count for Win32"
@@ -51,6 +51,27 @@
     }
   ],
   "previousVersions": [
+    {
+      "version": "GeoDa 1.22.0.20",
+      "downloads": [
+        {
+          "text": "GeoDa 1.22.0.20 (7/31/2025) for 64-bit Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.20/GeoDa-Windows7+-x64-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin64Downloads122",
+            "label": "GeoDa Software Downloads Count for Win64"
+          }
+        },
+        {
+          "text": "GeoDa 1.22.0.20 (7/31/2025) for 32-bit Windows",
+          "href": "https://github.com/GeoDaCenter/geoda/releases/download/v1.22.0.20/GeoDa-Windows7+-x86-installer.zip",
+          "tracking": {
+            "category": "GeoDaWin32Downloads122",
+            "label": "GeoDa Software Downloads Count for Win32"
+          }
+        }
+      ]
+    },
     {
       "version": "GeoDa 1.22.0.18",
       "downloads": [

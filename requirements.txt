@@ -5,7 +5,7 @@ google-analytics-data==0.16.2
 google-api-core==2.11.1
 google-auth==2.20.0
 googleapis-common-protos==1.59.1
-grpcio==1.54.2
+grpcio==1.54.3
 grpcio-status==1.54.2
 idna==3.4
 proto-plus==1.22.2

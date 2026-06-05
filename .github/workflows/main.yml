@@ -10,6 +10,10 @@ on:
         required: true
         default: "Testing"
 
+permissions:
+  contents: write
+  actions: write
+
 jobs:
   graph:
     name: Google Analytics 4 Update
@@ -41,3 +45,8 @@ jobs:
           git add static/data/download_data.json static/data/globe_log.json static/data/down_by_country.csv
           git commit -m "Updated google analytics stats ${{ steps.date.outputs.date }}"
           git push origin master
+      - name: Trigger GitHub Pages deployment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run deploy-to-github-pages.yml --ref master

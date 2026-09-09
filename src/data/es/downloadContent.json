@@ -12,7 +12,7 @@
     ],
     "image": "img/donate.png",
     "imageAlt": "Donar a GeoDa",
-    "description": "GeoDa se actualiza continuamente. La versión más reciente es GeoDa 1.22 con nuevas funciones. La encontramos estable pero si encuentras un error, por favor háznoslo saber. También puedes reportar errores y problemas en nuestro sitio de Github. El código fuente de GeoDa está disponible aquí y se publica bajo la licencia GPL v3.0.",
+    "description": "GeoDa se actualiza continuamente. La versión más reciente es GeoDa 1.22.1 con nuevas funciones. La encontramos estable pero si encuentras un error, por favor háznoslo saber. También puedes reportar errores y problemas en nuestro sitio de Github. El código fuente de GeoDa está disponible aquí y se publica bajo la licencia GPL v3.0.",
     "descriptionLinks": [
       {
         "text": "nuevas funciones",
@@ -67,6 +67,10 @@
       "external": true
     },
     "releases": [
+      {
+        "date": "8/26/2026",
+        "version": "1.22.1"
+      },
       {
         "date": "7/31/2025",
         "version": "1.22.0.20"

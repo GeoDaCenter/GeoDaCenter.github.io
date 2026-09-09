@@ -1,11 +1,17 @@
 {
   "current": {
-    "text": "🚀 GeoDa 1.22.0.21 (9/26/2025) is now available! 🎯",
+    "text": "🚀 GeoDa 1.22.1 (8/26/2026) is now available! 🎯",
     "url": "/download",
-    "date": "09/26/2025",
+    "date": "08/26/2026",
     "active": true
   },
   "previous": [
+    {
+      "text": "🚀 GeoDa 1.22.0.21 (9/26/2025) is now available! 🎯",
+      "url": "/download",
+      "date": "09/26/2025",
+      "active": false
+    },
     {
       "text": "🚀 GeoDa 1.22.0.20 (7/31/2025) is now available! 🎯",
       "url": "/download",
@@ -25,4 +31,4 @@
       "active": false
     }
   ]
-} 
+}

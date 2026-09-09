@@ -1,7 +1,7 @@
 {
   "mainContent": {
     "announce": {
-      "text": "🚀 NEW RELEASE! GeoDa version 1.22.0.21 is now available with enhanced features! Download now! 🎯",
+      "text": "🚀 NEW RELEASE! GeoDa version 1.22.1 is now available with enhanced features! Download now! 🎯",
       "url": "/download"
     },
     "intro": {
@@ -294,4 +294,4 @@
     "image": "img/donate.png",
     "imageAlt": "Donate to GeoDa"
   }
-} 
+}

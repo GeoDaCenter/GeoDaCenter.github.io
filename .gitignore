@@ -23,3 +23,6 @@ build
 
 # Backup directories created by version update scripts
 backup-*/
+
+# Local dev server config for the Claude Code preview pane
+.claude/launch.json

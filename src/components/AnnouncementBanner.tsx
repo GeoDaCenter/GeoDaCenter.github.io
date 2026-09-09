@@ -14,33 +14,26 @@ export default function AnnouncementBanner({ text, url, date }: AnnouncementBann
   useEffect(() => {
     // Check localStorage for banner visibility
     const lastDismissedDate = localStorage.getItem('announcement-banner-last-dismissed');
-    
+
     // If no date provided, fall back to the old behavior
     if (!date) {
       const bannerHidden = localStorage.getItem('announcement-banner-hidden');
       if (!bannerHidden) {
         setIsVisible(true);
-        document.body.style.paddingTop = '60px';
       }
       return;
     }
-    
+
     // Check if this announcement is newer than the last dismissed one
     // Convert MM/DD/YYYY strings to Date objects for proper chronological comparison
     if (!lastDismissedDate || new Date(date) > new Date(lastDismissedDate)) {
       setIsVisible(true);
-      document.body.style.paddingTop = '60px';
     }
-    
-    // Cleanup function to remove padding when component unmounts
-    return () => {
-      document.body.style.paddingTop = '';
-    };
   }, [date]);
 
   const handleClose = () => {
     setIsVisible(false);
-    
+
     if (date) {
       // Store the date of this announcement as dismissed
       localStorage.setItem('announcement-banner-last-dismissed', date);
@@ -48,9 +41,6 @@ export default function AnnouncementBanner({ text, url, date }: AnnouncementBann
       // Fall back to the old behavior for backward compatibility
       localStorage.setItem('announcement-banner-hidden', 'true');
     }
-    
-    // Remove padding from body when banner is closed
-    document.body.style.paddingTop = '';
   };
 
   if (!isVisible) {

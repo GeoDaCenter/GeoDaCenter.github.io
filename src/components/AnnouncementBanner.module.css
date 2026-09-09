@@ -4,10 +4,11 @@
   background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 25%, #45b7d1 50%, #96ceb4 75%, #feca57 100%);
   color: white;
   padding: 0.75rem 0;
-  position: fixed;
+  /* Sticky (not fixed) so the banner takes up its natural space in the
+     document flow. A fixed banner with a hardcoded body padding overlaps
+     the navbar on smaller screens where the banner wraps to more lines. */
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 9999;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   animation: slideDown 0.3s ease-out;
@@ -64,6 +65,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .closeButton:hover {
@@ -92,18 +94,13 @@
 @media screen and (max-width: 768px) {
   .bannerContent {
     padding: 0 1rem;
-    flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .bannerLink {
     font-size: 0.9rem;
-    text-align: center;
-  }
-  
-  .closeButton {
-    align-self: flex-end;
-    margin-top: -0.5rem;
+    text-align: left;
+    padding: 0.5rem 0.75rem;
   }
 }
 

@@ -4,7 +4,7 @@ This repository includes a GitHub Action that automatically updates version info
 
 ## How It Works
 
-The GitHub Action is triggered when a new tag is pushed to the repository with the format `vX.Y.Z.W` (e.g., `v1.22.0.20`).
+The GitHub Action is triggered when a new tag is pushed to the repository with the format `vX.Y.Z` or `vX.Y.Z.W` (e.g., `v1.22.1` or `v1.22.0.20`).
 
 ## What Gets Updated
 
@@ -16,6 +16,8 @@ When a new version tag is pushed, the action automatically updates the following
 - `downloadMac.json` - Updates current version and moves previous to history  
 - `downloadWindows.json` - Updates current version and moves previous to history
 - `downloadNightly.json` - Adds new release entry
+- `announcements.json` - Moves current announcement to history and adds the new one
+- `indexContent.json` - Updates the homepage "NEW RELEASE" banner
 
 ### Language-Specific Files (src/data/{de,es,zh-Hans}/)
 - Same updates applied to all language variants
@@ -23,13 +25,13 @@ When a new version tag is pushed, the action automatically updates the following
 ## Specific Changes Made
 
 ### downloadContent.json
-- Updates description text: "GeoDa X.Y.Z.W with new features"
-- Prepends new release entry: `{"date": "M/D/YYYY", "version": "X.Y.Z.W"}`
+- Updates description text: "GeoDa X.Y.Z with new features"
+- Prepends new release entry: `{"date": "M/D/YYYY", "version": "X.Y.Z"}`
 
 ### Platform Download Files (Linux/Mac/Windows)
 - Copies current version content to beginning of `previousVersions` array
 - Updates `currentVersion.version` to new version
-- Updates all download links to use new version number
+- Rebuilds the download links from the **actual release assets** fetched from the GeoDa GitHub repo (no guessed URLs)
 - Updates all date references to current date
 
 ### downloadNightly.json
@@ -39,8 +41,8 @@ When a new version tag is pushed, the action automatically updates the following
 
 1. **Create a new release tag** in the GeoDa repository:
    ```bash
-   git tag v1.22.0.20
-   git push origin v1.22.0.20
+   git tag v1.22.1
+   git push origin v1.22.1
    ```
 
 2. **The action will automatically run** and:
@@ -88,14 +90,16 @@ For version `1.22.0.20` released on `7/31/2025`:
 
 - The action requires `jq` for JSON manipulation (included in Ubuntu runner)
 - The action requires write permissions to create pull requests
-- Tags must follow the format `vX.Y.Z.W` where X, Y, Z, W are numbers
+- Tags must follow the format `vX.Y.Z` or `vX.Y.Z.W` where X, Y, Z, W are numbers
+- The action fetches release assets from the GeoDa repo, so the release must exist before the tag is pushed here
 
 ## Troubleshooting
 
 If the action fails:
-1. Check that the tag format is correct (`v1.22.0.20`, not `1.22.0.20`)
-2. Ensure the repository has the required permissions
-3. Check the action logs for specific error messages
+1. Check that the tag format is correct (`v1.22.1` or `v1.22.0.20`, not `1.22.1`)
+2. Ensure the release exists in the GeoDa repo (the script fetches its assets)
+3. Ensure the repository has the required permissions
+4. Check the action logs for specific error messages
 
 ## Local Testing and Manual Updates
 

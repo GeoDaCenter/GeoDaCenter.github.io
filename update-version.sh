@@ -38,8 +38,8 @@ show_usage() {
     echo "  ./update-version.sh --help"
     echo ""
     echo "Examples:"
-    echo "  ./update-version.sh 1.22.0.20"
-    echo "  ./update-version.sh 1.22.0.20 7/31/2025"
+    echo "  ./update-version.sh 1.22.1"
+    echo "  ./update-version.sh 1.22.1 8/26/2026"
     echo ""
     echo "Options:"
     echo "  --help     Show this help message"
@@ -81,13 +81,13 @@ check_prerequisites() {
 # Function to validate version format
 validate_version() {
     local version=$1
-    
-    # Check if version matches pattern X.Y.Z.W
-    if [[ ! $version =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        print_error "Invalid version format. Expected format: X.Y.Z.W (e.g., 1.22.0.20)"
+
+    # Check if version matches pattern X.Y.Z or X.Y.Z.W
+    if [[ ! $version =~ ^[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+        print_error "Invalid version format. Expected format: X.Y.Z or X.Y.Z.W (e.g., 1.22.1 or 1.22.0.20)"
         exit 1
     fi
-    
+
     print_success "Version format is valid: $version"
 }
 

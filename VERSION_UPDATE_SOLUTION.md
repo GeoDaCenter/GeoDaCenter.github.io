@@ -20,14 +20,15 @@ This solution provides a complete GitHub Actions workflow that automatically upd
 ## How It Works
 
 ### Trigger
-The workflow is triggered when a new tag is pushed with the format `vX.Y.Z.W` (e.g., `v1.22.0.20`).
+The workflow is triggered when a new tag is pushed with the format `vX.Y.Z` or `vX.Y.Z.W` (e.g., `v1.22.1` or `v1.22.0.20`).
 
 ### Process
 1. **Extract version and date**: Parses the tag and generates current date
-2. **Run local script**: Executes the `update-version.sh` script with version and date
-3. **Update files**: Script modifies all relevant JSON files with new version information
-4. **Validate changes**: Ensures all files are properly formatted
-5. **Create PR**: Automatically creates a pull request with all changes
+2. **Fetch release assets**: The script fetches the actual release assets from the GeoDa GitHub repo (the release must exist before the tag is pushed here)
+3. **Run local script**: Executes the `update-version.sh` script with version and date
+4. **Update files**: Script modifies all relevant JSON files, building download links from the real asset names (no guessed URLs)
+5. **Validate changes**: Ensures all files are properly formatted
+6. **Create PR**: Automatically creates a pull request with all changes
 
 ### Files Updated
 
@@ -37,6 +38,8 @@ The workflow is triggered when a new tag is pushed with the format `vX.Y.Z.W` (e
 - `downloadMac.json` - Updates current version, moves previous to history
 - `downloadWindows.json` - Updates current version, moves previous to history
 - `downloadNightly.json` - Adds new release entry
+- `announcements.json` - Moves current announcement to history and adds the new one
+- `indexContent.json` - Updates the homepage "NEW RELEASE" banner
 
 #### Language-Specific Files (`src/data/{de,es,zh-Hans}/`)
 - Same updates applied to all language variants
@@ -72,6 +75,9 @@ The workflow is triggered when a new tag is pushed with the format `vX.Y.Z.W` (e
 ```
 
 ### Platform Download Files (Linux/Mac/Windows)
+
+The download links are rebuilt from the **actual release assets** fetched from the GeoDa GitHub repo, so they always point at real files (e.g. `GeoDa-1.22.1-x86_64.AppImage`, `GeoDa1.22.1-arm64-Installer.dmg`, `GeoDa_1.22.1_win7+x64_Setup.exe`).
+
 ```json
 // Before
 {
@@ -146,8 +152,8 @@ The workflow is triggered when a new tag is pushed with the format `vX.Y.Z.W` (e
 
 ### 1. Create a New Release Tag
 ```bash
-git tag v1.22.0.20
-git push origin v1.22.0.20
+git tag v1.22.1
+git push origin v1.22.1
 ```
 
 ### 2. Monitor the Action
@@ -164,26 +170,30 @@ git push origin v1.22.0.20
 
 ### Run Simulation
 ```bash
-node scripts/test-version-update.js 1.22.0.20 7/31/2025
+node scripts/test-version-update.js 1.22.1 8/26/2026
 ```
 
 ### Validate Files (after updates)
 ```bash
-node scripts/validate-json.js 1.22.0.20
+node scripts/validate-json.js 1.22.1
 ```
 
 ## Technical Details
 
 ### Dependencies
-- **Node.js**: For the update script and validation (included in Ubuntu runner)
+- **Node.js 18+**: For the update script and validation (included in Ubuntu runner; requires global `fetch`)
 - **Bash**: For the wrapper script (included in Ubuntu runner)
 - **GitHub Actions**: For workflow execution
+- **Network access**: The script fetches release assets from the GitHub API (`api.github.com`); the workflow passes `GITHUB_TOKEN` to avoid rate limits
 
 ### Key Features
 - **Automatic version extraction** from git tags
+- **Supports `X.Y.Z` and `X.Y.Z.W` version formats**
+- **Release asset fetching**: download links are built from the real assets of the GeoDa release, never guessed
 - **Date generation** in M/D/YYYY format
 - **JSON validation** to ensure file integrity
-- **Multi-language support** for de, es, zh-Hans
+- **Multi-language support** for de, es, zh-Hans (including localized descriptions)
+- **Homepage announcement updates** (announcements.json, indexContent.json)
 - **Automatic PR creation** with descriptive commit messages
 - **Error handling** and validation
 
@@ -205,9 +215,10 @@ node scripts/validate-json.js 1.22.0.20
 ## Troubleshooting
 
 ### Common Issues
-1. **Tag format**: Must be `v1.22.0.20`, not `1.22.0.20`
-2. **Permissions**: Repository needs write access for PR creation
-3. **File structure**: Ensure all expected files exist
+1. **Tag format**: Must be `v1.22.1` or `v1.22.0.20`, not `1.22.1`
+2. **Release must exist**: The script fetches assets from the GeoDa repo, so the release must be published before the tag is pushed here
+3. **Permissions**: Repository needs write access for PR creation
+4. **File structure**: Ensure all expected files exist
 
 ### Manual Override
 If the action fails, you can:
@@ -218,7 +229,6 @@ If the action fails, you can:
 ## Future Enhancements
 
 Potential improvements:
-- Support for different version formats
 - Custom date formats
 - Additional file types
 - Email notifications

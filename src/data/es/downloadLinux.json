@@ -29,13 +29,8 @@
   },
   "notes": [
     {
-      "title": "Instrucciones de Instalación",
-      "content": "Nota: Si hacer clic para instalar no funciona, intente instalar usando la terminal",
-      "commands": [
-        "sudo dpkg -i /path/to/geoda_deb_file",
-        "sudo apt install -f"
-      ],
-      "buildInfo": "Puede construir GeoDa en Linux siguiendo las instrucciones: https://github.com/GeoDaCenter/geoda/tree/master/BuildTools/ubuntu"
+      "title": "Compilar GeoDa desde el código fuente",
+      "content": "Puede construir GeoDa en Linux siguiendo las instrucciones: https://github.com/GeoDaCenter/geoda/tree/master/BuildTools/ubuntu"
     },
     {
       "title": "Error FUSE de AppImage (Ubuntu 22.04+)",

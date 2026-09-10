@@ -36,6 +36,24 @@
         "sudo apt install -f"
       ],
       "buildInfo": "您可以按照以下说明在 Linux 上构建 GeoDa：https://github.com/GeoDaCenter/geoda/tree/master/BuildTools/ubuntu"
+    },
+    {
+      "title": "AppImage FUSE 错误（Ubuntu 22.04+）",
+      "content": "在 Ubuntu 22.04 及更高版本（以及一些其他发行版）中，默认未安装 libfuse2，因此双击 AppImage 会因 FUSE 错误而无法启动。所有 AppImage 都是如此，不仅仅是 GeoDa。要解决此问题，请安装 libfuse2：",
+      "commands": [
+        "sudo apt install libfuse2"
+      ]
+    },
+    {
+      "title": "不安装 libfuse2 运行 AppImage",
+      "content": "或者，您也可以在不安装 libfuse2 的情况下运行 AppImage：",
+      "commands": [
+        "./GeoDa-*.AppImage --appimage-extract-and-run"
+      ]
+    },
+    {
+      "title": "支持的 Linux 系统",
+      "content": "该 AppImage 专为 64 位 Linux 构建，并捆绑了其依赖项，因此可以在大多数现代 64 位 Linux 发行版上运行，包括 Ubuntu、Debian、Fedora、openSUSE 和 Arch Linux。唯一的系统要求是 FUSE（请参阅上面的说明）。"
     }
   ],
   "previousVersions": [

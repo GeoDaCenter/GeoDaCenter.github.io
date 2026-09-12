@@ -7,12 +7,10 @@ jkoschinsky:
   socials:
     linkedin: jkoschinsky
 
-lixun910:
-  name: Xun Li
-  title: GeoDa Lead Developer
-  url: https://github.com/lixun910
-  image_url: https://avatars.githubusercontent.com/u/2423887?v=4
+geodateam:
+  name: GeoDa Team
+  title: GeoDa Development Team
+  url: https://geodacenter.github.io/
+  image_url: https://avatars.githubusercontent.com/u/16259639?v=4
   page: true
-  socials:
-    github: lixun910
 

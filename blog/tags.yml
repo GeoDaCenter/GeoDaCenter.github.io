@@ -7,3 +7,13 @@ docusaurus:
   label: Docusaurus
   permalink: /docusaurus
   description: Docusaurus tag description
+
+news:
+  label: News
+  permalink: /news
+  description: News and announcements about GeoDa
+
+release:
+  label: Release
+  permalink: /release
+  description: GeoDa software release announcements

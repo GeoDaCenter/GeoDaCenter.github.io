@@ -1,9 +1,18 @@
 jkoschinsky:
-  name: Julia Koschinsky 
+  name: Julia Koschinsky
   title: Executive Director
   url: https://spatial.uchicago.edu/directory/Julia-Koschinsky
   image_url: https://spatial.uchicago.edu/sites/default/files/2024-10/screenshot_2024-10-29_at_9.56.09_am.png
   page: true
   socials:
     linkedin: jkoschinsky
+
+lixun910:
+  name: Xun Li
+  title: GeoDa Lead Developer
+  url: https://github.com/lixun910
+  image_url: https://avatars.githubusercontent.com/u/2423887?v=4
+  page: true
+  socials:
+    github: lixun910
 

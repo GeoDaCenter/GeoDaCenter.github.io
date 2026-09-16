@@ -9,7 +9,7 @@
       "content": [
         "GeoDa es una herramienta de software gratuita y de código abierto que sirve como introducción a la ciencia de datos espaciales. Está diseñada para facilitar nuevas perspectivas del análisis de datos mediante la exploración y modelado de patrones espaciales.",
         "GeoDa fue desarrollado por el Dr. Luc Anselin y su equipo. El programa proporciona una interfaz gráfica y fácil de usar para métodos de análisis exploratorio de datos espaciales (ESDA), como estadísticas de autocorrelación espacial para datos agregados (varios miles de registros), y análisis básico de regresión espacial para datos de puntos y polígonos (decenas de miles de registros). Para trabajar con big data en GeoDa, primero debe agregarse a unidades areales.",
-        "Desde su lanzamiento inicial en febrero de 2003, el número de usuarios de GeoDa ha aumentado exponencialmente a más de 520,000 (junio de 2022). Esto incluye usuarios de laboratorio en universidades como Harvard, MIT y Cornell. La comunidad de usuarios y la prensa abrazaron el programa con entusiasmo, llamándolo una 'herramienta analítica enormemente importante', un 'software muy fino' y un 'desarrollo emocionante'.",
+        "Desde su lanzamiento inicial en febrero de 2003, el número de usuarios de GeoDa ha aumentado exponencialmente a más de 852,000 (agosto de 2026). Esto incluye usuarios de laboratorio en universidades como Harvard, MIT y Cornell. La comunidad de usuarios y la prensa abrazaron el programa con entusiasmo, llamándolo una 'herramienta analítica enormemente importante', un 'software muy fino' y un 'desarrollo emocionante'.",
         "La última versión 1.22 contiene soporte multi-capa, varias nuevas características de clúster local, incluyendo mapas de clúster local Geary univariados y multivariados, redcap, skater, clustering espectral y max-p, y mapas de conteo de unión local para datos categóricos. También implementa varias técnicas clásicas de clúster no espacial (análisis de componentes principales, k-means, y clustering jerárquico) implementadas en la Biblioteca C Clustering de Hoon et al. (2013), así como HDBScan.",
         "Un nuevo libro de trabajo está en desarrollo. Mientras tanto, aquí hay recursos interinos, incluyendo una descripción general de las características en 1.22."
       ],
@@ -45,22 +45,22 @@
     },
     "slideshow": {
       "title": "GeoDa 1.22",
-      "description": "GeoDa funciona en Windows, MacOSX y Linux (Ubuntu)",
+      "description": "GeoDa funciona en Windows, macOS y Linux.",
       "slides": [
         {
           "image": "img/intro1.png",
-          "alt": "Mac OSX El Capitan",
-          "caption": "Mac OSX El Capitan"
+          "alt": "macOS",
+          "caption": "macOS"
         },
         {
           "image": "img/intro2.png",
-          "alt": "Windows 7/8/10",
-          "caption": "Windows 7/8/10"
+          "alt": "Windows 10/11",
+          "caption": "Windows 10/11"
         },
         {
           "image": "img/intro3.png",
-          "alt": "Ubuntu 14.04",
-          "caption": "Ubuntu 14.04"
+          "alt": "Linux",
+          "caption": "Linux"
         }
       ]
     },
@@ -184,19 +184,19 @@
     "description": "GeoDa se lanza bajo una licencia GPL. Se basa en varias bibliotecas de código abierto y archivos de código fuente. A continuación se muestra la lista de los proyectos clave que nos gustaría agradecer.",
     "items": [
       {
-        "name": "Bibliotecas GDAL, versión 1.10",
+        "name": "Bibliotecas GDAL, versión 3.x",
         "license": "Licencia de código abierto estilo X/MIT",
         "authors": "Muchos",
         "link": "https://www.gdal.org/"
       },
       {
-        "name": "Bibliotecas Boost, versión 1.53",
+        "name": "Bibliotecas Boost, versión 1.75",
         "license": "Licencia de Software Boost - Versión 1.0",
         "authors": "Muchos",
         "link": "https://www.boost.org/"
       },
       {
-        "name": "Biblioteca GUI Multiplataforma wxWidgets, versión 2.9.4",
+        "name": "Biblioteca GUI Multiplataforma wxWidgets, versión 3.2.4",
         "license": "La Licencia de Biblioteca wxWindows",
         "authors": "Julian Smart, Robert Roebling, y otros",
         "link": "https://www.wxwidgets.org/"

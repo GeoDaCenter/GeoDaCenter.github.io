@@ -9,7 +9,7 @@
       "content": [
         "GeoDa 是一个免费开源的软件工具，作为空间数据科学的入门工具。它旨在通过探索和建模空间模式，从数据分析中获得新的见解。",
         "GeoDa 由 Dr. Luc Anselin 博士及其团队开发。该程序为探索性空间数据分析（ESDA）方法提供了用户友好的图形界面，如聚合数据的空间自相关统计（数千条记录），以及点数据和多边形数据的基本空间回归分析（数万条记录）。要在 GeoDa 中处理大数据，应首先将其聚合到区域单元。",
-        "自 2003 年 2 月首次发布以来，GeoDa 的用户数量呈指数级增长，超过 520,000 人（2022 年 6 月）。这包括哈佛大学、麻省理工学院和康奈尔大学等大学的实验室用户。用户社区和媒体热情地接受了该程序，称其为\"极其重要的分析工具\"、\"非常优秀的软件\"和\"令人兴奋的发展\"。",
+        "自 2003 年 2 月首次发布以来，GeoDa 的用户数量呈指数级增长，超过 852,000 人（2026 年 8 月）。这包括哈佛大学、麻省理工学院和康奈尔大学等大学的实验室用户。用户社区和媒体热情地接受了该程序，称其为\"极其重要的分析工具\"、\"非常优秀的软件\"和\"令人兴奋的发展\"。",
         "最新版本 1.22 包含多层支持、几个新的局部聚类功能，包括单变量和多变量局部 Geary 聚类图、redcap、skater、谱聚类和 max-p，以及分类数据的局部连接计数图。它还实现了 Hoon 等人（2013）C 聚类库中的几种经典非空间聚类技术（主成分分析、k-means 和层次聚类），以及 HDBScan。",
         "新的工作手册正在开发中。在此期间，这里有一些临时资源，包括 1.22 版本功能的概述。"
       ],
@@ -45,22 +45,22 @@
     },
     "slideshow": {
       "title": "GeoDa 1.22",
-      "description": "GeoDa 运行在 Windows、MacOSX 和 Linux（Ubuntu）上",
+      "description": "GeoDa 可在 Windows、macOS 和 Linux 上运行。",
       "slides": [
         {
           "image": "img/intro1.png",
-          "alt": "Mac OSX El Capitan",
-          "caption": "Mac OSX El Capitan"
+          "alt": "macOS",
+          "caption": "macOS"
         },
         {
           "image": "img/intro2.png",
-          "alt": "Windows 7/8/10",
-          "caption": "Windows 7/8/10"
+          "alt": "Windows 10/11",
+          "caption": "Windows 10/11"
         },
         {
           "image": "img/intro3.png",
-          "alt": "Ubuntu 14.04",
-          "caption": "Ubuntu 14.04"
+          "alt": "Linux",
+          "caption": "Linux"
         }
       ]
     },
@@ -184,19 +184,19 @@
     "description": "GeoDa 在 GPL 许可证下发布。它基于几个开源库和源代码文件。以下是我们想要致谢的关键项目列表。",
     "items": [
       {
-        "name": "GDAL 库，版本 1.10",
+        "name": "GDAL 库，版本 3.x",
         "license": "X/MIT 风格开源许可证",
         "authors": "多人",
         "link": "https://www.gdal.org/"
       },
       {
-        "name": "Boost 库，版本 1.53",
+        "name": "Boost 库，版本 1.75",
         "license": "Boost 软件许可证 - 版本 1.0",
         "authors": "多人",
         "link": "https://www.boost.org/"
       },
       {
-        "name": "wxWidgets 跨平台 GUI 库，版本 2.9.4",
+        "name": "wxWidgets 跨平台 GUI 库，版本 3.2.4",
         "license": "wxWindows 库许可证",
         "authors": "Julian Smart、Robert Roebling 等",
         "link": "https://www.wxwidgets.org/"

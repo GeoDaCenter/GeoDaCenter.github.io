@@ -9,7 +9,7 @@
       "content": [
         "GeoDa is a free and open source software tool that serves as an introduction to spatial data science. It is designed to facilitate new insights from data analysis by exploring and modeling spatial patterns.",
         "GeoDa was developed by Dr. Luc Anselin and his team. The program provides a user-friendly and graphical interface to methods of exploratory spatial data analysis (ESDA), such as spatial autocorrelation statistics for aggregate data (several thousand records), and basic spatial regression analysis for point and polygon data (tens of thousands of records). To work with big data in GeoDa it should first be aggregated to areal units.",
-        "Since its initial release in February 2003, GeoDa's user numbers have increased exponentially to over 520,000 (June 2022). This includes lab users at universities such as Harvard, MIT, and Cornell. The user community and press embraced the program enthusiastically, calling it a \"hugely important analytic tool,\" a \"very fine piece of software,\" and an \"exciting development.\"",
+        "Since its initial release in February 2003, GeoDa's user numbers have increased exponentially to over 852,000 (August 2026). This includes lab users at universities such as Harvard, MIT, and Cornell. The user community and press embraced the program enthusiastically, calling it a \"hugely important analytic tool,\" a \"very fine piece of software,\" and an \"exciting development.\"",
         "The latest version 1.22 contains multi-layer support, several new local cluster features, including univariate and multivariate local Geary cluster maps, redcap, skater, spectral clustering and max-p, and local join count maps for categorical data. It also implements several classic non-spatial cluster techniques (principal component analysis, k-means, and hierarchical clustering) implemented in Hoon et al.'s (2013) C Clustering Library, as well as HDBScan.",
         "A new workbook is under development. In the meantime, here are interim resources, including an overview of features in 1.22."
       ],
@@ -45,22 +45,22 @@
     },
     "slideshow": {
       "title": "GeoDa 1.22",
-      "description": "GeoDa runs on Windows, MacOSX and Linux (Ubuntu)",
+      "description": "GeoDa runs on Windows, macOS, and Linux.",
       "slides": [
         {
           "image": "img/intro1.png",
-          "alt": "Mac OSX El Capitan",
-          "caption": "Mac OSX El Capitan"
+          "alt": "macOS",
+          "caption": "macOS"
         },
         {
           "image": "img/intro2.png",
-          "alt": "Windows 7/8/10",
-          "caption": "Windows 7/8/10"
+          "alt": "Windows 10/11",
+          "caption": "Windows 10/11"
         },
         {
           "image": "img/intro3.png",
-          "alt": "Ubuntu 14.04",
-          "caption": "Ubuntu 14.04"
+          "alt": "Linux",
+          "caption": "Linux"
         }
       ]
     },
@@ -184,19 +184,19 @@
     "description": "GeoDa is released under a GPL license. It builds on several open source libraries and source-code files. Below is the list of the key projects that we would like to acknowledge.",
     "items": [
       {
-        "name": "GDAL Libraries, version 1.10",
+        "name": "GDAL Libraries, version 3.x",
         "license": "X/MIT style Open Source license",
         "authors": "Many",
         "link": "https://www.gdal.org/"
       },
       {
-        "name": "Boost Libraries, version 1.53",
+        "name": "Boost Libraries, version 1.75",
         "license": "Boost Software License - Version 1.0",
         "authors": "Many",
         "link": "https://www.boost.org/"
       },
       {
-        "name": "wxWidgets Cross-Platform GUI Library, version 2.9.4",
+        "name": "wxWidgets Cross-Platform GUI Library, version 3.2.4",
         "license": "The wxWindows Library Licence",
         "authors": "Julian Smart, Robert Roebling, and others",
         "link": "https://www.wxwidgets.org/"
